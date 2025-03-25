@@ -1,15 +1,32 @@
-import { getKnowledgeBaseEntry } from '@/lib/sanity';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import PortableTextContent from '@/components/PortableTextContent';
+import { client } from '@/lib/sanity';
 
-// Funkcja komponentu strony z parametrami
-export default async function KnowledgeBaseEntryPage({
-                                                         params
-                                                     }: {
-    params: { slug: string }
-}) {
-    const entry = await getKnowledgeBaseEntry(params.slug);
+// Prosta funkcja do pobierania wpisu
+async function getEntry(slug: string) {
+    try {
+        return await client.fetch(`
+      *[_type == "knowledgeBase" && slug.current == $slug][0] {
+        _id,
+        title,
+        slug,
+        letter,
+        shortDescription,
+        content,
+        publishedAt,
+        tags
+      }
+    `, { slug });
+    } catch (error) {
+        console.error('Error fetching knowledge base entry:', error);
+        return null;
+    }
+}
+
+// Prosta strona bez generateMetadata i generateStaticParams
+export default async function Page({ params }: { params: { slug: string } }) {
+    const entry = await getEntry(params.slug);
 
     if (!entry) {
         notFound();
@@ -56,7 +73,7 @@ export default async function KnowledgeBaseEntryPage({
                 <div className="mb-8">
                     <div className="flex items-center gap-4 mb-4">
                         <div className="w-10 h-10 flex items-center justify-center bg-black text-white rounded-full">
-                            {entry.letter.toUpperCase()}
+                            {entry.letter?.toUpperCase()}
                         </div>
                         <div className="text-gray-500">{formattedDate}</div>
                     </div>
@@ -116,18 +133,4 @@ export default async function KnowledgeBaseEntryPage({
             </div>
         </main>
     );
-}
-
-// Definicja metadanych statycznych
-export const metadata = {
-    title: 'Wpis w bazie wiedzy',
-    description: 'Szczegółowy wpis w naszej bazie wiedzy',
-};
-
-// Generowanie statycznych parametrów
-export async function generateStaticParams() {
-    // Tutaj możesz dodać kod pobierający wszystkie slugi z bazy wiedzy
-    // dla statycznej generacji stron
-    // Na razie zostawiamy to puste - strony będą generowane na żądanie
-    return [];
 }
