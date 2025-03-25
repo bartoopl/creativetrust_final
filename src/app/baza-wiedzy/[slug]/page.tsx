@@ -1,44 +1,14 @@
 import { getKnowledgeBaseEntry } from '@/lib/sanity';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Metadata } from 'next';
 import PortableTextContent from '@/components/PortableTextContent';
-import { ResolvingMetadata } from 'next';
 
-// Typ dla parametrów generowania metadanych zgodny z PageProps
-interface Params {
-    slug: string;
-}
-
-// Dynamiczne generowanie metadanych
-export async function generateMetadata(
-    { params }: { params: Params },
-    parent: ResolvingMetadata
-): Promise<Metadata> {
-    const entry = await getKnowledgeBaseEntry(params.slug);
-
-    if (!entry) {
-        return {
-            title: 'Nie znaleziono wpisu - Baza wiedzy',
-            description: 'Wpis nie został znaleziony w naszej bazie wiedzy'
-        };
-    }
-
-    return {
-        title: entry.seoTitle || `${entry.title} - Baza wiedzy`,
-        description: entry.seoDescription || entry.shortDescription
-    };
-}
-
-// Generowanie statycznych parametrów
-export async function generateStaticParams() {
-    // Tutaj możesz dodać kod pobierający wszystkie slugi z bazy wiedzy
-    // dla statycznej generacji stron
-    // Na razie zostawiamy to puste - strony będą generowane na żądanie
-    return [];
-}
-
-export default async function KnowledgeBaseEntryPage({ params }: { params: Params }) {
+// Funkcja komponentu strony z parametrami
+export default async function KnowledgeBaseEntryPage({
+                                                         params
+                                                     }: {
+    params: { slug: string }
+}) {
     const entry = await getKnowledgeBaseEntry(params.slug);
 
     if (!entry) {
@@ -146,4 +116,18 @@ export default async function KnowledgeBaseEntryPage({ params }: { params: Param
             </div>
         </main>
     );
+}
+
+// Definicja metadanych statycznych
+export const metadata = {
+    title: 'Wpis w bazie wiedzy',
+    description: 'Szczegółowy wpis w naszej bazie wiedzy',
+};
+
+// Generowanie statycznych parametrów
+export async function generateStaticParams() {
+    // Tutaj możesz dodać kod pobierający wszystkie slugi z bazy wiedzy
+    // dla statycznej generacji stron
+    // Na razie zostawiamy to puste - strony będą generowane na żądanie
+    return [];
 }
