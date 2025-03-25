@@ -55,11 +55,10 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ title, href }) => {
 const Services: React.FC = () => {
     const services = [
         { title: "Branding", href: "/uslugi/branding" },
-        { title: "UX/UI Designs", href: "/uslugi/ux-ui" },
-        { title: "Motion & Animation", href: "/uslugi/motion" },
-        { title: "Mobile", href: "/uslugi/mobile" },
-        { title: "Web Development", href: "/uslugi/web-development" },
-        { title: "E-commerce", href: "/uslugi/e-commerce" }
+        { title: "Strony WWW", href: "/uslugi/strony-www" },
+        { title: "E-commerce", href: "/uslugi/e-commerce" },
+        { title: "Performance Marketing", href: "/uslugi/performance-marketing" },
+        { title: "Marketing Automation", href: "/uslugi/marketing-automation" },
     ];
 
     return (

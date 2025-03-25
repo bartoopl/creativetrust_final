@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
                 {/* Główny nagłówek CTA */}
                 <div className="mb-16">
                     <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium text-white mb-10 tracking-tight">
-                        Let's start <br className="hidden md:block" />creating together
+                        Porozmawiajmy <br className="hidden md:block" />o rozwiązaniach dla Ciebie
                     </h2>
 
                     <div>
@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
                         transition-all duration-300 ease-in-out
                         hover:bg-transparent hover:text-white hover:border hover:border-white"
                         >
-                            <span>Let's talk</span>
+                            <span>Porozmawiajmy</span>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
@@ -68,25 +68,25 @@ const Footer: React.FC = () => {
                                 href="/portfolio"
                                 className="text-white hover:text-gray-300"
                             >
-                                Work
+                                Realizacje
                             </Link>
                             <Link
                                 href="/o-nas"
                                 className="text-white hover:text-gray-300"
                             >
-                                About
+                                O nas
                             </Link>
                             <Link
                                 href="/kontakt"
                                 className="text-white hover:text-gray-300"
                             >
-                                Contact
+                                Kontakt
                             </Link>
                             <Link
                                 href="/baza-wiedzy"
                                 className="text-white hover:text-gray-300"
                             >
-                                Knowledge Base
+                                Baza wiedzy
                             </Link>
                         </nav>
                     </div>
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-between text-white hover:text-gray-300"
                             >
-                                <span>Twitter</span>
+                                <span>LinkedIn</span>
                                 <span className="ml-4">
                   <svg
                       width="20"
@@ -134,7 +134,7 @@ const Footer: React.FC = () => {
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-between text-white hover:text-gray-300"
                             >
-                                <span>Dribbble</span>
+                                <span>Facebook</span>
                                 <span className="ml-4">
                   <svg
                       width="20"
