@@ -19,7 +19,7 @@ const OurStory: React.FC = () => {
 
     return (
         <section className="w-full py-20 px-6 border-t border-gray-100">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-[1800px] mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-start">
                     <div className="mb-6 md:mb-0">
                         <h3 className="text-2xl font-medium">Nasza Historia</h3>

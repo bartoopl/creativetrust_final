@@ -28,8 +28,8 @@ export default function Header() {
     }, []);
 
     return (
-        <header className="bg-white shadow-sm py-4">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header className="bg-white py-4">
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between">
                     {/* Logo (lewa strona) */}
                     <div className="flex-shrink-0">

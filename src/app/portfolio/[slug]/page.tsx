@@ -35,7 +35,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
 
     if (!project) {
         return (
-            <div className="max-w-6xl mx-auto px-6 py-24">
+            <div className="max-w-[1800px] mx-auto px-6 py-24">
                 <h1 className="text-4xl font-medium mb-8">Projekt nie istnieje</h1>
                 <Link href="/portfolio" className="underline">
                     Wróć do portfolio
@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
 
     return (
         <main className="min-h-screen">
-            <div className="max-w-6xl mx-auto px-6 py-24">
+            <div className="max-w-[1800px] mx-auto px-6 py-24">
                 <Link href="/portfolio" className="text-gray-600 mb-12 block">
                     &larr; Wróć do portfolio
                 </Link>

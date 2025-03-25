@@ -64,3 +64,64 @@ export async function getServiceCategories() {
     }
   `);
 }
+
+// Funkcja pobierająca wszystkie wpisy z bazy wiedzy
+export async function getKnowledgeBase() {
+    return await client.fetch(`
+    *[_type == "knowledgeBase"] | order(letter asc, title asc) {
+      _id,
+      title,
+      slug,
+      letter,
+      shortDescription,
+      publishedAt,
+      tags
+    }
+  `);
+}
+
+// Funkcja pobierająca wpisy z bazy wiedzy dla konkretnej litery
+export async function getKnowledgeBaseByLetter(letter: string) {
+    return await client.fetch(`
+    *[_type == "knowledgeBase" && letter == $letter] | order(title asc) {
+      _id,
+      title,
+      slug,
+      letter,
+      shortDescription,
+      publishedAt,
+      tags
+    }
+  `, { letter });
+}
+
+// Funkcja pobierająca pojedynczy wpis z bazy wiedzy
+export async function getKnowledgeBaseEntry(slug: string) {
+    return await client.fetch(`
+    *[_type == "knowledgeBase" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      letter,
+      shortDescription,
+      content,
+      publishedAt,
+      tags,
+      seoTitle,
+      seoDescription
+    }
+  `, { slug });
+}
+
+// Funkcja pobierająca wszystkie dostępne litery z istniejących wpisów
+export async function getKnowledgeBaseLetters() {
+    const result = await client.fetch(`
+    *[_type == "knowledgeBase"] {
+      letter
+    } | order(letter asc)
+  `);
+
+    // Tworzymy zbiór unikalnych liter i konwertujemy z powrotem do tablicy
+    const uniqueLetters = [...new Set(result.map((item: any) => item.letter))];
+    return uniqueLetters;
+}

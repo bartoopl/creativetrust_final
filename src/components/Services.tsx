@@ -64,7 +64,7 @@ const Services: React.FC = () => {
 
     return (
         <section className="w-full py-16 md:py-24 px-6">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-[1800px] mx-auto">
                 <h2 className="text-2xl mb-10">Usługi</h2>
 
                 <div>

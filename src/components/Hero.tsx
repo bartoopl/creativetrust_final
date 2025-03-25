@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
 
     return (
         <section className="w-full py-24 md:py-32 lg:py-40 px-6">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-[1800px] mx-auto">
                 {/* Kategorie/Breadcrumbs */}
                 <div className="mb-8 md:mb-10">
                     <p className="text-gray-700 font-medium">

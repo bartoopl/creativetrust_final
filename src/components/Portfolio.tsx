@@ -110,7 +110,7 @@ const Portfolio: React.FC = () => {
 
     return (
         <section className="w-full py-16 md:py-24 px-6">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-[1800px] mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
                     <h2 className="text-2xl mb-6 md:mb-0">Realizacje</h2>
 

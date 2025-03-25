@@ -60,7 +60,7 @@ const FeaturedCaseStudy: React.FC = () => {
     if (isLoading) {
         return (
             <div className="w-full py-16 px-6">
-                <div className="max-w-6xl mx-auto">
+                <div className="max-w-[1800px] mx-auto">
                     <div className="h-96 bg-gray-100 rounded-xl animate-pulse"></div>
                 </div>
             </div>
@@ -71,7 +71,7 @@ const FeaturedCaseStudy: React.FC = () => {
 
     return (
         <section className="w-full py-16 md:py-24 px-6">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-[1800px] mx-auto">
                 <div className="bg-gray-100 rounded-xl p-6 md:p-10">
                     <div className="flex flex-col md:flex-row items-center">
                         <div className="w-full md:w-2/3 relative rounded-lg overflow-hidden mb-8 md:mb-0 md:mr-10">
