@@ -2,9 +2,16 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import PortableTextContent from '@/components/PortableTextContent';
 import { client } from '@/lib/sanity';
+import { Metadata } from 'next'; // jeśli będziesz używać `generateMetadata`
+import { FC } from 'react';
 
-// Prosta funkcja do pobierania wpisu
-async function getEntry(slug: string) {
+type PageProps = {
+    params: {
+        slug: string;
+    };
+};
+
+const getEntry = async (slug: string) => {
     try {
         return await client.fetch(`
       *[_type == "knowledgeBase" && slug.current == $slug][0] {
@@ -22,17 +29,15 @@ async function getEntry(slug: string) {
         console.error('Error fetching knowledge base entry:', error);
         return null;
     }
-}
+};
 
-// Prosta strona bez generateMetadata i generateStaticParams
-export default async function Page({ params }: { params: { slug: string } }) {
+const Page: FC<PageProps> = async ({ params }) => {
     const entry = await getEntry(params.slug);
 
     if (!entry) {
         notFound();
     }
 
-    // Formatowanie daty publikacji
     const publishDate = new Date(entry.publishedAt);
     const formattedDate = new Intl.DateTimeFormat('pl-PL', {
         day: 'numeric',
