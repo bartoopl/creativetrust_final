@@ -19,9 +19,10 @@ export default function ContactPage() {
                     <div className="w-full lg:w-1/2 space-y-12">
                         <div>
                             <h6 className="text-gray-600 mb-2">Kontakt</h6>
-                            <h1 className="text-4xl md:text-6xl font-medium mb-8">Get in touch</h1>
+                            <h1 className="text-4xl md:text-6xl font-medium mb-8">Masz biznes? My mamy pomysł na jego rozwój w sieci.</h1>
                             <p className="text-xl max-w-md">
-                                Get in touch to learn more about our automation platform and how we can help you achieve your business goals.
+                                Zostaw wiadomość i opowiedz nam o swoich planach — my podpowiemy, jak je przekuć w cyfrowy sukces.
+                                Pierwsze 30 minut konsultacji jest gratis i do niczego nie zobowiązuje.
                             </p>
                         </div>
 
