@@ -1,13 +1,11 @@
-// Zaktualizowany plik src/app/baza-wiedzy/[slug]/page.tsx
 import { getKnowledgeBaseEntry } from '@/lib/sanity';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Metadata } from 'next';
 import PortableTextContent from '@/components/PortableTextContent';
 
 // Typ dla parametrów generowania metadanych
-type Props = {
+interface Props {
     params: { slug: string }
 }
 
@@ -36,7 +34,7 @@ export async function generateStaticParams() {
     return [];
 }
 
-export default async function KnowledgeBaseEntryPage({ params }: { params: { slug: string } }) {
+export default async function KnowledgeBaseEntryPage({ params }: Props) {
     const entry = await getKnowledgeBaseEntry(params.slug);
 
     if (!entry) {
@@ -107,7 +105,7 @@ export default async function KnowledgeBaseEntryPage({ params }: { params: { slu
                 </div>
 
                 {/* Renderowanie treści za pomocą PortableText */}
-                <PortableTextContent content={entry.content} />
+                {entry.content && <PortableTextContent content={entry.content} />}
 
                 {/* Nawigacja na dole strony */}
                 <div className="mt-16 pt-8 border-t border-gray-200">
