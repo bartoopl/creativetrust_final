@@ -57,7 +57,7 @@ const AutomationChart = () => {
                         />
                         <Legend />
                         <Bar name="Tradycyjny marketing" dataKey="standardowy" fill="#f3f4f6" radius={[4, 4, 0, 0]} />
-                        <Bar name="Z Marketing Automation" dataKey="zAutomatyzowany" fill="#f97316" radius={[4, 4, 0, 0]} />
+                        <Bar name="Z Marketing Automation" dataKey="zAutomatyzowany" fill="#000000" radius={[4, 4, 0, 0]} />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

@@ -48,7 +48,7 @@ const PortableTextContent: React.FC<PortableTextContentProps> = ({ content }) =>
                         href={value?.href}
                         rel={rel}
                         target={target}
-                        className="text-blue-600 hover:text-blue-800 underline"
+                        className="text-black hover:text-black underline"
                     >
                         {children}
                     </Link>

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { getPortfolioProjects } from '@/lib/sanity';
+import AnimatedMenuItem from './AnimatedMenuItem';
 
 export default function Header() {
     const [projectCount, setProjectCount] = useState<number | null>(null);
@@ -18,7 +19,7 @@ export default function Header() {
                 setProjectCount(projects?.length || 0);
                 setLoading(false);
             } catch (error) {
-                console.error('Błąad podczas pobierania liczby projektów:', error);
+                console.error('Błąd podczas pobierania liczby projektów:', error);
                 setProjectCount(0);
                 setLoading(false);
             }
@@ -35,7 +36,7 @@ export default function Header() {
                     <div className="flex-shrink-0">
                         <Link href="/" className="block">
                             {/* SVG logo z filtrami CSS, aby było czarne */}
-                            <div className="w-32 h-10 relative">
+                            <div className="w-64 h-10 relative">
                                 {/* Zastąp '/logo.svg' ścieżką do Twojego logo */}
                                 <Image
                                     src="/logo.svg"
@@ -50,14 +51,14 @@ export default function Header() {
 
                     {/* Menu (środek) */}
                     <nav className="hidden md:flex items-center space-x-8">
-                        <Link href="/" className="text-gray-900 hover:text-gray-600 px-1 py-2 text-sm font-medium">
+                        <Link href="/" className="text-gray-900 hover:text-gray-500 transition-colors duration-300 px-1 py-2 text-sm font-medium">
                             Strona główna
                         </Link>
-                        <Link href="/uslugi" className="text-gray-900 hover:text-gray-600 px-1 py-2 text-sm font-medium">
+                        <Link href="/uslugi" className="text-gray-900 hover:text-gray-500 transition-colors duration-300 px-1 py-2 text-sm font-medium">
                             Usługi
                         </Link>
                         <div className="relative">
-                            <Link href="/portfolio" className="text-gray-900 hover:text-gray-600 px-1 py-2 text-sm font-medium">
+                            <Link href="/portfolio" className="text-gray-900 hover:text-gray-500 transition-colors duration-300 px-1 py-2 text-sm font-medium">
                                 Realizacje
                             </Link>
                             {loading ? (
@@ -84,10 +85,10 @@ export default function Header() {
                                 </motion.sup>
                             )}
                         </div>
-                        <Link href="/o-nas" className="text-gray-900 hover:text-gray-600 px-1 py-2 text-sm font-medium">
+                        <Link href="/o-nas" className="text-gray-900 hover:text-gray-500 transition-colors duration-300 px-1 py-2 text-sm font-medium">
                             O nas
                         </Link>
-                        <Link href="/blog" className="text-gray-900 hover:text-gray-600 px-1 py-2 text-sm font-medium">
+                        <Link href="/blog" className="text-gray-900 hover:text-gray-500 transition-colors duration-300 px-1 py-2 text-sm font-medium">
                             Blog
                         </Link>
                     </nav>
