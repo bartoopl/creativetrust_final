@@ -1,9 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    // Pozostałe konfiguracje
     images: {
-        domains: ['cdn.sanity.io'], // Aby umożliwić ładowanie obrazów z Sanity
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'cdn.sanity.io',
+                pathname: '/**',
+            },
+        ],
     },
-    // Możesz dodać tutaj inne opcje konfiguracyjne
-};
+    // Dodaj tę konfigurację dla Sanity
+    experimental: {
+        transpilePackages: ["@sanity"],
+    },
+}
 
-export default nextConfig;
+module.exports = nextConfig
