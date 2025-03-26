@@ -20,6 +20,7 @@ const ContactFormAutomation: React.FC = () => {
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -30,13 +31,35 @@ const ContactFormAutomation: React.FC = () => {
         e.preventDefault();
         setSubmitting(true);
         setError(null);
+        setSuccess(null);
 
         try {
-            // Tutaj normalnie byłoby wysyłanie danych do API
-            // Na potrzeby przykładu symulujemy opóźnienie
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            // Używamy tego samego endpointu API, ale dodajemy pole type
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...formData,
+                    subject: 'Marketing Automation - Zapytanie',
+                    message: `Prośba o kontakt w sprawie Marketing Automation.
+                    
+Imię i nazwisko: ${formData.name}
+Email: ${formData.email}
+Firma: ${formData.company}
+Telefon: ${formData.phone}`,
+                    type: 'automation'
+                }),
+            });
 
-            console.log('Formularz wysłany:', formData);
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Wystąpił błąd podczas wysyłania formularza');
+            }
+
+            setSuccess(data.message);
             setSubmitted(true);
             setFormData({
                 name: '',
@@ -45,7 +68,11 @@ const ContactFormAutomation: React.FC = () => {
                 phone: ''
             });
         } catch (err) {
-            setError('Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie później.');
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError('Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie później.');
+            }
             console.error('Błąd wysyłania formularza:', err);
         } finally {
             setSubmitting(false);
@@ -53,7 +80,7 @@ const ContactFormAutomation: React.FC = () => {
     };
 
     return (
-        <div className="bg-gray-900 p-8 rounded-xl">
+        <div className="bg-gray-900 p-8 rounded-xl text-white">
             {submitted ? (
                 <div className="text-center py-8">
                     <svg
@@ -72,8 +99,7 @@ const ContactFormAutomation: React.FC = () => {
                     </svg>
                     <h3 className="text-2xl font-medium mb-4">Dziękujemy za przesłanie formularza!</h3>
                     <p className="mb-6">
-                        Nasz ekspert skontaktuje się z Tobą w ciągu 24 godzin,
-                        aby omówić szczegóły bezpłatnego audytu.
+                        {success || 'Nasz ekspert skontaktuje się z Tobą w ciągu 24 godzin, aby omówić szczegóły bezpłatnego audytu.'}
                     </p>
                     <button
                         onClick={() => setSubmitted(false)}
@@ -93,6 +119,11 @@ const ContactFormAutomation: React.FC = () => {
                     {error && (
                         <div className="mb-6 bg-red-900 border border-red-800 text-white p-4 rounded-lg">
                             {error}
+                        </div>
+                    )}
+                    {success && !submitted && (
+                        <div className="mb-6 bg-green-900 border border-green-800 text-white p-4 rounded-lg">
+                            {success}
                         </div>
                     )}
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -153,12 +184,12 @@ const ContactFormAutomation: React.FC = () => {
                                 type="submit"
                                 disabled={submitting}
                                 className={`
-                  w-full px-6 py-3 rounded-full font-medium
-                  ${submitting
+                                    w-full px-6 py-3 rounded-full font-medium
+                                    ${submitting
                                     ? 'bg-gray-600 cursor-not-allowed'
                                     : 'bg-black hover:bg-black'} 
-                  transition-colors
-                `}
+                                    transition-colors
+                                `}
                             >
                                 {submitting ? 'Wysyłanie...' : 'Poproś o bezpłatny audyt'}
                             </button>

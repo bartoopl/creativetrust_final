@@ -191,7 +191,12 @@ const Footer: React.FC = () => {
 
                 {/* Dodajemy informacje o prawach autorskich */}
                 <div className="mt-12 text-center text-gray-500 text-sm">
-                    <p>&copy; {new Date().getFullYear()} Creative Trust. Wszelkie prawa zastrzeżone.</p>
+                    <p className="mb-2">&copy; {new Date().getFullYear()} Creative Trust. Wszelkie prawa zastrzeżone.</p>
+                    <div className="flex justify-center">
+                        <Link href="/polityka-prywatnosci" className="text-gray-400 hover:text-gray-300 transition-colors">
+                            Polityka Prywatności
+                        </Link>
+                    </div>
                 </div>
             </div>
         </footer>

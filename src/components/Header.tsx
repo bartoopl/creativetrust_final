@@ -3,15 +3,17 @@
 import Link from 'next/link';
 import Button from './Button';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getPortfolioProjects } from '@/lib/sanity';
-import AnimatedMenuItem from './AnimatedMenuItem';
+import MegaMenu from './MegaMenu';
 
 export default function Header() {
     const [projectCount, setProjectCount] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+    const servicesButtonRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const fetchProjectCount = async () => {
@@ -47,8 +49,14 @@ export default function Header() {
         setMobileMenuOpen(false);
     };
 
+    // Funkcja obsługująca kliknięcie na przycisk "Usługi"
+    const handleServicesClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        setMegaMenuOpen(!megaMenuOpen);
+    };
+
     return (
-        <header className="bg-white py-4 relative">
+        <header className="bg-white py-4 relative z-50 border-b border-gray-100">
             <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between">
                     {/* Logo (lewa strona) */}
@@ -73,9 +81,29 @@ export default function Header() {
                         <Link href="/" className="text-gray-900 hover:text-gray-500 transition-colors duration-300 px-1 py-2 text-sm font-medium">
                             Strona główna
                         </Link>
-                        <Link href="/uslugi" className="text-gray-900 hover:text-gray-500 transition-colors duration-300 px-1 py-2 text-sm font-medium">
-                            Usługi
-                        </Link>
+
+                        {/* Link do usług z ikoną dropdown */}
+                        <div
+                            ref={servicesButtonRef}
+                            className="relative cursor-pointer"
+                        >
+                            <div
+                                onClick={handleServicesClick}
+                                className={`flex items-center text-sm font-medium px-1 py-2 transition-colors duration-300 ${megaMenuOpen ? 'text-black' : 'text-gray-900 hover:text-gray-500'}`}
+                            >
+                                <span>Usługi</span>
+                                <svg
+                                    className={`w-4 h-4 ml-1 transform transition-transform duration-300 ${megaMenuOpen ? 'rotate-180' : ''}`}
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                        </div>
+
                         <div className="relative">
                             <Link href="/portfolio" className="text-gray-900 hover:text-gray-500 transition-colors duration-300 px-1 py-2 text-sm font-medium">
                                 Realizacje
@@ -160,6 +188,9 @@ export default function Header() {
                 </div>
             </div>
 
+            {/* Mega Menu dla usług */}
+            <MegaMenu isOpen={megaMenuOpen} onClose={() => setMegaMenuOpen(false)} />
+
             {/* Menu mobilne - rozwija się po kliknięciu hamburgera */}
             <AnimatePresence>
                 {mobileMenuOpen && (
@@ -179,13 +210,55 @@ export default function Header() {
                                 >
                                     Strona główna
                                 </Link>
-                                <Link
-                                    href="/uslugi"
-                                    className="text-xl font-medium text-gray-900 border-b border-gray-100 pb-4"
-                                    onClick={closeMobileMenu}
-                                >
-                                    Usługi
-                                </Link>
+
+                                {/* Usługi z submenu */}
+                                <div className="border-b border-gray-100 pb-4">
+                                    <Link
+                                        href="/uslugi"
+                                        className="text-xl font-medium text-gray-900 mb-4 block"
+                                        onClick={closeMobileMenu}
+                                    >
+                                        Usługi
+                                    </Link>
+                                    <div className="pl-4 mt-4 space-y-3">
+                                        <Link
+                                            href="/uslugi/strony-www"
+                                            className="text-lg text-gray-700 block"
+                                            onClick={closeMobileMenu}
+                                        >
+                                            Strony WWW
+                                        </Link>
+                                        <Link
+                                            href="/uslugi/e-commerce"
+                                            className="text-lg text-gray-700 block"
+                                            onClick={closeMobileMenu}
+                                        >
+                                            E-commerce
+                                        </Link>
+                                        <Link
+                                            href="/uslugi/branding"
+                                            className="text-lg text-gray-700 block"
+                                            onClick={closeMobileMenu}
+                                        >
+                                            Branding
+                                        </Link>
+                                        <Link
+                                            href="/uslugi/marketing-automation"
+                                            className="text-lg text-gray-700 block"
+                                            onClick={closeMobileMenu}
+                                        >
+                                            Marketing Automation
+                                        </Link>
+                                        <Link
+                                            href="/uslugi/performance-marketing"
+                                            className="text-lg text-gray-700 block"
+                                            onClick={closeMobileMenu}
+                                        >
+                                            Performance Marketing
+                                        </Link>
+                                    </div>
+                                </div>
+
                                 <Link
                                     href="/portfolio"
                                     className="text-xl font-medium text-gray-900 border-b border-gray-100 pb-4"

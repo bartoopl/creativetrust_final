@@ -20,6 +20,7 @@ const ContactForm: React.FC = () => {
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -30,13 +31,24 @@ const ContactForm: React.FC = () => {
         e.preventDefault();
         setSubmitting(true);
         setError(null);
+        setSuccess(null);
 
         try {
-            // Tutaj normalnie byłoby wysyłanie danych do API
-            // Na potrzeby przykładu symulujemy opóźnienie
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
 
-            console.log('Formularz wysłany:', formData);
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Wystąpił błąd podczas wysyłania formularza');
+            }
+
+            setSuccess(data.message);
             setSubmitted(true);
             setFormData({
                 name: '',
@@ -45,7 +57,11 @@ const ContactForm: React.FC = () => {
                 message: ''
             });
         } catch (err) {
-            setError('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.');
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.');
+            }
             console.error('Błąd wysyłania formularza:', err);
         } finally {
             setSubmitting(false);
@@ -60,7 +76,7 @@ const ContactForm: React.FC = () => {
                 <div className="bg-green-50 border border-green-200 p-6 rounded-lg">
                     <h3 className="text-xl font-medium text-green-800 mb-2">Dziękujemy za wiadomość!</h3>
                     <p className="text-green-700">
-                        Twoja wiadomość została wysłana. Skontaktujemy się z Tobą najszybciej jak to możliwe.
+                        {success || 'Twoja wiadomość została wysłana. Skontaktujemy się z Tobą najszybciej jak to możliwe.'}
                     </p>
                     <button
                         onClick={() => setSubmitted(false)}
@@ -148,17 +164,23 @@ const ContactForm: React.FC = () => {
                         </div>
                     )}
 
+                    {success && !submitted && (
+                        <div className="bg-green-50 border border-green-200 p-4 rounded-lg text-green-700">
+                            {success}
+                        </div>
+                    )}
+
                     <div className="pt-4">
                         <button
                             type="submit"
                             disabled={submitting}
                             className={`
-                w-full px-6 py-3 rounded-full font-medium
-                ${submitting
+                                w-full px-6 py-3 rounded-full font-medium
+                                ${submitting
                                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                 : 'bg-black text-white hover:bg-gray-800'}
-                transition-all
-              `}
+                                transition-all
+                            `}
                         >
                             {submitting ? 'Wysyłanie...' : 'Wyślij wiadomość'}
                         </button>
