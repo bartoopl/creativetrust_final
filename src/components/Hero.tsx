@@ -51,7 +51,7 @@ const Hero: React.FC = () => {
                 {/* Przycisk CTA */}
                 <div>
                     <Button href="/kontakt">
-                        Zamów bezpłatną konsultację
+                        Zamów bezpłatną konsultację.
                     </Button>
                 </div>
             </div>
