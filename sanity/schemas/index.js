@@ -1,10 +1,18 @@
-import knowledgeBase from "./knowledgeBase";
+// First, import all our schema types
+import blogPost from './blogPost'
+import blogCategory from './blogCategory'
+import author from './author'
 import portfolioProject from './portfolioProject'
 import serviceCategory from './serviceCategory'
+import knowledgeBase from './knowledgeBase'
 
+// Then, export the schema array - this is what Sanity Studio uses
 export const schemaTypes = [
+    // Document types
+    blogPost,
+    blogCategory,
+    author,
     portfolioProject,
     serviceCategory,
     knowledgeBase,
-    // Dodaj tutaj inne schematy z oryginalnego projektu Sanity
 ]

@@ -44,18 +44,8 @@ const Footer: React.FC = () => {
                 </div>
 
                 {/* Linki nawigacyjne i social media */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-10 border-t border-gray-800">
-                    {/* Left section - Contact link */}
-                    <div className="mb-6 md:mb-0">
-                        <Link
-                            href="/kontakt"
-                            className="text-white hover:text-gray-300 font-medium"
-                        >
-                            Contact
-                        </Link>
-                    </div>
-
-                    {/* Middle section - Main navigation */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10 border-t border-gray-800">
+                    {/* Main navigation */}
                     <div className="mb-6 md:mb-0">
                         <nav className="flex flex-col md:flex-row gap-3 md:gap-8">
                             <Link
@@ -92,16 +82,16 @@ const Footer: React.FC = () => {
                     </div>
 
                     {/* Right section - Social media links */}
-                    <div>
+                    <div className="flex justify-end">
                         <div className="flex flex-col gap-3">
                             <Link
                                 href="https://linkedin.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-between text-white hover:text-gray-300"
+                                className="flex items-center text-white hover:text-gray-300"
                             >
-                                <span>LinkedIn</span>
-                                <span className="ml-4">
+                                <span className="mr-auto">LinkedIn</span>
+                                <span className="ml-8">
                                     <svg
                                         width="20"
                                         height="20"
@@ -132,10 +122,10 @@ const Footer: React.FC = () => {
                                 href="https://facebook.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-between text-white hover:text-gray-300"
+                                className="flex items-center text-white hover:text-gray-300"
                             >
-                                <span>Facebook</span>
-                                <span className="ml-4">
+                                <span className="mr-auto">Facebook</span>
+                                <span className="ml-8">
                                     <svg
                                         width="20"
                                         height="20"
@@ -166,10 +156,10 @@ const Footer: React.FC = () => {
                                 href="https://instagram.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-between text-white hover:text-gray-300"
+                                className="flex items-center text-white hover:text-gray-300"
                             >
-                                <span>Instagram</span>
-                                <span className="ml-4">
+                                <span className="mr-auto">Instagram</span>
+                                <span className="ml-8">
                                     <svg
                                         width="20"
                                         height="20"

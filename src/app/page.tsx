@@ -3,6 +3,7 @@ import FeaturedCaseStudy from '@/components/FeaturedCaseStudy';
 import Services from '@/components/Services';
 import OurStory from '@/components/OurStory';
 import Portfolio from '@/components/Portfolio';
+import LatestBlogPosts from '@/components/LatestBlogPosts';
 
 export default function Home() {
     return (
@@ -12,6 +13,7 @@ export default function Home() {
             <Services />
             <OurStory />
             <Portfolio />
+            <LatestBlogPosts />
         </main>
     );
 }

@@ -125,3 +125,138 @@ export async function getKnowledgeBaseLetters() {
     const uniqueLetters = [...new Set(result.map((item: any) => item.letter))];
     return uniqueLetters;
 }
+
+// ----- Blog functions -----
+
+// Funkcja pobierająca wszystkie wpisy bloga
+export async function getBlogPosts() {
+    return await client.fetch(`
+    *[_type == "blogPost"] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      excerpt,
+      mainImage,
+      publishedAt,
+      estimatedReadingTime,
+      featured,
+      "authorName": author->name,
+      "authorImage": author->image,
+      "authorSlug": author->slug,
+      "categories": categories[]->{ _id, title, slug, color }
+    }
+  `);
+}
+
+// Funkcja pobierająca wyróżnione wpisy bloga
+export async function getFeaturedBlogPosts() {
+    return await client.fetch(`
+    *[_type == "blogPost" && featured == true] | order(publishedAt desc)[0...3] {
+      _id,
+      title,
+      slug,
+      excerpt,
+      mainImage,
+      publishedAt,
+      estimatedReadingTime,
+      "authorName": author->name,
+      "authorImage": author->image,
+      "authorSlug": author->slug,
+      "categories": categories[]->{ _id, title, slug, color }
+    }
+  `);
+}
+
+// Funkcja pobierająca pojedynczy wpis bloga
+export async function getBlogPost(slug: string) {
+    return await client.fetch(`
+    *[_type == "blogPost" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      excerpt,
+      mainImage,
+      content,
+      publishedAt,
+      estimatedReadingTime,
+      featured,
+      "author": author->{
+        name,
+        slug,
+        image,
+        bio,
+        role
+      },
+      "categories": categories[]->{ _id, title, slug, color },
+      "relatedPosts": *[_type == "blogPost" && 
+                         slug.current != $slug && 
+                         count(categories[@._ref in ^.^.categories[]._ref]) > 0] | 
+                         order(publishedAt desc)[0...3] {
+        _id,
+        title,
+        slug,
+        mainImage,
+        publishedAt
+      },
+      seoTitle,
+      seoDescription
+    }
+  `, { slug });
+}
+
+// Funkcja pobierająca wpisy bloga według kategorii
+export async function getBlogPostsByCategory(categorySlug: string) {
+    return await client.fetch(`
+    *[_type == "blogPost" && $categorySlug in categories[]->slug.current] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      excerpt,
+      mainImage,
+      publishedAt,
+      estimatedReadingTime,
+      "authorName": author->name,
+      "authorImage": author->image,
+      "authorSlug": author->slug,
+      "categories": categories[]->{ _id, title, slug, color }
+    }
+  `, { categorySlug });
+}
+
+// Funkcja pobierająca wszystkie kategorie bloga
+export async function getBlogCategories() {
+    return await client.fetch(`
+    *[_type == "blogCategory"] | order(title asc) {
+      _id,
+      title,
+      slug,
+      description,
+      color,
+      "count": count(*[_type == "blogPost" && references(^._id)])
+    }
+  `);
+}
+
+// Funkcja pobierająca informacje o autorze
+export async function getBlogAuthor(slug: string) {
+    return await client.fetch(`
+    *[_type == "author" && slug.current == $slug][0] {
+      _id,
+      name,
+      slug,
+      image,
+      bio,
+      role,
+      socialLinks,
+      "posts": *[_type == "blogPost" && author._ref == ^._id] | order(publishedAt desc) {
+        _id,
+        title,
+        slug,
+        excerpt,
+        mainImage,
+        publishedAt,
+        estimatedReadingTime
+      }
+    }
+  `, { slug });
+}
