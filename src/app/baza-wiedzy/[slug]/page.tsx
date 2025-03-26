@@ -1,12 +1,17 @@
 import { getKnowledgeBaseEntry } from '@/lib/sanity';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import PortableTextContent from '@/components/PortableTextContent';
 
-// Dokładnie to samo podejście co w działającym przykładzie
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-    const entry = await getKnowledgeBaseEntry(params.slug);
+type ParamsType = {
+    slug: string;
+};
+
+export async function generateMetadata(
+    props: { params: ParamsType }
+): Promise<Metadata> {
+    const entry = await getKnowledgeBaseEntry(props.params.slug);
 
     if (!entry) {
         return {
@@ -25,9 +30,10 @@ export async function generateStaticParams() {
     return [];
 }
 
-// Używamy dokładnie takiej samej struktury jak w działającym przykładzie
-export default async function KnowledgeBaseEntryPage({ params }: { params: { slug: string } }) {
-    const entry = await getKnowledgeBaseEntry(params.slug);
+export default async function KnowledgeBaseEntryPage(
+    props: { params: ParamsType }
+) {
+    const entry = await getKnowledgeBaseEntry(props.params.slug);
 
     if (!entry) {
         notFound();
