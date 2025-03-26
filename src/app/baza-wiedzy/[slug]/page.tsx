@@ -1,15 +1,11 @@
 import { getKnowledgeBaseEntry } from '@/lib/sanity';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import type { Metadata } from 'next';
+import { Metadata } from 'next';
 import PortableTextContent from '@/components/PortableTextContent';
 
-// Uproszczona wersja wg. dokumentacji Next.js 15
-type Props = {
-    params: { slug: string }
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+// Dokładnie to samo podejście co w działającym przykładzie
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     const entry = await getKnowledgeBaseEntry(params.slug);
 
     if (!entry) {
@@ -25,15 +21,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-// Generowanie statycznych parametrów
 export async function generateStaticParams() {
-    // Tutaj możesz dodać kod pobierający wszystkie slugi z bazy wiedzy
-    // dla statycznej generacji stron
-    // Na razie zostawiamy to puste - strony będą generowane na żądanie
     return [];
 }
 
-// Użycie komponentu funkcyjnego z bezpośrednim destrukturyzowaniem
+// Używamy dokładnie takiej samej struktury jak w działającym przykładzie
 export default async function KnowledgeBaseEntryPage({ params }: { params: { slug: string } }) {
     const entry = await getKnowledgeBaseEntry(params.slug);
 
@@ -105,7 +97,7 @@ export default async function KnowledgeBaseEntryPage({ params }: { params: { slu
                 </div>
 
                 {/* Renderowanie treści za pomocą PortableText */}
-                {entry.content && <PortableTextContent content={entry.content}/>}
+                {entry.content && <PortableTextContent content={entry.content} />}
 
                 {/* Nawigacja na dole strony */}
                 <div className="mt-16 pt-8 border-t border-gray-200">
