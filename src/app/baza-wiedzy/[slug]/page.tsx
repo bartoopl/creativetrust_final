@@ -4,13 +4,12 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import PortableTextContent from '@/components/PortableTextContent';
 
-// Typ dla parametrów generowania metadanych
-interface Props {
+// Definicja parametrów zgodna z oczekiwanym typem
+export async function generateMetadata({
+                                           params
+                                       }: {
     params: { slug: string }
-}
-
-// Dynamiczne generowanie metadanych
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+}): Promise<Metadata> {
     const entry = await getKnowledgeBaseEntry(params.slug);
 
     if (!entry) {
@@ -34,7 +33,11 @@ export async function generateStaticParams() {
     return [];
 }
 
-export default async function KnowledgeBaseEntryPage({ params }: Props) {
+export default async function KnowledgeBaseEntryPage({
+                                                         params
+                                                     }: {
+    params: { slug: string }
+}) {
     const entry = await getKnowledgeBaseEntry(params.slug);
 
     if (!entry) {
