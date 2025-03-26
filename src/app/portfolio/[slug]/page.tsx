@@ -2,6 +2,9 @@ import { client, urlFor } from '@/lib/sanity';
 import Image from 'next/image';
 import Link from 'next/link';
 
+// Define params as a Promise type for Next.js v15
+type Params = Promise<{ slug: string }>;
+
 // Generowanie statycznych parametrów
 export async function generateStaticParams() {
     const projects = await client.fetch(`*[_type == "portfolioProject"]{ slug }`);
@@ -30,8 +33,10 @@ async function getProject(slug: string) {
   `, { slug });
 }
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-    const project = await getProject(params.slug);
+export default async function ProjectPage({ params }: { params: Params }) {
+    // Await the params to get the slug
+    const { slug } = await params;
+    const project = await getProject(slug);
 
     if (!project) {
         return (
@@ -74,8 +79,8 @@ export default async function ProjectPage({ params }: { params: { slug: string }
                             key={category._id}
                             className="px-4 py-2 bg-gray-100 rounded-full text-sm"
                         >
-              {category.title}
-            </span>
+                            {category.title}
+                        </span>
                     ))}
                 </div>
 
