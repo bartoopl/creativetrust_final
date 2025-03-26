@@ -1,15 +1,15 @@
 import { getKnowledgeBaseEntry } from '@/lib/sanity';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import PortableTextContent from '@/components/PortableTextContent';
 
-// Definicja parametrów zgodna z oczekiwanym typem
-export async function generateMetadata({
-                                           params
-                                       }: {
+// Uproszczona wersja wg. dokumentacji Next.js 15
+type Props = {
     params: { slug: string }
-}): Promise<Metadata> {
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const entry = await getKnowledgeBaseEntry(params.slug);
 
     if (!entry) {
@@ -33,11 +33,8 @@ export async function generateStaticParams() {
     return [];
 }
 
-export default async function KnowledgeBaseEntryPage({
-                                                         params
-                                                     }: {
-    params: { slug: string }
-}) {
+// Użycie komponentu funkcyjnego z bezpośrednim destrukturyzowaniem
+export default async function KnowledgeBaseEntryPage({ params }: { params: { slug: string } }) {
     const entry = await getKnowledgeBaseEntry(params.slug);
 
     if (!entry) {
@@ -108,7 +105,7 @@ export default async function KnowledgeBaseEntryPage({
                 </div>
 
                 {/* Renderowanie treści za pomocą PortableText */}
-                {entry.content && <PortableTextContent content={entry.content} />}
+                {entry.content && <PortableTextContent content={entry.content}/>}
 
                 {/* Nawigacja na dole strony */}
                 <div className="mt-16 pt-8 border-t border-gray-200">
