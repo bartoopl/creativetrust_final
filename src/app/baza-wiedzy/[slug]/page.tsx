@@ -4,20 +4,17 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import PortableTextContent from '@/components/PortableTextContent';
 
-// Define the params for this page based on Next.js App Router expected types
-export interface PageProps {
-    params: {
-        slug: string;
-    };
-    searchParams: Record<string, string | string[] | undefined>;
-}
+// Define the params type as a Promise as required in Next.js v15
+type Params = Promise<{ slug: string }>;
 
 export async function generateMetadata({
                                            params,
                                        }: {
-    params: { slug: string };
+    params: Params;
 }): Promise<Metadata> {
-    const entry = await getKnowledgeBaseEntry(params.slug);
+    // Await the params to get the slug
+    const { slug } = await params;
+    const entry = await getKnowledgeBaseEntry(slug);
 
     if (!entry) {
         return {
@@ -36,13 +33,15 @@ export async function generateStaticParams() {
     return [];
 }
 
-// Using the correct App Router page component signature
+// Update the page component to also handle Promise params
 export default async function KnowledgeBaseEntryPage({
                                                          params,
                                                      }: {
-    params: { slug: string };
+    params: Params;
 }) {
-    const entry = await getKnowledgeBaseEntry(params.slug);
+    // Await the params to get the slug
+    const { slug } = await params;
+    const entry = await getKnowledgeBaseEntry(slug);
 
     if (!entry) {
         notFound();
@@ -104,8 +103,8 @@ export default async function KnowledgeBaseEntryPage({
                                     key={index}
                                     className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full"
                                 >
-                {tag}
-              </span>
+                  {tag}
+                </span>
                             ))}
                         </div>
                     )}
