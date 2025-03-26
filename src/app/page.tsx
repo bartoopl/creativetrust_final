@@ -2,7 +2,7 @@ import Hero from '@/components/Hero';
 import FeaturedCaseStudy from '@/components/FeaturedCaseStudy';
 import Services from '@/components/Services';
 import OurStory from '@/components/OurStory';
-import Portfolio from '@/components/Portfolio';
+import PortfolioHomepage from '@/components/PortfolioHomepage';
 import LatestBlogPosts from '@/components/LatestBlogPosts';
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
             <FeaturedCaseStudy />
             <Services />
             <OurStory />
-            <Portfolio />
+            <PortfolioHomepage />
             <LatestBlogPosts />
         </main>
     );

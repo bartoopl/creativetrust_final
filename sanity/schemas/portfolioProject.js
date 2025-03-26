@@ -1,3 +1,4 @@
+// sanity/schemas/portfolioProject.js
 export default {
     name: 'portfolioProject',
     title: 'Projekty Portfolio',
@@ -32,6 +33,53 @@ export default {
             options: {
                 hotspot: true,
             },
+            validation: Rule => Rule.required()
+        },
+        {
+            name: 'galleryImages',
+            title: 'Galeria Zdjęć',
+            description: 'Dodatkowe zdjęcia projektu do wyświetlenia w galerii',
+            type: 'array',
+            of: [
+                {
+                    type: 'image',
+                    options: {
+                        hotspot: true,
+                    },
+                    fields: [
+                        {
+                            name: 'alt',
+                            title: 'Tekst alternatywny',
+                            type: 'string',
+                            options: {
+                                isHighlighted: true
+                            },
+                            validation: Rule => Rule.required()
+                        },
+                        {
+                            name: 'caption',
+                            title: 'Podpis',
+                            type: 'string',
+                            options: {
+                                isHighlighted: true
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            name: 'projectUrl',
+            title: 'Adres projektu',
+            description: 'Link do zrealizowanego projektu (opcjonalnie)',
+            type: 'url',
+        },
+        {
+            name: 'scopeOfWork',
+            title: 'Zakres prac',
+            description: 'Lista rzeczy, które zostały wykonane w ramach projektu',
+            type: 'array',
+            of: [{ type: 'string' }],
             validation: Rule => Rule.required()
         },
         {

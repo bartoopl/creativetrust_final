@@ -2,6 +2,6 @@ src/components/PortableTextContent.tsx
 src/app/baza-wiedzy/**/*
 src/components/Footer.tsx
 src/components/OurStory.tsx
-src/components/Portfolio.tsx
+src/components/PortfolioHomepage.tsx
 src/components/FeaturedCaseStudy.tsx
 src/lib/sanity.ts

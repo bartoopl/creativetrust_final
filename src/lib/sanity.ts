@@ -15,7 +15,9 @@ export function urlFor(source: any) {
     return builder.image(source);
 }
 
-// Funkcje do pobierania danych portfolio
+// Dodaj tę funkcję do pliku lib/sanity.ts
+
+// Funkcja do pobierania wszystkich projektów portfolio
 export async function getPortfolioProjects() {
     return await client.fetch(`
     *[_type == "portfolioProject"] | order(publishedAt desc) {
@@ -35,6 +37,30 @@ export async function getPortfolioProjects() {
   `);
 }
 
+// Funkcja do pobierania pojedynczego projektu portfolio
+export async function getPortfolioProject(slug: string) {
+    return await client.fetch(`
+    *[_type == "portfolioProject" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      client,
+      mainImage,
+      galleryImages,
+      projectUrl,
+      scopeOfWork,
+      categories[]->{
+        _id,
+        title,
+        slug
+      },
+      description,
+      publishedAt
+    }
+  `, { slug });
+}
+
+// Funkcja do pobierania projektów portfolio według kategorii
 export async function getPortfolioProjectsByCategory(categorySlug: string) {
     return await client.fetch(`
     *[_type == "portfolioProject" && references(*[_type == "serviceCategory" && slug.current == $categorySlug]._id)] | order(publishedAt desc) {
