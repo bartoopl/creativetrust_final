@@ -4,15 +4,19 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import PortableTextContent from '@/components/PortableTextContent';
 
-type PageProps = {
+// Define the params for this page based on Next.js App Router expected types
+export interface PageProps {
     params: {
         slug: string;
     };
-};
+    searchParams: Record<string, string | string[] | undefined>;
+}
 
 export async function generateMetadata({
                                            params,
-                                       }: PageProps): Promise<Metadata> {
+                                       }: {
+    params: { slug: string };
+}): Promise<Metadata> {
     const entry = await getKnowledgeBaseEntry(params.slug);
 
     if (!entry) {
@@ -32,9 +36,12 @@ export async function generateStaticParams() {
     return [];
 }
 
+// Using the correct App Router page component signature
 export default async function KnowledgeBaseEntryPage({
                                                          params,
-                                                     }: PageProps) {
+                                                     }: {
+    params: { slug: string };
+}) {
     const entry = await getKnowledgeBaseEntry(params.slug);
 
     if (!entry) {
@@ -97,8 +104,8 @@ export default async function KnowledgeBaseEntryPage({
                                     key={index}
                                     className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full"
                                 >
-                  {tag}
-                </span>
+                {tag}
+              </span>
                             ))}
                         </div>
                     )}
