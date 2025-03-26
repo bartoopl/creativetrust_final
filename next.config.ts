@@ -10,10 +10,8 @@ const nextConfig = {
             },
         ],
     },
-    // Dodaj tę konfigurację dla Sanity
-    experimental: {
-        transpilePackages: ["@sanity"],
-    },
+    // Przeniesiono z experimental.transpilePackages do transpilePackages na głównym poziomie
+    transpilePackages: ["@sanity"],
 }
 
 module.exports = nextConfig

@@ -13,6 +13,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
     title: 'Moja Agencja Marketingowa',
     description: 'Profesjonalne usługi marketingowe, tworzenie stron www i sklepów internetowych',
+    viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0',
 };
 
 export default function RootLayout({
@@ -21,13 +22,13 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="pl">
-        <body className={manrope.className}>
-        <div className="max-w-[1800px] mx-auto">
+        <html lang="pl" className="overflow-x-hidden">
+        <body className={`${manrope.className} overflow-x-hidden w-full`}>
+        <div className="w-full overflow-x-hidden">
             <Header />
-            <main>{children}</main>
+            <main className="w-full overflow-x-hidden">{children}</main>
+            <Footer />
         </div>
-        <Footer />
         </body>
         </html>
     );

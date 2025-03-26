@@ -7,19 +7,21 @@ interface ButtonProps {
     href: string;
     children: React.ReactNode;
     className?: string;
+    onClick?: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ href, children, className = '' }) => {
+const Button: React.FC<ButtonProps> = ({ href, children, className = '', onClick }) => {
     return (
         <Link
             href={href}
             className={`
-        group relative inline-flex items-center justify-center gap-2 
-        bg-black text-white px-6 py-3 rounded-full font-medium
-        transition-all duration-300 ease-in-out
-        hover:bg-transparent hover:text-black hover:border hover:border-black
-        ${className}
-      `}
+                group relative inline-flex items-center justify-center gap-2 
+                bg-black text-white px-6 py-3 rounded-full font-medium
+                transition-all duration-300 ease-in-out
+                hover:bg-transparent hover:text-black hover:border hover:border-black
+                ${className}
+            `}
+            onClick={onClick}
         >
             <span>{children}</span>
             <svg
