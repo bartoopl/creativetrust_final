@@ -4,11 +4,15 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import PortableTextContent from '@/components/PortableTextContent';
 
+type PageProps = {
+    params: {
+        slug: string;
+    };
+};
+
 export async function generateMetadata({
                                            params,
-                                       }: {
-    params: Record<string, string>;
-}): Promise<Metadata> {
+                                       }: PageProps): Promise<Metadata> {
     const entry = await getKnowledgeBaseEntry(params.slug);
 
     if (!entry) {
@@ -28,12 +32,9 @@ export async function generateStaticParams() {
     return [];
 }
 
-// Używamy ogólnego Record<string, string> dla parametrów zgodnie z App Router
 export default async function KnowledgeBaseEntryPage({
                                                          params,
-                                                     }: {
-    params: Record<string, string>;
-}) {
+                                                     }: PageProps) {
     const entry = await getKnowledgeBaseEntry(params.slug);
 
     if (!entry) {
