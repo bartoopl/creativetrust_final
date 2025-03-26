@@ -85,7 +85,7 @@ const Footer: React.FC = () => {
                     <div className="flex justify-end">
                         <div className="flex flex-col gap-3">
                             <Link
-                                href="https://linkedin.com"
+                                href="https://www.linkedin.com/company/creativetrust"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center text-white hover:text-gray-300"
@@ -119,7 +119,7 @@ const Footer: React.FC = () => {
                             </Link>
 
                             <Link
-                                href="https://facebook.com"
+                                href="https://www.facebook.com/creativetrustpl/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center text-white hover:text-gray-300"
@@ -153,7 +153,7 @@ const Footer: React.FC = () => {
                             </Link>
 
                             <Link
-                                href="https://instagram.com"
+                                href="https://www.instagram.com/creativetrust_/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center text-white hover:text-gray-300"

@@ -77,7 +77,7 @@ export default function ContactPage() {
                         <div className="space-y-8 pt-12">
                             <div className="flex items-center space-x-4">
                                 <Link
-                                    href="https://twitter.com"
+                                    href="https://www.linkedin.com/company/creativetrust"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center group"
@@ -112,7 +112,7 @@ export default function ContactPage() {
 
                             <div className="flex items-center space-x-4">
                                 <Link
-                                    href="https://dribbble.com"
+                                    href="https://www.facebook.com/creativetrustpl/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center group"
@@ -147,7 +147,7 @@ export default function ContactPage() {
 
                             <div className="flex items-center space-x-4">
                                 <Link
-                                    href="https://instagram.com"
+                                    href="https://www.instagram.com/creativetrust_/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center group"
