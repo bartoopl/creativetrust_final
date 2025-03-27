@@ -34,9 +34,9 @@ export default function AboutPage() {
     const teamMembers: TeamMember[] = [
         {
             id: 1,
-            name: 'Anna Kowalska',
+            name: 'Natalia',
             role: 'CEO & Strateg Marketingowy',
-            bio: 'Z 15-letnim doświadczeniem w marketingu cyfrowym, Anna kieruje strategicznym rozwojem agencji. Specjalizuje się w kompleksowych kampaniach marketingowych dla średnich i dużych firm.',
+            bio: 'Pierwszy kontakt z Klientem. Opracowywanie Strategii itd.',
             image: '/team-member-1.jpg'
         },
         {
