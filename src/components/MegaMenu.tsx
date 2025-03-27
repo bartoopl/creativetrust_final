@@ -27,7 +27,7 @@ const services: Service[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
             </svg>
         ),
-        color: 'from-blue-400 to-blue-600'
+        color: 'bg-black'
     },
     {
         id: 'e-commerce',
@@ -38,7 +38,7 @@ const services: Service[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
         ),
-        color: 'from-green-400 to-green-600'
+        color: 'bg-black'
     },
     {
         id: 'branding',
@@ -49,7 +49,7 @@ const services: Service[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
             </svg>
         ),
-        color: 'from-purple-400 to-purple-600'
+        color: 'bg-black'
     },
     {
         id: 'marketing-automation',
@@ -61,7 +61,7 @@ const services: Service[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         ),
-        color: 'from-yellow-400 to-yellow-600'
+        color: 'bg-black'
     },
     {
         id: 'performance-marketing',
@@ -72,7 +72,7 @@ const services: Service[] = [
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
         ),
-        color: 'from-red-400 to-red-600'
+        color: 'bg-black'
     }
 ];
 

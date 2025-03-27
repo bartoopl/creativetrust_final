@@ -225,37 +225,7 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Nasz zespół */}
-            <section id="team" className="w-full py-16 md:py-24 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium mb-8 text-center">Nasz zespół</h2>
-                        <p className="text-lg text-gray-600 max-w-3xl mx-auto text-center">
-                            Poznaj ludzi, którzy stoją za sukcesem CreativeTrust. Zespół doświadczonych specjalistów z pasją do marketingu i technologii.
-                        </p>
-                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {teamMembers.map((member) => (
-                            <div key={member.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100">
-                                <div className="aspect-square relative overflow-hidden">
-                                    <Image
-                                        src={member.image}
-                                        alt={member.name}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-medium mb-1">{member.name}</h3>
-                                    <p className="text-gray-500 mb-4">{member.role}</p>
-                                    <p className="text-gray-600 text-sm">{member.bio}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* Liczby */}
             <section className="w-full py-16 md:py-24 px-6 bg-black text-white">
@@ -281,7 +251,7 @@ export default function AboutPage() {
                         </div>
 
                         <div className="text-center p-8">
-                            <div className="text-6xl font-bold mb-3">25+</div>
+                            <div className="text-6xl font-bold mb-3">10+</div>
                             <div className="text-xl text-gray-300">członków zespołu</div>
                         </div>
                     </div>
