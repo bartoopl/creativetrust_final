@@ -4,11 +4,3 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-
-[functions]
-  directory = ".netlify/functions"
-  node_bundler = "esbuild"
-
-# Ta część jest ważna - gwarantuje, że funkcje mają dostęp do zmiennych
-[build.environment]
-  NODE_ENV = "production"
