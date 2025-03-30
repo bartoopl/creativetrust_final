@@ -346,7 +346,7 @@ export default function AboutPage() {
                         Skontaktuj się z nami, aby porozmawiać o tym, jak możemy pomóc w osiągnięciu Twoich celów biznesowych za pomocą skutecznych strategii marketingowych.
                     </p>
                     <Button href="/kontakt">
-                        Umów bezpłatną konsultację
+                        Umów bezpłatną konsultację!
                     </Button>
                 </div>
             </section>
