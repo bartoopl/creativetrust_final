@@ -20,8 +20,3 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
-
-  # Zwiększamy timeout dla funkcji
-  [functions.contact]
-    included_files = ["node_modules/nodemailer/**"]
-    timeout = 30

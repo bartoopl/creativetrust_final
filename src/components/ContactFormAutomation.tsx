@@ -21,7 +21,6 @@ export default function ContactFormAutomation() {
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
-    const [usedFallback, setUsedFallback] = useState<boolean>(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -33,7 +32,6 @@ export default function ContactFormAutomation() {
         setSubmitting(true);
         setError(null);
         setSuccess(null);
-        setUsedFallback(false);
 
         // Przygotuj wiadomość dla API
         const apiMessageData = {
@@ -49,14 +47,12 @@ Telefon: ${formData.phone}`,
         };
 
         try {
-            // Najpierw próbujemy wysłać przez API
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(apiMessageData),
-                cache: 'no-store'
             });
 
             const data = await response.json();
@@ -76,67 +72,12 @@ Telefon: ${formData.phone}`,
                 phone: ''
             });
         } catch (err) {
-            console.error('Błąd wysyłania formularza przez API:', err);
-
-            try {
-                // Fallback: wysyłamy formularz przez natywny Netlify Forms
-                // W tym celu tworzymy ukryty formularz i wysyłamy go programowo
-                const netlifyForm = document.createElement('form');
-                netlifyForm.setAttribute('method', 'POST');
-                netlifyForm.setAttribute('name', 'automation');
-                netlifyForm.setAttribute('data-netlify', 'true');
-                netlifyForm.setAttribute('netlify-honeypot', 'bot-field');
-                netlifyForm.style.display = 'none';
-
-                // Dodajemy pole honeypot (przeciw botom)
-                const honeypotField = document.createElement('input');
-                honeypotField.setAttribute('name', 'bot-field');
-                netlifyForm.appendChild(honeypotField);
-
-                // Dodajemy pola formularza
-                for (const key in formData) {
-                    const input = document.createElement('input');
-                    input.setAttribute('name', key);
-                    input.setAttribute('value', formData[key as keyof FormData]);
-                    netlifyForm.appendChild(input);
-                }
-
-                // Dodajemy pole typu formularza
-                const typeInput = document.createElement('input');
-                typeInput.setAttribute('name', 'form-type');
-                typeInput.setAttribute('value', 'automation');
-                netlifyForm.appendChild(typeInput);
-
-                // Dodajemy ukryty input dla nazwy formularza (wymagane przez Netlify)
-                const formNameInput = document.createElement('input');
-                formNameInput.setAttribute('name', 'form-name');
-                formNameInput.setAttribute('value', 'automation');
-                netlifyForm.appendChild(formNameInput);
-
-                // Dodajemy formularz do dokumentu, wysyłamy i usuwamy
-                document.body.appendChild(netlifyForm);
-                netlifyForm.submit();
-
-                // Ustawiamy flagę, że użyliśmy fallbacku
-                setUsedFallback(true);
-                setSuccess('Dziękujemy za wiadomość! Nasz ekspert skontaktuje się z Tobą w ciągu 24 godzin.');
-                setSubmitted(true);
-
-                // Resetujemy formularz
-                setFormData({
-                    name: '',
-                    email: '',
-                    company: '',
-                    phone: ''
-                });
-            } catch (fallbackErr) {
-                console.error('Błąd podczas korzystania z fallbacku:', fallbackErr);
-                if (err instanceof Error) {
-                    setError(err.message);
-                } else {
-                    setError('Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie później.');
-                }
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError('Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie później.');
             }
+            console.error('Błąd wysyłania formularza:', err);
         } finally {
             setSubmitting(false);
         }
@@ -164,11 +105,6 @@ Telefon: ${formData.phone}`,
                     <p className="mb-6">
                         {success || 'Nasz ekspert skontaktuje się z Tobą w ciągu 24 godzin, aby omówić szczegóły bezpłatnego audytu.'}
                     </p>
-                    {usedFallback && (
-                        <p className="text-green-400 mt-2 text-sm mb-6">
-                            Wiadomość została wysłana alternatywną metodą z powodu problemów technicznych.
-                        </p>
-                    )}
                     <button
                         onClick={() => setSubmitted(false)}
                         className="px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors"
@@ -262,15 +198,6 @@ Telefon: ${formData.phone}`,
                                 {submitting ? 'Wysyłanie...' : 'Poproś o bezpłatny audyt'}
                             </button>
                         </div>
-                    </form>
-
-                    {/* Ukryty formularz dla Netlify Forms */}
-                    <form name="automation" data-netlify="true" netlify-honeypot="bot-field" hidden>
-                        <input type="text" name="name" />
-                        <input type="email" name="email" />
-                        <input type="text" name="company" />
-                        <input type="tel" name="phone" />
-                        <input type="text" name="form-type" />
                     </form>
                 </>
             )}
