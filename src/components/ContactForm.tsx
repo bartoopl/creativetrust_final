@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-export default
 
 interface FormData {
     name: string;
@@ -10,7 +9,7 @@ interface FormData {
     message: string;
 }
 
-const ContactForm: React.FC = () => {
+export default function ContactForm() {
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
@@ -22,6 +21,7 @@ const ContactForm: React.FC = () => {
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
+    const [usedFallback, setUsedFallback] = useState<boolean>(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -33,9 +33,10 @@ const ContactForm: React.FC = () => {
         setSubmitting(true);
         setError(null);
         setSuccess(null);
+        setUsedFallback(false);
 
         try {
-            // Dodaj parametr cache: 'no-store' aby zapobiec cachowaniu odpowiedzi
+            // Najpierw próbujemy wysłać przez API
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
@@ -53,6 +54,7 @@ const ContactForm: React.FC = () => {
 
             setSuccess(data.message);
             setSubmitted(true);
+
             // Resetujemy formularz
             setFormData({
                 name: '',
@@ -61,12 +63,61 @@ const ContactForm: React.FC = () => {
                 message: ''
             });
         } catch (err) {
-            if (err instanceof Error) {
-                setError(err.message);
-            } else {
-                setError('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.');
+            console.error('Błąd wysyłania formularza przez API:', err);
+
+            try {
+                // Fallback: wysyłamy formularz przez natywny Netlify Forms
+                // W tym celu tworzymy ukryty formularz i wysyłamy go programowo
+                const netlifyForm = document.createElement('form');
+                netlifyForm.setAttribute('method', 'POST');
+                netlifyForm.setAttribute('name', 'contact');
+                netlifyForm.setAttribute('data-netlify', 'true');
+                netlifyForm.setAttribute('netlify-honeypot', 'bot-field');
+                netlifyForm.style.display = 'none';
+
+                // Dodajemy pole honeypot (przeciw botom)
+                const honeypotField = document.createElement('input');
+                honeypotField.setAttribute('name', 'bot-field');
+                netlifyForm.appendChild(honeypotField);
+
+                // Dodajemy pola formularza
+                for (const key in formData) {
+                    const input = document.createElement('input');
+                    input.setAttribute('name', key);
+                    input.setAttribute('value', formData[key as keyof FormData]);
+                    netlifyForm.appendChild(input);
+                }
+
+                // Dodajemy ukryty input dla nazwy formularza (wymagane przez Netlify)
+                const formNameInput = document.createElement('input');
+                formNameInput.setAttribute('name', 'form-name');
+                formNameInput.setAttribute('value', 'contact');
+                netlifyForm.appendChild(formNameInput);
+
+                // Dodajemy formularz do dokumentu, wysyłamy i usuwamy
+                document.body.appendChild(netlifyForm);
+                netlifyForm.submit();
+
+                // Ustawiamy flagę, że użyliśmy fallbacku
+                setUsedFallback(true);
+                setSuccess('Dziękujemy za wiadomość! Skontaktujemy się z Tobą najszybciej jak to możliwe.');
+                setSubmitted(true);
+
+                // Resetujemy formularz
+                setFormData({
+                    name: '',
+                    email: '',
+                    subject: '',
+                    message: ''
+                });
+            } catch (fallbackErr) {
+                console.error('Błąd podczas korzystania z fallbacku:', fallbackErr);
+                if (err instanceof Error) {
+                    setError(err.message);
+                } else {
+                    setError('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.');
+                }
             }
-            console.error('Błąd wysyłania formularza:', err);
         } finally {
             setSubmitting(false);
         }
@@ -82,6 +133,11 @@ const ContactForm: React.FC = () => {
                     <p className="text-green-700">
                         {success || 'Twoja wiadomość została wysłana. Skontaktujemy się z Tobą najszybciej jak to możliwe.'}
                     </p>
+                    {usedFallback && (
+                        <p className="text-green-700 mt-2 text-sm">
+                            Wiadomość została wysłana alternatywną metodą z powodu problemów technicznych.
+                        </p>
+                    )}
                     <button
                         onClick={() => setSubmitted(false)}
                         className="mt-4 px-6 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-50 transition-colors"
@@ -90,113 +146,122 @@ const ContactForm: React.FC = () => {
                     </button>
                 </div>
             ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="space-y-4">
-                        <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                                Imię i nazwisko <span className="text-red-500">*</span>
-                            </label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                placeholder="Twoje imię i nazwisko"
-                            />
+                <>
+                    {/* Widoczny formularz dla użytkownika */}
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="space-y-4">
+                            <div>
+                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Imię i nazwisko <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                                    placeholder="Twoje imię i nazwisko"
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Email <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                                    placeholder="Twój adres email"
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Temat <span className="text-red-500">*</span>
+                                </label>
+                                <select
+                                    id="subject"
+                                    name="subject"
+                                    value={formData.subject}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                                >
+                                    <option value="" disabled>Wybierz temat</option>
+                                    <option value="general">Zapytanie ogólne</option>
+                                    <option value="cooperation">Współpraca</option>
+                                    <option value="project">Wycena projektu</option>
+                                    <option value="support">Wsparcie techniczne</option>
+                                    <option value="other">Inny</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Wiadomość <span className="text-red-500">*</span>
+                                </label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    required
+                                    rows={6}
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                                    placeholder="Twoja wiadomość..."
+                                />
+                            </div>
                         </div>
 
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                Email <span className="text-red-500">*</span>
-                            </label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                placeholder="Twój adres email"
-                            />
-                        </div>
+                        {error && (
+                            <div className="bg-red-50 border border-red-200 p-4 rounded-lg text-red-700">
+                                {error}
+                            </div>
+                        )}
 
-                        <div>
-                            <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                                Temat <span className="text-red-500">*</span>
-                            </label>
-                            <select
-                                id="subject"
-                                name="subject"
-                                value={formData.subject}
-                                onChange={handleChange}
-                                required
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                        {success && !submitted && (
+                            <div className="bg-green-50 border border-green-200 p-4 rounded-lg text-green-700">
+                                {success}
+                            </div>
+                        )}
+
+                        <div className="pt-4">
+                            <button
+                                type="submit"
+                                disabled={submitting}
+                                className={`
+                                    w-full px-6 py-3 rounded-full font-medium
+                                    ${submitting
+                                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                    : 'bg-black text-white hover:bg-gray-800'}
+                                    transition-all
+                                `}
                             >
-                                <option value="" disabled>Wybierz temat</option>
-                                <option value="general">Zapytanie ogólne</option>
-                                <option value="cooperation">Współpraca</option>
-                                <option value="project">Wycena projektu</option>
-                                <option value="support">Wsparcie techniczne</option>
-                                <option value="other">Inny</option>
-                            </select>
+                                {submitting ? 'Wysyłanie...' : 'Wyślij wiadomość'}
+                            </button>
                         </div>
 
-                        <div>
-                            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                                Wiadomość <span className="text-red-500">*</span>
-                            </label>
-                            <textarea
-                                id="message"
-                                name="message"
-                                value={formData.message}
-                                onChange={handleChange}
-                                required
-                                rows={6}
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                placeholder="Twoja wiadomość..."
-                            />
-                        </div>
-                    </div>
+                        <p className="text-sm text-gray-500 mt-4">
+                            Wysyłając ten formularz, zgadzasz się na przetwarzanie Twoich danych osobowych zgodnie z naszą <a href="/polityka-prywatnosci" className="underline hover:text-black">polityką prywatności</a>.
+                        </p>
+                    </form>
 
-                    {error && (
-                        <div className="bg-red-50 border border-red-200 p-4 rounded-lg text-red-700">
-                            {error}
-                        </div>
-                    )}
-
-                    {success && !submitted && (
-                        <div className="bg-green-50 border border-green-200 p-4 rounded-lg text-green-700">
-                            {success}
-                        </div>
-                    )}
-
-                    <div className="pt-4">
-                        <button
-                            type="submit"
-                            disabled={submitting}
-                            className={`
-                                w-full px-6 py-3 rounded-full font-medium
-                                ${submitting
-                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                : 'bg-black text-white hover:bg-gray-800'}
-                                transition-all
-                            `}
-                        >
-                            {submitting ? 'Wysyłanie...' : 'Wyślij wiadomość'}
-                        </button>
-                    </div>
-
-                    <p className="text-sm text-gray-500 mt-4">
-                        Wysyłając ten formularz, zgadzasz się na przetwarzanie Twoich danych osobowych zgodnie z naszą <a href="/polityka-prywatnosci" className="underline hover:text-black">polityką prywatności</a>.
-                    </p>
-                </form>
+                    {/* Ukryty formularz dla Netlify Forms */}
+                    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+                        <input type="text" name="name" />
+                        <input type="email" name="email" />
+                        <input type="text" name="subject" />
+                        <textarea name="message"></textarea>
+                    </form>
+                </>
             )}
         </div>
     );
-};
-
-export { ContactForm as default };
+}
