@@ -107,11 +107,11 @@ const AdvancedHero: React.FC = () => {
 
         // Najpierw animuj kategorie/breadcrumbs
         if (categoriesRef.current) {
-            gsap.set(categoriesRef.current, { opacity: 0, y: -20 });
+            gsap.set(categoriesRef.current, { opacity: 0, y: -10 });
             tl.to(categoriesRef.current, {
                 opacity: 1,
                 y: 0,
-                duration: 0.8
+                duration: 0.3
             });
         }
 
@@ -119,41 +119,41 @@ const AdvancedHero: React.FC = () => {
         tl.to(fadeUpWords, {
             y: 0,
             opacity: 1,
-            stagger: 0.08,
-            duration: 0.8
-        }, "-=0.4");
+            stagger: 0.03,
+            duration: 0.4
+        }, "-=0.2");
 
         tl.to(fadeRightWords, {
             x: 0,
             opacity: 1,
-            stagger: 0.08,
-            duration: 0.8
-        }, "-=0.6");
+            stagger: 0.03,
+            duration: 0.4
+        }, "-=0.3");
 
         tl.to(fadeLeftWords, {
             x: 0,
             opacity: 1,
-            stagger: 0.08,
-            duration: 0.8
-        }, "-=0.6");
+            stagger: 0.03,
+            duration: 0.4
+        }, "-=0.3");
 
         // Animuj litery dla dodatkowego efektu
         tl.to(allChars, {
             opacity: 1,
             scale: 1,
-            stagger: 0.01,
-            duration: 0.4
-        }, "-=0.8");
+            stagger: 0.005,
+            duration: 0.3
+        }, "-=0.4");
 
         // Na końcu animuj przycisk
         if (btnRef.current) {
-            gsap.set(btnRef.current, { opacity: 0, scale: 0.8 });
+            gsap.set(btnRef.current, { opacity: 0, scale: 0.9 });
             tl.to(btnRef.current, {
                 opacity: 1,
                 scale: 1,
-                duration: 0.8,
-                ease: "elastic.out(1, 0.5)"
-            }, "-=0.2");
+                duration: 0.4,
+                ease: "power2.out"
+            }, "-=0.3");
         }
 
     }, [headlineText]);
