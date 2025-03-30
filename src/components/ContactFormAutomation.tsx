@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+export default
 
 interface FormData {
     name: string;
@@ -51,6 +52,7 @@ Firma: ${formData.company}
 Telefon: ${formData.phone}`,
                     type: 'automation'
                 }),
+                cache: 'no-store'
             });
 
             const data = await response.json();
@@ -136,7 +138,7 @@ Telefon: ${formData.phone}`,
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all text-white"
                                 placeholder="Jan Kowalski"
                             />
                         </div>
@@ -149,7 +151,7 @@ Telefon: ${formData.phone}`,
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all text-white"
                                 placeholder="jan@firma.pl"
                             />
                         </div>
@@ -162,7 +164,7 @@ Telefon: ${formData.phone}`,
                                 value={formData.company}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all text-white"
                                 placeholder="Nazwa firmy"
                             />
                         </div>
@@ -175,7 +177,7 @@ Telefon: ${formData.phone}`,
                                 value={formData.phone}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all text-white"
                                 placeholder="+48 123 456 789"
                             />
                         </div>
@@ -200,5 +202,3 @@ Telefon: ${formData.phone}`,
         </div>
     );
 };
-
-export default ContactFormAutomation;

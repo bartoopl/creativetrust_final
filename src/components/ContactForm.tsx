@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+export default
 
 interface FormData {
     name: string;
@@ -34,12 +35,14 @@ const ContactForm: React.FC = () => {
         setSuccess(null);
 
         try {
+            // Dodaj parametr cache: 'no-store' aby zapobiec cachowaniu odpowiedzi
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
+                cache: 'no-store'
             });
 
             const data = await response.json();
@@ -50,6 +53,7 @@ const ContactForm: React.FC = () => {
 
             setSuccess(data.message);
             setSubmitted(true);
+            // Resetujemy formularz
             setFormData({
                 name: '',
                 email: '',
@@ -195,4 +199,4 @@ const ContactForm: React.FC = () => {
     );
 };
 
-export default ContactForm;
+export { ContactForm as default };
