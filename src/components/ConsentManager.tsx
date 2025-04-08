@@ -26,6 +26,14 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
                 personalization_storage: true,
                 security_storage: true
             });
+        } else if (storedConsent === 'essential') {
+            setConsents({
+                analytics_storage: false,
+                ad_storage: false,
+                functionality_storage: true,
+                personalization_storage: false,
+                security_storage: true
+            });
         }
     }, []);
 
@@ -85,9 +93,10 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
         setTimeout(savePreferences, 100);
     };
 
-    // Funkcja do obsługi kliknięcia na przełącznik
-    const handleToggleClick = (key: keyof typeof consents) => {
-        if (key === 'security_storage') return; // Nie pozwól na zmianę dla security_storage
+    // Funkcja do obsługi zmiany dla konkretnego przełącznika
+    const handleConsentChange = (key: keyof typeof consents) => {
+        // Nie pozwól na zmianę dla security_storage
+        if (key === 'security_storage') return;
 
         setConsents(prev => ({
             ...prev,
@@ -115,13 +124,10 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
                     <div className="p-4 border border-gray-200 rounded-lg">
                         <div className="flex items-center justify-between mb-2">
                             <span className="font-medium">Niezbędne (zawsze aktywne)</span>
-                            <label className="inline-flex items-center cursor-not-allowed">
-                                <div className="relative w-10 h-6">
-                                    <input type="checkbox" className="hidden" checked={true} readOnly />
-                                    <div className="block bg-black w-10 h-6 rounded-full"></div>
-                                    <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transform translate-x-4"></div>
-                                </div>
-                            </label>
+                            <div className="relative w-10 h-6">
+                                <div className="block bg-black w-10 h-6 rounded-full"></div>
+                                <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transform translate-x-4"></div>
+                            </div>
                         </div>
                         <p className="text-sm text-gray-600">
                             Te pliki cookie są niezbędne do funkcjonowania strony internetowej i nie mogą być wyłączone.
@@ -132,16 +138,16 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
                     <div className="p-4 border border-gray-200 rounded-lg">
                         <div className="flex items-center justify-between mb-2">
                             <span className="font-medium">Funkcjonalne</span>
-                            <label className="inline-flex items-center cursor-pointer">
-                                <div
-                                    className="relative w-10 h-6"
-                                    onClick={() => handleToggleClick('functionality_storage')}
-                                >
-                                    <input type="checkbox" className="hidden" checked={consents.functionality_storage} readOnly />
+                            <button
+                                onClick={() => handleConsentChange('functionality_storage')}
+                                className="focus:outline-none"
+                                aria-label={consents.functionality_storage ? "Wyłącz funkcjonalne" : "Włącz funkcjonalne"}
+                            >
+                                <div className="relative w-10 h-6">
                                     <div className={`block w-10 h-6 rounded-full transition-colors ${consents.functionality_storage ? 'bg-black' : 'bg-gray-300'}`}></div>
                                     <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ${consents.functionality_storage ? 'transform translate-x-4' : ''}`}></div>
                                 </div>
-                            </label>
+                            </button>
                         </div>
                         <p className="text-sm text-gray-600">
                             Te pliki cookie umożliwiają stronie internetowej zapamiętanie wyborów dokonanych przez użytkownika
@@ -153,16 +159,16 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
                     <div className="p-4 border border-gray-200 rounded-lg">
                         <div className="flex items-center justify-between mb-2">
                             <span className="font-medium">Analityczne</span>
-                            <label className="inline-flex items-center cursor-pointer">
-                                <div
-                                    className="relative w-10 h-6"
-                                    onClick={() => handleToggleClick('analytics_storage')}
-                                >
-                                    <input type="checkbox" className="hidden" checked={consents.analytics_storage} readOnly />
+                            <button
+                                onClick={() => handleConsentChange('analytics_storage')}
+                                className="focus:outline-none"
+                                aria-label={consents.analytics_storage ? "Wyłącz analityczne" : "Włącz analityczne"}
+                            >
+                                <div className="relative w-10 h-6">
                                     <div className={`block w-10 h-6 rounded-full transition-colors ${consents.analytics_storage ? 'bg-black' : 'bg-gray-300'}`}></div>
                                     <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ${consents.analytics_storage ? 'transform translate-x-4' : ''}`}></div>
                                 </div>
-                            </label>
+                            </button>
                         </div>
                         <p className="text-sm text-gray-600">
                             Te pliki cookie pozwalają nam analizować użytkowanie strony, aby poprawić jej funkcjonowanie
@@ -174,16 +180,16 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
                     <div className="p-4 border border-gray-200 rounded-lg">
                         <div className="flex items-center justify-between mb-2">
                             <span className="font-medium">Marketingowe</span>
-                            <label className="inline-flex items-center cursor-pointer">
-                                <div
-                                    className="relative w-10 h-6"
-                                    onClick={() => handleToggleClick('ad_storage')}
-                                >
-                                    <input type="checkbox" className="hidden" checked={consents.ad_storage} readOnly />
+                            <button
+                                onClick={() => handleConsentChange('ad_storage')}
+                                className="focus:outline-none"
+                                aria-label={consents.ad_storage ? "Wyłącz marketingowe" : "Włącz marketingowe"}
+                            >
+                                <div className="relative w-10 h-6">
                                     <div className={`block w-10 h-6 rounded-full transition-colors ${consents.ad_storage ? 'bg-black' : 'bg-gray-300'}`}></div>
                                     <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ${consents.ad_storage ? 'transform translate-x-4' : ''}`}></div>
                                 </div>
-                            </label>
+                            </button>
                         </div>
                         <p className="text-sm text-gray-600">
                             Te pliki cookie są używane do śledzenia skuteczności reklam i wyświetlania bardziej
@@ -195,16 +201,16 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
                     <div className="p-4 border border-gray-200 rounded-lg">
                         <div className="flex items-center justify-between mb-2">
                             <span className="font-medium">Personalizacja</span>
-                            <label className="inline-flex items-center cursor-pointer">
-                                <div
-                                    className="relative w-10 h-6"
-                                    onClick={() => handleToggleClick('personalization_storage')}
-                                >
-                                    <input type="checkbox" className="hidden" checked={consents.personalization_storage} readOnly />
+                            <button
+                                onClick={() => handleConsentChange('personalization_storage')}
+                                className="focus:outline-none"
+                                aria-label={consents.personalization_storage ? "Wyłącz personalizację" : "Włącz personalizację"}
+                            >
+                                <div className="relative w-10 h-6">
                                     <div className={`block w-10 h-6 rounded-full transition-colors ${consents.personalization_storage ? 'bg-black' : 'bg-gray-300'}`}></div>
                                     <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ${consents.personalization_storage ? 'transform translate-x-4' : ''}`}></div>
                                 </div>
-                            </label>
+                            </button>
                         </div>
                         <p className="text-sm text-gray-600">
                             Te pliki cookie umożliwiają personalizację treści, które widzisz na naszej stronie,

@@ -19,25 +19,18 @@ a, button {
   transition: all 0.3s ease;
 }
 
-/* Dodaj te style do pliku globals.css */
 
-/* Style dla przełączników w ConsentManager */
+
+/* Style dla przełączników Consent Manager */
 .dot {
   transition: transform 0.3s ease-in-out;
 }
 
-/* Dodaj animację dla przełączników */
 input:checked ~ .dot {
   transform: translateX(100%);
 }
 
-/* Style dla kontenera consent manager */
-.consent-manager-container {
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
-
-/* Style dla suwaka */
+/* Dodatkowe style poprawiające wygląd przełączników */
 .consent-toggle {
   position: relative;
   display: inline-block;
