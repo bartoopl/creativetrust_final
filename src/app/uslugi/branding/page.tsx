@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Button from '@/components/Button';
+import BrandingForm from "@/components/BrandingForm";
 
 export const metadata: Metadata = {
     title: 'Branding | Tworzenie i rozwój marek - CreativeTrust',
@@ -331,13 +332,15 @@ export default function BrandingPage() {
             {/* Formularz kontaktowy */}
             <section id="kontakt" className="w-full py-16 md:py-32 px-6">
                 <div className="max-w-[1800px] mx-auto">
-                    <div>
-                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Gotowy na stworzenie wyjątkowej marki?</h2>
-                        <p className="text-lg text-gray-600 mb-10">
-                            Niezależnie od tego, czy rozpoczynasz nowy biznes, odświeżasz istniejącą markę, czy potrzebujesz całkowitego rebrandingu, jesteśmy tutaj, aby pomóc. Skontaktuj się z nami, aby rozpocząć rozmowę o Twojej marce.
-                        </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                        <div>
+                            {/* Tekst i informacje kontaktowe */}
+                            <h2 className="text-3xl md:text-4xl font-medium mb-6">Gotowy na stworzenie wyjątkowej marki?</h2>
+                            <p className="text-lg text-gray-600 mb-10">
+                                Niezależnie od tego, czy rozpoczynasz nowy biznes, odświeżasz istniejącą markę, czy potrzebujesz całkowitego rebrandingu, jesteśmy tutaj, aby pomóc. Skontaktuj się z nami, aby rozpocząć rozmowę o Twojej marce.
+                            </p>
 
-                        <div className="space-y-8">
+                            <div className="space-y-8">
                             <div className="flex items-start">
                                 <div className="mt-1 mr-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -400,114 +403,9 @@ export default function BrandingPage() {
                         </div>
                     </div>
 
-                    <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-                        <h3 className="text-2xl font-medium mb-6">Szybki kontakt</h3>
-                        <form className="space-y-4" onSubmit={async (e) => {
-                            e.preventDefault();
-                            const formData = new FormData(e.target as HTMLFormElement);
-                            const formValues = Object.fromEntries(formData.entries());
-
-                            try {
-                                const response = await fetch('/api/contact', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                    body: JSON.stringify({
-                                        name: formValues.name,
-                                        email: formValues.email,
-                                        subject: 'Zapytanie o usługę brandingu',
-                                        message: `Zapytanie ze strony brandingu:
-Imię i nazwisko: ${formValues.name}
-Email: ${formValues.email}
-${formValues.company ? `Firma: ${formValues.company}` : ''}
-Wiadomość: ${formValues.message}`
-                                    }),
-                                });
-
-                                const data = await response.json();
-
-                                if (!response.ok) {
-                                    throw new Error(data.message || 'Wystąpił błąd podczas wysyłania formularza');
-                                }
-
-                                // Wyświetl informację o sukcesie i wyczyść formularz
-                                alert('Wiadomość została wysłana. Dziękujemy za kontakt!');
-                                (e.target as HTMLFormElement).reset();
-
-                            } catch (error) {
-                                console.error('Błąd podczas wysyłania formularza:', error);
-                                alert('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.');
-                            }
-                        }}>
-                            <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                                    Imię i nazwisko <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                    placeholder="Twoje imię i nazwisko"
-                                    required
-                                />
-                            </div>
-
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                    Email <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                    placeholder="Twój adres email"
-                                    required
-                                />
-                            </div>
-
-                            <div>
-                                <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
-                                    Firma
-                                </label>
-                                <input
-                                    type="text"
-                                    id="company"
-                                    name="company"
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                    placeholder="Nazwa Twojej firmy"
-                                />
-                            </div>
-
-                            <div>
-                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                                    Wiadomość <span className="text-red-500">*</span>
-                                </label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    rows={4}
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                    placeholder="Jak możemy pomóc z Twoim brandingiem?"
-                                    required
-                                />
-                            </div>
-
-                            <div className="pt-4">
-                                <button
-                                    type="submit"
-                                    className="w-full px-6 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
-                                >
-                                    Wyślij wiadomość
-                                </button>
-                            </div>
-
-                            <p className="text-sm text-gray-500 mt-4">
-                                Wysyłając ten formularz, zgadzasz się na przetwarzanie Twoich danych osobowych zgodnie z naszą <a href="/polityka-prywatnosci" className="underline hover:text-black">polityką prywatności</a>.
-                            </p>
-                        </form>
+                    <div>
+                        <BrandingForm />
+                    </div>
                     </div>
                 </div>
             </section>
