@@ -361,73 +361,154 @@ export default function EcommercePage() {
 
             {/* Sekcja kontaktowa */}
             <section id="kontakt" className="w-full py-16 md:py-32 px-6 bg-black text-white">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <div>
-                            <h2 className="text-3xl md:text-5xl font-medium mb-8">
-                                Gotowy na zwiększenie sprzedaży online?
-                            </h2>
-                            <p className="text-xl mb-10">
-                                Porozmawiajmy o Twoim projekcie e-commerce. Niezależnie od tego, czy zaczynasz od zera, czy chcesz ulepszyć istniejący sklep, mamy rozwiązania WooCommerce dopasowane do Twoich potrzeb.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-4">
-                                <Link
-                                    href="/kontakt"
-                                    className="group relative inline-flex items-center justify-center gap-2
-                    bg-white text-black px-8 py-4 rounded-full font-medium
-                    transition-all duration-300 ease-in-out
-                    hover:bg-transparent hover:text-white hover:border hover:border-white"
-                                >
-                                    <span>Umów bezpłatną konsultację</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="transform transition-transform duration-300 group-hover:rotate-45"
+                    <div className="max-w-[1800px] mx-auto">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                            <div>
+                                <h2 className="text-3xl md:text-5xl font-medium mb-8">
+                                    Gotowy na zwiększenie sprzedaży online?
+                                </h2>
+                                <p className="text-xl mb-10">
+                                    Porozmawiajmy o Twoim projekcie e-commerce. Niezależnie od tego, czy zaczynasz od zera, czy chcesz ulepszyć istniejący sklep, mamy rozwiązania WooCommerce dopasowane do Twoich potrzeb.
+                                </p>
+                                <div className="flex flex-col sm:flex-row gap-4">
+                                    <Link
+                                        href="/kontakt"
+                                        className="group relative inline-flex items-center justify-center gap-2
+                bg-white text-black px-8 py-4 rounded-full font-medium
+                transition-all duration-300 ease-in-out
+                hover:bg-transparent hover:text-white hover:border hover:border-white"
                                     >
-                                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                                        <polyline points="7 7 17 7 17 17"></polyline>
-                                    </svg>
-                                </Link>
-                                <Link
-                                    href="tel:+48570526421"
-                                    className="group relative inline-flex items-center justify-center gap-2
-                    border border-gray-300 text-gray-300 px-8 py-4 rounded-full font-medium
-                    transition-all duration-300 ease-in-out
-                    hover:bg-white hover:text-black"
-                                >
-                                    <span>+48 570 526 421</span>
-                                </Link>
+                                        <span>Umów bezpłatną konsultację</span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            className="transform transition-transform duration-300 group-hover:rotate-45"
+                                        >
+                                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                                            <polyline points="7 7 17 7 17 17"></polyline>
+                                        </svg>
+                                    </Link>
+                                    <Link
+                                        href="tel:+48570526421"
+                                        className="group relative inline-flex items-center justify-center gap-2
+                border border-gray-300 text-gray-300 px-8 py-4 rounded-full font-medium
+                transition-all duration-300 ease-in-out
+                hover:bg-white hover:text-black"
+                                    >
+                                        <span>+48 570 526 421</span>
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="bg-gray-800 p-6 rounded-xl">
-                                    <div className="text-4xl font-bold text-white mb-2">25+</div>
-                                    <p className="text-gray-300">zrealizowanych sklepów</p>
-                                </div>
-                                <div className="bg-gray-800 p-6 rounded-xl">
-                                    <div className="text-4xl font-bold text-white mb-2">98%</div>
-                                    <p className="text-gray-300">zadowolonych klientów</p>
-                                </div>
-                                <div className="bg-gray-800 p-6 rounded-xl">
-                                    <div className="text-4xl font-bold text-white mb-2">+58%</div>
-                                    <p className="text-gray-300">średni wzrost konwersji</p>
-                                </div>
-                                <div className="bg-gray-800 p-6 rounded-xl">
-                                    <div className="text-4xl font-bold text-white mb-2">24/7</div>
-                                    <p className="text-gray-300">wsparcie techniczne</p>
-                                </div>
+                            <div>
+                                <form className="bg-gray-800 p-8 rounded-xl" onSubmit={async (e) => {
+                                    e.preventDefault();
+                                    const formData = new FormData(e.target as HTMLFormElement);
+                                    const formValues = Object.fromEntries(formData.entries());
+
+                                    try {
+                                        const response = await fetch('/api/contact', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify({
+                                                name: formValues.name,
+                                                email: formValues.email,
+                                                subject: 'Zapytanie o sklep WooCommerce',
+                                                message: `Zapytanie ze strony e-commerce:
+Imię i nazwisko: ${formValues.name}
+Email: ${formValues.email}
+Firma: ${formValues.company || 'Nie podano'}
+Wiadomość: ${formValues.message}`
+                                            }),
+                                        });
+
+                                        const data = await response.json();
+
+                                        if (!response.ok) {
+                                            throw new Error(data.message || 'Wystąpił błąd podczas wysyłania formularza');
+                                        }
+
+                                        // Wyświetl informację o sukcesie i wyczyść formularz
+                                        alert('Wiadomość została wysłana. Dziękujemy za kontakt!');
+                                        (e.target as HTMLFormElement).reset();
+
+                                    } catch (error) {
+                                        console.error('Błąd podczas wysyłania formularza:', error);
+                                        alert('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.');
+                                    }
+                                }}>
+                                    <h3 className="text-2xl font-medium mb-6">Formularz kontaktowy</h3>
+                                    <div className="space-y-4">
+                                        <div>
+                                            <label htmlFor="name" className="block text-sm mb-1">Imię i nazwisko*</label>
+                                            <input
+                                                type="text"
+                                                id="name"
+                                                name="name"
+                                                className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+                                                placeholder="Twoje imię i nazwisko"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="email" className="block text-sm mb-1">Email*</label>
+                                            <input
+                                                type="email"
+                                                id="email"
+                                                name="email"
+                                                className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+                                                placeholder="Twój adres email"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="company" className="block text-sm mb-1">Firma</label>
+                                            <input
+                                                type="text"
+                                                id="company"
+                                                name="company"
+                                                className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+                                                placeholder="Nazwa Twojej firmy"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="message" className="block text-sm mb-1">Wiadomość*</label>
+                                            <textarea
+                                                id="message"
+                                                name="message"
+                                                rows={4}
+                                                className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+                                                placeholder="Opisz krótko swoje potrzeby"
+                                                required
+                                            ></textarea>
+                                        </div>
+                                        <div className="pt-4">
+                                            <button
+                                                type="submit"
+                                                className="w-full bg-white text-black rounded-full py-3 px-6 font-medium hover:bg-gray-200 transition-colors"
+                                            >
+                                                Wyślij zapytanie
+                                            </button>
+                                            <p className="text-xs text-gray-400 mt-4">
+                                                Wysyłając formularz, zgadzasz się na przetwarzanie danych zgodnie z naszą
+                                                <a href="/polityka-prywatnosci" className="text-gray-300 hover:text-white underline ml-1">
+                                                    polityką prywatności
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </div>
             </section>
 
             {/* FAQ */}

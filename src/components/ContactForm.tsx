@@ -34,6 +34,7 @@ export default function ContactForm() {
         setSuccess(null);
 
         try {
+            console.log('Wysyłanie formularza:', formData);
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
@@ -43,6 +44,7 @@ export default function ContactForm() {
             });
 
             const data = await response.json();
+            console.log('Odpowiedź z API:', data);
 
             if (!response.ok) {
                 throw new Error(data.message || 'Wystąpił błąd podczas wysyłania formularza');
@@ -59,12 +61,12 @@ export default function ContactForm() {
                 message: ''
             });
         } catch (err) {
+            console.error('Błąd wysyłania formularza:', err);
             if (err instanceof Error) {
                 setError(err.message);
             } else {
                 setError('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.');
             }
-            console.error('Błąd wysyłania formularza:', err);
         } finally {
             setSubmitting(false);
         }

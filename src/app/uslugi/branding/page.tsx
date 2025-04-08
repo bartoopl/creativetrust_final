@@ -331,148 +331,183 @@ export default function BrandingPage() {
             {/* Formularz kontaktowy */}
             <section id="kontakt" className="w-full py-16 md:py-32 px-6">
                 <div className="max-w-[1800px] mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <div>
-                            <h2 className="text-3xl md:text-4xl font-medium mb-6">Gotowy na stworzenie wyjątkowej marki?</h2>
-                            <p className="text-lg text-gray-600 mb-10">
-                                Niezależnie od tego, czy rozpoczynasz nowy biznes, odświeżasz istniejącą markę, czy potrzebujesz całkowitego rebrandingu, jesteśmy tutaj, aby pomóc. Skontaktuj się z nami, aby rozpocząć rozmowę o Twojej marce.
-                            </p>
+                    <div>
+                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Gotowy na stworzenie wyjątkowej marki?</h2>
+                        <p className="text-lg text-gray-600 mb-10">
+                            Niezależnie od tego, czy rozpoczynasz nowy biznes, odświeżasz istniejącą markę, czy potrzebujesz całkowitego rebrandingu, jesteśmy tutaj, aby pomóc. Skontaktuj się z nami, aby rozpocząć rozmowę o Twojej marce.
+                        </p>
 
-                            <div className="space-y-8">
-                                <div className="flex items-start">
-                                    <div className="mt-1 mr-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-lg font-medium mb-1">Email</h3>
-                                        <a href="mailto:office@creativetrust.pl" className="text-gray-600 hover:text-black transition-colors">
-                                            office@creativetrust.pl
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start">
-                                    <div className="mt-1 mr-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-lg font-medium mb-1">Telefon</h3>
-                                        <a href="tel:+48570526421" className="text-gray-600 hover:text-black transition-colors">
-                                            +48 570 526 421
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="mt-10">
-                                <Link
-                                    href="/kontakt"
-                                    className="inline-flex items-center text-black font-medium hover:text-gray-700 transition-colors"
-                                >
-                                    Przejdź do strony kontaktowej
-                                    <svg
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="ml-2"
-                                    >
-                                        <path
-                                            d="M5 12H19"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <path
-                                            d="M12 5L19 12L12 19"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
+                        <div className="space-y-8">
+                            <div className="flex items-start">
+                                <div className="mt-1 mr-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                     </svg>
-                                </Link>
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-medium mb-1">Email</h3>
+                                    <a href="mailto:office@creativetrust.pl" className="text-gray-600 hover:text-black transition-colors">
+                                        office@creativetrust.pl
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="flex items-start">
+                                <div className="mt-1 mr-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-medium mb-1">Telefon</h3>
+                                    <a href="tel:+48570526421" className="text-gray-600 hover:text-black transition-colors">
+                                        +48 570 526 421
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-                            <h3 className="text-2xl font-medium mb-6">Szybki kontakt</h3>
-                            <form className="space-y-4">
-                                <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Imię i nazwisko <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                        placeholder="Twoje imię i nazwisko"
-                                        required
+                        <div className="mt-10">
+                            <Link
+                                href="/kontakt"
+                                className="inline-flex items-center text-black font-medium hover:text-gray-700 transition-colors"
+                            >
+                                Przejdź do strony kontaktowej
+                                <svg
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="ml-2"
+                                >
+                                    <path
+                                        d="M5 12H19"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                     />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Email <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                        placeholder="Twój adres email"
-                                        required
+                                    <path
+                                        d="M12 5L19 12L12 19"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                     />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Firma
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="company"
-                                        name="company"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                        placeholder="Nazwa Twojej firmy"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Wiadomość <span className="text-red-500">*</span>
-                                    </label>
-                                    <textarea
-                                        id="message"
-                                        name="message"
-                                        rows={4}
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                        placeholder="Jak możemy pomóc z Twoim brandingiem?"
-                                        required
-                                    />
-                                </div>
-
-                                <div className="pt-4">
-                                    <button
-                                        type="submit"
-                                        className="w-full px-6 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
-                                    >
-                                        Wyślij wiadomość
-                                    </button>
-                                </div>
-
-                                <p className="text-sm text-gray-500 mt-4">
-                                    Wysyłając ten formularz, zgadzasz się na przetwarzanie Twoich danych osobowych zgodnie z naszą <a href="/polityka-prywatnosci" className="underline hover:text-black">polityką prywatności</a>.
-                                </p>
-                            </form>
+                                </svg>
+                            </Link>
                         </div>
+                    </div>
+
+                    <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
+                        <h3 className="text-2xl font-medium mb-6">Szybki kontakt</h3>
+                        <form className="space-y-4" onSubmit={async (e) => {
+                            e.preventDefault();
+                            const formData = new FormData(e.target as HTMLFormElement);
+                            const formValues = Object.fromEntries(formData.entries());
+
+                            try {
+                                const response = await fetch('/api/contact', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({
+                                        name: formValues.name,
+                                        email: formValues.email,
+                                        subject: 'Zapytanie o usługę brandingu',
+                                        message: `Zapytanie ze strony brandingu:
+Imię i nazwisko: ${formValues.name}
+Email: ${formValues.email}
+${formValues.company ? `Firma: ${formValues.company}` : ''}
+Wiadomość: ${formValues.message}`
+                                    }),
+                                });
+
+                                const data = await response.json();
+
+                                if (!response.ok) {
+                                    throw new Error(data.message || 'Wystąpił błąd podczas wysyłania formularza');
+                                }
+
+                                // Wyświetl informację o sukcesie i wyczyść formularz
+                                alert('Wiadomość została wysłana. Dziękujemy za kontakt!');
+                                (e.target as HTMLFormElement).reset();
+
+                            } catch (error) {
+                                console.error('Błąd podczas wysyłania formularza:', error);
+                                alert('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.');
+                            }
+                        }}>
+                            <div>
+                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Imię i nazwisko <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                                    placeholder="Twoje imię i nazwisko"
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Email <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                                    placeholder="Twój adres email"
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Firma
+                                </label>
+                                <input
+                                    type="text"
+                                    id="company"
+                                    name="company"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                                    placeholder="Nazwa Twojej firmy"
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Wiadomość <span className="text-red-500">*</span>
+                                </label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows={4}
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                                    placeholder="Jak możemy pomóc z Twoim brandingiem?"
+                                    required
+                                />
+                            </div>
+
+                            <div className="pt-4">
+                                <button
+                                    type="submit"
+                                    className="w-full px-6 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
+                                >
+                                    Wyślij wiadomość
+                                </button>
+                            </div>
+
+                            <p className="text-sm text-gray-500 mt-4">
+                                Wysyłając ten formularz, zgadzasz się na przetwarzanie Twoich danych osobowych zgodnie z naszą <a href="/polityka-prywatnosci" className="underline hover:text-black">polityką prywatności</a>.
+                            </p>
+                        </form>
                     </div>
                 </div>
             </section>

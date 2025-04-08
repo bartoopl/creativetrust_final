@@ -47,6 +47,7 @@ Telefon: ${formData.phone}`,
         };
 
         try {
+            console.log('Wysyłanie formularza automatyzacji:', apiMessageData);
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
@@ -56,6 +57,7 @@ Telefon: ${formData.phone}`,
             });
 
             const data = await response.json();
+            console.log('Odpowiedź z API (automatyzacja):', data);
 
             if (!response.ok) {
                 throw new Error(data.message || 'Wystąpił błąd podczas wysyłania formularza');
@@ -72,12 +74,12 @@ Telefon: ${formData.phone}`,
                 phone: ''
             });
         } catch (err) {
+            console.error('Błąd wysyłania formularza automatyzacji:', err);
             if (err instanceof Error) {
                 setError(err.message);
             } else {
                 setError('Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie później.');
             }
-            console.error('Błąd wysyłania formularza:', err);
         } finally {
             setSubmitting(false);
         }

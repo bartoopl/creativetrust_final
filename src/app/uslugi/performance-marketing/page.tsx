@@ -468,7 +468,46 @@ export default function PerformanceMarketingPage() {
                         </div>
                         <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
                             <h3 className="text-2xl font-medium mb-6">Potrzebujesz więcej informacji?</h3>
-                            <form className="space-y-4">
+                            <form className="space-y-4" onSubmit={async (e) => {
+                                e.preventDefault();
+                                const formData = new FormData(e.target as HTMLFormElement);
+                                const formValues = Object.fromEntries(formData.entries());
+
+                                try {
+                                    const response = await fetch('/api/contact', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({
+                                            name: formValues.name,
+                                            email: formValues.email,
+                                            subject: `Zapytanie o usługę Performance Marketing (${formValues.needs})`,
+                                            message: `Zapytanie ze strony Performance Marketing:
+Imię i nazwisko: ${formValues.name}
+Email: ${formValues.email}
+Firma: ${formValues.company || 'Nie podano'}
+Czego potrzebuje: ${formValues.needs}
+Budżet: ${formValues.budget || 'Nie podano'}
+Wiadomość: ${formValues.message}`
+                                        }),
+                                    });
+
+                                    const data = await response.json();
+
+                                    if (!response.ok) {
+                                        throw new Error(data.message || 'Wystąpił błąd podczas wysyłania formularza');
+                                    }
+
+                                    // Wyświetl informację o sukcesie i wyczyść formularz
+                                    alert('Wiadomość została wysłana. Dziękujemy za kontakt!');
+                                    (e.target as HTMLFormElement).reset();
+
+                                } catch (error) {
+                                    console.error('Błąd podczas wysyłania formularza:', error);
+                                    alert('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.');
+                                }
+                            }}>
                                 <div>
                                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                                         Imię i nazwisko <span className="text-red-500">*</span>
