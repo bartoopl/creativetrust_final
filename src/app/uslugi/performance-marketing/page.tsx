@@ -1,12 +1,19 @@
 import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { Metadata } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
 import Button from '@/components/Button';
+import PerformanceMarketingForm from '@/components/PerformanceMarketingForm';
 
 export const metadata: Metadata = {
     title: 'Performance Marketing | Skuteczne kampanie - CreativeTrust',
     description: 'Zwiększ sprzedaż i ROI dzięki naszym usługom performance marketingu. Specjalizujemy się w Google Ads, Facebook Ads i kampaniach nastawionych na efekty.',
+};
+
+export const viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
 };
 
 export default function PerformanceMarketingPage() {
@@ -466,154 +473,8 @@ export default function PerformanceMarketingPage() {
                                 </Link>
                             </div>
                         </div>
-                        <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-                            <h3 className="text-2xl font-medium mb-6">Potrzebujesz więcej informacji?</h3>
-                            <form className="space-y-4" onSubmit={async (e) => {
-                                e.preventDefault();
-                                const formData = new FormData(e.target as HTMLFormElement);
-                                const formValues = Object.fromEntries(formData.entries());
-
-                                try {
-                                    const response = await fetch('/api/contact', {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                        },
-                                        body: JSON.stringify({
-                                            name: formValues.name,
-                                            email: formValues.email,
-                                            subject: `Zapytanie o usługę Performance Marketing (${formValues.needs})`,
-                                            message: `Zapytanie ze strony Performance Marketing:
-Imię i nazwisko: ${formValues.name}
-Email: ${formValues.email}
-Firma: ${formValues.company || 'Nie podano'}
-Czego potrzebuje: ${formValues.needs}
-Budżet: ${formValues.budget || 'Nie podano'}
-Wiadomość: ${formValues.message}`
-                                        }),
-                                    });
-
-                                    const data = await response.json();
-
-                                    if (!response.ok) {
-                                        throw new Error(data.message || 'Wystąpił błąd podczas wysyłania formularza');
-                                    }
-
-                                    // Wyświetl informację o sukcesie i wyczyść formularz
-                                    alert('Wiadomość została wysłana. Dziękujemy za kontakt!');
-                                    (e.target as HTMLFormElement).reset();
-
-                                } catch (error) {
-                                    console.error('Błąd podczas wysyłania formularza:', error);
-                                    alert('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.');
-                                }
-                            }}>
-                                <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Imię i nazwisko <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                        placeholder="Twoje imię i nazwisko"
-                                        required
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Email <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                        placeholder="Twój adres email"
-                                        required
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Firma
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="company"
-                                        name="company"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                        placeholder="Nazwa Twojej firmy"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="needs" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Czego potrzebujesz? <span className="text-red-500">*</span>
-                                    </label>
-                                    <select
-                                        id="needs"
-                                        name="needs"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                        required
-                                    >
-                                        <option value="" disabled selected>Wybierz...</option>
-                                        <option value="google-ads">Kampanie Google Ads</option>
-                                        <option value="social-media">Kampanie w mediach społecznościowych</option>
-                                        <option value="seo">Pozycjonowanie SEO</option>
-                                        <option value="analytics">Analityka i raportowanie</option>
-                                        <option value="audit">Audyt marketingowy</option>
-                                        <option value="comprehensive">Kompleksowa obsługa marketingowa</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Wiadomość <span className="text-red-500">*</span>
-                                    </label>
-                                    <textarea
-                                        id="message"
-                                        name="message"
-                                        rows={4}
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                        placeholder="Opisz krótko swoje potrzeby"
-                                        required
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-1">
-                                        Miesięczny budżet reklamowy
-                                    </label>
-                                    <select
-                                        id="budget"
-                                        name="budget"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                    >
-                                        <option value="" disabled selected>Wybierz zakres...</option>
-                                        <option value="small">1,000 - 5,000 PLN</option>
-                                        <option value="medium">5,000 - 15,000 PLN</option>
-                                        <option value="large">15,000 - 50,000 PLN</option>
-                                        <option value="enterprise">Powyżej 50,000 PLN</option>
-                                        <option value="unsure">Nie wiem / Potrzebuję porady</option>
-                                    </select>
-                                </div>
-
-                                <div className="pt-4">
-                                    <button
-                                        type="submit"
-                                        className="w-full px-6 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
-                                    >
-                                        Wyślij zapytanie
-                                    </button>
-                                </div>
-
-                                <p className="text-sm text-gray-500 mt-4">
-                                    Wysyłając ten formularz, zgadzasz się na przetwarzanie Twoich danych osobowych zgodnie z naszą <a href="/polityka-prywatnosci" className="underline hover:text-black">polityką prywatności</a>.
-                                </p>
-                            </form>
+                        <div>
+                        <PerformanceMarketingForm />
                         </div>
                     </div>
                 </div>

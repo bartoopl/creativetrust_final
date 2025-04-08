@@ -14,7 +14,13 @@ const manrope = Manrope({
 export const metadata: Metadata = {
     title: 'CreativeTrust',
     description: 'Profesjonalne usługi marketingowe, tworzenie stron www i sklepów internetowych',
-    viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0',
+};
+
+export const viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false
 };
 
 export default function RootLayout({
