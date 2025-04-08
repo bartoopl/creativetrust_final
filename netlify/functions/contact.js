@@ -1,11 +1,19 @@
 const nodemailer = require('nodemailer');
 
 exports.handler = async (event, context) => {
-    // Nie czekaj na pętlę zdarzeń, aby zakończyć funkcję
-    context.callbackWaitsForEmptyEventLoop = false;
+    // Log request info for debugging
+    console.log('Otrzymano zapytanie do funkcji contact:', {
+        headers: event.headers,
+        httpMethod: event.httpMethod,
+        path: event.path
+    });
+
+    // Ustawienie, by funkcja czekała na zakończenie wszystkich operacji
+    context.callbackWaitsForEmptyEventLoop = true;
 
     // Sprawdź, czy to żądanie POST
     if (event.httpMethod !== 'POST') {
+        console.log('Nieprawidłowa metoda HTTP:', event.httpMethod);
         return {
             statusCode: 405,
             body: JSON.stringify({ success: false, message: 'Method Not Allowed' })
@@ -17,8 +25,11 @@ exports.handler = async (event, context) => {
         const data = JSON.parse(event.body);
         const { name, email, subject, message, type } = data;
 
+        console.log('Dane formularza:', { name, email, subject, messageLength: message?.length, type });
+
         // Podstawowa walidacja
         if (!name || !email || !message) {
+            console.log('Brak wymaganych pól');
             return {
                 statusCode: 400,
                 body: JSON.stringify({
@@ -31,6 +42,7 @@ exports.handler = async (event, context) => {
         // Walidacja e-mail
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
+            console.log('Nieprawidłowy format email:', email);
             return {
                 statusCode: 400,
                 body: JSON.stringify({
@@ -39,8 +51,6 @@ exports.handler = async (event, context) => {
                 })
             };
         }
-
-        console.log('Otrzymano formularz kontaktowy:', { name, email, subject, message, type });
 
         // Ustal adresata w zależności od typu formularza
         const recipient = type === 'automation'
@@ -53,23 +63,13 @@ exports.handler = async (event, context) => {
             : `[Formularz kontaktowy] ${subject || 'Nowa wiadomość'}`;
 
         // Loguj informacje o konfiguracji email dla debugowania
-        console.log('Email config:', {
+        console.log('Konfiguracja email:', {
             host: process.env.EMAIL_SERVER,
             port: process.env.EMAIL_PORT,
             secure: process.env.EMAIL_SECURE === 'true',
             user: process.env.EMAIL_USER ? '(configured)' : '(missing)',
             recipient
         });
-
-        // Zwróć sukces niezależnie od wyniku wysyłki
-        // To eliminuje problem timeoutu, bo nie czekamy na wysłanie maila
-        const response = {
-            statusCode: 200,
-            body: JSON.stringify({
-                success: true,
-                message: 'Wiadomość została przyjęta. Dziękujemy za kontakt!'
-            })
-        };
 
         // Konfiguracja transportera nodemailer
         const transporter = nodemailer.createTransport({
@@ -80,10 +80,8 @@ exports.handler = async (event, context) => {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASSWORD,
             },
-            // Dodatkowe opcje dla szybszego połączenia
-            connectionTimeout: 5000,
-            greetingTimeout: 5000,
-            socketTimeout: 5000,
+            debug: true, // Włącz debugowanie dla nodemailer
+            logger: true // Włącz logowanie dla nodemailer
         });
 
         // Opcje e-maila
@@ -99,12 +97,20 @@ ${message}
 Ta wiadomość została wysłana za pomocą formularza kontaktowego na stronie creativetrust.pl.`,
         };
 
-        // Wyślij email asynchronicznie (nie czekamy na wynik)
-        transporter.sendMail(mailOptions)
-            .then(info => {
-                console.log('Email wysłany pomyślnie:', info.messageId);
+        try {
+            // Sprawdź połączenie z serwerem SMTP przed wysłaniem
+            console.log('Sprawdzanie połączenia z serwerem SMTP...');
+            await transporter.verify();
+            console.log('Połączenie z serwerem SMTP ustanowione.');
 
-                // Próbujemy wysłać potwierdzenie do nadawcy, ale również asynchronicznie
+            // Wysyłanie e-maila
+            console.log('Próba wysłania e-maila do:', recipient);
+            const info = await transporter.sendMail(mailOptions);
+            console.log('Email wysłany pomyślnie. ID wiadomości:', info.messageId);
+
+            // Opcjonalnie - potwierdzenie dla nadawcy
+            try {
+                console.log('Próba wysłania potwierdzenia do:', email);
                 const confirmationOptions = {
                     from: process.env.EMAIL_FROM || 'noreply@creativetrust.pl',
                     to: email,
@@ -120,22 +126,34 @@ Pozdrawiamy,
 Zespół CreativeTrust
 `,
                 };
+                const confirmInfo = await transporter.sendMail(confirmationOptions);
+                console.log('Potwierdzenie wysłane pomyślnie. ID wiadomości:', confirmInfo.messageId);
+            } catch (confirmationError) {
+                console.error('Błąd podczas wysyłania potwierdzenia:', confirmationError);
+                // Nie przerywamy wykonania funkcji, jeśli potwierdzenie się nie powiedzie
+            }
 
-                return transporter.sendMail(confirmationOptions);
-            })
-            .then(info => {
-                console.log('Potwierdzenie wysłane pomyślnie:', info?.messageId);
-            })
-            .catch(error => {
-                console.error('Błąd podczas wysyłania e-maila:', error);
+            return {
+                statusCode: 200,
+                body: JSON.stringify({
+                    success: true,
+                    message: 'Wiadomość została wysłana. Dziękujemy za kontakt!',
+                    messageId: info.messageId
+                })
+            };
+        } catch (emailError) {
+            console.error('Błąd podczas wysyłania e-maila:', emailError);
 
-                // Tutaj możemy dodać kod, który zapisuje dane formularza do bazy danych
-                // lub innego miejsca w przypadku błędu wysyłki
-            });
-
-        // Natychmiast zwracamy odpowiedź użytkownikowi
-        return response;
-
+            // Zwracamy błąd klientowi, ale z szczegółami dla diagnostyki
+            return {
+                statusCode: 500,
+                body: JSON.stringify({
+                    success: false,
+                    message: 'Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.',
+                    error: process.env.NODE_ENV === 'development' ? emailError.message : undefined
+                })
+            };
+        }
     } catch (error) {
         console.error('Błąd podczas przetwarzania formularza kontaktowego:', error);
 
@@ -143,7 +161,8 @@ Zespół CreativeTrust
             statusCode: 500,
             body: JSON.stringify({
                 success: false,
-                message: 'Wystąpił błąd podczas przetwarzania wiadomości. Spróbuj ponownie później.'
+                message: 'Wystąpił błąd podczas przetwarzania formularza. Spróbuj ponownie później.',
+                error: process.env.NODE_ENV === 'development' ? error.message : undefined
             })
         };
     }
