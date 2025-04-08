@@ -150,6 +150,10 @@ try {
     const packageJson = require(packageJsonPath);
 
     // Dodaj skrypt do setupu Netlify
+    if (!packageJson.scripts) {
+        packageJson.scripts = {};
+    }
+
     if (!packageJson.scripts.setupNetlify) {
         packageJson.scripts.setupNetlify = 'node setup-netlify.js';
         fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
@@ -157,6 +161,10 @@ try {
     }
 
     // Dodaj dependencje potrzebne dla funkcji Netlify
+    if (!packageJson.dependencies) {
+        packageJson.dependencies = {};
+    }
+
     if (!packageJson.dependencies.nodemailer) {
         console.log('UWAGA: Upewnij się, że masz zainstalowany nodemailer w zależnościach.');
         console.log('Uruchom: npm install nodemailer --save');
