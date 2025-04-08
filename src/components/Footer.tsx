@@ -1,11 +1,14 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from './Button';
+import ConsentManager from './ConsentManager';
 
 const Footer: React.FC = () => {
+    const [showConsentManager, setShowConsentManager] = useState(false);
+
     return (
         <footer className="w-full py-16 md:py-24 px-6 bg-black overflow-hidden">
             <div className="max-w-[1800px] mx-auto">
@@ -189,16 +192,25 @@ const Footer: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Dodajemy informacje o prawach autorskich */}
+                {/* Informacje o prawach autorskich i ustawienia prywatności */}
                 <div className="mt-12 text-center text-gray-500 text-sm">
                     <p className="mb-2">&copy; {new Date().getFullYear()} Creative Trust. Wszelkie prawa zastrzeżone.</p>
-                    <div className="flex justify-center">
+                    <div className="flex justify-center space-x-6">
                         <Link href="/polityka-prywatnosci" className="text-gray-400 hover:text-gray-300 transition-colors">
                             Polityka Prywatności
                         </Link>
+                        <button
+                            onClick={() => setShowConsentManager(true)}
+                            className="text-gray-400 hover:text-gray-300 transition-colors"
+                        >
+                            Ustawienia prywatności
+                        </button>
                     </div>
                 </div>
             </div>
+
+            {/* Panel zarządzania zgodami */}
+            {showConsentManager && <ConsentManager onClose={() => setShowConsentManager(false)} />}
         </footer>
     );
 };

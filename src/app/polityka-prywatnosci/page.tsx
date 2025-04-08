@@ -214,6 +214,48 @@ export default function PrivacyPolicyPage() {
                         <li><a href="https://support.apple.com/pl-pl/HT201265" target="_blank" rel="noopener noreferrer">Safari (iOS)</a></li>
                         <li><a href="https://support.microsoft.com/pl-pl/windows/windows-phone-7-3ebc303c-59c0-d367-3995-f258b184fabb" target="_blank" rel="noopener noreferrer">Windows Phone</a></li>
                     </ul>
+                    <h2 className="text-2xl font-medium mt-10 mb-4">7.1 Google Tag Manager i Google Analytics</h2>
+                    <p>
+                        Nasza strona wykorzystuje Google Tag Manager (GTM) do zarządzania tagami i skryptami analitycznymi,
+                        w tym Google Analytics 4. GTM to platforma pozwalająca na zarządzanie skryptami śledzącymi bez
+                        konieczności modyfikacji kodu strony.
+                    </p>
+                    <p>
+                        Google Analytics 4 pomaga nam zrozumieć, w jaki sposób użytkownicy korzystają z naszej strony,
+                        zbierając anonimowe dane o zachowaniach użytkowników, takich jak:
+                    </p>
+                    <ul>
+                        <li>Czas spędzony na stronie</li>
+                        <li>Odwiedzone podstrony</li>
+                        <li>Źródła ruchu</li>
+                        <li>Informacje o urządzeniu i przeglądarce</li>
+                        <li>Ogólna lokalizacja geograficzna (na poziomie kraju/miasta)</li>
+                    </ul>
+                    <p>
+                        Dane te są wykorzystywane wyłącznie w celach statystycznych i analitycznych, aby pomóc nam
+                        w ulepszaniu naszej strony i oferty.
+                    </p>
+
+                    <h2 className="text-2xl font-medium mt-10 mb-4">7.2 Consent Mode i zarządzanie zgodami</h2>
+                    <p>
+                        Nasza strona wykorzystuje mechanizm Google Consent Mode v2, który pozwala na respektowanie
+                        preferencji użytkowników dotyczących plików cookie i śledzenia. Dzięki temu możesz decydować,
+                        jakie rodzaje cookies akceptujesz.
+                    </p>
+                    <p>
+                        Domyślnie, bez Twojej zgody, używamy tylko niezbędnych plików cookie. Pozostałe kategorie plików
+                        cookie (analityczne, marketingowe, funkcjonalne i personalizacyjne) są aktywowane tylko po
+                        uzyskaniu Twojej wyraźnej zgody.
+                    </p>
+                    <p>
+                        W dowolnym momencie możesz zarządzać swoimi preferencjami dotyczącymi plików cookie, klikając
+                        przycisk "Ustawienia prywatności" dostępny na dole strony.
+                    </p>
+
+                    <h2 className="text-2xl font-medium mt-10 mb-4">7.3 Kategorie plików cookie</h2>
+                    <p>
+                        Na naszej stronie wykorzystujemy następujące kategorie plików cookie:
+                    </p>
                 </div>
 
                 <div className="mt-12 pt-6 border-t border-gray-200">
