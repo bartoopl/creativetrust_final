@@ -1,19 +1,15 @@
+"use client";
+
+import { useState, useEffect } from 'react';
+import { notFound } from 'next/navigation';
 import { client, urlFor } from '@/lib/sanity';
 import Image from 'next/image';
 import Link from 'next/link';
+import Lightbox from '@/components/Lightbox';
+import { Project, Category, ImageWithCaption } from '@/types';
+import { use } from 'react';
 
-// Define params as a Promise type for Next.js v15
-type Params = Promise<{ slug: string }>;
-
-// Generowanie statycznych parametrów
-export async function generateStaticParams() {
-    const projects = await client.fetch(`*[_type == "portfolioProject"]{ slug }`);
-    return projects.map((project: any) => ({
-        slug: project.slug.current,
-    }));
-}
-
-// Pobieranie danych projektu - funkcja zaktualizowana w sanity.ts
+// Pobieranie danych projektu
 async function getProject(slug: string) {
     return await client.fetch(`
     *[_type == "portfolioProject" && slug.current == $slug][0] {
@@ -36,21 +32,15 @@ async function getProject(slug: string) {
   `, { slug });
 }
 
-export default async function ProjectPage({ params }: { params: Params }) {
-    // Await the params to get the slug
-    const { slug } = await params;
-    const project = await getProject(slug);
+export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+    // Rozpakowanie parametrów za pomocą React.use()
+    const resolvedParams = use(params);
+    const { slug } = resolvedParams;
 
-    if (!project) {
-        return (
-            <div className="max-w-[1800px] mx-auto px-6 py-24">
-                <h1 className="text-4xl font-medium mb-8">Projekt nie istnieje</h1>
-                <Link href="/portfolio" className="underline">
-                    Wróć do portfolio
-                </Link>
-            </div>
-        );
-    }
+    const [project, setProject] = useState<Project | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [lightboxIndex, setLightboxIndex] = useState(0);
 
     // Formatuj datę
     const formatDate = (dateString: string) => {
@@ -62,6 +52,55 @@ export default async function ProjectPage({ params }: { params: Params }) {
             year: 'numeric'
         }).format(date);
     };
+
+    useEffect(() => {
+        async function loadProject() {
+            try {
+                const data = await getProject(slug);
+                if (!data) {
+                    notFound();
+                }
+                setProject(data);
+            } catch (error) {
+                console.error("Błąd podczas ładowania projektu:", error);
+                notFound();
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        loadProject();
+    }, [slug]);
+
+    // Otwieranie Lightbox z określonym indeksem
+    const openLightbox = (index: number) => {
+        setLightboxIndex(index);
+        setLightboxOpen(true);
+
+        // Opcjonalnie: zatrzymaj przewijanie strony podczas otwartego lightboxa
+        document.body.style.overflow = 'hidden';
+    };
+
+    if (loading) {
+        return (
+            <main className="min-h-screen py-24 px-6">
+                <div className="max-w-[1800px] mx-auto">
+                    <div className="h-96 w-full animate-pulse bg-gray-200 rounded-xl"></div>
+                </div>
+            </main>
+        );
+    }
+
+    if (!project) {
+        return (
+            <div className="max-w-[1800px] mx-auto px-6 py-24">
+                <h1 className="text-4xl font-medium mb-8">Projekt nie istnieje</h1>
+                <Link href="/portfolio" className="underline">
+                    Wróć do portfolio
+                </Link>
+            </div>
+        );
+    }
 
     return (
         <main className="min-h-screen py-24 px-6">
@@ -97,13 +136,29 @@ export default async function ProjectPage({ params }: { params: Params }) {
                     {/* Lewa kolumna - główne zdjęcie i informacje */}
                     <div>
                         {project.mainImage && (
-                            <div className="mb-8 overflow-hidden rounded-lg shadow-md bg-gray-50 p-4">
-                                <div className="w-full">
+                            <div className="mb-8 overflow-hidden rounded-lg shadow-md bg-gray-50 p-4 cursor-pointer" onClick={() => openLightbox(-1)}>
+                                <div className="w-full relative group">
                                     <img
                                         src={urlFor(project.mainImage).width(800).url()}
                                         alt={project.title}
                                         className="w-full h-auto object-contain max-h-[500px]"
                                     />
+                                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                        <svg
+                                            className="w-12 h-12 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                                            />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         )}
@@ -128,7 +183,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
                                     <div>
                                         <h3 className="text-gray-600 text-sm">Kategorie</h3>
                                         <div className="flex flex-wrap gap-2 mt-1">
-                                            {project.categories.map((category: any) => (
+                                            {project.categories.map((category: Category) => (
                                                 <span
                                                     key={category._id}
                                                     className="px-3 py-1 bg-gray-100 rounded-full text-sm"
@@ -193,19 +248,39 @@ export default async function ProjectPage({ params }: { params: Params }) {
                             </div>
                         )}
 
-                        {/* Galeria zdjęć */}
+                        {/* Galeria zdjęć z możliwością kliknięcia i otwarcia lighboxa */}
                         {project.galleryImages && project.galleryImages.length > 0 && (
                             <div className="mt-10">
                                 <h2 className="text-xl font-medium mb-6">Galeria projektu</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    {project.galleryImages.map((image: any, index: number) => (
-                                        <div key={index} className="rounded-lg overflow-hidden shadow-md bg-gray-50 p-3">
-                                            <div className="w-full">
+                                    {project.galleryImages.map((image: ImageWithCaption, index: number) => (
+                                        <div
+                                            key={index}
+                                            className="rounded-lg overflow-hidden shadow-md bg-gray-50 p-3 cursor-pointer group"
+                                            onClick={() => openLightbox(index)}
+                                        >
+                                            <div className="w-full relative">
                                                 <img
                                                     src={urlFor(image).width(600).url()}
                                                     alt={image.alt || `Zdjęcie ${index + 1} projektu ${project.title}`}
-                                                    className="w-full h-auto object-contain max-h-[300px] hover:scale-105 transition-transform duration-300"
+                                                    className="w-full h-auto object-contain max-h-[300px] transition-transform duration-300 group-hover:scale-105"
                                                 />
+                                                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                                    <svg
+                                                        className="w-10 h-10 text-white"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                                                        />
+                                                    </svg>
+                                                </div>
                                             </div>
                                             {image.caption && (
                                                 <div className="p-2 bg-gray-50 text-sm text-gray-600">
@@ -220,6 +295,16 @@ export default async function ProjectPage({ params }: { params: Params }) {
                     </div>
                 </div>
             </div>
+
+            {/* Lightbox dla obrazów galerii */}
+            {project.galleryImages && lightboxOpen && (
+                <Lightbox
+                    images={lightboxIndex === -1 ? [project.mainImage, ...project.galleryImages] : project.galleryImages}
+                    initialIndex={lightboxIndex === -1 ? 0 : lightboxIndex}
+                    isOpen={lightboxOpen}
+                    onClose={() => setLightboxOpen(false)}
+                />
+            )}
         </main>
     );
 }
