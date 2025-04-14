@@ -5,7 +5,7 @@ import Button from '@/components/Button';
 
 export const metadata: Metadata = {
     title: 'O nas - CreativeTrust | Agencja Marketingowa',
-    description: 'Poznaj zespół CreativeTrust - agencji marketingowej specjalizującej się w tworzeniu skutecznych strategii marketingowych, stron www i aplikacji e-commerce.',
+    description: 'Poznaj CreativeTrust - agencję marketingową specjalizującą się w tworzeniu skutecznych strategii marketingowych, stron www i aplikacji e-commerce.',
 };
 
 interface Value {
@@ -106,7 +106,7 @@ export default function AboutPage() {
                                 Jesteśmy agencją marketingową, która tworzy skuteczne i kreatywne rozwiązania cyfrowe dla firm chcących rozwijać swój biznes online.
                             </p>
                             <Button href="#team" className="bg-transparent text-white border-2 border-white hover:bg-white hover:text-black font-medium">
-                                Poznaj nasz zespół
+                                Poznaj nas
                             </Button>
                         </div>
                         <div className="relative">
@@ -127,7 +127,7 @@ export default function AboutPage() {
             </section>
 
             {/* Nasza historia */}
-            <section className="w-full py-16 md:py-24 px-6">
+            <section id="team" className="w-full py-16 md:py-24 px-6">
                 <div className="max-w-[1800px] mx-auto">
                     <div className="mb-16">
                         <h2 className="text-3xl md:text-4xl font-medium mb-8 text-center">Nasza historia</h2>
