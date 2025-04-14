@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Metadata } from 'next';
 import Button from '@/components/Button';
 
@@ -8,14 +7,6 @@ export const metadata: Metadata = {
     title: 'O nas - CreativeTrust | Agencja Marketingowa',
     description: 'Poznaj zespół CreativeTrust - agencji marketingowej specjalizującej się w tworzeniu skutecznych strategii marketingowych, stron www i aplikacji e-commerce.',
 };
-
-interface TeamMember {
-    id: number;
-    name: string;
-    role: string;
-    bio: string;
-    image: string;
-}
 
 interface Value {
     id: number;
@@ -31,37 +22,6 @@ interface Milestone {
 }
 
 export default function AboutPage() {
-    const teamMembers: TeamMember[] = [
-        {
-            id: 1,
-            name: 'Natalia',
-            role: 'CEO & Strateg Marketingowy',
-            bio: 'Pierwszy kontakt z Klientem. Opracowywanie Strategii itd.',
-            image: '/team-member-1.jpg'
-        },
-        {
-            id: 2,
-            name: 'Piotr Nowak',
-            role: 'CTO & Lead Developer',
-            bio: 'Doświadczony programista z pasją do nowoczesnych technologii webowych. Specjalizuje się w React, Next.js i architekturze aplikacji e-commerce.',
-            image: '/team-member-2.jpg'
-        },
-        {
-            id: 3,
-            name: 'Marta Wiśniewska',
-            role: 'Dyrektor Kreatywny',
-            bio: 'Doświadczona projektantka UX/UI z wykształceniem w dziedzinie sztuki i projektowania. Specjalizuje się w tworzeniu intuicyjnych, estetycznych i funkcjonalnych interfejsów użytkownika.',
-            image: '/team-member-3.jpg'
-        },
-        {
-            id: 4,
-            name: 'Kamil Malinowski',
-            role: 'Performance Marketing Manager',
-            bio: 'Ekspert w dziedzinie kampanii PPC i analityki. Certyfikowany specjalista Google Ads i Meta Ads z doświadczeniem w optymalizacji kampanii dla e-commerce.',
-            image: '/team-member-4.jpg'
-        }
-    ];
-
     const values: Value[] = [
         {
             id: 1,
@@ -108,7 +68,7 @@ export default function AboutPage() {
     const milestones: Milestone[] = [
         {
             year: '2016',
-            title: 'Założenie firmy',
+            title: 'Rozpoczęcie działalności',
             description: 'CreativeTrust rozpoczyna działalność jako agencja marketingu cyfrowego, specjalizująca się w kampaniach PPC i mediach społecznościowych.'
         },
         {
@@ -117,17 +77,17 @@ export default function AboutPage() {
             description: 'Wzbogacenie oferty o kompleksowe usługi projektowania i wdrażania stron internetowych oraz sklepów e-commerce.'
         },
         {
-            year: '2020',
+            year: '2024',
             title: 'Partnerstwo z Sales Manago',
             description: 'Zostaliśmy oficjalnym partnerem Sales Manago, rozszerzając nasze usługi o marketing automation i spersonalizowane strategie komunikacji.'
         },
         {
-            year: '2022',
+            year: '2024',
             title: 'Otwarcie nowego biura',
             description: 'Przeprowadzka do nowej, większej siedziby w centrum Gorzowa Wielkopolskiego, umożliwiająca dalszy rozwój zespołu.'
         },
         {
-            year: '2024',
+            year: '2025',
             title: 'Rozwój zespołu',
             description: 'Powiększenie zespołu o specjalistów z branży UI/UX i Performance Marketingu, umożliwiające realizację jeszcze bardziej kompleksowych projektów.'
         }
@@ -145,7 +105,7 @@ export default function AboutPage() {
                             <p className="text-xl text-gray-300 mb-10">
                                 Jesteśmy agencją marketingową, która tworzy skuteczne i kreatywne rozwiązania cyfrowe dla firm chcących rozwijać swój biznes online.
                             </p>
-                            <Button href="#team" className="bg-white text-black hover:bg-transparent hover:text-white hover:border-white">
+                            <Button href="#team" className="bg-transparent text-white border-2 border-white hover:bg-white hover:text-black font-medium">
                                 Poznaj nasz zespół
                             </Button>
                         </div>
