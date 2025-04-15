@@ -1,15 +1,14 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { client } from '@/lib/sanity';
 
-interface Params {
-    id: string;
-}
-
 // Pobieranie pojedynczej faktury
-export async function GET(request: Request, { params }: { params: Params }) {
+export async function GET(
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
     try {
-        // TODO: Dodać weryfikację administratora
-        const { id } = params;
+        // Rozpakowywanie Promise z parametrami
+        const { id } = await params;
 
         const invoice = await client.fetch(
             `*[_type == "invoice" && _id == $id][0] {
@@ -58,10 +57,13 @@ export async function GET(request: Request, { params }: { params: Params }) {
 }
 
 // Aktualizacja faktury
-export async function PATCH(request: Request, { params }: { params: Params }) {
+export async function PATCH(
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
     try {
-        // TODO: Dodać weryfikację administratora
-        const { id } = params;
+        // Rozpakowywanie Promise z parametrami
+        const { id } = await params;
         const updates = await request.json();
 
         // Sprawdź, czy faktura istnieje
@@ -134,10 +136,13 @@ export async function PATCH(request: Request, { params }: { params: Params }) {
 }
 
 // Usunięcie faktury
-export async function DELETE(request: Request, { params }: { params: Params }) {
+export async function DELETE(
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
     try {
-        // TODO: Dodać weryfikację administratora
-        const { id } = params;
+        // Rozpakowywanie Promise z parametrami
+        const { id } = await params;
 
         // Zamiast usuwać, zmieniamy status faktury na anulowany
         await client
