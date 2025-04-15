@@ -2,18 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { client } from '@/lib/sanity';
 import { hashPassword } from '@/lib/auth-utils';
 
-type Params = {
-    id: string;
-}
-
 // Pobieranie danych pojedynczego klienta
-export async function GET(
-    request: NextRequest,
-    { params }: { params: Params }
-) {
+export async function GET(request: NextRequest) {
     try {
-        // TODO: Dodać weryfikację administratora
-        const id = params.id;
+        // Wyodrębniamy ID z URL
+        const urlParts = request.nextUrl.pathname.split('/');
+        const id = urlParts[urlParts.length - 1];
 
         const clientData = await client.fetch(
             `*[_type == "client" && _id == $id][0] {
@@ -60,13 +54,12 @@ export async function GET(
 }
 
 // Aktualizacja danych klienta
-export async function PATCH(
-    request: NextRequest,
-    { params }: { params: Params }
-) {
+export async function PATCH(request: NextRequest) {
     try {
-        // TODO: Dodać weryfikację administratora
-        const id = params.id;
+        // Wyodrębniamy ID z URL
+        const urlParts = request.nextUrl.pathname.split('/');
+        const id = urlParts[urlParts.length - 1];
+
         const updates = await request.json();
 
         // Sprawdź, czy klient istnieje
@@ -121,13 +114,11 @@ export async function PATCH(
 }
 
 // Usunięcie klienta (dezaktywacja)
-export async function DELETE(
-    request: NextRequest,
-    { params }: { params: Params }
-) {
+export async function DELETE(request: NextRequest) {
     try {
-        // TODO: Dodać weryfikację administratora
-        const id = params.id;
+        // Wyodrębniamy ID z URL
+        const urlParts = request.nextUrl.pathname.split('/');
+        const id = urlParts[urlParts.length - 1];
 
         // Zamiast usuwać, dezaktywujemy konto
         await client
