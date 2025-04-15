@@ -2,14 +2,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { client } from '@/lib/sanity';
 import { hashPassword } from '@/lib/auth-utils';
 
+type Params = {
+    id: string;
+}
+
 // Pobieranie danych pojedynczego klienta
 export async function GET(
     request: NextRequest,
-    context: { params: { id: string } }
+    { params }: { params: Params }
 ) {
     try {
         // TODO: Dodać weryfikację administratora
-        const { id } = context.params;
+        const id = params.id;
 
         const clientData = await client.fetch(
             `*[_type == "client" && _id == $id][0] {
@@ -58,11 +62,11 @@ export async function GET(
 // Aktualizacja danych klienta
 export async function PATCH(
     request: NextRequest,
-    context: { params: { id: string } }
+    { params }: { params: Params }
 ) {
     try {
         // TODO: Dodać weryfikację administratora
-        const { id } = context.params;
+        const id = params.id;
         const updates = await request.json();
 
         // Sprawdź, czy klient istnieje
@@ -119,11 +123,11 @@ export async function PATCH(
 // Usunięcie klienta (dezaktywacja)
 export async function DELETE(
     request: NextRequest,
-    context: { params: { id: string } }
+    { params }: { params: Params }
 ) {
     try {
         // TODO: Dodać weryfikację administratora
-        const { id } = context.params;
+        const id = params.id;
 
         // Zamiast usuwać, dezaktywujemy konto
         await client
