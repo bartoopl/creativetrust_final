@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { client } from '@/lib/sanity';
+import { hashPassword } from '@/lib/auth-utils';
 
-// Pobieranie pojedynczej faktury
+// Pobieranie danych pojedynczego klienta
 export async function GET(
     request: NextRequest,
     context: { params: { id: string } }
@@ -10,110 +11,91 @@ export async function GET(
         // Pobierz id z kontekstu
         const { id } = context.params;
 
-        const invoice = await client.fetch(
-            `*[_type == "invoice" && _id == $id][0] {
+        const clientData = await client.fetch(
+            `*[_type == "client" && _id == $id][0] {
         _id,
-        invoiceNumber,
-        "client": client->{
+        name,
+        email,
+        nip,
+        address,
+        phone,
+        contactPerson,
+        active,
+        createdAt,
+        "invoices": *[_type == "invoice" && client._ref == ^._id] | order(issueDate desc) {
           _id,
-          name,
-          email,
-          nip,
-          address
-        },
-        issueDate,
-        dueDate,
-        amount,
-        vatRate,
-        totalAmount,
-        status,
-        paymentDate,
-        items,
-        notes,
-        attachmentURL,
-        sentToClient
+          invoiceNumber,
+          issueDate,
+          dueDate,
+          amount,
+          totalAmount,
+          status
+        }
       }`,
             { id }
         );
 
-        if (!invoice) {
+        if (!clientData) {
             return NextResponse.json(
-                { success: false, message: 'Faktura nie została znaleziona' },
+                { success: false, message: 'Klient nie został znaleziony' },
                 { status: 404 }
             );
         }
 
         return NextResponse.json({
             success: true,
-            invoice
+            client: clientData
         });
     } catch (error) {
-        console.error('Error fetching invoice:', error);
+        console.error('Error fetching client:', error);
         return NextResponse.json(
-            { success: false, message: 'Wystąpił błąd podczas pobierania faktury' },
+            { success: false, message: 'Wystąpił błąd podczas pobierania danych klienta' },
             { status: 500 }
         );
     }
 }
 
-// Aktualizacja faktury
+// Aktualizacja danych klienta
 export async function PATCH(
     request: NextRequest,
     context: { params: { id: string } }
 ) {
     try {
-        // TODO: Dodać weryfikację administratora
+        // Pobierz id z kontekstu
         const { id } = context.params;
+
         const updates = await request.json();
 
-        // Sprawdź, czy faktura istnieje
-        const existingInvoice = await client.fetch(
-            `*[_type == "invoice" && _id == $id][0]`,
+        // Sprawdź, czy klient istnieje
+        const existingClient = await client.fetch(
+            `*[_type == "client" && _id == $id][0]`,
             { id }
         );
 
-        if (!existingInvoice) {
+        if (!existingClient) {
             return NextResponse.json(
-                { success: false, message: 'Faktura nie została znaleziona' },
+                { success: false, message: 'Klient nie został znaleziony' },
                 { status: 404 }
             );
         }
 
         // Przygotuj dane do aktualizacji
         const updateData: any = {
-            _type: 'invoice',
+            _type: 'client',
         };
 
         // Dodaj pola do aktualizacji, jeśli zostały przesłane
-        if (updates.invoiceNumber) updateData.invoiceNumber = updates.invoiceNumber;
-        if (updates.issueDate) updateData.issueDate = updates.issueDate;
-        if (updates.dueDate) updateData.dueDate = updates.dueDate;
-        if (updates.status) updateData.status = updates.status;
-        if (updates.paymentDate) updateData.paymentDate = updates.paymentDate;
-        if (updates.notes) updateData.notes = updates.notes;
-        if (updates.attachmentURL) updateData.attachmentURL = updates.attachmentURL;
-        if (updates.sentToClient !== undefined) updateData.sentToClient = updates.sentToClient;
+        if (updates.name) updateData.name = updates.name;
+        if (updates.email) updateData.email = updates.email;
+        if (updates.nip) updateData.nip = updates.nip;
+        if (updates.address) updateData.address = updates.address;
+        if (updates.phone) updateData.phone = updates.phone;
+        if (updates.contactPerson) updateData.contactPerson = updates.contactPerson;
+        if (updates.active !== undefined) updateData.active = updates.active;
 
-        // Jeśli zmienia się kwota lub stawka VAT, przelicz kwotę brutto
-        if (updates.amount || updates.vatRate) {
-            const amount = updates.amount || existingInvoice.amount;
-            const vatRate = updates.vatRate || existingInvoice.vatRate;
-            updateData.amount = amount;
-            updateData.vatRate = vatRate;
-            updateData.totalAmount = amount * (1 + vatRate / 100);
-        }
-
-        // Jeśli przesłano aktualizację pozycji faktury
-        if (updates.items) {
-            updateData.items = updates.items;
-        }
-
-        // Jeśli zmienia się klient
-        if (updates.clientId) {
-            updateData.client = {
-                _type: 'reference',
-                _ref: updates.clientId
-            };
+        // Jeśli przesłano nowe hasło, haszuj je
+        if (updates.password) {
+            updateData.password = await hashPassword(updates.password);
         }
 
         // Wykonaj aktualizację
@@ -124,41 +106,41 @@ export async function PATCH(
 
         return NextResponse.json({
             success: true,
-            message: 'Faktura została zaktualizowana'
+            message: 'Dane klienta zostały zaktualizowane'
         });
     } catch (error) {
-        console.error('Error updating invoice:', error);
+        console.error('Error updating client:', error);
         return NextResponse.json(
-            { success: false, message: 'Wystąpił błąd podczas aktualizacji faktury' },
+            { success: false, message: 'Wystąpił błąd podczas aktualizacji danych klienta' },
             { status: 500 }
         );
     }
 }
 
-// Usunięcie faktury
+// Usunięcie klienta (dezaktywacja)
 export async function DELETE(
     request: NextRequest,
     context: { params: { id: string } }
 ) {
     try {
-        // TODO: Dodać weryfikację administratora
+        // Pobierz id z kontekstu
         const { id } = context.params;
 
-        // Zamiast usuwać, zmieniamy status faktury na anulowany
+        // Zamiast usuwać, dezaktywujemy konto
         await client
             .patch(id)
-            .set({ status: 'cancelled' })
+            .set({ active: false })
             .commit();
 
         return NextResponse.json({
             success: true,
-            message: 'Faktura została anulowana'
+            message: 'Konto klienta zostało dezaktywowane'
         });
     } catch (error) {
-        console.error('Error cancelling invoice:', error);
+        console.error('Error deactivating client:', error);
         return NextResponse.json(
-            {success: false, message: 'Wystąpił błąd podczas anulowania faktury'},
-            {status: 500}
+            { success: false, message: 'Wystąpił błąd podczas dezaktywacji konta klienta' },
+            { status: 500 }
         );
     }
 }
