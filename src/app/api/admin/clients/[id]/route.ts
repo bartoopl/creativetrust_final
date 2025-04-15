@@ -5,11 +5,11 @@ import { hashPassword } from '@/lib/auth-utils';
 // Pobieranie danych pojedynczego klienta
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    context: { params: { id: string } }
 ) {
     try {
         // TODO: Dodać weryfikację administratora
-        const id = params.id;
+        const { id } = context.params;
 
         const clientData = await client.fetch(
             `*[_type == "client" && _id == $id][0] {
@@ -58,11 +58,11 @@ export async function GET(
 // Aktualizacja danych klienta
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    context: { params: { id: string } }
 ) {
     try {
         // TODO: Dodać weryfikację administratora
-        const id = params.id;
+        const { id } = context.params;
         const updates = await request.json();
 
         // Sprawdź, czy klient istnieje
@@ -119,11 +119,11 @@ export async function PATCH(
 // Usunięcie klienta (dezaktywacja)
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    context: { params: { id: string } }
 ) {
     try {
         // TODO: Dodać weryfikację administratora
-        const id = params.id;
+        const { id } = context.params;
 
         // Zamiast usuwać, dezaktywujemy konto
         await client
