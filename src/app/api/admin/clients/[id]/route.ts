@@ -5,9 +5,12 @@ import { hashPassword } from '@/lib/auth-utils';
 // Pobieranie danych pojedynczego klienta
 export async function GET(
     request: NextRequest,
-    { params: { id } }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        // Rozpakowywanie Promise z parametrami
+        const { id } = await params;
+
         const clientData = await client.fetch(
             `*[_type == "client" && _id == $id][0] {
         _id,
@@ -55,9 +58,11 @@ export async function GET(
 // Aktualizacja danych klienta
 export async function PATCH(
     request: NextRequest,
-    { params: { id } }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        // Rozpakowywanie Promise z parametrami
+        const { id } = await params;
         const updates = await request.json();
 
         // Sprawdź, czy klient istnieje
@@ -114,9 +119,12 @@ export async function PATCH(
 // Usunięcie klienta (dezaktywacja)
 export async function DELETE(
     request: NextRequest,
-    { params: { id } }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        // Rozpakowywanie Promise z parametrami
+        const { id } = await params;
+
         // Zamiast usuwać, dezaktywujemy konto
         await client
             .patch(id)
