@@ -31,58 +31,51 @@ export default function RootLayout({
     return (
         <html lang="pl" className="overflow-x-hidden">
         <head>
-            {/* Google Tag Manager i GA4 - poprawiona implementacja */}
+            {/* Google Tag Manager i Consent Mode - zoptymalizowana implementacja */}
             <script
                 dangerouslySetInnerHTML={{
                     __html: `
-                            // Konfiguracja Consent Mode v2
-                            window.dataLayer = window.dataLayer || [];
-                            function gtag(){dataLayer.push(arguments);}
-                            
-                            // Domyślne ustawienia Consent Mode - wszystko wymaga zgody (denied)
-                            gtag('consent', 'default', {
-                                'ad_storage': 'denied',
-                                'analytics_storage': 'denied',
-                                'functionality_storage': 'denied',
-                                'personalization_storage': 'denied',
-                                'security_storage': 'granted', // Zawsze dozwolone ze względów bezpieczeństwa
-                                'wait_for_update': 500 // Czas oczekiwania na aktualizację zgody
-                            });
-                            
-                            // Google Tag Manager
-                            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                            })(window,document,'script','dataLayer','GTM-WTKHM3K');
-                            
-                            // Google Analytics 4 bezpośrednia implementacja (pomocnicza)
-                            (function(w,d,s,l,i){
-                                w[l]=w[l]||[];w[l].push({'gtm.start':
-                                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                                j=d.createElement(s);j.async=true;j.src=
-                                'https://www.googletagmanager.com/gtag/js?id='+i;f.parentNode.insertBefore(j,f);
-                            })(window,document,'script','gtag','G-2PK8VH2GDV');
-                            
-                            window.dataLayer = window.dataLayer || [];
-                            function gtag(){dataLayer.push(arguments);}
-                            gtag('js', new Date());
-                            gtag('config', 'G-2PK8VH2GDV');
-                        `,
-                }}
-            />
-
-            {/* Sprawdzanie wcześniejszych zgód */}
-            <script
-                dangerouslySetInnerHTML={{
-                    __html: `
-                        // Sprawdź zapisane zgody przy ładowaniu strony
-                        (function() {
-                            var storedConsent = localStorage.getItem('cookieConsent');
-                            if (storedConsent) {
-                                window.dataLayer = window.dataLayer || [];
+                        // Inicjalizacja dataLayer
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        
+                        // Domyślna konfiguracja Consent Mode v2 - wszystko wymaga zgody (denied)
+                        gtag('consent', 'default', {
+                            'ad_storage': 'denied',
+                            'analytics_storage': 'denied',
+                            'functionality_storage': 'denied',
+                            'personalization_storage': 'denied',
+                            'security_storage': 'granted', // Zawsze dozwolone ze względów bezpieczeństwa
+                            'wait_for_update': 500 // Czas oczekiwania na aktualizację zgody
+                        });
+                        
+                        // Funkcja do przywracania zgód z localStorage
+                        function restoreConsents() {
+                            try {
+                                const consentType = localStorage.getItem('cookieConsent');
+                                const consentSettings = localStorage.getItem('cookieConsentSettings');
                                 
-                                if (storedConsent === 'all') {
+                                if (consentSettings) {
+                                    // Jeśli mamy szczegółowe ustawienia, użyj ich
+                                    const settings = JSON.parse(consentSettings);
+                                    const consentUpdate = {
+                                        'ad_storage': settings.ad_storage ? 'granted' : 'denied',
+                                        'analytics_storage': settings.analytics_storage ? 'granted' : 'denied',
+                                        'functionality_storage': settings.functionality_storage ? 'granted' : 'denied',
+                                        'personalization_storage': settings.personalization_storage ? 'granted' : 'denied',
+                                        'security_storage': 'granted'
+                                    };
+                                    
+                                    window.dataLayer.push({
+                                        event: 'consent_update',
+                                        consent: consentUpdate
+                                    });
+                                    
+                                    console.log('Consent restored from detailed settings:', consentUpdate);
+                                    return;
+                                }
+                                
+                                if (consentType === 'all') {
                                     window.dataLayer.push({
                                         event: 'consent_update',
                                         consent: {
@@ -94,16 +87,7 @@ export default function RootLayout({
                                         }
                                     });
                                     console.log('Consent restored from storage: all granted');
-                                    
-                                    // Dodatkowe potwierdzenie dla GA4
-                                    if (typeof gtag === 'function') {
-                                        gtag('consent', 'update', {
-                                            ad_storage: 'granted',
-                                            analytics_storage: 'granted'
-                                        });
-                                        console.log('GA4 consent updated directly');
-                                    }
-                                } else if (storedConsent === 'essential') {
+                                } else if (consentType === 'essential') {
                                     window.dataLayer.push({
                                         event: 'consent_update',
                                         consent: {
@@ -116,8 +100,33 @@ export default function RootLayout({
                                     });
                                     console.log('Consent restored from storage: only essential granted');
                                 }
+                            } catch (error) {
+                                console.error('Error restoring consent settings:', error);
                             }
-                        })();
+                        }
+                        
+                        // Wczytaj zapisane zgody
+                        restoreConsents();
+                        
+                        // Inicjalizacja Google Tag Manager
+                        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                        })(window,document,'script','dataLayer','GTM-WTKHM3K');
+                        
+                        // Google Analytics 4 - inicjalizacja
+                        (function(w,d,s,l,i){
+                            w[l]=w[l]||[];w[l].push({'gtm.start':
+                            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                            j=d.createElement(s);j.async=true;j.src=
+                            'https://www.googletagmanager.com/gtag/js?id='+i;f.parentNode.insertBefore(j,f);
+                        })(window,document,'script','gtag','G-2PK8VH2GDV');
+                        
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-2PK8VH2GDV');
                     `,
                 }}
             />

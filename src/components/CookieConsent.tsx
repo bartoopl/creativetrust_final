@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import ConsentManager from './ConsentManager';
+import { updateConsent } from '@/lib/consent-utils';
 
 const CookieConsent = () => {
     const [visible, setVisible] = useState(false);
@@ -17,45 +18,29 @@ const CookieConsent = () => {
 
     // Akceptuj wszystkie zgody
     const acceptAll = () => {
-        // Ustawienie zgód w dataLayer
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            event: 'consent_update',
-            consent: {
-                ad_storage: 'granted',
-                analytics_storage: 'granted',
-                functionality_storage: 'granted',
-                personalization_storage: 'granted',
-                security_storage: 'granted'
-            }
-        });
+        const allConsents = {
+            ad_storage: true,
+            analytics_storage: true,
+            functionality_storage: true,
+            personalization_storage: true,
+            security_storage: true
+        };
 
-        // Log potwierdzający aktualizację zgód
-        console.log('Consent settings updated: All granted');
-
-        localStorage.setItem('cookieConsent', 'all');
+        updateConsent(allConsents);
         setVisible(false);
     };
 
     // Odrzuć opcjonalne zgody (zaakceptuj tylko niezbędne)
     const acceptEssential = () => {
-        // Ustawienie zgód w dataLayer - tylko niezbędne
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            event: 'consent_update',
-            consent: {
-                ad_storage: 'denied',
-                analytics_storage: 'denied',
-                functionality_storage: 'granted', // Funkcjonalne są potrzebne do działania strony
-                personalization_storage: 'denied',
-                security_storage: 'granted'
-            }
-        });
+        const essentialConsents = {
+            ad_storage: false,
+            analytics_storage: false,
+            functionality_storage: true,
+            personalization_storage: false,
+            security_storage: true
+        };
 
-        // Log potwierdzający aktualizację zgód
-        console.log('Consent settings updated: Only essential granted');
-
-        localStorage.setItem('cookieConsent', 'essential');
+        updateConsent(essentialConsents);
         setVisible(false);
     };
 

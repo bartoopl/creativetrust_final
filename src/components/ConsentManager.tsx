@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { ConsentSettings, loadConsent, updateConsent } from '@/lib/consent-utils';
 
 interface ConsentManagerProps {
     onClose: () => void;
 }
 
 const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
-    const [consents, setConsents] = useState({
+    const [consents, setConsents] = useState<ConsentSettings>({
         analytics_storage: false,
         ad_storage: false,
         functionality_storage: true,
@@ -16,88 +17,51 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
     });
 
     useEffect(() => {
-        // Pobierz aktualne preferencje z localStorage
-        const storedConsent = localStorage.getItem('cookieConsent');
-        if (storedConsent === 'all') {
-            setConsents({
-                analytics_storage: true,
-                ad_storage: true,
-                functionality_storage: true,
-                personalization_storage: true,
-                security_storage: true
-            });
-        } else if (storedConsent === 'essential') {
-            setConsents({
-                analytics_storage: false,
-                ad_storage: false,
-                functionality_storage: true,
-                personalization_storage: false,
-                security_storage: true
-            });
-        }
+        // Pobierz aktualne preferencje z localStorage przy montowaniu komponentu
+        const storedConsents = loadConsent();
+        setConsents(storedConsents);
     }, []);
 
     const savePreferences = () => {
-        // Przekształć preferencje na format Consent Mode
-        const consentUpdate: { [key: string]: 'granted' | 'denied' } = {
-            ad_storage: consents.ad_storage ? 'granted' : 'denied',
-            analytics_storage: consents.analytics_storage ? 'granted' : 'denied',
-            functionality_storage: consents.functionality_storage ? 'granted' : 'denied',
-            personalization_storage: consents.personalization_storage ? 'granted' : 'denied',
-            security_storage: 'granted'
-        };
-
-        // Zapisz w localStorage
-        if (consents.analytics_storage && consents.ad_storage &&
-            consents.functionality_storage && consents.personalization_storage) {
-            localStorage.setItem('cookieConsent', 'all');
-        } else if (consents.functionality_storage) {
-            localStorage.setItem('cookieConsent', 'essential');
-        } else {
-            localStorage.setItem('cookieConsent', 'minimal');
-        }
-
-        // Aktualizuj w dataLayer
-        if (typeof window !== 'undefined') {
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                event: 'consent_update',
-                consent: consentUpdate
-            });
-
-            // Log potwierdzający aktualizację zgód
-            console.log('Consent settings updated via manager:', consentUpdate);
-        }
-
+        // Aktualizuj zgody w dataLayer i localStorage
+        updateConsent(consents);
         onClose();
     };
 
     const acceptAll = () => {
-        setConsents({
+        const allConsents: ConsentSettings = {
             analytics_storage: true,
             ad_storage: true,
             functionality_storage: true,
             personalization_storage: true,
             security_storage: true
-        });
+        };
 
-        setTimeout(savePreferences, 100);
+        setConsents(allConsents);
+        setTimeout(() => {
+            updateConsent(allConsents);
+            onClose();
+        }, 100);
     };
 
     const rejectAll = () => {
-        setConsents({
+        const essentialConsents: ConsentSettings = {
             analytics_storage: false,
             ad_storage: false,
             functionality_storage: true,
             personalization_storage: false,
             security_storage: true
-        });
+        };
 
-        setTimeout(savePreferences, 100);
+        setConsents(essentialConsents);
+        setTimeout(() => {
+            updateConsent(essentialConsents);
+            onClose();
+        }, 100);
     };
 
     // Funkcja do obsługi zmiany dla konkretnego przełącznika
-    const handleConsentChange = (key: keyof typeof consents) => {
+    const handleConsentChange = (key: keyof ConsentSettings) => {
         // Nie pozwól na zmianę dla security_storage
         if (key === 'security_storage') return;
 
