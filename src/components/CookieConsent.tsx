@@ -30,6 +30,9 @@ const CookieConsent = () => {
             }
         });
 
+        // Log potwierdzający aktualizację zgód
+        console.log('Consent settings updated: All granted');
+
         localStorage.setItem('cookieConsent', 'all');
         setVisible(false);
     };
@@ -48,6 +51,9 @@ const CookieConsent = () => {
                 security_storage: 'granted'
             }
         });
+
+        // Log potwierdzający aktualizację zgód
+        console.log('Consent settings updated: Only essential granted');
 
         localStorage.setItem('cookieConsent', 'essential');
         setVisible(false);

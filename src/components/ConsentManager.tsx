@@ -64,6 +64,9 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
                 event: 'consent_update',
                 consent: consentUpdate
             });
+
+            // Log potwierdzający aktualizację zgód
+            console.log('Consent settings updated via manager:', consentUpdate);
         }
 
         onClose();
