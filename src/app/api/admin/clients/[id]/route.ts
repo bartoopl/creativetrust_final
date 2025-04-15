@@ -157,8 +157,8 @@ export async function DELETE(
     } catch (error) {
         console.error('Error cancelling invoice:', error);
         return NextResponse.json(
-            { success: false, message: 'Wystąpił błąd podczas anulowania faktury' },
-            { status: 500 }
+            {success: false, message: 'Wystąpił błąd podczas anulowania faktury'},
+            {status: 500}
         );
     }
 }
