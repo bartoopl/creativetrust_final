@@ -5,6 +5,8 @@ import author from './author'
 import portfolioProject from './portfolioProject'
 import serviceCategory from './serviceCategory'
 import knowledgeBase from './knowledgeBase'
+import client from './client';
+import invoice from './invoice'
 
 // Then, export the schema array - this is what Sanity Studio uses
 export const schemaTypes = [
@@ -15,4 +17,6 @@ export const schemaTypes = [
     portfolioProject,
     serviceCategory,
     knowledgeBase,
+    client,
+    invoice,
 ]
