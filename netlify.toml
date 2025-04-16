@@ -20,3 +20,7 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+
+# Funkcja zaplanowana do codziennej synchronizacji danych reklamowych
+[functions."scheduled-sync"]
+  schedule = "@daily"

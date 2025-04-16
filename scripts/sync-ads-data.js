@@ -15,7 +15,7 @@ const https = require('https');
 
 // Konfiguracja
 const API_KEY = process.env.ADS_SYNC_API_KEY || 'twój-klucz-api';
-const API_URL = process.env.API_URL || 'https://twojadomena.pl/api/admin/ads/sync';
+const API_URL = process.env.API_URL || 'https://creativetrust.pl/api/admin/ads/sync';
 
 // Wykonaj żądanie POST do endpointu synchronizacji
 const req = https.request(

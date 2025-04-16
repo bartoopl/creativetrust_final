@@ -4,12 +4,12 @@ import { client } from '@/lib/sanity';
 /**
  * Endpoint do pobierania szczegółów kampanii
  */
-export async function GET(
-    request: Request,
-    { params }: { params: { id: string } }
-) {
+export async function GET(request: Request) {
     try {
-        const campaignId = params.id;
+        // Parsuj ID kampanii z URL
+        const url = new URL(request.url);
+        const pathSegments = url.pathname.split('/');
+        const campaignId = pathSegments[pathSegments.length - 1];
         
         // Pobierz kampanię z Sanity
         const campaign = await client.fetch(`
@@ -67,12 +67,12 @@ export async function GET(
 /**
  * Endpoint do aktualizacji kampanii
  */
-export async function PATCH(
-    request: Request,
-    { params }: { params: { id: string } }
-) {
+export async function PATCH(request: Request) {
     try {
-        const campaignId = params.id;
+        // Parsuj ID kampanii z URL
+        const url = new URL(request.url);
+        const pathSegments = url.pathname.split('/');
+        const campaignId = pathSegments[pathSegments.length - 1];
         
         // Odczytaj dane z żądania
         const body = await request.json();
@@ -132,12 +132,12 @@ export async function PATCH(
 /**
  * Endpoint do usuwania kampanii
  */
-export async function DELETE(
-    request: Request,
-    { params }: { params: { id: string } }
-) {
+export async function DELETE(request: Request) {
     try {
-        const campaignId = params.id;
+        // Parsuj ID kampanii z URL
+        const url = new URL(request.url);
+        const pathSegments = url.pathname.split('/');
+        const campaignId = pathSegments[pathSegments.length - 1];
         
         // Sprawdź czy kampania istnieje
         const campaignExists = await client.fetch(
