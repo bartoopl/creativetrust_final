@@ -41,7 +41,7 @@ export async function createJWT(clientData: ClientData & { temporary?: boolean }
 export async function setAuthCookie(token: string): Promise<void> {
     try {
         console.log('Setting auth cookie, token length:', token.length);
-        const cookieStore = await cookies();
+        const cookieStore = cookies();
         
         // First delete any existing cookie
         cookieStore.delete(COOKIE_NAME);
@@ -53,6 +53,8 @@ export async function setAuthCookie(token: string): Promise<void> {
             path: '/',
             maxAge: 7 * 24 * 60 * 60, // 7 days
             httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
         });
         
         console.log('Auth cookie set successfully');
@@ -68,7 +70,7 @@ export async function setAuthCookie(token: string): Promise<void> {
 export async function removeAuthCookie(): Promise<void> {
     try {
         console.log('Removing auth cookie:', COOKIE_NAME);
-        const cookieStore = await cookies();
+        const cookieStore = cookies();
         
         // Simple delete first
         cookieStore.delete(COOKIE_NAME);
@@ -80,6 +82,8 @@ export async function removeAuthCookie(): Promise<void> {
             expires: new Date(0),
             path: '/',
             maxAge: 0,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
         });
         
         console.log('Auth cookie deletion complete');
@@ -95,7 +99,7 @@ export async function removeAuthCookie(): Promise<void> {
 export async function getAuthToken(): Promise<string | undefined> {
     try {
         console.log('Getting auth token from cookies');
-        const cookieStore = await cookies();
+        const cookieStore = cookies();
         const cookie = cookieStore.get(COOKIE_NAME);
         
         console.log('Auth cookie found:', !!cookie);
@@ -131,6 +135,11 @@ export async function verifyAuth(): Promise<{ authenticated: boolean; client?: C
             }`,
             { email: decoded.email }
         );
+        
+        // Debug client data from Sanity if found
+        if (clientExistsByEmail) {
+            console.log('User found in Sanity. Data:', JSON.stringify(clientExistsByEmail, null, 2));
+        }
 
         // If user exists in Sanity by email, always use that account
         if (clientExistsByEmail) {
@@ -170,6 +179,10 @@ export async function verifyAuth(): Promise<{ authenticated: boolean; client?: C
             `*[_type == "client" && _id == $id && active == true][0]`,
             { id: decoded._id }
         );
+        
+        if (clientExistsById) {
+            console.log('User found in Sanity by ID. Data:', JSON.stringify(clientExistsById, null, 2));
+        }
 
         if (!clientExistsById) {
             console.log('User not found in Sanity by ID');

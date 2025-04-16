@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { cookies } from 'next/headers';
 
 export function middleware(request: NextRequest) {
     console.log('Middleware executing for path:', request.nextUrl.pathname);
@@ -8,6 +7,12 @@ export function middleware(request: NextRequest) {
     console.log('Auth cookie exists:', !!clientAuthCookie);
     
     const path = request.nextUrl.pathname;
+
+    // Log cookie value for debugging
+    if (clientAuthCookie) {
+        const valueLength = clientAuthCookie.value.length;
+        console.log(`Auth cookie found with value length: ${valueLength}`);
+    }
 
     // Protect client panel routes
     if (path.startsWith('/panel-klienta')) {
