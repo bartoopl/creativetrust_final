@@ -1,4 +1,4 @@
-import { GoogleAdsApi, GoogleAdsApiClient } from 'google-ads-api';
+import { GoogleAdsApi } from 'google-ads-api';
 import { client as sanityClient } from './sanity';
 
 // Konfiguracja z zmiennych środowiskowych lub bezpośrednio z konfiguracji
@@ -10,29 +10,38 @@ interface GoogleAdsConfig {
   customer_id: string;
 }
 
-// Konfiguracja z kluczy serwisowych
+// Konfiguracja z zmiennych środowiskowych
 const googleAdsConfig: GoogleAdsConfig = {
-  client_id: "100321284149936925533",
-  client_email: "creativetrustapp@creativetrust.iam.gserviceaccount.com",
-  private_key: "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCuD5XMamiH272i\n0Xrfx35XAGQ89ru6vvPouxwccJCupMcyF9EenXysFRAz34dgkn1PY4l+PoUgMGM8\nGUKxViGNd8LEAEeOQpIU256UWvFEXVznw7yIFq+6XXB+gcOr9woxJXUvIZzXamdW\npNV8HjRtwhna8DeTApmj3wV9kOsJHkhqFslg9sJ19Npi5XmEDV46hq1RpOkcGhsM\nEmavc4rNDfr4TcQi69Wzd3cpj+YKka3TW/cES+8vwaxcBbbkPIfG1u+1uiTzhWqF\nU/l23Guvl6PcVL38DasWN2A5x7lIYVbnF5K+xqcOcBlSkCW5LjBHSpjy2PoCfI17\nFPafW58PAgMBAAECggEAGqcPSIWeAPj1q5SeVzLHFo+xnvYm89GhK+iuxW9lGsuS\nJt+nvqOIf28a6TPX7m0v8UlBY0qJJvnR0CuMCfcxhxB+CyDXKXeUbSDd7O3qALkN\nF1NiWdz4xorf8AxzB7DPEjcf9PoVd+ohQw6qvpPUx7O6MstSry5C6WlRKr4shzDS\naab0l4DiweCtX6eGPFIP0ftWcIkhbHmCopuMeOIc9RrDckDHzIxeUDfZ89vwrODm\n/nSc+zxf1Z7fHzbQny//yOvAsp9p1b2pgvJZKApBT0cz8HDV9AzZcQ7kbv+0SGo+\nFUkvfGYLwPRmOoKamuEQgZou4uAX+oXS2yF+2Gn3LQKBgQDUZnI1bxmvL3X64Zut\nZDGuhjWjY4hcI98uSJnl83+r1Y3hlnAl2jnkSPjKoply63mmgd5aITP/EmbCxvdc\noqO0AKKaNcLIqfag6Vnf6KkHjIK6BLxp7JhmCvFi+AXa4MLBFiByOnFcpNWKAsPV\n2WFwoQbpc/WGe155dy9qx7+RHQKBgQDRymwjgC+g4Wmp0ZSLmaHm5iWZ3MaG2UeF\nF0r3CAjt9QDUzlNN72ehfoqtKfExlf23zVg6p7JMhYVpH30//ksi6MC+bDBOBwOl\n4jOshemDUGM8u/Ot3R9wx4+BglzjOjgRYyuzd4AsgG56RJ25GJkvz0jL39YrHBB5\nzWxY9KzFGwKBgGegC7xyFc/YkfDyvScdKPgC1ox+dPqvLaXBGgSMhg9pwyz6XoC5\nNWFhELCcH81ngRRxa/ABHwMlESmaNPjnCIM7hBlEfWG1OnRLJOQO+NiL/wOOZ/Yt\nzjSKxjYI16Jv4dSeXPod9UzDxsLskmr1AYsXpO2k+3a/HdqZAXNRPO8pAoGAehPI\niX/2Ny/0RJVoUzO7OpmCF96Yx694JsI/JTDPwWhoa20EnL1LGHaCS/G0IJ6fXW1o\ngflDj7PCxkFEqRBYuJ+oSSa7lSwPu1+9og7qqzcECDt2uR2LRh1aLIqncrJWHggP\nTgej1kGGCDAVd7gQq/l66uf9wGg8TiRzf/Ag+TECgYBcN5bHVuSMQF9X562CQlSD\nXVP2/NXnv7fYjzAhqNDR2HI2nGfv0TmRtz2DixSaHiFSBZAZ8DfUz/btLuXe72ap\nAAIUK2+El1Pzxt1MFMjuofy2b0trv2odKAgppWrw9RLseb68th3+ZabyUyZ99zxQ\nstKeKL1Wz2q5CybutlmXjA==\n-----END PRIVATE KEY-----\n",
-  developer_token: process.env.GOOGLE_ADS_DEVELOPER_TOKEN || '', // Należy ustawić w zmiennych środowiskowych
-  customer_id: process.env.GOOGLE_ADS_CLIENT_ID || '', // ID Klienta Ads (Customer ID)
+  client_id: process.env.GOOGLE_ADS_CLIENT_ID || '',
+  client_email: process.env.GOOGLE_ADS_CLIENT_EMAIL || '',
+  private_key: process.env.GOOGLE_ADS_PRIVATE_KEY || '',
+  developer_token: process.env.GOOGLE_ADS_DEVELOPER_TOKEN || '',
+  customer_id: process.env.GOOGLE_ADS_CUSTOMER_ID || '',
 };
 
 // Inicjalizacja klienta Google Ads
-let googleAdsClient: GoogleAdsApiClient | null = null;
+let googleAdsClient: any = null;
 
 try {
-  const googleAdsApi = new GoogleAdsApi({
-    client_id: googleAdsConfig.client_id,
-    client_secret: googleAdsConfig.private_key,
-    developer_token: googleAdsConfig.developer_token,
-  });
+  // Inicjalizacja klienta tylko gdy są dostępne potrzebne zmienne środowiskowe
+  if (googleAdsConfig.client_id && googleAdsConfig.private_key && googleAdsConfig.developer_token) {
+    const googleAdsApi = new GoogleAdsApi({
+      client_id: googleAdsConfig.client_id,
+      client_secret: googleAdsConfig.private_key,
+      developer_token: googleAdsConfig.developer_token,
+    });
 
-  googleAdsClient = googleAdsApi.getClient({
-    customer_id: googleAdsConfig.customer_id,
-    login_customer_id: googleAdsConfig.customer_id,
-  });
+    if (googleAdsConfig.customer_id) {
+      googleAdsClient = googleAdsApi.getClient({
+        customer_id: googleAdsConfig.customer_id,
+        login_customer_id: googleAdsConfig.customer_id,
+      });
+    } else {
+      console.log('Brak ID klienta Google Ads - klient nie został zainicjalizowany');
+    }
+  } else {
+    console.log('Brak wymaganych zmiennych środowiskowych dla Google Ads API');
+  }
 } catch (error) {
   console.error('Błąd inicjalizacji Google Ads API:', error);
 }
@@ -42,8 +51,35 @@ try {
  */
 export async function fetchCampaignsForClient(clientId: string): Promise<any[]> {
   if (!googleAdsClient) {
-    console.error('Google Ads API Client nie jest zainicjalizowany');
-    return [];
+    console.log('Google Ads API Client nie jest zainicjalizowany');
+    
+    // W środowisku produkcyjnym lub testowym zwracamy pustą tablicę
+    if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development') {
+      return [];
+    }
+    
+    // W trybie deweloperskim możemy zwrócić testowe dane
+    return [
+      {
+        campaign: {
+          id: 'test-campaign-1',
+          name: 'Testowa Kampania 1',
+          status: 'ENABLED',
+          start_date: '2025-01-01',
+          end_date: '2025-12-31'
+        },
+        metrics: {
+          impressions: '1000',
+          clicks: '50',
+          ctr: '5.0',
+          average_cpc: '2000000', // 2.0 PLN w mikro-jednostkach
+          cost_micros: '100000000', // 100.0 PLN w mikro-jednostkach
+          conversions: '3',
+          conversions_value: '1500',
+          cost_per_conversion: '33333333' // 33.33 PLN w mikro-jednostkach
+        }
+      }
+    ];
   }
 
   try {
@@ -99,6 +135,11 @@ export async function fetchCampaignsForClient(clientId: string): Promise<any[]> 
  * Można ją wywołać z cron job.
  */
 export async function syncGoogleAdsData(): Promise<void> {
+  // Sprawdź czy klient API jest dostępny
+  if (!googleAdsClient) {
+    console.log('Google Ads API Client nie jest zainicjalizowany - pomijanie synchronizacji');
+    return;
+  }
   try {
     // 1. Pobierz wszystkie kampanie Google Ads z Sanity
     const campaigns = await sanityClient.fetch(
