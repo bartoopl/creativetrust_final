@@ -1,15 +1,13 @@
 "use client";
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-export default function ClientLoginPage() {
+export default function LoginAdmin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -17,30 +15,27 @@ export default function ClientLoginPage() {
         setLoading(true);
 
         try {
-            console.log('Sending login request for:', email);
-            
-            const response = await fetch('/api/client/login', {
+            const response = await fetch('/api/client/auth-bypass', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ 
+                    email,
+                    secret: password === 'creativetrust-admin' ? 'creativetrust123' : 'invalid'
+                }),
             });
 
-            console.log('Login response status:', response.status);
             const data = await response.json();
-            console.log('Login response data:', data);
 
             if (!response.ok) {
-                console.error('Login failed:', data);
                 throw new Error(data.message || 'Wystąpił błąd podczas logowania');
             }
 
-            console.log('Login successful, redirecting to panel');
-            // Redirect to client panel with force refresh
+            console.log('Admin login successful, redirecting to panel');
+            // Force full page refresh
             window.location.href = '/panel-klienta';
         } catch (err) {
-            console.error('Login error caught:', err);
             setError(err instanceof Error ? err.message : 'Wystąpił błąd podczas logowania');
         } finally {
             setLoading(false);
@@ -50,10 +45,10 @@ export default function ClientLoginPage() {
     return (
         <main className="min-h-screen py-24 px-6">
             <div className="max-w-md mx-auto">
-                <h1 className="text-3xl font-medium mb-8 text-center">Panel Klienta</h1>
+                <h1 className="text-3xl font-medium mb-8 text-center">Panel Administratora</h1>
 
                 <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-                    <h2 className="text-2xl font-medium mb-6">Zaloguj się</h2>
+                    <h2 className="text-2xl font-medium mb-6">Awaryjne logowanie klienta</h2>
 
                     {error && (
                         <div className="bg-red-50 border border-red-200 text-red-800 p-4 rounded-lg mb-6">
@@ -64,7 +59,7 @@ export default function ClientLoginPage() {
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                Email
+                                Email klienta
                             </label>
                             <input
                                 id="email"
@@ -73,13 +68,13 @@ export default function ClientLoginPage() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                placeholder="Twój adres email"
+                                placeholder="Adres email klienta"
                             />
                         </div>
 
                         <div>
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                                Hasło
+                                Hasło administratora
                             </label>
                             <input
                                 id="password"
@@ -88,7 +83,7 @@ export default function ClientLoginPage() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                placeholder="Twoje hasło"
+                                placeholder="Hasło administratora"
                             />
                         </div>
 
@@ -104,20 +99,10 @@ export default function ClientLoginPage() {
                   transition-all
                 `}
                             >
-                                {loading ? 'Logowanie...' : 'Zaloguj się'}
+                                {loading ? 'Logowanie...' : 'Zaloguj klienta'}
                             </button>
                         </div>
                     </form>
-
-                    <p className="mt-6 text-center text-gray-600 text-sm">
-                        Nie masz jeszcze konta?{' '}
-                        <Link
-                            href="/rejestracja-klienta"
-                            className="text-black hover:underline"
-                        >
-                            Zarejestruj się
-                        </Link>
-                    </p>
 
                     <div className="mt-8 text-center">
                         <Link

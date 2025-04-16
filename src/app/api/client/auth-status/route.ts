@@ -14,6 +14,7 @@ export async function GET() {
         return NextResponse.json({
             authenticated: true,
             client: auth.client,
+            temporary: auth.temporary
         });
     } catch (error) {
         console.error('Auth status error:', error);

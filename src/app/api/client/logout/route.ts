@@ -3,8 +3,11 @@ import { removeAuthCookie } from '@/lib/auth-utils';
 
 export async function POST() {
     try {
+        console.log('Logout endpoint called');
+        
         // Remove the auth cookie
-        removeAuthCookie();
+        await removeAuthCookie();
+        console.log('Auth cookie removed successfully');
 
         return NextResponse.json({
             success: true,
@@ -12,6 +15,9 @@ export async function POST() {
         });
     } catch (error) {
         console.error('Logout error:', error);
+        if (error instanceof Error) {
+            console.error('Error details:', error.message, error.stack);
+        }
         return NextResponse.json(
             { success: false, message: 'Wystąpił błąd podczas wylogowania' },
             { status: 500 }

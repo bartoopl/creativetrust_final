@@ -28,7 +28,7 @@ export default function ClientPanelLayout({ children }: ClientPanelLayoutProps) 
                 }
 
                 if (data.client?.name) {
-                    setClientName(data.client.name);
+                    setClientName(data.temporary ? `${data.client.name} (Konto tymczasowe)` : data.client.name);
                 }
             } catch (error) {
                 console.error('Failed to fetch client data:', error);
@@ -41,10 +41,25 @@ export default function ClientPanelLayout({ children }: ClientPanelLayoutProps) 
     // Logout function
     const handleLogout = async () => {
         try {
-            await fetch('/api/client/logout', { method: 'POST' });
-            router.push('/logowanie-klienta');
+            console.log('Logout button clicked');
+            const response = await fetch('/api/client/logout', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            const data = await response.json();
+            console.log('Logout response:', data);
+            
+            // Clear any local state
+            setClientName('');
+            
+            // Force a redirect to login page
+            window.location.href = '/logowanie-klienta';
         } catch (error) {
             console.error('Logout error:', error);
+            alert('Wystąpił błąd podczas wylogowywania. Spróbuj odświeżyć stronę.');
         }
     };
 
