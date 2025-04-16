@@ -1,61 +1,64 @@
-# Konfiguracja integracji Google Ads
+# Panel Klienta - Statystyki Kampanii
 
-Ten dokument zawiera instrukcje dotyczące konfiguracji integracji z Google Ads API w panelu klienta.
+Ten dokument zawiera instrukcje dotyczące konfiguracji i zarządzania statystykami kampanii reklamowych w panelu klienta.
 
-## Wymagane zmienne środowiskowe
+## Symulowane dane kampanii
 
-Aby integracja z Google Ads działała poprawnie, należy ustawić następujące zmienne środowiskowe w panelu Netlify:
+Aktualna implementacja używa symulowanych danych kampanii zamiast bezpośredniej integracji z Google Ads API. Jest to rozwiązanie przejściowe, które pozwala na prezentację funkcjonalności panelu klienta bez konieczności pełnej konfiguracji Google Ads API.
+
+## Zmienne środowiskowe
+
+Aby zabezpieczyć endpointy synchronizacji, należy ustawić zmienną środowiskową w panelu Netlify:
 
 ```
-GOOGLE_ADS_CLIENT_ID=100321284149936925533
-GOOGLE_ADS_CLIENT_EMAIL=creativetrustapp@creativetrust.iam.gserviceaccount.com
-GOOGLE_ADS_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nMIIEvAIB...
-GOOGLE_ADS_DEVELOPER_TOKEN=YOUR_DEVELOPER_TOKEN
-GOOGLE_ADS_CUSTOMER_ID=YOUR_CUSTOMER_ID
 ADS_SYNC_API_KEY=YOUR_CUSTOM_API_KEY
 ```
 
-## Konfiguracja konta usługowego Google
+## Dodawanie kampanii reklamowych
 
-1. Przejdź do [Google Cloud Console](https://console.cloud.google.com/)
-2. Wybierz projekt lub utwórz nowy
-3. Włącz Google Ads API w bibliotece API
-4. Utwórz konto usługowe (Service Account) i pobierz klucz JSON
-5. Użyj informacji z klucza JSON do ustawienia zmiennych środowiskowych
+Aby dodać kampanie reklamowe do panelu klienta:
 
-## Uzyskanie Developer Token
+1. Zaloguj się do Sanity Studio
+2. Przejdź do sekcji "Kampanie reklamowe"
+3. Kliknij "Utwórz nowy dokument"
+4. Wypełnij formularz:
+   - Nazwa kampanii - nazwa widoczna dla klienta
+   - Klient - wybierz klienta, do którego przypisana jest kampania
+   - Platforma - wybierz "Google Ads" lub "Meta Ads" 
+   - ID kampanii w systemie zewnętrznym - wpisz ID kampanii
+   - Status - wybierz "active", "paused" lub "ended"
+   - Data rozpoczęcia i zakończenia - ustaw daty kampanii
+5. Zapisz dokument
 
-1. Zaloguj się do konta Google Ads
-2. Przejdź do [API Center](https://ads.google.com/aw/apicenter)
-3. Złóż wniosek o dostęp do API
-4. Po zatwierdzeniu, skopiuj Developer Token do zmiennych środowiskowych
+Po dodaniu kampanii do Sanity, będą one widoczne w panelu klienta. Dane statystyczne będą automatycznie aktualizowane raz dziennie.
 
-## Konfiguracja Customer ID
+## Przyszła implementacja Google Ads API
 
-Customer ID to ID klienta w formacie XXX-XXX-XXXX, które można znaleźć:
-1. W menu Google Ads
-2. W lewym górnym rogu interfejsu, pod nazwą konta
+W przyszłości planowana jest pełna integracja z Google Ads API. Będzie ona wymagała:
 
-## Ustawianie API Key
+1. Konfiguracji konta deweloperskiego Google
+2. Uzyskania Developer Token z Google Ads 
+3. Konfiguracji konta usługowego z odpowiednimi uprawnieniami
+4. Dodania ID klienta Google Ads (Customer ID)
 
-ADS_SYNC_API_KEY to dowolny ciąg znaków (preferowany silny, losowy), który będzie używany do autoryzacji żądań synchronizacji danych. Ustaw ten sam klucz w zmiennych środowiskowych i używaj go podczas wywoływania endpointu `/api/admin/ads/sync`.
+## Testowanie i synchronizacja danych
 
-## Testowanie integracji
+Po skonfigurowaniu API Key, możesz ręcznie wyzwolić aktualizację danych kampanii:
 
-Po ustawieniu wszystkich zmiennych środowiskowych, można przetestować integrację przez:
+```
+curl -X POST -H "x-api-key: YOUR_CUSTOM_API_KEY" https://creativetrust.pl/api/admin/ads/sync
+```
 
-1. Ręczne wywołanie synchronizacji:
-   ```
-   curl -X POST -H "x-api-key: YOUR_CUSTOM_API_KEY" https://creativetrust.pl/api/admin/ads/sync
-   ```
+Ten endpoint wygeneruje losowe dane statystyczne dla wszystkich kampanii w systemie, symulując codzienną aktualizację danych.
 
-2. Sprawdzenie logów Netlify pod kątem błędów
+### Automatyczna synchronizacja
 
-## Zarządzanie kampaniami
+Skonfigurowana funkcja zaplanowana w Netlify (`scheduled-sync`) uruchamia się codziennie i wykonuje to samo żądanie.
 
-1. Logowanie do Sanity Studio
-2. Przejście do kolekcji "Kampanie reklamowe"
-3. Utworzenie nowej kampanii z przypisaniem do klienta
-4. Wpisanie ID kampanii z Google Ads w polu "ID kampanii w systemie zewnętrznym"
+## Monitorowanie
 
-Po dodaniu kampanii i uruchomieniu synchronizacji, dane powinny pojawić się w panelu klienta.
+Po uruchomieniu synchronizacji, możesz monitorować proces w następujący sposób:
+
+1. Sprawdź logi w panelu Netlify
+2. Zaloguj się do Sanity Studio i sprawdź, czy pojawiły się nowe dokumenty typu "Statystyki kampanii"
+3. Sprawdź w panelu klienta, czy dane statystyczne są widoczne
