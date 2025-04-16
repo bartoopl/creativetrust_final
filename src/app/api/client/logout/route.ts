@@ -1,6 +1,25 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
+// Helper function to handle cookies safely
+async function deleteCookie(name: string) {
+    const cookieStore = await cookies();
+    
+    // Delete the cookie
+    cookieStore.delete(name);
+    
+    // Also set it with expired time as a fallback
+    cookieStore.set({
+        name: name,
+        value: 'deleted',
+        expires: new Date(0),
+        path: '/',
+        maxAge: 0,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+    });
+}
+
 export async function POST() {
     try {
         console.log('Logout endpoint called');
@@ -11,22 +30,8 @@ export async function POST() {
             message: 'Wylogowano pomyślnie',
         });
         
-        // Remove the auth cookie directly
-        const cookieStore = cookies();
-        
-        // Delete the cookie
-        cookieStore.delete('client_auth_token');
-        
-        // Also set it with expired time as a fallback
-        cookieStore.set({
-            name: 'client_auth_token',
-            value: 'deleted',
-            expires: new Date(0),
-            path: '/',
-            maxAge: 0,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-        });
+        // Remove the auth cookie
+        await deleteCookie('client_auth_token');
         
         console.log('Auth cookie removed successfully');
 

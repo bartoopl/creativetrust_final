@@ -41,7 +41,7 @@ export async function createJWT(clientData: ClientData & { temporary?: boolean }
 export async function setAuthCookie(token: string): Promise<void> {
     try {
         console.log('Setting auth cookie, token length:', token.length);
-        const cookieStore = cookies();
+        const cookieStore = await cookies();
         
         // First delete any existing cookie
         cookieStore.delete(COOKIE_NAME);
@@ -70,7 +70,7 @@ export async function setAuthCookie(token: string): Promise<void> {
 export async function removeAuthCookie(): Promise<void> {
     try {
         console.log('Removing auth cookie:', COOKIE_NAME);
-        const cookieStore = cookies();
+        const cookieStore = await cookies();
         
         // Simple delete first
         cookieStore.delete(COOKIE_NAME);
@@ -99,7 +99,7 @@ export async function removeAuthCookie(): Promise<void> {
 export async function getAuthToken(): Promise<string | undefined> {
     try {
         console.log('Getting auth token from cookies');
-        const cookieStore = cookies();
+        const cookieStore = await cookies();
         const cookie = cookieStore.get(COOKIE_NAME);
         
         console.log('Auth cookie found:', !!cookie);

@@ -1,8 +1,22 @@
 import { NextResponse } from 'next/server';
 import { client } from '@/lib/sanity';
-import { verifyPassword, createJWT, setAuthCookie } from '@/lib/auth-utils';
+import { verifyPassword, createJWT } from '@/lib/auth-utils';
 import { verifyTempAccount } from '@/lib/temp-accounts';
 import { cookies } from 'next/headers';
+
+// Helper function to set cookie safely
+async function setCookie(name: string, value: string) {
+    const cookieStore = await cookies();
+    cookieStore.set({
+        name,
+        value,
+        path: '/',
+        maxAge: 7 * 24 * 60 * 60, // 7 days
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+    });
+}
 
 export async function POST(request: Request) {
     try {
@@ -85,16 +99,7 @@ export async function POST(request: Request) {
                 });
 
                 // Set the cookie in the response
-                const cookieStore = cookies();
-                cookieStore.set({
-                    name: 'client_auth_token',
-                    value: token,
-                    path: '/',
-                    maxAge: 7 * 24 * 60 * 60, // 7 days
-                    httpOnly: true,
-                    secure: process.env.NODE_ENV === 'production',
-                    sameSite: 'lax',
-                });
+                await setCookie('client_auth_token', token);
 
                 console.log('Auth cookie set in response for Sanity account using temp credentials');
                 return response;
@@ -162,16 +167,7 @@ export async function POST(request: Request) {
             });
 
             // Set the cookie in the response
-            const cookieStore = cookies();
-            cookieStore.set({
-                name: 'client_auth_token',
-                value: token,
-                path: '/',
-                maxAge: 7 * 24 * 60 * 60, // 7 days
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'lax',
-            });
+            await setCookie('client_auth_token', token);
 
             console.log('Auth cookie set in response for regular Sanity account');
             return response;
@@ -211,16 +207,7 @@ export async function POST(request: Request) {
             });
 
             // Set the cookie in the response
-            const cookieStore = cookies();
-            cookieStore.set({
-                name: 'client_auth_token',
-                value: token,
-                path: '/',
-                maxAge: 7 * 24 * 60 * 60, // 7 days
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'lax',
-            });
+            await setCookie('client_auth_token', token);
 
             console.log('Auth cookie set in response for temp account');
             return response;
