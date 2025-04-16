@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import Button from './Button';
 import ConsentManager from './ConsentManager';
 
 const Footer: React.FC = () => {
@@ -80,6 +78,12 @@ const Footer: React.FC = () => {
                                 className="text-white hover:text-gray-300"
                             >
                                 Baza wiedzy
+                            </Link>
+                            <Link
+                                href="/panel-klienta"
+                                className="text-white hover:text-gray-300"
+                            >
+                                Panel Klienta
                             </Link>
                         </nav>
                     </div>
