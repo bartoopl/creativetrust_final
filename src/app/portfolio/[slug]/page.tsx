@@ -6,6 +6,7 @@ import { client, urlFor } from '@/lib/sanity';
 import Image from 'next/image';
 import Link from 'next/link';
 import Lightbox from '@/components/Lightbox';
+import PortableTextContent from '@/components/PortableTextContent';
 import { Project, Category, ImageWithCaption } from '@/types';
 import { use } from 'react';
 
@@ -231,7 +232,11 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                         <h1 className="text-4xl font-medium mb-6">{project.title}</h1>
 
                         <div className="prose max-w-none mb-8">
-                            <p className="whitespace-pre-line text-lg">{project.description}</p>
+                            {typeof project.description === 'string' ? (
+                                <p className="whitespace-pre-line text-lg">{project.description}</p>
+                            ) : (
+                                <PortableTextContent content={project.description} />
+                            )}
                         </div>
 
                         {project.scopeOfWork && project.scopeOfWork.length > 0 && (

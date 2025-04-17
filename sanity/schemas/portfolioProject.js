@@ -92,7 +92,63 @@ export default {
         {
             name: 'description',
             title: 'Opis Projektu',
-            type: 'text',
+            type: 'array',
+            of: [
+                {
+                    type: 'block',
+                    styles: [
+                        {title: 'Normal', value: 'normal'},
+                        {title: 'H2', value: 'h2'},
+                        {title: 'H3', value: 'h3'},
+                        {title: 'H4', value: 'h4'}
+                    ],
+                    marks: {
+                        decorators: [
+                            {title: 'Strong', value: 'strong'},
+                            {title: 'Emphasis', value: 'em'},
+                            {title: 'Underline', value: 'underline'}
+                        ],
+                        annotations: [
+                            {
+                                name: 'link',
+                                type: 'object',
+                                title: 'Link',
+                                fields: [
+                                    {
+                                        name: 'href',
+                                        type: 'url',
+                                        title: 'URL'
+                                    },
+                                    {
+                                        name: 'blank',
+                                        type: 'boolean',
+                                        title: 'Open in new tab',
+                                        initialValue: true
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    lists: [
+                        {title: 'Bullet', value: 'bullet'},
+                        {title: 'Number', value: 'number'}
+                    ]
+                },
+                {
+                    type: 'image',
+                    options: {
+                        hotspot: true
+                    },
+                    fields: [
+                        {
+                            name: 'alt',
+                            type: 'string',
+                            title: 'Alternative Text',
+                            description: 'Opis dla osób niewidomych i wyszukiwarek'
+                        }
+                    ]
+                }
+            ],
             validation: Rule => Rule.required()
         },
         {
