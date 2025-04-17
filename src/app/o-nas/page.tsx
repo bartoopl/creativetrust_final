@@ -196,7 +196,7 @@ export default function AboutPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         <div className="text-center p-8">
-                            <div className="text-6xl font-bold mb-3">7+</div>
+                            <div className="text-6xl font-bold mb-3">8+</div>
                             <div className="text-xl text-gray-300">lat na rynku</div>
                         </div>
 
