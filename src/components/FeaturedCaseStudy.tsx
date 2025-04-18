@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { client, urlFor } from '@/lib/sanity';
+import { PortableText } from '@portabletext/react';
 
 interface FeaturedProject {
     _id: string;
@@ -122,7 +123,9 @@ const FeaturedCaseStudy: React.FC = () => {
                             <h3 className="text-2xl md:text-3xl font-medium mb-4">{featuredProject.title}</h3>
                             <p className="text-gray-700 mb-6">
                                 {Array.isArray(featuredProject.description) 
-                                    ? 'Zobacz szczegóły projektu' 
+                                    ? featuredProject.description[0]?.children?.[0]?.text 
+                                      ? `${featuredProject.description[0].children[0].text.substring(0, 120)}...` 
+                                      : 'Zobacz szczegóły projektu'
                                     : featuredProject.description?.length > 120
                                       ? `${featuredProject.description.substring(0, 120)}...`
                                       : featuredProject.description || 'Zobacz szczegóły projektu'}
