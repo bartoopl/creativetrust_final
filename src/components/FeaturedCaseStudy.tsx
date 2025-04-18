@@ -12,7 +12,7 @@ interface FeaturedProject {
     slug: { current: string };
     client: string;
     mainImage: any;
-    description: string;
+    description: any; // Updated to handle array of blocks
 }
 
 const FeaturedCaseStudy: React.FC = () => {
@@ -121,9 +121,11 @@ const FeaturedCaseStudy: React.FC = () => {
                             <div className="mb-2 text-gray-500">{featuredProject.client}</div>
                             <h3 className="text-2xl md:text-3xl font-medium mb-4">{featuredProject.title}</h3>
                             <p className="text-gray-700 mb-6">
-                                {featuredProject.description.length > 120
-                                    ? `${featuredProject.description.substring(0, 120)}...`
-                                    : featuredProject.description}
+                                {Array.isArray(featuredProject.description) 
+                                    ? 'Zobacz szczegóły projektu' 
+                                    : featuredProject.description?.length > 120
+                                      ? `${featuredProject.description.substring(0, 120)}...`
+                                      : featuredProject.description || 'Zobacz szczegóły projektu'}
                             </p>
 
                             <Link href={`/portfolio/${featuredProject.slug.current}`}>
