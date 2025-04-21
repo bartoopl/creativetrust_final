@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Button from '@/components/Button';
 import PerformanceMarketingForm from '@/components/PerformanceMarketingForm';
+import SigningProcess from "@/components/SigningProcessComponent";
 
 export const metadata: Metadata = {
     title: 'Performance Marketing | Skuteczne kampanie - CreativeTrust',
@@ -258,8 +259,20 @@ export default function PerformanceMarketingPage() {
                                     <h3 className="text-xl font-medium mb-3">{platform.name}</h3>
                                     <p className="text-gray-600 mb-6">{platform.description}</p>
                                 </div>
-                                <div className="text-sm font-medium bg-white bg-opacity-50 p-3 rounded-lg">
-                                    {platform.stats}
+                                <div className="space-y-3">
+                                    <div className="text-sm font-medium bg-white bg-opacity-50 p-3 rounded-lg">
+                                        {platform.stats}
+                                    </div>
+                                    {(platform.name === 'Google Ads') && (
+                                        <Button href="/uslugi/google-ads" className="w-full">
+                                            Dowiedz się więcej
+                                        </Button>
+                                    )}
+                                    {(platform.name === 'Facebook & Instagram') && (
+                                        <Button href="/uslugi/meta-ads" className="w-full">
+                                            Dowiedz się więcej
+                                        </Button>
+                                    )}
                                 </div>
                             </div>
                         ))}
@@ -425,6 +438,7 @@ export default function PerformanceMarketingPage() {
                     </div>
                 </div>
             </section>
+            <SigningProcess />
 
             {/* Kontakt */}
             <section id="kontakt" className="w-full py-16 md:py-32 px-6">

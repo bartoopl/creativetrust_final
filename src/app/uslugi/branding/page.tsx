@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import Button from '@/components/Button';
 import BrandingForm from "@/components/BrandingForm";
+import SigningProcess from "@/components/SigningProcessComponent";
 
 export const metadata: Metadata = {
     title: 'Branding | Tworzenie i rozwój marek - CreativeTrust',
@@ -197,7 +198,7 @@ export default function BrandingPage() {
                     </div>
                 </div>
             </section>
-
+            <SigningProcess />
             {/* Branże */}
             <section className="w-full py-16 md:py-24 px-6">
                 <div className="max-w-[1800px] mx-auto">

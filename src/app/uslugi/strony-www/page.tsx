@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import ServicePortfolio from '@/components/ServicePortfolio';
+import SigningProcess from "@/components/SigningProcessComponent";
 
 export const metadata = {
     title: 'Strony WWW | Twoja Agencja',
@@ -121,7 +122,7 @@ export default function WebsitesServicePage() {
                     </div>
                 </div>
             </section>
-
+            <SigningProcess />
             {/* Sekcja korzyści */}
             <section className="w-full py-16 bg-gray-50 px-6">
                 <div className="max-w-[1800px] mx-auto">
