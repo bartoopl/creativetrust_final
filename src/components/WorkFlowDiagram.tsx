@@ -82,11 +82,11 @@ const WorkflowDiagram = () => {
                         animate={{ scale: 1, rotate: 0 }}
                         transition={{ duration: 0.8, type: "spring" }}
                     >
-                        <div className="bg-white rounded-full p-8 w-48 h-48 flex flex-col items-center justify-center shadow-xl">
-                            <div className="bg-gray-100 rounded-full p-5">
-                                <Rocket className="h-14 w-14 text-black" />
+                        <div className="bg-[#E94D28] rounded-full p-8 w-48 h-48 flex flex-col items-center justify-center shadow-xl">
+                            <div className="bg-white rounded-full p-5">
+                                <Rocket className="h-14 w-14 text-[#E94D28]" />
                             </div>
-                            <p className="text-black text-sm font-medium text-center mt-4">
+                            <p className="text-white text-sm font-medium text-center mt-4">
                                 Start i optymalizacja kampanii
                             </p>
                         </div>

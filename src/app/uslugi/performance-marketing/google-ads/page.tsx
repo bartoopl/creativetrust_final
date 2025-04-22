@@ -9,6 +9,7 @@ import ClientLogos from '@/components/ClientLogos';
 import PerformanceMarketingForm from '@/components/PerformanceMarketingForm';
 import { Rocket, Target, Users, BarChart, Shield } from 'lucide-react';
 import FAQAccordion from '@/components/FAQAccordion';
+import PricingTable from '@/components/PricingTable';
 
 // Animowane ikony korzyści
 const BenefitIcon = ({ children }: { children: React.ReactNode }) => (
@@ -24,7 +25,7 @@ const BenefitIcon = ({ children }: { children: React.ReactNode }) => (
 // Komponent dla sekcji korzyści
 const BenefitCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => (
     <motion.div
-        className="bg-white p-8 rounded-2xl shadow-sm"
+        className="bg-white p-8 rounded-2xl shadow-sm hover:border-t-2 hover:border-[#E94D28] transition-all"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -39,7 +40,7 @@ const BenefitCard = ({ icon, title, description }: { icon: React.ReactNode, titl
 // Komponent dla opinii klienta
 const TestimonialCard = ({ quote, author, company, image }: { quote: string, author: string, company: string, image: string }) => (
     <motion.div
-        className="bg-white p-8 rounded-2xl shadow-sm"
+        className="bg-white p-8 rounded-2xl shadow-sm hover:border-l-2 hover:border-[#E94D28] transition-all"
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
@@ -90,7 +91,7 @@ export default function GoogleAdsPage() {
                             <p className="text-xl text-gray-600 mb-10">
                                 Zwiększ widoczność, zdobądź klientów i generuj leady dzięki skutecznie prowadzonym kampaniom Google Ads – kompleksowo, transparentnie i z nastawieniem na wynik.
                             </p>
-                            <Button href="#kontakt">
+                            <Button href="#kontakt" className="bg-[#E94D28] hover:bg-[#d13d1a] text-white">
                                 Umów bezpłatną konsultację
                             </Button>
                         </motion.div>
@@ -212,6 +213,21 @@ export default function GoogleAdsPage() {
                             <PerformanceMarketingForm />
                         </div>
                     </div>
+                </div>
+            </section>
+
+            {/* Pricing section */}
+            <section className="w-full py-24 px-6 bg-white">
+                <div className="container mx-auto">
+                    <div className="max-w-3xl mx-auto text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-medium text-black mb-6">
+                            Wybierz pakiet dla siebie
+                        </h2>
+                        <p className="text-gray-600 text-lg">
+                            Dostosuj nasze usługi do swoich potrzeb i budżetu
+                        </p>
+                    </div>
+                    <PricingTable />
                 </div>
             </section>
 
