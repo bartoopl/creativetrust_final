@@ -132,7 +132,7 @@ Wiadomość: ${formData.message}`
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all text-black"
                         placeholder="Twoje imię i nazwisko"
                     />
                 </div>
@@ -148,7 +148,7 @@ Wiadomość: ${formData.message}`
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all text-black"
                         placeholder="Twój adres email"
                     />
                 </div>
@@ -163,7 +163,7 @@ Wiadomość: ${formData.message}`
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all text-black"
                         placeholder="Nazwa Twojej firmy"
                     />
                 </div>
@@ -221,7 +221,7 @@ Wiadomość: ${formData.message}`
                         onChange={handleChange}
                         required
                         rows={4}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all text-black"
                         placeholder="Opisz krótko swoje potrzeby"
                     />
                 </div>
