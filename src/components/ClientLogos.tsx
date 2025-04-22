@@ -10,7 +10,11 @@ interface ClientLogo {
     logo: string;
 }
 
-const ClientLogos: React.FC = () => {
+interface ClientLogosProps {
+    className?: string;
+}
+
+const ClientLogos: React.FC<ClientLogosProps> = ({ className = '' }) => {
     // Lista logotypów klientów
     // W prawdziwej implementacji dane mogłyby pochodzić z CMS (np. Sanity)
     const clients: ClientLogo[] = [
@@ -29,7 +33,7 @@ const ClientLogos: React.FC = () => {
                     Współpracowaliśmy między innymi z:
                 </h3>
 
-                <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+                <div className={`flex flex-wrap justify-center items-center gap-8 md:gap-16 ${className}`}>
                     {clients.map((client) => (
                         <motion.div
                             key={client.id}

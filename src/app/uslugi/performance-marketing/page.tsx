@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Button from '@/components/Button';
 import PerformanceMarketingForm from '@/components/PerformanceMarketingForm';
 import SigningProcess from "@/components/SigningProcessComponent";
+import WorkFlowDiagram from "@/components/WorkFlowDiagram";
 
 export const metadata: Metadata = {
     title: 'Performance Marketing | Skuteczne kampanie - CreativeTrust',
@@ -264,7 +265,7 @@ export default function PerformanceMarketingPage() {
                                         {platform.stats}
                                     </div>
                                     {(platform.name === 'Google Ads') && (
-                                        <Button href="/uslugi/google-ads" className="w-full">
+                                        <Button href="/uslugi/performance-marketing/google-ads" className="w-full">
                                             Dowiedz się więcej
                                         </Button>
                                     )}

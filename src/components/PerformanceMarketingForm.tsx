@@ -178,9 +178,9 @@ Wiadomość: ${formData.message}`
                         value={formData.needs}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all text-black"
                     >
-                        <option value="" disabled>Wybierz...</option>
+                        <option value="" disabled className="text-black">Wybierz...</option>
                         <option value="google-ads">Kampanie Google Ads</option>
                         <option value="social-media">Kampanie w mediach społecznościowych</option>
                         <option value="seo">Pozycjonowanie SEO</option>
@@ -199,9 +199,9 @@ Wiadomość: ${formData.message}`
                         name="budget"
                         value={formData.budget}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all text-black"
                     >
-                        <option value="" disabled>Wybierz zakres...</option>
+                        <option value="" disabled className="text-black">Wybierz zakres...</option>
                         <option value="small">1,000 - 5,000 PLN</option>
                         <option value="medium">5,000 - 15,000 PLN</option>
                         <option value="large">15,000 - 50,000 PLN</option>
