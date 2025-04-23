@@ -182,6 +182,7 @@ Wiadomość: ${formData.message}`
                     >
                         <option value="" disabled className="text-black">Wybierz...</option>
                         <option value="google-ads">Kampanie Google Ads</option>
+                        <option value="meta-ads">Kampanie Meta Ads</option>
                         <option value="social-media">Kampanie w mediach społecznościowych</option>
                         <option value="seo">Pozycjonowanie SEO</option>
                         <option value="analytics">Analityka i raportowanie</option>

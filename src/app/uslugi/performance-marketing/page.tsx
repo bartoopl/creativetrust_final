@@ -53,6 +53,11 @@ export default function PerformanceMarketingPage() {
             ),
             color: 'bg-indigo-50',
             stats: '2.8 miliarda aktywnych użytkowników miesięcznie',
+            button: (
+                <Button href="/uslugi/performance-marketing/meta-ads" className="mt-4 bg-[#1877F2] hover:bg-[#166FE5] text-white">
+                    Dowiedz się więcej
+                </Button>
+            ),
         },
         {
             name: 'LinkedIn Ads',
@@ -270,9 +275,7 @@ export default function PerformanceMarketingPage() {
                                         </Button>
                                     )}
                                     {(platform.name === 'Facebook & Instagram') && (
-                                        <Button href="/uslugi/meta-ads" className="w-full">
-                                            Dowiedz się więcej
-                                        </Button>
+                                        platform.button
                                     )}
                                 </div>
                             </div>

@@ -18,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({ href, children, className = '', onClick
                 group relative inline-flex items-center justify-center gap-2 
                 px-6 py-3 rounded-full font-medium
                 transition-all duration-300 ease-in-out
+                bg-black text-white hover:bg-gray-800
                 ${className}
             `}
             onClick={onClick}
