@@ -18,6 +18,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title }) => {
         const audio = audioRef.current;
         if (!audio) return;
 
+        console.log('Audio URL:', audioUrl); // Debug log
+
         const handleLoadedMetadata = () => {
             console.log('Audio metadata loaded:', audio.duration);
             setDuration(audio.duration);
@@ -25,7 +27,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title }) => {
         };
 
         const handleError = (e: Event) => {
-            console.error('Audio error:', e);
+            const audioElement = e.target as HTMLAudioElement;
+            console.error('Audio error:', {
+                error: audioElement.error,
+                networkState: audioElement.networkState,
+                readyState: audioElement.readyState,
+                src: audioElement.src
+            });
             setError('Wystąpił błąd podczas ładowania pliku audio');
         };
 
@@ -38,10 +46,21 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title }) => {
             setCurrentTime(0);
         };
 
+        const handleCanPlay = () => {
+            console.log('Audio can play');
+            setError(null);
+        };
+
+        const handleLoadStart = () => {
+            console.log('Audio load started');
+        };
+
         audio.addEventListener('loadedmetadata', handleLoadedMetadata);
         audio.addEventListener('error', handleError);
         audio.addEventListener('timeupdate', handleTimeUpdate);
         audio.addEventListener('ended', handleEnded);
+        audio.addEventListener('canplay', handleCanPlay);
+        audio.addEventListener('loadstart', handleLoadStart);
 
         // Set the audio source
         audio.src = audioUrl;
@@ -52,6 +71,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title }) => {
             audio.removeEventListener('error', handleError);
             audio.removeEventListener('timeupdate', handleTimeUpdate);
             audio.removeEventListener('ended', handleEnded);
+            audio.removeEventListener('canplay', handleCanPlay);
+            audio.removeEventListener('loadstart', handleLoadStart);
         };
     }, [audioUrl]);
 

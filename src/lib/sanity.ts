@@ -208,7 +208,9 @@ export async function getBlogPost(slug: string) {
       publishedAt,
       estimatedReadingTime,
       featured,
-      audioFile,
+      "audioFile": audioFile {
+        "url": asset->url
+      },
       "author": author->{
         name,
         slug,
