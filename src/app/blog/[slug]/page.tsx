@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 import { getBlogPost } from '@/lib/sanity';
 import { urlFor } from '@/lib/sanity';
 import PortableTextContent from '@/components/PortableTextContent';
+import AudioPlayer from '@/components/AudioPlayer';
 
 // Define the params type as a Promise as required in Next.js v15
 type Params = Promise<{ slug: string }>;
@@ -160,6 +161,14 @@ export default async function BlogPostPage({
                                 className="object-cover"
                             />
                         </div>
+                    )}
+
+                    {/* Audio Player */}
+                    {post.audioFile && (
+                        <AudioPlayer
+                            audioUrl={post.audioFile.asset.url}
+                            title={post.title}
+                        />
                     )}
 
                     {/* Renderowanie treści za pomocą PortableText */}

@@ -167,6 +167,7 @@ export async function getBlogPosts() {
       publishedAt,
       estimatedReadingTime,
       featured,
+      audioFile,
       "authorName": author->name,
       "authorImage": author->image,
       "authorSlug": author->slug,
@@ -207,6 +208,7 @@ export async function getBlogPost(slug: string) {
       publishedAt,
       estimatedReadingTime,
       featured,
+      audioFile,
       "author": author->{
         name,
         slug,

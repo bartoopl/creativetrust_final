@@ -41,6 +41,15 @@ export default {
             },
         },
         {
+            name: 'audioFile',
+            title: 'Audio File',
+            description: 'Upload an audio file for this blog post (optional)',
+            type: 'file',
+            options: {
+                accept: 'audio/*'
+            }
+        },
+        {
             name: 'categories',
             title: 'Categories',
             type: 'array',

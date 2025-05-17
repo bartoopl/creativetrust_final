@@ -14,6 +14,11 @@ interface BlogPost {
     excerpt: string;
     publishedAt: string;
     estimatedReadingTime?: number;
+    audioFile?: {
+        asset: {
+            url: string;
+        };
+    };
     categories: Array<{
         _id: string;
         title: string;
@@ -134,9 +139,9 @@ const LatestBlogPosts: React.FC = () => {
                             custom={index}
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ once: true, margin: "-100px" }}
+                            viewport={{ once: true }}
                             variants={postVariants}
-                            className="flex flex-col h-full group"
+                            className="group"
                         >
                             <div className="aspect-[16/9] relative rounded-xl overflow-hidden mb-6">
                                 {post.mainImage ? (
@@ -149,6 +154,13 @@ const LatestBlogPosts: React.FC = () => {
                                 ) : (
                                     <div className="w-full h-full bg-gray-100 flex items-center justify-center">
                                         <span className="text-gray-400">Brak zdjęcia</span>
+                                    </div>
+                                )}
+                                {post.audioFile && (
+                                    <div className="absolute top-4 right-4 bg-black bg-opacity-75 text-white p-2 rounded-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 012.728-2.728" />
+                                        </svg>
                                     </div>
                                 )}
                             </div>
@@ -165,8 +177,8 @@ const LatestBlogPosts: React.FC = () => {
                                 ))}
                                 {post.categories && post.categories.length > 2 && (
                                     <span className="inline-block px-2 py-1 bg-gray-100 text-xs text-gray-800 rounded-full">
-                    +{post.categories.length - 2}
-                  </span>
+                                        +{post.categories.length - 2}
+                                    </span>
                                 )}
                             </div>
 
