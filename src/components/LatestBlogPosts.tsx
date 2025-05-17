@@ -157,10 +157,11 @@ const LatestBlogPosts: React.FC = () => {
                                     </div>
                                 )}
                                 {post.audioFile && (
-                                    <div className="absolute top-4 right-4 bg-black bg-opacity-75 text-white p-2 rounded-full">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <div className="absolute top-4 right-4 bg-black bg-opacity-75 text-white p-2 rounded-full flex items-center gap-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 012.728-2.728" />
                                         </svg>
+                                        <span className="text-xs">Audio</span>
                                     </div>
                                 )}
                             </div>
