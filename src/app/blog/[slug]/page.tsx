@@ -166,7 +166,7 @@ export default async function BlogPostPage({
                     {/* Audio Player */}
                     {post.audioFile && (
                         <AudioPlayer
-                            audioUrl={post.audioFile.asset.url}
+                            audioUrl={`${post.audioFile.asset.url}?dl=`}
                             title={post.title}
                         />
                     )}
