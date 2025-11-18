@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { HONEYPOT_FIELD_NAME } from '@/lib/antispam';
 
 interface FormData {
     name: string;
@@ -10,6 +11,8 @@ interface FormData {
 }
 
 export default function ContactFormAutomation() {
+    const formStartTime = useRef<number>(Date.now());
+    
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
@@ -21,6 +24,11 @@ export default function ContactFormAutomation() {
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
+    
+    useEffect(() => {
+        // Reset form start time when component mounts
+        formStartTime.current = Date.now();
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -43,7 +51,8 @@ Imię i nazwisko: ${formData.name}
 Email: ${formData.email}
 Firma: ${formData.company}
 Telefon: ${formData.phone}`,
-            type: 'automation'
+            type: 'automation',
+            formTimestamp: formStartTime.current,
         };
 
         try {
@@ -185,6 +194,25 @@ Telefon: ${formData.phone}`,
                                 placeholder="+48 123 456 789"
                             />
                         </div>
+                        
+                        {/* Honeypot field - hidden from users but visible to bots */}
+                        <input
+                            type="text"
+                            name={HONEYPOT_FIELD_NAME}
+                            tabIndex={-1}
+                            autoComplete="off"
+                            style={{
+                                position: 'absolute',
+                                left: '-9999px',
+                                width: '1px',
+                                height: '1px',
+                                overflow: 'hidden',
+                                opacity: 0,
+                                pointerEvents: 'none'
+                            }}
+                            aria-hidden="true"
+                        />
+                        
                         <div className="pt-4">
                             <button
                                 type="submit"

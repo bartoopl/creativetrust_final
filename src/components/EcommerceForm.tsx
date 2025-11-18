@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { HONEYPOT_FIELD_NAME } from '@/lib/antispam';
 
 interface FormData {
     name: string;
@@ -13,6 +14,8 @@ interface FormData {
 }
 
 const EcommerceForm: React.FC = () => {
+    const formStartTime = useRef<number>(Date.now());
+    
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
@@ -26,6 +29,11 @@ const EcommerceForm: React.FC = () => {
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    
+    useEffect(() => {
+        // Reset form start time when component mounts
+        formStartTime.current = Date.now();
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -55,7 +63,8 @@ Firma: ${formData.company || 'Nie podano'}
 Telefon: ${formData.phone || 'Nie podano'}
 Typ projektu: ${formData.projectType}
 Budżet: ${formData.budget || 'Nie podano'}
-Wiadomość: ${formData.message}`
+Wiadomość: ${formData.message}`,
+                    formTimestamp: formStartTime.current,
                 }),
             });
 
@@ -244,6 +253,24 @@ Wiadomość: ${formData.message}`
                         placeholder="Opisz szczegóły swojego projektu e-commerce"
                     />
                 </div>
+                
+                {/* Honeypot field - hidden from users but visible to bots */}
+                <input
+                    type="text"
+                    name={HONEYPOT_FIELD_NAME}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    style={{
+                        position: 'absolute',
+                        left: '-9999px',
+                        width: '1px',
+                        height: '1px',
+                        overflow: 'hidden',
+                        opacity: 0,
+                        pointerEvents: 'none'
+                    }}
+                    aria-hidden="true"
+                />
 
                 <div className="pt-4">
                     <button

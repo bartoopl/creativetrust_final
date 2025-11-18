@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { HONEYPOT_FIELD_NAME } from '@/lib/antispam';
 
 interface FormData {
     name: string;
@@ -10,6 +11,8 @@ interface FormData {
 }
 
 const BrandingForm: React.FC = () => {
+    const formStartTime = useRef<number>(Date.now());
+    
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
@@ -20,6 +23,11 @@ const BrandingForm: React.FC = () => {
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    
+    useEffect(() => {
+        // Reset form start time when component mounts
+        formStartTime.current = Date.now();
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -46,7 +54,8 @@ const BrandingForm: React.FC = () => {
 Imię i nazwisko: ${formData.name}
 Email: ${formData.email}
 ${formData.company ? `Firma: ${formData.company}` : ''}
-Wiadomość: ${formData.message}`
+Wiadomość: ${formData.message}`,
+                    formTimestamp: formStartTime.current,
                 }),
             });
 
@@ -175,6 +184,24 @@ Wiadomość: ${formData.message}`
                         required
                     />
                 </div>
+                
+                {/* Honeypot field - hidden from users but visible to bots */}
+                <input
+                    type="text"
+                    name={HONEYPOT_FIELD_NAME}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    style={{
+                        position: 'absolute',
+                        left: '-9999px',
+                        width: '1px',
+                        height: '1px',
+                        overflow: 'hidden',
+                        opacity: 0,
+                        pointerEvents: 'none'
+                    }}
+                    aria-hidden="true"
+                />
 
                 <div className="pt-4">
                     <button

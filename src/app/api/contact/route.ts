@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/email';
+import { validateAntispam } from '@/lib/antispam';
 
 export async function POST(request: Request) {
     try {
@@ -8,7 +9,17 @@ export async function POST(request: Request) {
 
         // Pobieranie danych z żądania
         const data = await request.json();
-        const { name, email, subject, message, type } = data;
+        const { name, email, subject, message, type, formTimestamp } = data;
+        
+        // Antyspam validation
+        const antispamResult = validateAntispam(request, data, formTimestamp);
+        if (!antispamResult.valid) {
+            console.log('Antyspam validation failed:', antispamResult.error);
+            return NextResponse.json(
+                { success: false, message: antispamResult.error || 'Wystąpił błąd podczas przetwarzania formularza.' },
+                { status: 429 }
+            );
+        }
 
         console.log('Otrzymane dane formularza:', {
             name,
