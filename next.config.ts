@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
     // Pozostałe konfiguracje
     images: {
         remotePatterns: [
@@ -12,6 +13,8 @@ const nextConfig = {
     },
     // Przeniesiono z experimental.transpilePackages do transpilePackages na głównym poziomie
     transpilePackages: ["@sanity"],
+    // Explicitly mark as production build
+    productionBrowserSourceMaps: false,
 }
 
-module.exports = nextConfig
+export default nextConfig;

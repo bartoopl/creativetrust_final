@@ -1,10 +1,11 @@
-import { compare, hash } from 'bcryptjs';
-import { sign, verify } from 'jsonwebtoken';
+import { hash, compare } from '@node-rs/bcrypt';
+import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { client } from './sanity';
 import { getTempAccountByEmail } from './temp-accounts';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this-in-production';
+const JWT_SECRET_KEY = new TextEncoder().encode(JWT_SECRET);
 const COOKIE_NAME = 'client_auth_token';
 
 export interface ClientData {
@@ -27,15 +28,18 @@ export async function createJWT(clientData: ClientData & { temporary?: boolean }
         _id: clientData._id,
         email: clientData.email,
         name: clientData.name,
-    } as any;
-    
-    // Add temporary flag if present
-    if (clientData.temporary) {
-        payload.temporary = true;
-    }
+        temporary: clientData.temporary || undefined,
+    };
     
     console.log('Creating JWT with payload:', payload);
-    return sign(payload, JWT_SECRET, { expiresIn: '7d' });
+    
+    const token = await new SignJWT(payload)
+        .setProtectedHeader({ alg: 'HS256' })
+        .setIssuedAt()
+        .setExpirationTime('7d')
+        .sign(JWT_SECRET_KEY);
+    
+    return token;
 }
 
 export async function setAuthCookie(token: string): Promise<void> {
@@ -123,7 +127,8 @@ export async function verifyAuth(): Promise<{ authenticated: boolean; client?: C
 
     try {
         console.log('Verifying JWT token');
-        const decoded = verify(token, JWT_SECRET) as ClientData & { temporary?: boolean };
+        const { payload } = await jwtVerify(token, JWT_SECRET_KEY);
+        const decoded = payload as unknown as ClientData & { temporary?: boolean };
         console.log('JWT decoded successfully for:', decoded.email);
 
         // First check if the user exists in Sanity by EMAIL (not ID)

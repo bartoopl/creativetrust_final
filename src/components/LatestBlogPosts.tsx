@@ -61,15 +61,10 @@ const LatestBlogPosts: React.FC = () => {
     // Wariant animacji dla elementów postów
     const postVariants = {
         hidden: { opacity: 0, y: 20 },
-        visible: (i: number) => ({
+        visible: {
             opacity: 1,
-            y: 0,
-            transition: {
-                delay: i * 0.1,
-                duration: 0.5,
-                ease: "easeOut"
-            }
-        })
+            y: 0
+        }
     };
 
     if (isLoading) {
@@ -136,11 +131,14 @@ const LatestBlogPosts: React.FC = () => {
                     {posts.map((post, index) => (
                         <motion.div
                             key={post._id}
-                            custom={index}
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
                             variants={postVariants}
+                            transition={{ 
+                                delay: index * 0.1,
+                                duration: 0.5
+                            }}
                             className="group"
                         >
                             <div className="aspect-[16/9] relative rounded-xl overflow-hidden mb-6">
