@@ -1,6 +1,5 @@
 import React from 'react';
 import { Metadata } from 'next';
-import ContactForm from '@/components/ContactForm';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -184,7 +183,13 @@ export default function ContactPage() {
 
                     {/* Prawa kolumna - formularz kontaktowy */}
                     <div className="w-full lg:w-1/2">
-                        <ContactForm />
+                        <div className="bg-white rounded-lg border border-slate-200 p-8">
+                            <iframe
+                                src="https://forms.creativetrust.pl/s/cmksbivfc000cm2014hk4d62s"
+                                className="w-full h-[800px] border-0"
+                                title="Formularz kontaktowy"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
