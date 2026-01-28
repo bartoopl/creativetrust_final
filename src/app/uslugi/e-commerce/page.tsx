@@ -5,10 +5,11 @@ import { Metadata } from 'next';
 import Button from '@/components/Button';
 import ServicePortfolio from '@/components/ServicePortfolio';
 import EcommerceForm from "@/components/EcommerceForm";
+import EcommerceDemoSection from '@/components/ecommerce-demo/EcommerceDemoSection';
 
 export const metadata: Metadata = {
-    title: 'E-commerce | Sklepy WooCommerce - CreativeTrust',
-    description: 'Tworzenie profesjonalnych sklepów internetowych opartych na WooCommerce. Zwiększamy sprzedaż i konwersję Twojego biznesu online.',
+    title: 'E-commerce | Sklepy internetowe - CreativeTrust',
+    description: 'Tworzenie profesjonalnych sklepów internetowych – od headless commerce po gotowe platformy. Zwiększamy sprzedaż i konwersję Twojego biznesu online.',
 };
 
 export default function EcommercePage() {
@@ -83,7 +84,7 @@ export default function EcommercePage() {
         {
             number: '03',
             title: 'Rozwój techniczny',
-            description: 'Budujemy sklep na platformie WooCommerce, implementujemy funkcjonalności i integrujemy z niezbędnymi systemami.',
+            description: 'Budujemy sklep – na wybranej platformie lub w technologii headless (Next.js, React) – implementujemy funkcjonalności i integrujemy z płatnościami, magazynem i CRM.',
         },
         {
             number: '04',
@@ -97,17 +98,17 @@ export default function EcommercePage() {
         },
     ];
 
-    const wooCommerceFeatures = [
-        "Nieograniczona liczba produktów",
-        "Elastyczny system kategorii i atrybutów",
-        "Rozbudowane opcje produktów (warianty, ceny, stany magazynowe)",
-        "Pełna integracja z WordPress",
-        "Wsparcie dla subskrypcji i produktów cyfrowych",
-        "Zaawansowane raportowanie sprzedaży",
-        "System kuponów i promocji",
-        "Zarządzanie klientami i ich danymi",
-        "Integracja z popularnymi bramkami płatności",
-        "Rozbudowane opcje wysyłki i dostawy"
+    const ecommerceCapabilities = [
+        "Nieograniczona liczba produktów i wariantów",
+        "Elastyczny system kategorii, filtrów i wyszukiwania",
+        "Karty produktu, koszyk i checkout dopasowane do Twojej marki",
+        "Integracja z headless CMS (Sanity, Strapi) lub gotowymi platformami",
+        "Subskrypcje, preordery i produkty cyfrowe",
+        "Raporty sprzedaży, konwersji i zachowań użytkowników",
+        "Kupony, promocje i programy lojalnościowe",
+        "Panel klienta, historia zamówień i śledzenie przesyłek",
+        "Bramki płatności (Stripe, PayU, Przelewy24, BLIK, Apple Pay)",
+        "Integracje z magazynem, kurierami i księgowością"
     ];
 
     return (
@@ -118,9 +119,9 @@ export default function EcommercePage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <div>
                             <h6 className="text-gray-500 mb-4 uppercase tracking-wide">E-commerce</h6>
-                            <h1 className="text-4xl md:text-6xl font-medium mb-8">Sklepy WooCommerce, które sprzedają</h1>
+                            <h1 className="text-4xl md:text-6xl font-medium mb-8">Sklepy internetowe, które sprzedają</h1>
                             <p className="text-xl text-gray-600 mb-10">
-                                Tworzymy profesjonalne sklepy internetowe na platformie WooCommerce, które nie tylko świetnie wyglądają, ale przede wszystkim generują sprzedaż i ułatwiają zarządzanie biznesem online.
+                                Projektujemy i budujemy nowoczesne sklepy online – od headless commerce w Next.js po integracje z Shopify, WooCommerce czy własnym backendem. Skupiamy się na konwersji, UX i skalowalności.
                             </p>
                             <Button href="#kontakt">
                                 Stwórzmy Twój sklep
@@ -130,7 +131,7 @@ export default function EcommercePage() {
                             <div className="relative aspect-video w-full overflow-hidden rounded-xl shadow-lg">
                                 <Image
                                     src="/ecommerce-woocommerce.jpg"
-                                    alt="Sklep WooCommerce"
+                                    alt="Sklep internetowy"
                                     fill
                                     className="object-cover"
                                     priority
@@ -144,13 +145,13 @@ export default function EcommercePage() {
                 </div>
             </section>
 
-            {/* WooCommerce sekcja */}
+            {/* Możliwości e-commerce */}
             <section className="w-full py-16 md:py-24 px-6">
                 <div className="max-w-[1800px] mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Dlaczego WooCommerce?</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Co oferują nasze sklepy</h2>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            WooCommerce to najpopularniejsza platforma e-commerce na świecie, napędzająca ponad 28% wszystkich sklepów internetowych. Oferuje elastyczność, skalowalność i pełną kontrolę nad Twoim biznesem online.
+                            Niezależnie od wybranej technologii – headless (Next.js + API), Shopify, WooCommerce czy custom – dostarczamy pełen zestaw funkcji potrzebnych do sprzedaży online i zarządzania biznesem.
                         </p>
                     </div>
 
@@ -158,16 +159,16 @@ export default function EcommercePage() {
                         <div>
                             <Image
                                 src="/woocommerce-dashboard.jpg"
-                                alt="WooCommerce Panel"
+                                alt="Panel sklepu internetowego"
                                 width={600}
                                 height={400}
                                 className="rounded-xl shadow-lg"
                             />
                         </div>
                         <div>
-                            <h3 className="text-2xl font-medium mb-6">Możliwości WooCommerce</h3>
+                            <h3 className="text-2xl font-medium mb-6">Kluczowe możliwości</h3>
                             <ul className="space-y-3">
-                                {wooCommerceFeatures.map((feature, index) => (
+                                {ecommerceCapabilities.map((feature, index) => (
                                     <li key={index} className="flex items-start">
                                         <svg className="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
@@ -182,16 +183,16 @@ export default function EcommercePage() {
                     <div className="bg-gray-50 p-8 rounded-xl">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div className="text-center p-6">
-                                <div className="text-4xl font-bold mb-2">28%</div>
-                                <p className="text-gray-600">wszystkich sklepów na świecie</p>
+                                <div className="text-4xl font-bold mb-2">Next.js</div>
+                                <p className="text-gray-600">headless commerce, szybkość, SEO</p>
                             </div>
                             <div className="text-center p-6">
-                                <div className="text-4xl font-bold mb-2">+8M</div>
-                                <p className="text-gray-600">aktywnych instalacji</p>
+                                <div className="text-4xl font-bold mb-2">Dowolna skala</div>
+                                <p className="text-gray-600">od MVP po enterprise</p>
                             </div>
                             <div className="text-center p-6">
-                                <div className="text-4xl font-bold mb-2">+59K</div>
-                                <p className="text-gray-600">dostępnych wtyczek i rozszerzeń</p>
+                                <div className="text-4xl font-bold mb-2">Integracje</div>
+                                <p className="text-gray-600">płatności, magazyn, CRM, analityka</p>
                             </div>
                         </div>
                     </div>
@@ -204,7 +205,7 @@ export default function EcommercePage() {
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-medium mb-6">Funkcjonalności naszych sklepów</h2>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            Nasze sklepy WooCommerce łączą atrakcyjny design z zaawansowanymi funkcjonalnościami, które zwiększają sprzedaż i ułatwiają zarządzanie.
+                            Łączymy atrakcyjny design z wydajnym kodem i funkcjami, które zwiększają sprzedaż i ułatwiają zarządzanie – niezależnie od wybranej platformy.
                         </p>
                     </div>
 
@@ -220,13 +221,16 @@ export default function EcommercePage() {
                 </div>
             </section>
 
+            {/* Komponenty e-commerce (demo) */}
+            <EcommerceDemoSection />
+
             {/* Proces */}
             <section className="w-full py-16 md:py-24 px-6">
                 <div className="max-w-[1800px] mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Jak tworzymy sklepy WooCommerce</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Jak tworzymy sklepy internetowe</h2>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            Nasz proces rozwoju e-commerce jest zorientowany na rezultaty. Każdy etap jest starannie zaplanowany, aby dostarczyć sklep, który spełnia Twoje cele biznesowe.
+                            Proces jest zorientowany na rezultaty: od strategii i UX po rozwój i wdrożenie. Każdy etap jest zaplanowany tak, aby sklep spełniał Twoje cele biznesowe i był gotowy na rozwój.
                         </p>
                     </div>
 
@@ -254,7 +258,7 @@ export default function EcommercePage() {
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-medium mb-6">Nasze realizacje e-commerce</h2>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            Zobacz, jak pomagamy firmom rozwijać sprzedaż online dzięki profesjonalnym sklepom WooCommerce dopasowanym do ich potrzeb.
+                            Zobacz realizacje sklepów internetowych, które pomagają firmom rozwijać sprzedaż online.
                         </p>
                     </div>
 
@@ -268,7 +272,7 @@ export default function EcommercePage() {
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-medium mb-6">Co mówią nasi klienci</h2>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            Sprawdź opinie klientów, dla których stworzyliśmy sklepy WooCommerce, które generują realne wyniki biznesowe.
+                            Sprawdź opinie klientów, dla których zbudowaliśmy sklepy internetowe generujące realne wyniki sprzedażowe.
                         </p>
                     </div>
 
@@ -290,7 +294,7 @@ export default function EcommercePage() {
                                 </div>
                             </div>
                             <p className="text-gray-600 mb-4">
-                                "Współpraca z CreativeTrust to była jedna z najlepszych decyzji biznesowych. Nasz sklep WooCommerce nie tylko świetnie wygląda, ale przede wszystkim zwiększył naszą sprzedaż o 43% w ciągu pierwszych 3 miesięcy."
+                                "Współpraca z CreativeTrust to była jedna z najlepszych decyzji biznesowych. Nasz sklep nie tylko świetnie wygląda, ale przede wszystkim zwiększył naszą sprzedaż o 43% w ciągu pierwszych 3 miesięcy."
                             </p>
                             <div className="flex text-yellow-400">
                                 <span>★</span>
@@ -318,7 +322,7 @@ export default function EcommercePage() {
                                 </div>
                             </div>
                             <p className="text-gray-600 mb-4">
-                                "Zespół CreativeTrust zrozumiał nasze potrzeby od samego początku. Otrzymaliśmy nie tylko sklep WooCommerce, ale kompleksowe rozwiązanie e-commerce, które zautomatyzowało wiele naszych procesów."
+                                "Zespół CreativeTrust zrozumiał nasze potrzeby od samego początku. Otrzymaliśmy nie tylko sklep, ale kompleksowe rozwiązanie e-commerce, które zautomatyzowało wiele naszych procesów."
                             </p>
                             <div className="flex text-yellow-400">
                                 <span>★</span>
@@ -346,7 +350,7 @@ export default function EcommercePage() {
                                 </div>
                             </div>
                             <p className="text-gray-600 mb-4">
-                                "Doceniamy nie tylko profesjonalizm w tworzeniu naszego sklepu WooCommerce, ale również ciągłe wsparcie po wdrożeniu. Zespół CreativeTrust jest zawsze dostępny, gdy potrzebujemy pomocy lub chcemy wprowadzić nowe funkcjonalności."
+                                "Doceniamy nie tylko profesjonalizm w tworzeniu naszego sklepu, ale również ciągłe wsparcie po wdrożeniu. Zespół CreativeTrust jest zawsze dostępny, gdy potrzebujemy pomocy lub chcemy wprowadzić nowe funkcjonalności."
                             </p>
                             <div className="flex text-yellow-400">
                                 <span>★</span>
@@ -369,7 +373,7 @@ export default function EcommercePage() {
                                     Gotowy na zwiększenie sprzedaży online?
                                 </h2>
                                 <p className="text-xl mb-10">
-                                    Porozmawiajmy o Twoim projekcie e-commerce. Niezależnie od tego, czy zaczynasz od zera, czy chcesz ulepszyć istniejący sklep, mamy rozwiązania WooCommerce dopasowane do Twoich potrzeb.
+                                    Porozmawiajmy o Twoim projekcie e-commerce. Niezależnie od tego, czy zaczynasz od zera, czy chcesz ulepszyć istniejący sklep – dobierzemy technologię i zakres prac do Twoich potrzeb.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4">
                                     <Link
@@ -421,45 +425,45 @@ export default function EcommercePage() {
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-medium mb-6">Najczęściej zadawane pytania</h2>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            Odpowiedzi na najczęściej zadawane pytania dotyczące naszych usług WooCommerce i procesu tworzenia sklepów internetowych.
+                            Odpowiedzi na najczęściej zadawane pytania dotyczące naszych usług e-commerce i procesu tworzenia sklepów internetowych.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="p-8 bg-white rounded-xl shadow-sm">
-                            <h3 className="text-xl font-medium mb-4">Jak długo trwa stworzenie sklepu WooCommerce?</h3>
+                            <h3 className="text-xl font-medium mb-4">Jak długo trwa stworzenie sklepu internetowego?</h3>
                             <p className="text-gray-600">
-                                Czas realizacji zależy od złożoności projektu, ale zwykle trwa od 4 do 8 tygodni. Prosty sklep możemy uruchomić w ciągu miesiąca, podczas gdy bardziej zaawansowane projekty z integracjami i niestandardowymi funkcjami mogą zająć 2 miesiące.
+                                Czas realizacji zależy od złożoności: prosty sklep (np. na Shopify lub Next.js + headless CMS) można uruchomić w 4–8 tygodni; projekty z wieloma integracjami i niestandardowymi funkcjami – 2–4 miesiące. Harmonogram ustalamy na start.
                             </p>
                         </div>
 
                         <div className="p-8 bg-white rounded-xl shadow-sm">
-                            <h3 className="text-xl font-medium mb-4">Ile kosztuje stworzenie sklepu WooCommerce?</h3>
+                            <h3 className="text-xl font-medium mb-4">Ile kosztuje stworzenie sklepu?</h3>
                             <p className="text-gray-600">
-                                Koszt zależy od wielu czynników: zakresu funkcjonalności, integracji z zewnętrznymi systemami oraz indywidualnych wymagań. Oferujemy rozwiązania dopasowane do różnych budżetów - skontaktuj się z nami, aby otrzymać wycenę.
+                                Koszt zależy od technologii (headless, Shopify, WooCommerce, custom), zakresu funkcji i integracji. Oferujemy rozwiązania pod różne budżety – od MVP po enterprise. Skontaktuj się z nami po indywidualną wycenę.
                             </p>
                         </div>
 
                         <div className="p-8 bg-white rounded-xl shadow-sm">
                             <h3 className="text-xl font-medium mb-4">Czy mogę samodzielnie zarządzać sklepem po wdrożeniu?</h3>
                             <p className="text-gray-600">
-                                Tak, wszystkie nasze sklepy WooCommerce są wyposażone w intuicyjny panel administracyjny, który pozwala na samodzielne zarządzanie produktami, zamówieniami, promocjami i treściami. Zapewniamy również szkolenie z obsługi systemu oraz dokumentację.
+                                Tak. Każdy sklep ma panel do zarządzania produktami, zamówieniami, promocjami i treściami. Dostosowujemy go do wybranej platformy i zapewniamy szkolenie oraz dokumentację.
                             </p>
                         </div>
 
                         <div className="p-8 bg-white rounded-xl shadow-sm">
                             <h3 className="text-xl font-medium mb-4">Jakie metody płatności można zintegrować?</h3>
                             <p className="text-gray-600">
-                                Integrujemy wszystkie popularne metody płatności, w tym karty kredytowe, przelewy online, BLIK, płatności mobilne, PayPal, Apple Pay, Google Pay oraz systemy płatności ratalnych. WooCommerce oferuje gotowe integracje z większością polskich bramek płatności.
+                                Integrujemy m.in. Stripe, PayU, Przelewy24, BLIK, PayPal, Apple Pay, Google Pay oraz płatności ratalne. Wybór zależy od platformy i rynku – pomagamy dobrać optymalną konfigurację.
                             </p>
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
                         <div className="p-8 bg-white rounded-xl shadow-sm">
-                            <h3 className="text-xl font-medium mb-4">Czy sklep WooCommerce będzie responsywny?</h3>
+                            <h3 className="text-xl font-medium mb-4">Czy sklep będzie responsywny?</h3>
                             <p className="text-gray-600">
-                                Tak, wszystkie nasze sklepy WooCommerce są w pełni responsywne i dostosowują się do każdego urządzenia - od dużych monitorów po smartfony. Projektujemy z myślą o mobile-first, co przekłada się na lepsze doświadczenie użytkownika i wyższe konwersje.
+                                Tak. Wszystkie nasze sklepy są responsywne i projektowane w podejściu mobile-first, co poprawia doświadczenie użytkownika i konwersje na urządzeniach mobilnych.
                             </p>
                         </div>
 

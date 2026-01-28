@@ -209,8 +209,9 @@ Wiadomość: ${formData.message}`,
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
                     >
                         <option value="" disabled>Wybierz typ projektu...</option>
-                        <option value="woocommerce">Sklep WooCommerce</option>
+                        <option value="headless-next">Sklep headless (Next.js + API)</option>
                         <option value="shopify">Sklep Shopify</option>
+                        <option value="woocommerce">Sklep WooCommerce</option>
                         <option value="prestashop">Sklep PrestaShop</option>
                         <option value="migration">Migracja sklepu</option>
                         <option value="optimization">Optymalizacja istniejącego sklepu</option>
@@ -250,7 +251,7 @@ Wiadomość: ${formData.message}`,
                         required
                         rows={4}
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                        placeholder="Opisz szczegóły swojego projektu e-commerce"
+                        placeholder="Opisz szczegóły projektu sklepu internetowego"
                     />
                 </div>
                 
