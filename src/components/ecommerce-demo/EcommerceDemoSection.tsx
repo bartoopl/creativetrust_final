@@ -11,6 +11,10 @@ const DEMO_PRODUCTS: Product[] = [
     id: "1",
     name: "Kurtka zimowa Classic",
     price: 449,
+    compareAtPrice: 549,
+    badge: "Promocja",
+    rating: 4.6,
+    reviewCount: 18,
     description: "Ciepła kurtka na zimę. Materiał wodoodporny.",
     variants: [{ name: "Rozmiar", value: "S" }, { name: "Rozmiar", value: "M" }, { name: "Rozmiar", value: "L" }],
   },
@@ -18,20 +22,66 @@ const DEMO_PRODUCTS: Product[] = [
     id: "2",
     name: "Plecak miejski",
     price: 189,
+    rating: 4.9,
+    reviewCount: 42,
   },
   {
     id: "3",
     name: "Buty sportowe",
     price: 329,
+    compareAtPrice: 399,
+    badge: "Bestseller",
+    rating: 4.7,
+    reviewCount: 31,
   },
 ];
 
 const FEATURED_PRODUCT: Product = {
   id: "4",
-  name: "Słuchawki bezprzewodowe Pro",
-  price: 599,
-  description: "Słuchawki z redukcją szumów i długa żywotność baterii. Idealne do pracy i podróży.",
-  variants: [{ name: "Kolor", value: "Czarny" }, { name: "Kolor", value: "Biały" }],
+  name: "Minimalistyczna waza ceramiczna",
+  price: 179,
+  compareAtPrice: 229,
+  badge: "Nowość",
+  rating: 4.8,
+  reviewCount: 24,
+  description:
+    "Wprowadź naturę do wnętrza – waza z recyklingowanej ceramiki, wykończona w ekologicznych barwnikach. Elegancki design i trwałość.",
+  variants: [
+    { name: "Kolor", value: "Bordowy", hex: "#722F37" },
+    { name: "Kolor", value: "Beżowy", hex: "#E8DCC4" },
+    { name: "Kolor", value: "Zielony", hex: "#2D5016" },
+    { name: "Kolor", value: "Grafit", hex: "#4A4A4A" },
+  ],
+  deliveryInfo: "Wysyłka w 2 dni robocze",
+  giftWrapAvailable: true,
+  accordion: [
+    {
+      title: "Szczegóły",
+      content:
+        "Wysokość 22 cm, średnica 14 cm. Ceramika wypalana w 1100°C. Odpowiednia do suchych bukietów i pojedynczych gałązek. Ręcznie formowana.",
+    },
+    {
+      title: "Wysyłka",
+      content:
+        "Wysyłamy kurierem w 2 dni robocze. Opakowanie zabezpieczające przed uszkodzeniem. Koszt dostawy od 12,99 zł, przy zamówieniach powyżej 200 zł – gratis.",
+    },
+    {
+      title: "Płatności",
+      content:
+        "Akceptujemy karty, BLIK, przelewy online i płatności ratalne. Bezpieczne płatności przez Przelewy24 i Stripe.",
+    },
+    {
+      title: "Dla planety",
+      content:
+        "Ceramika z odzysku, barwniki na bazie roślin. Neutralny ślad węglowy przy wysyłce (kompensacja). Opakowanie w 100% nadaje się do recyklingu.",
+    },
+  ],
+  valueProps: [
+    { label: "Trwała jakość", icon: "quality" },
+    { label: "Eko-friendly", icon: "eco" },
+    { label: "Rzemiosło", icon: "craft" },
+    { label: "Dla Ciebie", icon: "curated" },
+  ],
 };
 
 function productToCartItem(p: Product, quantity = 1): CartItem {
