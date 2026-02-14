@@ -44,6 +44,8 @@ const PerformanceMarketingForm: React.FC = () => {
         setError(null);
 
         try {
+            const form = e.target as HTMLFormElement;
+            const honeypotValue = (form.elements.namedItem(HONEYPOT_FIELD_NAME) as HTMLInputElement | null)?.value ?? '';
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
@@ -53,6 +55,7 @@ const PerformanceMarketingForm: React.FC = () => {
                     name: formData.name,
                     email: formData.email,
                     company: formData.company,
+                    [HONEYPOT_FIELD_NAME]: honeypotValue,
                     subject: `Performance Marketing - ${formData.needs}`,
                     message: `Zapytanie o Performance Marketing:
 Imię i nazwisko: ${formData.name}

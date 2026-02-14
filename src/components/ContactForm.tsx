@@ -42,6 +42,8 @@ export default function ContactForm() {
         setSuccess(null);
 
         try {
+            const form = e.target as HTMLFormElement;
+            const honeypotValue = (form.elements.namedItem(HONEYPOT_FIELD_NAME) as HTMLInputElement | null)?.value ?? '';
             console.log('Wysyłanie formularza:', formData);
             const response = await fetch('/api/contact', {
                 method: 'POST',
@@ -50,6 +52,7 @@ export default function ContactForm() {
                 },
                 body: JSON.stringify({
                     ...formData,
+                    [HONEYPOT_FIELD_NAME]: honeypotValue,
                     formTimestamp: formStartTime.current,
                 }),
             });

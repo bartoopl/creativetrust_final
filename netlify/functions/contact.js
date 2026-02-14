@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const { validateAntispam } = require('./antispam');
 
 exports.handler = async (event, context) => {
     // Log request info for debugging
@@ -26,6 +27,16 @@ exports.handler = async (event, context) => {
         const { name, email, subject, message, type } = data;
 
         console.log('Dane formularza:', { name, email, subject, messageLength: message?.length, type });
+
+        // Walidacja antyspam (rate limit, honeypot, czas wypełnienia, treść)
+        const antispamResult = validateAntispam(event.headers || {}, data);
+        if (!antispamResult.valid) {
+            return {
+                statusCode: antispamResult.statusCode,
+                headers: { 'Content-Type': 'application/json' },
+                body: antispamResult.body
+            };
+        }
 
         // Podstawowa walidacja
         if (!name || !email || !message) {

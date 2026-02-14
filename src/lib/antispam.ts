@@ -13,7 +13,7 @@ const rateLimitStore = new Map<string, RateLimitEntry>();
 
 // Configuration
 const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes in milliseconds
-const RATE_LIMIT_MAX_REQUESTS = 5; // Max 5 submissions per IP per window
+const RATE_LIMIT_MAX_REQUESTS = 3; // Max 3 submissions per IP per window
 const MIN_FORM_FILL_TIME = 3000; // Minimum 3 seconds to fill the form (in milliseconds)
 const HONEYPOT_FIELD_NAME = 'website'; // Name of the honeypot field
 
@@ -124,7 +124,9 @@ export function validateContent(data: { name?: string; email?: string; message?:
         // Check for disposable email domains (common in spam)
         const disposableDomains = [
             'tempmail.com', 'throwaway.email', '10minutemail.com',
-            'guerrillamail.com', 'mailinator.com', 'trashmail.com'
+            'guerrillamail.com', 'mailinator.com', 'trashmail.com',
+            'yopmail.com', 'fakeinbox.com', 'temp-mail.org', 'getnada.com',
+            'sharklasers.com', 'guerrillamail.org', 'maildrop.cc'
         ];
         const domain = email.split('@')[1]?.toLowerCase();
         if (domain && disposableDomains.some(d => domain.includes(d))) {

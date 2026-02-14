@@ -41,9 +41,12 @@ export default function ContactFormAutomation() {
         setError(null);
         setSuccess(null);
 
+        const form = e.target as HTMLFormElement;
+        const honeypotValue = (form.elements.namedItem(HONEYPOT_FIELD_NAME) as HTMLInputElement | null)?.value ?? '';
         // Przygotuj wiadomość dla API
         const apiMessageData = {
             ...formData,
+            [HONEYPOT_FIELD_NAME]: honeypotValue,
             subject: 'Marketing Automation - Zapytanie',
             message: `Prośba o kontakt w sprawie Marketing Automation.
             
