@@ -128,7 +128,11 @@ Wiadomość: ${formData.message}`,
 
     return (
         <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-            <h3 className="text-2xl font-medium mb-6">Formularz kontaktowy</h3>
+            <h3 className="text-2xl font-medium mb-2">Formularz — e-commerce (Monkydot)</h3>
+            <p className="text-sm text-gray-600 mb-6">
+                Szybkie zapytanie z tej strony. Pełna oferta headless, migracji i B2B:{' '}
+                <a href="https://monkydot.com" className="underline font-medium text-black hover:text-gray-600" target="_blank" rel="noopener noreferrer">monkydot.com</a>
+            </p>
 
             {error && (
                 <div className="bg-red-50 border border-red-200 text-red-800 p-4 rounded-lg mb-6">
@@ -212,12 +216,12 @@ Wiadomość: ${formData.message}`,
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent transition-all"
                     >
                         <option value="" disabled>Wybierz typ projektu...</option>
-                        <option value="headless-next">Sklep headless (Next.js + API)</option>
-                        <option value="shopify">Sklep Shopify</option>
-                        <option value="woocommerce">Sklep WooCommerce</option>
-                        <option value="prestashop">Sklep PrestaShop</option>
-                        <option value="migration">Migracja sklepu</option>
-                        <option value="optimization">Optymalizacja istniejącego sklepu</option>
+                        <option value="headless-greenfield">Nowy sklep headless (Next.js + Medusa / Saleor / inne API)</option>
+                        <option value="shopify-plus-headless">Shopify Plus — storefront headless (Next.js)</option>
+                        <option value="migration-woo-monolith">Migracja z WooCommerce / monolitu do headless</option>
+                        <option value="b2b-marketplace">B2B, marketplace, portale handlowe</option>
+                        <option value="platform-dev">Rozwój i optymalizacja istniejącej platformy</option>
+                        <option value="audit">Audyt architektury / konsultacja (TCO, migracja)</option>
                         <option value="other">Inny typ projektu</option>
                     </select>
                 </div>

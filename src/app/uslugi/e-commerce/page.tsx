@@ -8,24 +8,40 @@ import EcommerceForm from "@/components/EcommerceForm";
 import EcommerceDemoSection from '@/components/ecommerce-demo/EcommerceDemoSection';
 
 export const metadata: Metadata = {
-    title: 'E-commerce | Sklepy internetowe - CreativeTrust',
-    description: 'Tworzenie profesjonalnych sklepów internetowych – od headless commerce po gotowe platformy. Zwiększamy sprzedaż i konwersję Twojego biznesu online.',
+    title: 'E-commerce & headless commerce | CreativeTrust → Monkydot',
+    description:
+        'E-commerce w CreativeTrust realizujemy w Monkydot: headless Next.js, Shopify Plus, Medusa, Saleor, migracje z monolitu, B2B i wysoki ruch. Odejście od nowych projektów na WooCommerce na rzecz architektur headless.',
 };
 
+const MONKYDOT_URL = 'https://monkydot.com';
+
 export default function EcommercePage() {
-    const ecommerceFeatures = [
+    const monkydotPillars = [
         {
-            title: 'Responsywny design',
-            description: 'Sklepy zaprojektowane do idealnego wyświetlania na wszystkich urządzeniach - od komputerów po smartfony.',
-            icon: (
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
-            ),
+            title: 'Headless e-commerce',
+            description:
+                'Storefronty oparte o Next.js (ISR, edge, caching) połączone z silnikami: Shopify Plus, Medusa, Saleor. Architektura pod duży ruch, konwersję i integrację z CMS (np. Sanity), ERP i płatnościami — tak jak w praktyce enterprise.',
+            tagline: 'Shopify Plus · Medusa · Saleor · Next.js',
         },
         {
-            title: 'Szybkość działania',
-            description: 'Optymalizacja wydajności, szybkie ładowanie stron i płynne przejścia dla lepszego doświadczenia użytkownika.',
+            title: 'B2B i marketplace',
+            description:
+                'Portale B2B, hurt, multi-vendor i złożone cenniki — od kont organizacji po workflow zamówień i integracje z magazynem oraz OMS. Dla operacji, gdzie sam „sklep na szablonie” nie wystarcza.',
+            tagline: 'Medusa · Shopify Plus · Next.js · Algolia',
+        },
+        {
+            title: 'Platformy i narzędzia wewnętrzne',
+            description:
+                'Panele back-office, dashboardy i narzędzia operacyjne w Next.js / GraphQL / PostgreSQL, gdy trzeba połączyć fragmentaryczne procesy w jeden spójny interfejs pod Twój P&L.',
+            tagline: 'Next.js · GraphQL · Postgres · Cloud',
+        },
+    ];
+
+    const ecommerceFeatures = [
+        {
+            title: 'Wydajność i skala',
+            description:
+                'Front w Next.js (ISR, cache), edge tam, gdzie ma sens, oraz monitoring — żeby architektura trzymała obciążenie i nie blokowała rozwoju.',
             icon: (
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -33,8 +49,9 @@ export default function EcommercePage() {
             ),
         },
         {
-            title: 'Bezpieczeństwo',
-            description: 'Zaawansowane zabezpieczenia, szyfrowanie SSL i regularne aktualizacje dla ochrony Twoich danych i klientów.',
+            title: 'Bezpieczeństwo i zgodność',
+            description:
+                'Szyfrowanie, bezpieczne sesje, uprawnienia do API oraz praktyki zgodne z wymaganiami płatności i danych osobowych — w headless łatwiej egzekwować politykę bezpieczeństwa.',
             icon: (
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -42,8 +59,9 @@ export default function EcommercePage() {
             ),
         },
         {
-            title: 'Integracje',
-            description: 'Płynna integracja z systemami płatności, dostawcami, CRM, narzędziami analitycznymi i automatyzacją marketingu.',
+            title: 'Integracje oprogramowania',
+            description:
+                'Warstwa danych handlowych połączona z PIM, ERP, OMS, płatnościami (np. Stripe), CDP / automatyzacją — projektowana kontraktami API, nie „klejem w motywie”.',
             icon: (
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
@@ -51,8 +69,9 @@ export default function EcommercePage() {
             ),
         },
         {
-            title: 'SEO-friendly',
-            description: 'Zoptymalizowane pod kątem wyszukiwarek sklepy z czystym kodem, szybkim ładowaniem i strukturą przyjazną dla SEO.',
+            title: 'SEO i doświadczenie w storefront',
+            description:
+                'Semantyka, wydajność Core Web Vitals, struktura URL i treści z CMS (np. Sanity) — w headless pełna kontrola nad frontem, a nie tylko nad motywem.',
             icon: (
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -60,11 +79,22 @@ export default function EcommercePage() {
             ),
         },
         {
-            title: 'Analityka',
-            description: 'Zaawansowane narzędzia analityczne, które pomagają zrozumieć zachowania klientów i podejmować decyzje oparte na danych.',
+            title: 'Dane i analityka',
+            description:
+                'Zdarzenia, lejki, testy A/B, powiązanie z analityką produktową — możliwość mierzenia tego, co wpływa na P&L, a nie tylko na odsłony.',
             icon: (
                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+            ),
+        },
+        {
+            title: 'Kanały i responsywność',
+            description:
+                'Jeden system treści i zamówień, spójny UI na desktop i mobile, gotowy pod dalsze kanały (B2B, partnerzy) bez przebudowy monolitu.',
+            icon: (
+                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
             ),
         },
@@ -73,65 +103,118 @@ export default function EcommercePage() {
     const developmentProcess = [
         {
             number: '01',
-            title: 'Analiza i strategia',
-            description: 'Określamy Twoje cele biznesowe, analizujemy konkurencję i projektujemy strategię e-commerce, która przyniesie realne rezultaty.',
+            title: 'Commerce discovery',
+            description:
+                'Audyt platformy, operacji i ruchu: wąskie gardła, ścieżka migracji z monolitu (np. WooCommerce) lub legacy, docelowa architektura i zakres fazy.',
         },
         {
             number: '02',
-            title: 'UX i projektowanie',
-            description: 'Tworzymy intuicyjne interfejsy użytkownika i ścieżki zakupowe, które maksymalizują konwersję i zadowolenie klientów.',
+            title: 'Warstwa API i kontrakty',
+            description:
+                'Definicja modelu danych handlowych, integracje z CMS, ERP, płatnościami, auth, usługami trzecimi — specyfikacje zanim powstanie pierwszy ekran.',
         },
         {
             number: '03',
-            title: 'Rozwój techniczny',
-            description: 'Budujemy sklep – na wybranej platformie lub w technologii headless (Next.js, React) – implementujemy funkcjonalności i integrujemy z płatnościami, magazynem i CRM.',
+            title: 'Inżynieria platformy',
+            description:
+                'Budowa storefrontu i narzędzi w Next.js, caching (ISR, edge), UI dopasowane do marki, testy i jakość wdrożenia.',
         },
         {
             number: '04',
-            title: 'Testowanie i optymalizacja',
-            description: 'Przeprowadzamy rygorystyczne testy, aby upewnić się, że sklep działa bezbłędnie na wszystkich urządzeniach i przeglądarkach.',
-        },
-        {
-            number: '05',
-            title: 'Wdrożenie i wsparcie',
-            description: 'Uruchamiamy sklep, migrujemy dane i zapewniamy ciągłe wsparcie techniczne oraz rozwój funkcjonalności.',
+            title: 'Launch i eksploatacja',
+            description:
+                'Wdrożenie z CI/CD, monitorowanie, skalowanie. Utrzymanie i rozwój: optymalizacja kosztów, wydajności i długu technicznego — bez lock-inu na „jedną wtyczkę”.',
         },
     ];
 
     const ecommerceCapabilities = [
-        "Nieograniczona liczba produktów i wariantów",
-        "Elastyczny system kategorii, filtrów i wyszukiwania",
-        "Karty produktu, koszyk i checkout dopasowane do Twojej marki",
-        "Integracja z headless CMS (Sanity, Strapi) lub gotowymi platformami",
-        "Subskrypcje, preordery i produkty cyfrowe",
-        "Raporty sprzedaży, konwersji i zachowań użytkowników",
-        "Kupony, promocje i programy lojalnościowe",
-        "Panel klienta, historia zamówień i śledzenie przesyłek",
-        "Bramki płatności (Stripe, PayU, Przelewy24, BLIK, Apple Pay)",
-        "Integracje z magazynem, kurierami i księgowością"
+        'Odrębny front (Next.js) i silnik e-commerce (API) — szybkość, niezależne wdrożenia, mniej ryzyka przy zmianach',
+        'Sklepy pod duży ruch: cache, plan skalowania, integracje z płatnościami i magazynem',
+        'Headless CMS (np. Sanity, Contentful) do treści i merchandisingu spójnego z katalogiem',
+        'B2B: konta, cenniki, workflow zamówień, powiązania z ERP / OMS',
+        'Checkout i koszyk dopasowane do marki — pełna kontrola nad UX',
+        'Migracje z monolitu (w tym WooCommerce) w kierunku headless, z mniejszą utratą danych i SEO',
+        'Observability: logi, metryki, alerty — mniej „cichych” awarii w szczycie',
+        'Kody rabatowe, programy lojalnościowe, subskrypcje — w zależności od silnika (Shopify, Medusa, itd.)',
+        'Dane klienta i zgody pod automatyzację marketingu (np. SALESmanago) tam, gdzie to część strategii',
+        'Strategia TCO: model kosztów platformy jasny z góry, bez nieograniczonego roszenia wtyczek',
     ];
 
     return (
         <main className="min-h-screen">
+            {/* Monkydot — informacja o marce w ramach CreativeTrust */}
+            <div className="w-full border-b border-gray-200 bg-white px-6 py-5">
+                <div className="max-w-[1800px] mx-auto space-y-2">
+                    <p className="text-base md:text-lg text-gray-800 leading-relaxed">
+                        <span className="font-medium">E-commerce w CreativeTrust</span> rozwijamy w ramach{' '}
+                        <span className="font-semibold">Monkydot</span> — pracowni platform handlowych (headless, duży ruch, integracje z ERP/OMS).
+                        Oferta, case studies i dedykowany kontakt:{' '}
+                        <a
+                            href={MONKYDOT_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium text-black underline underline-offset-2 hover:text-gray-600"
+                        >
+                            monkydot.com
+                        </a>
+                        .
+                    </p>
+                    <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+                        <span className="font-medium text-gray-800">Kierunek technologiczny:</span> nowe projekty e-commerce u nas budujemy przede wszystkim w architekturach{' '}
+                        <span className="whitespace-nowrap">headless (Next.js + API)</span> — np. Medusa, Saleor, Shopify Plus jako silnik, zamiast rozwijania sklepów opartych o motywy WooCommerce, które w dużej skali często rosną w dług techniczny.
+                    </p>
+                </div>
+            </div>
+
             {/* Hero sekcja */}
             <section className="w-full py-24 md:py-32 px-6 bg-gradient-to-br from-gray-50 to-gray-100">
                 <div className="max-w-[1800px] mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <div>
-                            <h6 className="text-gray-500 mb-4 uppercase tracking-wide">E-commerce</h6>
-                            <h1 className="text-4xl md:text-6xl font-medium mb-8">Sklepy internetowe, które sprzedają</h1>
-                            <p className="text-xl text-gray-600 mb-10">
-                                Projektujemy i budujemy nowoczesne sklepy online – od headless commerce w Next.js po integracje z Shopify, WooCommerce czy własnym backendem. Skupiamy się na konwersji, UX i skalowalności.
+                            <h6 className="text-gray-500 mb-4 uppercase tracking-wide">Monkydot × CreativeTrust</h6>
+                            <h1 className="text-4xl md:text-6xl font-medium mb-8">Headless commerce pod Twój ruch i integracje</h1>
+                            <p className="text-xl text-gray-600 mb-6">
+                        Monkydot to zespół, który projektuje i dowozi platformy e-commerce w Next.js z silnikami typu{' '}
+                        <span className="whitespace-nowrap">Shopify Plus, Medusa, Saleor</span> — z naciskiem na wydajność przy szczytach, kontrakty API i realną pracę z legacy (migracje z monolitu, m.in. z WooCommerce), a nie tylko „ładny szablon”.
                             </p>
-                            <Button href="#kontakt">
-                                Stwórzmy Twój sklep
-                            </Button>
+                            <p className="text-base text-gray-600 mb-10 border-l-4 border-black pl-4">
+                                Pełen opis oferty, metodyki delivery (m.in. fazy discovery → API → engineering → launch) i ekosystem współpracy zobaczysz na stronie Monkydot — poniżej skrót zakresu.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+                                <a
+                                    href={MONKYDOT_URL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ease-in-out bg-black text-white hover:bg-gray-800"
+                                >
+                                    <span>Przejdź do Monkydot</span>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        className="transform transition-transform duration-300 group-hover:rotate-45"
+                                        aria-hidden
+                                    >
+                                        <line x1="7" y1="17" x2="17" y2="7" />
+                                        <polyline points="7 7 17 7 17 17" />
+                                    </svg>
+                                </a>
+                                <Button href="#kontakt" className="!bg-white !text-black border border-gray-300 hover:!bg-gray-100">
+                                    Formularz na tej stronie
+                                </Button>
+                            </div>
                         </div>
                         <div className="relative">
                             <div className="relative aspect-video w-full overflow-hidden rounded-xl shadow-lg">
                                 <Image
                                     src="/ecommerce-woocommerce.jpg"
-                                    alt="Sklep internetowy"
+                                    alt="Wizualizacja sklepu online — artykuł poglądowy"
                                     fill
                                     className="object-cover"
                                     priority
@@ -145,13 +228,41 @@ export default function EcommercePage() {
                 </div>
             </section>
 
+            {/* Zakres Monkydot — zgodnie z monkydot.com */}
+            <section className="w-full py-16 md:py-24 px-6 bg-white border-t border-gray-100">
+                <div className="max-w-[1800px] mx-auto">
+                    <div className="text-center mb-14 max-w-3xl mx-auto">
+                        <h2 className="text-3xl md:text-4xl font-medium mb-4">Zakres Monkydot</h2>
+                        <p className="text-lg text-gray-600">
+                            Trzy filary, wokół których pracujemy — od storefrontu headless po złożony B2B i narzędzia operacyjne. Szczegóły, case studies i stack:{' '}
+                            <a href={MONKYDOT_URL} target="_blank" rel="noopener noreferrer" className="font-medium text-black underline underline-offset-2 hover:text-gray-600">
+                                monkydot.com
+                            </a>
+                            .
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {monkydotPillars.map((pillar) => (
+                            <div
+                                key={pillar.title}
+                                className="p-8 rounded-xl border border-gray-200 bg-gray-50/50 hover:shadow-md transition-shadow"
+                            >
+                                <h3 className="text-xl font-medium mb-3">{pillar.title}</h3>
+                                <p className="text-gray-600 mb-4 leading-relaxed">{pillar.description}</p>
+                                <p className="text-xs uppercase tracking-wide text-gray-500 font-medium">{pillar.tagline}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* Możliwości e-commerce */}
             <section className="w-full py-16 md:py-24 px-6">
                 <div className="max-w-[1800px] mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Co oferują nasze sklepy</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Co daje architektura headless u nas</h2>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            Niezależnie od wybranej technologii – headless (Next.js + API), Shopify, WooCommerce czy custom – dostarczamy pełen zestaw funkcji potrzebnych do sprzedaży online i zarządzania biznesem.
+                            Zestaw możliwości, który w praktyce odróżnia stack oparty o Next.js i API od rozbudowy sklepu wyłącznie w ekosystemie motywów i wtyczek — szczególnie gdy rośnie ruch, liczba integracji albo zespół produktowy.
                         </p>
                     </div>
 
@@ -159,14 +270,14 @@ export default function EcommercePage() {
                         <div>
                             <Image
                                 src="/woocommerce-dashboard.jpg"
-                                alt="Panel sklepu internetowego"
+                                alt="Panel operacyjny e-commerce — ilustracja"
                                 width={600}
                                 height={400}
                                 className="rounded-xl shadow-lg"
                             />
                         </div>
                         <div>
-                            <h3 className="text-2xl font-medium mb-6">Kluczowe możliwości</h3>
+                            <h3 className="text-2xl font-medium mb-6">Kluczowe elementy</h3>
                             <ul className="space-y-3">
                                 {ecommerceCapabilities.map((feature, index) => (
                                     <li key={index} className="flex items-start">
@@ -183,16 +294,16 @@ export default function EcommercePage() {
                     <div className="bg-gray-50 p-8 rounded-xl">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div className="text-center p-6">
-                                <div className="text-4xl font-bold mb-2">Next.js</div>
-                                <p className="text-gray-600">headless commerce, szybkość, SEO</p>
+                                <div className="text-2xl md:text-3xl font-bold mb-2">Next.js</div>
+                                <p className="text-gray-600">storefront, ISR, edge — pełna kontrola nad UX i wydajnością</p>
                             </div>
                             <div className="text-center p-6">
-                                <div className="text-4xl font-bold mb-2">Dowolna skala</div>
-                                <p className="text-gray-600">od MVP po enterprise</p>
+                                <div className="text-2xl md:text-3xl font-bold mb-2">Silniki API</div>
+                                <p className="text-gray-600">Medusa, Saleor, Shopify Plus — dobór pod skalę i model B2C/B2B</p>
                             </div>
                             <div className="text-center p-6">
-                                <div className="text-4xl font-bold mb-2">Integracje</div>
-                                <p className="text-gray-600">płatności, magazyn, CRM, analityka</p>
+                                <div className="text-2xl md:text-3xl font-bold mb-2">Integracje</div>
+                                <p className="text-gray-600">ERP, OMS, PIM, płatności, CDP — kontraktami, nie „na oko”</p>
                             </div>
                         </div>
                     </div>
@@ -203,9 +314,9 @@ export default function EcommercePage() {
             <section className="w-full py-16 md:py-24 px-6 bg-gray-50">
                 <div className="max-w-[1800px] mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Funkcjonalności naszych sklepów</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Warstwa produktowa i techniczna</h2>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            Łączymy atrakcyjny design z wydajnym kodem i funkcjami, które zwiększają sprzedaż i ułatwiają zarządzanie – niezależnie od wybranej platformy.
+                            To, co musi być spójne w headless: wydajność, bezpieczeństwo, integracje i mierzalność — żeby platforma dała się rozwijać latami, a nie tylko „uruchomić i utknąć w wtyczkach”.
                         </p>
                     </div>
 
@@ -228,9 +339,9 @@ export default function EcommercePage() {
             <section className="w-full py-16 md:py-24 px-6">
                 <div className="max-w-[1800px] mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Jak tworzymy sklepy internetowe</h2>
+                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Od discovery do eksploatacji</h2>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            Proces jest zorientowany na rezultaty: od strategii i UX po rozwój i wdrożenie. Każdy etap jest zaplanowany tak, aby sklep spełniał Twoje cele biznesowe i był gotowy na rozwój.
+                            Proces zbliżony do tego, który Monkydot stosuje przy platformach pod duży ruch: najpierw rozumiemy operacje i ruch, potem projektujemy warstwę danych i API, dopiero na końcu budujemy front i utrzymanie.
                         </p>
                     </div>
 
@@ -258,7 +369,7 @@ export default function EcommercePage() {
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-medium mb-6">Nasze realizacje e-commerce</h2>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            Zobacz realizacje sklepów internetowych, które pomagają firmom rozwijać sprzedaż online.
+                            Wybrane case’y portfolio CreativeTrust — szerszy katalog projektów platformowych i migracji znajdziesz na Monkydot.
                         </p>
                     </div>
 
@@ -372,18 +483,32 @@ export default function EcommercePage() {
                                 <h2 className="text-3xl md:text-5xl font-medium mb-8">
                                     Gotowy na zwiększenie sprzedaży online?
                                 </h2>
-                                <p className="text-xl mb-10">
-                                    Porozmawiajmy o Twoim projekcie e-commerce. Niezależnie od tego, czy zaczynasz od zera, czy chcesz ulepszyć istniejący sklep – dobierzemy technologię i zakres prac do Twoich potrzeb.
+                                <p className="text-xl mb-6">
+                                    Nowe wdrożenia i duże migracje (w tym z WooCommerce do headless) prowadzimy stroną Monkydot. Poniżej możesz zostawić szybkie zapytanie — albo od razu przejdź na monkydot.com po pełny opis oferty i kalendarz rozmów.
+                                </p>
+                                <p className="text-base text-gray-300 mb-10 border-l-2 border-white/40 pl-4">
+                                    Pełna oferta sklepów headless, B2B i konsultacji architektury jest na{' '}
+                                    <a
+                                        href={MONKYDOT_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-white font-medium underline underline-offset-2 hover:text-gray-200"
+                                    >
+                                        monkydot.com
+                                    </a>
+                                    — Monkydot jest częścią CreativeTrust, więc pracujesz z tym samym zespołem i standardem jakości.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4">
-                                    <Link
-                                        href="/kontakt"
+                                    <a
+                                        href={MONKYDOT_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="group relative inline-flex items-center justify-center gap-2
                 bg-white text-black px-8 py-4 rounded-full font-medium
                 transition-all duration-300 ease-in-out
-                hover:bg-transparent hover:text-white hover:border hover:border-white"
+                hover:bg-transparent hover:text-white border border-white"
                                     >
-                                        <span>Umów bezpłatną konsultację</span>
+                                        <span>Monkydot — oferta e-commerce</span>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -395,10 +520,20 @@ export default function EcommercePage() {
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             className="transform transition-transform duration-300 group-hover:rotate-45"
+                                            aria-hidden
                                         >
                                             <line x1="7" y1="17" x2="17" y2="7"></line>
                                             <polyline points="7 7 17 7 17 17"></polyline>
                                         </svg>
+                                    </a>
+                                    <Link
+                                        href="/kontakt"
+                                        className="group relative inline-flex items-center justify-center gap-2
+                border border-gray-300 text-gray-300 px-8 py-4 rounded-full font-medium
+                transition-all duration-300 ease-in-out
+                hover:bg-white hover:text-black"
+                                    >
+                                        <span>Kontakt CreativeTrust</span>
                                     </Link>
                                     <Link
                                         href="tel:+48570526421"
@@ -431,16 +566,25 @@ export default function EcommercePage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="p-8 bg-white rounded-xl shadow-sm">
-                            <h3 className="text-xl font-medium mb-4">Jak długo trwa stworzenie sklepu internetowego?</h3>
+                            <h3 className="text-xl font-medium mb-4">Czy nadal budujecie sklepy na WooCommerce?</h3>
                             <p className="text-gray-600">
-                                Czas realizacji zależy od złożoności: prosty sklep (np. na Shopify lub Next.js + headless CMS) można uruchomić w 4–8 tygodni; projekty z wieloma integracjami i niestandardowymi funkcjami – 2–4 miesiące. Harmonogram ustalamy na start.
+                                <span className="font-medium">Nowe projekty</span> — stawiamy na headless (Next.js + silnik API: Medusa, Saleor, Shopify Plus itd.), bo lepiej skalują się i unikają długu wynikającego z rosnącej liczby wtyczek. Istniejące sklepy WooCommerce często{' '}
+                                <span className="font-medium">migrujemy warstwowo</span> do architektury headless; utrzymanie typowego „mallu wtyczkowego” nie jest już naszym głównym kierunkiem rozwoju produktowego.
                             </p>
                         </div>
 
                         <div className="p-8 bg-white rounded-xl shadow-sm">
-                            <h3 className="text-xl font-medium mb-4">Ile kosztuje stworzenie sklepu?</h3>
+                            <h3 className="text-xl font-medium mb-4">Jak długo trwa projekt headless lub migracja?</h3>
                             <p className="text-gray-600">
-                                Koszt zależy od technologii (headless, Shopify, WooCommerce, custom), zakresu funkcji i integracji. Oferujemy rozwiązania pod różne budżety – od MVP po enterprise. Skontaktuj się z nami po indywidualną wycenę.
+                                Zależy od zakresu: pierwsze widoczne efekty (np. wybrany flow, migracja katalogu) bywają po kilku tygodniach; pełne platformy z wieloma integracjami — rzędu kilku miesięcy. Monkydot pracuje fazami (discovery → API → engineering → launch), z jasnym harmonogramem.
+                            </p>
+                        </div>
+
+                        <div className="p-8 bg-white rounded-xl shadow-sm">
+                            <h3 className="text-xl font-medium mb-4">Ile kosztuje platforma headless?</h3>
+                            <p className="text-gray-600">
+                                Zależy od silnika (Shopify Plus, open source, hosting), integracji (ERP, płatności) i zespołu. Wycena jest łatwiejsza po krótkim discovery i oszacowaniu TCO w porównaniu do monolitu — zaproponuj rozmowę na{' '}
+                                <a href={MONKYDOT_URL} className="font-medium text-black underline underline-offset-2" target="_blank" rel="noopener noreferrer">monkydot.com</a>.
                             </p>
                         </div>
 
