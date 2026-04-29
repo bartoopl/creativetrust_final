@@ -24,6 +24,7 @@ const ClientLogos: React.FC<ClientLogosProps> = ({ className = '' }) => {
         { id: 4, name: 'EB-GABINET', logo: '/logos/client4.svg' },
         { id: 5, name: 'Dr Pazera', logo: '/logos/client5.png' },
         { id: 6, name: 'Kapica Pasterski Partnerzy', logo: '/logos/client6.png' },
+        { id: 7, name: 'Quiosque', logo: '/logos/QuiosqueLogo.png' },
     ];
 
     return (
