@@ -15,10 +15,13 @@ CreativeTrust is a Polish B2B digital marketing agency based in Gorzów Wielkopo
 ## Services
 
 - Website design and development: https://www.creativetrust.pl/uslugi/strony-www
+- Website pricing guide: https://www.creativetrust.pl/uslugi/tworzenie-stron-www-cennik
 - Performance marketing: https://www.creativetrust.pl/uslugi/performance-marketing
+- Google Ads audit: https://www.creativetrust.pl/uslugi/audyt-google-ads
 - Google Ads: https://www.creativetrust.pl/uslugi/performance-marketing/google-ads
 - Meta Ads: https://www.creativetrust.pl/uslugi/performance-marketing/meta-ads
 - E-commerce and headless commerce: https://www.creativetrust.pl/uslugi/e-commerce
+- WooCommerce to headless migration: https://www.creativetrust.pl/uslugi/migracja-woocommerce-do-headless
 - Branding and visual identity: https://www.creativetrust.pl/uslugi/branding
 - Marketing automation and SALESmanago: https://www.creativetrust.pl/uslugi/marketing-automation
 

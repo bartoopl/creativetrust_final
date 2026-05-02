@@ -94,8 +94,14 @@ const Footer: React.FC = () => {
                             <Link href="/uslugi/strony-www" className="text-white hover:text-gray-300">
                                 Strony WWW
                             </Link>
+                            <Link href="/uslugi/tworzenie-stron-www-cennik" className="text-white hover:text-gray-300">
+                                Cennik stron WWW
+                            </Link>
                             <Link href="/uslugi/performance-marketing" className="text-white hover:text-gray-300">
                                 Performance Marketing
+                            </Link>
+                            <Link href="/uslugi/audyt-google-ads" className="text-white hover:text-gray-300">
+                                Audyt Google Ads
                             </Link>
                             <Link href="/uslugi/performance-marketing/google-ads" className="text-white hover:text-gray-300">
                                 Google Ads
@@ -105,6 +111,9 @@ const Footer: React.FC = () => {
                             </Link>
                             <Link href="/uslugi/e-commerce" className="text-white hover:text-gray-300">
                                 E-commerce
+                            </Link>
+                            <Link href="/uslugi/migracja-woocommerce-do-headless" className="text-white hover:text-gray-300">
+                                Migracja WooCommerce
                             </Link>
                             <Link href="/uslugi/branding" className="text-white hover:text-gray-300">
                                 Branding

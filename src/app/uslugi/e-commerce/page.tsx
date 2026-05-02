@@ -225,6 +225,12 @@ export default function EcommercePage() {
                                 <Button href="#kontakt" className="!bg-white !text-black border border-gray-300 hover:!bg-gray-100">
                                     Formularz na tej stronie
                                 </Button>
+                                <Link
+                                    href="/uslugi/migracja-woocommerce-do-headless"
+                                    className="inline-flex items-center justify-center rounded-full border border-gray-300 px-6 py-3 font-medium text-black hover:bg-black hover:text-white transition-colors"
+                                >
+                                    Migracja WooCommerce
+                                </Link>
                             </div>
                         </div>
                         <div className="relative">

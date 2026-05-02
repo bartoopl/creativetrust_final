@@ -94,6 +94,9 @@ export default function GoogleAdsPage() {
                             <Button href="#kontakt" className="bg-[#E94D28] hover:bg-[#d13d1a] text-white">
                                 Umów bezpłatną konsultację
                             </Button>
+                            <Button href="/uslugi/audyt-google-ads" className="ml-0 mt-4 sm:ml-4 sm:mt-0 bg-black hover:bg-gray-800 text-white">
+                                Audyt Google Ads
+                            </Button>
                         </motion.div>
                         <motion.div
                             className="relative h-[500px]"

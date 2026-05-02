@@ -232,11 +232,25 @@ export default function Header() {
                                             Strony WWW
                                         </Link>
                                         <Link
+                                            href="/uslugi/tworzenie-stron-www-cennik"
+                                            className="text-lg text-gray-700 block"
+                                            onClick={closeMobileMenu}
+                                        >
+                                            Cennik stron WWW
+                                        </Link>
+                                        <Link
                                             href="/uslugi/e-commerce"
                                             className="text-lg text-gray-700 block"
                                             onClick={closeMobileMenu}
                                         >
                                             E-commerce
+                                        </Link>
+                                        <Link
+                                            href="/uslugi/migracja-woocommerce-do-headless"
+                                            className="text-lg text-gray-700 block"
+                                            onClick={closeMobileMenu}
+                                        >
+                                            Migracja WooCommerce
                                         </Link>
                                         <Link
                                             href="/uslugi/branding"
@@ -258,6 +272,13 @@ export default function Header() {
                                             onClick={closeMobileMenu}
                                         >
                                             Performance Marketing
+                                        </Link>
+                                        <Link
+                                            href="/uslugi/audyt-google-ads"
+                                            className="text-lg text-gray-700 block"
+                                            onClick={closeMobileMenu}
+                                        >
+                                            Audyt Google Ads
                                         </Link>
                                     </div>
                                 </div>

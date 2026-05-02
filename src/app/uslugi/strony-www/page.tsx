@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import ServicePortfolio from '@/components/ServicePortfolio';
 import SigningProcess from "@/components/SigningProcessComponent";
@@ -55,6 +56,12 @@ export default function WebsitesServicePage() {
                                     <span className="text-sm text-gray-500">poziom satysfakcji</span>
                                 </div>
                             </div>
+                            <Link
+                                href="/uslugi/tworzenie-stron-www-cennik"
+                                className="inline-flex items-center justify-center rounded-full border border-gray-300 px-6 py-3 font-medium text-black hover:bg-black hover:text-white transition-colors"
+                            >
+                                Sprawdź orientacyjny cennik stron WWW
+                            </Link>
                         </div>
                         <div className="w-full md:w-1/2 relative aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
                             <Image

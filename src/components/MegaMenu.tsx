@@ -204,6 +204,24 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                                         </Link>
 
                                         <Link
+                                            href="/uslugi/audyt-google-ads"
+                                            className="block p-4 rounded-lg hover:bg-gray-50 transition-colors"
+                                            onClick={onClose}
+                                        >
+                                            <h4 className="text-lg font-medium mb-1">Audyt Google Ads</h4>
+                                            <p className="text-gray-600 text-sm">Sprawdź, gdzie kampanie tracą budżet</p>
+                                        </Link>
+
+                                        <Link
+                                            href="/uslugi/tworzenie-stron-www-cennik"
+                                            className="block p-4 rounded-lg hover:bg-gray-50 transition-colors"
+                                            onClick={onClose}
+                                        >
+                                            <h4 className="text-lg font-medium mb-1">Cennik stron WWW</h4>
+                                            <p className="text-gray-600 text-sm">Zobacz orientacyjne zakresy projektów</p>
+                                        </Link>
+
+                                        <Link
                                             href="/blog"
                                             className="block p-4 rounded-lg hover:bg-gray-50 transition-colors"
                                             onClick={onClose}

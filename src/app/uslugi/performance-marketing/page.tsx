@@ -218,10 +218,17 @@ export default function PerformanceMarketingPage() {
                             <p className="text-xl text-gray-300 mb-10">
                                 Tworzymy i optymalizujemy kampanie marketingowe, które przynoszą mierzalne efekty biznesowe: zwiększają sprzedaż, pozyskują leady i maksymalizują ROI.
                             </p>
-                            {/* Poprawiony przycisk z czarnym tekstem */}
-                            <Button href="#kontakt" className="bg-white !text-black hover:bg-transparent hover:!text-white hover:border-white">
-                                Zwiększ swoje wyniki
-                            </Button>
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                <Button href="#kontakt" className="bg-white !text-black hover:bg-transparent hover:!text-white hover:border-white">
+                                    Zwiększ swoje wyniki
+                                </Button>
+                                <Link
+                                    href="/uslugi/audyt-google-ads"
+                                    className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 font-medium text-white hover:bg-white hover:text-black transition-colors"
+                                >
+                                    Audyt Google Ads
+                                </Link>
+                            </div>
                         </div>
                         <div className="relative">
                             <div className="relative aspect-square w-full rounded-xl overflow-hidden shadow-2xl">
