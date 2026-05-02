@@ -6,11 +6,28 @@ import Button from '@/components/Button';
 import ServicePortfolio from '@/components/ServicePortfolio';
 import EcommerceForm from "@/components/EcommerceForm";
 import EcommerceDemoSection from '@/components/ecommerce-demo/EcommerceDemoSection';
+import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'E-commerce & headless commerce | CreativeTrust → Monkydot',
     description:
         'E-commerce w CreativeTrust realizujemy w Monkydot: headless Next.js, Shopify Plus, Medusa, Saleor, migracje z monolitu, B2B i wysoki ruch. Odejście od nowych projektów na WooCommerce na rzecz architektur headless.',
+    alternates: {
+        canonical: `${SITE_URL}/uslugi/e-commerce`,
+    },
+    openGraph: {
+        title: 'E-commerce & headless commerce | CreativeTrust',
+        description: 'Headless e-commerce, Shopify Plus, Medusa, Saleor, B2B i migracje sklepów w partnerstwie z Monkydot.',
+        url: `${SITE_URL}/uslugi/e-commerce`,
+        siteName: 'CreativeTrust',
+        locale: 'pl_PL',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'E-commerce & headless commerce | CreativeTrust',
+        description: 'Headless e-commerce, Shopify Plus, Medusa, Saleor, B2B i migracje sklepów w partnerstwie z Monkydot.',
+    },
 };
 
 const MONKYDOT_URL = 'https://monkydot.com';

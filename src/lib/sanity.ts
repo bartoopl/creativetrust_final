@@ -133,6 +133,7 @@ export async function getKnowledgeBaseEntry(slug: string) {
       shortDescription,
       content,
       publishedAt,
+      _updatedAt,
       tags,
       seoTitle,
       seoDescription
@@ -206,6 +207,7 @@ export async function getBlogPost(slug: string) {
       mainImage,
       content,
       publishedAt,
+      _updatedAt,
       estimatedReadingTime,
       featured,
       "audioFile": audioFile {

@@ -138,6 +138,9 @@ export default function Header() {
                         <Link href="/blog" className="text-gray-900 hover:text-gray-500 transition-colors duration-300 px-1 py-2 text-sm font-medium">
                             Blog
                         </Link>
+                        <Link href="/baza-wiedzy" className="text-gray-900 hover:text-gray-500 transition-colors duration-300 px-1 py-2 text-sm font-medium">
+                            Baza wiedzy
+                        </Link>
                     </nav>
 
                     {/* Button kontaktowy (prawa strona) - widoczny tylko na desktopie */}
@@ -279,6 +282,13 @@ export default function Header() {
                                     onClick={closeMobileMenu}
                                 >
                                     Blog
+                                </Link>
+                                <Link
+                                    href="/baza-wiedzy"
+                                    className="text-xl font-medium text-gray-900 border-b border-gray-100 pb-4"
+                                    onClick={closeMobileMenu}
+                                >
+                                    Baza wiedzy
                                 </Link>
                             </nav>
 

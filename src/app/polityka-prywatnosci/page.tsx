@@ -1,10 +1,14 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'Polityka Prywatności - CreativeTrust',
     description: 'Polityka prywatności opisuje zasady przetwarzania przez nas informacji na Twój temat, w tym danych osobowych oraz ciasteczek, czyli tzw. cookies.',
+    alternates: {
+        canonical: `${SITE_URL}/polityka-prywatnosci`,
+    },
 };
 
 export default function PrivacyPolicyPage() {

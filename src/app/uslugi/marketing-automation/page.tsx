@@ -5,10 +5,27 @@ import Image from 'next/image';
 import Button from '@/components/Button';
 import AutomationChart from '@/components/AutomationChart';
 import ContactFormAutomation from '@/components/ContactFormAutomation';
+import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Marketing Automation | Creativetrust - Partner Sales Manago',
-    description: 'Zwiększ skuteczność swoich działań marketingowych dzięki kompleksowym rozwiązaniom marketing automation. Jako oficjalny partner Sales Manago dostarczamy narzędzia, które automatyzują procesy, personalizują komunikację i zwiększają konwersję.',
+    title: 'Marketing Automation | Oficjalny Partner SALESmanago',
+    description: 'Zwiększ skuteczność swoich działań marketingowych dzięki kompleksowym rozwiązaniom marketing automation. Jako oficjalny partner SALESmanago dostarczamy narzędzia, które automatyzują procesy, personalizują komunikację i zwiększają konwersję.',
+    alternates: {
+        canonical: `${SITE_URL}/uslugi/marketing-automation`,
+    },
+    openGraph: {
+        title: 'Marketing Automation | CreativeTrust',
+        description: 'Wdrożenia i optymalizacja marketing automation z oficjalnym partnerem SALESmanago.',
+        url: `${SITE_URL}/uslugi/marketing-automation`,
+        siteName: 'CreativeTrust',
+        locale: 'pl_PL',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Marketing Automation | CreativeTrust',
+        description: 'Wdrożenia i optymalizacja marketing automation z oficjalnym partnerem SALESmanago.',
+    },
 };
 
 export default function MarketingAutomationPage() {
@@ -23,7 +40,7 @@ export default function MarketingAutomationPage() {
                             <h1 className="text-4xl md:text-6xl font-medium mb-8">Marketing Automation</h1>
                             <p className="text-xl text-gray-700 mb-10">
                                 Automatyzacja marketingu to nie tylko trend, ale konieczność w erze cyfrowej.
-                                Jako oficjalny partner <strong>Sales Manago</strong>, pomagamy firmom zwiększać konwersje,
+                                Jako oficjalny partner <strong>SALESmanago</strong>, pomagamy firmom zwiększać konwersje,
                                 lojalizować klientów i maksymalizować ROI dzięki personalizowanej komunikacji na dużą skalę.
                             </p>
                             <Button href="#kontakt">
@@ -136,7 +153,7 @@ export default function MarketingAutomationPage() {
                             </div>
                             <h3 className="text-2xl font-medium mb-4">Bezpieczeństwo danych</h3>
                             <p className="text-gray-700">
-                                Platformy Marketing Automation, takie jak Sales Manago, zapewniają
+                                Platformy Marketing Automation, takie jak SALESmanago, zapewniają
                                 zgodność z przepisami RODO i bezpieczeństwo danych klientów.
                             </p>
                         </div>
@@ -175,7 +192,7 @@ export default function MarketingAutomationPage() {
                                 na lepsze wyniki sprzedażowe i zwiększenie ROI.
                             </p>
                             <p className="text-gray-700">
-                                Jako partner Sales Manago, oferujemy kompleksowe rozwiązania marketing
+                                Jako partner SALESmanago, oferujemy kompleksowe rozwiązania marketing
                                 automation dostosowane do specyfiki Twojego biznesu i potrzeb Twoich klientów.
                             </p>
                         </div>
@@ -186,14 +203,14 @@ export default function MarketingAutomationPage() {
                 </div>
             </section>
 
-            {/* Sales Manago Partnership */}
+            {/* SALESmanago Partnership */}
             <section className="w-full py-16 md:py-24 px-6 bg-gray-100">
                 <div className="max-w-[1800px] mx-auto">
                     <div className="flex flex-col lg:flex-row gap-16 items-center">
                         <div className="w-full lg:w-1/2">
                             <Image
                                 src="/sales-manago-partnership.jpg"
-                                alt="Creativetrust - partner Sales Manago"
+                                alt="CreativeTrust - partner SALESmanago"
                                 width={700}
                                 height={500}
                                 className="rounded-xl shadow-xl object-cover"
@@ -201,14 +218,14 @@ export default function MarketingAutomationPage() {
                         </div>
                         <div className="w-full lg:w-1/2">
                             <h2 className="text-3xl md:text-4xl font-medium mb-8">
-                                Oficjalny partner Sales Manago
+                                Oficjalny partner SALESmanago
                             </h2>
                             <p className="text-xl text-gray-700 mb-6">
-                                Creativetrust to certyfikowany partner technologiczny Sales Manago -
+                                CreativeTrust to certyfikowany partner technologiczny SALESmanago -
                                 wiodącej europejskiej platformy marketing automation.
                             </p>
                             <p className="text-gray-700 mb-6">
-                                Współpraca z Sales Manago pozwala nam oferować klientom najnowocześniejsze
+                                Współpraca z SALESmanago pozwala nam oferować klientom najnowocześniejsze
                                 rozwiązania marketingowe, które generują realne i mierzalne rezultaty.
                             </p>
                             <p className="text-gray-700 mb-10">
@@ -243,7 +260,7 @@ export default function MarketingAutomationPage() {
                                 </div>
                             </div>
                             <p className="text-gray-700 mb-4">
-                                "Dzięki wdrożeniu Sales Manago i wsparciu Creativetrust, zwiększyliśmy
+                                "Dzięki wdrożeniu SALESmanago i wsparciu CreativeTrust, zwiększyliśmy
                                 nasze konwersje o 38% w ciągu pierwszych 3 miesięcy. Personalizacja
                                 oferty na podstawie zachowania użytkowników przyniosła spektakularne efekty."
                             </p>
@@ -271,7 +288,7 @@ export default function MarketingAutomationPage() {
                             </div>
                             <p className="text-gray-700 mb-4">
                                 "Automatyzacja kampanii email pozwoliła nam skrócić cykl sprzedażowy
-                                o 45% i zwiększyć wartość średniego koszyka o 23%. Zespół Creativetrust
+                                o 45% i zwiększyć wartość średniego koszyka o 23%. Zespół CreativeTrust
                                 pomógł nam zoptymalizować ścieżkę klienta i zwiększyć skuteczność lead nurturingu."
                             </p>
                             <div className="flex justify-between items-center">

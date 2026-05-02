@@ -2,10 +2,22 @@ import React from 'react';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import Button from '@/components/Button';
+import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'O nas - CreativeTrust | Agencja Marketingowa',
     description: 'Poznaj CreativeTrust - agencję marketingową specjalizującą się w tworzeniu skutecznych strategii marketingowych, stron www i aplikacji e-commerce.',
+    alternates: {
+        canonical: `${SITE_URL}/o-nas`,
+    },
+    openGraph: {
+        title: 'O nas | CreativeTrust',
+        description: 'Poznaj zespół i historię CreativeTrust, agencji marketingowej z Gorzowa Wielkopolskiego.',
+        url: `${SITE_URL}/o-nas`,
+        siteName: 'CreativeTrust',
+        locale: 'pl_PL',
+        type: 'website',
+    },
 };
 
 interface Value {
@@ -78,8 +90,8 @@ export default function AboutPage() {
         },
         {
             year: '2024',
-            title: 'Partnerstwo z Sales Manago',
-            description: 'Zostaliśmy oficjalnym partnerem Sales Manago, rozszerzając nasze usługi o marketing automation i spersonalizowane strategie komunikacji.'
+            title: 'Partnerstwo z SALESmanago',
+            description: 'Zostaliśmy oficjalnym partnerem SALESmanago, rozszerzając nasze usługi o marketing automation i spersonalizowane strategie komunikacji.'
         },
         {
             year: '2024',
@@ -196,7 +208,7 @@ export default function AboutPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         <div className="text-center p-8">
-                            <div className="text-6xl font-bold mb-3">8+</div>
+                            <div className="text-6xl font-bold mb-3">9+</div>
                             <div className="text-xl text-gray-300">lat na rynku</div>
                         </div>
 

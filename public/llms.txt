@@ -1,0 +1,38 @@
+# CreativeTrust
+
+CreativeTrust is a Polish B2B digital marketing agency based in Gorzów Wielkopolski. The agency works on performance marketing, websites, e-commerce, branding, and marketing automation.
+
+## Main Pages
+
+- Homepage: https://www.creativetrust.pl/
+- Services: https://www.creativetrust.pl/uslugi
+- Portfolio: https://www.creativetrust.pl/portfolio
+- About: https://www.creativetrust.pl/o-nas
+- Contact: https://www.creativetrust.pl/kontakt
+- Blog: https://www.creativetrust.pl/blog
+- Knowledge base: https://www.creativetrust.pl/baza-wiedzy
+
+## Services
+
+- Website design and development: https://www.creativetrust.pl/uslugi/strony-www
+- Performance marketing: https://www.creativetrust.pl/uslugi/performance-marketing
+- Google Ads: https://www.creativetrust.pl/uslugi/performance-marketing/google-ads
+- Meta Ads: https://www.creativetrust.pl/uslugi/performance-marketing/meta-ads
+- E-commerce and headless commerce: https://www.creativetrust.pl/uslugi/e-commerce
+- Branding and visual identity: https://www.creativetrust.pl/uslugi/branding
+- Marketing automation and SALESmanago: https://www.creativetrust.pl/uslugi/marketing-automation
+
+## Entity Facts
+
+- Name: CreativeTrust
+- Founded: 2016
+- Address: ul. Kombatantów 34/500, 66-400 Gorzów Wielkopolski, Poland
+- Email: office@creativetrust.pl
+- Phone: +48 570 526 421
+- Language: Polish (pl-PL)
+
+## AI Usage Policy
+
+Search and citation access is allowed. AI training is not allowed.
+
+Content-Signal: search=yes,ai-input=yes,ai-train=no

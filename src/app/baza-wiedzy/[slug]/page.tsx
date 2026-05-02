@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import PortableTextContent from '@/components/PortableTextContent';
+import SchemaScript from '@/components/SchemaScript';
+import { SITE_URL, buildBreadcrumbSchema, buildDefinedTermSchema } from '@/lib/schema';
 
 // Define the params type as a Promise as required in Next.js v15
 type Params = Promise<{ slug: string }>;
@@ -25,7 +27,22 @@ export async function generateMetadata({
 
     return {
         title: entry.seoTitle || `${entry.title} - Baza wiedzy`,
-        description: entry.seoDescription || entry.shortDescription
+        description: entry.seoDescription || entry.shortDescription,
+        alternates: {
+            canonical: `${SITE_URL}/baza-wiedzy/${slug}`,
+        },
+        openGraph: {
+            title: entry.seoTitle || entry.title,
+            description: entry.seoDescription || entry.shortDescription,
+            url: `${SITE_URL}/baza-wiedzy/${slug}`,
+            type: 'article',
+            locale: 'pl_PL',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: entry.seoTitle || entry.title,
+            description: entry.seoDescription || entry.shortDescription,
+        },
     };
 }
 
@@ -54,9 +71,23 @@ export default async function KnowledgeBaseEntryPage({
         month: 'long',
         year: 'numeric'
     }).format(publishDate);
+    const canonicalUrl = `${SITE_URL}/baza-wiedzy/${slug}`;
+    const definedTermSchema = buildDefinedTermSchema({
+        title: entry.title,
+        description: entry.shortDescription || entry.seoDescription,
+        url: canonicalUrl,
+        datePublished: entry.publishedAt,
+        tags: entry.tags,
+    });
+    const breadcrumbSchema = buildBreadcrumbSchema([
+        { name: 'Strona główna', url: SITE_URL },
+        { name: 'Baza wiedzy', url: `${SITE_URL}/baza-wiedzy` },
+        { name: entry.title, url: canonicalUrl },
+    ]);
 
     return (
         <main className="min-h-screen py-24 px-6">
+            <SchemaScript schema={[definedTermSchema, breadcrumbSchema]} />
             <div className="max-w-[1800px] mx-auto">
                 <Link href="/baza-wiedzy" className="text-gray-600 mb-12 flex items-center">
                     <svg

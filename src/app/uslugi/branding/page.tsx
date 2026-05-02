@@ -5,10 +5,27 @@ import { Metadata } from 'next';
 import Button from '@/components/Button';
 import BrandingForm from "@/components/BrandingForm";
 import SigningProcess from "@/components/SigningProcessComponent";
+import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'Branding | Tworzenie i rozwój marek - CreativeTrust',
     description: 'Profesjonalne usługi brandingowe dla firm. Projektowanie logo, identyfikacji wizualnej i strategii marki, które wyróżnią Twój biznes na tle konkurencji.',
+    alternates: {
+        canonical: `${SITE_URL}/uslugi/branding`,
+    },
+    openGraph: {
+        title: 'Branding i identyfikacja wizualna | CreativeTrust',
+        description: 'Strategia marki, logo, identyfikacja wizualna i komunikacja, które pomagają firmom wyróżnić się na rynku.',
+        url: `${SITE_URL}/uslugi/branding`,
+        siteName: 'CreativeTrust',
+        locale: 'pl_PL',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Branding i identyfikacja wizualna | CreativeTrust',
+        description: 'Strategia marki, logo, identyfikacja wizualna i komunikacja, które pomagają firmom wyróżnić się na rynku.',
+    },
 };
 
 export default function BrandingPage() {

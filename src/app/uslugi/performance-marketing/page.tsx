@@ -6,16 +6,32 @@ import Button from '@/components/Button';
 import PerformanceMarketingForm from '@/components/PerformanceMarketingForm';
 import SigningProcess from "@/components/SigningProcessComponent";
 import WorkFlowDiagram from "@/components/WorkFlowDiagram";
+import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'Performance Marketing | Skuteczne kampanie - CreativeTrust',
     description: 'Zwiększ sprzedaż i ROI dzięki naszym usługom performance marketingu. Specjalizujemy się w Google Ads, Facebook Ads i kampaniach nastawionych na efekty.',
+    alternates: {
+        canonical: `${SITE_URL}/uslugi/performance-marketing`,
+    },
+    openGraph: {
+        title: 'Performance Marketing | CreativeTrust',
+        description: 'Zwiększ sprzedaż i ROI dzięki kampaniom Google Ads, Meta Ads i działaniom nastawionym na wynik.',
+        url: `${SITE_URL}/uslugi/performance-marketing`,
+        siteName: 'CreativeTrust',
+        locale: 'pl_PL',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Performance Marketing | CreativeTrust',
+        description: 'Zwiększ sprzedaż i ROI dzięki kampaniom Google Ads, Meta Ads i działaniom nastawionym na wynik.',
+    },
 };
 
 export const viewport = {
     width: 'device-width',
     initialScale: 1,
-    maximumScale: 1,
 };
 
 export default function PerformanceMarketingPage() {

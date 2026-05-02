@@ -1,10 +1,22 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'Kontakt - Skontaktuj się z nami',
     description: 'Skontaktuj się z naszym zespołem, aby dowiedzieć się więcej o naszych usługach i jak możemy pomóc w rozwoju Twojego biznesu.',
+    alternates: {
+        canonical: `${SITE_URL}/kontakt`,
+    },
+    openGraph: {
+        title: 'Kontakt | CreativeTrust',
+        description: 'Skontaktuj się z CreativeTrust i umów bezpłatną konsultację marketingową.',
+        url: `${SITE_URL}/kontakt`,
+        siteName: 'CreativeTrust',
+        locale: 'pl_PL',
+        type: 'website',
+    },
 };
 
 export default function ContactPage() {

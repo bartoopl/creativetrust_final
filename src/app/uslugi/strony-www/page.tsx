@@ -1,11 +1,29 @@
 import React from 'react';
 import Image from 'next/image';
+import type { Metadata } from 'next';
 import ServicePortfolio from '@/components/ServicePortfolio';
 import SigningProcess from "@/components/SigningProcessComponent";
+import { SITE_URL } from '@/lib/schema';
 
-export const metadata = {
-    title: 'Strony WWW | Twoja Agencja',
+export const metadata: Metadata = {
+    title: 'Tworzenie stron internetowych dla firm',
     description: 'Profesjonalne strony internetowe tworzone z pasją i dbałością o skuteczność marketingową. Wykorzystujemy najnowsze technologie dla Twojego sukcesu.',
+    alternates: {
+        canonical: `${SITE_URL}/uslugi/strony-www`,
+    },
+    openGraph: {
+        title: 'Tworzenie stron internetowych dla firm | CreativeTrust',
+        description: 'Projektujemy szybkie, responsywne strony WWW, które wspierają sprzedaż i SEO.',
+        url: `${SITE_URL}/uslugi/strony-www`,
+        siteName: 'CreativeTrust',
+        locale: 'pl_PL',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Tworzenie stron internetowych dla firm | CreativeTrust',
+        description: 'Projektujemy szybkie, responsywne strony WWW, które wspierają sprzedaż i SEO.',
+    },
 };
 
 export default function WebsitesServicePage() {
@@ -21,11 +39,11 @@ export default function WebsitesServicePage() {
                                 <span className="text-gray-400">przyciągają klientów</span>
                             </h1>
                             <p className="text-lg mb-8 text-gray-700">
-                                Od 7 lat tworzymy strony internetowe, które nie tylko świetnie wyglądają, ale przede wszystkim realizują cele biznesowe naszych klientów.
+                                Od 9 lat tworzymy strony internetowe, które nie tylko świetnie wyglądają, ale przede wszystkim realizują cele biznesowe naszych klientów.
                             </p>
                             <div className="flex items-center space-x-8 mb-8">
                                 <div className="flex flex-col items-center">
-                                    <span className="text-3xl font-bold">7+</span>
+                                    <span className="text-3xl font-bold">9+</span>
                                     <span className="text-sm text-gray-500">lat doświadczenia</span>
                                 </div>
                                 <div className="flex flex-col items-center">
@@ -44,6 +62,7 @@ export default function WebsitesServicePage() {
                                 alt="Tworzenie stron internetowych"
                                 fill
                                 className="object-cover"
+                                priority
                             />
                         </div>
                     </div>

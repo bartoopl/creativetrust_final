@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
                 </div>
 
                 {/* Linki nawigacyjne i social media */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10 border-t border-gray-800">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-10 border-t border-gray-800">
                     {/* Main navigation */}
                     <div className="mb-6 md:mb-0">
                         <nav className="flex flex-col md:flex-row gap-3 md:gap-8">
@@ -84,6 +84,33 @@ const Footer: React.FC = () => {
                                 className="text-white hover:text-gray-300"
                             >
                                 Panel Klienta
+                            </Link>
+                        </nav>
+                    </div>
+
+                    <div>
+                        <h3 className="text-gray-400 text-sm mb-4">Usługi</h3>
+                        <nav className="flex flex-col gap-3">
+                            <Link href="/uslugi/strony-www" className="text-white hover:text-gray-300">
+                                Strony WWW
+                            </Link>
+                            <Link href="/uslugi/performance-marketing" className="text-white hover:text-gray-300">
+                                Performance Marketing
+                            </Link>
+                            <Link href="/uslugi/performance-marketing/google-ads" className="text-white hover:text-gray-300">
+                                Google Ads
+                            </Link>
+                            <Link href="/uslugi/performance-marketing/meta-ads" className="text-white hover:text-gray-300">
+                                Meta Ads
+                            </Link>
+                            <Link href="/uslugi/e-commerce" className="text-white hover:text-gray-300">
+                                E-commerce
+                            </Link>
+                            <Link href="/uslugi/branding" className="text-white hover:text-gray-300">
+                                Branding
+                            </Link>
+                            <Link href="/uslugi/marketing-automation" className="text-white hover:text-gray-300">
+                                Marketing Automation
                             </Link>
                         </nav>
                     </div>

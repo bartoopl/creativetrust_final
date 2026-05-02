@@ -62,7 +62,7 @@ const AutomationChart = () => {
                 </ResponsiveContainer>
             </div>
             <div className="mt-6 text-sm text-gray-500 text-center">
-                Źródło: Badania własne na podstawie danych z 125 firm korzystających z Sales Manago
+                Źródło: Badania własne na podstawie danych z 125 firm korzystających z SALESmanago
             </div>
         </div>
     );

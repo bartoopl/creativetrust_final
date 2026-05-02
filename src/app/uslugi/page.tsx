@@ -3,10 +3,27 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Button from '@/components/Button';
+import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'Usługi - CreativeTrust | Kompleksowe rozwiązania cyfrowe',
     description: 'Oferujemy szeroki zakres usług: projektowanie stron internetowych, e-commerce, branding, marketing automation i performance marketing. Sprawdź nasze rozwiązania.',
+    alternates: {
+        canonical: `${SITE_URL}/uslugi`,
+    },
+    openGraph: {
+        title: 'Usługi CreativeTrust | Marketing, WWW, e-commerce i branding',
+        description: 'Kompleksowe usługi dla firm: strony WWW, e-commerce, branding, marketing automation i performance marketing.',
+        url: `${SITE_URL}/uslugi`,
+        siteName: 'CreativeTrust',
+        locale: 'pl_PL',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Usługi CreativeTrust | Marketing, WWW, e-commerce i branding',
+        description: 'Kompleksowe usługi dla firm: strony WWW, e-commerce, branding, marketing automation i performance marketing.',
+    },
 };
 
 // Definicja usług
@@ -345,7 +362,7 @@ export default function ServicesPage() {
                             </div>
 
                             <div className="absolute -top-8 -left-8 w-48 bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-                                <div className="text-3xl font-bold text-black mb-2">7+</div>
+                                <div className="text-3xl font-bold text-black mb-2">9+</div>
                                 <p className="text-gray-700">lat doświadczenia</p>
                             </div>
                         </div>

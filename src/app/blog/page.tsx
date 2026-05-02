@@ -4,10 +4,27 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import { getBlogPosts, getBlogCategories, getFeaturedBlogPosts } from '@/lib/sanity';
 import { urlFor } from '@/lib/sanity';
+import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Blog - Agencja Marketingowa',
+    title: 'Blog — Marketing i technologia',
     description: 'Poznaj najnowsze trendy i strategie w marketingu, designie i technologii.',
+    alternates: {
+        canonical: `${SITE_URL}/blog`,
+    },
+    openGraph: {
+        title: 'Blog CreativeTrust | Marketing i technologia',
+        description: 'Artykuły o marketingu, designie, technologii, performance marketingu i e-commerce.',
+        url: `${SITE_URL}/blog`,
+        siteName: 'CreativeTrust',
+        locale: 'pl_PL',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Blog CreativeTrust | Marketing i technologia',
+        description: 'Artykuły o marketingu, designie, technologii, performance marketingu i e-commerce.',
+    },
 };
 
 export default async function BlogPage() {

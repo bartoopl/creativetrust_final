@@ -7,6 +7,8 @@ import { getBlogPost } from '@/lib/sanity';
 import { urlFor } from '@/lib/sanity';
 import PortableTextContent from '@/components/PortableTextContent';
 import AudioPlayer from '@/components/AudioPlayer';
+import SchemaScript from '@/components/SchemaScript';
+import { SITE_URL, buildBlogPostingSchema, buildBreadcrumbSchema } from '@/lib/schema';
 
 // Define the params type as a Promise as required in Next.js v15
 type Params = Promise<{ slug: string }>;
@@ -30,9 +32,22 @@ export async function generateMetadata({
     return {
         title: post.seoTitle || `${post.title} - Blog`,
         description: post.seoDescription || post.excerpt || '',
-        openGraph: post.mainImage ? {
-            images: [{ url: urlFor(post.mainImage).url() }]
-        } : undefined
+        alternates: {
+            canonical: `${SITE_URL}/blog/${slug}`,
+        },
+        openGraph: {
+            title: post.seoTitle || post.title,
+            description: post.seoDescription || post.excerpt || '',
+            url: `${SITE_URL}/blog/${slug}`,
+            type: 'article',
+            locale: 'pl_PL',
+            images: post.mainImage ? [{ url: urlFor(post.mainImage).url() }] : undefined,
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: post.seoTitle || post.title,
+            description: post.seoDescription || post.excerpt || '',
+        },
     };
 }
 
@@ -60,9 +75,25 @@ export default async function BlogPostPage({
         month: 'long',
         year: 'numeric'
     }).format(publishDate);
+    const canonicalUrl = `${SITE_URL}/blog/${slug}`;
+    const blogSchema = buildBlogPostingSchema({
+        title: post.title,
+        description: post.excerpt || post.seoDescription,
+        url: canonicalUrl,
+        datePublished: post.publishedAt,
+        dateModified: post._updatedAt || post.publishedAt,
+        image: post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined,
+        authorName: post.author?.name,
+    });
+    const breadcrumbSchema = buildBreadcrumbSchema([
+        { name: 'Strona główna', url: SITE_URL },
+        { name: 'Blog', url: `${SITE_URL}/blog` },
+        { name: post.title, url: canonicalUrl },
+    ]);
 
     return (
         <main className="min-h-screen py-24 px-6">
+            <SchemaScript schema={[blogSchema, breadcrumbSchema]} />
             <div className="max-w-[1800px] mx-auto">
                 <div className="max-w-3xl mx-auto">
                     <Link href="/blog" className="text-gray-600 mb-12 flex items-center">
