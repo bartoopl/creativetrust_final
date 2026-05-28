@@ -260,6 +260,13 @@ export default function Header() {
                                             Branding
                                         </Link>
                                         <Link
+                                            href="/uslugi/social-media"
+                                            className="text-lg text-gray-700 block"
+                                            onClick={closeMobileMenu}
+                                        >
+                                            Social Media
+                                        </Link>
+                                        <Link
                                             href="/uslugi/marketing-automation"
                                             className="text-lg text-gray-700 block"
                                             onClick={closeMobileMenu}

@@ -1,4 +1,4 @@
-const SITE_URL = 'https://www.creativetrust.pl';
+const SITE_URL = 'https://creativetrust.pl';
 
 type JsonLd = Record<string, unknown>;
 

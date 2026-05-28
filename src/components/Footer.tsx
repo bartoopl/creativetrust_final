@@ -97,6 +97,9 @@ const Footer: React.FC = () => {
                             <Link href="/uslugi/tworzenie-stron-www-cennik" className="text-white hover:text-gray-300">
                                 Cennik stron WWW
                             </Link>
+                            <Link href="/uslugi/social-media" className="text-white hover:text-gray-300">
+                                Social Media
+                            </Link>
                             <Link href="/uslugi/e-commerce" className="text-white hover:text-gray-300">
                                 E-commerce
                             </Link>
