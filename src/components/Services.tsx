@@ -57,7 +57,6 @@ const Services: React.FC = () => {
         { title: "Branding", href: "/uslugi/branding" },
         { title: "Strony WWW", href: "/uslugi/strony-www" },
         { title: "E-commerce", href: "/uslugi/e-commerce" },
-        { title: "Performance Marketing", href: "/uslugi/performance-marketing" },
         { title: "Marketing Automation", href: "/uslugi/marketing-automation" },
     ];
 

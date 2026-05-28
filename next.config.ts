@@ -13,6 +13,30 @@ const nextConfig: NextConfig = {
     },
     transpilePackages: ["@sanity"],
     productionBrowserSourceMaps: false,
+    async redirects() {
+        return [
+            {
+                source: '/uslugi/performance-marketing',
+                destination: '/uslugi',
+                permanent: true,
+            },
+            {
+                source: '/uslugi/performance-marketing/google-ads',
+                destination: '/uslugi',
+                permanent: true,
+            },
+            {
+                source: '/uslugi/performance-marketing/meta-ads',
+                destination: '/uslugi',
+                permanent: true,
+            },
+            {
+                source: '/uslugi/audyt-google-ads',
+                destination: '/uslugi',
+                permanent: true,
+            },
+        ];
+    },
     async headers() {
         return [
             {

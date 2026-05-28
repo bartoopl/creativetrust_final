@@ -266,20 +266,6 @@ export default function Header() {
                                         >
                                             Marketing Automation
                                         </Link>
-                                        <Link
-                                            href="/uslugi/performance-marketing"
-                                            className="text-lg text-gray-700 block"
-                                            onClick={closeMobileMenu}
-                                        >
-                                            Performance Marketing
-                                        </Link>
-                                        <Link
-                                            href="/uslugi/audyt-google-ads"
-                                            className="text-lg text-gray-700 block"
-                                            onClick={closeMobileMenu}
-                                        >
-                                            Audyt Google Ads
-                                        </Link>
                                     </div>
                                 </div>
 

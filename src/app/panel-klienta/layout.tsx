@@ -67,7 +67,6 @@ export default function ClientPanelLayout({ children }: ClientPanelLayoutProps) 
     const navItems = [
         { path: '/panel-klienta', label: 'Pulpit' },
         { path: '/panel-klienta/faktury', label: 'Faktury' },
-        { path: '/panel-klienta/kampanie', label: 'Kampanie reklamowe' },
         { path: '/panel-klienta/profil', label: 'Mój profil' },
     ];
 

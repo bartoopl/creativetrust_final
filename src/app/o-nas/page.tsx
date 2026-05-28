@@ -101,7 +101,7 @@ export default function AboutPage() {
         {
             year: '2025',
             title: 'Rozwój zespołu',
-            description: 'Powiększenie zespołu o specjalistów z branży UI/UX i Performance Marketingu, umożliwiające realizację jeszcze bardziej kompleksowych projektów.'
+            description: 'Powiększenie zespołu o specjalistów z branży UI/UX i Marketing Automation, umożliwiające realizację jeszcze bardziej kompleksowych projektów.'
         }
     ];
 
