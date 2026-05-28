@@ -3,10 +3,10 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.creativetrust.pl
+Host: https://creativetrust.pl
 
 # AI access policy
 Content-Signal: search=yes,ai-input=yes,ai-train=no
 
 # Sitemaps
-Sitemap: https://www.creativetrust.pl/sitemap.xml
+Sitemap: https://creativetrust.pl/sitemap.xml
