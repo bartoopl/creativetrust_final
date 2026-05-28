@@ -8,14 +8,14 @@ import ContactFormAutomation from '@/components/ContactFormAutomation';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Marketing Automation | Oficjalny Partner SALESmanago',
-    description: 'Zwiększ skuteczność swoich działań marketingowych dzięki kompleksowym rozwiązaniom marketing automation. Jako oficjalny partner SALESmanago dostarczamy narzędzia, które automatyzują procesy, personalizują komunikację i zwiększają konwersję.',
+    title: 'Marketing Automation dla Firm | Agencja Marketing Automation – CreativeTrust',
+    description: 'Agencja marketing automation — wdrożenia SALESmanago, automatyzacja procesów marketingowych i lead nurturing dla firm B2B i e-commerce. Oficjalny partner SALESmanago.',
     alternates: {
         canonical: `${SITE_URL}/uslugi/marketing-automation`,
     },
     openGraph: {
-        title: 'Marketing Automation | CreativeTrust',
-        description: 'Wdrożenia i optymalizacja marketing automation z oficjalnym partnerem SALESmanago.',
+        title: 'Marketing Automation dla Firm | CreativeTrust',
+        description: 'Wdrożenia i optymalizacja marketing automation. Oficjalny partner SALESmanago.',
         url: `${SITE_URL}/uslugi/marketing-automation`,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Marketing Automation | CreativeTrust',
-        description: 'Wdrożenia i optymalizacja marketing automation z oficjalnym partnerem SALESmanago.',
+        title: 'Marketing Automation dla Firm | CreativeTrust',
+        description: 'Wdrożenia i optymalizacja marketing automation. Oficjalny partner SALESmanago.',
     },
 };
 
@@ -36,12 +36,12 @@ export default function MarketingAutomationPage() {
                 <div className="max-w-[1800px] mx-auto">
                     <div className="flex flex-col lg:flex-row gap-16 items-center">
                         <div className="w-full lg:w-1/2">
-                            <h6 className="text-gray-600 mb-2">Zwiększ efektywność swojego marketingu</h6>
-                            <h1 className="text-4xl md:text-6xl font-medium mb-8">Marketing Automation</h1>
+                            <h6 className="text-gray-600 mb-2">Agencja Marketing Automation</h6>
+                            <h1 className="text-4xl md:text-6xl font-medium mb-8">Marketing Automation dla Firm</h1>
                             <p className="text-xl text-gray-700 mb-10">
-                                Automatyzacja marketingu to nie tylko trend, ale konieczność w erze cyfrowej.
-                                Jako oficjalny partner <strong>SALESmanago</strong>, pomagamy firmom zwiększać konwersje,
-                                lojalizować klientów i maksymalizować ROI dzięki personalizowanej komunikacji na dużą skalę.
+                                Wdrażamy i optymalizujemy marketing automation dla firm B2B i e-commerce.
+                                Jako oficjalny partner <strong>SALESmanago</strong>, pomagamy automatyzować procesy,
+                                personalizować komunikację i zwiększać konwersje — bez angażowania dodatkowego zespołu.
                             </p>
                             <Button href="#kontakt">
                                 Umów bezpłatną konsultację
@@ -302,6 +302,48 @@ export default function MarketingAutomationPage() {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* FAQ */}
+            <section className="w-full py-16 md:py-24 px-6 bg-gray-50">
+                <div className="max-w-[1800px] mx-auto">
+                    <h2 className="text-3xl md:text-4xl font-medium mb-16 text-center">
+                        Najczęstsze pytania o marketing automation
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                        {[
+                            {
+                                q: 'Czym jest marketing automation i jak działa?',
+                                a: 'Marketing automation to oprogramowanie, które automatyzuje powtarzalne zadania marketingowe — wysyłkę emaili, segmentację bazy, lead scoring i personalizację treści. Działa na podstawie zachowań użytkowników: jeśli ktoś odwiedzi daną podstronę lub pobierze materiał, system automatycznie wysyła dopasowaną komunikację.',
+                            },
+                            {
+                                q: 'Ile kosztuje wdrożenie marketing automation?',
+                                a: 'Koszt zależy od skali działalności, liczby kontaktów i zakresu automatyzacji. Wyceniamy każde wdrożenie indywidualnie — skontaktuj się z nami, aby otrzymać bezpłatną ofertę dopasowaną do Twojego biznesu.',
+                            },
+                            {
+                                q: 'Jak długo trwa wdrożenie marketing automation?',
+                                a: 'Podstawowe wdrożenie SALESmanago z pierwszymi scenariuszami zajmuje 4–8 tygodni. Bardziej zaawansowane projekty obejmujące integracje z CRM, e-commerce i personalizację on-site mogą trwać 3–6 miesięcy.',
+                            },
+                            {
+                                q: 'Dla jakich firm sprawdza się marketing automation?',
+                                a: 'Najlepsze efekty osiągają firmy B2B z dłuższym cyklem sprzedażowym, sklepy e-commerce z bazą ponad 1000 kontaktów oraz firmy usługowe, które chcą prowadzić lead nurturing bez powiększania działu marketingu.',
+                            },
+                            {
+                                q: 'Czy marketing automation zastąpi mój zespół marketingowy?',
+                                a: 'Nie — automation przejmuje rutynowe, powtarzalne zadania, dzięki czemu Twój zespół może skupić się na strategii, kreatywności i relacjach z klientami. To narzędzie do skalowania, nie zastępstwo ludzi.',
+                            },
+                            {
+                                q: 'Dlaczego SALESmanago zamiast innych platform?',
+                                a: 'SALESmanago to największa europejska platforma marketing automation, zoptymalizowana pod RODO i specyfikę polskiego rynku. Jako oficjalny partner mamy dostęp do pełnego wsparcia technicznego, szkoleń i najnowszych funkcji platformy.',
+                            },
+                        ].map(({ q, a }) => (
+                            <div key={q} className="border border-gray-200 bg-white p-8 rounded-xl">
+                                <h3 className="text-lg font-medium mb-3">{q}</h3>
+                                <p className="text-gray-700">{a}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
