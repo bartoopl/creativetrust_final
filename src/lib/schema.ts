@@ -12,7 +12,7 @@ export const organizationSchema: JsonLd = {
             url: SITE_URL,
             foundingDate: '2016',
             description:
-                'Agencja marketingowa specjalizująca się w performance marketingu, tworzeniu stron WWW, e-commerce, brandingu i marketing automation.',
+                'Agencja marketingowa specjalizująca się w stronach WWW, e-commerce, brandingu, marketing automation i performance marketingu.',
             email: 'office@creativetrust.pl',
             telephone: '+48570526421',
             address: {

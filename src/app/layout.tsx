@@ -16,16 +16,16 @@ const manrope = Manrope({
 export const metadata: Metadata = {
     metadataBase: new URL('https://creativetrust.pl'),
     title: {
-        default: 'CreativeTrust | Agencja Marketingowa',
+        default: 'Agencja marketingowa, strony WWW i e-commerce | CreativeTrust',
         template: '%s | CreativeTrust',
     },
-    description: 'Agencja marketingowa specjalizująca się w tworzeniu stron WWW, e-commerce, brandingu i marketing automation.',
+    description: 'CreativeTrust projektuje strony WWW, e-commerce, branding i marketing automation dla firm, które chcą lepszej widoczności i większej sprzedaży.',
     alternates: {
         canonical: '/',
     },
     openGraph: {
-        title: 'CreativeTrust | Agencja Marketingowa',
-        description: 'Strony WWW, e-commerce, branding i marketing automation dla firm.',
+        title: 'Agencja marketingowa, strony WWW i e-commerce | CreativeTrust',
+        description: 'CreativeTrust projektuje strony WWW, e-commerce, branding i marketing automation dla firm, które chcą lepszej widoczności i większej sprzedaży.',
         url: 'https://creativetrust.pl',
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'CreativeTrust | Agencja Marketingowa',
-        description: 'Strony WWW, e-commerce, branding i marketing automation dla firm.',
+        title: 'Agencja marketingowa, strony WWW i e-commerce | CreativeTrust',
+        description: 'CreativeTrust projektuje strony WWW, e-commerce, branding i marketing automation dla firm, które chcą lepszej widoczności i większej sprzedaży.',
     },
 };
 
