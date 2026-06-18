@@ -1,73 +1,43 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { getPortfolioProjects, urlFor } from '@/lib/sanity';
-import Button from './Button';
 
-// Tworzymy prostszy komponent dla strony głównej
-const PortfolioHomepage: React.FC = () => {
-    const [projects, setProjects] = useState<any[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+type Project = {
+    _id: string;
+    title: string;
+    slug: { current: string };
+    client: string;
+    mainImage: any;
+    publishedAt?: string;
+};
 
-    // Przykładowe dane w przypadku braku połączenia z Sanity
-    const sampleProjects = [
-        {
-            _id: 'sample1',
-            title: 'Projekt Brandingowy XYZ',
-            slug: { current: 'projekt-brandingowy-xyz' },
-            client: 'XYZ Company',
-            mainImage: null
-        },
-        {
-            _id: 'sample2',
-            title: 'Redesign UX dla ABC',
-            slug: { current: 'redesign-ux-abc' },
-            client: 'ABC Corporation',
-            mainImage: null
-        },
-        {
-            _id: 'sample3',
-            title: 'Aplikacja Mobilna dla DEF',
-            slug: { current: 'aplikacja-mobilna-def' },
-            client: 'DEF Solutions',
-            mainImage: null
-        },
-        {
-            _id: 'sample4',
-            title: 'Strona WWW dla GHI',
-            slug: { current: 'strona-www-ghi' },
-            client: 'GHI Company',
-            mainImage: null
-        }
+export default function PortfolioHomepage() {
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const sampleProjects: Project[] = [
+        { _id: 'sample1', title: 'Brand system dla marki retail', slug: { current: 'brand-system-retail' }, client: 'XYZ Company', mainImage: null },
+        { _id: 'sample2', title: 'Redesign i optymalizacja konwersji', slug: { current: 'redesign-konwersji' }, client: 'ABC Corporation', mainImage: null },
+        { _id: 'sample3', title: 'Sklep headless i migracja', slug: { current: 'sklep-headless-migracja' }, client: 'DEF Solutions', mainImage: null },
+        { _id: 'sample4', title: 'Strona usługowa z lead flow', slug: { current: 'strona-uslugowa-lead-flow' }, client: 'GHI Company', mainImage: null },
     ];
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                setIsLoading(true);
-                // Pobieramy wszystkie projekty, ale wyświetlamy tylko 4 najnowsze
                 const projectsData = await getPortfolioProjects();
+                const sortedProjects = (projectsData || [])
+                    .sort((a: Project, b: Project) => new Date(b.publishedAt || '').getTime() - new Date(a.publishedAt || '').getTime())
+                    .slice(0, 4);
 
-                if (projectsData && projectsData.length > 0) {
-                    // Sortujemy według daty (od najnowszych) i bierzemy pierwsze 4
-                    const sortedProjects = projectsData
-                        .sort((a: any, b: any) => {
-                            return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
-                        })
-                        .slice(0, 4);
-
-                    setProjects(sortedProjects);
-                } else {
-                    // Używamy danych przykładowych jeśli nie ma projektów
-                    setProjects(sampleProjects);
-                }
-
-                setIsLoading(false);
+                setProjects(sortedProjects.length > 0 ? sortedProjects : sampleProjects);
             } catch (error) {
                 console.error('Błąd podczas pobierania projektów portfolio:', error);
                 setProjects(sampleProjects);
+            } finally {
                 setIsLoading(false);
             }
         };
@@ -76,97 +46,80 @@ const PortfolioHomepage: React.FC = () => {
     }, []);
 
     return (
-        <section className="w-full py-16 md:py-24 px-6">
-            <div className="max-w-[1800px] mx-auto">
-                <div className="flex justify-between items-center mb-12">
-                    <h2 className="text-2xl">Nasze realizacje</h2>
+        <section className="w-full px-6 py-16 md:py-24">
+            <div className="mx-auto max-w-[1800px] border-t border-slate-200 pt-6">
+                <div className="mb-8 flex items-end justify-between gap-6">
+                    <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                            Realizacje
+                        </p>
+                        <h2 className="mt-2 text-3xl font-medium text-slate-950 md:text-4xl">
+                            Wybrane projekty, które pokazują sposób myślenia, a nie tylko ładny obrazek.
+                        </h2>
+                    </div>
+                    <Link href="/portfolio" className="hidden text-sm font-medium text-slate-950 md:inline-flex">
+                        Zobacz wszystkie
+                    </Link>
                 </div>
 
                 {isLoading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
                         {[1, 2, 3, 4].map((item) => (
-                            <div key={item} className="rounded-xl bg-gray-100 p-6 h-72 animate-pulse"></div>
+                            <div key={item} className="h-80 animate-pulse rounded-[8px] border border-slate-200 bg-slate-100" />
                         ))}
                     </div>
                 ) : (
-                    <>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {projects.map((project) => (
-                                <Link href={`/portfolio/${project.slug.current}`} key={project._id} className="block">
-                                    <motion.div
-                                        className="group relative"
-                                        whileHover={{ scale: 0.98 }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        <div className="rounded-xl bg-gray-50 p-6 relative overflow-hidden mb-4 h-full">
-                                            <div className="relative rounded-lg bg-gray-100 mb-4 overflow-hidden">
-                                                {project.mainImage ? (
-                                                    <div className="w-full">
-                                                        <img
-                                                            src={urlFor(project.mainImage).width(800).url()}
-                                                            alt={project.title}
-                                                            className="w-full h-auto object-contain max-h-[180px] transition-all duration-500 group-hover:scale-105"
-                                                        />
-                                                    </div>
-                                                ) : (
-                                                    <div className="aspect-[16/9] w-full flex items-center justify-center text-gray-400 text-sm">
-                                                        Brak zdjęcia
-                                                    </div>
-                                                )}
+                    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                        {projects.map((project) => (
+                            <Link key={project._id} href={`/portfolio/${project.slug.current}`} className="group block">
+                                <div className="overflow-hidden rounded-[8px] border border-slate-200 bg-white transition-transform group-hover:-translate-y-1">
+                                    <div className="relative aspect-[4/3] bg-slate-100">
+                                        {project.mainImage ? (
+                                            <Image
+                                                src={urlFor(project.mainImage).width(900).url()}
+                                                alt={project.title}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                                                sizes="(max-width: 1280px) 50vw, 25vw"
+                                            />
+                                        ) : (
+                                            <div className="flex h-full items-center justify-center text-sm text-slate-400">
+                                                Brak zdjęcia
                                             </div>
+                                        )}
+                                    </div>
 
-                                            <div className="absolute bottom-6 left-6 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-sm">
-                                                <motion.div
-                                                    className="flex items-center justify-center"
-                                                    whileHover={{ rotate: 45 }}
-                                                    transition={{ duration: 0.2 }}
-                                                >
-                                                    <svg
-                                                        width="24"
-                                                        height="24"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        className="transform transition-transform group-hover:rotate-45"
-                                                    >
-                                                        <path
-                                                            d="M7 17L17 7"
-                                                            stroke="currentColor"
-                                                            strokeWidth="2"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                        <path
-                                                            d="M7 7H17V17"
-                                                            stroke="currentColor"
-                                                            strokeWidth="2"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                    </svg>
-                                                </motion.div>
-                                            </div>
+                                    <div className="p-5">
+                                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                                            {project.client}
+                                        </p>
+                                        <h3 className="mt-3 text-lg font-medium text-slate-950">
+                                            {project.title}
+                                        </h3>
+                                        <div className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-slate-950">
+                                            Otwórz projekt
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                <path d="M5 12H19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                <path d="M12 5L19 12L12 19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
                                         </div>
-
-                                        <div className="pl-2">
-                                            <p className="text-gray-500 text-sm mb-1">{project.client}</p>
-                                            <h3 className="text-xl font-medium">{project.title}</h3>
-                                        </div>
-                                    </motion.div>
-                                </Link>
-                            ))}
-                        </div>
-
-                        <div className="flex justify-center mt-12">
-                            <Button href="/portfolio">
-                                Zobacz więcej realizacji
-                            </Button>
-                        </div>
-                    </>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                 )}
+
+                <div className="mt-10 md:hidden">
+                    <Link href="/portfolio" className="inline-flex items-center gap-2 text-sm font-medium text-slate-950">
+                        Zobacz wszystkie realizacje
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12H19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M12 5L19 12L12 19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </Link>
+                </div>
             </div>
         </section>
     );
-};
-
-export default PortfolioHomepage;
+}

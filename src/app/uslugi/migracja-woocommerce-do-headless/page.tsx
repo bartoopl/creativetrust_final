@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import Button from '@/components/Button';
 import LandingLeadForm from '@/components/LandingLeadForm';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
@@ -102,9 +101,12 @@ export default function WooCommerceHeadlessMigrationPage() {
                             sklep na wtyczkach.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <Button href="#formularz" className="bg-white !text-black hover:bg-gray-200">
+                            <Link
+                                href="#formularz"
+                                className="inline-flex items-center justify-center rounded-full border border-white bg-white px-5 py-3 text-sm font-medium text-black transition-colors hover:bg-gray-200"
+                            >
                                 Omów migrację sklepu
-                            </Button>
+                            </Link>
                             <Link
                                 href="/uslugi/e-commerce"
                                 className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 font-medium text-white hover:bg-white hover:text-black transition-colors"
@@ -192,7 +194,12 @@ export default function WooCommerceHeadlessMigrationPage() {
                             Gdy problemem jest skala, złożone integracje i koszt każdej zmiany UX, headless
                             daje więcej kontroli nad frontem, wydajnością i rozwojem kanałów.
                         </p>
-                        <Button href="#formularz">Sprawdź, czy headless ma sens</Button>
+                        <Link
+                            href="#formularz"
+                            className="inline-flex items-center justify-center rounded-full border border-black bg-black px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800"
+                        >
+                            Sprawdź, czy headless ma sens
+                        </Link>
                     </div>
                     <div className="rounded-3xl bg-black text-white p-8 md:p-10">
                         <p className="text-gray-400 mb-4">Możliwe scenariusze</p>

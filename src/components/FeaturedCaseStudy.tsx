@@ -1,11 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { client, urlFor } from '@/lib/sanity';
-import { PortableText } from '@portabletext/react';
 
 interface FeaturedProject {
     _id: string;
@@ -13,162 +11,134 @@ interface FeaturedProject {
     slug: { current: string };
     client: string;
     mainImage: any;
-    description: any; // Updated to handle array of blocks
+    description: any;
 }
 
-const FeaturedCaseStudy: React.FC = () => {
-    const [featuredProject, setFeaturedProject] = useState<FeaturedProject | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+const sampleProject: FeaturedProject = {
+    _id: 'sample1',
+    title: 'Strategic website rollout',
+    slug: { current: 'strategic-website-rollout' },
+    client: 'CreativeTrust',
+    mainImage: null,
+    description: 'Zintegrowany projekt strony, contentu i konwersji dla marki, która potrzebowała jasnego, bardziej dojrzałego przekazu.',
+};
 
-    // Przykładowy projekt na wypadek braku połączenia z Sanity
-    const sampleProject: FeaturedProject = {
-        _id: 'sample1',
-        title: 'Fintech Dello Banking App',
-        slug: { current: 'fintech-dello-banking-app' },
-        client: 'Booking Corp.',
-        mainImage: null,
-        description: 'Kompleksowy projekt aplikacji bankowej z funkcjami wymiany walut i zarządzania inwestycjami.'
-    };
+export default function FeaturedCaseStudy() {
+    const [featuredProject, setFeaturedProject] = useState<FeaturedProject | null>(null);
 
     useEffect(() => {
         const fetchFeaturedProject = async () => {
             try {
-                setIsLoading(true);
-                // Pobierz najnowszy projekt z kategorią "case-study"
                 const data = await client.fetch(`
-          *[_type == "portfolioProject" && references(*[_type == "serviceCategory" && slug.current == "case-study"]._id)][0] {
-            _id,
-            title,
-            slug,
-            client,
-            mainImage,
-            description
-          }
-        `);
+                    *[_type == "portfolioProject" && references(*[_type == "serviceCategory" && slug.current == "case-study"]._id)][0] {
+                        _id,
+                        title,
+                        slug,
+                        client,
+                        mainImage,
+                        description
+                    }
+                `);
 
                 setFeaturedProject(data || sampleProject);
-                setIsLoading(false);
             } catch (error) {
                 console.error('Błąd podczas pobierania wyróżnionego projektu:', error);
                 setFeaturedProject(sampleProject);
-                setIsLoading(false);
             }
         };
 
         fetchFeaturedProject();
     }, []);
 
-    if (isLoading) {
+    if (!featuredProject) {
         return (
-            <div className="w-full py-16 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="h-96 bg-gray-100 rounded-xl animate-pulse"></div>
+            <section className="w-full px-6 py-16 md:py-24">
+                <div className="mx-auto max-w-[1800px]">
+                    <div className="h-[420px] animate-pulse rounded-[8px] border border-slate-200 bg-slate-100" />
                 </div>
-            </div>
+            </section>
         );
     }
 
-    if (!featuredProject) return null;
+    const description = Array.isArray(featuredProject.description)
+        ? featuredProject.description[0]?.children?.[0]?.text || 'Zobacz szczegóły projektu.'
+        : featuredProject.description || 'Zobacz szczegóły projektu.';
 
     return (
-        <section className="w-full py-16 md:py-24 px-6">
-            <div className="max-w-[1800px] mx-auto">
-                <div className="bg-gray-100 rounded-xl p-6 md:p-10">
-                    <div className="flex flex-col md:flex-row items-center">
-                        <div className="w-full md:w-2/3 relative rounded-lg overflow-hidden mb-8 md:mb-0 md:mr-10">
-                            {featuredProject.mainImage ? (
-                                <div className="aspect-[16/9] relative">
-                                    <Image
-                                        src={urlFor(featuredProject.mainImage).url()}
-                                        alt={featuredProject.title}
-                                        fill
-                                        className="object-cover"
-                                        sizes="(max-width: 768px) 100vw, 66vw"
-                                    />
-                                </div>
-                            ) : (
-                                <div className="aspect-[16/9] bg-gray-200 relative flex items-center justify-center">
-                                    <span className="text-gray-400">Brak zdjęcia</span>
-                                </div>
-                            )}
+        <section className="w-full px-6 py-16 md:py-24">
+            <div className="mx-auto max-w-[1800px] border-t border-slate-200 pt-6">
+                <div className="mb-8 flex items-end justify-between gap-6">
+                    <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                            Wybrane case study
+                        </p>
+                        <h2 className="mt-2 text-3xl font-medium text-slate-950 md:text-4xl">
+                            Jedna realizacja, która pokazuje jak łączymy design, treść i wykonanie.
+                        </h2>
+                    </div>
+                    <Link href={`/portfolio/${featuredProject.slug.current}`} className="hidden text-sm font-medium text-slate-950 md:inline-flex">
+                        Otwórz projekt
+                    </Link>
+                </div>
 
-                            <div className="absolute bottom-4 left-4 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-sm">
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M7 17L17 7"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                    <path
-                                        d="M7 7H17V17"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
+                <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+                    <div className="overflow-hidden rounded-[8px] border border-slate-200 bg-slate-50">
+                        {featuredProject.mainImage ? (
+                            <div className="relative aspect-[16/10]">
+                                <Image
+                                    src={urlFor(featuredProject.mainImage).url()}
+                                    alt={featuredProject.title}
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 1024px) 100vw, 65vw"
+                                />
+                            </div>
+                        ) : (
+                            <div className="flex aspect-[16/10] items-center justify-center bg-slate-100 text-sm text-slate-400">
+                                Brak zdjęcia
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="flex flex-col justify-between rounded-[8px] border border-slate-200 bg-white p-6 md:p-8">
+                        <div>
+                            <p className="text-sm font-medium text-slate-500">{featuredProject.client}</p>
+                            <h3 className="mt-3 text-2xl font-medium text-slate-950 md:text-3xl">
+                                {featuredProject.title}
+                            </h3>
+                            <p className="mt-5 max-w-xl text-sm leading-6 text-slate-600 md:text-base">
+                                {description.length > 180 ? `${description.slice(0, 180)}...` : description}
+                            </p>
+                        </div>
+
+                        <div className="mt-10 grid gap-3 border-t border-slate-200 pt-5 text-sm text-slate-600">
+                            <div className="flex items-center justify-between">
+                                <span>Zakres</span>
+                                <span className="font-medium text-slate-950">Strategia / UX / wdrożenie</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <span>Cel</span>
+                                <span className="font-medium text-slate-950">Lepsza konwersja</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <span>Format</span>
+                                <span className="font-medium text-slate-950">Case study</span>
                             </div>
                         </div>
 
-                        <div className="w-full md:w-1/3">
-                            <div className="mb-2 text-gray-500">{featuredProject.client}</div>
-                            <h3 className="text-2xl md:text-3xl font-medium mb-4">{featuredProject.title}</h3>
-                            <p className="text-gray-700 mb-6">
-                                {Array.isArray(featuredProject.description) 
-                                    ? featuredProject.description[0]?.children?.[0]?.text 
-                                      ? `${featuredProject.description[0].children[0].text.substring(0, 120)}...` 
-                                      : 'Zobacz szczegóły projektu'
-                                    : featuredProject.description?.length > 120
-                                      ? `${featuredProject.description.substring(0, 120)}...`
-                                      : featuredProject.description || 'Zobacz szczegóły projektu'}
-                            </p>
-
-                            <Link href={`/portfolio/${featuredProject.slug.current}`}>
-                                <motion.div
-                                    className="inline-flex items-center text-black font-medium"
-                                    whileHover={{ x: 5 }}
-                                    transition={{ duration: 0.2 }}
-                                >
-                                    Zobacz case study
-                                    <svg
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="ml-2"
-                                    >
-                                        <path
-                                            d="M5 12H19"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <path
-                                            d="M12 5L19 12L12 19"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                </motion.div>
-                            </Link>
-                        </div>
+                        <Link
+                            href={`/portfolio/${featuredProject.slug.current}`}
+                            className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-slate-950"
+                        >
+                            Zobacz pełen projekt
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12H19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M12 5L19 12L12 19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </Link>
                     </div>
                 </div>
             </div>
         </section>
     );
-};
-
-export default FeaturedCaseStudy;
+}

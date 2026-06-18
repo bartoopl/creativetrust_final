@@ -1,87 +1,58 @@
-"use client";
-
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
 import Button from './Button';
 
-const OurStory: React.FC = () => {
-    const [firstPartWords, setFirstPartWords] = useState<string[]>([]);
-    const [secondPartWords, setSecondPartWords] = useState<string[]>([]);
+const principles = [
+    {
+        title: 'Strategia przed estetyką',
+        description: 'Najpierw definiujemy problem biznesowy i sposób pomiaru efektu. Design ma wspierać decyzję, nie tylko wyglądać dobrze.',
+    },
+    {
+        title: 'Jedna odpowiedzialność za wynik',
+        description: 'Łączymy branding, web, e-commerce i automation w jednym procesie. Dzięki temu nie rozbijamy odpowiedzialności na przypadkowych wykonawców.',
+    },
+    {
+        title: 'Wdrożenie, nie tylko koncepcja',
+        description: 'Dowozimy projekt od planu po implementację. Klient dostaje działający system, a nie dokument do archiwum.',
+    },
+];
 
-    const firstPart = "Poznaj naszą historię i dowiedz się, co wyróżnia nas w";
-    const secondPart = "tworzeniu skutecznych doświadczeń cyfrowych.";
-
-    useEffect(() => {
-        setFirstPartWords(firstPart.split(' '));
-        setSecondPartWords(secondPart.split(' '));
-    }, []);
-
+export default function OurStory() {
     return (
-        <section className="w-full py-20 px-6 border-t border-gray-100">
-            <div className="max-w-[1800px] mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-start">
-                    <div className="mb-6 md:mb-0">
-                        <h3 className="text-2xl font-medium">Nasza Historia</h3>
-                    </div>
-
-                    <div className="w-full md:w-3/5">
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-10 md:mb-6 leading-tight flex flex-wrap">
-                            {firstPartWords.map((word, wordIndex) => (
-                                <React.Fragment key={wordIndex}>
-                  <span className="inline-flex mr-[0.3em] whitespace-nowrap">
-                    {word.split('').map((letter, letterIndex) => (
-                        <motion.span
-                            key={letterIndex}
-                            initial={{ color: "rgb(156, 163, 175)" }} // text-gray-400
-                            animate={{ color: "rgb(33, 33, 33)" }}    // text-gray-900
-                            transition={{
-                                duration: 0.3,
-                                delay: (wordIndex * word.length + letterIndex) * 0.01,
-                                ease: "easeInOut"
-                            }}
-                            className="inline-block"
-                        >
-                            {letter}
-                        </motion.span>
-                    ))}
-                  </span>
-                                </React.Fragment>
-                            ))}
-                            {" "}
-                            {secondPartWords.map((word, wordIndex) => (
-                                <React.Fragment key={wordIndex}>
-                  <span className="inline-flex mr-[0.3em] whitespace-nowrap">
-                    {word.split('').map((letter, letterIndex) => (
-                        <motion.span
-                            key={letterIndex}
-                            initial={{ color: "rgb(209, 213, 219)" }} // bardzo jasny szary
-                            animate={{ color: "rgb(156, 163, 175)" }}    // docelowy szary
-                            transition={{
-                                duration: 0.3,
-                                delay: ((firstPartWords.length + wordIndex) * word.length + letterIndex) * 0.01,
-                                ease: "easeInOut"
-                            }}
-                            className="inline-block"
-                        >
-                            {letter}
-                        </motion.span>
-                    ))}
-                  </span>
-                                </React.Fragment>
-                            ))}
+        <section className="w-full px-6 py-16 md:py-24">
+            <div className="mx-auto max-w-[1800px] border-t border-slate-200 pt-6">
+                <div className="grid gap-8 lg:grid-cols-[0.35fr_0.65fr] lg:items-start">
+                    <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                            Dlaczego my
+                        </p>
+                        <h2 className="mt-3 text-3xl font-medium text-slate-950 md:text-4xl">
+                            Pracujemy jak partner, nie jak dostawca od pojedynczej usługi.
                         </h2>
                     </div>
-                </div>
 
-                <div className="flex justify-end mt-4">
-                    <Button href="/o-nas">
-                        O nas
-                    </Button>
+                    <div>
+                        <div className="grid gap-px overflow-hidden border border-slate-200 bg-slate-200 md:grid-cols-3">
+                            {principles.map((principle) => (
+                                <div key={principle.title} className="bg-white p-6 md:p-7">
+                                    <h3 className="text-xl font-medium text-slate-950">
+                                        {principle.title}
+                                    </h3>
+                                    <p className="mt-4 text-sm leading-6 text-slate-600">
+                                        {principle.description}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="mt-8 flex flex-col gap-4 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                            <p className="max-w-2xl text-sm leading-6 text-slate-600 md:text-base">
+                                Jeśli potrzebujesz uporządkować komunikację, przebudować stronę albo poukładać sprzedaż w sieci,
+                                zaczynamy od diagnozy, a nie od gotowego szablonu.
+                            </p>
+                            <Button href="/o-nas">Poznaj zespół</Button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     );
-};
-
-export default OurStory;
+}

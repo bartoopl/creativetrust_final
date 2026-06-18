@@ -1,249 +1,112 @@
 "use client";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import ConsentManager from './ConsentManager';
 
-const Footer: React.FC = () => {
+const serviceLinks = [
+    { href: '/uslugi/branding', label: 'Branding' },
+    { href: '/uslugi/strony-www', label: 'Strony WWW' },
+    { href: '/uslugi/e-commerce', label: 'E-commerce' },
+    { href: '/uslugi/social-media', label: 'Social Media' },
+    { href: '/uslugi/marketing-automation', label: 'Marketing Automation' },
+];
+
+export default function Footer() {
     const [showConsentManager, setShowConsentManager] = useState(false);
 
     return (
-        <footer className="w-full py-16 md:py-24 px-6 bg-black overflow-hidden">
-            <div className="max-w-[1800px] mx-auto">
-                {/* Główny nagłówek CTA */}
-                <div className="mb-16">
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-8 md:mb-10 tracking-tight">
-                        Porozmawiajmy <br className="hidden md:block" />o rozwiązaniach dla Ciebie
-                    </h2>
-
+        <footer className="w-full bg-slate-950 px-6 py-16 text-white md:py-24">
+            <div className="mx-auto max-w-[1800px]">
+                <div className="grid gap-10 border-b border-white/10 pb-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
                     <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
+                            CreativeTrust
+                        </p>
+                        <h2 className="mt-4 max-w-3xl text-3xl font-medium leading-[1.05] md:text-5xl lg:text-6xl">
+                            Jeśli chcesz uporządkować komunikację i przełożyć ją na wynik, porozmawiajmy.
+                        </h2>
+                    </div>
+
+                    <div className="flex flex-col gap-4 lg:items-end">
                         <Link
                             href="/kontakt"
-                            className="group relative inline-flex items-center justify-center gap-2
-                                bg-white text-black px-6 py-3 rounded-full font-medium
-                                transition-all duration-300 ease-in-out
-                                hover:bg-transparent hover:text-white hover:border hover:border-white"
+                            className="inline-flex items-center justify-center gap-2 rounded-full border border-white bg-white px-5 py-3 text-sm font-medium text-slate-950 transition-colors hover:bg-transparent hover:text-white"
                         >
-                            <span>Porozmawiajmy</span>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="transform transition-transform duration-300 group-hover:rotate-45"
-                            >
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
+                            Umów rozmowę
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <line x1="7" y1="17" x2="17" y2="7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <polyline points="7 7 17 7 17 17" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </Link>
+                        <p className="max-w-md text-sm leading-6 text-white/60 lg:text-right">
+                            Branding, strony WWW, e-commerce, social media i marketing automation. Zaczynamy od problemu,
+                            kończymy na działającym systemie.
+                        </p>
                     </div>
                 </div>
 
-                {/* Linki nawigacyjne i social media */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-10 border-t border-gray-800">
-                    {/* Main navigation */}
-                    <div className="mb-6 md:mb-0">
-                        <nav className="flex flex-col md:flex-row gap-3 md:gap-8">
-                            <Link
-                                href="/"
-                                className="text-white hover:text-gray-300"
-                            >
-                                Home
-                            </Link>
-                            <Link
-                                href="/portfolio"
-                                className="text-white hover:text-gray-300"
-                            >
-                                Realizacje
-                            </Link>
-                            <Link
-                                href="/o-nas"
-                                className="text-white hover:text-gray-300"
-                            >
-                                O nas
-                            </Link>
-                            <Link
-                                href="/kontakt"
-                                className="text-white hover:text-gray-300"
-                            >
-                                Kontakt
-                            </Link>
-                            <Link
-                                href="/baza-wiedzy"
-                                className="text-white hover:text-gray-300"
-                            >
-                                Baza wiedzy
-                            </Link>
-                            <Link
-                                href="/panel-klienta"
-                                className="text-white hover:text-gray-300"
-                            >
-                                Panel Klienta
-                            </Link>
+                <div className="grid gap-8 py-10 md:grid-cols-3">
+                    <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40">
+                            Nawigacja
+                        </p>
+                        <nav className="mt-4 flex flex-col gap-3 text-sm text-white/80">
+                            <Link href="/" className="hover:text-white">Home</Link>
+                            <Link href="/uslugi" className="hover:text-white">Usługi</Link>
+                            <Link href="/portfolio" className="hover:text-white">Realizacje</Link>
+                            <Link href="/o-nas" className="hover:text-white">O nas</Link>
+                            <Link href="/blog" className="hover:text-white">Blog</Link>
+                            <Link href="/kontakt" className="hover:text-white">Kontakt</Link>
                         </nav>
                     </div>
 
                     <div>
-                        <h3 className="text-gray-400 text-sm mb-4">Usługi</h3>
-                        <nav className="flex flex-col gap-3">
-                            <Link href="/uslugi/strony-www" className="text-white hover:text-gray-300">
-                                Strony WWW
-                            </Link>
-                            <Link href="/uslugi/tworzenie-stron-www-cennik" className="text-white hover:text-gray-300">
-                                Cennik stron WWW
-                            </Link>
-                            <Link href="/uslugi/social-media" className="text-white hover:text-gray-300">
-                                Social Media
-                            </Link>
-                            <Link href="/uslugi/e-commerce" className="text-white hover:text-gray-300">
-                                E-commerce
-                            </Link>
-                            <Link href="/uslugi/migracja-woocommerce-do-headless" className="text-white hover:text-gray-300">
-                                Migracja WooCommerce
-                            </Link>
-                            <Link href="/uslugi/branding" className="text-white hover:text-gray-300">
-                                Branding
-                            </Link>
-                            <Link href="/uslugi/marketing-automation" className="text-white hover:text-gray-300">
-                                Marketing Automation
-                            </Link>
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40">
+                            Usługi
+                        </p>
+                        <nav className="mt-4 flex flex-col gap-3 text-sm text-white/80">
+                            {serviceLinks.map((service) => (
+                                <Link key={service.href} href={service.href} className="hover:text-white">
+                                    {service.label}
+                                </Link>
+                            ))}
                         </nav>
                     </div>
 
-                    {/* Right section - Social media links */}
-                    <div className="flex justify-end">
-                        <div className="flex flex-col gap-3">
-                            <Link
-                                href="https://www.linkedin.com/company/creativetrust"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center text-white hover:text-gray-300"
-                            >
-                                <span className="mr-auto">LinkedIn</span>
-                                <span className="ml-8">
-                                    <svg
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="text-white"
-                                    >
-                                        <path
-                                            d="M7 17L17 7"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <path
-                                            d="M7 7H17V17"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                </span>
+                    <div className="md:text-right">
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40">
+                            Kontakt
+                        </p>
+                        <div className="mt-4 flex flex-col gap-3 text-sm text-white/80 md:items-end">
+                            <Link href="mailto:office@creativetrust.pl" className="hover:text-white">
+                                office@creativetrust.pl
                             </Link>
-
-                            <Link
-                                href="https://www.facebook.com/creativetrustpl/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center text-white hover:text-gray-300"
-                            >
-                                <span className="mr-auto">Facebook</span>
-                                <span className="ml-8">
-                                    <svg
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="text-white"
-                                    >
-                                        <path
-                                            d="M7 17L17 7"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <path
-                                            d="M7 7H17V17"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                </span>
+                            <Link href="https://www.linkedin.com/company/creativetrust" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                                LinkedIn
                             </Link>
-
-                            <Link
-                                href="https://www.instagram.com/creativetrust_/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center text-white hover:text-gray-300"
-                            >
-                                <span className="mr-auto">Instagram</span>
-                                <span className="ml-8">
-                                    <svg
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="text-white"
-                                    >
-                                        <path
-                                            d="M7 17L17 7"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <path
-                                            d="M7 7H17V17"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                </span>
+                            <Link href="https://www.instagram.com/creativetrust_/" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                                Instagram
                             </Link>
+                            <button
+                                onClick={() => setShowConsentManager(true)}
+                                className="text-sm text-white/60 transition-colors hover:text-white"
+                            >
+                                Ustawienia prywatności
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                {/* Informacje o prawach autorskich i ustawienia prywatności */}
-                <div className="mt-12 text-center text-gray-500 text-sm">
-                    <p className="mb-2">&copy; {new Date().getFullYear()} Creative Trust. Wszelkie prawa zastrzeżone.</p>
-                    <div className="flex justify-center space-x-6">
-                        <Link href="/polityka-prywatnosci" className="text-gray-400 hover:text-gray-300 transition-colors">
-                            Polityka Prywatności
-                        </Link>
-                        <button
-                            onClick={() => setShowConsentManager(true)}
-                            className="text-gray-400 hover:text-gray-300 transition-colors"
-                        >
-                            Ustawienia prywatności
-                        </button>
-                    </div>
+                <div className="flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/40 md:flex-row md:items-center md:justify-between">
+                    <p>&copy; {new Date().getFullYear()} CreativeTrust. Wszystkie prawa zastrzeżone.</p>
+                    <Link href="/polityka-prywatnosci" className="hover:text-white">
+                        Polityka prywatności
+                    </Link>
                 </div>
             </div>
 
-            {/* Panel zarządzania zgodami */}
-            {showConsentManager && <ConsentManager onClose={() => setShowConsentManager(false)} />}
+            {showConsentManager ? <ConsentManager onClose={() => setShowConsentManager(false)} /> : null}
         </footer>
     );
-};
-
-export default Footer;
+}

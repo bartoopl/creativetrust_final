@@ -1,245 +1,99 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-
-interface Service {
-    id: string;
-    title: string;
-    description: string;
-    icon: React.ReactNode;
-    color: string;
-}
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface MegaMenuProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
-const services: Service[] = [
-    {
-        id: 'strony-www',
-        title: 'Strony WWW',
-        description: 'Projektujemy i wdrażamy nowoczesne strony internetowe.',
-        icon: (
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-            </svg>
-        ),
-        color: 'bg-black'
-    },
-    {
-        id: 'e-commerce',
-        title: 'E-commerce',
-        description: 'Tworzymy sklepy internetowe, które generują sprzedaż.',
-        icon: (
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-        ),
-        color: 'bg-black'
-    },
-    {
-        id: 'branding',
-        title: 'Branding',
-        description: 'Budujemy silne marki, które wyróżniają się na tle konkurencji.',
-        icon: (
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-            </svg>
-        ),
-        color: 'bg-black'
-    },
-    {
-        id: 'social-media',
-        title: 'Social Media',
-        description: 'Prowadzimy social media, które budują markę i angażują odbiorców.',
-        icon: (
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-            </svg>
-        ),
-        color: 'bg-black'
-    },
-    {
-        id: 'marketing-automation',
-        title: 'Marketing Automation',
-        description: 'Automatyzujemy procesy marketingowe i zwiększamy skuteczność.',
-        icon: (
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-        ),
-        color: 'bg-black'
-    },
+const services = [
+    { id: 'branding', title: 'Branding', description: 'Strategia marki, identyfikacja, rebranding.' },
+    { id: 'strony-www', title: 'Strony WWW', description: 'Strony firmowe, landing pages, UX i wdrożenie.' },
+    { id: 'e-commerce', title: 'E-commerce', description: 'Headless commerce, migracje i integracje.' },
+    { id: 'social-media', title: 'Social Media', description: 'Komunikacja, content i prowadzenie kanałów.' },
+    { id: 'marketing-automation', title: 'Marketing Automation', description: 'Automatyzacje, segmentacja i lead nurturing.' },
 ];
 
-const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
-    const menuRef = useRef<HTMLDivElement>(null);
-
-    // Obsługa kliknięcia poza menu, aby je zamknąć
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-                onClose();
-            }
-        };
-
-        if (isOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [isOpen, onClose]);
-
-    // Zapobieganie scrollowaniu strony, gdy menu jest otwarte
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-
-        return () => {
-            document.body.style.overflow = '';
-        };
-    }, [isOpen]);
-
+export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
     return (
         <AnimatePresence>
-            {isOpen && (
+            {isOpen ? (
                 <>
-                    {/* Overlay */}
-                    <motion.div
+                    <motion.button
+                        aria-label="Zamknij menu"
+                        className="fixed inset-0 z-40 bg-slate-950/30"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="fixed inset-0 bg-black bg-opacity-50 z-40"
                         onClick={onClose}
                     />
 
-                    {/* Mega Menu */}
                     <motion.div
-                        ref={menuRef}
-                        initial={{ opacity: 0, y: -20 }}
+                        initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed top-[76px] left-0 right-0 bg-white z-50 shadow-xl border-t border-gray-100"
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="fixed left-0 right-0 top-[73px] z-50 border-b border-slate-200 bg-white"
                     >
-                        <div className="max-w-[1800px] mx-auto px-6 py-12">
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                                {/* Główne usługi */}
-                                <div className="col-span-2">
-                                    <h3 className="text-lg font-medium mb-6">Nasze usługi</h3>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                        {services.map((service) => (
-                                            <Link
-                                                key={service.id}
-                                                href={`/uslugi/${service.id}`}
-                                                className="p-4 rounded-xl hover:bg-gray-50 transition-colors flex flex-col h-full"
-                                                onClick={onClose}
-                                            >
-                                                <div className={`w-14 h-14 rounded-xl flex items-center justify-center text-white bg-gradient-to-r ${service.color} mb-4`}>
-                                                    {service.icon}
-                                                </div>
-                                                <h4 className="text-lg font-medium mb-2">{service.title}</h4>
-                                                <p className="text-gray-600 text-sm mb-4">{service.description}</p>
-                                                <div className="mt-auto flex items-center text-sm font-medium text-gray-900">
-                                                    <span>Dowiedz się więcej</span>
-                                                    <svg
-                                                        width="16"
-                                                        height="16"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        className="ml-2"
-                                                    >
-                                                        <path
-                                                            d="M5 12H19"
-                                                            stroke="currentColor"
-                                                            strokeWidth="2"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                        <path
-                                                            d="M12 5L19 12L12 19"
-                                                            stroke="currentColor"
-                                                            strokeWidth="2"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                            </Link>
-                                        ))}
-                                    </div>
+                        <div className="mx-auto grid max-w-[1800px] gap-8 px-6 py-8 md:grid-cols-[0.75fr_1.25fr]">
+                            <div className="max-w-md">
+                                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                                    Zakres usług
+                                </p>
+                                <h3 className="mt-3 text-2xl font-medium text-slate-950">
+                                    Wybierasz obszar, my spinamy strategię, wykonanie i rozwój.
+                                </h3>
+                                <p className="mt-4 text-sm leading-6 text-slate-600">
+                                    Najczęściej wchodzimy od jednego problemu, ale projektujemy całość tak, żeby nie rozjechać
+                                    komunikacji między stroną, sprzedażą i marketingiem.
+                                </p>
+
+                                <div className="mt-6 flex flex-wrap gap-3">
+                                    <Link href="/uslugi" onClick={onClose} className="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-950 hover:border-slate-950">
+                                        Wszystkie usługi
+                                    </Link>
+                                    <Link href="/kontakt" onClick={onClose} className="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-950 hover:border-slate-950">
+                                        Kontakt
+                                    </Link>
                                 </div>
+                            </div>
 
-                                {/* Prawa kolumna z dodatkowymi linkami */}
-                                <div>
-                                    <h3 className="text-lg font-medium mb-6">Przydatne linki</h3>
-                                    <div className="space-y-4">
-                                        <Link
-                                            href="/uslugi"
-                                            className="block p-4 rounded-lg hover:bg-gray-50 transition-colors"
-                                            onClick={onClose}
-                                        >
-                                            <h4 className="text-lg font-medium mb-1">Wszystkie usługi</h4>
-                                            <p className="text-gray-600 text-sm">Zobacz pełną ofertę naszych usług</p>
-                                        </Link>
-
-                                        <Link
-                                            href="/portfolio"
-                                            className="block p-4 rounded-lg hover:bg-gray-50 transition-colors"
-                                            onClick={onClose}
-                                        >
-                                            <h4 className="text-lg font-medium mb-1">Portfolio</h4>
-                                            <p className="text-gray-600 text-sm">Zobacz nasze realizacje</p>
-                                        </Link>
-
-                                        <Link
-                                            href="/uslugi/tworzenie-stron-www-cennik"
-                                            className="block p-4 rounded-lg hover:bg-gray-50 transition-colors"
-                                            onClick={onClose}
-                                        >
-                                            <h4 className="text-lg font-medium mb-1">Cennik stron WWW</h4>
-                                            <p className="text-gray-600 text-sm">Zobacz orientacyjne zakresy projektów</p>
-                                        </Link>
-
-                                        <Link
-                                            href="/blog"
-                                            className="block p-4 rounded-lg hover:bg-gray-50 transition-colors"
-                                            onClick={onClose}
-                                        >
-                                            <h4 className="text-lg font-medium mb-1">Blog</h4>
-                                            <p className="text-gray-600 text-sm">Artykuły i porady</p>
-                                        </Link>
-
-                                        <div className="border-t border-gray-100 my-6"></div>
-
-                                        <Link
-                                            href="/kontakt"
-                                            className="block p-4 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
-                                            onClick={onClose}
-                                        >
-                                            <h4 className="text-lg font-medium mb-1">Skontaktuj się z nami</h4>
-                                            <p className="text-gray-300 text-sm">Umów bezpłatną konsultację</p>
-                                        </Link>
-                                    </div>
-                                </div>
+                            <div className="grid gap-px overflow-hidden border border-slate-200 bg-slate-200 sm:grid-cols-2">
+                                {services.map((service) => (
+                                    <Link
+                                        key={service.id}
+                                        href={`/uslugi/${service.id}`}
+                                        onClick={onClose}
+                                        className="group bg-white p-5 transition-colors hover:bg-slate-50"
+                                    >
+                                        <div className="flex items-start justify-between gap-4">
+                                            <div>
+                                                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                                                    Service
+                                                </p>
+                                                <h4 className="mt-2 text-lg font-medium text-slate-950">
+                                                    {service.title}
+                                                </h4>
+                                            </div>
+                                            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:border-slate-950">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                    <path d="M7 17L17 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                    <path d="M7 7H17V17" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <p className="mt-3 text-sm leading-6 text-slate-600">
+                                            {service.description}
+                                        </p>
+                                    </Link>
+                                ))}
                             </div>
                         </div>
                     </motion.div>
                 </>
-            )}
+            ) : null}
         </AnimatePresence>
     );
-};
-
-export default MegaMenu;
+}

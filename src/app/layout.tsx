@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Manrope } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -7,25 +6,19 @@ import CookieConsent from '@/components/CookieConsent';
 import SchemaScript from '@/components/SchemaScript';
 import { organizationSchema } from '@/lib/schema';
 
-const manrope = Manrope({
-    subsets: ['latin'],
-    weight: ['500', '700'],
-    display: 'swap'
-});
-
 export const metadata: Metadata = {
     metadataBase: new URL('https://creativetrust.pl'),
     title: {
-        default: 'Agencja marketingowa, strony WWW i e-commerce | CreativeTrust',
+        default: 'CreativeTrust | Branding, strony WWW, e-commerce i automation',
         template: '%s | CreativeTrust',
     },
-    description: 'CreativeTrust projektuje strony WWW, e-commerce, branding i marketing automation dla firm, które chcą lepszej widoczności i większej sprzedaży.',
+    description: 'CreativeTrust łączy branding, strony WWW, e-commerce, social media i marketing automation w jednym procesie projektowym.',
     alternates: {
         canonical: '/',
     },
     openGraph: {
-        title: 'Agencja marketingowa, strony WWW i e-commerce | CreativeTrust',
-        description: 'CreativeTrust projektuje strony WWW, e-commerce, branding i marketing automation dla firm, które chcą lepszej widoczności i większej sprzedaży.',
+        title: 'CreativeTrust | Branding, strony WWW, e-commerce i automation',
+        description: 'CreativeTrust łączy branding, strony WWW, e-commerce, social media i marketing automation w jednym procesie projektowym.',
         url: 'https://creativetrust.pl',
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -33,8 +26,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Agencja marketingowa, strony WWW i e-commerce | CreativeTrust',
-        description: 'CreativeTrust projektuje strony WWW, e-commerce, branding i marketing automation dla firm, które chcą lepszej widoczności i większej sprzedaży.',
+        title: 'CreativeTrust | Branding, strony WWW, e-commerce i automation',
+        description: 'CreativeTrust łączy branding, strony WWW, e-commerce, social media i marketing automation w jednym procesie projektowym.',
     },
 };
 
@@ -134,7 +127,7 @@ export default function RootLayout({
                 }}
             />
         </head>
-        <body className={`${manrope.className} overflow-x-hidden w-full`}>
+        <body className="overflow-x-hidden w-full antialiased">
         <script
             dangerouslySetInnerHTML={{
                 __html: `

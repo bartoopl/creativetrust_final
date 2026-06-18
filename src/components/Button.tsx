@@ -15,10 +15,10 @@ const Button: React.FC<ButtonProps> = ({ href, children, className = '', onClick
         <Link
             href={href}
             className={`
-                group relative inline-flex items-center justify-center gap-2 
-                px-6 py-3 rounded-full font-medium
+                group inline-flex items-center justify-center gap-2 rounded-full
+                border border-black bg-black px-5 py-3 text-sm font-medium text-white
                 transition-all duration-300 ease-in-out
-                bg-black text-white hover:bg-gray-800
+                hover:bg-white hover:text-black
                 ${className}
             `}
             onClick={onClick}
@@ -34,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({ href, children, className = '', onClick
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="transform transition-transform duration-300 group-hover:rotate-45"
+                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             >
                 <line x1="7" y1="17" x2="17" y2="7"></line>
                 <polyline points="7 7 17 7 17 17"></polyline>
