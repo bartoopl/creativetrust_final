@@ -45,12 +45,12 @@ export default function PortfolioPage() {
         <main style={{ minHeight: '100vh' }}>
 
             {/* Hero */}
-            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 64px' }} className="px-4 pb-14 sm:px-6 lg:px-8">
-                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>REALIZACJE</div>
-                <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(36px, 6vw, 76px)', lineHeight: 1.02, letterSpacing: '-0.025em', margin: '0 0 16px' }}>
+            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(60px, 8vw, 96px) 32px 56px' }} className="px-4 pb-14 sm:px-6 lg:px-8">
+                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 16 }}>REALIZACJE</div>
+                <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 5.2vw, 64px)', lineHeight: 0.98, letterSpacing: '-0.045em', margin: '0 0 14px' }}>
                     150+ projektów. Każdy inny.
                 </h1>
-                <p style={{ color: 'var(--muted)', fontSize: 18, lineHeight: 1.55, maxWidth: '52ch', margin: 0 }}>
+                <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.55, maxWidth: '52ch', margin: 0 }}>
                     Marka, strona, sklep lub automatyzacja. Zobaczyć efekty to najlepszy sposób, żeby zrozumieć jak pracujemy.
                 </p>
             </section>
@@ -58,14 +58,14 @@ export default function PortfolioPage() {
             {/* Filter */}
             {categories.length > 0 && (
                 <div style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                    <div style={{ maxWidth: 1240, margin: '0 auto', padding: '20px 32px', display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }} className="px-4 sm:px-6 lg:px-8">
+                    <div style={{ maxWidth: 1240, margin: '0 auto', padding: '16px 32px', display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }} className="px-4 sm:px-6 lg:px-8">
                         {[{ _id: 'all', title: 'Wszystkie', slug: { current: 'all' } }, ...categories].map(cat => (
                             <button
                                 key={cat._id}
                                 onClick={() => setSelected(cat.slug.current)}
                                 style={{
-                                    fontFamily: 'var(--font-mono), monospace', fontSize: 13, cursor: 'pointer',
-                                    padding: '8px 16px', borderRadius: 999, border: '1px solid',
+                                    fontFamily: 'var(--font-mono), monospace', fontSize: 12, cursor: 'pointer',
+                                    padding: '7px 14px', borderRadius: 999, border: '1px solid',
                                     borderColor: selected === cat.slug.current ? 'var(--accent)' : 'var(--line)',
                                     background: selected === cat.slug.current ? 'color-mix(in srgb, var(--accent) 15%, var(--panel))' : 'transparent',
                                     color: selected === cat.slug.current ? 'var(--text)' : 'var(--muted)',
@@ -78,7 +78,7 @@ export default function PortfolioPage() {
             )}
 
             {/* Grid */}
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '56px 32px 96px' }} className="px-4 py-14 sm:px-6 lg:px-8">
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '48px 32px 88px' }} className="px-4 py-14 sm:px-6 lg:px-8">
                 {loading ? (
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         {[1, 2, 3, 4].map(i => (
@@ -104,8 +104,8 @@ export default function PortfolioPage() {
                                     )}
                                 </div>
                                 <div style={{ padding: '20px 24px' }}>
-                                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--muted)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.1em' }}>{project.client}</div>
-                                    <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 19 }}>{project.title}</div>
+                                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, color: 'var(--muted)', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.1em' }}>{project.client}</div>
+                                    <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 17 }}>{project.title}</div>
                                     {project.categories?.length > 0 && (
                                         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 12 }}>
                                             {project.categories.map(c => (

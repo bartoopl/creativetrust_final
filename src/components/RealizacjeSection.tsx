@@ -77,7 +77,7 @@ export default function RealizacjeSection() {
             '--line': 'rgba(255,255,255,0.08)',
             '--text': '#f5f7fb',
             '--muted': '#9ca3af',
-            '--glow': 'rgba(255,106,61,0.20)',
+            '--glow': 'rgba(165,107,255,0.24)',
             background: 'var(--bg)',
             color: 'var(--text)',
             borderTop: '1px solid var(--line)',
@@ -88,11 +88,11 @@ export default function RealizacjeSection() {
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 10 }}>
                             REALIZACJE
                         </div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 34px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04 }}>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(22px, 2.9vw, 32px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04 }}>
                             Efekty, nie obietnice.
                         </h2>
                     </div>
-                    <Link href="/portfolio" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--text)', textDecoration: 'none', fontSize: 13, borderBottom: '1px solid var(--accent)', paddingBottom: 3 }}>
+                    <Link href="/portfolio" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--text)', textDecoration: 'none', fontSize: 12, borderBottom: '1px solid var(--accent)', paddingBottom: 3 }}>
                         Wszystkie realizacje <span style={{ fontFamily: 'var(--font-mono), monospace' }}>→</span>
                     </Link>
                 </div>
@@ -147,7 +147,7 @@ export default function RealizacjeSection() {
                                     border: '1px solid var(--line)',
                                     backdropFilter: 'blur(8px)',
                                     fontFamily: 'var(--font-mono), monospace',
-                                    fontSize: 11,
+                                    fontSize: 10,
                                     letterSpacing: '.12em',
                                     textTransform: 'uppercase',
                                 }}>
@@ -158,10 +158,10 @@ export default function RealizacjeSection() {
                                 <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, color: 'var(--accent)', letterSpacing: '.12em', textTransform: 'uppercase', marginBottom: 8 }}>
                                     {r.category}
                                 </div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 17, margin: '0 0 10px', lineHeight: 1.2 }}>
-                                    {r.title}
-                                </h3>
-                                <div style={{ color: 'var(--muted)', fontSize: 13.5, lineHeight: 1.55, margin: 0 }}>
+                                    <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 16, margin: '0 0 10px', lineHeight: 1.2 }}>
+                                        {r.title}
+                                    </h3>
+                                <div style={{ color: 'var(--muted)', fontSize: 12.5, lineHeight: 1.55, margin: 0 }}>
                                     Otwórz projekt i zobacz zakres, efekty oraz szczegóły wdrożenia.
                                 </div>
                             </div>

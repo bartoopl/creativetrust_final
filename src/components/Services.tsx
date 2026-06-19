@@ -67,7 +67,7 @@ export default function Services() {
                             width: 280,
                             height: 280,
                             borderRadius: '50%',
-                            background: 'radial-gradient(circle, rgba(255, 106, 61, 0.20) 0%, rgba(255, 106, 61, 0.02) 68%, transparent 74%)',
+                            background: 'radial-gradient(circle, rgba(165, 107, 255, 0.22) 0%, rgba(165, 107, 255, 0.02) 68%, transparent 74%)',
                             pointerEvents: 'none',
                         }}
                     />

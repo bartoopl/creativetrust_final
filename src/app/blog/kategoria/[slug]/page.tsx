@@ -99,7 +99,7 @@ export default async function BlogCategoryPage({
                 </Link>
 
                 <div className="mb-12">
-                    <h1 className="text-4xl md:text-5xl font-medium mb-6">
+                    <h1 className="text-3xl md:text-4xl font-medium mb-6">
                         Kategoria: {category.title}
                     </h1>
                     {category.description && (

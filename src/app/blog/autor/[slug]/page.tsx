@@ -108,7 +108,7 @@ export default async function AuthorPage({
                         )}
 
                         <div className="text-center md:text-left">
-                            <h1 className="text-3xl md:text-5xl font-medium mb-4 leading-tight">{author.name}</h1>
+                            <h1 className="text-3xl md:text-4xl font-medium mb-4 leading-tight">{author.name}</h1>
 
                             {author.role && (
                                 <p className="text-lg sm:text-xl text-gray-600 mb-5 sm:mb-6">{author.role}</p>

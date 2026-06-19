@@ -28,7 +28,7 @@ export default function Footer() {
 
                 <h2 style={{
                     fontFamily: 'var(--font-space), sans-serif', fontWeight: 700,
-                    fontSize: 'clamp(28px, 4.8vw, 58px)', letterSpacing: '-0.045em',
+                    fontSize: 'clamp(26px, 4.2vw, 48px)', letterSpacing: '-0.045em',
                     lineHeight: 1, margin: '0 0 64px', maxWidth: '18ch',
                 }}>
                     Nie gonimy za trendami.{' '}

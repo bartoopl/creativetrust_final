@@ -8,15 +8,15 @@ const steps = [
 export default function ProcessSection() {
     return (
         <section id="podejscie" style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
-                <div style={{ marginBottom: 54, maxWidth: '60ch' }}>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
+                <div style={{ marginBottom: 42, maxWidth: '58ch' }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>
                         PODEJŚCIE
                     </div>
-                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(30px, 4vw, 52px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.04 }}>
+                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(26px, 3.2vw, 40px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04 }}>
                         Proces napędzany przez AI.
                     </h2>
-                    <p style={{ color: 'var(--muted)', fontSize: 17, lineHeight: 1.55, margin: '18px 0 0' }}>
+                    <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.55, margin: '14px 0 0' }}>
                         Pracujemy jak partner produktowy — w pętli. AI przyspiesza każdy etap, ale decyzje zostają po stronie ludzi.
                     </p>
                 </div>
@@ -29,9 +29,9 @@ export default function ProcessSection() {
                             borderRadius: 18,
                             background: step.featured ? 'linear-gradient(160deg, color-mix(in srgb, var(--accent) 16%, var(--panel)), var(--panel))' : 'var(--panel)',
                         }}>
-                            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 48 }}>{step.num}</div>
-                            <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, margin: '0 0 8px' }}>{step.title}</h3>
-                            <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.5, margin: 0 }}>{step.desc}</p>
+                            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--accent)', marginBottom: 38 }}>{step.num}</div>
+                            <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 8px' }}>{step.title}</h3>
+                            <p style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.5, margin: 0 }}>{step.desc}</p>
                         </div>
                     ))}
                 </div>

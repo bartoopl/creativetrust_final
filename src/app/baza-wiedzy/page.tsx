@@ -28,7 +28,7 @@ export default async function KnowledgeBasePage() {
     return (
         <main className="min-h-screen py-24 px-6">
             <div className="max-w-[1800px] mx-auto">
-                <h1 className="text-4xl md:text-5xl font-medium mb-4">Baza wiedzy</h1>
+                <h1 className="text-3xl md:text-4xl font-medium mb-4">Baza wiedzy</h1>
                 <p className="text-xl text-gray-600 mb-12 max-w-3xl">
                     Zapoznaj się z naszą bazą wiedzy na temat marketingu, designu, UX/UI i innych tematów związanych z rozwojem biznesu online.
                 </p>
@@ -62,7 +62,7 @@ export default async function KnowledgeBasePage() {
 
                         return (
                             <section key={letter} id={letter} className="scroll-mt-24">
-                                <h2 className="text-6xl font-bold mb-8 border-b pb-4">{letter}</h2>
+                                <h2 className="text-4xl md:text-5xl font-bold mb-8 border-b pb-4">{letter}</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                     {entries.map((entry: any) => (
                                         <Link

@@ -15,23 +15,23 @@ export default function CTASection() {
                     overflow: 'hidden',
                     borderRadius: 24,
                     border: '1px solid rgba(255,255,255,0.08)',
-                    background: 'linear-gradient(135deg, #11131a 0%, #1a1d25 52%, #11131a 100%)',
+                    background: 'linear-gradient(135deg, #10131a 0%, #171a23 52%, #10131a 100%)',
                     padding: 'clamp(28px, 5vw, 58px)',
                     color: '#f8f5ef',
                 }}
             >
                 <div
-                    aria-hidden="true"
-                    style={{
-                        position: 'absolute',
-                        inset: 'auto -15% -30% auto',
-                        width: 440,
-                        height: 440,
-                        borderRadius: '50%',
-                        background: 'radial-gradient(circle, rgba(198, 90, 54, 0.22) 0%, rgba(198, 90, 54, 0.06) 34%, transparent 72%)',
-                        pointerEvents: 'none',
-                    }}
-                />
+                        aria-hidden="true"
+                        style={{
+                            position: 'absolute',
+                            inset: 'auto -15% -30% auto',
+                            width: 440,
+                            height: 440,
+                            borderRadius: '50%',
+                            background: 'radial-gradient(circle, rgba(165, 107, 255, 0.24) 0%, rgba(165, 107, 255, 0.06) 34%, transparent 72%)',
+                            pointerEvents: 'none',
+                        }}
+                    />
                 <div style={{ position: 'relative', display: 'grid', gap: 28, alignItems: 'start', gridTemplateColumns: 'repeat(12, minmax(0, 1fr))' }}>
                     <div className="col-span-full lg:col-span-7">
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 10 }}>
@@ -41,7 +41,7 @@ export default function CTASection() {
                             style={{
                                 fontFamily: 'var(--font-space), sans-serif',
                                 fontWeight: 700,
-                                fontSize: 'clamp(28px, 4vw, 48px)',
+                                fontSize: 'clamp(26px, 3.4vw, 40px)',
                                 letterSpacing: '-0.045em',
                                 lineHeight: 1.02,
                                 margin: '0 0 16px',
@@ -50,7 +50,7 @@ export default function CTASection() {
                         >
                             Chcesz uporządkować produkt i przyspieszyć wzrost?
                         </h2>
-                        <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.6, maxWidth: '44ch', margin: '0 0 22px' }}>
+                        <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.6, maxWidth: '44ch', margin: '0 0 22px' }}>
                             Zacznijmy od krótkiej konsultacji. Pokażemy, gdzie masz największą dźwignię w brandzie, webie, e-commerce i automatyzacji.
                         </p>
                         <div className="flex flex-wrap gap-3">

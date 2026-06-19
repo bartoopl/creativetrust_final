@@ -92,7 +92,7 @@ export default function WooCommerceHeadlessMigrationPage() {
                         <p className="text-sm uppercase tracking-[0.3em] text-gray-400 mb-6">
                             WooCommerce → Headless
                         </p>
-                        <h1 className="text-4xl md:text-6xl font-medium leading-tight mb-8">
+                        <h1 className="text-3xl md:text-4xl font-medium leading-tight mb-8">
                             Migracja WooCommerce do headless storefrontu w Next.js
                         </h1>
                         <p className="text-xl text-gray-300 max-w-3xl mb-10">
@@ -145,15 +145,15 @@ export default function WooCommerceHeadlessMigrationPage() {
                 <div className="max-w-[1800px] mx-auto">
                     <div className="max-w-4xl mb-12">
                         <p className="text-gray-500 mb-3">Proces migracji</p>
-                        <h2 className="text-3xl md:text-5xl font-medium">
+                        <h2 className="text-2xl md:text-4xl font-medium">
                             Headless nie zaczyna się od kodu, tylko od decyzji architektonicznej
                         </h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {migrationSteps.map((step) => (
                             <div key={step.number} className="rounded-3xl border border-gray-200 p-8">
-                                <div className="text-4xl font-bold text-gray-200 mb-8">{step.number}</div>
-                                <h3 className="text-2xl font-medium mb-4">{step.title}</h3>
+                                <div className="text-3xl font-bold text-gray-200 mb-8">{step.number}</div>
+                                <h3 className="text-xl font-medium mb-4">{step.title}</h3>
                                 <p className="text-gray-600 leading-relaxed">{step.description}</p>
                             </div>
                         ))}
@@ -165,7 +165,7 @@ export default function WooCommerceHeadlessMigrationPage() {
                 <div className="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12">
                     <div>
                         <p className="text-gray-500 mb-3">Efekty biznesowe</p>
-                        <h2 className="text-3xl md:text-5xl font-medium leading-tight">
+                        <h2 className="text-2xl md:text-4xl font-medium leading-tight">
                             Migracja ma poprawić sprzedaż, nie tylko stack technologiczny
                         </h2>
                     </div>
@@ -182,7 +182,7 @@ export default function WooCommerceHeadlessMigrationPage() {
             <section className="px-6 py-16 md:py-24">
                 <div className="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
                     <div>
-                        <h2 className="text-3xl md:text-5xl font-medium mb-6">
+                        <h2 className="text-2xl md:text-4xl font-medium mb-6">
                             Nie każdy WooCommerce powinien przejść na headless
                         </h2>
                         <p className="text-lg text-gray-600 mb-6">

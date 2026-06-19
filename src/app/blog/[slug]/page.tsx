@@ -136,7 +136,7 @@ export default async function BlogPostPage({
                             ))}
                         </div>
 
-                        <h1 className="text-3xl md:text-5xl font-medium mb-5 sm:mb-6 leading-tight">{post.title}</h1>
+                        <h1 className="text-3xl md:text-4xl font-medium mb-5 sm:mb-6 leading-tight">{post.title}</h1>
 
                         {post.excerpt && (
                             <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8">{post.excerpt}</p>

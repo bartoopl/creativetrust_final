@@ -38,7 +38,7 @@ export default function Hero() {
                     width: 460,
                     height: 460,
                     borderRadius: '50%',
-                    background: 'radial-gradient(circle, rgba(255, 106, 61, 0.18) 0%, rgba(255, 106, 61, 0.05) 34%, transparent 72%)',
+                    background: 'radial-gradient(circle, rgba(165, 107, 255, 0.20) 0%, rgba(165, 107, 255, 0.06) 34%, transparent 72%)',
                     filter: 'blur(10px)',
                     pointerEvents: 'none',
                 }}
@@ -52,7 +52,7 @@ export default function Hero() {
                     height: 160,
                     borderRadius: 20,
                     border: '1px solid var(--line)',
-                    background: 'linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
+                        background: 'linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
                     transform: 'rotate(-8deg)',
                     pointerEvents: 'none',
                 }}
@@ -174,18 +174,18 @@ export default function Hero() {
                             position: 'absolute',
                             inset: 0,
                             background:
-                                'linear-gradient(135deg, rgba(255,106,61,0.10) 0%, transparent 26%, transparent 74%, rgba(111,183,255,0.06) 100%)',
+                                'linear-gradient(135deg, rgba(165,107,255,0.12) 0%, transparent 26%, transparent 74%, rgba(102,198,255,0.08) 100%)',
                             pointerEvents: 'none',
                         }}
                     />
 
                     <div style={{ position: 'relative', padding: 22, display: 'grid', gap: 14 }}>
                         <div
-                            style={{
-                                borderRadius: 18,
-                                padding: 20,
-                                background: 'linear-gradient(180deg, #11141a 0%, #0d0f14 100%)',
-                                color: 'var(--text)',
+                        style={{
+                            borderRadius: 18,
+                            padding: 20,
+                            background: 'linear-gradient(180deg, #11141a 0%, #0d0f14 100%)',
+                            color: 'var(--text)',
                                 border: '1px solid var(--line)',
                             }}
                         >
@@ -271,7 +271,7 @@ export default function Hero() {
                                         border: '1px solid var(--line)',
                                         borderRadius: 14,
                                         padding: 14,
-                                        background: index === 0 ? 'rgba(255, 106, 61, 0.08)' : 'rgba(255,255,255,0.02)',
+                                        background: index === 0 ? 'rgba(165, 107, 255, 0.10)' : 'rgba(255,255,255,0.02)',
                                     }}
                                 >
                                     <div

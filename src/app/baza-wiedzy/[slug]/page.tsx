@@ -124,7 +124,7 @@ export default async function KnowledgeBaseEntryPage({
                         <div className="text-gray-500">{formattedDate}</div>
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl font-medium mb-6">{entry.title}</h1>
+                    <h1 className="text-3xl md:text-4xl font-medium mb-6">{entry.title}</h1>
                     <p className="text-xl text-gray-600 mb-8 max-w-3xl">{entry.shortDescription}</p>
 
                     {entry.tags && entry.tags.length > 0 && (

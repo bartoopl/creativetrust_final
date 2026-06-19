@@ -15,7 +15,7 @@ export default function PrivacyPolicyPage() {
     return (
         <main className="min-h-screen py-24 px-6">
             <div className="max-w-4xl mx-auto">
-                <h1 className="text-4xl md:text-5xl font-medium mb-8">Polityka Prywatności</h1>
+                <h1 className="text-3xl md:text-4xl font-medium mb-8">Polityka Prywatności</h1>
 
                 <div className="prose max-w-none">
                     <p className="text-lg mb-8">

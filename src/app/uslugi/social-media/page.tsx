@@ -44,15 +44,15 @@ export default function SocialMediaPage() {
         <main style={{ minHeight: '100vh' }}>
 
             {/* Hero */}
-            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }}>
+            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(60px, 8vw, 96px) 32px 80px' }}>
                 <div style={{ maxWidth: 820 }}>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 16 }}>
                         SOCIAL MEDIA
                     </div>
-                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(36px, 6vw, 78px)', lineHeight: 1.02, letterSpacing: '-0.025em', margin: '0 0 24px' }}>
+                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 5.2vw, 64px)', lineHeight: 0.98, letterSpacing: '-0.045em', margin: '0 0 18px' }}>
                         Social media, które <span style={{ color: 'var(--accent)' }}>sprzedają.</span>
                     </h1>
-                    <p style={{ fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 36px' }}>
+                    <p style={{ fontSize: 'clamp(14px, 1.2vw, 17px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 28px' }}>
                         Budujemy obecność w mediach społecznościowych jako kanał sprzedaży i budowania marki — nie tylko jako obowiązek. Strategia, content, kampanie i analityka w jednym procesie.
                     </p>
                     <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
@@ -89,7 +89,7 @@ export default function SocialMediaPage() {
                         {services.map(s => (
                             <div key={s.num} style={{ borderRadius: 20, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
                                 <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 28 }}>{s.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 19, margin: '0 0 10px' }}>{s.title}</h3>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 17, margin: '0 0 10px' }}>{s.title}</h3>
                                 <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>{s.description}</p>
                             </div>
                         ))}
@@ -125,7 +125,7 @@ export default function SocialMediaPage() {
                         {process.map(step => (
                             <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: step.featured ? 'linear-gradient(160deg, color-mix(in srgb, var(--accent) 16%, var(--panel)), var(--panel))' : 'var(--panel)', border: step.featured ? '1px solid color-mix(in srgb, var(--accent) 40%, var(--line))' : '1px solid var(--line)' }}>
                                 <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 48 }}>{step.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, margin: '0 0 8px' }}>{step.title}</h3>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 8px' }}>{step.title}</h3>
                                 <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.5, margin: 0 }}>{step.description}</p>
                             </div>
                         ))}

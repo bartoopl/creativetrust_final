@@ -53,15 +53,15 @@ export default function EcommercePage() {
         <main style={{ minHeight: '100vh' }}>
 
             {/* Hero */}
-            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }}>
+            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(60px, 8vw, 96px) 32px 80px' }}>
                 <div style={{ maxWidth: 820 }}>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 16 }}>
                         E-COMMERCE
                     </div>
-                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(36px, 6vw, 78px)', lineHeight: 1.02, letterSpacing: '-0.025em', margin: '0 0 24px' }}>
+                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 5.2vw, 64px)', lineHeight: 0.98, letterSpacing: '-0.045em', margin: '0 0 18px' }}>
                         Sklepy, które sprzedają i <span style={{ color: 'var(--accent)' }}>skalują się.</span>
                     </h1>
-                    <p style={{ fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 36px' }}>
+                    <p style={{ fontSize: 'clamp(14px, 1.2vw, 17px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 28px' }}>
                         Projektujemy i wdrażamy sklepy e-commerce oparte na danych i AI. Nowe wdrożenia, migracje platform, integracje ERP — szybciej i z lepszym wynikiem niż tradycyjny proces.
                     </p>
                     <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
@@ -75,7 +75,7 @@ export default function EcommercePage() {
 
             {/* Stats */}
             <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '88px 32px' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
                     <div style={{ display: 'grid', gap: 24 }} className="grid-cols-2 md:grid-cols-4">
                         {stats.map(s => (
                             <div key={s.value} style={{ borderLeft: '1px solid var(--line)', paddingLeft: 20 }}>
@@ -91,15 +91,15 @@ export default function EcommercePage() {
             <section style={{ borderTop: '1px solid var(--line)' }}>
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
                     <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>ZAKRES</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Typy projektów e-commerce.</h2>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>ZAKRES</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Typy projektów e-commerce.</h2>
                     </div>
                     <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                         {services.map(s => (
                             <div key={s.num} style={{ borderRadius: 20, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 24 }}>{s.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 19, margin: '0 0 10px' }}>{s.title}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: '0 0 16px' }}>{s.description}</p>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--accent)', marginBottom: 22 }}>{s.num}</div>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 17, margin: '0 0 10px' }}>{s.title}</h3>
+                                <p style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.55, margin: '0 0 16px' }}>{s.description}</p>
                                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                                     {s.tags.map(t => (
                                         <span key={t} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--muted)', border: '1px solid var(--line)', padding: '4px 10px', borderRadius: 6 }}>{t}</span>
@@ -113,10 +113,10 @@ export default function EcommercePage() {
 
             {/* Standard */}
             <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
                     <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>STANDARD</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Co dostajesz w każdym sklepie.</h2>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>STANDARD</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Co dostajesz w każdym sklepie.</h2>
                     </div>
                     <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                         {features.map(f => (
@@ -131,14 +131,14 @@ export default function EcommercePage() {
 
             {/* Platforms */}
             <section style={{ borderTop: '1px solid var(--line)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
                     <div style={{ marginBottom: 40 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>TECH STACK</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Platformy i integracje, które obsługujemy.</h2>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>TECH STACK</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Platformy i integracje, które obsługujemy.</h2>
                     </div>
                     <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                         {platforms.map(p => (
-                            <span key={p} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 14, fontWeight: 500, color: 'var(--text)', border: '1px solid var(--line)', padding: '10px 18px', borderRadius: 10, background: 'var(--panel)' }}>{p}</span>
+                            <span key={p} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, fontWeight: 500, color: 'var(--text)', border: '1px solid var(--line)', padding: '9px 14px', borderRadius: 10, background: 'var(--panel)' }}>{p}</span>
                         ))}
                     </div>
                 </div>
@@ -146,17 +146,17 @@ export default function EcommercePage() {
 
             {/* Process */}
             <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
                     <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>PROCES</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Od konceptu do sprzedającego sklepu.</h2>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>PROCES</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Od konceptu do sprzedającego sklepu.</h2>
                     </div>
                     <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
                         {process.map(step => (
                             <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: step.featured ? 'linear-gradient(160deg, color-mix(in srgb, var(--accent) 16%, var(--panel)), var(--panel))' : 'var(--panel)', border: step.featured ? '1px solid color-mix(in srgb, var(--accent) 40%, var(--line))' : '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 48 }}>{step.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, margin: '0 0 8px' }}>{step.title}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.5, margin: 0 }}>{step.description}</p>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--accent)', marginBottom: 38 }}>{step.num}</div>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 8px' }}>{step.title}</h3>
+                                <p style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.5, margin: 0 }}>{step.description}</p>
                             </div>
                         ))}
                     </div>

@@ -79,7 +79,7 @@ function StatItem({ stat }: { stat: Stat }) {
                 style={{
                     fontFamily: 'var(--font-space), sans-serif',
                     fontWeight: 700,
-                    fontSize: 'clamp(26px, 3.6vw, 40px)',
+                    fontSize: 'clamp(24px, 3.2vw, 36px)',
                     letterSpacing: '-0.045em',
                     lineHeight: 1,
                     color: 'var(--text)',
@@ -99,10 +99,10 @@ export default function StatsSection() {
         <section style={{ maxWidth: 1240, margin: '0 auto', padding: '28px 32px 80px' }} className="px-4 py-10 sm:px-6 lg:px-8">
             <div className="mb-6 flex flex-col gap-3 lg:mb-8 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 10 }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 8 }}>
                         Dowody
                     </div>
-                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 34px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04 }}>
+                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(22px, 2.9vw, 32px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04 }}>
                         Wyniki, które da się policzyć.
                     </h2>
                 </div>

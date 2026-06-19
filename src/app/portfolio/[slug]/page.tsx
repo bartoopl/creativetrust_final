@@ -95,7 +95,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
     if (!project) {
         return (
             <div className="max-w-[1800px] mx-auto px-6 py-24">
-                <h1 className="text-4xl font-medium mb-8">Projekt nie istnieje</h1>
+                <h1 className="text-3xl font-medium mb-8">Projekt nie istnieje</h1>
                 <Link href="/portfolio" className="underline">
                     Wróć do portfolio
                 </Link>
@@ -229,7 +229,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
 
                     {/* Prawa kolumna - opis, zakres prac i galeria */}
                     <div>
-                        <h1 className="text-4xl font-medium mb-6">{project.title}</h1>
+                        <h1 className="text-3xl md:text-4xl font-medium mb-6">{project.title}</h1>
 
                         <div className="prose max-w-none mb-8">
                             {typeof project.description === 'string' ? (

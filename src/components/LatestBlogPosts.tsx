@@ -35,17 +35,17 @@ export default function LatestBlogPosts() {
 
     return (
         <section id="insights" style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '80px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mb-10 flex flex-col gap-4 lg:mb-11 lg:flex-row lg:items-end lg:justify-between">
                     <div>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>
                             INSIGHTS
                         </div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(30px, 4vw, 52px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.04 }}>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(26px, 3.3vw, 40px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04 }}>
                             Dzielimy się tym, co działa.
                         </h2>
                     </div>
-                    <Link href="/blog" style={{ color: 'var(--muted)', textDecoration: 'none', fontSize: 14, fontFamily: 'var(--font-mono), monospace' }}>
+                    <Link href="/blog" style={{ color: 'var(--muted)', textDecoration: 'none', fontSize: 13, fontFamily: 'var(--font-mono), monospace' }}>
                         Wszystkie artykuły →
                     </Link>
                 </div>
@@ -56,14 +56,14 @@ export default function LatestBlogPosts() {
                             <Link key={p._id} href={p.href} style={{
                                 textDecoration: 'none', color: 'var(--text)',
                                 borderRadius: 18, border: '1px solid var(--line)', background: 'var(--panel)',
-                                padding: 28, display: 'flex', flexDirection: 'column', gap: 14, minHeight: 220,
+                                padding: 24, display: 'flex', flexDirection: 'column', gap: 12, minHeight: 200,
                                 transition: 'transform .3s, border-color .3s',
                             }}
                                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
                                 onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}
                             >
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--muted)', letterSpacing: '.1em' }}>{p.cat} · {p.time} min</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 21, lineHeight: 1.25, margin: 0, flex: 1 }}>{p.title}</h3>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, color: 'var(--muted)', letterSpacing: '.1em' }}>{p.cat} · {p.time} min</div>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, lineHeight: 1.25, margin: 0, flex: 1 }}>{p.title}</h3>
                                 <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)' }}>Czytaj →</span>
                             </Link>
                         ))
@@ -71,17 +71,17 @@ export default function LatestBlogPosts() {
                             <Link key={post._id} href={`/blog/${post.slug.current}`} style={{
                                 textDecoration: 'none', color: 'var(--text)',
                                 borderRadius: 18, border: '1px solid var(--line)', background: 'var(--panel)',
-                                padding: 28, display: 'flex', flexDirection: 'column', gap: 14, minHeight: 220,
+                                padding: 24, display: 'flex', flexDirection: 'column', gap: 12, minHeight: 200,
                                 transition: 'transform .3s, border-color .3s',
                             }}
                                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
                                 onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}
                             >
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--muted)', letterSpacing: '.1em' }}>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, color: 'var(--muted)', letterSpacing: '.1em' }}>
                                     {post.categories?.[0]?.title?.toUpperCase() ?? 'INSIGHTS'}
                                     {post.estimatedReadingTime ? ` · ${post.estimatedReadingTime} min` : ''}
                                 </div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 21, lineHeight: 1.25, margin: 0, flex: 1 }}>{post.title}</h3>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, lineHeight: 1.25, margin: 0, flex: 1 }}>{post.title}</h3>
                                 <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)' }}>Czytaj →</span>
                             </Link>
                         ))

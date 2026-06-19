@@ -94,7 +94,7 @@ export default function WebsitePricingPage() {
                         <p className="text-sm uppercase tracking-[0.3em] text-gray-500 mb-6">
                             Cennik stron internetowych
                         </p>
-                        <h1 className="text-4xl md:text-6xl font-medium leading-tight mb-8">
+                        <h1 className="text-3xl md:text-4xl font-medium leading-tight mb-8">
                             Ile kosztuje strona internetowa dla firmy?
                         </h1>
                         <p className="text-xl text-gray-600 max-w-3xl mb-10">
@@ -124,7 +124,7 @@ export default function WebsitePricingPage() {
                         </div>
                         <div className="rounded-[2rem] bg-black p-8 md:p-10 text-white">
                             <p className="text-gray-400 mb-4">Najważniejsza zasada</p>
-                            <p className="text-3xl md:text-4xl font-medium leading-tight mb-6">
+                            <p className="text-2xl md:text-3xl font-medium leading-tight mb-6">
                                 Najtańsza strona rzadko jest najtańszą decyzją.
                             </p>
                             <p className="text-gray-300 leading-relaxed">
@@ -141,7 +141,7 @@ export default function WebsitePricingPage() {
                 <div className="max-w-[1800px] mx-auto">
                     <div className="max-w-3xl mb-12">
                         <p className="text-gray-500 mb-3">Orientacyjne zakresy</p>
-                        <h2 className="text-3xl md:text-5xl font-medium">
+                        <h2 className="text-2xl md:text-4xl font-medium">
                             Cennik traktujemy jako punkt startu do rozmowy
                         </h2>
                     </div>
@@ -169,7 +169,7 @@ export default function WebsitePricingPage() {
                 <div className="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12">
                     <div>
                         <p className="text-gray-500 mb-3">Od czego zależy cena?</p>
-                        <h2 className="text-3xl md:text-5xl font-medium leading-tight">
+                        <h2 className="text-2xl md:text-4xl font-medium leading-tight">
                             Największy wpływ ma nie liczba pikseli, tylko zakres decyzji
                         </h2>
                     </div>

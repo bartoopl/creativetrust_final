@@ -43,15 +43,15 @@ export default function BrandingPage() {
         <main style={{ minHeight: '100vh' }}>
 
             {/* Hero */}
-            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }}>
+            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(60px, 8vw, 96px) 32px 80px' }}>
                 <div style={{ maxWidth: 820 }}>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 16 }}>
                         BRANDING
                     </div>
-                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(36px, 6vw, 78px)', lineHeight: 1.02, letterSpacing: '-0.025em', margin: '0 0 24px', textWrap: 'balance' } as React.CSSProperties}>
+                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 5.2vw, 64px)', lineHeight: 0.98, letterSpacing: '-0.045em', margin: '0 0 18px', textWrap: 'balance' } as React.CSSProperties}>
                         Budujemy marki, które pozostają w pamięci <span style={{ color: 'var(--accent)' }}>i rosną.</span>
                     </h1>
-                    <p style={{ fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 36px' }}>
+                    <p style={{ fontSize: 'clamp(14px, 1.2vw, 17px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 28px' }}>
                         Dobry branding to więcej niż logo. To spójna historia, która buduje zaufanie, wyróżnia na tle konkurencji i przekłada się na realny wynik biznesowy.
                     </p>
                     <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
@@ -65,12 +65,12 @@ export default function BrandingPage() {
 
             {/* Stats */}
             <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '88px 32px' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
                     <div style={{ display: 'grid', gap: 24 }} className="grid-cols-2 md:grid-cols-4">
                         {stats.map(s => (
                             <div key={s.value} style={{ borderLeft: '1px solid var(--line)', paddingLeft: 20 }}>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 3.5vw, 52px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--accent)' }}>{s.value}</div>
-                                <div style={{ color: 'var(--muted)', fontSize: 14, marginTop: 10 }}>{s.label}</div>
+                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.1vw, 40px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--accent)' }}>{s.value}</div>
+                                <div style={{ color: 'var(--muted)', fontSize: 13, marginTop: 10 }}>{s.label}</div>
                             </div>
                         ))}
                     </div>
@@ -81,17 +81,17 @@ export default function BrandingPage() {
             <section style={{ borderTop: '1px solid var(--line)' }}>
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
                     <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>ZAKRES</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>ZAKRES</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>
                             Co składa się na kompleksowy branding.
                         </h2>
                     </div>
                     <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                         {elements.map(el => (
                             <div key={el.num} style={{ borderRadius: 20, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 28 }}>{el.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, margin: '0 0 10px' }}>{el.title}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.55, margin: 0 }}>{el.description}</p>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--accent)', marginBottom: 22 }}>{el.num}</div>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 10px' }}>{el.title}</h3>
+                                <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>{el.description}</p>
                             </div>
                         ))}
                     </div>
@@ -102,8 +102,8 @@ export default function BrandingPage() {
             <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
                     <div style={{ marginBottom: 54 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>PROCES</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>PROCES</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>
                             Nasz proces brandingowy — napędzany AI.
                         </h2>
                         <p style={{ color: 'var(--muted)', fontSize: 17, lineHeight: 1.55, margin: '16px 0 0', maxWidth: '52ch' }}>
@@ -113,10 +113,10 @@ export default function BrandingPage() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                         {process.map((step, i) => (
                             <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: 'var(--panel)', border: i === process.length - 1 ? '1px solid color-mix(in srgb, var(--accent) 40%, var(--line))' : '1px solid var(--line)', display: 'flex', alignItems: 'flex-start', gap: 24, ...(i === process.length - 1 ? { background: 'linear-gradient(140deg, color-mix(in srgb, var(--accent) 12%, var(--panel)), var(--panel))' } : {}) }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', flexShrink: 0, width: 32 }}>{step.num}</div>
-                                <div>
-                                    <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, margin: '0 0 8px' }}>{step.title}</h3>
-                                    <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.55, margin: 0 }}>{step.description}</p>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--accent)', flexShrink: 0, width: 32 }}>{step.num}</div>
+                                    <div>
+                                    <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 8px' }}>{step.title}</h3>
+                                    <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>{step.description}</p>
                                 </div>
                             </div>
                         ))}

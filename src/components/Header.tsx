@@ -28,7 +28,7 @@ function Logo({ size = 30 }: { size?: number }) {
             }}>
                 <span style={{ width: 10, height: 10, borderRadius: 3, background: 'var(--accent)' }} />
             </span>
-            <span style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 17, letterSpacing: '-0.02em' }}>
+            <span style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 16, letterSpacing: '-0.02em' }}>
                 <span style={{ fontWeight: 500 }}>Creative</span>
                 <span style={{ fontWeight: 700 }}>Trust</span>
                 <span style={{ color: 'var(--accent)', fontWeight: 700 }}>.</span>
@@ -60,7 +60,7 @@ export default function Header() {
             borderBottom: '1px solid var(--line)',
             transition: 'background .3s ease',
         }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '14px 32px' }} className="flex items-center justify-between gap-6">
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '12px 32px' }} className="flex items-center justify-between gap-6">
                 <Logo />
 
                 {/* Desktop nav */}
@@ -69,7 +69,7 @@ export default function Header() {
                         <Link
                             key={item.href}
                             href={item.href}
-                            style={{ fontSize: 13, color: 'var(--muted)', textDecoration: 'none', transition: 'color .2s' }}
+                            style={{ fontSize: 12, color: 'var(--muted)', textDecoration: 'none', transition: 'color .2s' }}
                             onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
                             onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
                         >
@@ -127,12 +127,12 @@ export default function Header() {
                     {navItems.map((item) => (
                         <Link
                             key={item.href}
-                            href={item.href}
-                            onClick={() => setMobileOpen(false)}
-                            style={{ fontSize: 22, fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, color: 'var(--text)', textDecoration: 'none', padding: '16px 0', borderBottom: '1px solid var(--line)' }}
-                        >
-                            {item.label}
-                        </Link>
+                        href={item.href}
+                        onClick={() => setMobileOpen(false)}
+                        style={{ fontSize: 20, fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, color: 'var(--text)', textDecoration: 'none', padding: '14px 0', borderBottom: '1px solid var(--line)' }}
+                    >
+                        {item.label}
+                    </Link>
                     ))}
                     <div style={{ paddingTop: 20 }}>
                         <Link href="/kontakt" className="ct-cta" onClick={() => setMobileOpen(false)}>
