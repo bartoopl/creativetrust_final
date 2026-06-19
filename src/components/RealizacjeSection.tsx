@@ -82,17 +82,17 @@ export default function RealizacjeSection() {
             color: 'var(--text)',
             borderTop: '1px solid var(--line)',
         } as React.CSSProperties}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '84px 32px 96px' }} className="px-4 py-16 sm:px-6 lg:px-8">
-                <div className="mb-10 flex flex-col gap-4 lg:mb-11 lg:flex-row lg:items-end lg:justify-between">
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '72px 32px 84px' }} className="px-4 py-16 sm:px-6 lg:px-8">
+                <div className="mb-8 flex flex-col gap-4 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
                     <div>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 10 }}>
                             REALIZACJE
                         </div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(30px, 4vw, 52px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.04 }}>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 34px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04 }}>
                             Efekty, nie obietnice.
                         </h2>
                     </div>
-                    <Link href="/portfolio" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--text)', textDecoration: 'none', fontSize: 15, borderBottom: '1px solid var(--accent)', paddingBottom: 3 }}>
+                    <Link href="/portfolio" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--text)', textDecoration: 'none', fontSize: 13, borderBottom: '1px solid var(--accent)', paddingBottom: 3 }}>
                         Wszystkie realizacje <span style={{ fontFamily: 'var(--font-mono), monospace' }}>→</span>
                     </Link>
                 </div>
@@ -101,7 +101,7 @@ export default function RealizacjeSection() {
                     {items.map((r) => (
                         <Link key={r._id} href={r.href} style={{
                             textDecoration: 'none', color: 'var(--text)',
-                            borderRadius: 20, overflow: 'hidden',
+                            borderRadius: 16, overflow: 'hidden',
                             border: '1px solid var(--line)', background: 'var(--panel)',
                             display: 'flex', flexDirection: 'column',
                             transition: 'transform .3s, border-color .3s',
@@ -154,14 +154,14 @@ export default function RealizacjeSection() {
                                     Najnowsza realizacja
                                 </div>
                             </div>
-                            <div style={{ padding: '20px 20px 22px' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--accent)', letterSpacing: '.12em', textTransform: 'uppercase', marginBottom: 10 }}>
+                            <div style={{ padding: '18px 18px 20px' }}>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, color: 'var(--accent)', letterSpacing: '.12em', textTransform: 'uppercase', marginBottom: 8 }}>
                                     {r.category}
                                 </div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, margin: '0 0 12px', lineHeight: 1.2 }}>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 17, margin: '0 0 10px', lineHeight: 1.2 }}>
                                     {r.title}
                                 </h3>
-                                <div style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>
+                                <div style={{ color: 'var(--muted)', fontSize: 13.5, lineHeight: 1.55, margin: 0 }}>
                                     Otwórz projekt i zobacz zakres, efekty oraz szczegóły wdrożenia.
                                 </div>
                             </div>

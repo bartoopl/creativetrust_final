@@ -22,13 +22,13 @@ function Logo({ size = 30 }: { size?: number }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 flex: 'none',
-                borderRadius: 10,
+                borderRadius: 8,
                 border: '1px solid var(--line)',
                 background: 'linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))',
             }}>
                 <span style={{ width: 10, height: 10, borderRadius: 3, background: 'var(--accent)' }} />
             </span>
-            <span style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 19, letterSpacing: '-0.02em' }}>
+            <span style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 17, letterSpacing: '-0.02em' }}>
                 <span style={{ fontWeight: 500 }}>Creative</span>
                 <span style={{ fontWeight: 700 }}>Trust</span>
                 <span style={{ color: 'var(--accent)', fontWeight: 700 }}>.</span>
@@ -60,7 +60,7 @@ export default function Header() {
             borderBottom: '1px solid var(--line)',
             transition: 'background .3s ease',
         }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '16px 32px' }} className="flex items-center justify-between gap-6">
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '14px 32px' }} className="flex items-center justify-between gap-6">
                 <Logo />
 
                 {/* Desktop nav */}
@@ -69,7 +69,7 @@ export default function Header() {
                         <Link
                             key={item.href}
                             href={item.href}
-                            style={{ fontSize: 14, color: 'var(--muted)', textDecoration: 'none', transition: 'color .2s' }}
+                            style={{ fontSize: 13, color: 'var(--muted)', textDecoration: 'none', transition: 'color .2s' }}
                             onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
                             onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
                         >

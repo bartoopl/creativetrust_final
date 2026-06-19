@@ -69,8 +69,8 @@ function StatItem({ stat }: { stat: Stat }) {
             ref={ref}
             style={{
                 border: '1px solid var(--line)',
-                borderRadius: 22,
-                padding: '20px 18px 18px',
+                borderRadius: 16,
+                padding: '16px 16px 14px',
                 background: 'color-mix(in srgb, var(--panel) 88%, transparent)',
                 minHeight: 124,
             }}
@@ -79,8 +79,8 @@ function StatItem({ stat }: { stat: Stat }) {
                 style={{
                     fontFamily: 'var(--font-space), sans-serif',
                     fontWeight: 700,
-                    fontSize: 'clamp(32px, 4.5vw, 52px)',
-                    letterSpacing: '-0.04em',
+                    fontSize: 'clamp(26px, 3.6vw, 40px)',
+                    letterSpacing: '-0.045em',
                     lineHeight: 1,
                     color: 'var(--text)',
                 }}
@@ -96,17 +96,17 @@ function StatItem({ stat }: { stat: Stat }) {
 
 export default function StatsSection() {
     return (
-        <section style={{ maxWidth: 1240, margin: '0 auto', padding: '36px 32px 92px' }} className="px-4 py-10 sm:px-6 lg:px-8">
-            <div className="mb-8 flex flex-col gap-3 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
+        <section style={{ maxWidth: 1240, margin: '0 auto', padding: '28px 32px 80px' }} className="px-4 py-10 sm:px-6 lg:px-8">
+            <div className="mb-6 flex flex-col gap-3 lg:mb-8 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 12 }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 10 }}>
                         Dowody
                     </div>
-                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-0.03em', margin: 0, lineHeight: 1.04 }}>
+                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 34px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04 }}>
                         Wyniki, które da się policzyć.
                     </h2>
                 </div>
-                <p style={{ color: 'var(--muted)', fontSize: 16, maxWidth: '42ch', margin: 0, lineHeight: 1.55 }}>
+                <p style={{ color: 'var(--muted)', fontSize: 14, maxWidth: '42ch', margin: 0, lineHeight: 1.55 }}>
                     Łączymy strategię, projekt i wdrożenie w jednym procesie, więc szybciej przechodzimy od decyzji do efektu.
                 </p>
             </div>

@@ -13,10 +13,10 @@ export default function CTASection() {
                 style={{
                     position: 'relative',
                     overflow: 'hidden',
-                    borderRadius: 32,
+                    borderRadius: 24,
                     border: '1px solid rgba(255,255,255,0.08)',
-                    background: 'linear-gradient(135deg, #151515 0%, #222222 52%, #171717 100%)',
-                    padding: 'clamp(34px, 6vw, 72px)',
+                    background: 'linear-gradient(135deg, #11131a 0%, #1a1d25 52%, #11131a 100%)',
+                    padding: 'clamp(28px, 5vw, 58px)',
                     color: '#f8f5ef',
                 }}
             >
@@ -34,36 +34,36 @@ export default function CTASection() {
                 />
                 <div style={{ position: 'relative', display: 'grid', gap: 28, alignItems: 'start', gridTemplateColumns: 'repeat(12, minmax(0, 1fr))' }}>
                     <div className="col-span-full lg:col-span-7">
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.16em', color: 'rgba(248,245,239,0.62)', textTransform: 'uppercase', marginBottom: 12 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 10 }}>
                             Porozmawiajmy
                         </div>
                         <h2
                             style={{
                                 fontFamily: 'var(--font-space), sans-serif',
                                 fontWeight: 700,
-                                fontSize: 'clamp(32px, 5vw, 64px)',
-                                letterSpacing: '-0.04em',
+                                fontSize: 'clamp(28px, 4vw, 48px)',
+                                letterSpacing: '-0.045em',
                                 lineHeight: 1.02,
-                                margin: '0 0 18px',
+                                margin: '0 0 16px',
                                 maxWidth: '14ch',
                             }}
                         >
                             Chcesz uporządkować produkt i przyspieszyć wzrost?
                         </h2>
-                        <p style={{ color: 'rgba(248,245,239,0.76)', fontSize: 18, lineHeight: 1.6, maxWidth: '44ch', margin: '0 0 26px' }}>
+                        <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.6, maxWidth: '44ch', margin: '0 0 22px' }}>
                             Zacznijmy od krótkiej konsultacji. Pokażemy, gdzie masz największą dźwignię w brandzie, webie, e-commerce i automatyzacji.
                         </p>
                         <div className="flex flex-wrap gap-3">
-                            <Link href="/kontakt" className="ct-cta" style={{ fontSize: 16, padding: '9px 9px 9px 26px' }}>
+                            <Link href="/kontakt" className="ct-cta" style={{ fontSize: 14, padding: '7px 7px 7px 20px' }}>
                                 Umów konsultację
-                                <span className="ct-badge" style={{ width: 42, height: 42 }}>
+                                <span className="ct-badge" style={{ width: 34, height: 34 }}>
                                     <span className="ct-arrows">
-                                        <span style={{ width: 42 }}>→</span>
-                                        <span style={{ width: 42 }}>→</span>
+                                        <span style={{ width: 34 }}>→</span>
+                                        <span style={{ width: 34 }}>→</span>
                                     </span>
                                 </span>
                             </Link>
-                            <Link href="/portfolio" className="ct-ghost" style={{ borderColor: 'rgba(248,245,239,0.16)', color: '#f8f5ef', background: 'rgba(255,255,255,0.04)' }}>
+                            <Link href="/portfolio" className="ct-ghost" style={{ borderColor: 'var(--line)', color: '#f8f5ef', background: 'rgba(255,255,255,0.02)' }}>
                                 <span className="ct-dot" />
                                 Zobacz realizacje
                                 <span className="ct-tail">↓</span>
@@ -74,14 +74,14 @@ export default function CTASection() {
                     <div className="col-span-full lg:col-span-5">
                         <div
                             style={{
-                                borderRadius: 24,
-                                border: '1px solid rgba(248,245,239,0.12)',
-                                background: 'rgba(255,255,255,0.05)',
+                                borderRadius: 18,
+                                border: '1px solid var(--line)',
+                                background: 'rgba(255,255,255,0.02)',
                                 padding: 22,
                                 backdropFilter: 'blur(10px)',
                             }}
                         >
-                            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.16em', color: 'rgba(248,245,239,0.62)', textTransform: 'uppercase', marginBottom: 14 }}>
+                            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 12 }}>
                                 Co dostajesz
                             </div>
                             <div style={{ display: 'grid', gap: 12 }}>
@@ -94,13 +94,13 @@ export default function CTASection() {
                                             gap: 12,
                                             alignItems: 'start',
                                             paddingBottom: 12,
-                                            borderBottom: index === contactPillars.length - 1 ? 'none' : '1px solid rgba(248,245,239,0.12)',
+                                            borderBottom: index === contactPillars.length - 1 ? 'none' : '1px solid var(--line)',
                                         }}
                                     >
                                         <div style={{ color: 'var(--accent)', fontWeight: 700, fontFamily: 'var(--font-mono), monospace' }}>
                                             0{index + 1}
                                         </div>
-                                        <div style={{ color: 'rgba(248,245,239,0.82)', lineHeight: 1.5 }}>
+                                        <div style={{ color: 'var(--text)', lineHeight: 1.5 }}>
                                             {item}
                                         </div>
                                     </div>

@@ -27,7 +27,7 @@ export default function Hero() {
             style={{
                 position: 'relative',
                 overflow: 'hidden',
-                padding: '56px 0 48px',
+                padding: '44px 0 36px',
             }}
         >
             <div
@@ -35,8 +35,8 @@ export default function Hero() {
                 style={{
                     position: 'absolute',
                     inset: 'auto -8% 10% auto',
-                    width: 520,
-                    height: 520,
+                    width: 460,
+                    height: 460,
                     borderRadius: '50%',
                     background: 'radial-gradient(circle, rgba(255, 106, 61, 0.18) 0%, rgba(255, 106, 61, 0.05) 34%, transparent 72%)',
                     filter: 'blur(10px)',
@@ -48,9 +48,9 @@ export default function Hero() {
                 style={{
                     position: 'absolute',
                     inset: '12% auto auto 4%',
-                    width: 180,
-                    height: 180,
-                    borderRadius: 28,
+                    width: 160,
+                    height: 160,
+                    borderRadius: 20,
                     border: '1px solid var(--line)',
                     background: 'linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
                     transform: 'rotate(-8deg)',
@@ -82,9 +82,9 @@ export default function Hero() {
                         style={{
                             fontFamily: 'var(--font-space), sans-serif',
                             fontWeight: 700,
-                            fontSize: 'clamp(42px, 7vw, 88px)',
-                            lineHeight: 0.95,
-                            letterSpacing: '-0.055em',
+                            fontSize: 'clamp(36px, 6.2vw, 72px)',
+                            lineHeight: 0.96,
+                            letterSpacing: '-0.05em',
                             margin: '0 0 24px',
                             maxWidth: '12ch',
                             textWrap: 'balance',
@@ -95,7 +95,7 @@ export default function Hero() {
 
                     <p
                         style={{
-                            fontSize: 'clamp(16px, 1.5vw, 20px)',
+                            fontSize: 'clamp(15px, 1.25vw, 18px)',
                             lineHeight: 1.55,
                             color: 'var(--muted)',
                             maxWidth: '56ch',
@@ -127,7 +127,7 @@ export default function Hero() {
                             display: 'grid',
                             gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
                             gap: 14,
-                            marginTop: 28,
+                            marginTop: 24,
                         }}
                     >
                         {proofPoints.map((item) => (
@@ -141,7 +141,7 @@ export default function Hero() {
                                 <div
                                     style={{
                                         fontFamily: 'var(--font-space), sans-serif',
-                                        fontSize: 28,
+                                        fontSize: 24,
                                         lineHeight: 1,
                                         letterSpacing: '-0.04em',
                                         fontWeight: 700,
@@ -162,7 +162,7 @@ export default function Hero() {
                 <div
                     style={{
                         position: 'relative',
-                        borderRadius: 28,
+                        borderRadius: 22,
                         border: '1px solid var(--line)',
                         background: 'linear-gradient(180deg, rgba(17,19,26,0.96), rgba(11,12,16,0.96))',
                         boxShadow: '0 30px 90px rgba(0, 0, 0, 0.35)',
@@ -179,11 +179,11 @@ export default function Hero() {
                         }}
                     />
 
-                    <div style={{ position: 'relative', padding: 28, display: 'grid', gap: 16 }}>
+                    <div style={{ position: 'relative', padding: 22, display: 'grid', gap: 14 }}>
                         <div
                             style={{
-                                borderRadius: 22,
-                                padding: 24,
+                                borderRadius: 18,
+                                padding: 20,
                                 background: 'linear-gradient(180deg, #11141a 0%, #0d0f14 100%)',
                                 color: 'var(--text)',
                                 border: '1px solid var(--line)',
@@ -205,16 +205,16 @@ export default function Hero() {
                                 style={{
                                     fontFamily: 'var(--font-space), sans-serif',
                                     fontWeight: 700,
-                                    fontSize: 'clamp(24px, 3vw, 34px)',
-                                    letterSpacing: '-0.04em',
+                                    fontSize: 'clamp(22px, 2.2vw, 28px)',
+                                    letterSpacing: '-0.045em',
                                     lineHeight: 1.04,
                                     maxWidth: '12ch',
-                                    marginBottom: 14,
+                                    marginBottom: 12,
                                 }}
                             >
                                 Spójny proces. Jedna odpowiedzialność.
                             </div>
-                            <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.6, fontSize: 15, maxWidth: '40ch' }}>
+                            <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.6, fontSize: 14, maxWidth: '40ch' }}>
                                 Zamiast rozpraszać projekt na kilka podmiotów, prowadzimy go od strategii po wdrożenie i optymalizację.
                             </p>
                         </div>
@@ -269,8 +269,8 @@ export default function Hero() {
                                     key={item}
                                     style={{
                                         border: '1px solid var(--line)',
-                                        borderRadius: 18,
-                                        padding: 16,
+                                        borderRadius: 14,
+                                        padding: 14,
                                         background: index === 0 ? 'rgba(255, 106, 61, 0.08)' : 'rgba(255,255,255,0.02)',
                                     }}
                                 >

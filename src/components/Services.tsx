@@ -31,17 +31,17 @@ const primaryServices = [
 
 export default function Services() {
     return (
-        <section id="uslugi" style={{ maxWidth: 1240, margin: '0 auto', padding: '36px 32px 96px' }} className="px-4 pb-20 sm:px-6 lg:px-8">
-            <div className="mb-10 flex flex-col gap-4 lg:mb-12 lg:flex-row lg:items-end lg:justify-between">
+        <section id="uslugi" style={{ maxWidth: 1240, margin: '0 auto', padding: '28px 32px 84px' }} className="px-4 pb-20 sm:px-6 lg:px-8">
+            <div className="mb-8 flex flex-col gap-4 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 12 }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 10 }}>
                         Usługi
                     </div>
-                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(30px, 4vw, 54px)', letterSpacing: '-0.03em', margin: 0, lineHeight: 1.04 }}>
+                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(26px, 3.4vw, 42px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04 }}>
                         Jeden zespół. Jeden kierunek.
                     </h2>
                 </div>
-                <p style={{ color: 'var(--muted)', fontSize: 16, maxWidth: '40ch', margin: 0, lineHeight: 1.55 }}>
+                <p style={{ color: 'var(--muted)', fontSize: 14, maxWidth: '40ch', margin: 0, lineHeight: 1.55 }}>
                     Pracujemy jak studio produktowe: strategia, projekt i wdrożenie są u nas zszyte w jeden proces, a nie przekazywane między podwykonawcami.
                 </p>
             </div>
@@ -52,12 +52,12 @@ export default function Services() {
                     style={{
                         position: 'relative',
                         overflow: 'hidden',
-                        borderRadius: 28,
-                        border: '1px solid color-mix(in srgb, var(--line) 92%, transparent)',
-                        background: 'linear-gradient(180deg, #181818 0%, #242424 100%)',
-                        color: '#f8f5ef',
-                        padding: 32,
-                        minHeight: 320,
+                        borderRadius: 20,
+                        border: '1px solid var(--line)',
+                        background: 'linear-gradient(180deg, #151821 0%, #0f1116 100%)',
+                        color: 'var(--text)',
+                        padding: 24,
+                        minHeight: 300,
                     }}
                 >
                     <div
@@ -67,34 +67,34 @@ export default function Services() {
                             width: 280,
                             height: 280,
                             borderRadius: '50%',
-                            background: 'radial-gradient(circle, rgba(198, 90, 54, 0.30) 0%, rgba(198, 90, 54, 0.02) 68%, transparent 74%)',
+                            background: 'radial-gradient(circle, rgba(255, 106, 61, 0.20) 0%, rgba(255, 106, 61, 0.02) 68%, transparent 74%)',
                             pointerEvents: 'none',
                         }}
                     />
-                    <div style={{ position: 'relative', display: 'flex', height: '100%', flexDirection: 'column', justifyContent: 'space-between', gap: 24 }}>
+                    <div style={{ position: 'relative', display: 'flex', height: '100%', flexDirection: 'column', justifyContent: 'space-between', gap: 20 }}>
                         <div>
-                            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.16em', color: 'rgba(248,245,239,0.58)', textTransform: 'uppercase', marginBottom: 12 }}>
+                            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 10 }}>
                                 Nasza przewaga
                             </div>
-                            <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 4vw, 40px)', letterSpacing: '-0.03em', margin: '0 0 12px', lineHeight: 1.05, maxWidth: '14ch' }}>
+                            <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 32px)', letterSpacing: '-0.045em', margin: '0 0 10px', lineHeight: 1.05, maxWidth: '14ch' }}>
                                 AI bez efektu „sztucznego dodatku”.
                             </h3>
-                            <p style={{ color: 'rgba(248,245,239,0.76)', fontSize: 16, lineHeight: 1.6, maxWidth: '46ch', margin: 0 }}>
+                            <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.6, maxWidth: '46ch', margin: 0 }}>
                                 Wpinamy automatyzacje, analizę i generatywne procesy tam, gdzie realnie oszczędzają czas, porządkują decyzje i poprawiają wynik.
                             </p>
                         </div>
-                        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                             {['AI research', 'systemy design', 'automatyzacje', 'optymalizacja'].map((tag) => (
                                 <span
                                     key={tag}
                                     style={{
                                         fontFamily: 'var(--font-mono), monospace',
-                                        fontSize: 12,
-                                        color: 'rgba(248,245,239,0.72)',
-                                        border: '1px solid rgba(248,245,239,0.16)',
-                                        padding: '7px 12px',
+                                        fontSize: 11,
+                                        color: 'var(--muted)',
+                                        border: '1px solid var(--line)',
+                                        padding: '6px 10px',
                                         borderRadius: 999,
-                                        background: 'rgba(255,255,255,0.04)',
+                                        background: 'rgba(255,255,255,0.02)',
                                     }}
                                 >
                                     {tag}
@@ -107,16 +107,16 @@ export default function Services() {
                 <div className="lg:col-span-5 grid gap-4">
                     <div
                         style={{
-                            borderRadius: 28,
-                            padding: 28,
-                            background: 'color-mix(in srgb, var(--panel) 94%, transparent)',
+                            borderRadius: 18,
+                            padding: 20,
+                            background: 'color-mix(in srgb, var(--panel) 92%, transparent)',
                             border: '1px solid var(--line)',
                         }}
                     >
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 10 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 10 }}>
                             Zakres
                         </div>
-                        <p style={{ margin: 0, color: 'var(--text)', fontSize: 18, lineHeight: 1.55, fontWeight: 500 }}>
+                        <p style={{ margin: 0, color: 'var(--text)', fontSize: 15, lineHeight: 1.55, fontWeight: 500 }}>
                             Projektujemy systemy, które są jednocześnie czytelne dla zespołu i skuteczne dla biznesu.
                         </p>
                     </div>
@@ -128,70 +128,70 @@ export default function Services() {
                                 href={service.href}
                                 className="ct-card-hover"
                                 style={{
-                                    borderRadius: 24,
-                                    padding: 24,
+                                    borderRadius: 16,
+                                    padding: 18,
                                     background: 'color-mix(in srgb, var(--panel) 92%, transparent)',
                                     border: '1px solid var(--line)',
                                     textDecoration: 'none',
                                     color: 'var(--text)',
-                                    minHeight: 190,
+                                    minHeight: 170,
                                     display: 'flex',
                                     flexDirection: 'column',
                                     justifyContent: 'space-between',
                                 }}
                             >
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.16em', color: 'var(--muted)' }}>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)' }}>
                                     {service.meta}
                                 </div>
                                 <div>
-                                    <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, letterSpacing: '-0.02em', margin: '0 0 8px' }}>
+                                    <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 17, letterSpacing: '-0.03em', margin: '0 0 8px' }}>
                                         {service.title}
                                     </h3>
-                                    <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.55, margin: 0 }}>
+                                    <p style={{ color: 'var(--muted)', fontSize: 13.5, lineHeight: 1.55, margin: 0 }}>
                                         {service.desc}
                                     </p>
                                 </div>
                             </Link>
                         ))}
                     </div>
-                </div>
 
-                {primaryServices.slice(2).map((service) => (
-                    <Link
-                        key={service.href}
-                        href={service.href}
-                        className="ct-card-hover lg:col-span-6"
-                        style={{
-                            borderRadius: 24,
-                            padding: 26,
-                            background: 'color-mix(in srgb, var(--panel) 92%, transparent)',
-                            border: '1px solid var(--line)',
-                            textDecoration: 'none',
-                            color: 'var(--text)',
-                            minHeight: 180,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'space-between',
-                        }}
-                    >
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-                            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.16em', color: 'var(--muted)' }}>
-                                {service.meta}
+                    {primaryServices.slice(2).map((service) => (
+                        <Link
+                            key={service.href}
+                            href={service.href}
+                            className="ct-card-hover lg:col-span-6"
+                            style={{
+                                borderRadius: 16,
+                                padding: 18,
+                                background: 'color-mix(in srgb, var(--panel) 92%, transparent)',
+                                border: '1px solid var(--line)',
+                                textDecoration: 'none',
+                                color: 'var(--text)',
+                                minHeight: 160,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'space-between',
+                            }}
+                        >
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)' }}>
+                                    {service.meta}
+                                </div>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--accent)', textTransform: 'uppercase' }}>
+                                    explore
+                                </div>
                             </div>
-                            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.16em', color: 'var(--accent)', textTransform: 'uppercase' }}>
-                                explore
+                            <div>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, letterSpacing: '-0.03em', margin: '0 0 8px' }}>
+                                    {service.title}
+                                </h3>
+                                <p style={{ color: 'var(--muted)', fontSize: 13.5, lineHeight: 1.55, margin: 0, maxWidth: '46ch' }}>
+                                    {service.desc}
+                                </p>
                             </div>
-                        </div>
-                        <div>
-                            <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 22, letterSpacing: '-0.02em', margin: '0 0 8px' }}>
-                                {service.title}
-                            </h3>
-                            <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.55, margin: 0, maxWidth: '46ch' }}>
-                                {service.desc}
-                            </p>
-                        </div>
-                    </Link>
-                ))}
+                        </Link>
+                    ))}
+                </div>
             </div>
         </section>
     );
