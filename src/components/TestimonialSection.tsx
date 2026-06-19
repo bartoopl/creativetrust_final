@@ -1,7 +1,7 @@
 export default function TestimonialSection() {
     return (
         <section style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--panel2)' }}>
-            <div style={{ maxWidth: 1000, margin: '0 auto', padding: '80px 32px', textAlign: 'center' }}>
+            <div style={{ maxWidth: 1000, margin: '0 auto', padding: '80px 32px', textAlign: 'center' }} className="px-4 py-16 sm:px-6 lg:px-8">
                 <div style={{
                     fontFamily: 'var(--font-space), sans-serif',
                     fontSize: 'clamp(20px, 2.4vw, 30px)',

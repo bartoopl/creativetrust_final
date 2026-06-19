@@ -8,7 +8,7 @@ const steps = [
 export default function ProcessSection() {
     return (
         <section id="podejscie" style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
                 <div style={{ marginBottom: 54, maxWidth: '60ch' }}>
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>
                         PODEJŚCIE
@@ -21,7 +21,7 @@ export default function ProcessSection() {
                     </p>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }} className="grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
                     {steps.map(step => (
                         <div key={step.num} style={{
                             padding: '28px 24px',

@@ -16,7 +16,7 @@ export default function Hero() {
                 background: 'radial-gradient(120% 80% at 20% 100%, color-mix(in srgb, var(--bg) 30%, transparent) 0%, color-mix(in srgb, var(--bg) 85%, transparent) 60%, var(--bg) 100%)',
             }} />
 
-            <div style={{ position: 'relative', zIndex: 2, maxWidth: 1240, margin: '0 auto', width: '100%', padding: '0 32px 72px' }}>
+            <div style={{ position: 'relative', zIndex: 2, maxWidth: 1240, margin: '0 auto', width: '100%', padding: '0 32px 72px' }} className="px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
                 <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 26 }}>
                     STRATEGIA <span style={{ color: 'var(--accent)' }}>·</span> DESIGN <span style={{ color: 'var(--accent)' }}>·</span> DEVELOPMENT <span style={{ color: 'var(--accent)' }}>·</span> AI
                 </div>

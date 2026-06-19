@@ -45,7 +45,7 @@ export default function PortfolioPage() {
         <main style={{ minHeight: '100vh' }}>
 
             {/* Hero */}
-            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 64px' }}>
+            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 64px' }} className="px-4 pb-14 sm:px-6 lg:px-8">
                 <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>REALIZACJE</div>
                 <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(36px, 6vw, 76px)', lineHeight: 1.02, letterSpacing: '-0.025em', margin: '0 0 16px' }}>
                     150+ projektów. Każdy inny.
@@ -58,7 +58,7 @@ export default function PortfolioPage() {
             {/* Filter */}
             {categories.length > 0 && (
                 <div style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                    <div style={{ maxWidth: 1240, margin: '0 auto', padding: '20px 32px', display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+                    <div style={{ maxWidth: 1240, margin: '0 auto', padding: '20px 32px', display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }} className="px-4 sm:px-6 lg:px-8">
                         {[{ _id: 'all', title: 'Wszystkie', slug: { current: 'all' } }, ...categories].map(cat => (
                             <button
                                 key={cat._id}
@@ -78,15 +78,15 @@ export default function PortfolioPage() {
             )}
 
             {/* Grid */}
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '56px 32px 96px' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '56px 32px 96px' }} className="px-4 py-14 sm:px-6 lg:px-8">
                 {loading ? (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 18 }}>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         {[1, 2, 3, 4].map(i => (
                             <div key={i} style={{ borderRadius: 20, background: 'var(--panel)', border: '1px solid var(--line)', aspectRatio: '16/10', animation: 'ctpulse 1.5s ease-in-out infinite' }} />
                         ))}
                     </div>
                 ) : filtered.length > 0 ? (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 18 }}>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         {filtered.map(project => (
                             <Link key={project._id} href={`/portfolio/${project.slug.current}`} style={{ textDecoration: 'none', color: 'var(--text)', display: 'block', borderRadius: 20, background: 'var(--panel)', border: '1px solid var(--line)', overflow: 'hidden', transition: 'border-color .3s, transform .3s' }}
                                 onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}

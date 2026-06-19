@@ -16,8 +16,8 @@ const contactDetails = [
 export default function ContactPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'start' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }} className="px-4 pb-16 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
 
                     {/* Left */}
                     <div>
@@ -61,10 +61,10 @@ export default function ContactPage() {
                     </div>
 
                     {/* Right — iframe form */}
-                    <div style={{ borderRadius: 22, border: '1px solid var(--line)', background: 'var(--panel)', overflow: 'hidden', padding: 8 }}>
+                    <div style={{ borderRadius: 22, border: '1px solid var(--line)', background: 'var(--panel)', overflow: 'hidden', padding: 8 }} className="min-h-[760px]">
                         <iframe
                             src="https://forms.creativetrust.pl/s/cmksbivfc000cm2014hk4d62s"
-                            style={{ width: '100%', height: 760, border: 'none', display: 'block' }}
+                            style={{ width: '100%', height: '100%', minHeight: 760, border: 'none', display: 'block' }}
                             title="Formularz kontaktowy"
                         />
                     </div>

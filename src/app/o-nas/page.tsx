@@ -34,7 +34,7 @@ export default function AboutPage() {
         <main style={{ minHeight: '100vh' }}>
 
             {/* Hero */}
-            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }}>
+            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }} className="px-4 pb-16 sm:px-6 lg:px-8">
                 <div style={{ maxWidth: 820 }}>
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>
                         O NAS
@@ -61,8 +61,8 @@ export default function AboutPage() {
 
             {/* Stats bar */}
             <section style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '56px 32px' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }} className="grid-cols-2 md:grid-cols-4">
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '56px 32px' }} className="px-4 py-14 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
                         {stats.map(([val, label]) => (
                             <div key={label} style={{ borderLeft: '1px solid var(--line)', paddingLeft: 20 }}>
                                 <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 3.5vw, 48px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--accent)' }}>{val}</div>
@@ -75,12 +75,12 @@ export default function AboutPage() {
 
             {/* Values */}
             <section style={{ borderTop: '1px solid var(--line)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
                     <div style={{ marginBottom: 48 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>CO NAS PROWADZI</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Zasady, które trzymają projekt w ryzach.</h2>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="grid-cols-1 md:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                         {values.map((v, i) => (
                             <div key={v.title} style={{ borderRadius: 20, padding: 32, background: 'var(--panel)', border: '1px solid var(--line)' }}>
                                 <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 24 }}>0{i + 1}</div>
@@ -94,14 +94,14 @@ export default function AboutPage() {
 
             {/* Timeline */}
             <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
                     <div style={{ marginBottom: 48 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>NASZA DROGA</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>
                             Budowaliśmy kompetencje tam, gdzie rósł rynek.
                         </h2>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }} className="grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
                         {milestones.map((m) => (
                             <div key={m.year} style={{ borderRadius: 18, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
                                 <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 20 }}>{m.year}</div>

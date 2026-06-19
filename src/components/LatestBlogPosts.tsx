@@ -35,8 +35,8 @@ export default function LatestBlogPosts() {
 
     return (
         <section id="insights" style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, marginBottom: 42, flexWrap: 'wrap' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
+                <div className="mb-10 flex flex-col gap-4 lg:mb-11 lg:flex-row lg:items-end lg:justify-between">
                     <div>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>
                             INSIGHTS
@@ -50,7 +50,7 @@ export default function LatestBlogPosts() {
                     </Link>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22 }} className="grid-cols-1 md:grid-cols-3">
+                <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
                     {loading
                         ? staticPosts.map(p => (
                             <Link key={p._id} href={p.href} style={{

@@ -24,7 +24,7 @@ export default function Footer() {
 
     return (
         <footer style={{ borderTop: '1px solid var(--line)', background: 'var(--bg)' }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '80px 32px 40px' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '80px 32px 40px' }} className="px-4 pb-10 pt-16 sm:px-6 lg:px-8">
 
                 <h2 style={{
                     fontFamily: 'var(--font-space), sans-serif', fontWeight: 700,
@@ -35,7 +35,7 @@ export default function Footer() {
                     <span style={{ color: 'var(--accent)' }}>Tworzymy je.</span>
                 </h2>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr', gap: 32, paddingBottom: 56, borderBottom: '1px solid var(--line)' }} className="grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+                <div style={{ paddingBottom: 56, borderBottom: '1px solid var(--line)' }} className="grid grid-cols-1 gap-8 pb-10 sm:grid-cols-2 md:grid-cols-4">
                     <div>
                         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 11, textDecoration: 'none', color: 'var(--text)', marginBottom: 16 }}>
                             <svg width="28" height="28" viewBox="0 0 30 30" fill="none">

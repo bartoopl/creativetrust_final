@@ -71,8 +71,8 @@ function StatItem({ stat }: { stat: Stat }) {
 
 export default function StatsSection() {
     return (
-        <section style={{ maxWidth: 1240, margin: '0 auto', padding: '88px 32px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }} className="grid-cols-2 md:grid-cols-4">
+        <section style={{ maxWidth: 1240, margin: '0 auto', padding: '88px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
                 {stats.map((stat) => <StatItem key={stat.label} stat={stat} />)}
             </div>
         </section>

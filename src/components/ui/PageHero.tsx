@@ -14,12 +14,8 @@ export default function PageHero({ eyebrow, title, description, cta, ctaSecondar
         <section style={{
             maxWidth: 1240, margin: '0 auto',
             padding: 'clamp(72px, 10vw, 120px) 32px clamp(64px, 8vw, 96px)',
-        }}>
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: right ? '1fr 0.8fr' : '1fr',
-                gap: 64, alignItems: 'center',
-            }} className={right ? 'grid-cols-1 lg:grid-cols-[1fr_0.8fr]' : ''}>
+        }} className="px-4 sm:px-6 lg:px-8">
+            <div className={`grid items-center gap-10 ${right ? 'grid-cols-1 lg:grid-cols-[1fr_0.8fr] lg:gap-16' : 'grid-cols-1'}`}>
                 <div style={{ maxWidth: right ? '100%' : 820 }}>
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>
                         {eyebrow}

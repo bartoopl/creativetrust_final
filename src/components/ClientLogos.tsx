@@ -5,7 +5,7 @@ export default function ClientLogos() {
 
     return (
         <section style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', padding: '26px 0', overflow: 'hidden' }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto 14px', padding: '0 32px', fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '0.18em', color: 'var(--muted)', textTransform: 'uppercase' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto 14px', padding: '0 32px', fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '0.18em', color: 'var(--muted)', textTransform: 'uppercase' }} className="px-4 sm:px-6 lg:px-8">
                 Zaufali nam
             </div>
             <div style={{ display: 'flex', width: 'max-content', animation: 'ctmarquee 32s linear infinite', willChange: 'transform' }}>

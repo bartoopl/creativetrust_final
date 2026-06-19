@@ -54,11 +54,11 @@ export default function Header() {
             borderBottom: '1px solid var(--line)',
             transition: 'background .3s ease',
         }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '16px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24 }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '16px 32px' }} className="flex items-center justify-between gap-6">
                 <Logo />
 
                 {/* Desktop nav */}
-                <nav style={{ display: 'flex', alignItems: 'center', gap: 30 }} className="hidden md:flex">
+                <nav className="hidden items-center gap-8 md:flex">
                     {navItems.map((item) => (
                         <Link
                             key={item.href}
@@ -84,7 +84,7 @@ export default function Header() {
                     className="md:hidden"
                     onClick={() => setMobileOpen(v => !v)}
                     aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
-                    style={{ background: 'none', border: '1px solid var(--line)', borderRadius: 999, width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text)', cursor: 'pointer' }}
+                    style={{ background: 'color-mix(in srgb, var(--panel) 92%, transparent)', border: '1px solid var(--line)', borderRadius: 999, width: 40, height: 40, color: 'var(--text)', cursor: 'pointer' }}
                 >
                     {mobileOpen ? <X size={18} /> : <Menu size={18} />}
                 </button>
@@ -92,7 +92,20 @@ export default function Header() {
 
             {/* Mobile menu */}
             {mobileOpen && (
-                <div style={{ position: 'fixed', inset: '73px 0 0 0', background: 'var(--bg)', zIndex: 40, padding: '24px 32px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+                <div
+                    style={{
+                        position: 'fixed',
+                        inset: '73px 0 0 0',
+                        background: 'color-mix(in srgb, var(--bg) 98%, transparent)',
+                        zIndex: 40,
+                        padding: '24px 32px',
+                        maxHeight: 'calc(100dvh - 73px)',
+                        overflowY: 'auto',
+                        borderTop: '1px solid var(--line)',
+                        backdropFilter: 'blur(14px)',
+                    }}
+                    className="flex flex-col gap-4 md:hidden"
+                >
                     {navItems.map((item) => (
                         <Link
                             key={item.href}

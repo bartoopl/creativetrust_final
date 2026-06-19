@@ -36,8 +36,8 @@ export default function ServicesPage() {
         <main style={{ minHeight: '100vh' }}>
 
             {/* Hero */}
-            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 0.8fr', gap: 64, alignItems: 'end' }}>
+            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }} className="px-4 pb-16 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-[1fr_0.8fr] lg:gap-16">
                     <div>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>USŁUGI</div>
                         <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(36px, 6vw, 76px)', lineHeight: 1.02, letterSpacing: '-0.025em', margin: '0 0 24px' }}>
@@ -58,9 +58,9 @@ export default function ServicesPage() {
                             </Link>
                         </div>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, overflow: 'hidden', borderRadius: 20, border: '1px solid var(--line)' }}>
+                    <div className="grid grid-cols-1 overflow-hidden rounded-[20px] border border-[var(--line)] sm:grid-cols-2">
                         {[['Priorytet', 'Jasny przekaz i sprawny proces'], ['Efekt', 'Mniej tarcia, więcej wyniku'], ['Model', 'Strategia + wdrożenie'], ['Zakres', 'Brand, web, commerce, AI']].map(([label, val]) => (
-                            <div key={label} style={{ background: 'var(--panel)', padding: '20px 22px' }}>
+                            <div key={label} style={{ background: 'var(--panel)', padding: '20px 22px' }} className="border-b border-[var(--line)] last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
                                 <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.12em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 8 }}>{label}</div>
                                 <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 15, lineHeight: 1.3 }}>{val}</div>
                             </div>
@@ -71,14 +71,14 @@ export default function ServicesPage() {
 
             {/* Services list */}
             <section id="zakres" style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
                     <div style={{ marginBottom: 48 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>ZAKRES USŁUG</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Moduły, które można uruchamiać osobno lub łączyć.</h2>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <div className="flex flex-col gap-2">
                         {services.map((s) => (
-                            <Link key={s.href} href={s.href} className="ct-service-row" style={{ borderRadius: 18, border: '1px solid var(--line)', background: 'var(--panel)', padding: '24px 28px', textDecoration: 'none', color: 'var(--text)', display: 'flex', alignItems: 'center', gap: 24, justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                            <Link key={s.href} href={s.href} className="ct-service-row flex flex-col gap-4 rounded-[18px] border border-[var(--line)] bg-[var(--panel)] p-6 text-[var(--text)] no-underline lg:flex-row lg:items-center lg:justify-between lg:gap-6 lg:p-7">
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 24, flex: 1, minWidth: 0 }}>
                                     <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', flexShrink: 0 }}>{s.num}</span>
                                     <div>
@@ -86,7 +86,7 @@ export default function ServicesPage() {
                                         <div style={{ color: 'var(--muted)', fontSize: 15 }}>{s.description}</div>
                                     </div>
                                 </div>
-                                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', flexShrink: 0 }}>
+                                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', flexShrink: 0 }} className="lg:ml-auto">
                                     {s.tags.map(t => (
                                         <span key={t} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--muted)', border: '1px solid var(--line)', padding: '4px 10px', borderRadius: 6 }}>{t}</span>
                                     ))}
@@ -100,12 +100,12 @@ export default function ServicesPage() {
 
             {/* Process */}
             <section style={{ borderTop: '1px solid var(--line)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
                     <div style={{ marginBottom: 48 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>JAK PRACUJEMY</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Proces napędzany przez AI.</h2>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
                         {process.map((step) => (
                             <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: step.featured ? 'linear-gradient(160deg, color-mix(in srgb, var(--accent) 16%, var(--panel)), var(--panel))' : 'var(--panel)', border: step.featured ? '1px solid color-mix(in srgb, var(--accent) 40%, var(--line))' : '1px solid var(--line)' }}>
                                 <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 48 }}>{step.num}</div>
@@ -119,12 +119,12 @@ export default function ServicesPage() {
 
             {/* FAQ */}
             <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
                     <div style={{ marginBottom: 48 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>FAQ</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Najczęstsze pytania.</h2>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 18 }}>
+                    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                         {faq.map(item => (
                             <div key={item.q} style={{ borderRadius: 18, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
                                 <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 12px' }}>{item.q}</h3>

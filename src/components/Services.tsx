@@ -4,8 +4,8 @@ import Link from 'next/link';
 
 export default function Services() {
     return (
-        <section id="uslugi" style={{ maxWidth: 1240, margin: '0 auto', padding: '48px 32px 96px' }}>
-            <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, marginBottom: 42, flexWrap: 'wrap' }}>
+        <section id="uslugi" style={{ maxWidth: 1240, margin: '0 auto', padding: '48px 32px 96px' }} className="px-4 pb-20 sm:px-6 lg:px-8">
+            <div className="mb-10 flex flex-col gap-4 lg:mb-11 lg:flex-row lg:items-end lg:justify-between">
                 <div>
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>
                         USŁUGI
@@ -19,17 +19,16 @@ export default function Services() {
                 </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 18 }} className="!grid-cols-1 md:!grid-cols-12">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-5">
 
                 {/* AI featured card */}
                 <div style={{
-                    gridColumn: 'span 7',
                     position: 'relative', overflow: 'hidden', borderRadius: 20, padding: 34,
                     background: 'linear-gradient(140deg, color-mix(in srgb, var(--accent) 26%, var(--panel)) 0%, var(--panel) 55%)',
                     border: '1px solid color-mix(in srgb, var(--accent) 40%, var(--line))',
                     minHeight: 300, display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
                     transition: 'transform .3s, box-shadow .3s',
-                }} className="col-span-full md:col-span-7"
+                }} className="col-span-full p-6 md:col-span-7 md:p-8"
                     onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 24px 60px var(--glow)'; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
                 >
@@ -52,7 +51,7 @@ export default function Services() {
                 </div>
 
                 {/* right stacked */}
-                <div style={{ gridColumn: 'span 5', display: 'flex', flexDirection: 'column', gap: 18 }} className="col-span-full md:col-span-5">
+                <div className="col-span-full flex flex-col gap-4 md:col-span-5">
                     {[
                         { href: '/uslugi/branding', title: 'Strategia marki', desc: 'Pozycjonowanie, narracja i architektura komunikacji, która się broni.' },
                         { href: '/uslugi/marketing-automation', title: 'Automatyzacja marketingu', desc: 'Lejki, CRM i kampanie sterowane danymi — działają, kiedy śpisz.' },
@@ -62,7 +61,7 @@ export default function Services() {
                             background: 'var(--panel)', border: '1px solid var(--line)',
                             textDecoration: 'none', color: 'var(--text)',
                             transition: 'transform .3s, border-color .3s',
-                        }}
+                        }} className="p-6 md:p-7"
                             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
                             onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}
                         >
@@ -79,12 +78,11 @@ export default function Services() {
                     { num: '03', href: '/uslugi/branding', title: 'Development', desc: 'Wydajny, skalowalny kod. Headless, Jamstack, integracje.' },
                 ].map(card => (
                     <Link key={card.num} href={card.href} style={{
-                        gridColumn: 'span 4',
                         borderRadius: 20, padding: 28, background: 'var(--panel)', border: '1px solid var(--line)',
                         minHeight: 200, display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
                         textDecoration: 'none', color: 'var(--text)',
                         transition: 'transform .3s, border-color .3s',
-                    }} className="col-span-full md:col-span-4"
+                    }} className="col-span-full p-6 md:col-span-4 md:p-7"
                         onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
                         onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}
                     >

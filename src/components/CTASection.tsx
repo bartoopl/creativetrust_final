@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function CTASection() {
     return (
-        <section id="kontakt" style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+        <section id="kontakt" style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
             <div style={{
                 position: 'relative', overflow: 'hidden',
                 borderRadius: 28,

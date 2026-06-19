@@ -33,7 +33,7 @@ export default async function BlogPage() {
         <main style={{ minHeight: '100vh' }}>
 
             {/* Hero */}
-            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 64px' }}>
+            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 64px' }} className="px-4 pb-14 sm:px-6 lg:px-8">
                 <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>BLOG</div>
                 <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(36px, 6vw, 76px)', lineHeight: 1.02, letterSpacing: '-0.025em', margin: '0 0 16px' }}>
                     Wiedza bez ogólników.
@@ -46,7 +46,7 @@ export default async function BlogPage() {
             {/* Category nav */}
             {categories.length > 0 && (
                 <div style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                    <div style={{ maxWidth: 1240, margin: '0 auto', padding: '20px 32px', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    <div style={{ maxWidth: 1240, margin: '0 auto', padding: '20px 32px', display: 'flex', gap: 8, flexWrap: 'wrap' }} className="px-4 sm:px-6 lg:px-8">
                         <Link href="/blog" style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, padding: '8px 16px', borderRadius: 999, border: '1px solid var(--accent)', background: 'color-mix(in srgb, var(--accent) 15%, var(--panel))', color: 'var(--text)', textDecoration: 'none' }}>Wszystkie</Link>
                         {categories.map((cat: any) => (
                             <Link key={cat._id} href={`/blog/kategoria/${cat.slug.current}`} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, padding: '8px 16px', borderRadius: 999, border: '1px solid var(--line)', background: 'transparent', color: 'var(--muted)', textDecoration: 'none' }}>
@@ -57,13 +57,13 @@ export default async function BlogPage() {
                 </div>
             )}
 
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '56px 32px 96px' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '56px 32px 96px' }} className="px-4 py-14 sm:px-6 lg:px-8">
 
                 {/* Featured post */}
                 {mainPost && (
                     <div style={{ marginBottom: 64 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.1em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 24 }}>WYRÓŻNIONY ARTYKUŁ</div>
-                        <Link href={`/blog/${mainPost.slug.current}`} className="ct-card-hover" style={{ textDecoration: 'none', color: 'var(--text)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, alignItems: 'stretch', borderRadius: 24, border: '1px solid var(--line)', background: 'var(--panel)', overflow: 'hidden' }}>
+                        <Link href={`/blog/${mainPost.slug.current}`} className="ct-card-hover grid grid-cols-1 overflow-hidden rounded-[24px] border border-[var(--line)] bg-[var(--panel)] text-[var(--text)] no-underline lg:grid-cols-2" style={{ gap: 0, alignItems: 'stretch' }}>
                             <div style={{ background: 'var(--panel2)', overflow: 'hidden', minHeight: 340 }}>
                                 {mainPost.mainImage ? (
                                     <img src={urlFor(mainPost.mainImage).width(800).url()} alt={mainPost.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -90,7 +90,7 @@ export default async function BlogPage() {
                 {regularPosts.length > 0 && (
                     <div>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.1em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 32 }}>WSZYSTKIE ARTYKUŁY</div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }}>
+                        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                             {regularPosts.map((post: any) => (
                                 <Link key={post._id} href={`/blog/${post.slug.current}`} className="ct-card-hover" style={{ textDecoration: 'none', color: 'var(--text)', display: 'flex', flexDirection: 'column', borderRadius: 20, background: 'var(--panel)', border: '1px solid var(--line)', overflow: 'hidden' }}>
                                     <div style={{ aspectRatio: '16/9', background: 'var(--panel2)', overflow: 'hidden' }}>

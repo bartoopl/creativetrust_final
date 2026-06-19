@@ -36,8 +36,8 @@ export default function RealizacjeSection() {
             color: 'var(--text)',
             borderTop: '1px solid rgba(14,14,24,0.10)',
         } as React.CSSProperties}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, marginBottom: 42, flexWrap: 'wrap' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
+                <div className="mb-10 flex flex-col gap-4 lg:mb-11 lg:flex-row lg:items-end lg:justify-between">
                     <div>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>
                             REALIZACJE
@@ -51,7 +51,7 @@ export default function RealizacjeSection() {
                     </Link>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22 }} className="grid-cols-1 md:grid-cols-3">
+                <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
                     {realizacje.map((r) => (
                         <Link key={r.title} href={r.href} style={{
                             textDecoration: 'none', color: 'var(--text)',
@@ -77,7 +77,7 @@ export default function RealizacjeSection() {
                                 <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, margin: '0 0 12px', lineHeight: 1.2 }}>
                                     {r.title}
                                 </h3>
-                                <div style={{ display: 'flex', gap: 18 }}>
+                                <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap' }}>
                                     {r.metrics.map(m => (
                                         <div key={m.label}>
                                             <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 22, color: 'var(--accent)' }}>{m.value}</div>

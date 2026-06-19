@@ -7,7 +7,7 @@ const NeuralBridgeCanvas = dynamic(() => import('./NeuralBridgeCanvas'), { ssr: 
 export default function NeuralBridgeSection() {
     return (
         <section style={{ borderTop: '1px solid var(--line)', background: 'var(--bg)' }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
                 <div style={{ textAlign: 'center', maxWidth: '62ch', margin: '0 auto 44px' }}>
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>
                         SYNERGIA
@@ -20,17 +20,17 @@ export default function NeuralBridgeSection() {
                     </p>
                 </div>
 
-                <div style={{ position: 'relative', border: '1px solid var(--line)', borderRadius: 24, overflow: 'hidden', background: 'var(--panel2)', height: 'clamp(340px, 42vw, 420px)' }}>
+                <div style={{ position: 'relative', border: '1px solid var(--line)', borderRadius: 24, overflow: 'hidden', background: 'var(--panel2)', height: 'clamp(340px, 42vw, 420px)' }} className="min-h-[340px] md:h-[clamp(340px,42vw,420px)]">
                     <NeuralBridgeCanvas />
 
-                    <div style={{ position: 'absolute', left: '5%', top: '50%', transform: 'translateY(-50%)', zIndex: 2, pointerEvents: 'none' }}>
+                    <div style={{ position: 'absolute', left: '5%', top: '50%', transform: 'translateY(-50%)', zIndex: 2, pointerEvents: 'none' }} className="left-4 top-8 translate-y-0 md:left-[5%] md:top-1/2 md:-translate-y-1/2">
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.14em', color: 'var(--accent2)', textTransform: 'uppercase', marginBottom: 8 }}>// człowiek</div>
                         <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 'clamp(18px, 2vw, 24px)', lineHeight: 1.25, maxWidth: '14ch' }}>
                             Intuicja<br />Strategia<br />Smak
                         </div>
                     </div>
 
-                    <div style={{ position: 'absolute', right: '5%', top: '50%', transform: 'translateY(-50%)', zIndex: 2, textAlign: 'right', pointerEvents: 'none' }}>
+                    <div style={{ position: 'absolute', right: '5%', top: '50%', transform: 'translateY(-50%)', zIndex: 2, textAlign: 'right', pointerEvents: 'none' }} className="right-4 top-8 translate-y-0 md:right-[5%] md:top-1/2 md:-translate-y-1/2">
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.14em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 8 }}>sztuczna inteligencja //</div>
                         <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 'clamp(18px, 2vw, 24px)', lineHeight: 1.25, maxWidth: '14ch', marginLeft: 'auto' }}>
                             Skala<br />Szybkość<br />Dane
