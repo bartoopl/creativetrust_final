@@ -38,7 +38,7 @@ export default function Hero() {
                     width: 520,
                     height: 520,
                     borderRadius: '50%',
-                    background: 'radial-gradient(circle, rgba(198, 90, 54, 0.16) 0%, rgba(198, 90, 54, 0.04) 34%, transparent 72%)',
+                    background: 'radial-gradient(circle, rgba(255, 106, 61, 0.18) 0%, rgba(255, 106, 61, 0.05) 34%, transparent 72%)',
                     filter: 'blur(10px)',
                     pointerEvents: 'none',
                 }}
@@ -51,8 +51,8 @@ export default function Hero() {
                     width: 180,
                     height: 180,
                     borderRadius: 28,
-                    border: '1px solid color-mix(in srgb, var(--line) 80%, transparent)',
-                    background: 'linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,255,255,0.24))',
+                    border: '1px solid var(--line)',
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
                     transform: 'rotate(-8deg)',
                     pointerEvents: 'none',
                 }}
@@ -68,7 +68,7 @@ export default function Hero() {
                             width: 'fit-content',
                             fontFamily: 'var(--font-mono), monospace',
                             fontSize: 11,
-                            letterSpacing: '0.16em',
+                            letterSpacing: '0.18em',
                             color: 'var(--muted)',
                             textTransform: 'uppercase',
                             marginBottom: 18,
@@ -83,8 +83,8 @@ export default function Hero() {
                             fontFamily: 'var(--font-space), sans-serif',
                             fontWeight: 700,
                             fontSize: 'clamp(42px, 7vw, 88px)',
-                            lineHeight: 0.98,
-                            letterSpacing: '-0.04em',
+                            lineHeight: 0.95,
+                            letterSpacing: '-0.055em',
                             margin: '0 0 24px',
                             maxWidth: '12ch',
                             textWrap: 'balance',
@@ -146,6 +146,7 @@ export default function Hero() {
                                         letterSpacing: '-0.04em',
                                         fontWeight: 700,
                                         marginBottom: 8,
+                                        color: 'var(--text)',
                                     }}
                                 >
                                     {item.value}
@@ -162,9 +163,9 @@ export default function Hero() {
                     style={{
                         position: 'relative',
                         borderRadius: 28,
-                        border: '1px solid color-mix(in srgb, var(--line) 90%, transparent)',
-                        background: 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.72))',
-                        boxShadow: '0 30px 90px rgba(17, 24, 39, 0.08)',
+                        border: '1px solid var(--line)',
+                        background: 'linear-gradient(180deg, rgba(17,19,26,0.96), rgba(11,12,16,0.96))',
+                        boxShadow: '0 30px 90px rgba(0, 0, 0, 0.35)',
                         overflow: 'hidden',
                     }}
                 >
@@ -173,7 +174,7 @@ export default function Hero() {
                             position: 'absolute',
                             inset: 0,
                             background:
-                                'linear-gradient(135deg, rgba(198,90,54,0.08) 0%, transparent 26%, transparent 74%, rgba(31,74,82,0.06) 100%)',
+                                'linear-gradient(135deg, rgba(255,106,61,0.10) 0%, transparent 26%, transparent 74%, rgba(111,183,255,0.06) 100%)',
                             pointerEvents: 'none',
                         }}
                     />
@@ -183,8 +184,9 @@ export default function Hero() {
                             style={{
                                 borderRadius: 22,
                                 padding: 24,
-                                background: 'linear-gradient(180deg, #171717 0%, #232323 100%)',
-                                color: '#f7f4ef',
+                                background: 'linear-gradient(180deg, #11141a 0%, #0d0f14 100%)',
+                                color: 'var(--text)',
+                                border: '1px solid var(--line)',
                             }}
                         >
                             <div
@@ -192,7 +194,7 @@ export default function Hero() {
                                     fontFamily: 'var(--font-mono), monospace',
                                     fontSize: 11,
                                     letterSpacing: '0.16em',
-                                    color: 'rgba(247,244,239,0.62)',
+                                    color: 'var(--muted)',
                                     textTransform: 'uppercase',
                                     marginBottom: 12,
                                 }}
@@ -204,7 +206,7 @@ export default function Hero() {
                                     fontFamily: 'var(--font-space), sans-serif',
                                     fontWeight: 700,
                                     fontSize: 'clamp(24px, 3vw, 34px)',
-                                    letterSpacing: '-0.03em',
+                                    letterSpacing: '-0.04em',
                                     lineHeight: 1.04,
                                     maxWidth: '12ch',
                                     marginBottom: 14,
@@ -212,7 +214,7 @@ export default function Hero() {
                             >
                                 Spójny proces. Jedna odpowiedzialność.
                             </div>
-                            <p style={{ margin: 0, color: 'rgba(247,244,239,0.74)', lineHeight: 1.6, fontSize: 15, maxWidth: '40ch' }}>
+                            <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.6, fontSize: 15, maxWidth: '40ch' }}>
                                 Zamiast rozpraszać projekt na kilka podmiotów, prowadzimy go od strategii po wdrożenie i optymalizację.
                             </p>
                         </div>
@@ -246,7 +248,7 @@ export default function Hero() {
                                         0{index + 1}
                                     </div>
                                     <div>
-                                        <div style={{ fontWeight: 600, marginBottom: 4 }}>0{index + 1}</div>
+                                        <div style={{ fontWeight: 600, marginBottom: 4, color: 'var(--text)' }}>0{index + 1}</div>
                                         <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.55, fontSize: 15 }}>
                                             {item}
                                         </p>
@@ -269,7 +271,7 @@ export default function Hero() {
                                         border: '1px solid var(--line)',
                                         borderRadius: 18,
                                         padding: 16,
-                                        background: index === 0 ? 'rgba(198, 90, 54, 0.08)' : 'rgba(255,255,255,0.88)',
+                                        background: index === 0 ? 'rgba(255, 106, 61, 0.08)' : 'rgba(255,255,255,0.02)',
                                     }}
                                 >
                                     <div
@@ -284,7 +286,7 @@ export default function Hero() {
                                     >
                                         {index + 1 < 10 ? `0${index + 1}` : index + 1}
                                     </div>
-                                    <div style={{ fontWeight: 600, lineHeight: 1.35 }}>{item}</div>
+                                    <div style={{ fontWeight: 600, lineHeight: 1.35, color: 'var(--text)' }}>{item}</div>
                                 </div>
                             ))}
                         </div>

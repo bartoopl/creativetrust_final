@@ -72,15 +72,15 @@ export default function RealizacjeSection() {
 
     return (
         <section id="realizacje" style={{
-            '--panel': '#ffffff',
-            '--panel2': '#efeef6',
-            '--line': 'rgba(14,14,24,0.10)',
-            '--text': '#0c0c14',
-            '--muted': '#5d5d6e',
-            '--glow': 'rgba(132,92,255,0.20)',
-            background: '#f6f5fb',
+            '--panel': '#11131a',
+            '--panel2': '#0c0d12',
+            '--line': 'rgba(255,255,255,0.08)',
+            '--text': '#f5f7fb',
+            '--muted': '#9ca3af',
+            '--glow': 'rgba(255,106,61,0.20)',
+            background: 'var(--bg)',
             color: 'var(--text)',
-            borderTop: '1px solid rgba(14,14,24,0.10)',
+            borderTop: '1px solid var(--line)',
         } as React.CSSProperties}>
             <div style={{ maxWidth: 1240, margin: '0 auto', padding: '84px 32px 96px' }} className="px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mb-10 flex flex-col gap-4 lg:mb-11 lg:flex-row lg:items-end lg:justify-between">

@@ -24,7 +24,7 @@ function Logo({ size = 30 }: { size?: number }) {
                 flex: 'none',
                 borderRadius: 10,
                 border: '1px solid var(--line)',
-                background: 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.62))',
+                background: 'linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))',
             }}>
                 <span style={{ width: 10, height: 10, borderRadius: 3, background: 'var(--accent)' }} />
             </span>
@@ -56,7 +56,7 @@ export default function Header() {
         <header style={{
             position: 'sticky', top: 0, zIndex: 50,
             backdropFilter: 'blur(14px)',
-            background: scrolled ? 'color-mix(in srgb, var(--bg) 92%, white)' : 'color-mix(in srgb, var(--bg) 80%, transparent)',
+            background: scrolled ? 'rgba(8, 9, 12, 0.84)' : 'rgba(8, 9, 12, 0.68)',
             borderBottom: '1px solid var(--line)',
             transition: 'background .3s ease',
         }}>

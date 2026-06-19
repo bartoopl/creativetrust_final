@@ -2,18 +2,18 @@
 
 /* ===== Design Tokens ===== */
 :root {
-  --font-hanken: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-space: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-hanken: "SF Pro Text", "SF Pro Display", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-space: "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  --bg: #f4efe7;
-  --panel: #ffffff;
-  --panel2: #eee6db;
-  --line: rgba(17, 24, 39, 0.10);
-  --accent: #c65a36;
-  --accent2: #1f4a52;
-  --glow: rgba(198, 90, 54, 0.18);
-  --text: #111111;
-  --muted: #60584f;
+  --bg: #08090c;
+  --panel: #11131a;
+  --panel2: #0c0d12;
+  --line: rgba(255, 255, 255, 0.08);
+  --accent: #ff6a3d;
+  --accent2: #6fb7ff;
+  --glow: rgba(255, 106, 61, 0.20);
+  --text: #f5f7fb;
+  --muted: #9ca3af;
 }
 
 /* ===== Keyframes ===== */
@@ -28,9 +28,9 @@ html, body { margin: 0; padding: 0; }
 
 body {
   background:
-    radial-gradient(circle at top left, rgba(198, 90, 54, 0.09), transparent 30%),
-    radial-gradient(circle at top right, rgba(31, 74, 82, 0.08), transparent 28%),
-    linear-gradient(180deg, #f7f2ea 0%, var(--bg) 62%, #ece4d9 100%);
+    radial-gradient(circle at top left, rgba(255, 106, 61, 0.14), transparent 28%),
+    radial-gradient(circle at 82% 14%, rgba(111, 183, 255, 0.10), transparent 24%),
+    linear-gradient(180deg, #0c0d12 0%, var(--bg) 46%, #0a0b0f 100%);
   color: var(--text);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -142,7 +142,7 @@ input:checked ~ .dot { transform: translateX(100%); }
 .consent-toggle input { opacity: 0; width: 0; height: 0; }
 .consent-slider {
   position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #333; transition: .4s; border-radius: 34px;
+  background-color: #2a2f3a; transition: .4s; border-radius: 34px;
 }
 .consent-slider:before {
   position: absolute; content: ""; height: 16px; width: 16px;
