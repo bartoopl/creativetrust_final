@@ -66,7 +66,7 @@ export default function BrandingPage() {
             {/* Stats */}
             <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '88px 32px' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }} className="grid-cols-2 md:grid-cols-4">
+                    <div style={{ display: 'grid', gap: 24 }} className="grid-cols-2 md:grid-cols-4">
                         {stats.map(s => (
                             <div key={s.value} style={{ borderLeft: '1px solid var(--line)', paddingLeft: 20 }}>
                                 <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 3.5vw, 52px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--accent)' }}>{s.value}</div>
@@ -86,7 +86,7 @@ export default function BrandingPage() {
                             Co składa się na kompleksowy branding.
                         </h2>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                         {elements.map(el => (
                             <div key={el.num} style={{ borderRadius: 20, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
                                 <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 28 }}>{el.num}</div>

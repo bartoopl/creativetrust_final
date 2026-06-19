@@ -2,15 +2,18 @@
 
 /* ===== Design Tokens ===== */
 :root {
-  --bg: #08080c;
-  --panel: #101017;
-  --panel2: #0b0b11;
-  --line: rgba(255,255,255,0.09);
-  --accent: #845cff;
-  --accent2: #ff5ca8;
-  --glow: rgba(132,92,255,0.45);
-  --text: #f4f3f8;
-  --muted: #8d8c9c;
+  --font-hanken: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-space: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --bg: #f4efe7;
+  --panel: #ffffff;
+  --panel2: #eee6db;
+  --line: rgba(17, 24, 39, 0.10);
+  --accent: #c65a36;
+  --accent2: #1f4a52;
+  --glow: rgba(198, 90, 54, 0.18);
+  --text: #111111;
+  --muted: #60584f;
 }
 
 /* ===== Keyframes ===== */
@@ -24,7 +27,10 @@ html { scroll-behavior: smooth; }
 html, body { margin: 0; padding: 0; }
 
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(circle at top left, rgba(198, 90, 54, 0.09), transparent 30%),
+    radial-gradient(circle at top right, rgba(31, 74, 82, 0.08), transparent 28%),
+    linear-gradient(180deg, #f7f2ea 0%, var(--bg) 62%, #ece4d9 100%);
   color: var(--text);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -57,7 +63,7 @@ h1, h2, h3, h4, h5, h6 { line-height: 1.1; }
   transition: transform .45s cubic-bezier(.76,0,.24,1); z-index: -1;
 }
 .ct-cta:hover::before { transform: translateX(0); }
-.ct-cta:hover { color: #08080c; box-shadow: 0 12px 40px var(--glow); transform: translateY(-2px); }
+.ct-cta:hover { color: #fff; box-shadow: 0 12px 40px var(--glow); transform: translateY(-2px); }
 .ct-cta .ct-badge {
   width: 38px; height: 38px; border-radius: 999px;
   background: var(--accent); color: #08080c;
@@ -65,7 +71,7 @@ h1, h2, h3, h4, h5, h6 { line-height: 1.1; }
   overflow: hidden; flex: none; transition: background .35s ease;
 }
 .ct-cta.sm .ct-badge { width: 32px; height: 32px; }
-.ct-cta:hover .ct-badge { background: #08080c; color: var(--accent); }
+.ct-cta:hover .ct-badge { background: #fff; color: var(--accent); }
 .ct-cta .ct-arrows {
   display: flex;
   transition: transform .4s cubic-bezier(.76,0,.24,1);
@@ -80,7 +86,7 @@ h1, h2, h3, h4, h5, h6 { line-height: 1.1; }
   display: inline-flex; align-items: center; gap: 11px;
   padding: 14px 24px; border-radius: 999px;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--panel) 50%, transparent);
+  background: color-mix(in srgb, var(--panel) 84%, transparent);
   color: var(--text);
   font-weight: 500; font-size: 15px;
   text-decoration: none; cursor: pointer;
@@ -88,7 +94,7 @@ h1, h2, h3, h4, h5, h6 { line-height: 1.1; }
 }
 .ct-ghost:hover {
   border-color: var(--accent); transform: translateY(-2px);
-  background: color-mix(in srgb, var(--panel) 80%, transparent);
+  background: color-mix(in srgb, var(--panel) 96%, var(--panel2));
 }
 .ct-ghost .ct-dot {
   width: 7px; height: 7px; border-radius: 50%;

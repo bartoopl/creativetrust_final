@@ -38,13 +38,21 @@ export default function Footer() {
                 <div style={{ paddingBottom: 56, borderBottom: '1px solid var(--line)' }} className="grid grid-cols-1 gap-8 pb-10 sm:grid-cols-2 md:grid-cols-4">
                     <div>
                         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 11, textDecoration: 'none', color: 'var(--text)', marginBottom: 16 }}>
-                            <svg width="28" height="28" viewBox="0 0 30 30" fill="none">
-                                <circle cx="15" cy="15" r="11.5" stroke="var(--accent)" strokeWidth="1.5" />
-                                <circle cx="15" cy="3.5" r="2" fill="var(--accent)" />
-                            </svg>
+                            <span style={{
+                                width: 28,
+                                height: 28,
+                                borderRadius: 8,
+                                border: '1px solid var(--line)',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                background: 'color-mix(in srgb, var(--panel) 90%, transparent)',
+                            }}>
+                                <span style={{ width: 10, height: 10, borderRadius: 3, background: 'var(--accent)' }} />
+                            </span>
                             <span style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, letterSpacing: '-0.02em' }}>
-                                <span style={{ fontWeight: 500 }}>creative</span>
-                                <span style={{ fontWeight: 700 }}>trust</span>
+                                <span style={{ fontWeight: 500 }}>Creative</span>
+                                <span style={{ fontWeight: 700 }}>Trust</span>
                                 <span style={{ color: 'var(--accent)', fontWeight: 700 }}>.</span>
                             </span>
                         </Link>

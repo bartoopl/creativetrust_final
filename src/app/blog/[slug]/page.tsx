@@ -92,11 +92,11 @@ export default async function BlogPostPage({
     ]);
 
     return (
-        <main className="min-h-screen py-24 px-6">
+        <main className="min-h-screen py-16 px-4 sm:py-24 sm:px-6">
             <SchemaScript schema={[blogSchema, breadcrumbSchema]} />
             <div className="max-w-[1800px] mx-auto">
                 <div className="max-w-3xl mx-auto">
-                    <Link href="/blog" className="text-gray-600 mb-12 flex items-center">
+                    <Link href="/blog" className="text-gray-600 mb-8 sm:mb-12 flex items-center">
                         <svg
                             width="20"
                             height="20"
@@ -136,14 +136,14 @@ export default async function BlogPostPage({
                             ))}
                         </div>
 
-                        <h1 className="text-4xl md:text-5xl font-medium mb-6">{post.title}</h1>
+                        <h1 className="text-3xl md:text-5xl font-medium mb-5 sm:mb-6 leading-tight">{post.title}</h1>
 
                         {post.excerpt && (
-                            <p className="text-xl text-gray-600 mb-8">{post.excerpt}</p>
+                            <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8">{post.excerpt}</p>
                         )}
 
-                        <div className="flex items-center mb-8">
-                            <div className="flex items-center mr-8">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mb-8">
+                            <div className="flex items-center">
                                 {post.author?.image ? (
                                     <div className="w-10 h-10 rounded-full overflow-hidden mr-3 relative">
                                         <Image
@@ -245,9 +245,9 @@ export default async function BlogPostPage({
 
                     {/* Powiązane artykuły */}
                     {post.relatedPosts && post.relatedPosts.length > 0 && (
-                        <div className="mt-16">
-                            <h3 className="text-2xl font-medium mb-8">Powiązane artykuły</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="mt-12 sm:mt-16">
+                            <h3 className="text-2xl font-medium mb-6 sm:mb-8">Powiązane artykuły</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                                 {post.relatedPosts.map((relatedPost) => (
                                     <Link
                                         key={relatedPost._id}
@@ -281,7 +281,7 @@ export default async function BlogPostPage({
                     )}
 
                     {/* Nawigacja na dole strony */}
-                    <div className="mt-16 pt-8 border-t border-gray-200">
+                    <div className="mt-12 sm:mt-16 pt-8 border-t border-gray-200">
                         <Link
                             href="/blog"
                             className="inline-flex items-center text-gray-700 hover:text-black"

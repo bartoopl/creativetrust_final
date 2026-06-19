@@ -14,17 +14,23 @@ const navItems = [
 function Logo({ size = 30 }: { size?: number }) {
     return (
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 11, textDecoration: 'none', color: 'var(--text)' }}>
-            <span style={{ position: 'relative', width: size, height: size, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flex: 'none' }}>
-                <svg width={size} height={size} viewBox="0 0 30 30" fill="none">
-                    <circle cx="15" cy="15" r="11.5" stroke="var(--accent)" strokeWidth="1.5" />
-                </svg>
-                <span style={{ position: 'absolute', inset: 0, animation: 'ctspin 7s linear infinite' }}>
-                    <span style={{ position: 'absolute', top: 1, left: '50%', width: 5, height: 5, marginLeft: -2.5, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 9px var(--glow)' }} />
-                </span>
+            <span style={{
+                position: 'relative',
+                width: size,
+                height: size,
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flex: 'none',
+                borderRadius: 10,
+                border: '1px solid var(--line)',
+                background: 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.62))',
+            }}>
+                <span style={{ width: 10, height: 10, borderRadius: 3, background: 'var(--accent)' }} />
             </span>
             <span style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 19, letterSpacing: '-0.02em' }}>
-                <span style={{ fontWeight: 500 }}>creative</span>
-                <span style={{ fontWeight: 700 }}>trust</span>
+                <span style={{ fontWeight: 500 }}>Creative</span>
+                <span style={{ fontWeight: 700 }}>Trust</span>
                 <span style={{ color: 'var(--accent)', fontWeight: 700 }}>.</span>
             </span>
         </Link>
@@ -50,7 +56,7 @@ export default function Header() {
         <header style={{
             position: 'sticky', top: 0, zIndex: 50,
             backdropFilter: 'blur(14px)',
-            background: scrolled ? 'color-mix(in srgb, var(--bg) 88%, transparent)' : 'color-mix(in srgb, var(--bg) 72%, transparent)',
+            background: scrolled ? 'color-mix(in srgb, var(--bg) 92%, white)' : 'color-mix(in srgb, var(--bg) 80%, transparent)',
             borderBottom: '1px solid var(--line)',
             transition: 'background .3s ease',
         }}>
@@ -81,10 +87,22 @@ export default function Header() {
                 {/* Mobile toggle */}
                 <button
                     type="button"
-                    className="md:hidden"
+                    className="inline-flex items-center justify-center md:hidden"
                     onClick={() => setMobileOpen(v => !v)}
                     aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
-                    style={{ background: 'color-mix(in srgb, var(--panel) 92%, transparent)', border: '1px solid var(--line)', borderRadius: 999, width: 40, height: 40, color: 'var(--text)', cursor: 'pointer' }}
+                    aria-expanded={mobileOpen}
+                        style={{
+                        background: 'color-mix(in srgb, var(--panel) 92%, transparent)',
+                        border: '1px solid var(--line)',
+                        borderRadius: 999,
+                        width: 40,
+                        height: 40,
+                        color: 'var(--text)',
+                        cursor: 'pointer',
+                        flex: 'none',
+                        padding: 0,
+                        touchAction: 'manipulation',
+                    }}
                 >
                     {mobileOpen ? <X size={18} /> : <Menu size={18} />}
                 </button>

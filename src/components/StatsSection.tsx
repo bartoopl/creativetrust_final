@@ -7,18 +7,18 @@ interface Stat {
     decimals?: number;
     suffix?: string;
     label: string;
-    accent?: boolean;
 }
 
 const stats: Stat[] = [
     { value: 150, suffix: '+', label: 'zrealizowanych projektów' },
-    { value: 15, label: 'lat doświadczenia' },
-    { value: 3.2, decimals: 1, suffix: '×', label: 'średni wzrost konwersji', accent: true },
+    { value: 15, suffix: '', label: 'lat doświadczenia' },
+    { value: 3.2, decimals: 1, suffix: '×', label: 'średni wzrost konwersji' },
     { value: 40, suffix: '%', label: 'szybciej dzięki AI' },
 ];
 
 function useCountUp(target: number, decimals = 0, active: boolean) {
     const [val, setVal] = useState(0);
+
     useEffect(() => {
         if (!active) return;
         const dur = 1400;
@@ -31,11 +31,13 @@ function useCountUp(target: number, decimals = 0, active: boolean) {
         };
         requestAnimationFrame(step);
     }, [active, target]);
+
     const fmt = (v: number) => {
         let s = v.toFixed(decimals);
         if (decimals > 0) s = s.replace('.', ',');
         return s;
     };
+
     return fmt(val);
 }
 
@@ -46,34 +48,73 @@ function StatItem({ stat }: { stat: Stat }) {
 
     useEffect(() => {
         const el = ref.current;
-        if (!el || !('IntersectionObserver' in window)) { setActive(true); return; }
-        const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setActive(true); obs.disconnect(); } }, { threshold: 0.6 });
+        if (!el || !('IntersectionObserver' in window)) {
+            setActive(true);
+            return;
+        }
+
+        const obs = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setActive(true);
+                obs.disconnect();
+            }
+        }, { threshold: 0.6 });
+
         obs.observe(el);
         return () => obs.disconnect();
     }, []);
 
     return (
-        <div ref={ref} style={{ borderLeft: '1px solid var(--line)', paddingLeft: 20 }}>
-            <div style={{
-                fontFamily: 'var(--font-space), sans-serif',
-                fontWeight: 700,
-                fontSize: 'clamp(38px, 4.5vw, 58px)',
-                letterSpacing: '-0.03em',
-                lineHeight: 1,
-                color: stat.accent ? 'var(--accent)' : 'var(--text)',
-            }}>
+        <div
+            ref={ref}
+            style={{
+                border: '1px solid var(--line)',
+                borderRadius: 22,
+                padding: '20px 18px 18px',
+                background: 'color-mix(in srgb, var(--panel) 88%, transparent)',
+                minHeight: 124,
+            }}
+        >
+            <div
+                style={{
+                    fontFamily: 'var(--font-space), sans-serif',
+                    fontWeight: 700,
+                    fontSize: 'clamp(32px, 4.5vw, 52px)',
+                    letterSpacing: '-0.04em',
+                    lineHeight: 1,
+                    color: 'var(--text)',
+                }}
+            >
                 {display}{stat.suffix ?? ''}
             </div>
-            <div style={{ color: 'var(--muted)', fontSize: 14, marginTop: 10 }}>{stat.label}</div>
+            <div style={{ color: 'var(--muted)', fontSize: 14, marginTop: 12, lineHeight: 1.45 }}>
+                {stat.label}
+            </div>
         </div>
     );
 }
 
 export default function StatsSection() {
     return (
-        <section style={{ maxWidth: 1240, margin: '0 auto', padding: '88px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-                {stats.map((stat) => <StatItem key={stat.label} stat={stat} />)}
+        <section style={{ maxWidth: 1240, margin: '0 auto', padding: '36px 32px 92px' }} className="px-4 py-10 sm:px-6 lg:px-8">
+            <div className="mb-8 flex flex-col gap-3 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
+                <div>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 12 }}>
+                        Dowody
+                    </div>
+                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-0.03em', margin: 0, lineHeight: 1.04 }}>
+                        Wyniki, które da się policzyć.
+                    </h2>
+                </div>
+                <p style={{ color: 'var(--muted)', fontSize: 16, maxWidth: '42ch', margin: 0, lineHeight: 1.55 }}>
+                    Łączymy strategię, projekt i wdrożenie w jednym procesie, więc szybciej przechodzimy od decyzji do efektu.
+                </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+                {stats.map((stat) => (
+                    <StatItem key={stat.label} stat={stat} />
+                ))}
             </div>
         </section>
     );

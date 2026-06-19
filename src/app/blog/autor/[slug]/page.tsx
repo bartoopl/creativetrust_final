@@ -60,9 +60,9 @@ export default async function AuthorPage({
     };
 
     return (
-        <main className="min-h-screen py-24 px-6">
+        <main className="min-h-screen py-16 px-4 sm:py-24 sm:px-6">
             <div className="max-w-[1800px] mx-auto">
-                <Link href="/blog" className="text-gray-600 mb-8 flex items-center">
+                <Link href="/blog" className="text-gray-600 mb-6 sm:mb-8 flex items-center">
                     <svg
                         width="20"
                         height="20"
@@ -91,9 +91,9 @@ export default async function AuthorPage({
 
                 {/* Profil autora */}
                 <div className="mb-16">
-                    <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+                    <div className="flex flex-col md:flex-row items-center md:items-start gap-6 sm:gap-8">
                         {author.image ? (
-                            <div className="w-32 h-32 rounded-full overflow-hidden relative">
+                            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden relative">
                                 <Image
                                     src={urlFor(author.image).url()}
                                     alt={author.name}
@@ -102,16 +102,16 @@ export default async function AuthorPage({
                                 />
                             </div>
                         ) : (
-                            <div className="w-32 h-32 flex items-center justify-center bg-gray-200 rounded-full">
-                                <span className="text-3xl text-gray-600">{author.name.charAt(0)}</span>
+                            <div className="w-24 h-24 sm:w-32 sm:h-32 flex items-center justify-center bg-gray-200 rounded-full">
+                                <span className="text-2xl sm:text-3xl text-gray-600">{author.name.charAt(0)}</span>
                             </div>
                         )}
 
                         <div className="text-center md:text-left">
-                            <h1 className="text-4xl md:text-5xl font-medium mb-4">{author.name}</h1>
+                            <h1 className="text-3xl md:text-5xl font-medium mb-4 leading-tight">{author.name}</h1>
 
                             {author.role && (
-                                <p className="text-xl text-gray-600 mb-6">{author.role}</p>
+                                <p className="text-lg sm:text-xl text-gray-600 mb-5 sm:mb-6">{author.role}</p>
                             )}
 
                             {author.bio && (
@@ -214,7 +214,7 @@ export default async function AuthorPage({
                     <div>
                         <h2 className="text-2xl font-medium mb-8">Artykuły autora ({author.posts.length})</h2>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
                             {author.posts.map((post) => (
                                 <div key={post._id} className="flex flex-col h-full group">
                                     <div className="aspect-[16/9] relative rounded-xl overflow-hidden mb-6">

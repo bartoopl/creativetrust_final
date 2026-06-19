@@ -61,10 +61,10 @@ export default function ContactPage() {
                     </div>
 
                     {/* Right — iframe form */}
-                    <div style={{ borderRadius: 22, border: '1px solid var(--line)', background: 'var(--panel)', overflow: 'hidden', padding: 8 }} className="min-h-[760px]">
+                    <div style={{ borderRadius: 22, border: '1px solid var(--line)', background: 'var(--panel)', overflow: 'hidden', padding: 8 }} className="min-h-[560px] lg:min-h-[760px]">
                         <iframe
                             src="https://forms.creativetrust.pl/s/cmksbivfc000cm2014hk4d62s"
-                            style={{ width: '100%', height: '100%', minHeight: 760, border: 'none', display: 'block' }}
+                            style={{ width: '100%', height: '100%', minHeight: 560, border: 'none', display: 'block' }}
                             title="Formularz kontaktowy"
                         />
                     </div>

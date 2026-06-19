@@ -1,32 +1,10 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk, Hanken_Grotesk, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
 import SchemaScript from '@/components/SchemaScript';
 import { organizationSchema } from '@/lib/schema';
-
-const hankenGrotesk = Hanken_Grotesk({
-    subsets: ['latin'],
-    weight: ['400', '500', '600'],
-    variable: '--font-hanken',
-    display: 'swap',
-});
-
-const spaceGrotesk = Space_Grotesk({
-    subsets: ['latin'],
-    weight: ['400', '500', '600', '700'],
-    variable: '--font-space',
-    display: 'swap',
-});
-
-const jetbrainsMono = JetBrains_Mono({
-    subsets: ['latin'],
-    weight: ['400', '500'],
-    variable: '--font-mono',
-    display: 'swap',
-});
 
 export const metadata: Metadata = {
     metadataBase: new URL('https://creativetrust.pl'),
@@ -76,7 +54,7 @@ export default function RootLayout({
     return (
         <html
             lang="pl"
-            className={`overflow-x-hidden ${hankenGrotesk.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+            className="overflow-x-hidden"
             style={{ fontFamily: 'var(--font-hanken), sans-serif' }}
         >
             <head>
