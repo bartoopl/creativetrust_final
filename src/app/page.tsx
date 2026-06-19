@@ -1,13 +1,8 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import ClientLogos from '@/components/ClientLogos';
-import StatsSection from '@/components/StatsSection';
 import Services from '@/components/Services';
-import NeuralBridgeSection from '@/components/NeuralBridgeSection';
-import ProcessSection from '@/components/ProcessSection';
 import RealizacjeSection from '@/components/RealizacjeSection';
-import TestimonialSection from '@/components/TestimonialSection';
-import LatestBlogPosts from '@/components/LatestBlogPosts';
 import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
@@ -27,13 +22,8 @@ export default function Home() {
         <main>
             <Hero />
             <ClientLogos />
-            <StatsSection />
             <Services />
-            <NeuralBridgeSection />
-            <ProcessSection />
             <RealizacjeSection />
-            <TestimonialSection />
-            <LatestBlogPosts />
             <CTASection />
         </main>
     );
