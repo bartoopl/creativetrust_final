@@ -78,21 +78,21 @@ export default function RealizacjeSection() {
             '--text': '#f5f7fb',
             '--muted': '#9ca3af',
             '--glow': 'rgba(165,107,255,0.24)',
-            background: 'var(--bg)',
-            color: 'var(--text)',
-            borderTop: '1px solid var(--line)',
+            background: '#f4f1ea',
+            color: '#11131a',
+            borderTop: '1px solid rgba(12,14,18,0.08)',
         } as React.CSSProperties}>
             <div style={{ maxWidth: 1240, margin: '0 auto', padding: '72px 32px 84px' }} className="px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mb-8 flex flex-col gap-4 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
                     <div>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 10 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: '#5b6472', textTransform: 'uppercase', marginBottom: 10 }}>
                             REALIZACJE
                         </div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(22px, 2.9vw, 32px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04 }}>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(22px, 2.9vw, 32px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04, color: '#11131a' }}>
                             Efekty, nie obietnice.
                         </h2>
                     </div>
-                    <Link href="/portfolio" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--text)', textDecoration: 'none', fontSize: 12, borderBottom: '1px solid var(--accent)', paddingBottom: 3 }}>
+                    <Link href="/portfolio" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: '#11131a', textDecoration: 'none', fontSize: 12, borderBottom: '1px solid var(--accent)', paddingBottom: 3 }}>
                         Wszystkie realizacje <span style={{ fontFamily: 'var(--font-mono), monospace' }}>→</span>
                     </Link>
                 </div>
@@ -100,14 +100,15 @@ export default function RealizacjeSection() {
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
                     {items.map((r) => (
                         <Link key={r._id} href={r.href} style={{
-                            textDecoration: 'none', color: 'var(--text)',
+                            textDecoration: 'none', color: '#11131a',
                             borderRadius: 16, overflow: 'hidden',
-                            border: '1px solid var(--line)', background: 'var(--panel)',
+                            border: '1px solid rgba(12,14,18,0.10)', background: 'rgba(255,255,255,0.82)',
                             display: 'flex', flexDirection: 'column',
                             transition: 'transform .3s, border-color .3s',
+                            boxShadow: '0 10px 30px rgba(12,14,18,0.04)',
                         }}
                             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
-                            onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}
+                            onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'rgba(12,14,18,0.10)'; }}
                         >
                             <div style={{ aspectRatio: '4/3', position: 'relative', overflow: 'hidden', background: 'var(--panel2)' }}>
                                 {r.mainImage ? (
@@ -158,10 +159,10 @@ export default function RealizacjeSection() {
                                 <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, color: 'var(--accent)', letterSpacing: '.12em', textTransform: 'uppercase', marginBottom: 8 }}>
                                     {r.category}
                                 </div>
-                                    <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 16, margin: '0 0 10px', lineHeight: 1.2 }}>
+                                    <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 16, margin: '0 0 10px', lineHeight: 1.2, color: '#11131a' }}>
                                         {r.title}
                                     </h3>
-                                <div style={{ color: 'var(--muted)', fontSize: 12.5, lineHeight: 1.55, margin: 0 }}>
+                                <div style={{ color: '#5b6472', fontSize: 12.5, lineHeight: 1.55, margin: 0 }}>
                                     Otwórz projekt i zobacz zakres, efekty oraz szczegóły wdrożenia.
                                 </div>
                             </div>
