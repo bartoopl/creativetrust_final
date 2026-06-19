@@ -54,7 +54,7 @@ export default function Header() {
 
     return (
         <header style={{
-            position: 'sticky', top: 0, zIndex: 50,
+            position: 'sticky', top: 0, zIndex: 110,
             backdropFilter: 'blur(14px)',
             background: scrolled ? 'rgba(8, 9, 12, 0.84)' : 'rgba(8, 9, 12, 0.68)',
             borderBottom: '1px solid var(--line)',
@@ -113,11 +113,11 @@ export default function Header() {
                 <div
                     style={{
                         position: 'fixed',
-                        inset: '73px 0 0 0',
+                        inset: '68px 0 0 0',
                         background: 'color-mix(in srgb, var(--bg) 98%, transparent)',
-                        zIndex: 40,
+                        zIndex: 130,
                         padding: '24px 32px',
-                        maxHeight: 'calc(100dvh - 73px)',
+                        maxHeight: 'calc(100dvh - 68px)',
                         overflowY: 'auto',
                         borderTop: '1px solid var(--line)',
                         backdropFilter: 'blur(14px)',

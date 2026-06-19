@@ -68,11 +68,12 @@ function StatItem({ stat }: { stat: Stat }) {
         <div
             ref={ref}
             style={{
-                border: '1px solid var(--line)',
+                border: '1px solid rgba(12, 14, 18, 0.10)',
                 borderRadius: 16,
                 padding: '16px 16px 14px',
-                background: 'color-mix(in srgb, var(--panel) 88%, transparent)',
+                background: 'rgba(255,255,255,0.72)',
                 minHeight: 124,
+                boxShadow: '0 10px 30px rgba(12, 14, 18, 0.05)',
             }}
         >
             <div
@@ -82,12 +83,12 @@ function StatItem({ stat }: { stat: Stat }) {
                     fontSize: 'clamp(24px, 3.2vw, 36px)',
                     letterSpacing: '-0.045em',
                     lineHeight: 1,
-                    color: 'var(--text)',
+                    color: '#11131a',
                 }}
             >
                 {display}{stat.suffix ?? ''}
             </div>
-            <div style={{ color: 'var(--muted)', fontSize: 14, marginTop: 12, lineHeight: 1.45 }}>
+            <div style={{ color: '#5b6472', fontSize: 14, marginTop: 12, lineHeight: 1.45 }}>
                 {stat.label}
             </div>
         </div>
@@ -96,17 +97,18 @@ function StatItem({ stat }: { stat: Stat }) {
 
 export default function StatsSection() {
     return (
-        <section style={{ maxWidth: 1240, margin: '0 auto', padding: '28px 32px 80px' }} className="px-4 py-10 sm:px-6 lg:px-8">
+        <section style={{ background: '#f4f1ea', color: '#11131a', borderTop: '1px solid rgba(12,14,18,0.08)' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '32px 32px 84px' }} className="px-4 py-10 sm:px-6 lg:px-8">
             <div className="mb-6 flex flex-col gap-3 lg:mb-8 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 8 }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: '#5b6472', textTransform: 'uppercase', marginBottom: 8 }}>
                         Dowody
                     </div>
-                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(22px, 2.9vw, 32px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04 }}>
+                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(22px, 2.9vw, 32px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04, color: '#11131a' }}>
                         Wyniki, które da się policzyć.
                     </h2>
                 </div>
-                <p style={{ color: 'var(--muted)', fontSize: 14, maxWidth: '42ch', margin: 0, lineHeight: 1.55 }}>
+                <p style={{ color: '#5b6472', fontSize: 14, maxWidth: '42ch', margin: 0, lineHeight: 1.55 }}>
                     Łączymy strategię, projekt i wdrożenie w jednym procesie, więc szybciej przechodzimy od decyzji do efektu.
                 </p>
             </div>
@@ -115,6 +117,7 @@ export default function StatsSection() {
                 {stats.map((stat) => (
                     <StatItem key={stat.label} stat={stat} />
                 ))}
+            </div>
             </div>
         </section>
     );

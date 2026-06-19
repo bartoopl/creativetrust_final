@@ -1,10 +1,31 @@
 import type { Metadata } from 'next';
+import { IBM_Plex_Mono, IBM_Plex_Sans, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
 import SchemaScript from '@/components/SchemaScript';
 import { organizationSchema } from '@/lib/schema';
+
+const spaceGrotesk = Space_Grotesk({
+    subsets: ['latin'],
+    variable: '--font-space',
+    display: 'swap',
+});
+
+const plexSans = IBM_Plex_Sans({
+    subsets: ['latin'],
+    variable: '--font-hanken',
+    display: 'swap',
+    weight: ['400', '500', '600', '700'],
+});
+
+const plexMono = IBM_Plex_Mono({
+    subsets: ['latin'],
+    variable: '--font-mono',
+    display: 'swap',
+    weight: ['400', '500', '600'],
+});
 
 export const metadata: Metadata = {
     metadataBase: new URL('https://creativetrust.pl'),
@@ -54,8 +75,7 @@ export default function RootLayout({
     return (
         <html
             lang="pl"
-            className="overflow-x-hidden"
-            style={{ fontFamily: 'var(--font-hanken), sans-serif' }}
+            className={`${spaceGrotesk.variable} ${plexSans.variable} ${plexMono.variable} overflow-x-hidden`}
         >
             <head>
                 <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
