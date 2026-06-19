@@ -1,106 +1,147 @@
 @import "tailwindcss";
 
+/* ===== Design Tokens ===== */
 :root {
-  --foreground-rgb: 33, 33, 33;
-  --background-rgb: 255, 255, 255;
-  --accent-rgb: 14, 116, 144;
+  --bg: #08080c;
+  --panel: #101017;
+  --panel2: #0b0b11;
+  --line: rgba(255,255,255,0.09);
+  --accent: #845cff;
+  --accent2: #ff5ca8;
+  --glow: rgba(132,92,255,0.45);
+  --text: #f4f3f8;
+  --muted: #8d8c9c;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* ===== Keyframes ===== */
+@keyframes ctspin { to { transform: rotate(360deg); } }
+@keyframes ctmarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes ctpulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes ctfloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes ctblink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+html { scroll-behavior: smooth; }
+html, body { margin: 0; padding: 0; }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
+::selection { background: var(--accent); color: #08080c; }
+img { max-width: 100%; height: auto; }
+main { isolation: isolate; }
 
-/* Dodatkowe stylowanie dla elementów interaktywnych */
-a, button {
-  transition: all 0.3s ease;
-}
+h1, h2, h3, h4, h5, h6 { line-height: 1.1; }
 
-::selection {
-  background: rgb(var(--accent-rgb));
-  color: #fff;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-main {
+/* ===== Primary Button (.ct-cta) ===== */
+.ct-cta {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 7px 7px 7px 22px; border-radius: 999px;
+  border: 1px solid var(--accent); background: transparent;
+  color: var(--text);
+  font-weight: 600; font-size: 15px;
+  text-decoration: none; cursor: pointer;
+  transition: color .35s ease, box-shadow .35s ease, transform .25s ease;
   isolation: isolate;
 }
-
-
-
-/* Style dla przełączników Consent Manager */
-.dot {
-  transition: transform 0.3s ease-in-out;
+.ct-cta.sm { font-size: 14px; padding: 5px 5px 5px 18px; }
+.ct-cta::before {
+  content: ""; position: absolute; inset: 0;
+  background: var(--accent); transform: translateX(-101%);
+  transition: transform .45s cubic-bezier(.76,0,.24,1); z-index: -1;
 }
-
-input:checked ~ .dot {
-  transform: translateX(100%);
+.ct-cta:hover::before { transform: translateX(0); }
+.ct-cta:hover { color: #08080c; box-shadow: 0 12px 40px var(--glow); transform: translateY(-2px); }
+.ct-cta .ct-badge {
+  width: 38px; height: 38px; border-radius: 999px;
+  background: var(--accent); color: #08080c;
+  display: inline-flex; align-items: center; justify-content: center;
+  overflow: hidden; flex: none; transition: background .35s ease;
 }
+.ct-cta.sm .ct-badge { width: 32px; height: 32px; }
+.ct-cta:hover .ct-badge { background: #08080c; color: var(--accent); }
+.ct-cta .ct-arrows {
+  display: flex;
+  transition: transform .4s cubic-bezier(.76,0,.24,1);
+}
+.ct-cta .ct-arrows span { width: 38px; text-align: center; flex: none; }
+.ct-cta.sm .ct-arrows span { width: 32px; }
+.ct-cta:hover .ct-arrows { transform: translateX(-100%); }
 
-/* Dodatkowe style poprawiające wygląd przełączników */
-.consent-toggle {
+/* ===== Ghost Button (.ct-ghost) ===== */
+.ct-ghost {
   position: relative;
-  display: inline-block;
-  width: 40px;
-  height: 24px;
+  display: inline-flex; align-items: center; gap: 11px;
+  padding: 14px 24px; border-radius: 999px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel) 50%, transparent);
+  color: var(--text);
+  font-weight: 500; font-size: 15px;
+  text-decoration: none; cursor: pointer;
+  transition: border-color .3s ease, transform .25s ease, background .3s ease;
+}
+.ct-ghost:hover {
+  border-color: var(--accent); transform: translateY(-2px);
+  background: color-mix(in srgb, var(--panel) 80%, transparent);
+}
+.ct-ghost .ct-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 10px var(--glow); flex: none;
+}
+.ct-ghost .ct-tail {
+  color: var(--muted);
+  transition: transform .3s ease, color .3s ease;
+}
+.ct-ghost:hover .ct-tail { transform: translateY(3px); color: var(--accent); }
+
+/* ===== Utility hover classes (server-component safe) ===== */
+.ct-service-row {
+  transition: border-color .3s, transform .3s;
+}
+.ct-service-row:hover {
+  border-color: var(--accent) !important;
+  transform: translateX(4px);
+}
+.ct-card-hover {
+  transition: border-color .3s, transform .3s;
+}
+.ct-card-hover:hover {
+  border-color: var(--accent) !important;
+  transform: translateY(-4px);
+}
+.ct-contact-link {
+  transition: color .2s;
+}
+.ct-contact-link:hover {
+  color: var(--accent) !important;
 }
 
-.consent-toggle input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+/* ===== Scroll Reveal ===== */
+[data-reveal] {
+  opacity: 0; transform: translateY(26px);
+  transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
 }
+[data-reveal].is-revealed { opacity: 1; transform: translateY(0); }
 
+/* ===== Consent Manager ===== */
+.dot { transition: transform 0.3s ease-in-out; }
+input:checked ~ .dot { transform: translateX(100%); }
+.consent-toggle { position: relative; display: inline-block; width: 40px; height: 24px; }
+.consent-toggle input { opacity: 0; width: 0; height: 0; }
 .consent-slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
-  border-radius: 34px;
+  position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #333; transition: .4s; border-radius: 34px;
 }
-
 .consent-slider:before {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
+  position: absolute; content: ""; height: 16px; width: 16px;
+  left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%;
 }
-
-input:checked + .consent-slider {
-  background-color: #000000;
-}
-
-input:checked + .consent-slider:before {
-  transform: translateX(16px);
-}
-
-/* Efekt fokusa dla dostępności */
-input:focus + .consent-slider {
-  box-shadow: 0 0 1px #000000;
-}
+input:checked + .consent-slider { background-color: var(--accent); }
+input:checked + .consent-slider:before { transform: translateX(16px); }
+input:focus + .consent-slider { box-shadow: 0 0 1px var(--accent); }

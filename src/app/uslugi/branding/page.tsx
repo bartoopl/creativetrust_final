@@ -1,432 +1,130 @@
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { Metadata } from 'next';
-import Button from '@/components/Button';
-import BrandingForm from "@/components/BrandingForm";
-import SigningProcess from "@/components/SigningProcessComponent";
+import Link from 'next/link';
+import CTASection from '@/components/CTASection';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Branding | Tworzenie i rozwój marek - CreativeTrust',
-    description: 'Profesjonalne usługi brandingowe dla firm. Projektowanie logo, identyfikacji wizualnej i strategii marki, które wyróżnią Twój biznes na tle konkurencji.',
-    alternates: {
-        canonical: `${SITE_URL}/uslugi/branding`,
-    },
+    title: 'Branding i strategia marki — CreativeTrust | Pozycjonowanie, logo, komunikacja',
+    description: 'Budujemy marki, które sprzedają i rosną. Pozycjonowanie, narracja, identyfikacja wizualna i komunikacja — spójne w każdym punkcie styku. Efekty, nie obietnice.',
+    alternates: { canonical: `${SITE_URL}/uslugi/branding` },
     openGraph: {
-        title: 'Branding i identyfikacja wizualna | CreativeTrust',
-        description: 'Strategia marki, logo, identyfikacja wizualna i komunikacja, które pomagają firmom wyróżnić się na rynku.',
-        url: `${SITE_URL}/uslugi/branding`,
-        siteName: 'CreativeTrust',
-        locale: 'pl_PL',
-        type: 'website',
-    },
-    twitter: {
-        card: 'summary_large_image',
-        title: 'Branding i identyfikacja wizualna | CreativeTrust',
-        description: 'Strategia marki, logo, identyfikacja wizualna i komunikacja, które pomagają firmom wyróżnić się na rynku.',
+        title: 'Branding i strategia marki | CreativeTrust',
+        description: 'Pozycjonowanie, logo, identyfikacja wizualna i architektura komunikacji, która się broni. AI przyspiesza każdy etap procesu.',
+        url: `${SITE_URL}/uslugi/branding`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
     },
 };
 
+const stats = [
+    { value: '59%', label: 'konsumentów preferuje zakupy od marek, które znają' },
+    { value: '81%', label: 'wymaga zaufania do marki przed dokonaniem zakupu' },
+    { value: '3,2×', label: 'średni wzrost konwersji po rebrandingu z nami' },
+    { value: '39×', label: 'większa szansa wyboru spośród konkurencji' },
+];
+
+const elements = [
+    { title: 'Strategia marki', description: 'Misja, wizja, wartości, osobowość i pozycjonowanie — fundament dla wszystkich działań.', num: '01' },
+    { title: 'Identyfikacja wizualna', description: 'Logo, kolorystyka, typografia i system graficzny spójny we wszystkich kanałach.', num: '02' },
+    { title: 'Komunikacja', description: 'Tone of voice, storytelling i kluczowe komunikaty trafiające w odbiorców.', num: '03' },
+    { title: 'Materiały brandingowe', description: 'Wizytówki, prezentacje, materiały cyfrowe i drukowane zaprojektowane systemowo.', num: '04' },
+    { title: 'Brand guidelines', description: 'Księga znaku i zasady użycia marki — spójność na każdym poziomie.', num: '05' },
+    { title: 'Rebranding', description: 'Odświeżenie marki z zachowaniem jej wartości i rozpoznawalności.', num: '06' },
+];
+
+const process = [
+    { num: '01', title: 'Odkrycie', description: 'Wywiady, warsztaty i AI-research — poznajemy firmę, rynek i odbiorców głębiej niż tradycyjna analiza.' },
+    { num: '02', title: 'Strategia', description: 'Pozycjonowanie, osobowość marki, propozycja wartości i komunikaty kluczowe.' },
+    { num: '03', title: 'Projekt', description: 'System wizualny i język komunikacji. Generujemy i testujemy warianty szybciej dzięki AI.' },
+    { num: '04', title: 'Wdrożenie', description: 'Marka w każdym punkcie styku. Brand guidelines i materiały gotowe do użycia.' },
+    { num: '05', title: 'Ewaluacja', description: 'Analizujemy jak marka funkcjonuje w praktyce i optymalizujemy w pętli.' },
+];
+
 export default function BrandingPage() {
-    const brandStats = [
-        { id: 1, stat: '59%', description: 'konsumentów preferuje zakupy od marek, które znają' },
-        { id: 2, stat: '81%', description: 'wymaga od marki zaufania przed dokonaniem zakupu' },
-        { id: 3, stat: '77%', description: 'kupuje produkty ze względu na markę, a nie tylko nazwę' },
-        { id: 4, stat: '39x', description: 'większa szansa, że będziesz wybrany spośród konkurencji' },
-    ];
-
-    const brandElements = [
-        {
-            icon: '✦',
-            title: 'Strategia marki',
-            description: 'Definiujemy Twoją markę od podstaw: misję, wizję, wartości, osobowość i pozycjonowanie na rynku.'
-        },
-        {
-            icon: '◎',
-            title: 'Identyfikacja wizualna',
-            description: 'Tworzymy spójny system wizualny: logo, kolorystykę, typografię i elementy graficzne reprezentujące Twoją markę.'
-        },
-        {
-            icon: '◈',
-            title: 'Komunikacja marki',
-            description: 'Opracowujemy tone of voice, storytelling i kluczowe komunikaty, które przemówią do Twoich odbiorców.'
-        },
-        {
-            icon: '⟁',
-            title: 'Materiały brandingowe',
-            description: 'Projektujemy wizytówki, papier firmowy, prezentacje, materiały cyfrowe i wszystko, czego potrzebuje Twoja marka.'
-        },
-        {
-            icon: '⬢',
-            title: 'Brand guidelines',
-            description: 'Tworzymy księgę znaku i wskazówki dotyczące używania elementów marki, zapewniając spójność we wszystkich kanałach.'
-        },
-        {
-            icon: '⦿',
-            title: 'Rebranding',
-            description: 'Odświeżamy istniejące marki, zachowując ich wartość i rozpoznawalność, jednocześnie dostosowując je do współczesnych standardów.'
-        },
-    ];
-
-    const brandingProcess = [
-        {
-            number: '01',
-            title: 'Odkrycie',
-            description: 'Przeprowadzamy wywiady, warsztaty i badania, aby poznać Twoją firmę, wartości, odbiorców i konkurencję. To fundament do stworzenia unikalnej marki.',
-        },
-        {
-            number: '02',
-            title: 'Strategia',
-            description: 'Definiujemy pozycjonowanie marki, osobowość, propozycję wartości i kluczowe komunikaty. To drogowskaz dla wszystkich elementów brandingu.',
-        },
-        {
-            number: '03',
-            title: 'Kreatywność',
-            description: 'Projektujemy logotyp, system wizualny i język komunikacji. Eksperymentujemy z różnymi kierunkami kreatywnymi, aby znaleźć ten idealny.',
-        },
-        {
-            number: '04',
-            title: 'Implementacja',
-            description: 'Wdrażamy markę we wszystkich punktach styku z klientem. Tworzymy materiały brandingowe i przygotowujemy brand guidelines.',
-        },
-        {
-            number: '05',
-            title: 'Ewaluacja',
-            description: 'Analizujemy, jak marka funkcjonuje w prawdziwym świecie. Zbieramy dane i opinie, aby upewnić się, że marka spełnia swoje cele.',
-        },
-    ];
-
     return (
-        <main className="min-h-screen">
-            {/* Hero sekcja */}
-            <section className="w-full py-24 md:py-32 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <div>
-                            <h6 className="text-gray-500 mb-4 uppercase tracking-wide">Branding</h6>
-                            <h1 className="text-4xl md:text-6xl font-medium mb-8">Budujemy marki, które pozostają w pamięci</h1>
-                            <p className="text-xl text-gray-600 mb-10">
-                                Dobry branding to więcej niż logo. To spójna historia, która przemawia do Twoich odbiorców, buduje zaufanie i wyróżnia Cię na tle konkurencji.
-                            </p>
-                            <Button href="#kontakt">
-                                Porozmawiajmy o Twojej marce
-                            </Button>
-                        </div>
-                        <div className="relative">
-                            <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
-                                <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-4 p-10">
-                                    <div className="rounded-lg bg-black"></div>
-                                    <div className="rounded-lg bg-white shadow-sm"></div>
-                                    <div className="rounded-lg bg-white shadow-sm"></div>
-                                    <div className="rounded-lg bg-black"></div>
-                                </div>
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="w-40 h-40 rounded-full bg-white shadow-lg flex items-center justify-center text-5xl font-bold">
-                                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-800 to-gray-400">CT</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="absolute -bottom-6 -right-6 w-36 h-36 rounded-full bg-gray-200 -z-10"></div>
-                            <div className="absolute -top-6 -left-6 w-24 h-24 rounded-full bg-gray-200 -z-10"></div>
-                        </div>
+        <main style={{ minHeight: '100vh' }}>
+
+            {/* Hero */}
+            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }}>
+                <div style={{ maxWidth: 820 }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>
+                        BRANDING
+                    </div>
+                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(36px, 6vw, 78px)', lineHeight: 1.02, letterSpacing: '-0.025em', margin: '0 0 24px', textWrap: 'balance' } as React.CSSProperties}>
+                        Budujemy marki, które pozostają w pamięci <span style={{ color: 'var(--accent)' }}>i rosną.</span>
+                    </h1>
+                    <p style={{ fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 36px' }}>
+                        Dobry branding to więcej niż logo. To spójna historia, która buduje zaufanie, wyróżnia na tle konkurencji i przekłada się na realny wynik biznesowy.
+                    </p>
+                    <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                        <Link href="/kontakt" className="ct-cta">
+                            Porozmawiajmy o marce
+                            <span className="ct-badge"><span className="ct-arrows"><span>→</span><span>→</span></span></span>
+                        </Link>
                     </div>
                 </div>
             </section>
 
-            {/* Statystyki */}
-            <section className="w-full py-16 md:py-24 px-6 bg-gray-50">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Dlaczego branding ma znaczenie?</h2>
-                        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            W dzisiejszym konkurencyjnym świecie, silna marka jest kluczowa dla sukcesu. Oto kilka powodów, dlaczego warto inwestować w profesjonalny branding:
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                        {brandStats.map((item) => (
-                            <div key={item.id} className="p-8 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
-                                <div className="text-4xl md:text-5xl font-bold mb-4">{item.stat}</div>
-                                <p className="text-gray-600">{item.description}</p>
+            {/* Stats */}
+            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '88px 32px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }} className="grid-cols-2 md:grid-cols-4">
+                        {stats.map(s => (
+                            <div key={s.value} style={{ borderLeft: '1px solid var(--line)', paddingLeft: 20 }}>
+                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 3.5vw, 52px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--accent)' }}>{s.value}</div>
+                                <div style={{ color: 'var(--muted)', fontSize: 14, marginTop: 10 }}>{s.label}</div>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Elementy brandingu */}
-            <section className="w-full py-16 md:py-24 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-16">
-                        <div>
-                            <h2 className="text-3xl md:text-4xl font-medium mb-6">Co składa się na kompleksowy branding?</h2>
-                            <p className="text-lg text-gray-600">
-                                Skuteczny branding to znacznie więcej niż samo logo. To kompleksowy system, który komunikuje wartości Twojej marki na każdym poziomie kontaktu z klientem.
-                            </p>
-                        </div>
-                        <div className="aspect-video relative rounded-xl overflow-hidden">
-                            <Image
-                                src="/branding-elements.jpg"
-                                alt="Elementy brandingu"
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                            />
-                        </div>
+            {/* Elements */}
+            <section style={{ borderTop: '1px solid var(--line)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                    <div style={{ marginBottom: 48 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>ZAKRES</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>
+                            Co składa się na kompleksowy branding.
+                        </h2>
                     </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {brandElements.map((element, index) => (
-                            <div key={index} className="p-8 bg-white border border-gray-100 rounded-xl hover:shadow-md transition-shadow duration-300">
-                                <div className="text-4xl mb-4">{element.icon}</div>
-                                <h3 className="text-xl font-medium mb-3">{element.title}</h3>
-                                <p className="text-gray-600">{element.description}</p>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                        {elements.map(el => (
+                            <div key={el.num} style={{ borderRadius: 20, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 28 }}>{el.num}</div>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, margin: '0 0 10px' }}>{el.title}</h3>
+                                <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.55, margin: 0 }}>{el.description}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Proces brandingowy */}
-            <section className="w-full py-16 md:py-24 px-6 bg-black text-white">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Nasz proces brandingowy</h2>
-                        <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-                            Tworzymy marki w oparciu o sprawdzony proces, który gwarantuje skuteczne rezultaty. Każdy etap jest kluczowy dla budowy silnej i spójnej marki.
+            {/* Process */}
+            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                    <div style={{ marginBottom: 54 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>PROCES</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>
+                            Nasz proces brandingowy — napędzany AI.
+                        </h2>
+                        <p style={{ color: 'var(--muted)', fontSize: 17, lineHeight: 1.55, margin: '16px 0 0', maxWidth: '52ch' }}>
+                            AI przyspiesza każdy etap — research, generowanie wariantów i testowanie. Decyzje zostają po stronie ludzi.
                         </p>
                     </div>
-
-                    <div className="space-y-16">
-                        {brandingProcess.map((step, index) => (
-                            <div key={index} className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
-                                <div className="md:col-span-1">
-                                    <div className="text-6xl md:text-8xl font-bold text-gray-800">{step.number}</div>
-                                </div>
-                                <div className="md:col-span-1">
-                                    <div className="text-2xl font-medium">{step.title}</div>
-                                </div>
-                                <div className="md:col-span-3">
-                                    <p className="text-gray-300">{step.description}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-            <SigningProcess />
-            {/* Branże */}
-            <section className="w-full py-16 md:py-24 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <div>
-                            <h2 className="text-3xl md:text-4xl font-medium mb-6">Branding dla każdej branży</h2>
-                            <p className="text-lg text-gray-600 mb-6">
-                                Specjalizujemy się w tworzeniu marek dla różnych branż, rozumiejąc specyfikę każdej z nich. Niezależnie od tego, czy działasz w sektorze B2B, B2C, czy w branży kreatywnej, pomożemy Ci stworzyć markę, która przemówi do Twoich odbiorców.
-                            </p>
-                            <ul className="space-y-4">
-                                <li className="flex items-center">
-                                    <span className="w-6 h-6 flex items-center justify-center rounded-full bg-black text-white mr-3">✓</span>
-                                    <span>Startupy i nowe biznesy</span>
-                                </li>
-                                <li className="flex items-center">
-                                    <span className="w-6 h-6 flex items-center justify-center rounded-full bg-black text-white mr-3">✓</span>
-                                    <span>E-commerce i handel detaliczny</span>
-                                </li>
-                                <li className="flex items-center">
-                                    <span className="w-6 h-6 flex items-center justify-center rounded-full bg-black text-white mr-3">✓</span>
-                                    <span>Usługi profesjonalne i B2B</span>
-                                </li>
-                                <li className="flex items-center">
-                                    <span className="w-6 h-6 flex items-center justify-center rounded-full bg-black text-white mr-3">✓</span>
-                                    <span>Branża technologiczna i IT</span>
-                                </li>
-                                <li className="flex items-center">
-                                    <span className="w-6 h-6 flex items-center justify-center rounded-full bg-black text-white mr-3">✓</span>
-                                    <span>Gastronomia i hotelarstwo</span>
-                                </li>
-                                <li className="flex items-center">
-                                    <span className="w-6 h-6 flex items-center justify-center rounded-full bg-black text-white mr-3">✓</span>
-                                    <span>Edukacja i organizacje non-profit</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="aspect-square relative rounded-xl overflow-hidden">
-                                <Image
-                                    src="/branding-industry-1.jpg"
-                                    alt="Branding dla startupu"
-                                    fill
-                                    className="object-cover"
-                                    sizes="(max-width: 768px) 100vw, 25vw"
-                                />
-                            </div>
-                            <div className="aspect-square relative rounded-xl overflow-hidden mt-8">
-                                <Image
-                                    src="/branding-industry-2.jpg"
-                                    alt="Branding dla e-commerce"
-                                    fill
-                                    className="object-cover"
-                                    sizes="(max-width: 768px) 100vw, 25vw"
-                                />
-                            </div>
-                            <div className="aspect-square relative rounded-xl overflow-hidden -mt-16">
-                                <Image
-                                    src="/branding-industry-3.jpg"
-                                    alt="Branding dla usług profesjonalnych"
-                                    fill
-                                    className="object-cover"
-                                    sizes="(max-width: 768px) 100vw, 25vw"
-                                />
-                            </div>
-                            <div className="aspect-square relative rounded-xl overflow-hidden -mt-8">
-                                <Image
-                                    src="/branding-industry-4.jpg"
-                                    alt="Branding dla branży technologicznej"
-                                    fill
-                                    className="object-cover"
-                                    sizes="(max-width: 768px) 100vw, 25vw"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Przykłady brandingu */}
-            <section className="w-full py-16 md:py-24 px-6 bg-gray-50">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-medium mb-6">Nasze podejście do brandingu</h2>
-                        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            Każda marka, którą tworzymy, jest unikalna i dopasowana do specyficznych potrzeb klienta. Zawsze stawiamy na połączenie estetyki, strategii i funkcjonalności.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                        {/* Przykład 1 */}
-                        <div className="p-6 bg-white rounded-xl shadow-sm">
-                            <div className="aspect-video relative rounded-lg overflow-hidden mb-4 bg-gray-200">
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="w-20 h-20 rounded-full bg-black text-white flex items-center justify-center text-2xl font-bold">01</div>
-                                </div>
-                            </div>
-                            <h3 className="text-xl font-medium mb-2">Branding oparty na badaniach</h3>
-                            <p className="text-gray-600">
-                                Nie zgadujemy, co zadziała. Opieramy nasze decyzje na solidnych badaniach rynku, konkurencji i grupy docelowej.
-                            </p>
-                        </div>
-
-                        {/* Przykład 2 */}
-                        <div className="p-6 bg-white rounded-xl shadow-sm">
-                            <div className="aspect-video relative rounded-lg overflow-hidden mb-4 bg-gray-200">
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="w-20 h-20 rounded-full bg-black text-white flex items-center justify-center text-2xl font-bold">02</div>
-                                </div>
-                            </div>
-                            <h3 className="text-xl font-medium mb-2">Branding z charakterem</h3>
-                            <p className="text-gray-600">
-                                Tworzymy marki, które mają osobowość i charakter. Marki, które są autentyczne i rezonują z odbiorcami na poziomie emocjonalnym.
-                            </p>
-                        </div>
-
-                        {/* Przykład 3 */}
-                        <div className="p-6 bg-white rounded-xl shadow-sm">
-                            <div className="aspect-video relative rounded-lg overflow-hidden mb-4 bg-gray-200">
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="w-20 h-20 rounded-full bg-black text-white flex items-center justify-center text-2xl font-bold">03</div>
-                                </div>
-                            </div>
-                            <h3 className="text-xl font-medium mb-2">Branding zorientowany na przyszłość</h3>
-                            <p className="text-gray-600">
-                                Projektujemy marki, które będą aktualne przez lata. Elastyczne, adaptowalne i gotowe na przyszłe wyzwania.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Formularz kontaktowy */}
-            <section id="kontakt" className="w-full py-16 md:py-32 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <div>
-                            {/* Tekst i informacje kontaktowe */}
-                            <h2 className="text-3xl md:text-4xl font-medium mb-6">Gotowy na stworzenie wyjątkowej marki?</h2>
-                            <p className="text-lg text-gray-600 mb-10">
-                                Niezależnie od tego, czy rozpoczynasz nowy biznes, odświeżasz istniejącą markę, czy potrzebujesz całkowitego rebrandingu, jesteśmy tutaj, aby pomóc. Skontaktuj się z nami, aby rozpocząć rozmowę o Twojej marce.
-                            </p>
-
-                            <div className="space-y-8">
-                            <div className="flex items-start">
-                                <div className="mt-1 mr-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        {process.map((step, i) => (
+                            <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: 'var(--panel)', border: i === process.length - 1 ? '1px solid color-mix(in srgb, var(--accent) 40%, var(--line))' : '1px solid var(--line)', display: 'flex', alignItems: 'flex-start', gap: 24, ...(i === process.length - 1 ? { background: 'linear-gradient(140deg, color-mix(in srgb, var(--accent) 12%, var(--panel)), var(--panel))' } : {}) }}>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', flexShrink: 0, width: 32 }}>{step.num}</div>
                                 <div>
-                                    <h3 className="text-lg font-medium mb-1">Email</h3>
-                                    <a href="mailto:office@creativetrust.pl" className="text-gray-600 hover:text-black transition-colors">
-                                        office@creativetrust.pl
-                                    </a>
+                                    <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, margin: '0 0 8px' }}>{step.title}</h3>
+                                    <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.55, margin: 0 }}>{step.description}</p>
                                 </div>
                             </div>
-
-                            <div className="flex items-start">
-                                <div className="mt-1 mr-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-medium mb-1">Telefon</h3>
-                                    <a href="tel:+48570526421" className="text-gray-600 hover:text-black transition-colors">
-                                        +48 570 526 421
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="mt-10">
-                            <Link
-                                href="/kontakt"
-                                className="inline-flex items-center text-black font-medium hover:text-gray-700 transition-colors"
-                            >
-                                Przejdź do strony kontaktowej
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="ml-2"
-                                >
-                                    <path
-                                        d="M5 12H19"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                    <path
-                                        d="M12 5L19 12L12 19"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
-                            </Link>
-                        </div>
-                    </div>
-
-                    <div>
-                        <BrandingForm />
-                    </div>
+                        ))}
                     </div>
                 </div>
             </section>
+
+            <CTASection />
         </main>
     );
 }

@@ -1,196 +1,156 @@
-import React from 'react';
-import Image from 'next/image';
+import { Metadata } from 'next';
 import Link from 'next/link';
-import type { Metadata } from 'next';
-import ServicePortfolio from '@/components/ServicePortfolio';
-import SigningProcess from "@/components/SigningProcessComponent";
+import CTASection from '@/components/CTASection';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Tworzenie stron internetowych dla firm',
-    description: 'Profesjonalne strony internetowe tworzone z pasją i dbałością o skuteczność marketingową. Wykorzystujemy najnowsze technologie dla Twojego sukcesu.',
-    alternates: {
-        canonical: `${SITE_URL}/uslugi/strony-www`,
-    },
+    title: 'Tworzenie stron internetowych — CreativeTrust | Szybkie, skuteczne, AI-assisted',
+    description: 'Projektujemy i wdrażamy strony WWW, które generują leady i sprzedają. Headless, Next.js, performance. Krótszy time-to-market dzięki AI. Sprawdź zakres.',
+    alternates: { canonical: `${SITE_URL}/uslugi/strony-www` },
     openGraph: {
         title: 'Tworzenie stron internetowych dla firm | CreativeTrust',
-        description: 'Projektujemy szybkie, responsywne strony WWW, które wspierają sprzedaż i SEO.',
-        url: `${SITE_URL}/uslugi/strony-www`,
-        siteName: 'CreativeTrust',
-        locale: 'pl_PL',
-        type: 'website',
-    },
-    twitter: {
-        card: 'summary_large_image',
-        title: 'Tworzenie stron internetowych dla firm | CreativeTrust',
-        description: 'Projektujemy szybkie, responsywne strony WWW, które wspierają sprzedaż i SEO.',
+        description: 'Strony WWW zaprojektowane pod konwersję, SEO i performance. Headless, Next.js, UX — jeden zespół od konceptu po wdrożenie.',
+        url: `${SITE_URL}/uslugi/strony-www`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
     },
 };
 
-export default function WebsitesServicePage() {
+const types = [
+    { num: '01', title: 'Strony firmowe', description: 'Wizytówka marki zaprojektowana pod konwersję i SEO. Pracuje przez całą dobę.', tags: ['Headless CMS', 'Next.js', 'Sanity'] },
+    { num: '02', title: 'Landing pages', description: 'Strony pod kampanie, produkty i eventy. Czas do wdrożenia: tygodnie, nie miesiące.', tags: ['High conversion', 'A/B ready', 'Szybkie'] },
+    { num: '03', title: 'Portale i platformy', description: 'Rozbudowane serwisy z autentykacją, dashboardem i logiką biznesową.', tags: ['SaaS', 'Dashboard', 'API'] },
+    { num: '04', title: 'Strony produktowe', description: 'Showcase produktu lub usługi, który sprzedaje — storytelling + CTA.', tags: ['Storytelling', 'Video', 'CTA'] },
+];
+
+const features = [
+    { title: 'Wydajność powyżej 90', description: 'Core Web Vitals i PageSpeed Score > 90. Szybkość to SEO i konwersja — budujemy od podstaw pod wyniki.' },
+    { title: 'SEO on-page', description: 'Architektura semantyczna, meta tagi, schemat org, sitemap i canonicale ustawione od pierwszego dnia.' },
+    { title: 'Headless CMS', description: 'Sanity, Contentful lub Strapi — treści edytujesz bez dotykania kodu. Oddzielamy logikę od designu.' },
+    { title: 'Responsive & accessible', description: 'Wygląda świetnie na każdym urządzeniu. WCAG 2.1 AA. Dostępność nie jest opcją.' },
+    { title: 'AI-assisted development', description: 'Generujemy i testujemy komponenty szybciej. Time-to-market skrócony o 30–40% względem tradycyjnego procesu.' },
+    { title: 'Wsparcie po wdrożeniu', description: 'Opiekujemy się stroną po starcie. Aktualizacje, optymalizacje, rozbudowa.' },
+];
+
+const tech = ['Next.js', 'React', 'Sanity CMS', 'TypeScript', 'Tailwind CSS', 'Vercel / Netlify', 'Figma', 'GTM'];
+
+const process = [
+    { num: '01', title: 'Discovery', description: 'Analiza celów, grupy docelowej i konkurencji. AI przyspiesza research.' },
+    { num: '02', title: 'Design', description: 'Wireframes i UI w Figma. Prototyp klikamy zanim napiszemy linię kodu.' },
+    { num: '03', title: 'Development', description: 'Headless, performant, SEO-ready. AI-assisted coding — szybciej i mniej błędów.' },
+    { num: '04', title: 'Launch & wzrost', description: 'Wdrożenie, testy, monitoring. Optymalizujemy po starcie na podstawie danych.', featured: true },
+];
+
+export default function WebsitesPage() {
     return (
-        <main className="min-h-screen pt-24">
-            {/* Hero sekcja */}
-            <section className="w-full py-16 md:py-24 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="flex flex-col md:flex-row items-start gap-12">
-                        <div className="w-full md:w-1/2">
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-6 leading-tight">
-                                Strony WWW, które<br />
-                                <span className="text-gray-400">przyciągają klientów</span>
-                            </h1>
-                            <p className="text-lg mb-8 text-gray-700">
-                                Od 9 lat tworzymy strony internetowe, które nie tylko świetnie wyglądają, ale przede wszystkim realizują cele biznesowe naszych klientów.
-                            </p>
-                            <div className="flex items-center space-x-8 mb-8">
-                                <div className="flex flex-col items-center">
-                                    <span className="text-3xl font-bold">9+</span>
-                                    <span className="text-sm text-gray-500">lat doświadczenia</span>
+        <main style={{ minHeight: '100vh' }}>
+
+            {/* Hero */}
+            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }}>
+                <div style={{ maxWidth: 820 }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>
+                        STRONY WWW
+                    </div>
+                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(36px, 6vw, 78px)', lineHeight: 1.02, letterSpacing: '-0.025em', margin: '0 0 24px' }}>
+                        Strony, które przyciągają klientów i <span style={{ color: 'var(--accent)' }}>konwertują.</span>
+                    </h1>
+                    <p style={{ fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 32px' }}>
+                        Projektujemy i wdrażamy strony WWW oparte na danych — od landing page po rozbudowany portal. Headless, szybkie, SEO-ready. Czas realizacji skrócony o 30–40% dzięki AI.
+                    </p>
+                    <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 48 }}>
+                        <Link href="/kontakt" className="ct-cta">
+                            Wycena projektu
+                            <span className="ct-badge"><span className="ct-arrows"><span>→</span><span>→</span></span></span>
+                        </Link>
+                    </div>
+                    <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
+                        {[['150+', 'stron'], ['15', 'lat'], ['90+', 'PageSpeed'], ['30-40%', 'szybciej']].map(([val, label]) => (
+                            <div key={label}>
+                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 32, letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--accent)' }}>{val}</div>
+                                <div style={{ color: 'var(--muted)', fontSize: 13, marginTop: 4 }}>{label}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Types */}
+            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                    <div style={{ marginBottom: 48 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>TYPY PROJEKTÓW</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Co możemy zbudować.</h2>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 18 }}>
+                        {types.map(t => (
+                            <div key={t.num} style={{ borderRadius: 20, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 28 }}>{t.num}</div>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 22, margin: '0 0 10px' }}>{t.title}</h3>
+                                <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.55, margin: '0 0 20px' }}>{t.description}</p>
+                                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                                    {t.tags.map(tag => (
+                                        <span key={tag} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--muted)', border: '1px solid var(--line)', padding: '4px 10px', borderRadius: 6 }}>{tag}</span>
+                                    ))}
                                 </div>
-                                <div className="flex flex-col items-center">
-                                    <span className="text-3xl font-bold">150+</span>
-                                    <span className="text-sm text-gray-500">zadowolonych klientów</span>
-                                </div>
-                                <div className="flex flex-col items-center">
-                                    <span className="text-3xl font-bold">98%</span>
-                                    <span className="text-sm text-gray-500">poziom satysfakcji</span>
-                                </div>
                             </div>
-                            <Link
-                                href="/uslugi/tworzenie-stron-www-cennik"
-                                className="inline-flex items-center justify-center rounded-full border border-gray-300 px-6 py-3 font-medium text-black hover:bg-black hover:text-white transition-colors"
-                            >
-                                Sprawdź orientacyjny cennik stron WWW
-                            </Link>
-                        </div>
-                        <div className="w-full md:w-1/2 relative aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
-                            <Image
-                                src="/images/web-development.jpg"
-                                alt="Tworzenie stron internetowych"
-                                fill
-                                className="object-cover"
-                                priority
-                            />
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* Sekcja technologie */}
-            <section className="w-full py-16 bg-gray-50 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <h2 className="text-3xl font-medium mb-12 text-center">Technologie, które wykorzystujemy</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        <div className="bg-white p-6 rounded-lg shadow-sm flex flex-col items-center text-center">
-                            <div className="w-16 h-16 mb-4 relative">
-                                <Image src="/wordpress.svg" alt="WordPress" fill className="object-contain" />
+            {/* Features */}
+            <section style={{ borderTop: '1px solid var(--line)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                    <div style={{ marginBottom: 48 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>STANDARD PROJEKTU</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Co dostajesz w każdym projekcie.</h2>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }}>
+                        {features.map(f => (
+                            <div key={f.title} style={{ borderRadius: 18, padding: '24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 10px' }}>{f.title}</h3>
+                                <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>{f.description}</p>
                             </div>
-                            <h3 className="text-lg font-medium mb-2">WordPress</h3>
-                            <p className="text-sm text-gray-600">Najpopularniejszy CMS na świecie, oferujący elastyczność i łatwość zarządzania treścią.</p>
-                        </div>
-                        <div className="bg-white p-6 rounded-lg shadow-sm flex flex-col items-center text-center">
-                            <div className="w-16 h-16 mb-4 relative">
-                                <Image src="/react.svg" alt="React" fill className="object-contain" />
-                            </div>
-                            <h3 className="text-lg font-medium mb-2">React</h3>
-                            <p className="text-sm text-gray-600">Nowoczesna biblioteka JavaScript do tworzenia interaktywnych interfejsów użytkownika.</p>
-                        </div>
-                        <div className="bg-white p-6 rounded-lg shadow-sm flex flex-col items-center text-center">
-                            <div className="w-16 h-16 mb-4 relative">
-                                <Image src="/nextjs.svg" alt="Next.js" fill className="object-contain" />
-                            </div>
-                            <h3 className="text-lg font-medium mb-2">Next.js</h3>
-                            <p className="text-sm text-gray-600">Framework React z zaawansowanymi funkcjami, wspierający SEO i wydajność.</p>
-                        </div>
-                        <div className="bg-white p-6 rounded-lg shadow-sm flex flex-col items-center text-center">
-                            <div className="w-16 h-16 mb-4 relative">
-                                <Image src="/elementor.svg" alt="Elementor" fill className="object-contain" />
-                            </div>
-                            <h3 className="text-lg font-medium mb-2">Elementor</h3>
-                            <p className="text-sm text-gray-600">Intuicyjny kreator stron dla WordPress, umożliwiający projektowanie bez znajomości kodu.</p>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* Sekcja podejście */}
-            <section className="w-full py-16 md:py-24 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <h2 className="text-3xl font-medium mb-12">Nasze kompleksowe podejście</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                        <div>
-                            <div className="bg-gray-100 rounded-full w-12 h-12 flex items-center justify-center mb-6">
-                                <span className="text-xl font-bold">1</span>
-                            </div>
-                            <h3 className="text-xl font-medium mb-3">Analiza i strategia</h3>
-                            <p className="text-gray-700">
-                                Zaczynamy od zrozumienia Twoich celów biznesowych i grupy docelowej. Tworzymy strategię, która określa, jak strona internetowa wpisze się w Twój lejek marketingowy.
-                            </p>
-                        </div>
-                        <div>
-                            <div className="bg-gray-100 rounded-full w-12 h-12 flex items-center justify-center mb-6">
-                                <span className="text-xl font-bold">2</span>
-                            </div>
-                            <h3 className="text-xl font-medium mb-3">Projektowanie i UX</h3>
-                            <p className="text-gray-700">
-                                Projektujemy intuicyjne interfejsy, które nie tylko wyglądają atrakcyjnie, ale przede wszystkim prowadzą użytkownika do pożądanych działań i konwersji.
-                            </p>
-                        </div>
-                        <div>
-                            <div className="bg-gray-100 rounded-full w-12 h-12 flex items-center justify-center mb-6">
-                                <span className="text-xl font-bold">3</span>
-                            </div>
-                            <h3 className="text-xl font-medium mb-3">Rozwój i optymalizacja</h3>
-                            <p className="text-gray-700">
-                                Implementujemy stronę z wykorzystaniem odpowiednich technologii, dbając o szybkość ładowania, SEO i kompatybilność z różnymi urządzeniami.
-                            </p>
-                        </div>
+            {/* Stack */}
+            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                    <div style={{ marginBottom: 40 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>TECH STACK</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Technologie, które wybieramy z powodu.</h2>
                     </div>
-                </div>
-            </section>
-            <SigningProcess />
-            {/* Sekcja korzyści */}
-            <section className="w-full py-16 bg-gray-50 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <h2 className="text-3xl font-medium mb-12 text-center">Dlaczego warto z nami współpracować?</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="bg-white p-8 rounded-xl shadow-sm">
-                            <h3 className="text-xl font-medium mb-4">Strona jako element lejka marketingowego</h3>
-                            <p className="text-gray-700">
-                                Projektujemy strony, które nie są tylko wizytówką, ale aktywnym narzędziem marketingowym, przyciągającym i konwertującym potencjalnych klientów.
-                            </p>
-                        </div>
-                        <div className="bg-white p-8 rounded-xl shadow-sm">
-                            <h3 className="text-xl font-medium mb-4">Optymalizacja pod SEO</h3>
-                            <p className="text-gray-700">
-                                Dbamy o to, aby Twoja strona była widoczna w wynikach wyszukiwania, stosując najlepsze praktyki SEO już na etapie projektowania.
-                            </p>
-                        </div>
-                        <div className="bg-white p-8 rounded-xl shadow-sm">
-                            <h3 className="text-xl font-medium mb-4">Responsywność i szybkość</h3>
-                            <p className="text-gray-700">
-                                Nasze strony doskonale wyglądają na każdym urządzeniu i ładują się błyskawicznie, co przekłada się na lepsze doświadczenie użytkownika i wyższe pozycje w Google.
-                            </p>
-                        </div>
-                        <div className="bg-white p-8 rounded-xl shadow-sm">
-                            <h3 className="text-xl font-medium mb-4">Wsparcie po wdrożeniu</h3>
-                            <p className="text-gray-700">
-                                Oferujemy kompleksowe wsparcie techniczne, regularne aktualizacje i pomoc w rozwijaniu strony wraz z rozwojem Twojego biznesu.
-                            </p>
-                        </div>
+                    <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                        {tech.map(t => (
+                            <span key={t} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 14, fontWeight: 500, color: 'var(--text)', border: '1px solid var(--line)', padding: '10px 18px', borderRadius: 10, background: 'var(--panel)' }}>{t}</span>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* Sekcja portfolio */}
-            <section className="w-full py-16 md:py-24 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <h2 className="text-3xl font-medium mb-12">Nasze realizacje</h2>
-                    <ServicePortfolio categorySlug="strony-www" />
+            {/* Process */}
+            <section style={{ borderTop: '1px solid var(--line)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                    <div style={{ marginBottom: 48 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>PROCES</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>
+                            Od briefu do gotowej strony.
+                        </h2>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
+                        {process.map(step => (
+                            <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: step.featured ? 'linear-gradient(160deg, color-mix(in srgb, var(--accent) 16%, var(--panel)), var(--panel))' : 'var(--panel)', border: step.featured ? '1px solid color-mix(in srgb, var(--accent) 40%, var(--line))' : '1px solid var(--line)' }}>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 48 }}>{step.num}</div>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, margin: '0 0 8px' }}>{step.title}</h3>
+                                <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.5, margin: 0 }}>{step.description}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
 
-
+            <CTASection />
         </main>
     );
 }

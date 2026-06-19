@@ -1,88 +1,100 @@
-import Link from 'next/link';
+"use client";
 
-const services = [
-    {
-        title: 'Branding',
-        href: '/uslugi/branding',
-        description: 'Porządkujemy pozycjonowanie, identyfikację i komunikację marki, żeby działały spójnie w każdym punkcie styku.',
-    },
-    {
-        title: 'Strony WWW',
-        href: '/uslugi/strony-www',
-        description: 'Projektujemy i wdrażamy strony, które jasno prowadzą użytkownika do kontaktu, zapytania lub zakupu.',
-    },
-    {
-        title: 'E-commerce',
-        href: '/uslugi/e-commerce',
-        description: 'Budujemy sklepy i migracje headless z naciskiem na szybkość, integracje i skalowanie sprzedaży.',
-    },
-    {
-        title: 'Social Media',
-        href: '/uslugi/social-media',
-        description: 'Układamy komunikację i content pod widoczność, zasięg i sprzedaż, nie tylko pod publikację postów.',
-    },
-    {
-        title: 'Marketing Automation',
-        href: '/uslugi/marketing-automation',
-        description: 'Projektujemy automatyzacje, które pomagają domykać leady, segmentować bazę i odciążać zespół.',
-    },
-];
+import Link from 'next/link';
 
 export default function Services() {
     return (
-        <section className="w-full px-6 py-16 md:py-24">
-            <div className="mx-auto max-w-[1800px]">
-                <div className="mb-10 flex flex-col gap-3 border-t border-slate-200 pt-6 md:flex-row md:items-end md:justify-between">
-                    <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                            Zakres usług
-                        </p>
-                        <h2 className="mt-2 max-w-2xl text-3xl font-medium text-slate-950 md:text-4xl">
-                            Jedna współpraca, kilka kompetencji. Bez rozbijania projektu na przypadkowych wykonawców.
-                        </h2>
+        <section id="uslugi" style={{ maxWidth: 1240, margin: '0 auto', padding: '48px 32px 96px' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, marginBottom: 42, flexWrap: 'wrap' }}>
+                <div>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>
+                        USŁUGI
                     </div>
-                    <p className="max-w-xl text-sm leading-6 text-slate-600 md:text-base">
-                        Dobieramy zakres do problemu biznesowego. Czasem zaczynamy od marki, czasem od strony lub sklepu,
-                        a czasem od automatyzacji, która pozwala domknąć proces.
-                    </p>
+                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(30px, 4vw, 52px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.04 }}>
+                        Jeden zespół. Pełen zakres.
+                    </h2>
+                </div>
+                <p style={{ color: 'var(--muted)', fontSize: 16, maxWidth: '38ch', margin: 0 }}>
+                    Od pierwszej diagnozy po rozwój produktu — bez przekazywania pałeczki między agencjami.
+                </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 18 }} className="!grid-cols-1 md:!grid-cols-12">
+
+                {/* AI featured card */}
+                <div style={{
+                    gridColumn: 'span 7',
+                    position: 'relative', overflow: 'hidden', borderRadius: 20, padding: 34,
+                    background: 'linear-gradient(140deg, color-mix(in srgb, var(--accent) 26%, var(--panel)) 0%, var(--panel) 55%)',
+                    border: '1px solid color-mix(in srgb, var(--accent) 40%, var(--line))',
+                    minHeight: 300, display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                    transition: 'transform .3s, box-shadow .3s',
+                }} className="col-span-full md:col-span-7"
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 24px 60px var(--glow)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
+                >
+                    <div style={{ position: 'absolute', top: -40, right: -40, width: 220, height: 220, borderRadius: '50%', background: 'radial-gradient(circle, var(--glow) 0%, transparent 70%)', animation: 'ctfloat 6s ease-in-out infinite' }} />
+                    <div style={{ position: 'relative' }}>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.14em', color: 'var(--accent)', border: '1px solid color-mix(in srgb, var(--accent) 50%, transparent)', padding: '5px 11px', borderRadius: 999, textTransform: 'uppercase' }}>
+                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 8px var(--accent)', animation: 'ctpulse 1.6s infinite' }} />
+                            nasza przewaga
+                        </div>
+                        <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 32, letterSpacing: '-0.02em', margin: '22px 0 12px' }}>Sztuczna inteligencja</h3>
+                        <p style={{ color: 'var(--text)', opacity: 0.85, fontSize: 16, lineHeight: 1.55, maxWidth: '42ch', margin: 0 }}>
+                            Agenci, generatywny content, automatyzacje i analiza danych — wplecione w każdy etap projektu. Nie dokładamy AI „na siłę". Wiemy, gdzie realnie skraca czas i podnosi wynik.
+                        </p>
+                    </div>
+                    <div style={{ position: 'relative', display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 24 }}>
+                        {['AI research', 'generative design', 'agenci & automatyzacje'].map(tag => (
+                            <span key={tag} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, color: 'var(--muted)', border: '1px solid var(--line)', padding: '6px 12px', borderRadius: 8 }}>{tag}</span>
+                        ))}
+                    </div>
                 </div>
 
-                <div className="grid gap-px overflow-hidden border border-slate-200 bg-slate-200 md:grid-cols-2">
-                    {services.map((service) => (
-                        <Link
-                            key={service.title}
-                            href={service.href}
-                            className="group bg-white p-6 transition-colors hover:bg-slate-50 md:p-8"
+                {/* right stacked */}
+                <div style={{ gridColumn: 'span 5', display: 'flex', flexDirection: 'column', gap: 18 }} className="col-span-full md:col-span-5">
+                    {[
+                        { href: '/uslugi/branding', title: 'Strategia marki', desc: 'Pozycjonowanie, narracja i architektura komunikacji, która się broni.' },
+                        { href: '/uslugi/marketing-automation', title: 'Automatyzacja marketingu', desc: 'Lejki, CRM i kampanie sterowane danymi — działają, kiedy śpisz.' },
+                    ].map(card => (
+                        <Link key={card.href} href={card.href} style={{
+                            flex: 1, borderRadius: 20, padding: 28,
+                            background: 'var(--panel)', border: '1px solid var(--line)',
+                            textDecoration: 'none', color: 'var(--text)',
+                            transition: 'transform .3s, border-color .3s',
+                        }}
+                            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
+                            onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}
                         >
-                            <div className="flex h-full flex-col">
-                                <div className="flex items-start justify-between gap-4">
-                                    <div>
-                                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-                                            Service
-                                        </p>
-                                        <h3 className="mt-3 text-2xl font-medium text-slate-950">
-                                            {service.title}
-                                        </h3>
-                                    </div>
-                                    <span className="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:border-slate-950">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                            <path d="M7 17L17 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M7 7H17V17" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                    </span>
-                                </div>
-
-                                <p className="mt-5 max-w-lg text-sm leading-6 text-slate-600 md:text-base">
-                                    {service.description}
-                                </p>
-
-                                <div className="mt-6 border-t border-slate-200 pt-4 text-sm font-medium text-slate-950">
-                                    Zobacz zakres
-                                </div>
-                            </div>
+                            <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 21, letterSpacing: '-0.01em', margin: '0 0 8px' }}>{card.title}</h3>
+                            <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.5, margin: 0 }}>{card.desc}</p>
                         </Link>
                     ))}
                 </div>
+
+                {/* bottom row */}
+                {[
+                    { num: '01', href: '/uslugi/e-commerce', title: 'Web & e-commerce', desc: 'Sklepy i serwisy, które sprzedają i skalują się bez bólu.' },
+                    { num: '02', href: '/uslugi/strony-www', title: 'Product & UX design', desc: 'Interfejsy projektowane wokół konwersji, nie tylko estetyki.' },
+                    { num: '03', href: '/uslugi/branding', title: 'Development', desc: 'Wydajny, skalowalny kod. Headless, Jamstack, integracje.' },
+                ].map(card => (
+                    <Link key={card.num} href={card.href} style={{
+                        gridColumn: 'span 4',
+                        borderRadius: 20, padding: 28, background: 'var(--panel)', border: '1px solid var(--line)',
+                        minHeight: 200, display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                        textDecoration: 'none', color: 'var(--text)',
+                        transition: 'transform .3s, border-color .3s',
+                    }} className="col-span-full md:col-span-4"
+                        onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}
+                    >
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)' }}>{card.num}</div>
+                        <div>
+                            <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 21, margin: '0 0 8px' }}>{card.title}</h3>
+                            <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.5, margin: 0 }}>{card.desc}</p>
+                        </div>
+                    </Link>
+                ))}
             </div>
         </section>
     );

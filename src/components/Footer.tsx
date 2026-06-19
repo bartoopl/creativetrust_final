@@ -4,109 +4,110 @@ import { useState } from 'react';
 import Link from 'next/link';
 import ConsentManager from './ConsentManager';
 
-const serviceLinks = [
-    { href: '/uslugi/branding', label: 'Branding' },
-    { href: '/uslugi/strony-www', label: 'Strony WWW' },
-    { href: '/uslugi/e-commerce', label: 'E-commerce' },
-    { href: '/uslugi/social-media', label: 'Social Media' },
-    { href: '/uslugi/marketing-automation', label: 'Marketing Automation' },
+const services = [
+    { href: '/uslugi/branding', label: 'Strategia marki' },
+    { href: '/uslugi/e-commerce', label: 'Web & e-commerce' },
+    { href: '/uslugi/strony-www', label: 'Product design' },
+    { href: '/uslugi/marketing-automation', label: 'AI & automatyzacja' },
+];
+
+const company = [
+    { href: '/o-nas', label: 'O nas' },
+    { href: '/portfolio', label: 'Realizacje' },
+    { href: '/blog', label: 'Insights' },
+    { href: '/kontakt', label: 'Kontakt' },
 ];
 
 export default function Footer() {
-    const [showConsentManager, setShowConsentManager] = useState(false);
+    const [showConsent, setShowConsent] = useState(false);
+    const year = new Date().getFullYear();
 
     return (
-        <footer className="w-full bg-slate-950 px-6 py-16 text-white md:py-24">
-            <div className="mx-auto max-w-[1800px]">
-                <div className="grid gap-10 border-b border-white/10 pb-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-                    <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
-                            CreativeTrust
-                        </p>
-                        <h2 className="mt-4 max-w-3xl text-3xl font-medium leading-[1.05] md:text-5xl lg:text-6xl">
-                            Jeśli chcesz uporządkować komunikację i przełożyć ją na wynik, porozmawiajmy.
-                        </h2>
-                    </div>
+        <footer style={{ borderTop: '1px solid var(--line)', background: 'var(--bg)' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '80px 32px 40px' }}>
 
-                    <div className="flex flex-col gap-4 lg:items-end">
-                        <Link
-                            href="/kontakt"
-                            className="inline-flex items-center justify-center gap-2 rounded-full border border-white bg-white px-5 py-3 text-sm font-medium text-slate-950 transition-colors hover:bg-transparent hover:text-white"
-                        >
-                            Umów rozmowę
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <line x1="7" y1="17" x2="17" y2="7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                <polyline points="7 7 17 7 17 17" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <h2 style={{
+                    fontFamily: 'var(--font-space), sans-serif', fontWeight: 700,
+                    fontSize: 'clamp(34px, 6vw, 82px)', letterSpacing: '-0.03em',
+                    lineHeight: 1, margin: '0 0 64px', maxWidth: '18ch',
+                }}>
+                    Nie gonimy za trendami.{' '}
+                    <span style={{ color: 'var(--accent)' }}>Tworzymy je.</span>
+                </h2>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr', gap: 32, paddingBottom: 56, borderBottom: '1px solid var(--line)' }} className="grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+                    <div>
+                        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 11, textDecoration: 'none', color: 'var(--text)', marginBottom: 16 }}>
+                            <svg width="28" height="28" viewBox="0 0 30 30" fill="none">
+                                <circle cx="15" cy="15" r="11.5" stroke="var(--accent)" strokeWidth="1.5" />
+                                <circle cx="15" cy="3.5" r="2" fill="var(--accent)" />
                             </svg>
+                            <span style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, letterSpacing: '-0.02em' }}>
+                                <span style={{ fontWeight: 500 }}>creative</span>
+                                <span style={{ fontWeight: 700 }}>trust</span>
+                                <span style={{ color: 'var(--accent)', fontWeight: 700 }}>.</span>
+                            </span>
                         </Link>
-                        <p className="max-w-md text-sm leading-6 text-white/60 lg:text-right">
-                            Branding, strony WWW, e-commerce, social media i marketing automation. Zaczynamy od problemu,
-                            kończymy na działającym systemie.
+                        <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, maxWidth: '34ch', margin: 0 }}>
+                            Strategia, design, development i automatyzacja w jednym zespole. AI-native partner produktowy.
                         </p>
-                    </div>
-                </div>
-
-                <div className="grid gap-8 py-10 md:grid-cols-3">
-                    <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40">
-                            Nawigacja
-                        </p>
-                        <nav className="mt-4 flex flex-col gap-3 text-sm text-white/80">
-                            <Link href="/" className="hover:text-white">Home</Link>
-                            <Link href="/uslugi" className="hover:text-white">Usługi</Link>
-                            <Link href="/portfolio" className="hover:text-white">Realizacje</Link>
-                            <Link href="/o-nas" className="hover:text-white">O nas</Link>
-                            <Link href="/blog" className="hover:text-white">Blog</Link>
-                            <Link href="/kontakt" className="hover:text-white">Kontakt</Link>
-                        </nav>
                     </div>
 
                     <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40">
-                            Usługi
-                        </p>
-                        <nav className="mt-4 flex flex-col gap-3 text-sm text-white/80">
-                            {serviceLinks.map((service) => (
-                                <Link key={service.href} href={service.href} className="hover:text-white">
-                                    {service.label}
-                                </Link>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.14em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 16 }}>Usługi</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
+                            {services.map(s => (
+                                <Link key={s.href} href={s.href} style={{ color: 'var(--text)', opacity: 0.8, textDecoration: 'none', fontSize: 14, transition: 'opacity .2s' }}
+                                    onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
+                                    onMouseLeave={e => (e.currentTarget.style.opacity = '0.8')}
+                                >{s.label}</Link>
                             ))}
-                        </nav>
+                        </div>
                     </div>
 
-                    <div className="md:text-right">
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40">
-                            Kontakt
-                        </p>
-                        <div className="mt-4 flex flex-col gap-3 text-sm text-white/80 md:items-end">
-                            <Link href="mailto:office@creativetrust.pl" className="hover:text-white">
-                                office@creativetrust.pl
-                            </Link>
-                            <Link href="https://www.linkedin.com/company/creativetrust" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                                LinkedIn
-                            </Link>
-                            <Link href="https://www.instagram.com/creativetrust_/" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                                Instagram
-                            </Link>
-                            <button
-                                onClick={() => setShowConsentManager(true)}
-                                className="text-sm text-white/60 transition-colors hover:text-white"
-                            >
-                                Ustawienia prywatności
-                            </button>
+                    <div>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.14em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 16 }}>Firma</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
+                            {company.map(s => (
+                                <Link key={s.href} href={s.href} style={{ color: 'var(--text)', opacity: 0.8, textDecoration: 'none', fontSize: 14, transition: 'opacity .2s' }}
+                                    onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
+                                    onMouseLeave={e => (e.currentTarget.style.opacity = '0.8')}
+                                >{s.label}</Link>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.14em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 16 }}>Kontakt</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
+                            <Link href="mailto:office@creativetrust.pl" style={{ color: 'var(--text)', opacity: 0.8, textDecoration: 'none', fontSize: 14 }}>office@creativetrust.pl</Link>
+                            <Link href="https://www.linkedin.com/company/creativetrust" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text)', opacity: 0.8, textDecoration: 'none', fontSize: 14 }}>LinkedIn</Link>
+                            <Link href="https://www.instagram.com/creativetrust_/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text)', opacity: 0.8, textDecoration: 'none', fontSize: 14 }}>Instagram</Link>
                         </div>
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/40 md:flex-row md:items-center md:justify-between">
-                    <p>&copy; {new Date().getFullYear()} CreativeTrust. Wszystkie prawa zastrzeżone.</p>
-                    <Link href="/polityka-prywatnosci" className="hover:text-white">
-                        Polityka prywatności
-                    </Link>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, paddingTop: 28, flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'center' }}>
+                        <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, color: 'var(--muted)' }}>
+                            © {year} Creativetrust. Wszelkie prawa zastrzeżone.
+                        </span>
+                        <Link href="/polityka-prywatnosci" style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, color: 'var(--muted)', textDecoration: 'none', transition: 'color .2s' }}
+                            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
+                            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
+                        >Polityka prywatności</Link>
+                        <button
+                            onClick={() => setShowConsent(true)}
+                            style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, transition: 'color .2s' }}
+                            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
+                            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
+                        >Ustawienia prywatności</button>
+                    </div>
+                    <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, color: 'var(--muted)' }}>Made at AI speed.</span>
                 </div>
             </div>
 
-            {showConsentManager ? <ConsentManager onClose={() => setShowConsentManager(false)} /> : null}
+            {showConsent && <ConsentManager onClose={() => setShowConsent(false)} />}
         </footer>
     );
 }

@@ -1,58 +1,31 @@
-import Image from 'next/image';
+const clients = ['NORDIC', 'Volta', 'FORMA', 'kasa.io', 'Monnari', 'Quiosque', '51015kids', 'EB-GABINET', 'Dr Pazera', 'PARK', 'Wave'];
 
-interface ClientLogo {
-    id: number;
-    name: string;
-    logo: string;
-}
-
-interface ClientLogosProps {
-    className?: string;
-}
-
-export default function ClientLogos({ className = '' }: ClientLogosProps) {
-    const clients: ClientLogo[] = [
-        { id: 1, name: 'Monnari', logo: '/logos/client1.png' },
-        { id: 2, name: '51015kids', logo: '/logos/client2.png' },
-        { id: 3, name: 'Sulphur', logo: '/logos/client3.png' },
-        { id: 4, name: 'EB-GABINET', logo: '/logos/client4.svg' },
-        { id: 5, name: 'Dr Pazera', logo: '/logos/client5.png' },
-        { id: 6, name: 'Kapica Pasterski Partnerzy', logo: '/logos/client6.png' },
-        { id: 7, name: 'Quiosque', logo: '/logos/QuiosqueLogo.png' },
-    ];
+export default function ClientLogos() {
+    const doubled = [...clients, ...clients];
 
     return (
-        <section className="w-full px-6 py-10">
-            <div className="mx-auto max-w-[1800px] border-y border-slate-200 py-8">
-                <div className="grid gap-8 lg:grid-cols-[0.35fr_0.65fr] lg:items-center">
-                    <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                            Zaufali nam
-                        </p>
-                        <p className="mt-3 max-w-xs text-sm leading-6 text-slate-600">
-                            Pracowaliśmy z markami z retailu, usług i e-commerce. Nazwy są różne, ale oczekiwanie zwykle jest jedno:
-                            mniej chaosu, więcej wyniku.
-                        </p>
-                    </div>
-
-                    <div className={`grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-7 ${className}`}>
-                        {clients.map((client) => (
-                            <div
-                                key={client.id}
-                                className="flex h-16 items-center justify-center rounded-[8px] border border-slate-200 bg-white px-4 py-3 grayscale transition-all hover:grayscale-0"
-                            >
-                                <div className="relative h-10 w-full">
-                                    <Image
-                                        src={client.logo}
-                                        alt={`${client.name} logo`}
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+        <section style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', padding: '26px 0', overflow: 'hidden' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto 14px', padding: '0 32px', fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '0.18em', color: 'var(--muted)', textTransform: 'uppercase' }}>
+                Zaufali nam
+            </div>
+            <div style={{ display: 'flex', width: 'max-content', animation: 'ctmarquee 32s linear infinite', willChange: 'transform' }}>
+                {doubled.map((name, i) => (
+                    <span
+                        key={i}
+                        style={{
+                            display: 'inline-block',
+                            marginRight: 64,
+                            fontFamily: i % 3 === 1 ? 'var(--font-mono), monospace' : 'var(--font-space), sans-serif',
+                            fontWeight: i % 4 === 0 ? 700 : i % 4 === 1 ? 500 : 600,
+                            fontSize: i % 3 === 1 ? 20 : 22,
+                            color: 'var(--muted)',
+                            opacity: 0.6,
+                            whiteSpace: 'nowrap',
+                        }}
+                    >
+                        {name}
+                    </span>
+                ))}
             </div>
         </section>
     );

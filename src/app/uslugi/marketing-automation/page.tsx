@@ -1,461 +1,155 @@
-import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
-import Button from '@/components/Button';
-import AutomationChart from '@/components/AutomationChart';
-import ContactFormAutomation from '@/components/ContactFormAutomation';
+import CTASection from '@/components/CTASection';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Marketing Automation dla Firm | Agencja Marketing Automation – CreativeTrust',
-    description: 'Agencja marketing automation — wdrożenia SALESmanago, automatyzacja procesów marketingowych i lead nurturing dla firm B2B i e-commerce. Oficjalny partner SALESmanago.',
-    alternates: {
-        canonical: `${SITE_URL}/uslugi/marketing-automation`,
-    },
+    title: 'Marketing Automation dla Firm — CreativeTrust | AI, SALESmanago, lejki, CRM',
+    description: 'Automatyzacja marketingu oparta na danych i AI. Wdrażamy SALESmanago, budujemy lejki, integrujemy CRM i ustawiamy kampanie, które działają bez Twojej obecności.',
+    alternates: { canonical: `${SITE_URL}/uslugi/marketing-automation` },
     openGraph: {
         title: 'Marketing Automation dla Firm | CreativeTrust',
-        description: 'Wdrożenia i optymalizacja marketing automation. Oficjalny partner SALESmanago.',
-        url: `${SITE_URL}/uslugi/marketing-automation`,
-        siteName: 'CreativeTrust',
-        locale: 'pl_PL',
-        type: 'website',
-    },
-    twitter: {
-        card: 'summary_large_image',
-        title: 'Marketing Automation dla Firm | CreativeTrust',
-        description: 'Wdrożenia i optymalizacja marketing automation. Oficjalny partner SALESmanago.',
+        description: 'SALESmanago, lejki, lead nurturing, automatyczne kampanie. Działają, kiedy śpisz.',
+        url: `${SITE_URL}/uslugi/marketing-automation`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
     },
 };
 
+const services = [
+    { num: '01', title: 'Wdrożenie SALESmanago', description: 'Konfiguracja platformy, integracje, segmentacja i pierwsze automatyzacje gotowe do działania.' },
+    { num: '02', title: 'Lead nurturing', description: 'Lejki, sekwencje e-mail i scoring leadów — kontakty dojrzewają do zakupu bez Twojej obecności.' },
+    { num: '03', title: 'Personalizacja w czasie rzeczywistym', description: 'Treści na stronie i w e-mailach dopasowane do zachowań i segmentu odbiorcy.' },
+    { num: '04', title: 'AI w kampaniach', description: 'Optymalizacja czasu wysyłki, predykcyjny scoring i generowanie treści wspomagane AI.' },
+    { num: '05', title: 'Integracje CRM', description: 'Pipedrive, HubSpot, Salesforce — dane marketingowe trafiają tam, gdzie pracuje sprzedaż.' },
+    { num: '06', title: 'Analityka i reporting', description: 'Dashboardy z metrykami, które mają znaczenie — nie tylko otwarcia i kliknięcia.' },
+];
+
+const stats = [
+    { value: '3,2×', label: 'średni wzrost konwersji po wdrożeniu automatyzacji' },
+    { value: '40%', label: 'leadów, które nie byłyby obsłużone ręcznie' },
+    { value: '24/7', label: 'kampanie działają bez Twojego udziału' },
+    { value: '15+', label: 'lat doświadczenia w marketingu B2B i B2C' },
+];
+
+const usecases = [
+    { title: 'E-commerce', description: 'Koszyk porzucony, rekomendacje produktowe, reaktywacja klientów i cross-sell.' },
+    { title: 'B2B / SaaS', description: 'Lead scoring, nurturing przed rozmową handlową, onboarding i retencja.' },
+    { title: 'Usługi lokalne', description: 'Przypomnienia, upsell po wizycie, zbieranie opinii i kampanie sezonowe.' },
+    { title: 'Edukacja i szkolenia', description: 'Automatyczny onboarding kursantów, przypomnienia i kampanie upsell.' },
+];
+
+const process = [
+    { num: '01', title: 'Audyt', description: 'Mapujemy obecny stack, dane, lejki i punkty styku. Identyfikujemy największe straty.' },
+    { num: '02', title: 'Architektura', description: 'Projektujemy lejki, segmentację i logikę automatyzacji — zanim ktokolwiek kliknie "uruchom".' },
+    { num: '03', title: 'Wdrożenie', description: 'Konfigurujemy platformę, integrujemy CRM i uruchamiamy pierwsze automatyzacje.' },
+    { num: '04', title: 'Optymalizacja', description: 'Testujemy, mierzymy i rozbudowujemy. Pętla danych → decyzja → wynik.', featured: true },
+];
+
 export default function MarketingAutomationPage() {
     return (
-        <main className="min-h-screen">
-            {/* Hero section */}
-            <section className="w-full py-24 md:py-32 px-6 bg-gradient-to-br from-gray-50 to-gray-100">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="flex flex-col lg:flex-row gap-16 items-center">
-                        <div className="w-full lg:w-1/2">
-                            <h6 className="text-gray-600 mb-2">Agencja Marketing Automation</h6>
-                            <h1 className="text-4xl md:text-6xl font-medium mb-8">Marketing Automation dla Firm</h1>
-                            <p className="text-xl text-gray-700 mb-10">
-                                Wdrażamy i optymalizujemy marketing automation dla firm B2B i e-commerce.
-                                Jako oficjalny partner <strong>SALESmanago</strong>, pomagamy automatyzować procesy,
-                                personalizować komunikację i zwiększać konwersje — bez angażowania dodatkowego zespołu.
-                            </p>
-                            <Button href="#kontakt">
-                                Umów bezpłatną konsultację
-                            </Button>
+        <main style={{ minHeight: '100vh' }}>
+
+            {/* Hero */}
+            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 0.9fr', gap: 64, alignItems: 'start' }}>
+                    <div>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>
+                            MARKETING AUTOMATION
                         </div>
-                        <div className="w-full lg:w-1/2">
-                            <Image
-                                src="/marketing-automation-hero.jpg"
-                                alt="Marketing Automation"
-                                width={800}
-                                height={600}
-                                className="rounded-xl shadow-xl object-cover"
-                                priority
-                            />
-                        </div>
+                        <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(36px, 5.5vw, 72px)', lineHeight: 1.02, letterSpacing: '-0.025em', margin: '0 0 24px' }}>
+                            Kampanie, które działają <span style={{ color: 'var(--accent)' }}>kiedy śpisz.</span>
+                        </h1>
+                        <p style={{ fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 36px' }}>
+                            Wdrażamy SALESmanago i budujemy automatyzacje oparte na danych i AI. Lejki, lead nurturing, personalizacja, integracje CRM — działają bez Twojego udziału.
+                        </p>
+                        <Link href="/kontakt" className="ct-cta">
+                            Omów projekt
+                            <span className="ct-badge"><span className="ct-arrows"><span>→</span><span>→</span></span></span>
+                        </Link>
                     </div>
-                </div>
-            </section>
-
-            {/* Statistics section */}
-            <section className="w-full py-16 md:py-24 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-medium mb-16 text-center">
-                        Marketing Automation w liczbach
-                    </h2>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div className="bg-white p-8 rounded-xl shadow-sm text-center">
-                            <div className="text-5xl font-bold text-black mb-4">+77%</div>
-                            <p className="text-xl">Wzrost konwersji dzięki personalizacji komunikacji</p>
-                        </div>
-                        <div className="bg-white p-8 rounded-xl shadow-sm text-center">
-                            <div className="text-5xl font-bold text-black mb-4">12,2x</div>
-                            <p className="text-xl">Średni zwrot z inwestycji w marketing automation</p>
-                        </div>
-                        <div className="bg-white p-8 rounded-xl shadow-sm text-center">
-                            <div className="text-5xl font-bold text-black mb-4">67%</div>
-                            <p className="text-xl">Firm osiągnęło swoje cele marketingowe dzięki automatyzacji</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Benefits section */}
-            <section className="w-full py-16 md:py-24 px-6 bg-gray-50">
-                <div className="max-w-[1800px] mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-medium mb-16 text-center">
-                        Dlaczego warto zainwestować w Marketing Automation?
-                    </h2>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div className="bg-white p-8 rounded-xl shadow-sm">
-                            <div className="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-8 h-8">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                            </div>
-                            <h3 className="text-2xl font-medium mb-4">Zwiększenie efektywności</h3>
-                            <p className="text-gray-700">
-                                Automatyzacja rutynowych zadań marketingowych pozwala Twojemu zespołowi skupić
-                                się na strategicznych inicjatywach, które napędzają rozwój biznesu.
-                            </p>
-                        </div>
-
-                        <div className="bg-white p-8 rounded-xl shadow-sm">
-                            <div className="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-8 h-8">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </div>
-                            <h3 className="text-2xl font-medium mb-4">Personalizacja na dużą skalę</h3>
-                            <p className="text-gray-700">
-                                Docieraj do tysięcy klientów z komunikacją dopasowaną do ich zachowań,
-                                preferencji i etapu ścieżki zakupowej.
-                            </p>
-                        </div>
-
-                        <div className="bg-white p-8 rounded-xl shadow-sm">
-                            <div className="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-8 h-8">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                </svg>
-                            </div>
-                            <h3 className="text-2xl font-medium mb-4">Lepsze wyniki kampanii</h3>
-                            <p className="text-gray-700">
-                                Zwiększ współczynniki otwarć, kliknięć i konwersji dzięki
-                                precyzyjnemu targetowaniu i komunikacji w odpowiednim momencie.
-                            </p>
-                        </div>
-
-                        <div className="bg-white p-8 rounded-xl shadow-sm">
-                            <div className="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-8 h-8">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
-                            <h3 className="text-2xl font-medium mb-4">Optymalizacja budżetu</h3>
-                            <p className="text-gray-700">
-                                Zmniejsz koszty pozyskania klienta (CAC) i zwiększ lifetime value (LTV)
-                                dzięki lepszemu nurturowaniu leadów i programom lojalnościowym.
-                            </p>
-                        </div>
-
-                        <div className="bg-white p-8 rounded-xl shadow-sm">
-                            <div className="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-8 h-8">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                </svg>
-                            </div>
-                            <h3 className="text-2xl font-medium mb-4">Bezpieczeństwo danych</h3>
-                            <p className="text-gray-700">
-                                Platformy Marketing Automation, takie jak SALESmanago, zapewniają
-                                zgodność z przepisami RODO i bezpieczeństwo danych klientów.
-                            </p>
-                        </div>
-
-                        <div className="bg-white p-8 rounded-xl shadow-sm">
-                            <div className="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-8 h-8">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                </svg>
-                            </div>
-                            <h3 className="text-2xl font-medium mb-4">Mierzalne rezultaty</h3>
-                            <p className="text-gray-700">
-                                Zyskaj pełną przejrzystość efektów swoich działań marketingowych
-                                dzięki zaawansowanej analityce i raportowaniu w czasie rzeczywistym.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Chart section */}
-            <section className="w-full py-16 md:py-24 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="flex flex-col lg:flex-row gap-16 items-center">
-                        <div className="w-full lg:w-1/2">
-                            <h2 className="text-3xl md:text-4xl font-medium mb-8">
-                                Skuteczność Marketing Automation w biznesie
-                            </h2>
-                            <p className="text-xl text-gray-700 mb-6">
-                                Badania pokazują, że firmy wykorzystujące marketing automation osiągają znacząco
-                                lepsze wyniki w porównaniu do firm polegających wyłącznie na ręcznych kampaniach.
-                            </p>
-                            <p className="text-gray-700 mb-6">
-                                Automatyzacja pozwala na lepsze lead nurturing, skuteczniejsze kampanie
-                                e-mail marketingowe oraz bardziej precyzyjne targetowanie. To przekłada się
-                                na lepsze wyniki sprzedażowe i zwiększenie ROI.
-                            </p>
-                            <p className="text-gray-700">
-                                Jako partner SALESmanago, oferujemy kompleksowe rozwiązania marketing
-                                automation dostosowane do specyfiki Twojego biznesu i potrzeb Twoich klientów.
-                            </p>
-                        </div>
-                        <div className="w-full lg:w-1/2">
-                            <AutomationChart />
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* SALESmanago Partnership */}
-            <section className="w-full py-16 md:py-24 px-6 bg-gray-100">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="flex flex-col lg:flex-row gap-16 items-center">
-                        <div className="w-full lg:w-1/2">
-                            <Image
-                                src="/sales-manago-partnership.jpg"
-                                alt="CreativeTrust - partner SALESmanago"
-                                width={700}
-                                height={500}
-                                className="rounded-xl shadow-xl object-cover"
-                            />
-                        </div>
-                        <div className="w-full lg:w-1/2">
-                            <h2 className="text-3xl md:text-4xl font-medium mb-8">
-                                Oficjalny partner SALESmanago
-                            </h2>
-                            <p className="text-xl text-gray-700 mb-6">
-                                CreativeTrust to certyfikowany partner technologiczny SALESmanago -
-                                wiodącej europejskiej platformy marketing automation.
-                            </p>
-                            <p className="text-gray-700 mb-6">
-                                Współpraca z SALESmanago pozwala nam oferować klientom najnowocześniejsze
-                                rozwiązania marketingowe, które generują realne i mierzalne rezultaty.
-                            </p>
-                            <p className="text-gray-700 mb-10">
-                                Nasze doświadczenie w implementacji i optymalizacji kampanii marketing
-                                automation sprawia, że możemy zaoferować nie tylko narzędzia, ale też
-                                wsparcie strategiczne i całościowe podejście do automatyzacji działań marketingowych.
-                            </p>
-                            <Button href="#kontakt">
-                                Dowiedz się więcej
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Case study section */}
-            <section className="w-full py-16 md:py-24 px-6">
-                <div className="max-w-[1800px] mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-medium mb-16 text-center">
-                        Historie sukcesu naszych klientów
-                    </h2>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        <div className="bg-white p-8 rounded-xl shadow-sm">
-                            <div className="flex items-center gap-4 mb-6">
-                                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center text-white text-xl font-bold">
-                                    ES
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-medium">E-commerce - Sklep Sportowy</h3>
-                                    <p className="text-gray-500">Branża retail / e-commerce</p>
-                                </div>
-                            </div>
-                            <p className="text-gray-700 mb-4">
-                                "Dzięki wdrożeniu SALESmanago i wsparciu CreativeTrust, zwiększyliśmy
-                                nasze konwersje o 38% w ciągu pierwszych 3 miesięcy. Personalizacja
-                                oferty na podstawie zachowania użytkowników przyniosła spektakularne efekty."
-                            </p>
-                            <div className="flex justify-between items-center">
-                                <p className="text-gray-500">Dyrektor Marketingu</p>
-                                <div className="flex">
-                                    <div className="text-yellow-500">★</div>
-                                    <div className="text-yellow-500">★</div>
-                                    <div className="text-yellow-500">★</div>
-                                    <div className="text-yellow-500">★</div>
-                                    <div className="text-yellow-500">★</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="bg-white p-8 rounded-xl shadow-sm">
-                            <div className="flex items-center gap-4 mb-6">
-                                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center text-white text-xl font-bold">
-                                    FT
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-medium">Fintech Corp</h3>
-                                    <p className="text-gray-500">Branża finansowa</p>
-                                </div>
-                            </div>
-                            <p className="text-gray-700 mb-4">
-                                "Automatyzacja kampanii email pozwoliła nam skrócić cykl sprzedażowy
-                                o 45% i zwiększyć wartość średniego koszyka o 23%. Zespół CreativeTrust
-                                pomógł nam zoptymalizować ścieżkę klienta i zwiększyć skuteczność lead nurturingu."
-                            </p>
-                            <div className="flex justify-between items-center">
-                                <p className="text-gray-500">Head of Digital</p>
-                                <div className="flex">
-                                    <div className="text-yellow-500">★</div>
-                                    <div className="text-yellow-500">★</div>
-                                    <div className="text-yellow-500">★</div>
-                                    <div className="text-yellow-500">★</div>
-                                    <div className="text-yellow-500">★</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* FAQ */}
-            <section className="w-full py-16 md:py-24 px-6 bg-gray-50">
-                <div className="max-w-[1800px] mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-medium mb-16 text-center">
-                        Najczęstsze pytania o marketing automation
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                        {[
-                            {
-                                q: 'Czym jest marketing automation i jak działa?',
-                                a: 'Marketing automation to oprogramowanie, które automatyzuje powtarzalne zadania marketingowe — wysyłkę emaili, segmentację bazy, lead scoring i personalizację treści. Działa na podstawie zachowań użytkowników: jeśli ktoś odwiedzi daną podstronę lub pobierze materiał, system automatycznie wysyła dopasowaną komunikację.',
-                            },
-                            {
-                                q: 'Ile kosztuje wdrożenie marketing automation?',
-                                a: 'Koszt zależy od skali działalności, liczby kontaktów i zakresu automatyzacji. Wyceniamy każde wdrożenie indywidualnie — skontaktuj się z nami, aby otrzymać bezpłatną ofertę dopasowaną do Twojego biznesu.',
-                            },
-                            {
-                                q: 'Jak długo trwa wdrożenie marketing automation?',
-                                a: 'Podstawowe wdrożenie SALESmanago z pierwszymi scenariuszami zajmuje 4–8 tygodni. Bardziej zaawansowane projekty obejmujące integracje z CRM, e-commerce i personalizację on-site mogą trwać 3–6 miesięcy.',
-                            },
-                            {
-                                q: 'Dla jakich firm sprawdza się marketing automation?',
-                                a: 'Najlepsze efekty osiągają firmy B2B z dłuższym cyklem sprzedażowym, sklepy e-commerce z bazą ponad 1000 kontaktów oraz firmy usługowe, które chcą prowadzić lead nurturing bez powiększania działu marketingu.',
-                            },
-                            {
-                                q: 'Czy marketing automation zastąpi mój zespół marketingowy?',
-                                a: 'Nie — automation przejmuje rutynowe, powtarzalne zadania, dzięki czemu Twój zespół może skupić się na strategii, kreatywności i relacjach z klientami. To narzędzie do skalowania, nie zastępstwo ludzi.',
-                            },
-                            {
-                                q: 'Dlaczego SALESmanago zamiast innych platform?',
-                                a: 'SALESmanago to największa europejska platforma marketing automation, zoptymalizowana pod RODO i specyfikę polskiego rynku. Jako oficjalny partner mamy dostęp do pełnego wsparcia technicznego, szkoleń i najnowszych funkcji platformy.',
-                            },
-                        ].map(({ q, a }) => (
-                            <div key={q} className="border border-gray-200 bg-white p-8 rounded-xl">
-                                <h3 className="text-lg font-medium mb-3">{q}</h3>
-                                <p className="text-gray-700">{a}</p>
+                    <div style={{ borderRadius: 20, border: '1px solid color-mix(in srgb, var(--accent) 30%, var(--line))', background: 'color-mix(in srgb, var(--accent) 7%, var(--panel))', padding: 32 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.12em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 20 }}>// status: active</div>
+                        {['lead scoring', 'email nurturing', 'CRM sync', 'AI content', 'behavioral triggers', 'real-time personalization'].map((item, i) => (
+                            <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0', borderBottom: i < 5 ? '1px solid var(--line)' : 'none' }}>
+                                <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 8px var(--glow)', flexShrink: 0, animation: `ctpulse 2s ease-in-out ${i * 0.3}s infinite` }} />
+                                <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 14, color: 'var(--text)' }}>{item}</span>
+                                <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--accent)' }}>running</span>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* CTA section */}
-            <section id="kontakt" className="w-full py-16 md:py-32 px-6 bg-white">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="flex flex-col lg:flex-row gap-16 items-center">
-                        <div className="w-full lg:w-1/2">
-                            <h2 className="text-3xl md:text-5xl font-medium mb-8">
-                                Gotowy na automatyzację swojego marketingu?
-                            </h2>
-                            <p className="text-xl mb-10 text-gray-700">
-                                Skontaktuj się z nami, aby umówić bezpłatną konsultację.
-                                Omówimy Twoje potrzeby i zaproponujemy rozwiązania,
-                                które pomogą Ci osiągnąć Twoje cele biznesowe.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-4">
-                                <Link
-                                    href="/kontakt"
-                                    className="group relative inline-flex items-center justify-center gap-2
-            bg-black text-white px-8 py-4 rounded-full font-medium
-            transition-all duration-300 ease-in-out
-            hover:bg-black"
-                                >
-                                    <span>Umów konsultację</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="transform transition-transform duration-300 group-hover:rotate-45"
-                                    >
-                                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                                        <polyline points="7 7 17 7 17 17"></polyline>
-                                    </svg>
-                                </Link>
-                                <Link
-                                    href="mailto:office@creativetrust.pl"
-                                    className="group relative inline-flex items-center justify-center gap-2
-            border border-gray-300 text-gray-800 px-8 py-4 rounded-full font-medium
-            transition-all duration-300 ease-in-out
-            hover:bg-gray-50"
-                                >
-                                    <span>Napisz do nas</span>
-                                </Link>
+            {/* Stats */}
+            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '88px 32px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+                        {stats.map(s => (
+                            <div key={s.value} style={{ borderLeft: '1px solid var(--line)', paddingLeft: 20 }}>
+                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 3.5vw, 52px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--accent)' }}>{s.value}</div>
+                                <div style={{ color: 'var(--muted)', fontSize: 14, marginTop: 10 }}>{s.label}</div>
                             </div>
-                        </div>
-                        <div className="w-full lg:w-1/2">
-                            <div className="bg-gray-50 p-8 rounded-xl shadow-sm">
-                                <h3 className="text-2xl font-medium mb-6">Bezpłatny audyt marketingowy</h3>
-                                <p className="mb-6 text-gray-700">
-                                    Zostaw swoje dane, a nasz ekspert skontaktuje się z Tobą,
-                                    aby przeprowadzić bezpłatny audyt i zaproponować rozwiązania
-                                    marketing automation dla Twojego biznesu.
-                                </p>
-                                <form className="space-y-4">
-                                    <div>
-                                        <label htmlFor="name" className="block text-sm font-medium mb-1 text-gray-700">Imię i nazwisko</label>
-                                        <input
-                                            type="text"
-                                            id="name"
-                                            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                            placeholder="Jan Kowalski"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="email" className="block text-sm font-medium mb-1 text-gray-700">Email</label>
-                                        <input
-                                            type="email"
-                                            id="email"
-                                            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                            placeholder="jan@firma.pl"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="company" className="block text-sm font-medium mb-1 text-gray-700">Firma</label>
-                                        <input
-                                            type="text"
-                                            id="company"
-                                            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                            placeholder="Nazwa firmy"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="phone" className="block text-sm font-medium mb-1 text-gray-700">Telefon</label>
-                                        <input
-                                            type="tel"
-                                            id="phone"
-                                            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                                            placeholder="+48 123 456 789"
-                                        />
-                                    </div>
-                                    <div className="pt-4">
-                                        <button
-                                            type="submit"
-                                            className="w-full px-6 py-3 bg-black text-white rounded-full font-medium hover:bg-black transition-colors"
-                                        >
-                                            Poproś o bezpłatny audyt
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
+
+            {/* Services */}
+            <section style={{ borderTop: '1px solid var(--line)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                    <div style={{ marginBottom: 48 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>CO ROBIMY</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Zakres automatyzacji.</h2>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }}>
+                        {services.map(s => (
+                            <div key={s.num} style={{ borderRadius: 20, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 28 }}>{s.num}</div>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 19, margin: '0 0 10px' }}>{s.title}</h3>
+                                <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>{s.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Use cases */}
+            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                    <div style={{ marginBottom: 48 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>ZASTOSOWANIA</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Dla kogo to działa.</h2>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 18 }}>
+                        {usecases.map(u => (
+                            <div key={u.title} style={{ borderRadius: 18, padding: '24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, margin: '0 0 10px' }}>{u.title}</h3>
+                                <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.55, margin: 0 }}>{u.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Process */}
+            <section style={{ borderTop: '1px solid var(--line)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
+                    <div style={{ marginBottom: 48 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>PROCES</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Od audytu do automatyzacji.</h2>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
+                        {process.map(step => (
+                            <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: step.featured ? 'linear-gradient(160deg, color-mix(in srgb, var(--accent) 16%, var(--panel)), var(--panel))' : 'var(--panel)', border: step.featured ? '1px solid color-mix(in srgb, var(--accent) 40%, var(--line))' : '1px solid var(--line)' }}>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', marginBottom: 48 }}>{step.num}</div>
+                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 20, margin: '0 0 8px' }}>{step.title}</h3>
+                                <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.5, margin: 0 }}>{step.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <CTASection />
         </main>
     );
 }

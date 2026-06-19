@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import Link from 'next/link';
 
 interface ButtonProps {
@@ -8,37 +7,26 @@ interface ButtonProps {
     children: React.ReactNode;
     className?: string;
     onClick?: () => void;
+    variant?: 'primary' | 'ghost';
 }
 
-const Button: React.FC<ButtonProps> = ({ href, children, className = '', onClick }) => {
+const Button: React.FC<ButtonProps> = ({ href, children, className = '', onClick, variant = 'primary' }) => {
+    if (variant === 'ghost') {
+        return (
+            <Link href={href} className={`ct-ghost ${className}`} onClick={onClick}>
+                <span className="ct-dot" />
+                {children}
+                <span className="ct-tail">→</span>
+            </Link>
+        );
+    }
+
     return (
-        <Link
-            href={href}
-            className={`
-                group inline-flex items-center justify-center gap-2 rounded-full
-                border border-black bg-black px-5 py-3 text-sm font-medium text-white
-                transition-all duration-300 ease-in-out
-                hover:bg-white hover:text-black
-                ${className}
-            `}
-            onClick={onClick}
-        >
-            <span>{children}</span>
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            >
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-            </svg>
+        <Link href={href} className={`ct-cta ${className}`} onClick={onClick}>
+            {children}
+            <span className="ct-badge">
+                <span className="ct-arrows"><span>→</span><span>→</span></span>
+            </span>
         </Link>
     );
 };
