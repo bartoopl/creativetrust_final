@@ -24,11 +24,11 @@ function Logo({ size = 30 }: { size?: number }) {
                 flex: 'none',
                 borderRadius: 8,
                 border: '1px solid var(--line)',
-                background: 'linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))',
+                background: '#ffffff',
             }}>
                 <span style={{ width: 10, height: 10, borderRadius: 3, background: 'var(--accent)' }} />
             </span>
-            <span style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 16, letterSpacing: '-0.02em' }}>
+            <span style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 16, letterSpacing: '-0.02em' }}>
                 <span style={{ fontWeight: 500 }}>Creative</span>
                 <span style={{ fontWeight: 700 }}>Trust</span>
                 <span style={{ color: 'var(--accent)', fontWeight: 700 }}>.</span>
@@ -56,7 +56,7 @@ export default function Header() {
         <header style={{
             position: 'sticky', top: 0, zIndex: 110,
             backdropFilter: 'blur(14px)',
-            background: scrolled ? 'rgba(8, 9, 12, 0.84)' : 'rgba(8, 9, 12, 0.68)',
+            background: scrolled ? 'rgba(255, 255, 255, 0.92)' : 'rgba(255, 255, 255, 0.84)',
             borderBottom: '1px solid var(--line)',
             transition: 'background .3s ease',
         }}>
@@ -69,7 +69,7 @@ export default function Header() {
                         <Link
                             key={item.href}
                             href={item.href}
-                            style={{ fontSize: 12, color: 'var(--muted)', textDecoration: 'none', transition: 'color .2s' }}
+                            style={{ fontSize: 12, color: 'var(--muted)', textDecoration: 'none', transition: 'color .2s', fontWeight: 500 }}
                             onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
                             onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
                         >

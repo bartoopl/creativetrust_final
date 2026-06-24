@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { IBM_Plex_Mono, IBM_Plex_Sans, Space_Grotesk } from 'next/font/google';
+import { IBM_Plex_Mono, Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -7,13 +7,14 @@ import CookieConsent from '@/components/CookieConsent';
 import SchemaScript from '@/components/SchemaScript';
 import { organizationSchema } from '@/lib/schema';
 
-const spaceGrotesk = Space_Grotesk({
+const interDisplay = Inter({
     subsets: ['latin'],
     variable: '--font-space',
     display: 'swap',
+    weight: ['400', '500', '600', '700', '800'],
 });
 
-const plexSans = IBM_Plex_Sans({
+const interSans = Inter({
     subsets: ['latin'],
     variable: '--font-hanken',
     display: 'swap',
@@ -75,7 +76,7 @@ export default function RootLayout({
     return (
         <html
             lang="pl"
-            className={`${spaceGrotesk.variable} ${plexSans.variable} ${plexMono.variable} overflow-x-hidden`}
+            className={`${interDisplay.variable} ${interSans.variable} ${plexMono.variable} overflow-x-hidden`}
         >
             <head>
                 <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />

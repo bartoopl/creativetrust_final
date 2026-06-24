@@ -23,16 +23,20 @@ export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer style={{ borderTop: '1px solid var(--line)', background: 'var(--bg)' }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '68px 32px 36px' }} className="px-4 pb-10 pt-16 sm:px-6 lg:px-8">
-
+        <footer style={{ borderTop: '1px solid var(--line)', background: '#ffffff' }}>
+            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '72px 32px 36px' }} className="px-4 pb-10 pt-16 sm:px-6 lg:px-8">
                 <h2 style={{
-                    fontFamily: 'var(--font-space), sans-serif', fontWeight: 700,
-                    fontSize: 'clamp(26px, 4.2vw, 48px)', letterSpacing: '-0.045em',
-                    lineHeight: 1, margin: '0 0 64px', maxWidth: '18ch',
+                    fontFamily: 'var(--font-space), sans-serif',
+                    fontWeight: 800,
+                    fontSize: 'clamp(34px, 5vw, 56px)',
+                    letterSpacing: '-0.045em',
+                    lineHeight: 1,
+                    margin: '0 0 56px',
+                    maxWidth: '16ch',
+                    color: 'var(--text)',
                 }}>
-                    Nie gonimy za trendami.{' '}
-                    <span style={{ color: 'var(--accent)' }}>Tworzymy je.</span>
+                    Ship faster.{' '}
+                    <span style={{ color: 'var(--accent)' }}>Stay sharp.</span>
                 </h2>
 
                 <div style={{ paddingBottom: 44, borderBottom: '1px solid var(--line)' }} className="grid grid-cols-1 gap-8 pb-10 sm:grid-cols-2 md:grid-cols-4">
@@ -46,11 +50,11 @@ export default function Footer() {
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                background: 'color-mix(in srgb, var(--panel) 90%, transparent)',
+                                background: '#ffffff',
                             }}>
                                 <span style={{ width: 10, height: 10, borderRadius: 3, background: 'var(--accent)' }} />
                             </span>
-                            <span style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 16, letterSpacing: '-0.02em' }}>
+                            <span style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 16, letterSpacing: '-0.02em' }}>
                                 <span style={{ fontWeight: 500 }}>Creative</span>
                                 <span style={{ fontWeight: 700 }}>Trust</span>
                                 <span style={{ color: 'var(--accent)', fontWeight: 700 }}>.</span>
@@ -65,9 +69,9 @@ export default function Footer() {
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.14em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 14 }}>Usługi</div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
                             {services.map(s => (
-                                <Link key={s.href} href={s.href} style={{ color: 'var(--text)', opacity: 0.8, textDecoration: 'none', fontSize: 14, transition: 'opacity .2s' }}
+                                <Link key={s.href} href={s.href} style={{ color: 'var(--text)', opacity: 0.82, textDecoration: 'none', fontSize: 14, transition: 'opacity .2s' }}
                                     onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-                                    onMouseLeave={e => (e.currentTarget.style.opacity = '0.8')}
+                                    onMouseLeave={e => (e.currentTarget.style.opacity = '0.82')}
                                 >{s.label}</Link>
                             ))}
                         </div>
@@ -77,9 +81,9 @@ export default function Footer() {
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.14em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 14 }}>Firma</div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
                             {company.map(s => (
-                                <Link key={s.href} href={s.href} style={{ color: 'var(--text)', opacity: 0.8, textDecoration: 'none', fontSize: 14, transition: 'opacity .2s' }}
+                                <Link key={s.href} href={s.href} style={{ color: 'var(--text)', opacity: 0.82, textDecoration: 'none', fontSize: 14, transition: 'opacity .2s' }}
                                     onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-                                    onMouseLeave={e => (e.currentTarget.style.opacity = '0.8')}
+                                    onMouseLeave={e => (e.currentTarget.style.opacity = '0.82')}
                                 >{s.label}</Link>
                             ))}
                         </div>
@@ -88,9 +92,9 @@ export default function Footer() {
                     <div>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.14em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 14 }}>Kontakt</div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
-                            <Link href="mailto:office@creativetrust.pl" style={{ color: 'var(--text)', opacity: 0.8, textDecoration: 'none', fontSize: 14 }}>office@creativetrust.pl</Link>
-                            <Link href="https://www.linkedin.com/company/creativetrust" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text)', opacity: 0.8, textDecoration: 'none', fontSize: 14 }}>LinkedIn</Link>
-                            <Link href="https://www.instagram.com/creativetrust_/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text)', opacity: 0.8, textDecoration: 'none', fontSize: 14 }}>Instagram</Link>
+                            <Link href="mailto:office@creativetrust.pl" style={{ color: 'var(--text)', opacity: 0.82, textDecoration: 'none', fontSize: 14 }}>office@creativetrust.pl</Link>
+                            <Link href="https://www.linkedin.com/company/creativetrust" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text)', opacity: 0.82, textDecoration: 'none', fontSize: 14 }}>LinkedIn</Link>
+                            <Link href="https://www.instagram.com/creativetrust_/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text)', opacity: 0.82, textDecoration: 'none', fontSize: 14 }}>Instagram</Link>
                         </div>
                     </div>
                 </div>

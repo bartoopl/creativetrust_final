@@ -9,12 +9,12 @@ import LatestBlogPosts from '@/components/LatestBlogPosts';
 import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
-    title: 'CreativeTrust — AI-native partner produktowy | Branding, Web, E-commerce',
-    description: 'Strategia, design, development i automatyzacja AI w jednym zespole. 150+ projektów, 15 lat doświadczenia. Tworzymy marki i produkty cyfrowe w tempie AI — wyniki, nie obietnice.',
+    title: 'CreativeTrust — AI-native partner produktowy | Web, E-commerce, Automatyzacja',
+    description: 'Projektujemy web, e-commerce i automatyzacje z prędkością AI. Strategia, design i wdrożenie w jednym zespole.',
     alternates: { canonical: '/' },
     openGraph: {
         title: 'CreativeTrust — AI-native partner produktowy',
-        description: 'Tworzymy marki i produkty cyfrowe w tempie AI. Strategia, design, development i automatyzacja w jednym zespole.',
+        description: 'Projektujemy web, e-commerce i automatyzacje z prędkością AI.',
         url: 'https://creativetrust.pl',
         type: 'website',
     },
