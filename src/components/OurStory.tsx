@@ -7,7 +7,7 @@ const principles = [
     },
     {
         title: 'Jedna odpowiedzialność za wynik',
-        description: 'Łączymy branding, web, e-commerce i automation w jednym procesie. Dzięki temu nie rozbijamy odpowiedzialności na przypadkowych wykonawców.',
+        description: 'Łączymy web, e-commerce i automation w jednym procesie. Dzięki temu nie rozbijamy odpowiedzialności na przypadkowych wykonawców.',
     },
     {
         title: 'Wdrożenie, nie tylko koncepcja',

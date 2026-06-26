@@ -9,7 +9,6 @@ interface MegaMenuProps {
 }
 
 const services = [
-    { id: 'branding', title: 'Branding', description: 'Strategia marki, identyfikacja, rebranding.' },
     { id: 'strony-www', title: 'Strony WWW', description: 'Strony firmowe, landing pages, UX i wdrożenie.' },
     { id: 'e-commerce', title: 'E-commerce', description: 'Headless commerce, migracje i integracje.' },
     { id: 'social-media', title: 'Social Media', description: 'Komunikacja, content i prowadzenie kanałów.' },

@@ -69,8 +69,19 @@ export default async function BlogCategoryPage({
     };
 
     return (
-        <main className="min-h-screen py-24 px-6">
-            <div className="max-w-[1800px] mx-auto">
+        <main className="min-h-screen bg-white">
+            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
+                        Kategoria
+                    </div>
+                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: 0, maxWidth: '12ch' }}>
+                        {category.title}
+                    </h1>
+                </div>
+            </section>
+            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+                <div style={{ maxWidth: 900, margin: '0 auto' }}>
                 <Link href="/blog" className="text-gray-600 mb-8 flex items-center">
                     <svg
                         width="20"
@@ -229,6 +240,7 @@ export default async function BlogCategoryPage({
                         </Link>
                     </div>
                 )}
+                </div>
             </div>
         </main>
     );

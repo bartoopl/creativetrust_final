@@ -2,8 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-const ACCENT = '#845cff';
-const ACCENT2 = '#ff5ca8';
+const ACCENT = '#56C4DB';
 const BG = '#08080c';
 
 function hexA(hex: string, a: number): string {
@@ -11,133 +10,282 @@ function hexA(hex: string, a: number): string {
     return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
 }
 
-interface Particle {
-    x: number; y: number;
-    vx: number; vy: number;
-    age: number; life: number;
-    seed: number; sz: number;
-    glyph: string | null;
+interface Node3D {
+    ox: number;
+    oy: number;
+    oz: number;
+    energy: number;
+    baseR: number;
+    phase: number;
+}
+
+interface Edge3D {
+    a: number;
+    b: number;
+}
+
+interface Signal3D {
+    a: number;
+    b: number;
+    p: number;
+    sp: number;
 }
 
 export default function HeroCanvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
-        const cv = canvasRef.current;
-        if (!cv) return;
-        const ctx = cv.getContext('2d');
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-        let w = 0, h = 0;
+        let w = 0;
+        let h = 0;
+        let raf = 0;
+        let lt = 0;
+        let spawnAcc = 0;
+        let t = 0;
 
         const resize = () => {
-            const p = cv.parentElement;
-            if (!p) return;
-            w = p.clientWidth; h = p.clientHeight;
-            cv.width = w * dpr; cv.height = h * dpr;
+            const parent = canvas.parentElement;
+            if (!parent) return;
+            w = parent.clientWidth;
+            h = parent.clientHeight;
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         };
+
         resize();
         window.addEventListener('resize', resize);
 
-        const plume: Particle[] = [];
-        let spawnAcc = 0;
-        let lt = 0;
-        let raf = 0;
+        const nodes: Node3D[] = [];
+        const edges: Edge3D[] = [];
+        const signals: Signal3D[] = [];
+
+        const W = 700;
+        const H = 900;
+        const CX = W * 0.5;
+        const CY = H * 0.46;
+        const FOV = 750;
+        const CAM_Z = 550;
+        const SPHERE_R = 295;
+        const SPHERE_SPREAD = 50;
+        const INTERIOR_R = 240;
+        const CONNECT_DIST = 140;
+        const MAX_CONNECTIONS = 6;
+        const ROTATION_Y = 0.19;
+        const WOBBLE_X = 0.09;
+        const SIGNAL_CHANCE = 0.20;
+        const SIGNAL_SPEED_MIN = 0.016;
+        const SIGNAL_SPEED_MAX = 0.034;
+        const ENERGY_DECAY = 0.022;
+        const CASCADE_CHANCE = 0.35;
+
+        for (let i = 0; i < 120; i++) {
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(2 * Math.random() - 1);
+            const r = SPHERE_R + (Math.random() - 0.5) * SPHERE_SPREAD;
+            nodes.push({
+                ox: r * Math.sin(phi) * Math.cos(theta),
+                oy: r * Math.sin(phi) * Math.sin(theta) * 0.82,
+                oz: r * Math.cos(phi),
+                energy: 0,
+                baseR: Math.random() * 1.4 + 0.8,
+                phase: Math.random() * Math.PI * 2,
+            });
+        }
+
+        for (let i = 0; i < 55; i++) {
+            const r = Math.cbrt(Math.random()) * INTERIOR_R;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(2 * Math.random() - 1);
+            nodes.push({
+                ox: r * Math.sin(phi) * Math.cos(theta),
+                oy: r * Math.sin(phi) * Math.sin(theta) * 0.82,
+                oz: r * Math.cos(phi),
+                energy: 0,
+                baseR: Math.random() * 1.1 + 0.5,
+                phase: Math.random() * Math.PI * 2,
+            });
+        }
+
+        const connCount = new Array(nodes.length).fill(0);
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                if (connCount[i] >= MAX_CONNECTIONS || connCount[j] >= MAX_CONNECTIONS) continue;
+                const dx = nodes[i].ox - nodes[j].ox;
+                const dy = nodes[i].oy - nodes[j].oy;
+                const dz = nodes[i].oz - nodes[j].oz;
+                if (Math.sqrt(dx * dx + dy * dy + dz * dz) < CONNECT_DIST && Math.random() > 0.32) {
+                    edges.push({ a: i, b: j });
+                    connCount[i]++;
+                    connCount[j]++;
+                }
+            }
+        }
+
+        const project = (ox: number, oy: number, oz: number, ry: number, rx: number) => {
+            const x1 = ox * Math.cos(ry) - oz * Math.sin(ry);
+            const z1 = ox * Math.sin(ry) + oz * Math.cos(ry);
+            const y2 = oy * Math.cos(rx) - z1 * Math.sin(rx);
+            const z2 = oy * Math.sin(rx) + z1 * Math.cos(rx);
+            const sc = FOV / (FOV + z2 + CAM_Z);
+            return { px: CX + x1 * sc, py: CY + y2 * sc, sc, z: z2 };
+        };
 
         const draw = (ts: number) => {
             const dt = Math.min(48, ts - (lt || ts));
             lt = ts;
-            const baseX = w * 0.6, baseY = h * 0.99;
+            t += 0.0055;
+            const ry = t * ROTATION_Y;
+            const rx = Math.sin(t * WOBBLE_X) * 0.13;
 
+            ctx.clearRect(0, 0, W, H);
             ctx.fillStyle = BG;
-            ctx.fillRect(0, 0, w, h);
+            ctx.fillRect(0, 0, W, H);
 
             spawnAcc += dt;
             while (spawnAcc > 7) {
                 spawnAcc -= 7;
-                if (plume.length < 360) {
-                    const r = Math.random();
-                    plume.push({
-                        x: baseX + (Math.random() - 0.5) * 26,
-                        y: baseY,
-                        vx: (Math.random() - 0.5) * 0.012 * w / 600,
-                        vy: -(0.12 + Math.random() * 0.12) * h / 600,
-                        age: 0,
-                        life: 1600 + Math.random() * 2200,
-                        seed: Math.random() * 6.28,
-                        glyph: r < 0.22 ? (Math.random() < 0.5 ? '0' : '1') : null,
-                        sz: 1.4 + Math.random() * 2.6,
+                if (signals.length < 360) {
+                    const edge = edges[Math.floor(Math.random() * edges.length)];
+                    signals.push({
+                        a: edge.a,
+                        b: edge.b,
+                        p: 0,
+                        sp: SIGNAL_SPEED_MIN + Math.random() * (SIGNAL_SPEED_MAX - SIGNAL_SPEED_MIN),
                     });
                 }
             }
 
-            ctx.globalCompositeOperation = 'lighter';
+            nodes.forEach((node) => {
+                node.energy = Math.max(0, node.energy - ENERGY_DECAY);
+                node.phase += 0.011;
+            });
 
-            // core beam
-            const beamH = h * 0.85;
-            const bg = ctx.createLinearGradient(0, baseY, 0, baseY - beamH);
-            bg.addColorStop(0, hexA(ACCENT, 0.22));
-            bg.addColorStop(0.4, hexA(ACCENT, 0.10));
-            bg.addColorStop(1, hexA(ACCENT, 0));
-            ctx.fillStyle = bg;
-            ctx.beginPath();
-            ctx.moveTo(baseX - 16, baseY);
-            ctx.lineTo(baseX + 16, baseY);
-            ctx.lineTo(baseX + 72, baseY - beamH);
-            ctx.lineTo(baseX - 72, baseY - beamH);
-            ctx.closePath(); ctx.fill();
+            if (Math.random() < SIGNAL_CHANCE && edges.length > 0) {
+                const edge = edges[Math.floor(Math.random() * edges.length)];
+                signals.push({
+                    a: edge.a,
+                    b: edge.b,
+                    p: 0,
+                    sp: SIGNAL_SPEED_MIN + Math.random() * (SIGNAL_SPEED_MAX - SIGNAL_SPEED_MIN),
+                });
+            }
 
-            // engine flare
-            const fl = ctx.createRadialGradient(baseX, baseY - 8, 0, baseX, baseY - 8, 150);
-            fl.addColorStop(0, hexA('#ffffff', 0.5));
-            fl.addColorStop(0.3, hexA(ACCENT, 0.35));
-            fl.addColorStop(1, hexA(ACCENT, 0));
-            ctx.fillStyle = fl;
-            ctx.beginPath(); ctx.arc(baseX, baseY - 8, 150, 0, 6.2832); ctx.fill();
-
-            // particles
-            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-            for (let i = plume.length - 1; i >= 0; i--) {
-                const p = plume[i];
-                p.age += dt;
-                const t = p.age / p.life;
-                if (t >= 1) { plume.splice(i, 1); continue; }
-                p.vy *= (1 + 0.00035 * dt);
-                const turb = Math.sin(p.age * 0.004 + p.seed) * 0.03 * (0.3 + t);
-                p.x += (p.vx + turb) * dt * (1 + t * 1.2);
-                p.y += p.vy * dt;
-                const a = Math.pow(1 - t, 0.7) * Math.min(1, p.age / 100);
-                if (p.glyph) {
-                    ctx.font = `${9 + p.sz * 2}px "JetBrains Mono", monospace`;
-                    ctx.fillStyle = hexA(t < 0.3 ? '#ffffff' : ACCENT2, a * 0.9);
-                    ctx.fillText(p.glyph, p.x, p.y);
-                } else {
-                    const col = t < 0.18 ? '#ffffff' : ACCENT;
-                    const r = p.sz * (2.5 + t * 4);
-                    const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
-                    g.addColorStop(0, hexA(col, a * 0.8));
-                    g.addColorStop(1, hexA(col, 0));
-                    ctx.fillStyle = g;
-                    ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, 6.2832); ctx.fill();
-                    if (t < 0.5) {
-                        ctx.fillStyle = hexA('#ffffff', a * 0.7);
-                        ctx.beginPath(); ctx.arc(p.x, p.y, p.sz * 0.7, 0, 6.2832); ctx.fill();
+            for (let i = signals.length - 1; i >= 0; i--) {
+                const signal = signals[i];
+                signal.p += signal.sp;
+                if (signal.p >= 1) {
+                    nodes[signal.b].energy = 1;
+                    if (Math.random() < CASCADE_CHANCE) {
+                        const next = edges.find((edge) => edge.a === signal.b || edge.b === signal.b);
+                        if (next) {
+                            signals.push({
+                                a: signal.b,
+                                b: next.a === signal.b ? next.b : next.a,
+                                p: 0,
+                                sp: SIGNAL_SPEED_MIN + Math.random() * (SIGNAL_SPEED_MAX - SIGNAL_SPEED_MIN),
+                            });
+                        }
                     }
+                    signals.splice(i, 1);
                 }
             }
 
+            const projected = nodes.map((node) => project(node.ox, node.oy, node.oz, ry, rx));
+
+            ctx.globalCompositeOperation = 'lighter';
+
+            edges
+                .map((edge) => ({ ...edge, dz: (projected[edge.a].z + projected[edge.b].z) * 0.5 }))
+                .sort((a, b) => a.dz - b.dz)
+                .forEach(({ a, b, dz }) => {
+                    const df = Math.max(0, Math.min(1, dz / 380 + 0.55));
+                    ctx.beginPath();
+                    ctx.moveTo(projected[a].px, projected[a].py);
+                    ctx.lineTo(projected[b].px, projected[b].py);
+                    ctx.strokeStyle = hexA(ACCENT, 0.025 + df * 0.095);
+                    ctx.lineWidth = 0.4 + df * 0.6;
+                    ctx.stroke();
+                });
+
+            signals.forEach(({ a, b, p }) => {
+                const pa = projected[a];
+                const pb = projected[b];
+                const sx = pa.px + (pb.px - pa.px) * p;
+                const sy = pa.py + (pb.py - pa.py) * p;
+                const avgSc = (pa.sc + pb.sc) * 0.5;
+
+                const g = ctx.createLinearGradient(pa.px, pa.py, sx, sy);
+                g.addColorStop(0, hexA(ACCENT, 0));
+                g.addColorStop(1, hexA(ACCENT, Math.min(1, 0.55 * avgSc * 3)));
+                ctx.beginPath();
+                ctx.moveTo(pa.px, pa.py);
+                ctx.lineTo(sx, sy);
+                ctx.strokeStyle = g;
+                ctx.lineWidth = 1.8 * avgSc;
+                ctx.stroke();
+
+                ctx.save();
+                ctx.shadowBlur = 16;
+                ctx.shadowColor = hexA(ACCENT, 0.9);
+                ctx.beginPath();
+                ctx.arc(sx, sy, Math.max(0.5, 2.8 * avgSc), 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(160,230,255,0.95)';
+                ctx.fill();
+                ctx.restore();
+            });
+
+            projected
+                .map((p, i) => ({ ...p, i }))
+                .sort((a, b) => a.z - b.z)
+                .forEach(({ px, py, sc, z, i }) => {
+                    const node = nodes[i];
+                    const df = Math.max(0, Math.min(1, z / 380 + 0.55));
+                    const en = node.energy;
+                    const r = Math.max(0.4, (node.baseR + en * 2.8) * sc * 1.9);
+                    const al = 0.18 + df * 0.52 + en * 0.28;
+
+                    if (en > 0.15) {
+                        ctx.save();
+                        ctx.shadowBlur = 18 + en * 14;
+                        ctx.shadowColor = hexA(ACCENT, 0.88);
+                        ctx.beginPath();
+                        ctx.arc(px, py, r * (1.8 + en), 0, Math.PI * 2);
+                        ctx.fillStyle = hexA(ACCENT, en * 0.12);
+                        ctx.fill();
+                        ctx.restore();
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(px, py, r, 0, Math.PI * 2);
+                    ctx.fillStyle = en > 0.18 ? hexA(ACCENT, Math.min(1, al + en * 0.45)) : hexA('#ffffff', al * 0.6);
+                    ctx.fill();
+                });
+
+            const grd = ctx.createRadialGradient(CX, CY, 260, CX, CY, 430);
+            grd.addColorStop(0, hexA(ACCENT, 0));
+            grd.addColorStop(0.6, hexA(ACCENT, 0.04 + 0.015 * Math.sin(t * 0.7)));
+            grd.addColorStop(1, hexA(ACCENT, 0));
+            ctx.fillStyle = grd;
+            ctx.fillRect(0, 0, W, H);
+
             ctx.globalCompositeOperation = 'source-over';
-            ctx.textBaseline = 'alphabetic';
+
+            if (!reduced) {
+                raf = requestAnimationFrame(draw);
+            }
         };
 
         if (reduced) {
             draw(0);
         } else {
-            const loop = (ts: number) => { draw(ts); raf = requestAnimationFrame(loop); };
-            raf = requestAnimationFrame(loop);
+            raf = requestAnimationFrame(draw);
         }
 
         return () => {
@@ -146,10 +294,5 @@ export default function HeroCanvas() {
         };
     }, []);
 
-    return (
-        <canvas
-            ref={canvasRef}
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }}
-        />
-    );
+    return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />;
 }

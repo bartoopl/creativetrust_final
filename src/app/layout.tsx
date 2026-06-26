@@ -31,17 +31,17 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
     metadataBase: new URL('https://creativetrust.pl'),
     title: {
-        default: 'CreativeTrust — AI-native partner produktowy | Branding, Web, E-commerce',
+        default: 'CreativeTrust — AI-native partner produktowy | Web, E-commerce',
         template: '%s | CreativeTrust',
     },
-    description: 'Strategia, design, development i automatyzacja AI w jednym zespole. 150+ projektów, 15 lat doświadczenia. Tworzymy marki i produkty cyfrowe w tempie AI — wyniki, nie obietnice.',
-    keywords: ['agencja AI', 'branding', 'strony internetowe', 'e-commerce', 'marketing automation', 'UX design', 'automatyzacja AI', 'partner produktowy'],
+    description: 'Strategia, design, development i automatyzacja AI w jednym zespole. 150+ projektów, 15 lat doświadczenia. Tworzymy produkty cyfrowe w tempie AI — wyniki, nie obietnice.',
+    keywords: ['agencja AI', 'strony internetowe', 'e-commerce', 'marketing automation', 'UX design', 'automatyzacja AI', 'partner produktowy'],
     alternates: {
         canonical: '/',
     },
     openGraph: {
         title: 'CreativeTrust — AI-native partner produktowy',
-        description: 'Strategia, design, development i automatyzacja AI w jednym zespole. Tworzymy marki i produkty cyfrowe w tempie AI.',
+        description: 'Strategia, design, development i automatyzacja AI w jednym zespole. Tworzymy produkty cyfrowe w tempie AI.',
         url: 'https://creativetrust.pl',
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'CreativeTrust — AI-native partner produktowy',
-        description: 'Strategia, design, development i automatyzacja AI w jednym zespole. Tworzymy marki i produkty cyfrowe w tempie AI.',
+        description: 'Strategia, design, development i automatyzacja AI w jednym zespole. Tworzymy produkty cyfrowe w tempie AI.',
     },
     robots: {
         index: true,

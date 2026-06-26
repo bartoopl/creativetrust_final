@@ -39,13 +39,6 @@ function Logo({ size = 30 }: { size?: number }) {
 
 export default function Header() {
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-
-    useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 12);
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
-    }, []);
 
     useEffect(() => {
         document.body.style.overflow = mobileOpen ? 'hidden' : '';
@@ -54,32 +47,67 @@ export default function Header() {
 
     return (
         <header style={{
-            position: 'sticky', top: 0, zIndex: 110,
-            backdropFilter: 'blur(14px)',
-            background: scrolled ? 'rgba(255, 255, 255, 0.92)' : 'rgba(255, 255, 255, 0.84)',
-            borderBottom: '1px solid var(--line)',
-            transition: 'background .3s ease',
+            position: 'sticky',
+            top: 0,
+            zIndex: 110,
+            background: '#000000',
+            borderBottom: '1px solid rgba(255,255,255,0.08)',
         }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '12px 32px' }} className="flex items-center justify-between gap-6">
+            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 72px', height: 72 }} className="flex items-center justify-between gap-6">
                 <Logo />
 
-                {/* Desktop nav */}
-                <nav className="hidden items-center gap-8 md:flex">
+                <nav className="hidden items-center gap-0 md:flex">
                     {navItems.map((item) => (
                         <Link
                             key={item.href}
                             href={item.href}
-                            style={{ fontSize: 12, color: 'var(--muted)', textDecoration: 'none', transition: 'color .2s', fontWeight: 500 }}
-                            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
-                            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
+                            style={{
+                                height: 72,
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                padding: '0 16px',
+                                fontSize: 13.5,
+                                color: 'rgba(255,255,255,0.92)',
+                                textDecoration: 'none',
+                                letterSpacing: '-0.28px',
+                                fontWeight: 400,
+                            }}
                         >
                             {item.label}
                         </Link>
                     ))}
-                    <Link href="/kontakt" className="ct-cta sm">
-                        Umów konsultację
-                        <span className="ct-badge">
-                            <span className="ct-arrows"><span>→</span><span>→</span></span>
+                    <Link
+                        href="/kontakt"
+                        style={{
+                            marginLeft: 12,
+                            height: 40,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 0,
+                            padding: '5px',
+                            borderRadius: 4,
+                            background: '#ffffff',
+                            color: '#202124',
+                            textDecoration: 'none',
+                            fontSize: 13.2,
+                            fontWeight: 500,
+                            boxShadow: 'inset 0 0 0 1px #ffffff',
+                        }}
+                    >
+                        <span style={{ padding: '0 12px' }}>Book consultation</span>
+                        <span style={{
+                            width: 30,
+                            height: 30,
+                            borderRadius: 2,
+                            background: 'rgba(0,0,0,0.1)',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#000',
+                            fontSize: 14,
+                            lineHeight: 1,
+                        }}>
+                            →
                         </span>
                     </Link>
                 </nav>
@@ -91,13 +119,13 @@ export default function Header() {
                     onClick={() => setMobileOpen(v => !v)}
                     aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
                     aria-expanded={mobileOpen}
-                        style={{
-                        background: 'color-mix(in srgb, var(--panel) 92%, transparent)',
-                        border: '1px solid var(--line)',
+                    style={{
+                        background: 'rgba(255,255,255,0.08)',
+                        border: '1px solid rgba(255,255,255,0.1)',
                         borderRadius: 999,
                         width: 40,
                         height: 40,
-                        color: 'var(--text)',
+                        color: '#fff',
                         cursor: 'pointer',
                         flex: 'none',
                         padding: 0,
@@ -113,14 +141,13 @@ export default function Header() {
                 <div
                     style={{
                         position: 'fixed',
-                        inset: '68px 0 0 0',
-                        background: 'color-mix(in srgb, var(--bg) 98%, transparent)',
+                        inset: '72px 0 0 0',
+                        background: 'rgba(0,0,0,0.98)',
                         zIndex: 130,
                         padding: '24px 32px',
-                        maxHeight: 'calc(100dvh - 68px)',
+                        maxHeight: 'calc(100dvh - 72px)',
                         overflowY: 'auto',
-                        borderTop: '1px solid var(--line)',
-                        backdropFilter: 'blur(14px)',
+                        borderTop: '1px solid rgba(255,255,255,0.08)',
                     }}
                     className="flex flex-col gap-4 md:hidden"
                 >
@@ -129,16 +156,40 @@ export default function Header() {
                             key={item.href}
                         href={item.href}
                         onClick={() => setMobileOpen(false)}
-                        style={{ fontSize: 20, fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, color: 'var(--text)', textDecoration: 'none', padding: '14px 0', borderBottom: '1px solid var(--line)' }}
+                        style={{ fontSize: 20, fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, color: '#fff', textDecoration: 'none', padding: '14px 0', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
                     >
                         {item.label}
                     </Link>
                     ))}
                     <div style={{ paddingTop: 20 }}>
-                        <Link href="/kontakt" className="ct-cta" onClick={() => setMobileOpen(false)}>
-                            Umów konsultację
-                            <span className="ct-badge">
-                                <span className="ct-arrows"><span>→</span><span>→</span></span>
+                        <Link href="/kontakt" onClick={() => setMobileOpen(false)} style={{
+                            height: 40,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 0,
+                            padding: '5px',
+                            borderRadius: 4,
+                            background: '#ffffff',
+                            color: '#202124',
+                            textDecoration: 'none',
+                            fontSize: 13.2,
+                            fontWeight: 500,
+                            boxShadow: 'inset 0 0 0 1px #ffffff',
+                        }}>
+                            <span style={{ padding: '0 12px' }}>Book consultation</span>
+                            <span style={{
+                                width: 30,
+                                height: 30,
+                                borderRadius: 2,
+                                background: 'rgba(0,0,0,0.1)',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: '#000',
+                                fontSize: 14,
+                                lineHeight: 1,
+                            }}>
+                                →
                             </span>
                         </Link>
                     </div>

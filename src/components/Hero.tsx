@@ -2,121 +2,120 @@ import Link from 'next/link';
 import HeroCanvas from './HeroCanvas';
 
 const signals = [
-    { label: 'AI-native delivery', value: 'w procesie' },
-    { label: '150+ projects', value: 'dowożonych' },
-    { label: '15 years', value: 'doświadczenia' },
+    'AI-native delivery',
+    '150+ projektów',
+    '15 lat doświadczenia',
 ];
 
 export default function Hero() {
     return (
         <section
-            className="relative overflow-hidden border-b border-[var(--line)]"
+            className="relative overflow-hidden border-b border-[rgba(255,255,255,0.08)]"
             style={{
-                background: '#08080c',
-                '--bg': '#08080c',
-                '--panel': '#10131a',
-                '--panel2': '#0a0c11',
-                '--line': 'rgba(255,255,255,0.08)',
-                '--text': '#f5f7fb',
-                '--muted': '#9ca3af',
-                '--accent': '#845cff',
+                background: '#000000',
             } as React.CSSProperties}
         >
-            <div className="absolute inset-0">
-                <HeroCanvas />
-            </div>
-
             <div
                 aria-hidden="true"
-                className="absolute inset-0 bg-[radial-gradient(circle_at_18%_28%,rgba(108,99,255,0.22),transparent_28%),radial-gradient(circle_at_78%_18%,rgba(102,198,255,0.10),transparent_22%),linear-gradient(180deg,rgba(6,7,10,0.18)_0%,rgba(6,7,10,0.82)_40%,rgba(5,6,10,0.96)_100%)]"
+                className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_60%_50%,rgba(20,20,20,0.6)_0%,rgba(0,0,0,1)_70%)]"
             />
 
-            <div className="relative mx-auto grid min-h-[calc(100vh-74px)] max-w-[1240px] grid-cols-1 gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-16">
-                <div className="flex flex-col justify-end pb-4 lg:pb-12">
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 16, fontWeight: 600 }}>
-                        AI-NATIVE DELIVERY
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-                        {signals.map((signal) => (
-                            <div
-                                key={signal.label}
-                                style={{
-                                    border: '1px solid var(--line)',
-                                    borderRadius: 16,
-                                    background: 'rgba(255,255,255,0.03)',
-                                    padding: '14px 16px',
-                                    backdropFilter: 'blur(10px)',
-                                }}
-                            >
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.14em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 8, fontWeight: 600 }}>
-                                    {signal.label}
-                                </div>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 16, letterSpacing: '-0.03em', color: 'var(--text)' }}>
-                                    {signal.value}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <h1
-                        style={{
-                            fontFamily: 'var(--font-space), sans-serif',
-                            fontWeight: 800,
-                            fontSize: 'clamp(38px, 5.2vw, 68px)',
-                            lineHeight: 0.96,
-                            letterSpacing: '-0.05em',
-                            margin: '24px 0 18px',
-                            maxWidth: '12ch',
-                            textWrap: 'balance',
-                            color: 'var(--text)',
-                        } as React.CSSProperties}
-                    >
-                        Ship web, e-commerce and automation at AI speed.
-                    </h1>
-
-                    <p style={{ fontSize: 'clamp(14px, 1.2vw, 17px)', lineHeight: 1.65, color: 'var(--muted)', maxWidth: '46ch', margin: '0 0 26px' }}>
-                        Projektujemy i wdrażamy systemy cyfrowe w jednym procesie. AI skraca research, produkcję i testy, a zespół pilnuje decyzji, jakości i wyniku.
-                    </p>
-
-                    <div className="flex flex-wrap gap-3">
-                        <Link href="/kontakt" className="ct-cta">
-                            Book Consultation
-                            <span className="ct-badge">
-                                <span className="ct-arrows">
-                                    <span>→</span>
-                                    <span>→</span>
+            <div className="relative mx-auto grid min-h-[900px] max-w-[1440px] grid-cols-1 lg:grid-cols-[1fr_700px]">
+                <div className="relative min-h-[520px] lg:min-h-[900px]">
+                    <div className="absolute left-4 right-4 top-10 sm:left-6 sm:right-6 lg:left-[72px] lg:right-auto lg:top-auto lg:bottom-[120px] flex max-w-[620px] flex-col gap-8">
+                        <div className="flex flex-wrap items-center gap-2 text-[12px] font-medium leading-[18px] tracking-[-0.24px] text-[rgba(255,255,255,0.4)]">
+                            {signals.map((signal, index) => (
+                                <span key={signal} className="inline-flex items-center gap-2">
+                                    <span>{signal}</span>
+                                    {index < signals.length - 1 && <span aria-hidden="true">•</span>}
                                 </span>
-                            </span>
-                        </Link>
-                        <Link href="#uslugi" className="ct-ghost">
-                            <span className="ct-dot" />
-                            How we can help
-                            <span className="ct-tail">↓</span>
-                        </Link>
+                            ))}
+                        </div>
+
+                        <h1
+                            style={{
+                                fontFamily: 'var(--font-space), sans-serif',
+                                fontWeight: 500,
+                                fontSize: 'clamp(38px, 4.2vw, 60.8px)',
+                                lineHeight: '1.09',
+                                letterSpacing: '-2.4px',
+                                margin: 0,
+                                maxWidth: '12ch',
+                                color: '#ffffff',
+                            }}
+                        >
+                            Web, e-commerce i automatyzacje, które dowożą wynik.
+                        </h1>
+
+                        <p style={{
+                            fontSize: '17px',
+                            lineHeight: '27px',
+                            letterSpacing: '-0.36px',
+                            color: 'rgba(255,255,255,0.6)',
+                            maxWidth: '42ch',
+                            margin: 0,
+                        }}>
+                            Projektujemy i wdrażamy systemy cyfrowe w jednym procesie. AI skraca research, produkcję i testy, a zespół pilnuje decyzji, jakości i wyniku.
+                        </p>
+
+                        <div className="flex flex-wrap gap-4">
+                            <Link href="/kontakt" style={{
+                                height: 40,
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                padding: 5,
+                                borderRadius: 4,
+                                background: '#fff',
+                                boxShadow: 'inset 0 0 0 1px #fff',
+                                color: '#202124',
+                                textDecoration: 'none',
+                                fontSize: 13.2,
+                                fontWeight: 500,
+                            }}>
+                                <span style={{ padding: '0 12px' }}>Umów konsultację</span>
+                                <span style={{
+                                    width: 30,
+                                    height: 30,
+                                    borderRadius: 2,
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    background: 'rgba(0,0,0,0.1)',
+                                    fontSize: 14,
+                                    lineHeight: 1,
+                                }}>
+                                    →
+                                </span>
+                            </Link>
+                            <Link href="#uslugi" style={{
+                                height: 40,
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                padding: '0 18px',
+                                borderRadius: 4,
+                                border: '1px solid rgba(255,255,255,0.3)',
+                                color: '#fff',
+                                background: 'transparent',
+                                textDecoration: 'none',
+                                fontSize: 13.2,
+                                fontWeight: 500,
+                            }}>
+                                How we can help
+                            </Link>
+                        </div>
                     </div>
                 </div>
 
-                <div className="relative flex items-end justify-end">
+                <div className="relative hidden items-start justify-end lg:flex">
                     <div
                         style={{
-                            width: '100%',
-                            maxWidth: 560,
-                            minHeight: 520,
-                            borderRadius: 28,
-                            border: '1px solid var(--line)',
-                            background: 'linear-gradient(180deg, rgba(12,13,18,0.92) 0%, rgba(6,7,10,0.98) 100%)',
-                            padding: 20,
-                            boxShadow: '0 30px 120px rgba(0,0,0,0.45)',
+                            width: 700,
+                            height: 900,
+                            position: 'relative',
                             overflow: 'hidden',
                         }}
                     >
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 600 }}>
-                            Live system
-                        </div>
-                        <div style={{ position: 'relative', height: 'calc(100% - 28px)', minHeight: 460, borderRadius: 22, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)', background: '#08080c' }}>
-                            <HeroCanvas />
-                        </div>
+                        <HeroCanvas />
                     </div>
                 </div>
             </div>

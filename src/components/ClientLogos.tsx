@@ -4,22 +4,21 @@ export default function ClientLogos() {
     const doubled = [...clients, ...clients];
 
     return (
-        <section style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', padding: '18px 0', overflow: 'hidden', background: '#ffffff' }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto 12px', padding: '0 32px', fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--muted)', textTransform: 'uppercase', fontWeight: 600 }} className="px-4 sm:px-6 lg:px-8">
-                Used by teams like
-            </div>
-            <div style={{ display: 'flex', width: 'max-content', animation: 'ctmarquee 32s linear infinite', willChange: 'transform' }}>
+        <section style={{ height: 72, overflow: 'hidden', background: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ display: 'flex', width: 'max-content', height: '100%', alignItems: 'center', animation: 'ctmarquee 28s linear infinite', willChange: 'transform' }}>
                 {doubled.map((name, i) => (
                     <span
                         key={i}
                         style={{
-                            display: 'inline-block',
+                            display: 'inline-flex',
+                            alignItems: 'center',
                             marginRight: 56,
-                            fontFamily: i % 3 === 1 ? 'var(--font-mono), monospace' : 'var(--font-space), sans-serif',
-                            fontWeight: i % 4 === 0 ? 700 : i % 4 === 1 ? 500 : 600,
-                            fontSize: i % 3 === 1 ? 15 : 17,
-                            color: 'var(--muted)',
-                            opacity: 0.72,
+                            fontFamily: 'var(--font-space), sans-serif',
+                            fontWeight: 500,
+                            fontSize: 13,
+                            letterSpacing: '-0.245px',
+                            lineHeight: '21px',
+                            color: 'rgba(255,255,255,0.6)',
                             whiteSpace: 'nowrap',
                         }}
                     >

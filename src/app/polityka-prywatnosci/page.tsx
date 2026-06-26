@@ -13,60 +13,65 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
     return (
-        <main className="min-h-screen py-24 px-6">
-            <div className="max-w-4xl mx-auto">
-                <h1 className="text-3xl md:text-4xl font-medium mb-8">Polityka Prywatności</h1>
+        <main style={{ minHeight: '100vh' }}>
+            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>LEGAL</div>
+                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: 0, maxWidth: '12ch' }}>Polityka Prywatności</h1>
+                </div>
+            </section>
 
-                <div className="prose max-w-none">
-                    <p className="text-lg mb-8">
+            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+                <div style={{ maxWidth: 900 }}>
+                    <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', margin: '0 0 32px', color: 'rgba(0,0,0,0.6)' }}>
                         Polityka prywatności opisuje zasady przetwarzania przez nas informacji na Twój temat, w tym danych osobowych oraz ciasteczek, czyli tzw. cookies.
                     </p>
 
-                    <h2 className="text-2xl font-medium mt-10 mb-4">1. Informacje ogólne</h2>
-                    <p>
+                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(24px, 3vw, 43.1px)', letterSpacing: '-1.76px', lineHeight: '48.4px', margin: '40px 0 16px' }}>1. Informacje ogólne</h2>
+                    <p style={{ color: 'rgba(0,0,0,0.6)' }}>
                         Niniejsza polityka dotyczy Serwisu www, funkcjonującego pod adresem url: creativetrust.pl
                     </p>
-                    <p>
+                    <p style={{ color: 'rgba(0,0,0,0.6)' }}>
                         Operatorem serwisu oraz Administratorem danych osobowych jest: CreativeTrust Natalia Staszak Kombatantów 34/500
                     </p>
-                    <p>
+                    <p style={{ color: 'rgba(0,0,0,0.6)' }}>
                         Adres kontaktowy poczty elektronicznej operatora: office@creativetrust.pl
                     </p>
-                    <p>
+                    <p style={{ color: 'rgba(0,0,0,0.6)' }}>
                         Operator jest Administratorem Twoich danych osobowych w odniesieniu do danych podanych dobrowolnie w Serwisie.
                     </p>
-                    <p>
+                    <p style={{ color: 'rgba(0,0,0,0.6)' }}>
                         Serwis wykorzystuje dane osobowe w następujących celach:
                     </p>
-                    <ul>
+                    <ul style={{ color: 'rgba(0,0,0,0.6)' }}>
                         <li>Obsługa zapytań przez formularz</li>
                         <li>Prezentacja oferty lub informacji</li>
                     </ul>
-                    <p>
+                    <p style={{ color: 'rgba(0,0,0,0.6)' }}>
                         Serwis realizuje funkcje pozyskiwania informacji o użytkownikach i ich zachowaniu w następujący sposób:
                     </p>
-                    <ul>
+                    <ul style={{ color: 'rgba(0,0,0,0.6)' }}>
                         <li>Poprzez dobrowolnie wprowadzone w formularzach dane, które zostają wprowadzone do systemów Operatora.</li>
                         <li>Poprzez zapisywanie w urządzeniach końcowych plików cookie (tzw. „ciasteczka").</li>
                     </ul>
 
-                    <h2 className="text-2xl font-medium mt-10 mb-4">2. Wybrane metody ochrony danych stosowane przez Operatora</h2>
-                    <p>
+                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(24px, 3vw, 43.1px)', letterSpacing: '-1.76px', lineHeight: '48.4px', margin: '40px 0 16px' }}>2. Wybrane metody ochrony danych stosowane przez Operatora</h2>
+                    <p style={{ color: 'rgba(0,0,0,0.6)' }}>
                         Miejsca logowania i wprowadzania danych osobowych są chronione w warstwie transmisji (certyfikat SSL). Dzięki temu dane osobowe i dane logowania, wprowadzone na stronie, zostają zaszyfrowane w komputerze użytkownika i mogą być odczytane jedynie na docelowym serwerze.
                     </p>
-                    <p>
+                    <p style={{ color: 'rgba(0,0,0,0.6)' }}>
                         Dane osobowe przechowywane w bazie danych są zaszyfrowane w taki sposób, że jedynie posiadający Operator klucz może je odczytać. Dzięki temu dane są chronione na wypadek wykradzenia bazy danych z serwera.
                     </p>
-                    <p>
+                    <p style={{ color: 'rgba(0,0,0,0.6)' }}>
                         Hasła użytkowników są przechowywane w postaci hashowanej. Funkcja hashująca działa jednokierunkowo - nie jest możliwe odwrócenie jej działania, co stanowi obecnie współczesny standard w zakresie przechowywania haseł użytkowników.
                     </p>
-                    <p>
+                    <p style={{ color: 'rgba(0,0,0,0.6)' }}>
                         Operator okresowo zmienia swoje hasła administracyjne.
                     </p>
-                    <p>
+                    <p style={{ color: 'rgba(0,0,0,0.6)' }}>
                         W celu ochrony danych Operator regularnie wykonuje kopie bezpieczeństwa.
                     </p>
-                    <p>
+                    <p style={{ color: 'rgba(0,0,0,0.6)' }}>
                         Istotnym elementem ochrony danych jest regularna aktualizacja wszelkiego oprogramowania, wykorzystywanego przez Operatora do przetwarzania danych osobowych, co w szczególności oznacza regularne aktualizacje komponentów programistycznych.
                     </p>
 

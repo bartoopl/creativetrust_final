@@ -4,17 +4,16 @@ import CTASection from '@/components/CTASection';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Usługi — CreativeTrust | Branding, WWW, e-commerce, AI i automatyzacja',
-    description: 'Strategia marki, web design, e-commerce, marketing automation i AI — w jednym zespole. Pracujemy od diagnozy po wdrożenie i rozwój. Wyniki, nie obietnice.',
+    title: 'Usługi — CreativeTrust | WWW, e-commerce, AI i automatyzacja',
+    description: 'Web design, e-commerce, marketing automation i AI — w jednym zespole. Pracujemy od diagnozy po wdrożenie i rozwój. Wyniki, nie obietnice.',
     alternates: { canonical: `${SITE_URL}/uslugi` },
 };
 
 const services = [
-    { num: '01', title: 'Branding', href: '/uslugi/branding', description: 'Pozycjonowanie, narracja i identyfikacja wizualna, które się bronią.', tags: ['Strategia marki', 'Logo', 'Rebranding'] },
-    { num: '02', title: 'Strony WWW', href: '/uslugi/strony-www', description: 'Strony i landing pages zaprojektowane pod konwersję, SEO i szybkość.', tags: ['Strony firmowe', 'Landing pages', 'Next.js'] },
-    { num: '03', title: 'E-commerce', href: '/uslugi/e-commerce', description: 'Sklepy headless i migracje, które sprzedają i skalują się bez bólu.', tags: ['Headless', 'Migracje', 'Integracje'] },
-    { num: '04', title: 'Social Media', href: '/uslugi/social-media', description: 'Komunikacja pod zasięg, spójność i sprzedaż — nie tylko pod publikacje.', tags: ['Strategia', 'Content', 'Analityka'] },
-    { num: '05', title: 'Marketing Automation', href: '/uslugi/marketing-automation', description: 'Lejki, CRM i kampanie sterowane danymi i AI. Działają, kiedy śpisz.', tags: ['SALESmanago', 'Lead nurturing', 'AI'] },
+    { num: '01', title: 'Strony WWW', href: '/uslugi/strony-www', description: 'Strony i landing pages zaprojektowane pod konwersję, SEO i szybkość.', tags: ['Strony firmowe', 'Landing pages', 'Next.js'] },
+    { num: '02', title: 'E-commerce', href: '/uslugi/e-commerce', description: 'Sklepy headless i migracje, które sprzedają i skalują się bez bólu.', tags: ['Headless', 'Migracje', 'Integracje'] },
+    { num: '03', title: 'Social Media', href: '/uslugi/social-media', description: 'Komunikacja pod zasięg, spójność i sprzedaż — nie tylko pod publikacje.', tags: ['Strategia', 'Content', 'Analityka'] },
+    { num: '04', title: 'Marketing Automation', href: '/uslugi/marketing-automation', description: 'Lejki, CRM i kampanie sterowane danymi i AI. Działają, kiedy śpisz.', tags: ['SALESmanago', 'Lead nurturing', 'AI'] },
 ];
 
 const process = [
@@ -26,7 +25,7 @@ const process = [
 
 const faq = [
     { q: 'Od czego najlepiej zacząć?', a: 'Najczęściej od diagnozy: marka, strona, sklep albo automatyzacja. Wybór zależy od tego, gdzie dziś tracisz najwięcej potencjału.' },
-    { q: 'Czy łączycie kilka usług w jednym projekcie?', a: 'Tak. To zwykle lepszy model niż oddzielne zamawianie brandingu, WWW i komunikacji u różnych wykonawców.' },
+    { q: 'Czy łączycie kilka usług w jednym projekcie?', a: 'Tak. To zwykle lepszy model niż oddzielne zamawianie WWW, e-commerce i komunikacji u różnych wykonawców.' },
     { q: 'Jak wygląda rola AI w projektach?', a: 'AI przyspiesza research, generowanie wariantów, development i optymalizację. Decyzje zostają po stronie ludzi — wiemy, kiedy i gdzie AI realnie pomaga.' },
     { q: 'Czy możecie zacząć od audytu?', a: 'Tak. Audyt jest dobrym punktem startowym, jeśli potrzebujesz decyzji, co robić dalej i w jakiej kolejności.' },
 ];
@@ -34,64 +33,59 @@ const faq = [
 export default function ServicesPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
-
-            {/* Hero */}
-            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(60px, 8vw, 96px) 32px 80px' }} className="px-4 pb-16 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-[1fr_0.8fr] lg:gap-16">
+            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }} className="grid grid-cols-1 items-end gap-12 lg:grid-cols-[1.05fr_0.95fr]">
                     <div>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 16 }}>USŁUGI</div>
-                        <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 5.2vw, 64px)', lineHeight: 0.98, letterSpacing: '-0.045em', margin: '0 0 18px' }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>Usługi</div>
+                        <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: '0 0 18px', maxWidth: '12ch' }}>
                             Jeden zespół. Pełen zakres.
                         </h1>
-                        <p style={{ fontSize: 'clamp(14px, 1.2vw, 17px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 28px' }}>
+                        <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', color: 'rgba(255,255,255,0.6)', maxWidth: '54ch', margin: '0 0 28px' }}>
                             Strategia, design, development i automatyzacja AI w jednym procesie — bez przekazywania pałeczki między agencjami.
                         </p>
                         <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-                            <Link href="/kontakt" className="ct-cta">
+                            <Link href="/kontakt" style={{ height: 40, display: 'inline-flex', alignItems: 'center', padding: 5, borderRadius: 4, background: '#fff', boxShadow: 'inset 0 0 0 1px #fff', color: '#202124', textDecoration: 'none', fontSize: 13.2, fontWeight: 500 }}>
                                 Umów konsultację
-                                <span className="ct-badge"><span className="ct-arrows"><span>→</span><span>→</span></span></span>
+                                <span style={{ width: 30, height: 30, marginLeft: 12, borderRadius: 2, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.1)' }}>→</span>
                             </Link>
-                            <Link href="#zakres" className="ct-ghost">
-                                <span className="ct-dot" />
-                                Zobacz zakres
-                                <span className="ct-tail">↓</span>
+                            <Link href="#zakres" style={{ height: 40, display: 'inline-flex', alignItems: 'center', padding: '0 18px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.3)', color: '#fff', textDecoration: 'none', fontSize: 13.2, fontWeight: 500 }}>
+                                Zobacz zakres usług
                             </Link>
                         </div>
                     </div>
-                    <div className="grid grid-cols-1 overflow-hidden rounded-[20px] border border-[var(--line)] sm:grid-cols-2">
+                    <div className="grid grid-cols-2 overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)', borderRadius: 4 }}>
                         {[['Priorytet', 'Jasny przekaz i sprawny proces'], ['Efekt', 'Mniej tarcia, więcej wyniku'], ['Model', 'Strategia + wdrożenie'], ['Zakres', 'Brand, web, commerce, AI']].map(([label, val]) => (
-                            <div key={label} style={{ background: 'var(--panel)', padding: '20px 22px' }} className="border-b border-[var(--line)] last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.12em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 8 }}>{label}</div>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 15, lineHeight: 1.3 }}>{val}</div>
+                            <div key={label} style={{ background: 'rgba(255,255,255,0.02)', padding: '20px 22px', borderRight: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)' }} className="last:border-r-0 last:border-b-0">
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, letterSpacing: '.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 8 }}>{label}</div>
+                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 15.4, lineHeight: '24px', letterSpacing: '-0.32px' }}>{val}</div>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Services list */}
-            <section id="zakres" style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
+            <section id="zakres" style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
                     <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>ZAKRES USŁUG</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Moduły, które można uruchamiać osobno lub łączyć.</h2>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>ZAKRES USŁUG</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Moduły, które można uruchamiać osobno lub łączyć.</h2>
                     </div>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-0">
                         {services.map((s) => (
-                            <Link key={s.href} href={s.href} className="ct-service-row flex flex-col gap-4 rounded-[18px] border border-[var(--line)] bg-[var(--panel)] p-6 text-[var(--text)] no-underline lg:flex-row lg:items-center lg:justify-between lg:gap-6 lg:p-7">
+                            <Link key={s.href} href={s.href} className="ct-service-row flex flex-col gap-4 border border-[rgba(0,0,0,0.08)] bg-white p-6 text-[var(--text)] no-underline lg:flex-row lg:items-center lg:justify-between lg:gap-6 lg:p-7" style={{ borderRadius: 4, marginBottom: 16 }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 24, flex: 1, minWidth: 0 }}>
-                                    <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--accent)', flexShrink: 0 }}>{s.num}</span>
+                                    <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, color: 'rgba(0,0,0,0.4)', flexShrink: 0 }}>{s.num}</span>
                                     <div>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, marginBottom: 4 }}>{s.title}</div>
-                                        <div style={{ color: 'var(--muted)', fontSize: 14 }}>{s.description}</div>
+                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, marginBottom: 4, letterSpacing: '-0.8px' }}>{s.title}</div>
+                                        <div style={{ color: 'rgba(0,0,0,0.6)', fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px' }}>{s.description}</div>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', flexShrink: 0 }} className="lg:ml-auto">
                                     {s.tags.map(t => (
-                                        <span key={t} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--muted)', border: '1px solid var(--line)', padding: '4px 10px', borderRadius: 6 }}>{t}</span>
+                                        <span key={t} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'rgba(0,0,0,0.6)', border: '1px solid rgba(0,0,0,0.08)', padding: '4px 10px', borderRadius: 4 }}>{t}</span>
                                     ))}
                                 </div>
-                                <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 18, color: 'var(--accent)', flexShrink: 0 }}>→</span>
+                                <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 18, color: '#000', flexShrink: 0 }}>→</span>
                             </Link>
                         ))}
                     </div>

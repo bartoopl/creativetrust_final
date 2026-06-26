@@ -68,27 +68,28 @@ function StatItem({ stat }: { stat: Stat }) {
         <div
             ref={ref}
             style={{
-                border: '1px solid var(--line)',
-                borderRadius: 16,
-                padding: '16px 16px 14px',
-                background: '#ffffff',
-                minHeight: 124,
-                boxShadow: '0 12px 30px rgba(17,24,39,0.04)',
+                border: '0.5px solid rgba(255,255,255,0.08)',
+                padding: '32px 24px',
+                minHeight: 220,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                background: 'rgba(255,255,255,0.02)',
             }}
         >
             <div
                 style={{
                     fontFamily: 'var(--font-space), sans-serif',
-                    fontWeight: 700,
-                    fontSize: 'clamp(24px, 3.2vw, 36px)',
-                    letterSpacing: '-0.045em',
+                    fontWeight: 500,
+                    fontSize: 'clamp(28px, 3.4vw, 43px)',
+                    letterSpacing: '-1.44px',
                     lineHeight: 1,
-                    color: 'var(--text)',
+                    color: '#fff',
                 }}
             >
                 {display}{stat.suffix ?? ''}
             </div>
-            <div style={{ color: 'var(--muted)', fontSize: 14, marginTop: 12, lineHeight: 1.45 }}>
+            <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, lineHeight: 1.45 }}>
                 {stat.label}
             </div>
         </div>
@@ -97,27 +98,27 @@ function StatItem({ stat }: { stat: Stat }) {
 
 export default function StatsSection() {
     return (
-        <section style={{ background: '#ffffff', color: 'var(--text)', borderTop: '1px solid var(--line)' }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: '32px 32px 84px' }} className="px-4 py-10 sm:px-6 lg:px-8">
-            <div className="mb-6 flex flex-col gap-3 lg:mb-8 lg:flex-row lg:items-end lg:justify-between">
-                <div>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.16em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 8, fontWeight: 600 }}>
-                        Proof
+        <section style={{ background: '#000000', color: '#ffffff', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 80, alignItems: 'end', marginBottom: 80 }}>
+                    <div>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
+                            Dowody
+                        </div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0, color: '#ffffff' }}>
+                            Wyniki, które da się policzyć.
+                        </h2>
                     </div>
-                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 800, fontSize: 'clamp(24px, 3vw, 34px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.04, color: 'var(--text)' }}>
-                        Wyniki, które da się policzyć.
-                    </h2>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', maxWidth: '44ch', margin: 0 }}>
+                        Łączymy strategię, projekt i wdrożenie w jednym procesie, więc szybciej przechodzimy od decyzji do efektu.
+                    </p>
                 </div>
-                <p style={{ color: 'var(--muted)', fontSize: 14, maxWidth: '42ch', margin: 0, lineHeight: 1.55 }}>
-                    Łączymy strategię, projekt i wdrożenie w jednym procesie, więc szybciej przechodzimy od decyzji do efektu.
-                </p>
-            </div>
 
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-                {stats.map((stat) => (
-                    <StatItem key={stat.label} stat={stat} />
-                ))}
-            </div>
+                <div className="grid grid-cols-1 gap-0 md:grid-cols-2 xl:grid-cols-4">
+                    {stats.map((stat) => (
+                        <StatItem key={stat.label} stat={stat} />
+                    ))}
+                </div>
             </div>
         </section>
     );

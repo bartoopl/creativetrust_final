@@ -16,33 +16,31 @@ const contactDetails = [
 export default function ContactPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
-            <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(60px, 8vw, 96px) 32px 80px' }} className="px-4 pb-16 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
-
-                    {/* Left */}
+            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }} className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
                     <div>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 16 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
                             KONTAKT
                         </div>
-                        <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 5vw, 60px)', lineHeight: 0.98, letterSpacing: '-0.045em', margin: '0 0 18px' }}>
+                        <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: '0 0 18px', maxWidth: '10ch' }}>
                             Zacznijmy od rozmowy.
                         </h1>
-                        <p style={{ fontSize: 15, lineHeight: 1.55, color: 'var(--muted)', maxWidth: '48ch', margin: '0 0 36px' }}>
+                        <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', color: 'rgba(255,255,255,0.6)', maxWidth: '48ch', margin: '0 0 36px' }}>
                             30-minutowa konsultacja bez zobowiązań. Pokażemy, gdzie AI realnie skróci Twój czas i podniesie wynik — konkretnie, bez marketingowego szumu.
                         </p>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 32, borderTop: '1px solid var(--line)', paddingTop: 32 }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 32, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 32 }}>
                             {contactDetails.map(d => (
                                 <div key={d.label}>
-                                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.14em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 8 }}>{d.label}</div>
-                                    <Link href={d.href} className="ct-contact-link" style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, color: 'var(--text)', textDecoration: 'none' }}>
+                                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 8 }}>{d.label}</div>
+                                    <Link href={d.href} className="ct-contact-link" style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, color: '#fff', textDecoration: 'none', letterSpacing: '-0.8px' }}>
                                         {d.value}
                                     </Link>
                                 </div>
                             ))}
                             <div>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.14em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 8 }}>Adres</div>
-                                <p style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 15, color: 'var(--text)', margin: 0, lineHeight: 1.6 }}>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 8 }}>Adres</div>
+                                <p style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 15.4, color: '#fff', margin: 0, lineHeight: '24px', letterSpacing: '-0.32px' }}>
                                     M34 Business Center<br />
                                     ul. Kombatantów 34/500<br />
                                     66-400 Gorzów Wielkopolski
@@ -50,9 +48,9 @@ export default function ContactPage() {
                             </div>
                         </div>
 
-                        <div style={{ marginTop: 40, padding: 22, borderRadius: 18, border: '1px solid color-mix(in srgb, var(--accent) 30%, var(--line))', background: 'color-mix(in srgb, var(--accent) 8%, var(--panel))' }}>
-                            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '.1em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 10 }}>Co możesz opisać w formularzu</div>
-                            <ul style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.7, margin: 0, paddingLeft: 16 }}>
+                        <div style={{ marginTop: 40, padding: 22, borderRadius: 4, border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' }}>
+                            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, letterSpacing: '.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 10 }}>Co możesz opisać w formularzu</div>
+                            <ul style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13.5, lineHeight: 1.7, margin: 0, paddingLeft: 16 }}>
                                 <li>Co chcesz poprawić: markę, stronę, sklep, automatyzację</li>
                                 <li>Skala projektu i horyzont czasowy</li>
                                 <li>Budżet orientacyjny (opcjonalnie)</li>
@@ -60,8 +58,7 @@ export default function ContactPage() {
                         </div>
                     </div>
 
-                    {/* Right — iframe form */}
-                    <div style={{ borderRadius: 22, border: '1px solid var(--line)', background: 'var(--panel)', overflow: 'hidden', padding: 8 }} className="min-h-[560px] lg:min-h-[760px]">
+                    <div style={{ borderRadius: 4, border: '1px solid rgba(255,255,255,0.08)', background: '#fff', overflow: 'hidden', padding: 8 }} className="min-h-[560px] lg:min-h-[760px]">
                         <iframe
                             src="https://forms.creativetrust.pl/s/cmksbivfc000cm2014hk4d62s"
                             style={{ width: '100%', height: '100%', minHeight: 560, border: 'none', display: 'block' }}
@@ -69,7 +66,7 @@ export default function ContactPage() {
                         />
                     </div>
                 </div>
-            </div>
+            </section>
         </main>
     );
 }
