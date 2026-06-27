@@ -80,7 +80,7 @@ function ArrowBadge({ dark = false, label }: { dark?: boolean; label: string }) 
                     <path d="M 8.167 0 L 8.167 9.333 L 9.333 9.333 L 9.333 0 L 8.167 0 Z M 0 4.083 L 0 5.25 L 4.667 5.25 L 4.667 6.417 L 3.5 6.417 L 3.5 7.583 L 4.667 7.583 L 4.667 6.417 L 5.833 6.417 L 5.833 5.25 L 7 5.25 L 7 4.083 L 5.833 4.083 L 5.833 2.917 L 4.667 2.917 L 4.667 1.75 L 3.5 1.75 L 3.5 2.917 L 4.667 2.917 L 4.667 4.083 L 0 4.083 Z" fillRule="evenodd" />
                 </svg>
             </div>
-            <span style={{ padding: '9px 12px', fontSize: 13.2, fontWeight: 500, color: dark ? 'rgb(32,31,36)' : '#fff', whiteSpace: 'nowrap', lineHeight: '21px' }}>
+            <span style={{ padding: '9px 12px', fontSize: 13.2, fontWeight: 500, color: dark ? 'rgb(32,31,36)' : '#fff', whiteSpace: 'normal', lineHeight: '21px' }} className="lg:whitespace-nowrap">
                 {label}
             </span>
         </div>
@@ -89,9 +89,9 @@ function ArrowBadge({ dark = false, label }: { dark?: boolean; label: string }) 
 
 export default function ProcessSection() {
     return (
-        <section style={{ background: '#fff', padding: '120px 72px 0' }}>
+        <section style={{ background: '#fff', padding: '72px 16px 0' }} className="lg:px-[72px] lg:pt-[120px]">
             <div style={{ maxWidth: 1440, margin: '0 auto' }}>
-                <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(34px, 4vw, 43.1px)', fontWeight: 500, lineHeight: '48.4px', letterSpacing: '-1.76px', color: '#000', margin: '0 0 80px' }}>
+                <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(28px, 4vw, 43.1px)', fontWeight: 500, lineHeight: '1.15', letterSpacing: '-1.76px', color: '#000', margin: '0 0 40px' }} className="lg:mb-20">
                     Wybierz, od czego chcesz<br />
                     zacząć. My ogarniemy resztę.
                 </h2>
@@ -105,10 +105,10 @@ export default function ProcessSection() {
                         ))}
                     </div>
 
-                    <div className="flex-1 flex flex-col gap-20 pb-24">
+                    <div className="flex-1 flex flex-col gap-16 pb-16 lg:gap-20 lg:pb-24">
                         {lanes.map((lane, index) => (
-                            <div key={lane.label} className="flex flex-col gap-10 lg:flex-row" style={{ gap: 120 }}>
-                                <div className="flex w-full flex-none flex-col gap-10 lg:w-[416px]">
+                            <div key={lane.label} className="flex flex-col gap-8 lg:flex-row lg:gap-[120px]">
+                                <div className="flex w-full flex-none flex-col gap-6 lg:w-[416px] lg:gap-10">
                                     <div className="flex flex-col gap-2">
                                         <span style={{ fontSize: 12.2, fontWeight: 500, color: 'rgba(0,0,0,0.4)', letterSpacing: '-0.36px', lineHeight: '20px' }}>
                                             {lane.kicker}
@@ -142,7 +142,7 @@ export default function ProcessSection() {
 
                                     <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid rgba(0,0,0,0.08)', borderRight: '1px solid rgba(0,0,0,0.08)', borderLeft: '1px solid rgba(0,0,0,0.08)' }}>
                                         {lane.items.map((item) => (
-                                            <div key={item} style={{ height: 62, borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', gap: 20, padding: '0 16px' }}>
+                                            <div key={item} style={{ minHeight: 62, borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', gap: 20, padding: '12px 16px' }} className="lg:h-[62px] lg:py-0">
                                                 <Bullet />
                                                 <span style={{ fontSize: 13, fontWeight: 500, color: '#000', letterSpacing: '-0.245px', lineHeight: '21px' }}>{item}</span>
                                             </div>
@@ -154,7 +154,7 @@ export default function ProcessSection() {
                                     </Link>
                                 </div>
 
-                                <div className="flex-1 overflow-hidden rounded-[4px] bg-[rgba(0,0,0,0.04)] min-h-[300px] lg:min-h-[400px]">
+                                <div className="flex-1 overflow-hidden rounded-[4px] bg-[rgba(0,0,0,0.04)] min-h-[220px] lg:min-h-[400px]">
                                     {lane.image ? (
                                         <img src={lane.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     ) : (

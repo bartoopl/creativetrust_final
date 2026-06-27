@@ -40,9 +40,9 @@ function Bullet() {
 
 export default function Services() {
     return (
-        <section style={{ background: '#000', padding: '112px 72px 120px' }}>
+        <section style={{ background: '#000', padding: '72px 16px 80px' }} className="lg:px-[72px] lg:py-[112px]">
             <div style={{ maxWidth: 1440, margin: '0 auto' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 80 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }} className="lg:gap-20">
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
                         <span style={{ fontSize: 12.2, fontWeight: 500, color: 'rgba(255,255,255,0.4)', letterSpacing: '-0.36px', lineHeight: '20px' }}>
                             OD PROJEKTU DO WYNIKU
@@ -53,9 +53,9 @@ export default function Services() {
                         </h2>
                     </div>
 
-                    <div style={{ display: 'flex', gap: 32 }}>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4" style={{ gap: 16 }} >
                         {services.map((service) => (
-                            <div key={service.eyebrow} style={{ flex: 1, borderRadius: 4, border: service.active ? '1px solid rgba(255,255,255,0.16)' : '1px solid rgba(255,255,255,0.08)', padding: '32px 24px', display: 'flex', flexDirection: 'column', gap: 24, background: service.active ? 'rgba(255,255,255,0.04)' : 'transparent' }}>
+                            <div key={service.eyebrow} style={{ borderRadius: 4, border: service.active ? '1px solid rgba(255,255,255,0.16)' : '1px solid rgba(255,255,255,0.08)', padding: '24px 20px', display: 'flex', flexDirection: 'column', gap: 20, background: service.active ? 'rgba(255,255,255,0.04)' : 'transparent' }} className="lg:p-8">
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                                     <span style={{ fontSize: 11.4, fontWeight: 400, color: 'rgba(255,255,255,0.4)', lineHeight: '18px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                                         {service.eyebrow}

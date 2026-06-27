@@ -68,7 +68,7 @@ export default function Footer() {
                         <p style={{ fontSize: 11.4, fontWeight: 400, lineHeight: '18px', letterSpacing: '-0.24px', color: 'rgba(0,0,0,0.4)', margin: 0 }}>
                             © {year} Creativetrust. Wszelkie prawa zastrzeżone.
                         </p>
-                        <div className="flex gap-6">
+                        <div className="flex flex-col gap-2 sm:flex-row sm:gap-6">
                             <Link href="/polityka-prywatnosci" style={{ fontSize: 11.4, color: 'rgba(0,0,0,0.4)', textDecoration: 'none' }}>
                                 Polityka prywatności
                             </Link>

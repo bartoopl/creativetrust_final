@@ -14,10 +14,10 @@ export default function ClientLogos() {
     const rows = [logos, logos];
 
     return (
-        <section style={{ background: 'rgba(0,0,0,0.8)', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', height: 72, overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
+        <section style={{ background: 'rgba(0,0,0,0.8)', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', height: 56, overflow: 'hidden', display: 'flex', alignItems: 'center' }} className="lg:!h-[72px]">
             <div style={{ display: 'flex', animation: 'ctmarquee 28s linear infinite', whiteSpace: 'nowrap' }}>
                 {rows.map((row, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 64, padding: '0 32px' }}>
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 40, padding: '0 20px' }} className="lg:gap-16 lg:px-8">
                         {row.map((src) => (
                             <img key={src} src={src} alt="" style={{ height: 16, opacity: 0.5, filter: 'invert(1)' }} />
                         ))}

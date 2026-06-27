@@ -17,13 +17,13 @@ const cases = [
 
 export default function RealizacjeSection() {
     return (
-        <section style={{ background: '#fff', padding: '120px 72px' }}>
+        <section style={{ background: '#fff', padding: '72px 16px' }} className="lg:px-[72px] lg:py-[120px]">
             <div style={{ maxWidth: 1440, margin: '0 auto' }}>
-                <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(34px, 4vw, 43.1px)', fontWeight: 500, lineHeight: '48.4px', letterSpacing: '-1.76px', color: '#000', margin: '0 0 64px', textAlign: 'center' }}>
+                <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(28px, 4vw, 43.1px)', fontWeight: 500, lineHeight: '1.15', letterSpacing: '-1.76px', color: '#000', margin: '0 0 40px', textAlign: 'center' }} className="lg:mb-16">
                     Jak to wygląda w praktyce
                 </h2>
 
-                <div className="flex flex-col gap-8 lg:flex-row">
+                <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
                     {cases.map((item) => (
                         <div key={item.title} className="flex-1 overflow-hidden rounded-[4px] border border-[rgba(0,0,0,0.06)]">
                             <div style={{ height: 280, background: 'rgba(0,0,0,0.06)', overflow: 'hidden' }}>
