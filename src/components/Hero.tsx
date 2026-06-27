@@ -2,9 +2,9 @@ import Link from 'next/link';
 import HeroCanvas from './HeroCanvas';
 
 const signals = [
-    'AI-native delivery',
-    '150+ projektów',
-    '15 lat doświadczenia',
+    'Strony www',
+    'Ecommerce headless',
+    'Marketing automation',
 ];
 
 export default function Hero() {
@@ -44,7 +44,7 @@ export default function Hero() {
                                 color: '#ffffff',
                             }}
                         >
-                            Web, e-commerce i automatyzacje, które dowożą wynik.
+                            Projekty cyfrowe, które<br />działają biznesowo.
                         </h1>
 
                         <p style={{
@@ -100,7 +100,7 @@ export default function Hero() {
                                 fontSize: 13.2,
                                 fontWeight: 500,
                             }}>
-                                How we can help
+                                Jak możemy pomóc
                             </Link>
                         </div>
                     </div>

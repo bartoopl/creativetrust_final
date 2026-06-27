@@ -1,132 +1,47 @@
 import Link from 'next/link';
 
-const contactPillars = [
-    '30-minutowa konsultacja',
-    'Diagnoza kanałów i procesów',
-    'Plan kolejnych kroków bez zobowiązań',
-];
+function ArrowBadge() {
+    return (
+        <div style={{ display: 'flex', alignItems: 'stretch', height: 40, borderRadius: 4, background: '#fff', cursor: 'pointer' }}>
+            <div style={{ width: 30, margin: '5px 0 5px 5px', borderRadius: 2, background: 'rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="9" height="9" viewBox="0 0 9.333 9.333" fill="rgb(0,0,0)">
+                    <path d="M 8.167 0 L 8.167 9.333 L 9.333 9.333 L 9.333 0 L 8.167 0 Z M 0 4.083 L 0 5.25 L 4.667 5.25 L 4.667 6.417 L 3.5 6.417 L 3.5 7.583 L 4.667 7.583 L 4.667 6.417 L 5.833 6.417 L 5.833 5.25 L 7 5.25 L 7 4.083 L 5.833 4.083 L 5.833 2.917 L 4.667 2.917 L 4.667 1.75 L 3.5 1.75 L 3.5 2.917 L 4.667 2.917 L 4.667 4.083 L 0 4.083 Z" fillRule="evenodd" />
+                </svg>
+            </div>
+            <span style={{ padding: '9px 12px', fontSize: 13.2, fontWeight: 500, color: 'rgb(32,31,36)', whiteSpace: 'nowrap', lineHeight: '21px' }}>
+                Umów bezpłatną konsultację
+            </span>
+        </div>
+    );
+}
 
 export default function CTASection() {
     return (
-        <section id="kontakt" style={{ background: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-            <div
-                style={{
-                    maxWidth: 1440,
-                    margin: '0 auto',
-                    color: '#fff',
-                }}
-                className="ct-shell-xl"
-            >
-                <div
-                    style={{
-                        alignItems: 'start',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        borderRadius: 4,
-                        background: 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0))',
-                        position: 'relative',
-                        overflow: 'hidden',
-                    }}
-                    className="grid grid-cols-1 gap-10 p-6 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:p-12"
-                >
-                    <div aria-hidden="true" style={{ position: 'absolute', inset: 'auto -12% -18% auto', width: 520, height: 520, borderRadius: '50%', background: 'radial-gradient(circle, rgba(86,196,219,0.12) 0%, rgba(86,196,219,0.04) 34%, transparent 72%)', pointerEvents: 'none' }} />
-                    <div style={{ position: 'relative' }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
-                            Porozmawiajmy
-                        </div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: '0 0 16px', maxWidth: '14ch', color: '#ffffff' }}>
-                            Chcesz uporządkować produkt i przyspieszyć wzrost?
-                        </h2>
-                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', maxWidth: '44ch', margin: '0 0 22px' }}>
-                            Zacznijmy od krótkiej konsultacji. Pokażemy, gdzie masz największą dźwignię w brandzie, webie, e-commerce i automatyzacji.
-                        </p>
-                        <div className="flex flex-wrap gap-3">
-                            <Link href="/kontakt" style={{
-                                height: 40,
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                padding: 5,
-                                borderRadius: 4,
-                                background: '#fff',
-                                boxShadow: 'inset 0 0 0 1px #fff',
-                                color: '#202124',
-                                textDecoration: 'none',
-                                fontSize: 13.2,
-                                fontWeight: 500,
-                            }}>
-                                <span style={{ padding: '0 12px' }}>Umów konsultację</span>
-                                <span style={{
-                                    width: 30,
-                                    height: 30,
-                                    borderRadius: 2,
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    background: 'rgba(0,0,0,0.1)',
-                                    fontSize: 14,
-                                    lineHeight: 1,
-                                }}>
-                                    →
-                                </span>
-                            </Link>
-                            <Link href="/portfolio" style={{
-                                height: 40,
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                padding: '0 18px',
-                                borderRadius: 4,
-                                border: '1px solid rgba(255,255,255,0.3)',
-                                color: '#fff',
-                                background: 'transparent',
-                                textDecoration: 'none',
-                                fontSize: 13.2,
-                                fontWeight: 500,
-                            }}>
-                                Zobacz realizacje
-                            </Link>
-                        </div>
-                    </div>
-
-                    <div style={{ position: 'relative' }}>
-                        <div style={{ borderRadius: 4, border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)', padding: 24 }}>
-                            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 16, fontWeight: 500 }}>
-                                Co dostajesz
-                            </div>
-                            <div style={{ display: 'grid', gap: 14 }}>
-                                {contactPillars.map((item, index) => (
-                                    <div key={item} style={{
-                                        display: 'grid',
-                                        gridTemplateColumns: '28px 1fr',
-                                        gap: 12,
-                                        alignItems: 'start',
-                                        paddingBottom: 14,
-                                        borderBottom: index === contactPillars.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.08)',
-                                    }}>
-                                        <div style={{ color: '#56C4DB', fontWeight: 500, fontFamily: 'var(--font-mono), monospace' }}>
-                                            0{index + 1}
-                                        </div>
-                                        <div style={{ color: 'rgba(255,255,255,0.6)', lineHeight: '24px', letterSpacing: '-0.32px' }}>
-                                            {item}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+        <section style={{ background: '#000', overflow: 'hidden', position: 'relative' }}>
+            <img src="/design-handoff-v7/cad2d7d59470aff2.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} />
+            <div style={{ position: 'relative', maxWidth: 1440, margin: '0 auto', padding: '200px 72px 0' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 32, paddingBottom: 64 }}>
+                    <span style={{ fontSize: 12.2, fontWeight: 500, color: 'rgba(255,255,255,0.4)', letterSpacing: '-0.36px', lineHeight: '20px' }}>
+                        Łączymy myślenie biznesowe z prędkością AI
+                    </span>
+                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(38px, 4.8vw, 60.8px)', fontWeight: 500, lineHeight: '66px', letterSpacing: '-2.4px', color: '#fff', margin: 0, whiteSpace: 'nowrap' }}>
+                        Zacznij budować digitalnie.
+                    </h2>
+                    <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', color: 'rgba(255,255,255,0.6)', maxWidth: 640, margin: 0 }}>
+                        Senior specjaliści i narzędzia AI - realizujemy projekty szybciej bez obniżania poprzeczki. Sprawdźmy razem, co możemy zrobić dla Twojego biznesu.
+                    </p>
+                    <Link href="/kontakt" style={{ textDecoration: 'none' }}>
+                        <ArrowBadge />
+                    </Link>
                 </div>
-
-                <div style={{ marginTop: 24, overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                    <div style={{ display: 'flex', width: 'max-content', gap: 24, padding: '18px 0', animation: 'ctmarquee 28s linear infinite', color: 'rgba(255,255,255,0.4)', fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '.5px', textTransform: 'uppercase' }}>
-                        <span>150+ projektów</span>
-                        <span>•</span>
-                        <span>15 lat doświadczenia</span>
-                        <span>•</span>
-                        <span>AI-native delivery</span>
-                        <span>•</span>
-                        <span>150+ projektów</span>
-                        <span>•</span>
-                        <span>15 lat doświadczenia</span>
-                        <span>•</span>
-                        <span>AI-native delivery</span>
+            </div>
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', height: 58, overflow: 'hidden', display: 'flex', alignItems: 'center', background: 'rgba(0,0,0,0.3)' }}>
+                <div style={{ display: 'flex', animation: 'ctmarquee 25s linear infinite', whiteSpace: 'nowrap' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '0 16px', fontSize: 12.2, fontWeight: 500, color: 'rgba(255,255,255,0.6)', letterSpacing: '-0.36px' }}>
+                        <span>Strony www</span><span style={{ opacity: 0.4 }}>·</span><span>Ecommerce headless</span><span style={{ opacity: 0.4 }}>·</span><span>Marketing automation</span><span style={{ opacity: 0.4 }}>·</span><span>Social media</span><span style={{ opacity: 0.4 }}>·</span><span>Medusa.js</span><span style={{ opacity: 0.4 }}>·</span><span>Projekty z wynikami</span><span style={{ opacity: 0.4 }}>·</span><span>Prędkość AI w wdrożeniach</span><span style={{ opacity: 0.4 }}>·</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '0 16px', fontSize: 12.2, fontWeight: 500, color: 'rgba(255,255,255,0.6)', letterSpacing: '-0.36px' }}>
+                        <span>Strony www</span><span style={{ opacity: 0.4 }}>·</span><span>Ecommerce headless</span><span style={{ opacity: 0.4 }}>·</span><span>Marketing automation</span><span style={{ opacity: 0.4 }}>·</span><span>Social media</span><span style={{ opacity: 0.4 }}>·</span><span>Medusa.js</span><span style={{ opacity: 0.4 }}>·</span><span>Projekty z wynikami</span><span style={{ opacity: 0.4 }}>·</span><span>Prędkość AI w wdrożeniach</span><span style={{ opacity: 0.4 }}>·</span>
                     </div>
                 </div>
             </div>

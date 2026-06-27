@@ -1,47 +1,167 @@
-const steps = [
-    { num: '01', title: 'Diagnoza', desc: 'Audyt, dane, cele. AI przyspiesza research i analizę konkurencji.' },
-    { num: '02', title: 'Projekt', desc: 'Strategia i design. Warianty generujemy i testujemy szybciej niż kiedykolwiek.' },
-    { num: '03', title: 'Wdrożenie', desc: 'Development z asystą AI. Krótszy time-to-market, mniej błędów.' },
-    { num: '04', title: 'Rozwój', desc: 'Optymalizacja w pętli. Modele uczą się na Twoich danych i wynikach.', featured: true },
+import Link from 'next/link';
+
+const lanes = [
+    {
+        label: 'Strony www',
+        kicker: 'Projektowanie i wdrożenie z myślą o wynikach',
+        title: 'Strony, które pracują na Twój biznes',
+        text: 'Nie robimy stron dla samego robienia stron. Każdy projekt zaczynamy od zrozumienia Twojego biznesu - a kończymy na wdrożeniu, które generuje wyniki.',
+        items: [
+            'Strony wizytówkowe i landing page',
+            'Rozbudowane platformy contentowe',
+            'Redesign i migracje',
+            'UX i optymalizacja konwersji',
+        ],
+        button: 'Strony www',
+        href: '/uslugi/strony-www',
+        image: '/design-handoff-v7/f8a02b73f518f6ea.jpg',
+    },
+    {
+        label: 'Ecommerce',
+        kicker: 'Headless ecommerce bez kompromisów',
+        title: 'Sklep, który skaluje razem z Twoim biznesem',
+        text: 'Medusa.js daje Ci pełną kontrolę nad kodem, danymi i UX - bez comiesięcznych opłat za platformę i bez ograniczeń, gdy chcesz rosnąć.',
+        items: [
+            'Sklepy headless na Medusa.js',
+            'Integracje z ERP, CRM, WMS',
+            'E-commerce management',
+            'Migracje z Shopify, WooCommerce',
+        ],
+        button: 'Ecommerce headless',
+        href: '/uslugi/e-commerce',
+    },
+    {
+        label: 'Marketing automation',
+        kicker: 'Procesy, które pracują za Ciebie',
+        title: 'Automatyzacja, która przekłada się na sprzedaż',
+        text: 'Konfigurujemy automatyzacje, które oszczędzają czas i zwiększają przychody - od welcome sequence po zaawansowany lead scoring i wielokanałowe kampanie.',
+        items: [
+            'Wdrożenie narzędzi automatyzacji',
+            'Budowa sekwencji i scenariuszy',
+            'Segmentacja i personalizacja',
+            'Raportowanie i optymalizacja',
+        ],
+        button: 'Marketing automation',
+        href: '/uslugi/marketing-automation',
+    },
+    {
+        label: 'Social media',
+        kicker: 'Content z głową, nie dla samego contentu',
+        title: 'Social media, które buduje markę i sprzedaje',
+        text: 'Nie robimy postów dla postów. Każdy content jest podporządkowany strategii i mierzalnym celom biznesowym - zasięg, konwersja, lojalność.',
+        items: [
+            'Strategia i harmonogram contentowy',
+            'Tworzenie treści - tekst, grafika, video',
+            'Community management',
+            'Reklamy w social media',
+        ],
+        button: 'Social media',
+        href: '/uslugi/social-media',
+    },
 ];
+
+function Bullet() {
+    return (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="rgb(0,0,0)">
+            <rect x="0" y="0" width="20" height="2" />
+            <rect x="0" y="4" width="12" height="2" />
+            <rect x="0" y="8" width="16" height="2" />
+            <rect x="0" y="12" width="10" height="2" />
+            <rect x="0" y="16" width="14" height="2" />
+        </svg>
+    );
+}
+
+function ArrowBadge({ dark = false, label }: { dark?: boolean; label: string }) {
+    return (
+        <div style={{ display: 'flex', alignItems: 'stretch', height: 40, borderRadius: 4, background: dark ? '#fff' : '#000', cursor: 'pointer' }}>
+            <div style={{ width: 30, margin: '5px 0 5px 5px', borderRadius: 2, background: dark ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="9" height="9" viewBox="0 0 9.333 9.333" fill={dark ? 'rgb(0,0,0)' : 'rgb(255,255,255)'}>
+                    <path d="M 8.167 0 L 8.167 9.333 L 9.333 9.333 L 9.333 0 L 8.167 0 Z M 0 4.083 L 0 5.25 L 4.667 5.25 L 4.667 6.417 L 3.5 6.417 L 3.5 7.583 L 4.667 7.583 L 4.667 6.417 L 5.833 6.417 L 5.833 5.25 L 7 5.25 L 7 4.083 L 5.833 4.083 L 5.833 2.917 L 4.667 2.917 L 4.667 1.75 L 3.5 1.75 L 3.5 2.917 L 4.667 2.917 L 4.667 4.083 L 0 4.083 Z" fillRule="evenodd" />
+                </svg>
+            </div>
+            <span style={{ padding: '9px 12px', fontSize: 13.2, fontWeight: 500, color: dark ? 'rgb(32,31,36)' : '#fff', whiteSpace: 'nowrap', lineHeight: '21px' }}>
+                {label}
+            </span>
+        </div>
+    );
+}
 
 export default function ProcessSection() {
     return (
-        <section id="podejscie" style={{ background: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
-            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-28">
-                    <div style={{ alignSelf: 'start' }} className="lg:sticky lg:top-24">
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
-                        Podejście
-                        </div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0, color: '#000000', maxWidth: '12ch' }}>
-                        Proces napędzany przez AI.
-                        </h2>
-                        <p style={{ color: 'rgba(0,0,0,0.6)', fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', margin: '14px 0 0', maxWidth: '34ch' }}>
-                        Pracujemy w pętli. AI przyspiesza każdy etap, ale decyzje zostają po stronie ludzi.
-                        </p>
+        <section style={{ background: '#fff', padding: '120px 72px 0' }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto' }}>
+                <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(34px, 4vw, 43.1px)', fontWeight: 500, lineHeight: '48.4px', letterSpacing: '-1.76px', color: '#000', margin: '0 0 80px' }}>
+                    Wybierz, od czego chcesz<br />
+                    zacząć. My ogarniemy resztę.
+                </h2>
+
+                <div className="flex items-start gap-8">
+                    <div className="sticky top-24 hidden w-[224px] flex-none flex-col gap-1 lg:flex">
+                        {lanes.map((lane, index) => (
+                            <div key={lane.label} style={{ padding: '12px 0 12px 12px', fontSize: 12.2, fontWeight: 500, color: index === 0 ? '#000' : 'rgba(0,0,0,0.4)', letterSpacing: '-0.36px', lineHeight: '20px', borderLeft: index === 0 ? '2px solid #000' : '2px solid transparent' }}>
+                                {lane.label}
+                            </div>
+                        ))}
                     </div>
 
-                    <div style={{ display: 'grid' }}>
-                        {steps.map((step, index) => (
-                            <div key={step.num} style={{
-                                display: 'grid',
-                                gridTemplateColumns: '120px 1fr',
-                                gap: 24,
-                                padding: '28px 0',
-                                borderTop: index === 0 ? '1px solid rgba(0,0,0,0.08)' : '1px solid rgba(0,0,0,0.08)',
-                                alignItems: 'start',
-                            }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, color: 'rgba(0,0,0,0.4)', letterSpacing: '.5px', textTransform: 'uppercase', fontWeight: 500 }}>
-                                    {step.num}
+                    <div className="flex-1 flex flex-col gap-20 pb-24">
+                        {lanes.map((lane, index) => (
+                            <div key={lane.label} className="flex flex-col gap-10 lg:flex-row" style={{ gap: 120 }}>
+                                <div className="flex w-full flex-none flex-col gap-10 lg:w-[416px]">
+                                    <div className="flex flex-col gap-2">
+                                        <span style={{ fontSize: 12.2, fontWeight: 500, color: 'rgba(0,0,0,0.4)', letterSpacing: '-0.36px', lineHeight: '20px' }}>
+                                            {lane.kicker}
+                                        </span>
+                                        <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 35.6, fontWeight: 500, lineHeight: '39.6px', letterSpacing: '-1.44px', color: '#000', margin: 0 }}>
+                                            {lane.title}
+                                        </h3>
+                                    </div>
+
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+                                        <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: 'rgba(0,0,0,0.6)', margin: 0 }}>
+                                            {lane.text}
+                                        </p>
+
+                                        {index === 0 && (
+                                            <div style={{ borderLeft: '1px solid rgba(0,0,0,0.08)', paddingLeft: 25, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                                                <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: '#000', margin: 0 }}>
+                                                    Firmy z dobrze zaprojektowanym UX konwertują nawet 3× lepiej.
+                                                </p>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                                    <span style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.28px', color: 'rgba(0,0,0,0.4)' }}>
+                                                        Forrester Research / UX ROI Study
+                                                    </span>
+                                                    <svg width="11" height="11" viewBox="0 0 10.667 10.667" fill="rgb(0,0,0)">
+                                                        <path d="M 9.333 0 L 9.333 10.667 L 10.667 10.667 L 10.667 0 L 9.333 0 Z M 0 4.667 L 0 6 L 5.333 6 L 5.333 7.333 L 4 7.333 L 4 8.667 L 5.333 8.667 L 5.333 7.333 L 6.667 7.333 L 6.667 6 L 8 6 L 8 4.667 L 6.667 4.667 L 6.667 3.333 L 5.333 3.333 L 5.333 2 L 4 2 L 4 3.333 L 5.333 3.333 L 5.333 4.667 L 0 4.667 Z" fillRule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid rgba(0,0,0,0.08)', borderRight: '1px solid rgba(0,0,0,0.08)', borderLeft: '1px solid rgba(0,0,0,0.08)' }}>
+                                        {lane.items.map((item) => (
+                                            <div key={item} style={{ height: 62, borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', gap: 20, padding: '0 16px' }}>
+                                                <Bullet />
+                                                <span style={{ fontSize: 13, fontWeight: 500, color: '#000', letterSpacing: '-0.245px', lineHeight: '21px' }}>{item}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <Link href={lane.href} style={{ textDecoration: 'none', alignSelf: 'flex-start' }}>
+                                        <ArrowBadge label={lane.button} />
+                                    </Link>
                                 </div>
-                                <div style={{ display: 'grid', gap: 8 }}>
-                                    <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, lineHeight: '24px', letterSpacing: '-0.8px', margin: 0, color: '#000000' }}>
-                                        {step.title}
-                                    </h3>
-                                    <p style={{ color: 'rgba(0,0,0,0.6)', fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', margin: 0, maxWidth: '42ch' }}>
-                                        {step.desc}
-                                    </p>
+
+                                <div className="flex-1 overflow-hidden rounded-[4px] bg-[rgba(0,0,0,0.04)] min-h-[300px] lg:min-h-[400px]">
+                                    {lane.image ? (
+                                        <img src={lane.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                    ) : (
+                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(0,0,0,0.2)', fontFamily: 'monospace', fontSize: 12 }}>
+                                            zdjęcie / screenshoty projektu
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}
