@@ -44,6 +44,34 @@ main { isolation: isolate; }
 
 h1, h2, h3, h4, h5, h6 { line-height: 1.1; }
 
+/* ===== Responsive shells ===== */
+.ct-shell-xl {
+  padding: clamp(72px, 10vw, 120px) clamp(16px, 4vw, 72px) !important;
+}
+
+.ct-shell-lg {
+  padding: clamp(56px, 8vw, 96px) clamp(16px, 4vw, 72px) !important;
+}
+
+.ct-shell-sm {
+  padding: clamp(18px, 4vw, 32px) clamp(16px, 4vw, 72px) !important;
+}
+
+.ct-shell-xs {
+  padding: clamp(12px, 3vw, 18px) clamp(16px, 4vw, 72px) !important;
+}
+
+.ct-header-shell {
+  padding: 0 clamp(16px, 4vw, 72px) !important;
+  height: 64px !important;
+}
+
+@media (min-width: 1024px) {
+  .ct-header-shell {
+    height: 72px !important;
+  }
+}
+
 /* ===== Primary Button (.ct-cta) ===== */
 .ct-cta {
   position: relative; overflow: hidden;

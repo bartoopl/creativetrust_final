@@ -33,7 +33,7 @@ export default function AboutPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
             <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
                         O NAS
                     </div>
@@ -56,7 +56,7 @@ export default function AboutPage() {
             </section>
 
             <section style={{ borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', background: '#000' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '32px 72px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-sm">
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
                         {stats.map(([val, label]) => (
                             <div key={label} style={{ borderLeft: '1px solid rgba(255,255,255,0.08)', paddingLeft: 20 }}>
@@ -69,7 +69,7 @@ export default function AboutPage() {
             </section>
 
             <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ marginBottom: 48 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>CO NAS PROWADZI</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', letterSpacing: '-1.76px', margin: 0, lineHeight: '48.4px' }}>Zasady, które trzymają projekt w ryzach.</h2>
@@ -87,7 +87,7 @@ export default function AboutPage() {
             </section>
 
             <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ marginBottom: 48 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>NASZA DROGA</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', letterSpacing: '-1.76px', margin: 0, lineHeight: '48.4px' }}>

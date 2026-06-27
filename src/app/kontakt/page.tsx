@@ -17,7 +17,7 @@ export default function ContactPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
             <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }} className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
                     <div>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
                             KONTAKT

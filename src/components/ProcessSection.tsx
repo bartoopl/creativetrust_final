@@ -8,9 +8,9 @@ const steps = [
 export default function ProcessSection() {
     return (
         <section id="podejscie" style={{ background: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
-            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '0.95fr 1.05fr', gap: 120, alignItems: 'start' }}>
-                    <div style={{ position: 'sticky', top: 96, alignSelf: 'start' }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
+                <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-28">
+                    <div style={{ alignSelf: 'start' }} className="lg:sticky lg:top-24">
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
                         Podejście
                         </div>

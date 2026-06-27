@@ -52,7 +52,7 @@ export default function EcommercePage() {
     return (
         <main style={{ minHeight: '100vh' }}>
             <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
                         E-COMMERCE
                     </div>
@@ -72,7 +72,7 @@ export default function EcommercePage() {
             </section>
 
             <section style={{ borderTop: '1px solid rgba(255,255,255,0.08)', background: '#000', color: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '32px 72px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-sm">
                     <div style={{ display: 'grid', gap: 24 }} className="grid-cols-2 md:grid-cols-4">
                         {stats.map(s => (
                             <div key={s.value} style={{ borderLeft: '1px solid rgba(255,255,255,0.08)', paddingLeft: 20 }}>
@@ -85,7 +85,7 @@ export default function EcommercePage() {
             </section>
 
             <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ marginBottom: 48 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>ZAKRES</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Typy projektów e-commerce.</h2>
@@ -108,7 +108,7 @@ export default function EcommercePage() {
             </section>
 
             <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ marginBottom: 48 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>STANDARD</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Co dostajesz w każdym sklepie.</h2>
@@ -125,7 +125,7 @@ export default function EcommercePage() {
             </section>
 
             <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ marginBottom: 40 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>TECH STACK</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Platformy i integracje, które obsługujemy.</h2>
@@ -139,7 +139,7 @@ export default function EcommercePage() {
             </section>
 
             <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ marginBottom: 48 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>PROCES</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Od konceptu do sprzedającego sklepu.</h2>

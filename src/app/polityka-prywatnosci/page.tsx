@@ -15,13 +15,13 @@ export default function PrivacyPolicyPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
             <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>LEGAL</div>
                     <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: 0, maxWidth: '12ch' }}>Polityka Prywatności</h1>
                 </div>
             </section>
 
-            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                 <div style={{ maxWidth: 900 }}>
                     <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', margin: '0 0 32px', color: 'rgba(0,0,0,0.6)' }}>
                         Polityka prywatności opisuje zasady przetwarzania przez nas informacji na Twój temat, w tym danych osobowych oraz ciasteczek, czyli tzw. cookies.

@@ -10,7 +10,7 @@ const primaryServices = [
 export default function Services() {
     return (
         <section id="uslugi" style={{ background: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)', color: '#ffffff' }}>
-            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                 <div className="mb-10 flex flex-col gap-4 lg:mb-12 lg:flex-row lg:items-end lg:justify-between" style={{ marginBottom: 80 }}>
                     <div>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>

@@ -62,7 +62,7 @@ export default async function AuthorPage({
     return (
         <main className="min-h-screen bg-white">
             <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
                         Autor
                     </div>
@@ -71,7 +71,7 @@ export default async function AuthorPage({
                     </h1>
                 </div>
             </section>
-            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                 <div style={{ maxWidth: 900, margin: '0 auto' }}>
                 <Link href="/blog" className="text-gray-600 mb-6 sm:mb-8 flex items-center">
                     <svg

@@ -34,7 +34,7 @@ export default function ServicesPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
             <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }} className="grid grid-cols-1 items-end gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl grid grid-cols-1 items-end gap-12 lg:grid-cols-[1.05fr_0.95fr]">
                     <div>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>Usługi</div>
                         <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: '0 0 18px', maxWidth: '12ch' }}>
@@ -65,7 +65,7 @@ export default function ServicesPage() {
             </section>
 
             <section id="zakres" style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ marginBottom: 48 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>ZAKRES USŁUG</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Moduły, które można uruchamiać osobno lub łączyć.</h2>

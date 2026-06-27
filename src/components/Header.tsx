@@ -53,7 +53,7 @@ export default function Header() {
             background: '#000000',
             borderBottom: '1px solid rgba(255,255,255,0.08)',
         }}>
-            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 72px', height: 72 }} className="flex items-center justify-between gap-6">
+            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-header-shell flex items-center justify-between gap-6">
                 <Logo />
 
                 <nav className="hidden items-center gap-0 md:flex">
@@ -141,11 +141,11 @@ export default function Header() {
                 <div
                     style={{
                         position: 'fixed',
-                        inset: '72px 0 0 0',
+                        inset: '64px 0 0 0',
                         background: 'rgba(0,0,0,0.98)',
                         zIndex: 130,
                         padding: '24px 32px',
-                        maxHeight: 'calc(100dvh - 72px)',
+                        maxHeight: 'calc(100dvh - 64px)',
                         overflowY: 'auto',
                         borderTop: '1px solid rgba(255,255,255,0.08)',
                     }}

@@ -99,8 +99,8 @@ function StatItem({ stat }: { stat: Stat }) {
 export default function StatsSection() {
     return (
         <section style={{ background: '#000000', color: '#ffffff', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 80, alignItems: 'end', marginBottom: 80 }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
+                <div className="mb-12 grid grid-cols-1 items-end gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:mb-20">
                     <div>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
                             Dowody

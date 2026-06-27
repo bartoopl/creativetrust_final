@@ -4,7 +4,7 @@ export default function ClientLogos() {
     const doubled = [...clients, ...clients];
 
     return (
-        <section style={{ height: 72, overflow: 'hidden', background: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <section style={{ height: 64, overflow: 'hidden', background: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)' }} className="lg:!h-[72px]">
             <div style={{ display: 'flex', width: 'max-content', height: '100%', alignItems: 'center', animation: 'ctmarquee 28s linear infinite', willChange: 'transform' }}>
                 {doubled.map((name, i) => (
                     <span

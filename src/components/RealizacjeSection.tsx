@@ -54,7 +54,7 @@ export default function RealizacjeSection() {
 
     return (
         <section id="realizacje" style={{ background: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
-            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                 <div className="mb-10 flex flex-col gap-4 lg:mb-12 lg:flex-row lg:items-end lg:justify-between">
                     <div>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>

@@ -86,7 +86,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
         return (
             <main className="min-h-screen bg-white">
                 <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                    <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
+                    <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
                             Portfolio
                         </div>
@@ -95,7 +95,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                         </h1>
                     </div>
                 </section>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div className="h-96 w-full animate-pulse bg-gray-200" style={{ borderRadius: 4 }}></div>
                 </div>
             </main>
@@ -116,7 +116,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
     return (
         <main className="min-h-screen bg-white">
             <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
                         Realizacje
                     </div>
@@ -125,7 +125,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                     </h1>
                 </div>
             </section>
-            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                 <div style={{ maxWidth: 1800, margin: '0 auto' }}>
                 <Link href="/portfolio" className="text-gray-600 mb-12 block flex items-center">
                     <svg

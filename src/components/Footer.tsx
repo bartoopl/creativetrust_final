@@ -38,7 +38,7 @@ export default function Footer() {
 
     return (
         <footer style={{ background: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
-            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px 0' }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                 <h2 style={{
                     fontFamily: 'var(--font-space), sans-serif',
                     fontWeight: 500,
@@ -101,17 +101,17 @@ export default function Footer() {
                 <div style={{ height: 1, background: 'rgba(0,0,0,0.08)', marginBottom: 60 }} />
 
                 <div style={{ display: 'flex', gap: 32, paddingBottom: 60, flexWrap: 'wrap' }}>
-                    <div style={{ width: 416, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+                    <div style={{ width: '100%', maxWidth: 416, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
                         <p style={{ fontSize: 13, fontWeight: 500, lineHeight: '21px', letterSpacing: '-0.245px', color: '#000000', margin: 0 }}>
                             Zapisz się po aktualizacje AI i webowe
                         </p>
-                        <div style={{ display: 'flex', height: 44, gap: 0, position: 'relative' }}>
+                        <div className="flex w-full flex-col gap-3 sm:relative sm:flex-row sm:gap-0" style={{ minHeight: 44 }}>
                             <div style={{ flex: 1, borderRadius: 2, boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.08)', background: '#ffffff', display: 'flex', alignItems: 'center', padding: '0 16px' }}>
                                 <span style={{ fontSize: 14, fontWeight: 400, color: 'rgba(0,0,0,0.4)', lineHeight: '19.2px' }}>
                                     E-mail*
                                 </span>
                             </div>
-                            <div style={{ position: 'absolute', right: 0, top: 0, height: 44, padding: '0 16px', borderRadius: 2, background: 'rgba(0,0,0,0.04)', display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                            <div style={{ height: 44, padding: '0 16px', borderRadius: 2, background: 'rgba(0,0,0,0.04)', display: 'flex', alignItems: 'center', cursor: 'pointer' }} className="sm:absolute sm:right-0 sm:top-0">
                                 <span style={{ fontSize: 13.2, fontWeight: 500, color: 'rgb(32,31,36)', lineHeight: '14px' }}>
                                     Subskrybuj
                                 </span>

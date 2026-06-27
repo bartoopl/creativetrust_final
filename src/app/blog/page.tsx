@@ -32,7 +32,7 @@ export default async function BlogPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
             <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>BLOG</div>
                     <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: '0 0 14px', maxWidth: '12ch' }}>
                         Wiedza bez ogólników.
@@ -45,7 +45,7 @@ export default async function BlogPage() {
 
             {categories.length > 0 && (
                 <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', borderBottom: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                        <div style={{ maxWidth: 1440, margin: '0 auto', padding: '18px 72px', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                        <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-sm flex gap-2 flex-wrap">
                         <Link href="/blog" style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, padding: '7px 14px', borderRadius: 4, border: '1px solid rgba(0,0,0,0.15)', background: 'rgba(0,0,0,0.04)', color: '#000', textDecoration: 'none' }}>Wszystkie</Link>
                         {categories.map((cat: any) => (
                             <Link key={cat._id} href={`/blog/kategoria/${cat.slug.current}`} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, padding: '7px 14px', borderRadius: 4, border: '1px solid rgba(0,0,0,0.08)', background: 'transparent', color: 'rgba(0,0,0,0.6)', textDecoration: 'none' }}>
@@ -56,7 +56,7 @@ export default async function BlogPage() {
                 </div>
             )}
 
-            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
 
                 {mainPost && (
                     <div style={{ marginBottom: 64 }}>

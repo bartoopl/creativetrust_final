@@ -13,22 +13,21 @@ export default function CTASection() {
                 style={{
                     maxWidth: 1440,
                     margin: '0 auto',
-                    padding: '112px 72px 0',
                     color: '#fff',
                 }}
+                className="ct-shell-xl"
             >
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1.1fr 0.9fr',
-                    gap: 80,
-                    alignItems: 'start',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    borderRadius: 4,
-                    padding: '48px 40px',
-                    background: 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0))',
-                    position: 'relative',
-                    overflow: 'hidden',
-                }}>
+                <div
+                    style={{
+                        alignItems: 'start',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        borderRadius: 4,
+                        background: 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0))',
+                        position: 'relative',
+                        overflow: 'hidden',
+                    }}
+                    className="grid grid-cols-1 gap-10 p-6 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:p-12"
+                >
                     <div aria-hidden="true" style={{ position: 'absolute', inset: 'auto -12% -18% auto', width: 520, height: 520, borderRadius: '50%', background: 'radial-gradient(circle, rgba(86,196,219,0.12) 0%, rgba(86,196,219,0.04) 34%, transparent 72%)', pointerEvents: 'none' }} />
                     <div style={{ position: 'relative' }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>

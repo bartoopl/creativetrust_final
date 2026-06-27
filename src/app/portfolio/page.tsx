@@ -44,7 +44,7 @@ export default function PortfolioPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
             <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto', padding: '112px 72px 120px' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>REALIZACJE</div>
                     <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: '0 0 14px', maxWidth: '12ch' }}>
                     150+ projektów. Każdy inny.
@@ -57,7 +57,7 @@ export default function PortfolioPage() {
 
             {categories.length > 0 && (
                 <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', borderBottom: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                    <div style={{ maxWidth: 1440, margin: '0 auto', padding: '18px 72px', display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+                    <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-sm flex gap-2 flex-wrap items-center">
                         {[{ _id: 'all', title: 'Wszystkie', slug: { current: 'all' } }, ...categories].map(cat => (
                             <button
                                 key={cat._id}
@@ -77,7 +77,7 @@ export default function PortfolioPage() {
             )}
 
             {/* Grid */}
-            <div style={{ maxWidth: 1440, margin: '0 auto', padding: '120px 72px' }}>
+            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                 {loading ? (
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         {[1, 2, 3, 4].map(i => (
