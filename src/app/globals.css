@@ -12,6 +12,8 @@
   --accent: #6c63ff;
   --accent2: #66c6ff;
   --glow: rgba(108, 99, 255, 0.16);
+  --lime: #CAFF04;
+  --bg-dark-2: #080808;
   --text: #111827;
   --muted: #5b6472;
 }
@@ -22,6 +24,7 @@
 @keyframes ctpulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
 @keyframes ctfloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 @keyframes ctblink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes aiBadgePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(202,255,4,0.3); } 50% { box-shadow: 0 0 0 5px rgba(202,255,4,0); } }
 
 html { scroll-behavior: smooth; }
 html {

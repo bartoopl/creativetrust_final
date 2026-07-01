@@ -1,21 +1,27 @@
 import Link from 'next/link';
+import { getLatestPortfolioProjects, urlFor } from '@/lib/sanity';
+import NotchedButton from './ui/NotchedButton';
 
-const cases = [
-    {
-        category: 'Case Study · Ecommerce',
-        title: 'Sklep headless na Medusa.js dla klienta z branży fashion',
-        description: 'Migracja z WooCommerce na architekturę headless - pełna kontrola nad UX, 40% szybsze ładowanie strony produktu.',
-        image: '/design-handoff-v7/ad20e828e5fd5e59.png',
-    },
-    {
-        category: 'Case Study · Marketing automation',
-        title: 'Wdrożenie automatyzacji dla firmy B2B - 3× więcej kwalifikowanych leadów',
-        description: 'Zbudowaliśmy system lead nurturing, który działa 24/7 - od pierwszego kontaktu po zamknięcie sprzedaży.',
-        image: '/design-handoff-v7/4d6f580d2fcd21dc.png',
-    },
-];
+interface PortfolioCategory {
+    _id: string;
+    title: string;
+}
 
-export default function RealizacjeSection() {
+interface PortfolioProject {
+    _id: string;
+    title: string;
+    slug: { current: string };
+    client: string;
+    mainImage: any;
+    scopeOfWork?: string[];
+    categories?: PortfolioCategory[];
+}
+
+export default async function RealizacjeSection() {
+    const projects: PortfolioProject[] = await getLatestPortfolioProjects(2);
+
+    if (!projects?.length) return null;
+
     return (
         <section style={{ background: '#fff', padding: '72px 16px' }} className="lg:px-[72px] lg:py-[120px]">
             <div style={{ maxWidth: 1440, margin: '0 auto' }}>
@@ -24,30 +30,41 @@ export default function RealizacjeSection() {
                 </h2>
 
                 <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
-                    {cases.map((item) => (
-                        <div key={item.title} className="flex-1 overflow-hidden rounded-[4px] border border-[rgba(0,0,0,0.06)]">
+                    {projects.map((item) => (
+                        <Link
+                            key={item._id}
+                            href={`/portfolio/${item.slug.current}`}
+                            className="flex-1 overflow-hidden rounded-[4px] border border-[rgba(0,0,0,0.06)]"
+                            style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+                        >
                             <div style={{ height: 280, background: 'rgba(0,0,0,0.06)', overflow: 'hidden' }}>
-                                <img src={item.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                {item.mainImage && (
+                                    <img
+                                        src={urlFor(item.mainImage).width(800).url()}
+                                        alt={item.title}
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                    />
+                                )}
                             </div>
                             <div style={{ padding: 32 }}>
-                                <p style={{ fontSize: 11.4, fontWeight: 400, color: 'rgba(0,0,0,0.4)', lineHeight: '18px', margin: '0 0 12px' }}>
-                                    {item.category}
+                                <p style={{ fontSize: 11.4, fontWeight: 400, color: 'rgba(0,0,0,0.4)', lineHeight: '18px', margin: '0 0 12px', textTransform: 'uppercase', letterSpacing: '.5px' }}>
+                                    {item.categories?.slice(0, 2).map((c) => c.title).join(' · ') || 'Realizacja'}
                                 </p>
                                 <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 21.8, fontWeight: 500, lineHeight: '26.4px', letterSpacing: '-0.88px', color: '#000', margin: '0 0 12px' }}>
-                                    {item.title}
+                                    {item.client}
                                 </h3>
                                 <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: 'rgba(0,0,0,0.6)', margin: 0 }}>
-                                    {item.description}
+                                    {item.scopeOfWork?.join(' · ') || item.title}
                                 </p>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
 
                 <div style={{ marginTop: 32, display: 'flex', justifyContent: 'center' }}>
-                    <Link href="/portfolio" style={{ fontSize: 13.2, color: 'rgba(0,0,0,0.6)', textDecoration: 'none', fontFamily: 'var(--font-mono), monospace', fontWeight: 500 }}>
-                        Wszystkie realizacje →
-                    </Link>
+                    <NotchedButton href="/portfolio" variant="ghost-light">
+                        Wszystkie realizacje
+                    </NotchedButton>
                 </div>
             </div>
         </section>

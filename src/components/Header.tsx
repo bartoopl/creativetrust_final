@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import NotchedButton from './ui/NotchedButton';
 
 const navItems = [
     { href: '/uslugi', label: 'Usługi', chevron: true },
@@ -65,18 +66,9 @@ export default function Header() {
                     ))}
                 </nav>
 
-                <Link
-                    href="/kontakt"
-                    className="hidden md:inline-flex"
-                    style={{ alignItems: 'stretch', height: 40, borderRadius: 4, background: '#fff', cursor: 'pointer', flexShrink: 0, textDecoration: 'none', boxShadow: 'inset 0 0 0 1px #fff' }}
-                >
-                    <span style={{ padding: '9px 12px', fontSize: 13.2, fontWeight: 500, color: 'rgb(32,31,36)', whiteSpace: 'nowrap', lineHeight: '21px' }}>Umów konsultację</span>
-                    <span style={{ width: 30, margin: '5px 5px 5px 0', borderRadius: 2, background: 'rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <svg width="9" height="9" viewBox="0 0 9.333 9.333" fill="rgb(0,0,0)">
-                            <path d="M 8.167 0 L 8.167 9.333 L 9.333 9.333 L 9.333 0 L 8.167 0 Z M 0 4.083 L 0 5.25 L 4.667 5.25 L 4.667 6.417 L 3.5 6.417 L 3.5 7.583 L 4.667 7.583 L 4.667 6.417 L 5.833 6.417 L 5.833 5.25 L 7 5.25 L 7 4.083 L 5.833 4.083 L 5.833 2.917 L 4.667 2.917 L 4.667 1.75 L 3.5 1.75 L 3.5 2.917 L 4.667 2.917 L 4.667 4.083 L 0 4.083 Z" fillRule="evenodd" />
-                        </svg>
-                    </span>
-                </Link>
+                <NotchedButton href="/kontakt" variant="primary-dark" className="hidden md:inline-flex">
+                    Umów konsultację
+                </NotchedButton>
 
                 <button
                     type="button"
@@ -98,14 +90,9 @@ export default function Header() {
                         </Link>
                     ))}
                     <div style={{ paddingTop: 20 }}>
-                        <Link href="/kontakt" onClick={() => setMobileOpen(false)} style={{ height: 40, display: 'inline-flex', alignItems: 'stretch', borderRadius: 4, background: '#fff', cursor: 'pointer', flexShrink: 0, textDecoration: 'none', boxShadow: 'inset 0 0 0 1px #fff' }}>
-                            <span style={{ padding: '9px 12px', fontSize: 13.2, fontWeight: 500, color: 'rgb(32,31,36)', whiteSpace: 'nowrap', lineHeight: '21px' }}>Umów konsultację</span>
-                            <span style={{ width: 30, margin: '5px 5px 5px 0', borderRadius: 2, background: 'rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                                <svg width="9" height="9" viewBox="0 0 9.333 9.333" fill="rgb(0,0,0)">
-                                    <path d="M 8.167 0 L 8.167 9.333 L 9.333 9.333 L 9.333 0 L 8.167 0 Z M 0 4.083 L 0 5.25 L 4.667 5.25 L 4.667 6.417 L 3.5 6.417 L 3.5 7.583 L 4.667 7.583 L 4.667 6.417 L 5.833 6.417 L 5.833 5.25 L 7 5.25 L 7 4.083 L 5.833 4.083 L 5.833 2.917 L 4.667 2.917 L 4.667 1.75 L 3.5 1.75 L 3.5 2.917 L 4.667 2.917 L 4.667 4.083 L 0 4.083 Z" fillRule="evenodd" />
-                                </svg>
-                            </span>
-                        </Link>
+                        <NotchedButton href="/kontakt" variant="primary-dark" onClick={() => setMobileOpen(false)}>
+                            Umów konsultację
+                        </NotchedButton>
                     </div>
                 </div>
             )}

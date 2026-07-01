@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460">
+  <defs>
+    <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0L0 0 0 40" fill="none" stroke="#ffffff" stroke-opacity="0.03" stroke-width="0.5"></path>
+    </pattern>
+    <marker id="a" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <path d="M0,0 L0,4 L6,2 z" fill="rgba(255,255,255,0.2)"></path>
+    </marker>
+    <marker id="al" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <path d="M0,0 L0,4 L6,2 z" fill="rgba(202,255,4,0.5)"></path>
+    </marker>
+  </defs>
+  <rect width="800" height="460" fill="#080808"></rect>
+  <rect width="800" height="460" fill="url(#g)"></rect>
+  <rect x="0" y="0" width="800" height="52" fill="rgba(0,0,0,0.55)"></rect>
+  <text x="40" y="33" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="11" fill="#CAFF04" opacity="0.85" letter-spacing="2">ARCHITEKTURA HEADLESS</text>
+  <text x="670" y="33" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="9" fill="rgba(255,255,255,0.2)" letter-spacing="1">Medusa.js 2.x</text>
+  <line x1="0" y1="52" x2="800" y2="52" stroke="rgba(255,255,255,0.05)" stroke-width="1"></line>
+  <text x="55" y="85" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.2)" letter-spacing="1.5">PRESENTATION</text>
+  <text x="313" y="85" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(202,255,4,0.55)" letter-spacing="1.5">BUSINESS LOGIC</text>
+  <text x="575" y="85" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.2)" letter-spacing="1.5">DATA LAYER</text>
+  <rect x="40" y="96" width="202" height="114" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.09)" stroke-width="0.5"></rect>
+  <rect x="40" y="96" width="3" height="114" fill="rgba(255,255,255,0.15)"></rect>
+  <text x="54" y="116" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.28)" letter-spacing="1.5">FRONTEND</text>
+  <text x="54" y="144" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="19" fill="white" font-weight="500">Next.js</text>
+  <text x="54" y="163" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.32)">TypeScript · React · SSR</text>
+  <text x="54" y="179" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.2)">Vercel Edge Network</text>
+  <text x="54" y="199" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.13)">storefront.yourapp.com</text>
+  <line x1="242" y1="153" x2="297" y2="153" stroke="rgba(255,255,255,0.18)" stroke-width="0.5" stroke-dasharray="4,3" marker-end="url(#a)"></line>
+  <text x="249" y="146" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.18)">REST / GQL</text>
+  <rect x="300" y="96" width="200" height="114" fill="rgba(202,255,4,0.03)" stroke="rgba(202,255,4,0.28)" stroke-width="0.5"></rect>
+  <rect x="300" y="96" width="3" height="114" fill="rgba(202,255,4,0.6)"></rect>
+  <text x="314" y="116" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(202,255,4,0.65)" letter-spacing="1.5">API LAYER</text>
+  <text x="314" y="144" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="19" fill="#CAFF04" font-weight="500">Medusa.js</text>
+  <text x="314" y="163" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.32)">Orders · Products · Users</text>
+  <text x="314" y="179" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.22)">Plugins · Events · Workflows</text>
+  <text x="314" y="199" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(202,255,4,0.32)">open source · Node.js</text>
+  <line x1="500" y1="153" x2="555" y2="153" stroke="rgba(255,255,255,0.18)" stroke-width="0.5" stroke-dasharray="4,3" marker-end="url(#a)"></line>
+  <text x="513" y="146" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.18)">ORM / SQL</text>
+  <rect x="558" y="96" width="202" height="114" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.09)" stroke-width="0.5"></rect>
+  <rect x="558" y="96" width="3" height="114" fill="rgba(255,255,255,0.15)"></rect>
+  <text x="572" y="116" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.28)" letter-spacing="1.5">DATABASE</text>
+  <text x="572" y="144" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="19" fill="white" font-weight="500">PostgreSQL</text>
+  <text x="572" y="163" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.32)">Products · Orders · Inventory</text>
+  <text x="572" y="179" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.2)">Redis cache · S3 media</text>
+  <text x="572" y="199" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.13)">self-hosted / AWS RDS</text>
+  <line x1="400" y1="210" x2="400" y2="252" stroke="rgba(202,255,4,0.18)" stroke-width="0.5"></line>
+  <line x1="400" y1="252" x2="186" y2="252" stroke="rgba(202,255,4,0.18)" stroke-width="0.5"></line>
+  <line x1="400" y1="252" x2="614" y2="252" stroke="rgba(202,255,4,0.18)" stroke-width="0.5"></line>
+  <line x1="186" y1="252" x2="186" y2="272" stroke="rgba(202,255,4,0.18)" stroke-width="0.5"></line>
+  <line x1="614" y1="252" x2="614" y2="272" stroke="rgba(202,255,4,0.18)" stroke-width="0.5"></line>
+  <rect x="86" y="272" width="200" height="78" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"></rect>
+  <text x="99" y="294" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.22)" letter-spacing="1.5">INTEGRACJE</text>
+  <text x="99" y="316" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="14" fill="rgba(255,255,255,0.58)" font-weight="400">CRM · ERP · WMS</text>
+  <text x="99" y="335" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.16)">Salesforce · SAP · custom API</text>
+  <rect x="514" y="272" width="200" height="78" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"></rect>
+  <text x="527" y="294" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.22)" letter-spacing="1.5">HOSTING / CDN</text>
+  <text x="527" y="316" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="14" fill="rgba(255,255,255,0.58)" font-weight="400">Vercel · Cloudflare</text>
+  <text x="527" y="335" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7.5" fill="rgba(255,255,255,0.16)">Edge · zero downtime · CI/CD</text>
+  <rect x="0" y="392" width="800" height="68" fill="rgba(0,0,0,0.6)"></rect>
+  <line x1="0" y1="392" x2="800" y2="392" stroke="rgba(255,255,255,0.04)" stroke-width="1"></line>
+  <text x="40" y="420" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="9" fill="rgba(255,255,255,0.14)" letter-spacing="1">VENDOR LOCK-IN</text>
+  <text x="170" y="420" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="9" fill="rgba(202,255,4,0.55)" letter-spacing="1"> — NONE</text>
+  <circle cx="340" cy="416" r="2" fill="rgba(255,255,255,0.1)"></circle>
+  <text x="354" y="420" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="9" fill="rgba(255,255,255,0.14)" letter-spacing="1">FULL CODE OWNERSHIP</text>
+  <circle cx="538" cy="416" r="2" fill="rgba(255,255,255,0.1)"></circle>
+  <text x="552" y="420" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="9" fill="rgba(255,255,255,0.14)" letter-spacing="1">NO PLATFORM FEES</text>
+</svg>

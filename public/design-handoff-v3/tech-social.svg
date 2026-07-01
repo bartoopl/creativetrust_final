@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440">
+  <defs>
+    <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0L0 0 0 40" fill="none" stroke="#ffffff" stroke-opacity="0.03" stroke-width="0.5"></path>
+    </pattern>
+  </defs>
+  <rect width="800" height="440" fill="#080808"></rect>
+  <rect width="800" height="440" fill="url(#g)"></rect>
+  <rect x="0" y="0" width="800" height="52" fill="rgba(0,0,0,0.55)"></rect>
+  <text x="40" y="33" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="11" fill="#CAFF04" opacity="0.85" letter-spacing="2">CONTENT CALENDAR</text>
+  <text x="660" y="33" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="9" fill="rgba(255,255,255,0.2)" letter-spacing="1">Q3 — 2026</text>
+  <line x1="0" y1="52" x2="800" y2="52" stroke="rgba(255,255,255,0.05)" stroke-width="1"></line>
+  <text x="40" y="82" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.2)" letter-spacing="1.5">KANAŁ</text>
+  <text x="148" y="82" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.2)" letter-spacing="1.5" text-anchor="middle">PN</text>
+  <text x="289" y="82" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.2)" letter-spacing="1.5" text-anchor="middle">WT</text>
+  <text x="430" y="82" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(202,255,4,0.5)" letter-spacing="1.5" text-anchor="middle">ŚR</text>
+  <text x="571" y="82" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.2)" letter-spacing="1.5" text-anchor="middle">CZ</text>
+  <text x="712" y="82" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.2)" letter-spacing="1.5" text-anchor="middle">PT</text>
+  <line x1="40" y1="90" x2="760" y2="90" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"></line>
+  <rect x="40" y="96" width="760" height="1" fill="rgba(255,255,255,0.04)"></rect>
+  <line x1="110" y1="90" x2="110" y2="370" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"></line>
+  <line x1="251" y1="90" x2="251" y2="370" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"></line>
+  <line x1="392" y1="90" x2="392" y2="370" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"></line>
+  <line x1="533" y1="90" x2="533" y2="370" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"></line>
+  <line x1="674" y1="90" x2="674" y2="370" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"></line>
+  <text x="70" y="134" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="9" fill="rgba(255,255,255,0.45)" text-anchor="middle" letter-spacing="1">IG</text>
+  <line x1="40" y1="90" x2="40" y2="370" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"></line>
+  <line x1="40" y1="174" x2="760" y2="174" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"></line>
+  <text x="70" y="218" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="9" fill="rgba(255,255,255,0.45)" text-anchor="middle" letter-spacing="1">LI</text>
+  <line x1="40" y1="258" x2="760" y2="258" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"></line>
+  <text x="70" y="302" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="9" fill="rgba(255,255,255,0.45)" text-anchor="middle" letter-spacing="1">FB</text>
+  <line x1="40" y1="370" x2="760" y2="370" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"></line>
+  <rect x="120" y="100" width="122" height="66" fill="rgba(202,255,4,0.07)" stroke="rgba(202,255,4,0.3)" stroke-width="0.5"></rect>
+  <text x="130" y="118" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(202,255,4,0.6)" letter-spacing="1">REEL</text>
+  <text x="130" y="134" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="11" fill="white" font-weight="500">Przed/po redesign</text>
+  <text x="130" y="150" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.3)">+12.4% reach</text>
+  <text x="130" y="161" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="6.5" fill="rgba(202,255,4,0.4)">● LIVE</text>
+  <rect x="261" y="100" width="122" height="66" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" stroke-dasharray="3,2"></rect>
+  <text x="271" y="118" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.22)" letter-spacing="1">CAROUSEL</text>
+  <text x="271" y="136" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="11" fill="rgba(255,255,255,0.5)" font-weight="500">5 mitów o AI</text>
+  <text x="271" y="155" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="6.5" fill="rgba(255,255,255,0.2)">○ BRIEF</text>
+  <rect x="402" y="100" width="122" height="66" fill="rgba(202,255,4,0.07)" stroke="rgba(202,255,4,0.3)" stroke-width="0.5"></rect>
+  <text x="412" y="118" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(202,255,4,0.6)" letter-spacing="1">STORY</text>
+  <text x="412" y="134" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="11" fill="white" font-weight="500">Za kulisami projektu</text>
+  <text x="412" y="150" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.3)">8h po wdrożeniu</text>
+  <text x="412" y="161" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="6.5" fill="rgba(202,255,4,0.4)">● LIVE</text>
+  <rect x="543" y="100" width="122" height="66" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"></rect>
+  <text x="553" y="118" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.22)" letter-spacing="1">REEL</text>
+  <text x="553" y="136" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="11" fill="rgba(255,255,255,0.55)" font-weight="500">Headless in 60s</text>
+  <text x="553" y="155" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="6.5" fill="rgba(255,255,255,0.22)">◐ DESIGN</text>
+  <rect x="684" y="100" width="68" height="66" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" stroke-dasharray="3,3"></rect>
+  <text x="718" y="137" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.1)" text-anchor="middle">—</text>
+  <rect x="120" y="184" width="122" height="66" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" stroke-dasharray="3,2"></rect>
+  <text x="130" y="202" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.22)" letter-spacing="1">ARTYKUŁ</text>
+  <text x="130" y="220" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="11" fill="rgba(255,255,255,0.5)" font-weight="500">Headless w B2B</text>
+  <text x="130" y="239" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="6.5" fill="rgba(255,255,255,0.2)">○ BRIEF</text>
+  <rect x="261" y="184" width="122" height="66" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" stroke-dasharray="3,3"></rect>
+  <text x="322" y="221" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.1)" text-anchor="middle">—</text>
+  <rect x="402" y="184" width="122" height="66" fill="rgba(202,255,4,0.07)" stroke="rgba(202,255,4,0.3)" stroke-width="0.5"></rect>
+  <text x="412" y="202" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(202,255,4,0.6)" letter-spacing="1">CASE STUDY</text>
+  <text x="412" y="218" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="11" fill="white" font-weight="500">ROI z automatyzacji</text>
+  <text x="412" y="234" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.3)">3× więcej leadów</text>
+  <text x="412" y="245" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="6.5" fill="rgba(202,255,4,0.4)">● LIVE</text>
+  <rect x="543" y="184" width="122" height="66" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"></rect>
+  <text x="553" y="202" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.22)" letter-spacing="1">POST</text>
+  <text x="553" y="220" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="11" fill="rgba(255,255,255,0.55)" font-weight="500">AI tools roundup</text>
+  <text x="553" y="239" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="6.5" fill="rgba(255,255,255,0.22)">◐ DESIGN</text>
+  <rect x="684" y="184" width="68" height="66" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" stroke-dasharray="3,3"></rect>
+  <text x="718" y="221" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.1)" text-anchor="middle">—</text>
+  <rect x="120" y="268" width="122" height="94" fill="rgba(202,255,4,0.05)" stroke="rgba(202,255,4,0.2)" stroke-width="0.5"></rect>
+  <text x="130" y="286" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(202,255,4,0.55)" letter-spacing="1">BOOST</text>
+  <text x="130" y="302" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="11" fill="white" font-weight="500">Kampania lead gen</text>
+  <text x="130" y="318" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.28)">Budget: 2 000 PLN</text>
+  <text x="130" y="334" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.2)">CPC target: 1.2 PLN</text>
+  <text x="130" y="352" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="6.5" fill="rgba(202,255,4,0.4)">● LIVE</text>
+  <rect x="261" y="268" width="263" height="94" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" stroke-dasharray="3,3"></rect>
+  <text x="392" y="320" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.1)" text-anchor="middle">— wolny slot —</text>
+  <rect x="543" y="268" width="122" height="94" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"></rect>
+  <text x="553" y="286" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.22)" letter-spacing="1">POST</text>
+  <text x="553" y="302" font-family="&#39;Inter&#39;,-apple-system,sans-serif" font-size="11" fill="rgba(255,255,255,0.55)" font-weight="500">Weekend tips</text>
+  <text x="553" y="318" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="7" fill="rgba(255,255,255,0.2)">3 szybkie porady</text>
+  <text x="553" y="352" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="6.5" fill="rgba(255,255,255,0.22)">◐ DESIGN</text>
+  <rect x="684" y="268" width="68" height="94" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" stroke-dasharray="3,3"></rect>
+  <text x="718" y="320" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.1)" text-anchor="middle">—</text>
+  <rect x="0" y="378" width="800" height="62" fill="rgba(0,0,0,0.6)"></rect>
+  <line x1="0" y1="378" x2="800" y2="378" stroke="rgba(255,255,255,0.04)" stroke-width="1"></line>
+  <circle cx="54" cy="400" r="4" fill="rgba(202,255,4,0.8)"></circle>
+  <text x="66" y="404" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.35)" letter-spacing="0.5">LIVE</text>
+  <circle cx="122" cy="400" r="4" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"></circle>
+  <text x="134" y="404" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.35)" letter-spacing="0.5">BRIEF</text>
+  <text x="195" y="404" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.15)" letter-spacing="0.5">◐</text>
+  <text x="207" y="404" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.35)" letter-spacing="0.5">DESIGN</text>
+  <text x="40" y="425" font-family="&#39;Courier New&#39;,Courier,monospace" font-size="8" fill="rgba(255,255,255,0.1)" letter-spacing="0.5">KAŻDY POST MA CEL, MIERZONE WYNIKI I MIEJSCE W STRATEGII — ŻADNEGO CONTENTU DLA CONTENTU</text>
+</svg>

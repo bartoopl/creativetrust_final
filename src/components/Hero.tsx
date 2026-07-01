@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import HeroCanvas from './HeroCanvas';
+import NotchedButton from './ui/NotchedButton';
 
 const signals = [
     'Strony www',
@@ -59,50 +59,12 @@ export default function Hero() {
                         </p>
 
                         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-                            <Link href="/kontakt" style={{
-                                height: 40,
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                padding: 5,
-                                borderRadius: 4,
-                                background: '#fff',
-                                boxShadow: 'inset 0 0 0 1px #fff',
-                                color: '#202124',
-                                textDecoration: 'none',
-                                fontSize: 13.2,
-                                fontWeight: 500,
-                            }}>
-                                <span style={{ padding: '0 12px' }}>Umów konsultację</span>
-                                <span style={{
-                                    width: 30,
-                                    height: 30,
-                                    borderRadius: 2,
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    background: 'rgba(0,0,0,0.1)',
-                                    fontSize: 14,
-                                    lineHeight: 1,
-                                }}>
-                                    →
-                                </span>
-                            </Link>
-                            <Link href="#uslugi" style={{
-                                height: 40,
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                padding: '0 18px',
-                                borderRadius: 4,
-                                border: '1px solid rgba(255,255,255,0.3)',
-                                color: '#fff',
-                                background: 'transparent',
-                                textDecoration: 'none',
-                                fontSize: 13.2,
-                                fontWeight: 500,
-                                width: 'fit-content',
-                            }}>
+                            <NotchedButton href="/kontakt" variant="primary-dark">
+                                Umów konsultację
+                            </NotchedButton>
+                            <NotchedButton href="#uslugi" variant="ghost-dark">
                                 Jak możemy pomóc
-                            </Link>
+                            </NotchedButton>
                         </div>
                     </div>
                 </div>

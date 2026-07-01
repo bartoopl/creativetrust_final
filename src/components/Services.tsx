@@ -30,9 +30,9 @@ const services = [
     },
 ];
 
-function Bullet() {
+function Bullet({ active }: { active?: boolean }) {
     return (
-        <svg width="8" height="8" viewBox="0 0 8 8" fill="rgba(255,255,255,0.4)">
+        <svg width="8" height="8" viewBox="0 0 8 8" fill={active ? 'var(--lime)' : 'rgba(255,255,255,0.4)'}>
             <rect width="8" height="8" />
         </svg>
     );
@@ -55,9 +55,9 @@ export default function Services() {
 
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4" style={{ gap: 16 }} >
                         {services.map((service) => (
-                            <div key={service.eyebrow} style={{ borderRadius: 4, border: service.active ? '1px solid rgba(255,255,255,0.16)' : '1px solid rgba(255,255,255,0.08)', padding: '24px 20px', display: 'flex', flexDirection: 'column', gap: 20, background: service.active ? 'rgba(255,255,255,0.04)' : 'transparent' }} className="lg:p-8">
+                            <div key={service.eyebrow} style={{ borderRadius: 4, border: service.active ? '1px solid var(--lime)' : '1px solid rgba(255,255,255,0.08)', padding: '24px 20px', display: 'flex', flexDirection: 'column', gap: 20, background: service.active ? 'rgba(202,255,4,0.04)' : 'transparent' }} className="lg:p-8">
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                                    <span style={{ fontSize: 11.4, fontWeight: 400, color: 'rgba(255,255,255,0.4)', lineHeight: '18px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                    <span style={{ fontSize: 11.4, fontWeight: 400, color: service.active ? 'var(--lime)' : 'rgba(255,255,255,0.4)', lineHeight: '18px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                                         {service.eyebrow}
                                     </span>
                                     <p style={{ fontSize: 15.4, fontWeight: 500, lineHeight: '22px', letterSpacing: '-0.32px', color: '#fff', margin: 0 }}>
@@ -70,7 +70,7 @@ export default function Services() {
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                                     {service.items.map((item) => (
                                         <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 0', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                                            <Bullet />
+                                            <Bullet active={service.active} />
                                             <span style={{ fontSize: 12.2, fontWeight: 400, color: 'rgba(255,255,255,0.6)', lineHeight: '18px' }}>{item}</span>
                                         </div>
                                     ))}

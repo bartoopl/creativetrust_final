@@ -42,7 +42,7 @@ export default function LatestBlogPosts() {
                     </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'rgba(0,0,0,0.06)', borderRadius: 6, overflow: 'hidden', boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.06)' }} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+                <div style={{ gap: 1, background: 'rgba(0,0,0,0.06)', borderRadius: 6, overflow: 'hidden', boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.06)' }} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
                     {testimonials.map((item) => (
                         <div key={item.name} style={{ background: '#fff', display: 'flex', flexDirection: 'column', minHeight: 420 }} className="lg:min-h-[497px]">
                             <div style={{ height: 96, borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', padding: '0 24px' }} className="lg:h-[120px] lg:px-8">
@@ -61,7 +61,7 @@ export default function LatestBlogPosts() {
                                 </p>
                             </div>
                             <div style={{ height: 72, padding: '0 24px 0 44px', display: 'flex', alignItems: 'center', position: 'relative' }} className="lg:h-20 lg:pl-[52px] lg:pr-8">
-                                <div style={{ position: 'absolute', left: 32, top: '50%', transform: 'translateY(-50%)', width: 8, height: 8, borderRadius: '50%', background: 'rgba(0,0,0,0.15)', animation: 'ctpulse 2.8s ease-in-out infinite' }} />
+                                <div style={{ position: 'absolute', left: 32, top: '50%', transform: 'translateY(-50%)', width: 8, height: 8, borderRadius: '50%', background: 'var(--lime)' }} />
                                 <div>
                                     <p style={{ fontSize: 13, fontWeight: 500, lineHeight: '21px', letterSpacing: '-0.245px', color: '#000', margin: 0 }}>{item.name}</p>
                                 </div>

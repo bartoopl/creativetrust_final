@@ -61,6 +61,25 @@ export async function getPortfolioProject(slug: string) {
   `, { slug });
 }
 
+// Funkcja do pobierania najnowszych projektów portfolio (np. do sekcji na stronie głównej)
+export async function getLatestPortfolioProjects(limit: number = 2) {
+    return await client.fetch(`
+    *[_type == "portfolioProject"] | order(publishedAt desc) [0...$limit] {
+      _id,
+      title,
+      slug,
+      client,
+      mainImage,
+      scopeOfWork,
+      categories[]->{
+        _id,
+        title,
+        slug
+      }
+    }
+  `, { limit });
+}
+
 // Funkcja do pobierania projektów portfolio według kategorii
 export async function getPortfolioProjectsByCategory(categorySlug: string) {
     return await client.fetch(`

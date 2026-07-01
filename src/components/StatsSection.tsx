@@ -1,3 +1,5 @@
+import NotchedButton from './ui/NotchedButton';
+
 export default function StatsSection() {
     return (
         <section style={{ background: '#fff', padding: '72px 16px' }} className="lg:px-[72px] lg:py-[120px]">
@@ -12,8 +14,8 @@ export default function StatsSection() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: 0 }} className="lg:gap-8 lg:px-20">
-                    <div className="flex flex-col gap-4 lg:flex-row lg:gap-8" style={{ minHeight: 0 }}>
-                        <div style={{ flex: 662, borderRadius: 4, background: '#000', overflow: 'hidden', position: 'relative', padding: 32 }}>
+                    <div className="flex flex-col gap-4 lg:flex-row lg:gap-8 lg:min-h-[360px]">
+                        <div style={{ flex: 662, borderRadius: 4, background: '#000', overflow: 'hidden', padding: 32, display: 'flex', flexDirection: 'column', gap: 24, justifyContent: 'space-between' }}>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 461 }}>
                                 <p style={{ fontSize: 17, fontWeight: 500, lineHeight: '27px', letterSpacing: '-0.36px', color: '#fff', margin: 0 }}>
                                     Jesteśmy w biznesie, nie tylko obok niego.
@@ -22,7 +24,7 @@ export default function StatsSection() {
                                     Zarządzamy firmami klientów od środka. Każda decyzja projektowa jest dla nas decyzją biznesową - nie estetyczną.
                                 </p>
                             </div>
-                            <p style={{ position: 'absolute', bottom: 24, left: 24, fontSize: 15.4, fontWeight: 500, lineHeight: '24px', letterSpacing: '-0.32px', color: '#fff', margin: 0 }} className="lg:bottom-8 lg:left-8">
+                            <p style={{ fontSize: 15.4, fontWeight: 500, lineHeight: '24px', letterSpacing: '-0.32px', color: '#fff', margin: 0 }}>
                                 Klienci z Polski i z zagranicy · Projekty z mierzalnymi wynikami
                             </p>
                         </div>
@@ -59,16 +61,9 @@ export default function StatsSection() {
                                     Budujemy na otwartych, dojrzałych stackach - Medusa.js, Next.js, React. Brak vendor lock-in, pełna kontrola nad kodem.
                                 </p>
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'stretch', height: 40, borderRadius: 4, boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.15)', alignSelf: 'flex-start' }}>
-                                <div style={{ width: 30, margin: '5px 0 5px 5px', borderRadius: 2, background: 'rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <svg width="9" height="9" viewBox="0 0 9.333 9.333" fill="rgb(0,0,0)">
-                                        <path d="M 8.167 0 L 8.167 9.333 L 9.333 9.333 L 9.333 0 L 8.167 0 Z M 0 4.083 L 0 5.25 L 4.667 5.25 L 4.667 6.417 L 3.5 6.417 L 3.5 7.583 L 4.667 7.583 L 4.667 6.417 L 5.833 6.417 L 5.833 5.25 L 7 5.25 L 7 4.083 L 5.833 4.083 L 5.833 2.917 L 4.667 2.917 L 4.667 1.75 L 3.5 1.75 L 3.5 2.917 L 4.667 2.917 L 4.667 4.083 L 0 4.083 Z" fillRule="evenodd" />
-                                    </svg>
-                                </div>
-                                <span style={{ padding: '9px 12px', fontSize: 13.2, fontWeight: 500, color: 'rgb(32,31,36)', whiteSpace: 'nowrap', lineHeight: '21px' }} className="whitespace-normal lg:whitespace-nowrap">
-                                    Nasze podejście technologiczne
-                                </span>
-                            </div>
+                            <NotchedButton variant="ghost-light" className="self-start">
+                                Nasze podejście technologiczne
+                            </NotchedButton>
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
                                     <p style={{ fontSize: 35.6, fontWeight: 500, lineHeight: '39.6px', letterSpacing: '-1.44px', color: '#000', margin: 0 }}>50+</p>
@@ -97,15 +92,10 @@ export default function StatsSection() {
                                     Robimy projekty cyfrowe, które mają sens biznesowy - i sprawdzamy to wspólnie z klientem na każdym etapie.
                                 </p>
                             </div>
-                            <div style={{ position: 'absolute', bottom: 24, left: 24, display: 'flex', alignItems: 'stretch', height: 40, borderRadius: 4, background: '#fff' }} className="lg:bottom-8 lg:left-8">
-                                <div style={{ width: 30, margin: '5px 0 5px 5px', borderRadius: 2, background: 'rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <svg width="9" height="9" viewBox="0 0 9.333 9.333" fill="rgb(0,0,0)">
-                                        <path d="M 8.167 0 L 8.167 9.333 L 9.333 9.333 L 9.333 0 L 8.167 0 Z M 0 4.083 L 0 5.25 L 4.667 5.25 L 4.667 6.417 L 3.5 6.417 L 3.5 7.583 L 4.667 7.583 L 4.667 6.417 L 5.833 6.417 L 5.833 5.25 L 7 5.25 L 7 4.083 L 5.833 4.083 L 5.833 2.917 L 4.667 2.917 L 4.667 1.75 L 3.5 1.75 L 3.5 2.917 L 4.667 2.917 L 4.667 4.083 L 0 4.083 Z" fillRule="evenodd" />
-                                    </svg>
-                                </div>
-                                <span style={{ padding: '9px 12px', fontSize: 13.2, fontWeight: 500, color: 'rgb(32,31,36)', whiteSpace: 'nowrap', lineHeight: '21px' }}>
+                            <div style={{ position: 'absolute', bottom: 24, left: 24 }} className="lg:bottom-8 lg:left-8">
+                                <NotchedButton variant="primary-dark">
                                     Zobacz case studies
-                                </span>
+                                </NotchedButton>
                             </div>
                         </div>
                         <div style={{ flex: 1, borderRadius: 4, background: '#fff', boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.08)', overflow: 'hidden', position: 'relative', padding: 24, minHeight: 260 }} className="lg:min-h-[360px] lg:p-8">
@@ -118,15 +108,10 @@ export default function StatsSection() {
                                     Masz bezpośredni kontakt z osobami decyzyjnymi - bez account managerów i gry w głuchy telefon.
                                 </p>
                             </div>
-                            <div style={{ position: 'absolute', bottom: 24, left: 24, display: 'flex', alignItems: 'stretch', height: 40, borderRadius: 4, background: '#000' }} className="lg:bottom-8 lg:left-8">
-                                <div style={{ width: 30, margin: '5px 0 5px 5px', borderRadius: 2, background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <svg width="9" height="9" viewBox="0 0 9.333 9.333" fill="rgb(255,255,255)">
-                                        <path d="M 8.167 0 L 8.167 9.333 L 9.333 9.333 L 9.333 0 L 8.167 0 Z M 0 4.083 L 0 5.25 L 4.667 5.25 L 4.667 6.417 L 3.5 6.417 L 3.5 7.583 L 4.667 7.583 L 4.667 6.417 L 5.833 6.417 L 5.833 5.25 L 7 5.25 L 7 4.083 L 5.833 4.083 L 5.833 2.917 L 4.667 2.917 L 4.667 1.75 L 3.5 1.75 L 3.5 2.917 L 4.667 2.917 L 4.667 4.083 L 0 4.083 Z" fillRule="evenodd" />
-                                    </svg>
-                                </div>
-                                <span style={{ padding: '9px 12px', fontSize: 13.2, fontWeight: 500, color: '#fff', whiteSpace: 'nowrap', lineHeight: '21px' }}>
+                            <div style={{ position: 'absolute', bottom: 24, left: 24 }} className="lg:bottom-8 lg:left-8">
+                                <NotchedButton variant="primary-light">
                                     O nas
-                                </span>
+                                </NotchedButton>
                             </div>
                         </div>
                     </div>
@@ -143,16 +128,9 @@ export default function StatsSection() {
                                         AI przyspiesza wdrożenia. My wiemy, jak to przełożyć na wyniki - nie na slajdy.
                                     </p>
                                 </div>
-                                <div style={{ display: 'flex', alignItems: 'stretch', height: 40, borderRadius: 4, background: '#000', alignSelf: 'flex-start' }}>
-                                    <div style={{ width: 30, margin: '5px 0 5px 5px', borderRadius: 2, background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <svg width="9" height="9" viewBox="0 0 9.333 9.333" fill="rgb(255,255,255)">
-                                            <path d="M 8.167 0 L 8.167 9.333 L 9.333 9.333 L 9.333 0 L 8.167 0 Z M 0 4.083 L 0 5.25 L 4.667 5.25 L 4.667 6.417 L 3.5 6.417 L 3.5 7.583 L 4.667 7.583 L 4.667 6.417 L 5.833 6.417 L 5.833 5.25 L 7 5.25 L 7 4.083 L 5.833 4.083 L 5.833 2.917 L 4.667 2.917 L 4.667 1.75 L 3.5 1.75 L 3.5 2.917 L 4.667 2.917 L 4.667 4.083 L 0 4.083 Z" fillRule="evenodd" />
-                                        </svg>
-                                    </div>
-                                    <span style={{ padding: '9px 12px', fontSize: 13.2, fontWeight: 500, color: '#fff', whiteSpace: 'nowrap', lineHeight: '21px' }}>
-                                        Jak działamy
-                                    </span>
-                                </div>
+                                <NotchedButton variant="primary-light" className="self-start">
+                                    Jak działamy
+                                </NotchedButton>
                             </div>
                         </div>
                     </div>

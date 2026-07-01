@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-const ACCENT = '#56C4DB';
+const ACCENT = '#CAFF04';
 const BG = '#08080c';
 
 function hexA(hex: string, a: number): string {
@@ -236,7 +236,7 @@ export default function HeroCanvas() {
                 ctx.shadowColor = hexA(ACCENT, 0.9);
                 ctx.beginPath();
                 ctx.arc(sx, sy, Math.max(0.5, 2.8 * avgSc), 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(160,230,255,0.95)';
+                ctx.fillStyle = hexA(ACCENT, 0.95);
                 ctx.fill();
                 ctx.restore();
             });

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import NotchedButton from './ui/NotchedButton';
 
 const lanes = [
     {
@@ -29,6 +29,7 @@ const lanes = [
         ],
         button: 'Ecommerce headless',
         href: '/uslugi/e-commerce',
+        image: '/design-handoff-v3/tech-ecommerce.svg',
     },
     {
         label: 'Marketing automation',
@@ -43,6 +44,7 @@ const lanes = [
         ],
         button: 'Marketing automation',
         href: '/uslugi/marketing-automation',
+        image: '/design-handoff-v3/tech-automation.svg',
     },
     {
         label: 'Social media',
@@ -57,33 +59,15 @@ const lanes = [
         ],
         button: 'Social media',
         href: '/uslugi/social-media',
+        image: '/design-handoff-v3/tech-social.svg',
     },
 ];
 
 function Bullet() {
     return (
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="rgb(0,0,0)">
-            <rect x="0" y="0" width="20" height="2" />
-            <rect x="0" y="4" width="12" height="2" />
-            <rect x="0" y="8" width="16" height="2" />
-            <rect x="0" y="12" width="10" height="2" />
-            <rect x="0" y="16" width="14" height="2" />
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="var(--lime)">
+            <rect width="8" height="8" />
         </svg>
-    );
-}
-
-function ArrowBadge({ dark = false, label }: { dark?: boolean; label: string }) {
-    return (
-        <div style={{ display: 'flex', alignItems: 'stretch', height: 40, borderRadius: 4, background: dark ? '#fff' : '#000', cursor: 'pointer' }}>
-            <div style={{ width: 30, margin: '5px 0 5px 5px', borderRadius: 2, background: dark ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <svg width="9" height="9" viewBox="0 0 9.333 9.333" fill={dark ? 'rgb(0,0,0)' : 'rgb(255,255,255)'}>
-                    <path d="M 8.167 0 L 8.167 9.333 L 9.333 9.333 L 9.333 0 L 8.167 0 Z M 0 4.083 L 0 5.25 L 4.667 5.25 L 4.667 6.417 L 3.5 6.417 L 3.5 7.583 L 4.667 7.583 L 4.667 6.417 L 5.833 6.417 L 5.833 5.25 L 7 5.25 L 7 4.083 L 5.833 4.083 L 5.833 2.917 L 4.667 2.917 L 4.667 1.75 L 3.5 1.75 L 3.5 2.917 L 4.667 2.917 L 4.667 4.083 L 0 4.083 Z" fillRule="evenodd" />
-                </svg>
-            </div>
-            <span style={{ padding: '9px 12px', fontSize: 13.2, fontWeight: 500, color: dark ? 'rgb(32,31,36)' : '#fff', whiteSpace: 'normal', lineHeight: '21px' }} className="lg:whitespace-nowrap">
-                {label}
-            </span>
-        </div>
     );
 }
 
@@ -99,7 +83,7 @@ export default function ProcessSection() {
                 <div className="flex items-start gap-8">
                     <div className="sticky top-24 hidden w-[224px] flex-none flex-col gap-1 lg:flex">
                         {lanes.map((lane, index) => (
-                            <div key={lane.label} style={{ padding: '12px 0 12px 12px', fontSize: 12.2, fontWeight: 500, color: index === 0 ? '#000' : 'rgba(0,0,0,0.4)', letterSpacing: '-0.36px', lineHeight: '20px', borderLeft: index === 0 ? '2px solid #000' : '2px solid transparent' }}>
+                            <div key={lane.label} style={{ padding: '12px 0 12px 12px', fontSize: 12.2, fontWeight: 500, color: index === 0 ? '#000' : 'rgba(0,0,0,0.4)', letterSpacing: '-0.36px', lineHeight: '20px', borderLeft: index === 0 ? '2px solid var(--lime)' : '2px solid transparent' }}>
                                 {lane.label}
                             </div>
                         ))}
@@ -124,7 +108,7 @@ export default function ProcessSection() {
                                         </p>
 
                                         {index === 0 && (
-                                            <div style={{ borderLeft: '1px solid rgba(0,0,0,0.08)', paddingLeft: 25, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                                            <div style={{ borderLeft: '2px solid var(--lime)', paddingLeft: 24, display: 'flex', flexDirection: 'column', gap: 6 }}>
                                                 <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: '#000', margin: 0 }}>
                                                     Firmy z dobrze zaprojektowanym UX konwertują nawet 3× lepiej.
                                                 </p>
@@ -149,9 +133,9 @@ export default function ProcessSection() {
                                         ))}
                                     </div>
 
-                                    <Link href={lane.href} style={{ textDecoration: 'none', alignSelf: 'flex-start' }}>
-                                        <ArrowBadge label={lane.button} />
-                                    </Link>
+                                    <NotchedButton href={lane.href} variant="primary-light" className="self-start">
+                                        {lane.button}
+                                    </NotchedButton>
                                 </div>
 
                                 <div className="flex-1 overflow-hidden rounded-[4px] bg-[rgba(0,0,0,0.04)] min-h-[220px] lg:min-h-[400px]">
