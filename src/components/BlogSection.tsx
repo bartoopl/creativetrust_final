@@ -37,7 +37,7 @@ export default async function BlogSection() {
                 <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
                     <Link
                         href={`/blog/${featured.slug.current}`}
-                        style={{ textDecoration: 'none', color: 'inherit', flex: '740 1 0%', borderRadius: 4, background: 'rgba(0,0,0,0.04)', overflow: 'hidden', display: 'block' }}
+                        style={{ textDecoration: 'none', color: 'inherit', flex: '2 1 0%', borderRadius: 4, background: 'rgba(0,0,0,0.04)', overflow: 'hidden', display: 'block' }}
                     >
                         <div style={{ height: 380, overflow: 'hidden', background: 'rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             {featured.mainImage && (

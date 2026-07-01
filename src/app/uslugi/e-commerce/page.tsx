@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import CTASection from '@/components/CTASection';
+import NotchedButton from '@/components/ui/NotchedButton';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
@@ -57,16 +57,15 @@ export default function EcommercePage() {
                         E-COMMERCE
                     </div>
                     <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: '0 0 18px', maxWidth: '12ch' }}>
-                        Sklepy, które sprzedają i <span style={{ color: 'var(--accent)' }}>skalują się.</span>
+                        Sklepy, które sprzedają i <span style={{ color: 'var(--lime)' }}>skalują się.</span>
                     </h1>
                     <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', color: 'rgba(255,255,255,0.6)', maxWidth: '54ch', margin: '0 0 28px' }}>
                         Projektujemy i wdrażamy sklepy e-commerce oparte na danych i AI. Nowe wdrożenia, migracje platform, integracje ERP — szybciej i z lepszym wynikiem niż tradycyjny proces.
                     </p>
                     <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-                        <Link href="/kontakt" style={{ height: 40, display: 'inline-flex', alignItems: 'center', padding: 5, borderRadius: 4, background: '#fff', boxShadow: 'inset 0 0 0 1px #fff', color: '#202124', textDecoration: 'none', fontSize: 13.2, fontWeight: 500 }}>
+                        <NotchedButton href="/kontakt" variant="primary-dark">
                             Omów projekt
-                            <span style={{ width: 30, height: 30, marginLeft: 12, borderRadius: 2, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.1)' }}>→</span>
-                        </Link>
+                        </NotchedButton>
                     </div>
                 </div>
             </section>
@@ -84,7 +83,7 @@ export default function EcommercePage() {
                 </div>
             </section>
 
-            <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
+            <section id="oferta" style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
                 <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ marginBottom: 48 }}>
                         <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>ZAKRES</div>

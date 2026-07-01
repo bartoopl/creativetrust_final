@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import NotchedButton from './ui/NotchedButton';
 
 const lanes = [
@@ -126,10 +127,15 @@ export default function ProcessSection() {
 
                                     <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid rgba(0,0,0,0.08)', borderRight: '1px solid rgba(0,0,0,0.08)', borderLeft: '1px solid rgba(0,0,0,0.08)' }}>
                                         {lane.items.map((item) => (
-                                            <div key={item} style={{ minHeight: 62, borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', gap: 20, padding: '12px 16px' }} className="lg:h-[62px] lg:py-0">
+                                            <Link
+                                                key={item}
+                                                href={`${lane.href}#oferta`}
+                                                style={{ minHeight: 62, borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', gap: 20, padding: '12px 16px', textDecoration: 'none', transition: 'background .15s' }}
+                                                className="lg:h-[62px] lg:py-0 hover:bg-[rgba(0,0,0,0.03)]"
+                                            >
                                                 <Bullet />
                                                 <span style={{ fontSize: 13, fontWeight: 500, color: '#000', letterSpacing: '-0.245px', lineHeight: '21px' }}>{item}</span>
-                                            </div>
+                                            </Link>
                                         ))}
                                     </div>
 
