@@ -55,10 +55,19 @@ export async function POST(request: Request) {
             ? process.env.EMAIL_AUTOMATION || 'automation@creativetrust.pl'
             : process.env.EMAIL_CONTACT || 'office@creativetrust.pl';
 
+        // Czytelne etykiety tematów z formularza kontaktowego
+        const subjectLabels: Record<string, string> = {
+            general: 'Zapytanie ogólne',
+            cooperation: 'Współpraca',
+            project: 'Wycena projektu',
+            support: 'Wsparcie techniczne',
+            other: 'Inny',
+        };
+
         // Przygotuj temat e-maila
         const emailSubject = type === 'automation'
             ? `[Marketing Automation] Nowe zapytanie od ${name}`
-            : `[Formularz kontaktowy] ${subject || 'Nowa wiadomość'}`;
+            : `[Formularz kontaktowy] ${subjectLabels[subject] || subject || 'Nowa wiadomość'}`;
 
         console.log('Przygotowanie do wysłania email do:', recipient);
         console.log('Temat:', emailSubject);

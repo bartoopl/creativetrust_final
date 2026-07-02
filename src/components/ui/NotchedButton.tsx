@@ -10,6 +10,8 @@ interface NotchedButtonProps {
     onClick?: () => void;
     variant?: Variant;
     className?: string;
+    type?: 'button' | 'submit';
+    disabled?: boolean;
 }
 
 const NOTCH = 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%)';
@@ -65,10 +67,11 @@ function ArrowIcon({ fill }: { fill: string }) {
     );
 }
 
-export default function NotchedButton({ children, href, onClick, variant = 'primary-dark', className = '' }: NotchedButtonProps) {
+export default function NotchedButton({ children, href, onClick, variant = 'primary-dark', className = '', type = 'button', disabled = false }: NotchedButtonProps) {
     const style: React.CSSProperties = {
         display: 'inline-flex',
         alignItems: 'center',
+        justifyContent: 'center',
         gap: 8,
         height: 40,
         fontSize: 11,
@@ -76,8 +79,10 @@ export default function NotchedButton({ children, href, onClick, variant = 'prim
         letterSpacing: '0.09em',
         textTransform: 'uppercase',
         whiteSpace: 'nowrap',
-        cursor: 'pointer',
+        cursor: disabled ? 'not-allowed' : 'pointer',
         textDecoration: 'none',
+        opacity: disabled ? 0.5 : 1,
+        border: 'none',
         transition: variant.startsWith('primary') ? 'opacity 0.15s' : 'border-color 0.15s',
         ...VARIANT_STYLE[variant],
     };
@@ -98,7 +103,7 @@ export default function NotchedButton({ children, href, onClick, variant = 'prim
     }
 
     return (
-        <button type="button" onClick={onClick} className={className} style={style}>
+        <button type={type} onClick={onClick} disabled={disabled} className={className} style={style}>
             {content}
         </button>
     );
