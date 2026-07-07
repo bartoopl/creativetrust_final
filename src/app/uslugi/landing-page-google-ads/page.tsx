@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import LandingLeadForm from '@/components/LandingLeadForm';
 import SchemaScript from '@/components/SchemaScript';
+import NotchedButton from '@/components/ui/NotchedButton';
 import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/landing-page-google-ads`;
@@ -98,7 +98,7 @@ export default function GoogleAdsLandingPage() {
             <section className="bg-black px-6 py-20 text-white md:py-28">
                 <div className="mx-auto grid max-w-[1800px] grid-cols-1 items-center gap-16 lg:grid-cols-[1fr_0.95fr]">
                     <div>
-                        <p className="mb-6 text-sm uppercase tracking-[0.3em] text-white/40">
+                        <p className="mb-6 text-sm uppercase tracking-[0.3em]" style={{ color: 'var(--lime-ink)' }}>
                             Performance landing page
                         </p>
                         <h1 className="mb-8 text-3xl font-medium leading-tight md:text-5xl">
@@ -109,18 +109,12 @@ export default function GoogleAdsLandingPage() {
                             Copy, UX, wydajność i CTA układamy pod konkretną ofertę, nie pod ogólną wizytówkę.
                         </p>
                         <div className="flex flex-col gap-4 sm:flex-row">
-                            <Link
-                                href="#formularz"
-                                className="inline-flex items-center justify-center rounded-full border border-white bg-white px-5 py-3 text-sm font-medium text-black transition-colors hover:bg-gray-200"
-                            >
+                            <NotchedButton href="#formularz" variant="primary-dark">
                                 Zleć landing page
-                            </Link>
-                            <Link
-                                href="/uslugi/strony-www"
-                                className="inline-flex items-center justify-center rounded-full border border-white/25 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black"
-                            >
+                            </NotchedButton>
+                            <NotchedButton href="/uslugi/strony-www" variant="ghost-dark">
                                 Oferta stron WWW
-                            </Link>
+                            </NotchedButton>
                         </div>
                     </div>
 
@@ -152,7 +146,7 @@ export default function GoogleAdsLandingPage() {
             <section className="px-6 py-16 md:py-24">
                 <div className="mx-auto max-w-[1800px]">
                     <div className="mb-12 max-w-4xl">
-                        <p className="mb-3 text-gray-500">Co musi mieć dobra strona pod reklamy?</p>
+                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>Co musi mieć dobra strona pod reklamy?</p>
                         <h2 className="text-2xl font-medium md:text-4xl">
                             Landing page pod Google Ads działa, gdy usuwa tarcie i nie rozprasza uwagi
                         </h2>
@@ -171,7 +165,7 @@ export default function GoogleAdsLandingPage() {
             <section className="bg-gray-50 px-6 py-16 md:py-24">
                 <div className="mx-auto grid max-w-[1800px] grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr]">
                     <div>
-                        <p className="mb-3 text-gray-500">Dla kogo</p>
+                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>Dla kogo</p>
                         <h2 className="text-2xl font-medium leading-tight md:text-4xl">
                             Jedna strona pod reklamę, jedna oferta, jeden ruch użytkownika
                         </h2>
@@ -189,7 +183,7 @@ export default function GoogleAdsLandingPage() {
             <section className="px-6 py-16 md:py-24">
                 <div className="mx-auto max-w-[1800px]">
                     <div className="mb-12 max-w-4xl">
-                        <p className="mb-3 text-gray-500">Proces</p>
+                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>Proces</p>
                         <h2 className="text-2xl font-medium md:text-4xl">
                             Projektujemy landing page pod kampanię, nie odwrotnie
                         </h2>
@@ -213,12 +207,9 @@ export default function GoogleAdsLandingPage() {
                                     Zrobimy stronę pod konkretną frazę, reklamę i konwersję. Bez kopiowania homepage.
                                 </p>
                             </div>
-                            <Link
-                                href="#formularz"
-                                className="inline-flex items-center justify-center rounded-full border border-black bg-black px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800"
-                            >
+                            <NotchedButton href="#formularz" variant="primary-light">
                                 Poproś o landing page
-                            </Link>
+                            </NotchedButton>
                         </div>
                     </div>
                 </div>

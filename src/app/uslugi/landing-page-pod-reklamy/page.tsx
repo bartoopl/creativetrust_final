@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import LandingLeadForm from '@/components/LandingLeadForm';
 import SchemaScript from '@/components/SchemaScript';
+import NotchedButton from '@/components/ui/NotchedButton';
 import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/landing-page-pod-reklamy`;
@@ -68,7 +68,7 @@ export default function LandingPageAdsPage() {
             <section className="bg-black px-6 py-20 text-white md:py-28">
                 <div className="mx-auto grid max-w-[1800px] grid-cols-1 items-center gap-16 lg:grid-cols-[1fr_0.95fr]">
                     <div>
-                        <p className="mb-6 text-sm uppercase tracking-[0.3em] text-white/40">
+                        <p className="mb-6 text-sm uppercase tracking-[0.3em]" style={{ color: 'var(--lime-ink)' }}>
                             Performance
                         </p>
                         <h1 className="mb-8 text-3xl font-medium leading-tight md:text-5xl">
@@ -79,18 +79,12 @@ export default function LandingPageAdsPage() {
                             szybkość i CTA tak, żeby ruch z reklam miał prostą drogę do zapytania.
                         </p>
                         <div className="flex flex-col gap-4 sm:flex-row">
-                            <Link
-                                href="#formularz"
-                                className="inline-flex items-center justify-center rounded-full border border-white bg-white px-5 py-3 text-sm font-medium text-black transition-colors hover:bg-gray-200"
-                            >
+                            <NotchedButton href="#formularz" variant="primary-dark">
                                 Zleć landing page
-                            </Link>
-                            <Link
-                                href="/uslugi/strony-www"
-                                className="inline-flex items-center justify-center rounded-full border border-white/25 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black"
-                            >
+                            </NotchedButton>
+                            <NotchedButton href="/uslugi/strony-www" variant="ghost-dark">
                                 Oferta stron WWW
-                            </Link>
+                            </NotchedButton>
                         </div>
                     </div>
 
@@ -122,7 +116,7 @@ export default function LandingPageAdsPage() {
             <section className="px-6 py-16 md:py-24">
                 <div className="mx-auto max-w-[1800px]">
                     <div className="mb-12 max-w-4xl">
-                        <p className="mb-3 text-gray-500">Must-have landing page</p>
+                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>Must-have landing page</p>
                         <h2 className="text-2xl font-medium md:text-4xl">
                             Landing pod reklamy powinien być prosty, szybki i bez tarcia
                         </h2>
@@ -140,7 +134,7 @@ export default function LandingPageAdsPage() {
             <section className="bg-gray-50 px-6 py-16 md:py-24">
                 <div className="mx-auto grid max-w-[1800px] grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr]">
                     <div>
-                        <p className="mb-3 text-gray-500">Dla kogo</p>
+                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>Dla kogo</p>
                         <h2 className="text-2xl font-medium leading-tight md:text-4xl">
                             Dla kampanii, które mają sprzedawać konkretną ofertę, a nie ogólny wizerunek
                         </h2>
@@ -158,7 +152,7 @@ export default function LandingPageAdsPage() {
             <section className="px-6 py-16 md:py-24">
                 <div className="mx-auto max-w-[1800px]">
                     <div className="mb-12 max-w-4xl">
-                        <p className="mb-3 text-gray-500">Co robimy</p>
+                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>Co robimy</p>
                         <h2 className="text-2xl font-medium md:text-4xl">
                             Projekt pod reklamę, od komunikatu po CTA
                         </h2>
