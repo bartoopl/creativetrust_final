@@ -52,11 +52,11 @@ export default function MarketingAutomationPage() {
             <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(60px, 8vw, 96px) 32px 80px' }}>
                 <div style={{ display: 'grid', gap: 64, alignItems: 'start' }} className="grid-cols-1 lg:grid-cols-[1fr_0.9fr]">
                     <div>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime)', textTransform: 'uppercase', marginBottom: 16 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 16 }}>
                             MARKETING AUTOMATION
                         </div>
                         <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 5vw, 60px)', lineHeight: 0.98, letterSpacing: '-0.045em', margin: '0 0 18px' }}>
-                            Kampanie, które działają <span style={{ color: 'var(--lime)' }}>kiedy śpisz.</span>
+                            Kampanie, które działają <span style={{ color: 'var(--lime-ink)' }}>kiedy śpisz.</span>
                         </h1>
                         <p style={{ fontSize: 'clamp(14px, 1.2vw, 17px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 28px' }}>
                             Wdrażamy SALESmanago i budujemy automatyzacje oparte na danych i AI. Lejki, lead nurturing, personalizacja, integracje CRM — działają bez Twojego udziału.
@@ -66,12 +66,12 @@ export default function MarketingAutomationPage() {
                         </NotchedButton>
                     </div>
                     <div style={{ borderRadius: 20, border: '1px solid color-mix(in srgb, var(--lime) 30%, var(--line))', background: 'color-mix(in srgb, var(--lime) 7%, var(--panel))', padding: 32 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.12em', color: 'var(--lime)', textTransform: 'uppercase', marginBottom: 20 }}>// status: active</div>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.12em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 20 }}>// status: active</div>
                         {['lead scoring', 'email nurturing', 'CRM sync', 'AI content', 'behavioral triggers', 'real-time personalization'].map((item, i) => (
                             <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0', borderBottom: i < 5 ? '1px solid var(--line)' : 'none' }}>
                                 <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--lime)', boxShadow: '0 0 8px var(--glow)', flexShrink: 0, animation: `ctpulse 2s ease-in-out ${i * 0.3}s infinite` }} />
                                 <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 14, color: 'var(--text)' }}>{item}</span>
-                                <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--lime)' }}>running</span>
+                                <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--lime-ink)' }}>running</span>
                             </div>
                         ))}
                     </div>
@@ -84,7 +84,7 @@ export default function MarketingAutomationPage() {
                     <div style={{ display: 'grid', gap: 24 }} className="grid-cols-2 md:grid-cols-4">
                         {stats.map(s => (
                             <div key={s.value} style={{ borderLeft: '1px solid var(--line)', paddingLeft: 20 }}>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.1vw, 40px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--lime)' }}>{s.value}</div>
+                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.1vw, 40px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--lime-ink)' }}>{s.value}</div>
                                 <div style={{ color: 'var(--muted)', fontSize: 13, marginTop: 10 }}>{s.label}</div>
                             </div>
                         ))}
@@ -96,13 +96,13 @@ export default function MarketingAutomationPage() {
             <section id="oferta" style={{ borderTop: '1px solid var(--line)' }}>
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
                     <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime)', textTransform: 'uppercase', marginBottom: 12 }}>CO ROBIMY</div>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 12 }}>CO ROBIMY</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Zakres automatyzacji.</h2>
                     </div>
                     <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                         {services.map(s => (
                             <div key={s.num} style={{ borderRadius: 20, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--lime)', marginBottom: 22 }}>{s.num}</div>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--lime-ink)', marginBottom: 22 }}>{s.num}</div>
                                 <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 17, margin: '0 0 10px' }}>{s.title}</h3>
                                 <p style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.55, margin: 0 }}>{s.description}</p>
                             </div>
@@ -115,7 +115,7 @@ export default function MarketingAutomationPage() {
             <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
                     <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime)', textTransform: 'uppercase', marginBottom: 12 }}>ZASTOSOWANIA</div>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 12 }}>ZASTOSOWANIA</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Dla kogo to działa.</h2>
                     </div>
                     <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2">
@@ -133,13 +133,13 @@ export default function MarketingAutomationPage() {
             <section style={{ borderTop: '1px solid var(--line)' }}>
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
                     <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime)', textTransform: 'uppercase', marginBottom: 12 }}>PROCES</div>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 12 }}>PROCES</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Od audytu do automatyzacji.</h2>
                     </div>
                     <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
                         {process.map(step => (
                             <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: step.featured ? 'linear-gradient(160deg, color-mix(in srgb, var(--lime) 16%, var(--panel)), var(--panel))' : 'var(--panel)', border: step.featured ? '1px solid color-mix(in srgb, var(--lime) 40%, var(--line))' : '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--lime)', marginBottom: 38 }}>{step.num}</div>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--lime-ink)', marginBottom: 38 }}>{step.num}</div>
                                 <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 8px' }}>{step.title}</h3>
                                 <p style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.5, margin: 0 }}>{step.description}</p>
                             </div>

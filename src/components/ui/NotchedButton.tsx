@@ -39,7 +39,7 @@ const VARIANT_STYLE: Record<Variant, React.CSSProperties> = {
     'ghost-light': {
         background: 'transparent',
         border: '1px solid rgba(0,0,0,0.1)',
-        borderLeft: '2px solid var(--lime)',
+        borderLeft: '2px solid var(--lime-ink)',
         color: '#000',
         padding: '0 14px 0 12px',
     },

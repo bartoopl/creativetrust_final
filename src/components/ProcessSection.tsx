@@ -4,6 +4,7 @@ import NotchedButton from './ui/NotchedButton';
 const lanes = [
     {
         label: 'Strony www',
+        anchor: 'strony-www',
         kicker: 'Projektowanie i wdrożenie z myślą o wynikach',
         title: 'Strony, które pracują na Twój biznes',
         text: 'Nie robimy stron dla samego robienia stron. Każdy projekt zaczynamy od zrozumienia Twojego biznesu - a kończymy na wdrożeniu, które generuje wyniki.',
@@ -19,6 +20,7 @@ const lanes = [
     },
     {
         label: 'Ecommerce',
+        anchor: 'ecommerce',
         kicker: 'Headless ecommerce bez kompromisów',
         title: 'Sklep, który skaluje razem z Twoim biznesem',
         text: 'Medusa.js daje Ci pełną kontrolę nad kodem, danymi i UX - bez comiesięcznych opłat za platformę i bez ograniczeń, gdy chcesz rosnąć.',
@@ -34,6 +36,7 @@ const lanes = [
     },
     {
         label: 'Marketing automation',
+        anchor: 'marketing-automation',
         kicker: 'Procesy, które pracują za Ciebie',
         title: 'Automatyzacja, która przekłada się na sprzedaż',
         text: 'Konfigurujemy automatyzacje, które oszczędzają czas i zwiększają przychody - od welcome sequence po zaawansowany lead scoring i wielokanałowe kampanie.',
@@ -49,6 +52,7 @@ const lanes = [
     },
     {
         label: 'Social media',
+        anchor: 'social-media',
         kicker: 'Content z głową, nie dla samego contentu',
         title: 'Social media, które buduje markę i sprzedaje',
         text: 'Nie robimy postów dla postów. Każdy content jest podporządkowany strategii i mierzalnym celom biznesowym - zasięg, konwersja, lojalność.',
@@ -66,7 +70,7 @@ const lanes = [
 
 function Bullet() {
     return (
-        <svg width="8" height="8" viewBox="0 0 8 8" fill="var(--lime)">
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="var(--lime-ink)">
             <rect width="8" height="8" />
         </svg>
     );
@@ -84,15 +88,20 @@ export default function ProcessSection() {
                 <div className="flex items-start gap-8">
                     <div className="sticky top-24 hidden w-[224px] flex-none flex-col gap-1 lg:flex">
                         {lanes.map((lane, index) => (
-                            <div key={lane.label} style={{ padding: '12px 0 12px 12px', fontSize: 12.2, fontWeight: 500, color: index === 0 ? '#000' : 'rgba(0,0,0,0.4)', letterSpacing: '-0.36px', lineHeight: '20px', borderLeft: index === 0 ? '2px solid var(--lime)' : '2px solid transparent' }}>
+                            <Link
+                                key={lane.label}
+                                href={`#${lane.anchor}`}
+                                style={{ padding: '12px 0 12px 12px', fontSize: 12.2, fontWeight: 500, color: index === 0 ? '#000' : 'rgba(0,0,0,0.4)', letterSpacing: '-0.36px', lineHeight: '20px', borderLeft: index === 0 ? '2px solid var(--lime-ink)' : '2px solid transparent', textDecoration: 'none', transition: 'color .15s, border-color .15s' }}
+                                className="hover:text-black"
+                            >
                                 {lane.label}
-                            </div>
+                            </Link>
                         ))}
                     </div>
 
                     <div className="flex-1 flex flex-col gap-16 pb-16 lg:gap-20 lg:pb-24">
                         {lanes.map((lane, index) => (
-                            <div key={lane.label} className="flex flex-col gap-8 lg:flex-row lg:gap-[120px]">
+                            <div key={lane.label} id={lane.anchor} className="scroll-mt-24 flex flex-col gap-8 lg:flex-row lg:gap-[120px]">
                                 <div className="flex w-full flex-none flex-col gap-6 lg:w-[416px] lg:gap-10">
                                     <div className="flex flex-col gap-2">
                                         <span style={{ fontSize: 12.2, fontWeight: 500, color: 'rgba(0,0,0,0.4)', letterSpacing: '-0.36px', lineHeight: '20px' }}>
@@ -109,7 +118,7 @@ export default function ProcessSection() {
                                         </p>
 
                                         {index === 0 && (
-                                            <div style={{ borderLeft: '2px solid var(--lime)', paddingLeft: 24, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                                            <div style={{ borderLeft: '2px solid var(--lime-ink)', paddingLeft: 24, display: 'flex', flexDirection: 'column', gap: 6 }}>
                                                 <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: '#000', margin: 0 }}>
                                                     Firmy z dobrze zaprojektowanym UX konwertują nawet 3× lepiej.
                                                 </p>

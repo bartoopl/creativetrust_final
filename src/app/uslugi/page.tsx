@@ -16,6 +16,44 @@ const services = [
     { num: '04', title: 'Marketing Automation', href: '/uslugi/marketing-automation', description: 'Lejki, CRM i kampanie sterowane danymi i AI. Działają, kiedy śpisz.', tags: ['SALESmanago', 'Lead nurturing', 'AI'] },
 ];
 
+const landingPages = [
+    {
+        title: 'Migracja WooCommerce do headless',
+        href: '/uslugi/migracja-woocommerce-do-headless',
+        description: 'Fraza dla sklepów, które potrzebują wydajności, elastyczności i lepszej kontroli nad UX.',
+    },
+    {
+        title: 'Wdrożenie SALESmanago',
+        href: '/uslugi/wdrozenie-salesmanago',
+        description: 'Landing pod zapytania o partnera i implementację marketing automation.',
+    },
+    {
+        title: 'Landing page Google Ads',
+        href: '/uslugi/landing-page-google-ads',
+        description: 'Strona pod kampanie płatne, reklamy i konkretne zapytania sprzedażowe.',
+    },
+    {
+        title: 'Tworzenie stron WWW cennik',
+        href: '/uslugi/tworzenie-stron-www-cennik',
+        description: 'Wycena strony WWW dla osób szukających orientacyjnego budżetu i zakresu.',
+    },
+    {
+        title: 'Strona firmowa cena',
+        href: '/uslugi/strona-firmowa-cena',
+        description: 'Landing pod zapytania o koszt i zakres strony firmowej.',
+    },
+    {
+        title: 'Landing page pod reklamy',
+        href: '/uslugi/landing-page-pod-reklamy',
+        description: 'Strona pod kampanie płatne i lead generation.',
+    },
+    {
+        title: 'Headless WooCommerce',
+        href: '/uslugi/headless-woocommerce',
+        description: 'Landing pod frazy związane z przebudową sklepu WooCommerce.',
+    },
+];
+
 const process = [
     { num: '01', title: 'Diagnoza', description: 'Audyt, dane, cele. AI przyspiesza research i analizę konkurencji.' },
     { num: '02', title: 'Projekt', description: 'Strategia i design. Warianty generujemy i testujemy szybciej niż kiedykolwiek.' },
@@ -86,6 +124,28 @@ export default function ServicesPage() {
                                     ))}
                                 </div>
                                 <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 18, color: '#000', flexShrink: 0 }}>→</span>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: 'var(--panel2)' }}>
+                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
+                    <div style={{ marginBottom: 48 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>LANDING PAGES SEO</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Strony pod konkretne frazy i intencje zakupowe.</h2>
+                    </div>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        {landingPages.map((page) => (
+                            <Link key={page.href} href={page.href} className="ct-service-row rounded-2xl border border-[rgba(0,0,0,0.08)] bg-white p-6 no-underline transition-all hover:bg-white" style={{ marginBottom: 0 }}>
+                                <div className="flex items-start justify-between gap-6">
+                                    <div>
+                                        <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, margin: '0 0 8px', letterSpacing: '-0.8px', color: 'var(--text)' }}>{page.title}</h3>
+                                        <p style={{ color: 'rgba(0,0,0,0.6)', fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', margin: 0, maxWidth: '52ch' }}>{page.description}</p>
+                                    </div>
+                                    <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 18, color: '#000', flexShrink: 0 }}>→</span>
+                                </div>
                             </Link>
                         ))}
                     </div>

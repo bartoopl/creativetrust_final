@@ -40,7 +40,7 @@ function Bullet({ active }: { active?: boolean }) {
 
 export default function Services() {
     return (
-        <section style={{ background: '#000', padding: '72px 16px 80px' }} className="lg:px-[72px] lg:py-[112px]">
+        <section id="uslugi" style={{ background: '#000', padding: '72px 16px 80px' }} className="lg:px-[72px] lg:py-[112px]">
             <div style={{ maxWidth: 1440, margin: '0 auto' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }} className="lg:gap-20">
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>

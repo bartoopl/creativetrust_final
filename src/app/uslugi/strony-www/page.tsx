@@ -46,11 +46,11 @@ export default function WebsitesPage() {
             {/* Hero */}
             <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }}>
                 <div style={{ maxWidth: 820 }}>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime)', textTransform: 'uppercase', marginBottom: 20 }}>
+                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 20 }}>
                         STRONY WWW
                     </div>
                     <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 5.2vw, 64px)', lineHeight: 0.98, letterSpacing: '-0.045em', margin: '0 0 18px' }}>
-                        Strony, które przyciągają klientów i <span style={{ color: 'var(--lime)' }}>konwertują.</span>
+                        Strony, które przyciągają klientów i <span style={{ color: 'var(--lime-ink)' }}>konwertują.</span>
                     </h1>
                     <p style={{ fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 32px' }}>
                         Projektujemy i wdrażamy strony WWW oparte na danych — od landing page po rozbudowany portal. Headless, szybkie, SEO-ready. Czas realizacji skrócony o 30–40% dzięki AI.
@@ -63,7 +63,7 @@ export default function WebsitesPage() {
                     <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
                         {[['150+', 'stron'], ['15', 'lat'], ['90+', 'PageSpeed'], ['30-40%', 'szybciej']].map(([val, label]) => (
                             <div key={label}>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 32, letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--lime)' }}>{val}</div>
+                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 32, letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--lime-ink)' }}>{val}</div>
                                 <div style={{ color: 'var(--muted)', fontSize: 13, marginTop: 4 }}>{label}</div>
                             </div>
                         ))}
@@ -75,13 +75,13 @@ export default function WebsitesPage() {
             <section id="oferta" style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
                     <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime)', textTransform: 'uppercase', marginBottom: 14 }}>TYPY PROJEKTÓW</div>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 14 }}>TYPY PROJEKTÓW</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Co możemy zbudować.</h2>
                     </div>
                     <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2">
                         {types.map(t => (
                             <div key={t.num} style={{ borderRadius: 20, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--lime)', marginBottom: 28 }}>{t.num}</div>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--lime-ink)', marginBottom: 28 }}>{t.num}</div>
                                 <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 10px' }}>{t.title}</h3>
                                 <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.55, margin: '0 0 20px' }}>{t.description}</p>
                                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -99,7 +99,7 @@ export default function WebsitesPage() {
             <section style={{ borderTop: '1px solid var(--line)' }}>
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
                     <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime)', textTransform: 'uppercase', marginBottom: 14 }}>STANDARD PROJEKTU</div>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 14 }}>STANDARD PROJEKTU</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Co dostajesz w każdym projekcie.</h2>
                     </div>
                     <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -117,7 +117,7 @@ export default function WebsitesPage() {
             <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
                     <div style={{ marginBottom: 40 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime)', textTransform: 'uppercase', marginBottom: 14 }}>TECH STACK</div>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 14 }}>TECH STACK</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Technologie, które wybieramy z powodu.</h2>
                     </div>
                     <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -132,7 +132,7 @@ export default function WebsitesPage() {
             <section style={{ borderTop: '1px solid var(--line)' }}>
                 <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
                     <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime)', textTransform: 'uppercase', marginBottom: 14 }}>PROCES</div>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 14 }}>PROCES</div>
                         <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>
                             Od briefu do gotowej strony.
                         </h2>
@@ -140,7 +140,7 @@ export default function WebsitesPage() {
                     <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
                         {process.map(step => (
                             <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: step.featured ? 'linear-gradient(160deg, color-mix(in srgb, var(--lime) 16%, var(--panel)), var(--panel))' : 'var(--panel)', border: step.featured ? '1px solid color-mix(in srgb, var(--lime) 40%, var(--line))' : '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--lime)', marginBottom: 48 }}>{step.num}</div>
+                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--lime-ink)', marginBottom: 48 }}>{step.num}</div>
                                 <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 8px' }}>{step.title}</h3>
                                 <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.5, margin: 0 }}>{step.description}</p>
                             </div>

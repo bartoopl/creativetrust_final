@@ -57,7 +57,7 @@ export default function EcommercePage() {
                         E-COMMERCE
                     </div>
                     <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: '0 0 18px', maxWidth: '12ch' }}>
-                        Sklepy, które sprzedają i <span style={{ color: 'var(--lime)' }}>skalują się.</span>
+                        Sklepy, które sprzedają i <span style={{ color: 'var(--lime-ink)' }}>skalują się.</span>
                     </h1>
                     <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', color: 'rgba(255,255,255,0.6)', maxWidth: '54ch', margin: '0 0 28px' }}>
                         Projektujemy i wdrażamy sklepy e-commerce oparte na danych i AI. Nowe wdrożenia, migracje platform, integracje ERP — szybciej i z lepszym wynikiem niż tradycyjny proces.
