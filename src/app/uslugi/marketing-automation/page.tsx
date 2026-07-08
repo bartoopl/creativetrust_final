@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
 import NotchedButton from '@/components/ui/NotchedButton';
-import { SITE_URL } from '@/lib/schema';
+import SchemaScript from '@/components/SchemaScript';
+import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'Marketing Automation dla Firm — CreativeTrust | AI, SALESmanago, lejki, CRM',
@@ -45,8 +46,17 @@ const process = [
 ];
 
 export default function MarketingAutomationPage() {
+    const serviceSchema = buildServiceSchema({
+        name: 'Marketing Automation',
+        description:
+            'Automatyzacja marketingu, SALESmanago, lejki, CRM i kampanie oparte na danych.',
+        url: `${SITE_URL}/uslugi/marketing-automation`,
+        serviceType: 'Marketing automation',
+    });
+
     return (
         <main style={{ minHeight: '100vh' }}>
+            <SchemaScript schema={serviceSchema} />
 
             {/* Hero */}
             <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(60px, 8vw, 96px) 32px 80px' }}>

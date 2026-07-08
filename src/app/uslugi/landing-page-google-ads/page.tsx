@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import LandingLeadForm from '@/components/LandingLeadForm';
+import FAQAccordion from '@/components/FAQAccordion';
 import SchemaScript from '@/components/SchemaScript';
 import NotchedButton from '@/components/ui/NotchedButton';
-import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/landing-page-google-ads`;
 
@@ -84,16 +85,39 @@ const process = [
     },
 ];
 
+const faqs = [
+    {
+        question: 'Czy landing page pod Google Ads powinien być osobną stroną?',
+        answer: 'Tak, jeśli kampania ma jedną ofertę i jeden cel konwersji. Osobna strona zwykle lepiej dopasowuje komunikat niż homepage.',
+    },
+    {
+        question: 'Czym różni się od zwykłej strony usługowej?',
+        answer: 'Landing ma krótszą ścieżkę, mniej rozpraszaczy i mocniejsze CTA. Strona usługowa jest szersza i mniej wyspecjalizowana.',
+    },
+    {
+        question: 'Czy pomagacie też z SEO takiego landinga?',
+        answer: 'Tak, ale w sensie technicznym i treściowym: intencja, meta, nagłówki, wydajność i linkowanie. Nie robimy klasycznego SEO kampanijnego.',
+    },
+];
+
 export default function GoogleAdsLandingPage() {
     const breadcrumbSchema = buildBreadcrumbSchema([
         { name: 'Strona główna', url: SITE_URL },
         { name: 'Usługi', url: `${SITE_URL}/uslugi` },
         { name: 'Landing page Google Ads', url: canonicalUrl },
     ]);
+    const serviceSchema = buildServiceSchema({
+        name: 'Landing page Google Ads',
+        description:
+            'Strona pod kampanie Google Ads i performance marketing, projektowana pod jedną ofertę i jedną konwersję.',
+        url: canonicalUrl,
+        serviceType: 'Landing page pod reklamy',
+    });
+    const faqSchema = buildFaqSchema(faqs.map(({ question, answer }) => ({ question, answer })));
 
     return (
         <main className="min-h-screen bg-white">
-            <SchemaScript schema={breadcrumbSchema} />
+            <SchemaScript schema={[breadcrumbSchema, serviceSchema, faqSchema]} />
 
             <section className="bg-black px-6 py-20 text-white md:py-28">
                 <div className="mx-auto grid max-w-[1800px] grid-cols-1 items-center gap-16 lg:grid-cols-[1fr_0.95fr]">
@@ -212,6 +236,16 @@ export default function GoogleAdsLandingPage() {
                             </NotchedButton>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <section className="bg-gray-50 px-6 py-16 md:py-24">
+                <div className="mx-auto max-w-[1100px]">
+                    <div className="mb-10 max-w-3xl">
+                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>FAQ</p>
+                        <h2 className="text-2xl font-medium md:text-4xl">Najczęstsze pytania o landing page pod reklamy</h2>
+                    </div>
+                    <FAQAccordion items={faqs.map(({ question, answer }) => ({ question, answer }))} />
                 </div>
             </section>
 

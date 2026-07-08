@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/Button';
+import FAQAccordion from '@/components/FAQAccordion';
 import LandingLeadForm from '@/components/LandingLeadForm';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/tworzenie-stron-www-cennik`;
 
@@ -77,16 +78,39 @@ const comparisons = [
     },
 ];
 
+const faqs = [
+    {
+        question: 'Ile kosztuje strona internetowa dla firmy?',
+        answer: 'To zależy od zakresu. Prosta strona zaczyna się od kilku tysięcy złotych, a większe serwisy z CMS i integracjami są wyceniane indywidualnie.',
+    },
+    {
+        question: 'Czy cennik oznacza stałą cenę?',
+        answer: 'Nie. To orientacyjny punkt startu, który pomaga dobrać zakres do celu biznesowego i budżetu.',
+    },
+    {
+        question: 'Czy taki landing pomaga w SEO?',
+        answer: 'Tak, jeśli odpowiada na konkretną intencję wyszukiwania, ma dobrą strukturę, szybko się ładuje i prowadzi do kontaktu.',
+    },
+];
+
 export default function WebsitePricingPage() {
     const breadcrumbSchema = buildBreadcrumbSchema([
         { name: 'Strona główna', url: SITE_URL },
         { name: 'Usługi', url: `${SITE_URL}/uslugi` },
         { name: 'Tworzenie stron WWW cennik', url: canonicalUrl },
     ]);
+    const serviceSchema = buildServiceSchema({
+        name: 'Tworzenie stron WWW cennik',
+        description:
+            'Orientacyjny cennik stron WWW: od landing page po rozbudowany serwis firmowy z CMS, SEO i integracjami.',
+        url: canonicalUrl,
+        serviceType: 'Cennik stron internetowych',
+    });
+    const faqSchema = buildFaqSchema(faqs.map(({ question, answer }) => ({ question, answer })));
 
     return (
         <main className="min-h-screen bg-white">
-            <SchemaScript schema={breadcrumbSchema} />
+            <SchemaScript schema={[breadcrumbSchema, serviceSchema, faqSchema]} />
 
             <section className="px-6 py-20 md:py-28 bg-gray-50">
                 <div className="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-16 items-center">
@@ -203,6 +227,16 @@ export default function WebsitePricingPage() {
                         </div>
                         <Button href="#formularz">Wyceń projekt WWW</Button>
                     </div>
+                </div>
+            </section>
+
+            <section className="bg-gray-50 px-6 py-16 md:py-24">
+                <div className="mx-auto max-w-[1100px]">
+                    <div className="mb-10 max-w-3xl">
+                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>FAQ</p>
+                        <h2 className="text-2xl font-medium md:text-4xl">Najczęstsze pytania o cennik stron WWW</h2>
+                    </div>
+                    <FAQAccordion items={faqs.map(({ question, answer }) => ({ question, answer }))} />
                 </div>
             </section>
 

@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import LandingLeadForm from '@/components/LandingLeadForm';
+import FAQAccordion from '@/components/FAQAccordion';
 import SchemaScript from '@/components/SchemaScript';
 import NotchedButton from '@/components/ui/NotchedButton';
-import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/strona-firmowa-cena`;
 
@@ -66,16 +67,39 @@ const checklist = [
     'podstawowe SEO i pomiar wyników',
 ];
 
+const faqs = [
+    {
+        question: 'Od czego najbardziej zależy cena strony firmowej?',
+        answer: 'Od zakresu, treści, CMS, integracji, poziomu projektu i tego, czy strona ma sprzedawać, czy tylko prezentować firmę.',
+    },
+    {
+        question: 'Czy ta strona jest dobra jako landing SEO?',
+        answer: 'Tak, jeśli użytkownik szuka wyceny i chce szybko zrozumieć przedział budżetu oraz czynniki wpływające na koszt.',
+    },
+    {
+        question: 'Czy cena z formularza jest ostateczna?',
+        answer: 'Nie. Formularz służy do diagnozy zakresu, a wycena zależy od realnych potrzeb i decyzji projektowych.',
+    },
+];
+
 export default function CompanyWebsitePricingPage() {
     const breadcrumbSchema = buildBreadcrumbSchema([
         { name: 'Strona główna', url: SITE_URL },
         { name: 'Usługi', url: `${SITE_URL}/uslugi` },
         { name: 'Strona firmowa cena', url: canonicalUrl },
     ]);
+    const serviceSchema = buildServiceSchema({
+        name: 'Strona firmowa cena',
+        description:
+            'Landing page pod frazę strona firmowa cena, koszt strony firmowej i wycena strony dla firmy.',
+        url: canonicalUrl,
+        serviceType: 'Wycena strony firmowej',
+    });
+    const faqSchema = buildFaqSchema(faqs.map(({ question, answer }) => ({ question, answer })));
 
     return (
         <main className="min-h-screen bg-white">
-            <SchemaScript schema={breadcrumbSchema} />
+            <SchemaScript schema={[breadcrumbSchema, serviceSchema, faqSchema]} />
 
             <section className="bg-black px-6 py-20 text-white md:py-28">
                 <div className="mx-auto grid max-w-[1800px] grid-cols-1 items-center gap-16 lg:grid-cols-[1fr_0.95fr]">
@@ -187,6 +211,16 @@ export default function CompanyWebsitePricingPage() {
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            <section className="bg-gray-50 px-6 py-16 md:py-24">
+                <div className="mx-auto max-w-[1100px]">
+                    <div className="mb-10 max-w-3xl">
+                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>FAQ</p>
+                        <h2 className="text-2xl font-medium md:text-4xl">Najczęstsze pytania o cenę strony firmowej</h2>
+                    </div>
+                    <FAQAccordion items={faqs.map(({ question, answer }) => ({ question, answer }))} />
                 </div>
             </section>
 

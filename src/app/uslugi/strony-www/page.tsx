@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
 import NotchedButton from '@/components/ui/NotchedButton';
-import { SITE_URL } from '@/lib/schema';
+import SchemaScript from '@/components/SchemaScript';
+import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'Tworzenie stron internetowych — CreativeTrust | Szybkie, skuteczne, AI-assisted',
@@ -40,8 +41,17 @@ const process = [
 ];
 
 export default function WebsitesPage() {
+    const serviceSchema = buildServiceSchema({
+        name: 'Strony WWW',
+        description:
+            'Strony internetowe, landing pages i serwisy projektowane pod konwersję, SEO i wydajność.',
+        url: `${SITE_URL}/uslugi/strony-www`,
+        serviceType: 'Projektowanie stron WWW',
+    });
+
     return (
         <main style={{ minHeight: '100vh' }}>
+            <SchemaScript schema={serviceSchema} />
 
             {/* Hero */}
             <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }}>

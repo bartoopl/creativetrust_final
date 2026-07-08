@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import LandingLeadForm from '@/components/LandingLeadForm';
+import FAQAccordion from '@/components/FAQAccordion';
 import SchemaScript from '@/components/SchemaScript';
 import NotchedButton from '@/components/ui/NotchedButton';
-import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/landing-page-pod-reklamy`;
 
@@ -54,16 +55,39 @@ const useCases = [
     'testowanie nowego komunikatu sprzedażowego',
 ];
 
+const faqs = [
+    {
+        question: 'Czym landing page pod reklamy różni się od landing page Google Ads?',
+        answer: 'Zakres jest szerszy, bo strona może obsługiwać różne kampanie performance, nie tylko jedną platformę reklamową.',
+    },
+    {
+        question: 'Czy taki landing ma sens przy małym budżecie?',
+        answer: 'Tak, jeśli kampania ma jedną ofertę i potrzebujesz maksymalnie krótkiej drogi do kontaktu.',
+    },
+    {
+        question: 'Czy pomagacie dopasować treść do reklamy?',
+        answer: 'Tak. Dopasowujemy headline, sekcje i CTA tak, aby ruch z reklam nie trafiał na komunikacyjny chaos.',
+    },
+];
+
 export default function LandingPageAdsPage() {
     const breadcrumbSchema = buildBreadcrumbSchema([
         { name: 'Strona główna', url: SITE_URL },
         { name: 'Usługi', url: `${SITE_URL}/uslugi` },
         { name: 'Landing page pod reklamy', url: canonicalUrl },
     ]);
+    const serviceSchema = buildServiceSchema({
+        name: 'Landing page pod reklamy',
+        description:
+            'Strona pod kampanie performance i lead generation, projektowana pod jedną obietnicę i jedno CTA.',
+        url: canonicalUrl,
+        serviceType: 'Landing page performance',
+    });
+    const faqSchema = buildFaqSchema(faqs.map(({ question, answer }) => ({ question, answer })));
 
     return (
         <main className="min-h-screen bg-white">
-            <SchemaScript schema={breadcrumbSchema} />
+            <SchemaScript schema={[breadcrumbSchema, serviceSchema, faqSchema]} />
 
             <section className="bg-black px-6 py-20 text-white md:py-28">
                 <div className="mx-auto grid max-w-[1800px] grid-cols-1 items-center gap-16 lg:grid-cols-[1fr_0.95fr]">
@@ -173,6 +197,16 @@ export default function LandingPageAdsPage() {
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            <section className="bg-gray-50 px-6 py-16 md:py-24">
+                <div className="mx-auto max-w-[1100px]">
+                    <div className="mb-10 max-w-3xl">
+                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>FAQ</p>
+                        <h2 className="text-2xl font-medium md:text-4xl">Najczęstsze pytania o strony pod reklamy</h2>
+                    </div>
+                    <FAQAccordion items={faqs.map(({ question, answer }) => ({ question, answer }))} />
                 </div>
             </section>
 

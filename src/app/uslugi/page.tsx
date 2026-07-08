@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
-import { SITE_URL } from '@/lib/schema';
+import SchemaScript from '@/components/SchemaScript';
+import { SITE_URL, buildFaqSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'Usługi — CreativeTrust | WWW, e-commerce, AI i automatyzacja',
@@ -69,8 +70,11 @@ const faq = [
 ];
 
 export default function ServicesPage() {
+    const faqSchema = buildFaqSchema(faq.map(({ q, a }) => ({ question: q, answer: a })));
+
     return (
         <main style={{ minHeight: '100vh' }}>
+            <SchemaScript schema={faqSchema} />
             <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                 <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl grid grid-cols-1 items-end gap-12 lg:grid-cols-[1.05fr_0.95fr]">
                     <div>

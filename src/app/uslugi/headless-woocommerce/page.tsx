@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import LandingLeadForm from '@/components/LandingLeadForm';
+import FAQAccordion from '@/components/FAQAccordion';
 import SchemaScript from '@/components/SchemaScript';
 import NotchedButton from '@/components/ui/NotchedButton';
-import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/headless-woocommerce`;
 
@@ -62,16 +63,39 @@ const approaches = [
     },
 ];
 
+const faqs = [
+    {
+        question: 'Czy headless WooCommerce oznacza całkowitą migrację sklepu?',
+        answer: 'Nie zawsze. Czasem najpierw zmieniamy tylko frontend, a backend zostaje w WooCommerce.',
+    },
+    {
+        question: 'Kiedy headless ma największy sens?',
+        answer: 'Gdy motyw i wtyczki ograniczają rozwój, performance albo testowanie nowych doświadczeń zakupowych.',
+    },
+    {
+        question: 'Czy headless poprawia SEO sklepu?',
+        answer: 'Może poprawić techniczne fundamenty SEO dzięki szybkości i lepszej architekturze, ale wymaga też sensownej treści i linkowania.',
+    },
+];
+
 export default function HeadlessWooCommercePage() {
     const breadcrumbSchema = buildBreadcrumbSchema([
         { name: 'Strona główna', url: SITE_URL },
         { name: 'Usługi', url: `${SITE_URL}/uslugi` },
         { name: 'Headless WooCommerce', url: canonicalUrl },
     ]);
+    const serviceSchema = buildServiceSchema({
+        name: 'Headless WooCommerce',
+        description:
+            'Headless WooCommerce z Next.js storefrontem dla sklepów, które potrzebują lepszej wydajności i większej swobody UX.',
+        url: canonicalUrl,
+        serviceType: 'Headless e-commerce',
+    });
+    const faqSchema = buildFaqSchema(faqs.map(({ question, answer }) => ({ question, answer })));
 
     return (
         <main className="min-h-screen bg-white">
-            <SchemaScript schema={breadcrumbSchema} />
+            <SchemaScript schema={[breadcrumbSchema, serviceSchema, faqSchema]} />
 
             <section className="bg-black px-6 py-20 text-white md:py-28">
                 <div className="mx-auto grid max-w-[1800px] grid-cols-1 items-center gap-16 lg:grid-cols-[1fr_0.95fr]">
@@ -182,6 +206,16 @@ export default function HeadlessWooCommercePage() {
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            <section className="bg-gray-50 px-6 py-16 md:py-24">
+                <div className="mx-auto max-w-[1100px]">
+                    <div className="mb-10 max-w-3xl">
+                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>FAQ</p>
+                        <h2 className="text-2xl font-medium md:text-4xl">Najczęstsze pytania o headless WooCommerce</h2>
+                    </div>
+                    <FAQAccordion items={faqs.map(({ question, answer }) => ({ question, answer }))} />
                 </div>
             </section>
 

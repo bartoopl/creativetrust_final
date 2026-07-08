@@ -1,4 +1,4 @@
-const SITE_URL = 'https://creativetrust.pl';
+const SITE_URL = 'https://www.creativetrust.pl';
 
 type JsonLd = Record<string, unknown>;
 
@@ -78,6 +78,48 @@ export function buildBreadcrumbSchema(items: Array<{ name: string; url: string }
             position: index + 1,
             name: item.name,
             item: item.url,
+        })),
+    };
+}
+
+export function buildServiceSchema({
+    name,
+    description,
+    url,
+    serviceType,
+    areaServed = 'PL',
+}: {
+    name: string;
+    description: string;
+    url: string;
+    serviceType: string;
+    areaServed?: string;
+}): JsonLd {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name,
+        description,
+        serviceType,
+        provider: {
+            '@id': `${SITE_URL}/#organization`,
+        },
+        areaServed,
+        url,
+    };
+}
+
+export function buildFaqSchema(items: Array<{ question: string; answer: string }>): JsonLd {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: items.map((item) => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: item.answer,
+            },
         })),
     };
 }

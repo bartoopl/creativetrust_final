@@ -9,6 +9,7 @@ import RealizacjeSection from '@/components/RealizacjeSection';
 import LatestBlogPosts from '@/components/LatestBlogPosts';
 import CTASection from '@/components/CTASection';
 import BlogSection from '@/components/BlogSection';
+import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'CreativeTrust — Projekty cyfrowe, które działają biznesowo',
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'CreativeTrust — Projekty cyfrowe, które działają biznesowo',
         description: 'Strony www, ecommerce headless, marketing automation i social media.',
-        url: 'https://creativetrust.pl',
+        url: SITE_URL,
         type: 'website',
     },
 };

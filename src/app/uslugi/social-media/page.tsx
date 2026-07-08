@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
 import NotchedButton from '@/components/ui/NotchedButton';
-import { SITE_URL } from '@/lib/schema';
+import SchemaScript from '@/components/SchemaScript';
+import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'Social Media Marketing — CreativeTrust | Strategia, content, wyniki',
@@ -40,8 +41,17 @@ const process = [
 ];
 
 export default function SocialMediaPage() {
+    const serviceSchema = buildServiceSchema({
+        name: 'Social Media',
+        description:
+            'Strategia social media, content, kampanie płatne i analityka pod wynik biznesowy.',
+        url: `${SITE_URL}/uslugi/social-media`,
+        serviceType: 'Social media marketing',
+    });
+
     return (
         <main style={{ minHeight: '100vh' }}>
+            <SchemaScript schema={serviceSchema} />
 
             {/* Hero */}
             <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(60px, 8vw, 96px) 32px 80px' }}>

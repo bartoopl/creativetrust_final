@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
 import NotchedButton from '@/components/ui/NotchedButton';
-import { SITE_URL } from '@/lib/schema';
+import SchemaScript from '@/components/SchemaScript';
+import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'E-commerce — CreativeTrust | Sklepy headless, migracje, WooCommerce, Shopify',
@@ -49,8 +50,17 @@ const process = [
 ];
 
 export default function EcommercePage() {
+    const serviceSchema = buildServiceSchema({
+        name: 'E-commerce',
+        description:
+            'Sklepy headless, migracje platform, integracje ERP i optymalizacja konwersji dla e-commerce.',
+        url: `${SITE_URL}/uslugi/e-commerce`,
+        serviceType: 'E-commerce i headless commerce',
+    });
+
     return (
         <main style={{ minHeight: '100vh' }}>
+            <SchemaScript schema={serviceSchema} />
             <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                 <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
                     <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>

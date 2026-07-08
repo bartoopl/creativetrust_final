@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
 import SchemaScript from '@/components/SchemaScript';
-import { organizationSchema } from '@/lib/schema';
+import { SITE_URL, organizationSchema } from '@/lib/schema';
 
 const interDisplay = Inter({
     subsets: ['latin'],
@@ -29,7 +29,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL('https://creativetrust.pl'),
+    metadataBase: new URL(SITE_URL),
     title: {
         default: 'CreativeTrust — AI-native partner produktowy | Web, E-commerce',
         template: '%s | CreativeTrust',
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'CreativeTrust — AI-native partner produktowy',
         description: 'Strategia, design, development i automatyzacja AI w jednym zespole. Tworzymy produkty cyfrowe w tempie AI.',
-        url: 'https://creativetrust.pl',
+        url: SITE_URL,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
         type: 'website',
