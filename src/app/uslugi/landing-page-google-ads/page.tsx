@@ -30,6 +30,10 @@ export const metadata: Metadata = {
         description:
             'Strona pod reklamy Google Ads i kampanie performance. Projekt pod kliknięcia, leady i wynik.',
     },
+    robots: {
+        index: false,
+        follow: true,
+    },
 };
 
 const signals = [

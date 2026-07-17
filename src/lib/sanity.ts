@@ -6,7 +6,7 @@ export const client = createClient({
     dataset: 'production',
     apiVersion: '2023-05-03',
     useCdn: process.env.NODE_ENV === 'production',
-    token: process.env.SANITY_TOKEN, // Dodaj token do zapytań (potrzebny do mutacji)
+    token: process.env.SANITY_TOKEN || process.env.sanity_token, // Token serwerowy; obsługuje istniejącą lokalną nazwę zmiennej.
 });
 
 // Konfiguracja dla obrazów z Sanity

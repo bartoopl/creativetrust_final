@@ -17,7 +17,9 @@ module.exports = {
         '/logowanie-klienta',
         '/panel-klienta',
         '/panel-klienta/*',
-        '/rejestracja-klienta'
+        '/rejestracja-klienta',
+        '/uslugi/landing-page-google-ads',
+        '/uslugi/landing-page-pod-reklamy'
     ],
     additionalPaths: async (config) => {
         const { createClient } = require('next-sanity');

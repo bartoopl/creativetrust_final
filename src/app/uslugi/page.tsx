@@ -29,11 +29,6 @@ const landingPages = [
         description: 'Landing pod zapytania o partnera i implementację marketing automation.',
     },
     {
-        title: 'Landing page Google Ads',
-        href: '/uslugi/landing-page-google-ads',
-        description: 'Strona pod kampanie płatne, reklamy i konkretne zapytania sprzedażowe.',
-    },
-    {
         title: 'Tworzenie stron WWW cennik',
         href: '/uslugi/tworzenie-stron-www-cennik',
         description: 'Wycena strony WWW dla osób szukających orientacyjnego budżetu i zakresu.',
@@ -42,11 +37,6 @@ const landingPages = [
         title: 'Strona firmowa cena',
         href: '/uslugi/strona-firmowa-cena',
         description: 'Landing pod zapytania o koszt i zakres strony firmowej.',
-    },
-    {
-        title: 'Landing page pod reklamy',
-        href: '/uslugi/landing-page-pod-reklamy',
-        description: 'Strona pod kampanie płatne i lead generation.',
     },
     {
         title: 'Headless WooCommerce',

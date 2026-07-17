@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import LandingLeadForm from '@/components/LandingLeadForm';
+import FAQAccordion from '@/components/FAQAccordion';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/migracja-woocommerce-do-headless`;
 
@@ -75,16 +76,38 @@ const outcomes = [
     'czytelniejszy podział odpowiedzialności między commerce backend i storefront',
 ];
 
+const faqs = [
+    {
+        question: 'Czy migracja WooCommerce do headless może odbyć się bez utraty SEO?',
+        answer: 'Tak, jeśli przed uruchomieniem przygotujemy mapę URL, przekierowania 301, canonicale, sitemapę, dane strukturalne i plan monitoringu po wdrożeniu.',
+    },
+    {
+        question: 'Czy trzeba przenosić cały sklep od razu?',
+        answer: 'Nie. W wielu przypadkach bezpieczniejszy jest etapowy rollout, na przykład najpierw storefront lub checkout, a następnie pozostałe obszary sklepu.',
+    },
+    {
+        question: 'Kiedy headless nie jest najlepszym wyborem?',
+        answer: 'Gdy sklep jest prosty, nie ma problemów z wydajnością ani złożonymi integracjami. Wtedy audyt może wskazać tańszą optymalizację obecnego rozwiązania.',
+    },
+];
+
 export default function WooCommerceHeadlessMigrationPage() {
     const breadcrumbSchema = buildBreadcrumbSchema([
         { name: 'Strona główna', url: SITE_URL },
         { name: 'Usługi', url: `${SITE_URL}/uslugi` },
         { name: 'Migracja WooCommerce do headless', url: canonicalUrl },
     ]);
+    const serviceSchema = buildServiceSchema({
+        name: 'Migracja WooCommerce do headless',
+        description: 'Migracja WooCommerce do architektury headless z planem zachowania SEO, danych i sprzedaży.',
+        url: canonicalUrl,
+        serviceType: 'Migracja e-commerce',
+    });
+    const faqSchema = buildFaqSchema(faqs);
 
     return (
         <main className="min-h-screen bg-white">
-            <SchemaScript schema={breadcrumbSchema} />
+            <SchemaScript schema={[breadcrumbSchema, serviceSchema, faqSchema]} />
 
             <section className="px-6 py-20 md:py-28 bg-black text-white overflow-hidden">
                 <div className="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-16 items-center">
@@ -224,6 +247,31 @@ export default function WooCommerceHeadlessMigrationPage() {
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <section className="bg-gray-50 px-6 py-16 md:py-24">
+                <div className="mx-auto grid max-w-[1800px] grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+                    <div>
+                        <p className="mb-3 text-gray-500">SEO w migracji</p>
+                        <h2 className="text-2xl font-medium leading-tight md:text-4xl">Plan migracji chroni widoczność tylko wtedy, gdy jest częścią wdrożenia.</h2>
+                    </div>
+                    <div className="space-y-5 text-lg leading-relaxed text-gray-600">
+                        <p>Przed zmianą technologii ustalamy adresy do zachowania, mapę przekierowań, canonicale, sitemapę, dane strukturalne i pomiar. Po starcie sprawdzamy indeksację, błędy 404 oraz kluczowe strony i zapytania.</p>
+                        <Link href="/blog/migracja-sklepu-bez-utraty-seo" className="inline-flex rounded-full border border-black px-5 py-3 text-sm font-medium text-black transition-colors hover:bg-black hover:text-white">
+                            Zobacz checklistę migracji sklepu bez utraty SEO
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            <section className="px-6 py-16 md:py-24">
+                <div className="mx-auto max-w-[1100px]">
+                    <div className="mb-10 max-w-3xl">
+                        <p className="mb-3 text-gray-500">FAQ</p>
+                        <h2 className="text-2xl font-medium md:text-4xl">Pytania o migrację WooCommerce do headless</h2>
+                    </div>
+                    <FAQAccordion items={faqs} />
                 </div>
             </section>
 

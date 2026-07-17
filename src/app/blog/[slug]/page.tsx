@@ -7,7 +7,9 @@ import { getBlogPost } from '@/lib/sanity';
 import { urlFor } from '@/lib/sanity';
 import PortableTextContent from '@/components/PortableTextContent';
 import AudioPlayer from '@/components/AudioPlayer';
+import BlogServiceLinks from '@/components/BlogServiceLinks';
 import SchemaScript from '@/components/SchemaScript';
+import { getBlogSeoConfig } from '@/lib/blog-seo';
 import { SITE_URL, buildBlogPostingSchema, buildBreadcrumbSchema } from '@/lib/schema';
 
 // Define the params type as a Promise as required in Next.js v15
@@ -21,6 +23,7 @@ export async function generateMetadata({
     // Await the params to get the slug
     const { slug } = await params;
     const post = await getBlogPost(slug);
+    const seoConfig = getBlogSeoConfig(slug);
 
     if (!post) {
         return {
@@ -30,14 +33,14 @@ export async function generateMetadata({
     }
 
     return {
-        title: post.seoTitle || `${post.title} - Blog`,
-        description: post.seoDescription || post.excerpt || '',
+        title: seoConfig?.title || post.seoTitle || `${post.title} - Blog`,
+        description: seoConfig?.description || post.seoDescription || post.excerpt || '',
         alternates: {
             canonical: `${SITE_URL}/blog/${slug}`,
         },
         openGraph: {
-            title: post.seoTitle || post.title,
-            description: post.seoDescription || post.excerpt || '',
+            title: seoConfig?.title || post.seoTitle || post.title,
+            description: seoConfig?.description || post.seoDescription || post.excerpt || '',
             url: `${SITE_URL}/blog/${slug}`,
             type: 'article',
             locale: 'pl_PL',
@@ -45,8 +48,8 @@ export async function generateMetadata({
         },
         twitter: {
             card: 'summary_large_image',
-            title: post.seoTitle || post.title,
-            description: post.seoDescription || post.excerpt || '',
+            title: seoConfig?.title || post.seoTitle || post.title,
+            description: seoConfig?.description || post.seoDescription || post.excerpt || '',
         },
     };
 }
@@ -63,6 +66,7 @@ export default async function BlogPostPage({
     // Await the params to get the slug
     const { slug } = await params;
     const post = await getBlogPost(slug);
+    const seoConfig = getBlogSeoConfig(slug);
 
     if (!post) {
         notFound();
@@ -214,6 +218,7 @@ export default async function BlogPostPage({
 
                     {/* Renderowanie treści za pomocą PortableText */}
                     {post.content && <PortableTextContent content={post.content} />}
+                    <BlogServiceLinks links={seoConfig?.links || []} />
 
                     {/* Informacje o autorze */}
                     <div className="mt-16 pt-8 border-t border-gray-200">

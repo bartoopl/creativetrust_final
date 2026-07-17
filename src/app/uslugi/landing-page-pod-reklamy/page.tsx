@@ -30,6 +30,10 @@ export const metadata: Metadata = {
         description:
             'Strona pod kampanie Google Ads, Meta Ads i lead generation.',
     },
+    robots: {
+        index: false,
+        follow: true,
+    },
 };
 
 const signals = [

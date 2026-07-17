@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import CTASection from '@/components/CTASection';
+import FAQAccordion from '@/components/FAQAccordion';
 import NotchedButton from '@/components/ui/NotchedButton';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
     title: 'Marketing Automation dla Firm — CreativeTrust | AI, SALESmanago, lejki, CRM',
@@ -45,6 +47,21 @@ const process = [
     { num: '04', title: 'Optymalizacja', description: 'Testujemy, mierzymy i rozbudowujemy. Pętla danych → decyzja → wynik.', featured: true },
 ];
 
+const faqs = [
+    {
+        question: 'Od czego zacząć wdrożenie marketing automation?',
+        answer: 'Od audytu danych, źródeł leadów, zgód i procesu sprzedaży. Dopiero potem wybieramy scenariusze oraz konfigurację platformy.',
+    },
+    {
+        question: 'Czy marketing automation ma sens w B2B?',
+        answer: 'Tak, szczególnie przy dłuższym procesie sprzedaży. Pomaga segmentować zapytania, prowadzić lead nurturing i przekazywać sprzedaży lepiej przygotowane kontakty.',
+    },
+    {
+        question: 'Czy możecie wdrożyć SALESmanago?',
+        answer: 'Tak. Wdrażamy tracking, segmentację, scenariusze, integracje CRM oraz raportowanie, a następnie rozwijamy automatyzacje na podstawie danych.',
+    },
+];
+
 export default function MarketingAutomationPage() {
     const serviceSchema = buildServiceSchema({
         name: 'Marketing Automation',
@@ -53,10 +70,11 @@ export default function MarketingAutomationPage() {
         url: `${SITE_URL}/uslugi/marketing-automation`,
         serviceType: 'Marketing automation',
     });
+    const faqSchema = buildFaqSchema(faqs);
 
     return (
         <main style={{ minHeight: '100vh' }}>
-            <SchemaScript schema={serviceSchema} />
+            <SchemaScript schema={[serviceSchema, faqSchema]} />
 
             {/* Hero */}
             <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(60px, 8vw, 96px) 32px 80px' }}>
@@ -154,6 +172,35 @@ export default function MarketingAutomationPage() {
                                 <p style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.5, margin: 0 }}>{step.description}</p>
                             </div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
+                    <div style={{ marginBottom: 32 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 12 }}>WIEDZA I WDROŻENIE</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Zobacz, jak połączyć automation z procesem sprzedaży.</h2>
+                    </div>
+                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2">
+                        <Link href="/blog/wdrozenie-marketing-automation-krok-po-kroku" style={{ borderRadius: 18, padding: 24, background: 'var(--panel)', border: '1px solid var(--line)', color: 'var(--text)', textDecoration: 'none' }}>
+                            <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 10px' }}>Wdrożenie marketing automation krok po kroku</h3>
+                            <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>Przeczytaj, jak uporządkować dane, zgody, segmenty i pierwsze scenariusze.</p>
+                        </Link>
+                        <Link href="/uslugi/wdrozenie-salesmanago" style={{ borderRadius: 18, padding: 24, background: 'var(--panel)', border: '1px solid var(--line)', color: 'var(--text)', textDecoration: 'none' }}>
+                            <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 10px' }}>Wdrożenie SALESmanago</h3>
+                            <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>Poznaj zakres wdrożenia — od trackingu i integracji po lead nurturing.</p>
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            <section style={{ borderTop: '1px solid var(--line)' }}>
+                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
+                    <div style={{ maxWidth: 840 }}>
+                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 12 }}>FAQ</div>
+                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: '0 0 28px', lineHeight: 1.06 }}>Pytania o marketing automation.</h2>
+                        <FAQAccordion items={faqs} />
                     </div>
                 </div>
             </section>
