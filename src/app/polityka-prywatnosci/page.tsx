@@ -11,22 +11,9 @@ export const metadata: Metadata = {
     },
 };
 
-const legalStyles = `
-.ct-legal { font-size: 15px; line-height: 1.7; color: var(--muted); }
-.ct-legal h2 { font-size: clamp(20px, 2.2vw, 24px); font-weight: 600; letter-spacing: -0.5px; line-height: 1.25; color: var(--text); margin: 48px 0 14px; padding-top: 24px; border-top: 1px solid var(--line); }
-.ct-legal p { margin: 0 0 14px; }
-.ct-legal ul { margin: 0 0 16px; padding: 0; list-style: none; }
-.ct-legal ul:not(.ct-legal-links) li { position: relative; padding: 8px 0 8px 18px; border-top: 1px solid var(--line); }
-.ct-legal ul:not(.ct-legal-links) li::before { content: ''; position: absolute; left: 0; top: 17px; width: 6px; height: 6px; background: var(--accent); }
-.ct-legal-links { display: flex; flex-wrap: wrap; gap: 8px; }
-.ct-legal-links a { display: inline-flex; font: 500 11.5px/1.4 var(--font-mono), monospace; text-transform: uppercase; letter-spacing: .3px; color: var(--text); border: 1px solid var(--line-strong); border-radius: 999px; padding: 6px 12px; transition: border-color .15s, color .15s; }
-.ct-legal-links a:hover { border-color: var(--accent); color: var(--accent); }
-`;
-
 export default function PrivacyPolicyPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
-            <style>{legalStyles}</style>
             <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x)', borderBottom: '1px solid var(--line)' }}>
                 <div style={{ maxWidth: 720, margin: '0 auto' }}>
                     <span className="ct-eyebrow">LEGAL</span>

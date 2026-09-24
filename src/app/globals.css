@@ -206,6 +206,17 @@ h1, h2, h3, h4, h5, h6 { line-height: 1.1; color: var(--text); }
 .ct-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 .ct-label { display: block; font: 500 11px/1.4 var(--font-mono), monospace; text-transform: uppercase; letter-spacing: .3px; color: var(--muted); margin-bottom: 6px; }
 
+/* ===== Long-form reading (legal pages) ===== */
+.ct-legal { font-size: 15px; line-height: 1.7; color: var(--muted); }
+.ct-legal h2 { font-size: clamp(20px, 2.2vw, 24px); font-weight: 600; letter-spacing: -0.5px; line-height: 1.25; color: var(--text); margin: 48px 0 14px; padding-top: 24px; border-top: 1px solid var(--line); }
+.ct-legal p { margin: 0 0 14px; }
+.ct-legal ul { margin: 0 0 16px; padding: 0; list-style: none; }
+.ct-legal ul:not(.ct-legal-links) li { position: relative; padding: 8px 0 8px 18px; border-top: 1px solid var(--line); }
+.ct-legal ul:not(.ct-legal-links) li::before { content: ''; position: absolute; left: 0; top: 17px; width: 6px; height: 6px; background: var(--accent); }
+.ct-legal-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.ct-legal-links a { display: inline-flex; font: 500 11.5px/1.4 var(--font-mono), monospace; text-transform: uppercase; letter-spacing: .3px; color: var(--text); border: 1px solid var(--line-strong); border-radius: 999px; padding: 6px 12px; transition: border-color .15s, color .15s; }
+.ct-legal-links a:hover { border-color: var(--accent); color: var(--accent); }
+
 /* ===== Scroll Reveal ===== */
 [data-reveal] {
   opacity: 0; transform: translateY(16px);
