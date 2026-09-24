@@ -60,7 +60,8 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
                 <>
                     <motion.button
                         aria-label="Zamknij menu"
-                        className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[1px]"
+                        className="fixed inset-0 z-40 cursor-default"
+                        style={{ background: 'rgba(17,24,39,0.12)', border: 'none' }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -68,91 +69,62 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
                     />
 
                     <motion.div
-                        initial={{ opacity: 0, y: -10 }}
+                        initial={{ opacity: 0, y: -6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="fixed left-0 right-0 top-[73px] z-50 border-b border-black/10 bg-white shadow-[0_22px_80px_rgba(0,0,0,0.16)]"
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute left-0 right-0 top-full z-50"
+                        style={{ background: '#fff', borderBottom: '1px solid var(--line-strong)' }}
                         onMouseLeave={onClose}
                     >
-                        <div className="mx-auto grid max-w-[1800px] gap-6 px-6 py-6 lg:grid-cols-[0.9fr_1.3fr_1fr] lg:gap-8">
-                            <div className="rounded-[28px] bg-black p-6 text-white lg:p-8">
-                                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40">
-                                    Zakres usług
-                                </p>
-                                <h3 className="mt-3 text-2xl font-medium leading-tight text-white lg:text-[32px]">
+                        <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[0.9fr_1.4fr_1fr]" style={{ padding: '0 var(--pad-x)' }}>
+                            <div className="flex flex-col gap-4 py-8 lg:pr-8" style={{ borderRight: '1px solid var(--line)' }}>
+                                <span className="ct-eyebrow">Zakres usług</span>
+                                <p style={{ margin: 0, fontSize: 20, fontWeight: 600, letterSpacing: '-0.5px', lineHeight: 1.25, color: 'var(--text)' }}>
                                     Wybierasz obszar, my spinamy strategię, wykonanie i rozwój.
-                                </h3>
-                                <p className="mt-4 text-sm leading-6 text-white/65">
+                                </p>
+                                <p className="ct-body">
                                     Najczęściej wchodzimy od jednego problemu, ale układamy całość tak, żeby oferta, treść i
                                     sprzedaż pracowały razem.
                                 </p>
-
-                                <div className="mt-6 flex flex-wrap gap-3">
-                                    <Link href="/uslugi" onClick={onClose} className="rounded-full border border-white/15 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white hover:text-black">
-                                        Wszystkie usługi
-                                    </Link>
-                                    <Link href="/kontakt" onClick={onClose} className="rounded-full border border-white/15 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white hover:text-black">
-                                        Kontakt
-                                    </Link>
+                                <div className="mt-2 flex flex-wrap gap-3">
+                                    <Link href="/uslugi" onClick={onClose} className="ct-link">Wszystkie usługi →</Link>
+                                    <Link href="/kontakt" onClick={onClose} className="ct-link">Kontakt →</Link>
                                 </div>
                             </div>
 
-                            <div className="grid gap-4 sm:grid-cols-2">
+                            <div className="grid sm:grid-cols-2" style={{ gap: 1, background: 'var(--line)', borderRight: '1px solid var(--line)' }}>
                                 {services.map((service) => (
                                     <Link
                                         key={service.href}
                                         href={service.href}
                                         onClick={onClose}
-                                        className="group rounded-[22px] border border-black/10 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-black/20 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]"
+                                        className="group flex flex-col gap-2 p-6 transition-colors"
+                                        style={{ background: '#fff' }}
                                     >
-                                        <div className="flex items-start justify-between gap-4">
-                                            <div>
-                                                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-black/40">
-                                                    {service.accent}
-                                                </p>
-                                                <h4 className="mt-2 text-lg font-medium text-black">
-                                                    {service.title}
-                                                </h4>
-                                            </div>
-                                            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-black/10 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:border-black">
-                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                    <path d="M7 17L17 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                    <path d="M7 7H17V17" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                        <p className="mt-3 text-sm leading-6 text-black/60">
-                                            {service.description}
-                                        </p>
+                                        <span className="ct-meta" style={{ color: 'var(--accent)' }}>{service.accent}</span>
+                                        <span className="flex items-center justify-between gap-4" style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)' }}>
+                                            {service.title}
+                                            <span className="ct-mono transition-transform group-hover:translate-x-0.5" style={{ color: 'var(--accent)', fontSize: 13 }}>→</span>
+                                        </span>
+                                        <span className="ct-body" style={{ fontSize: 13 }}>{service.description}</span>
                                     </Link>
                                 ))}
                             </div>
 
-                            <div className="rounded-[28px] border border-black/10 bg-[linear-gradient(180deg,#fafafa_0%,#ffffff_100%)] p-6 lg:p-8">
-                                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/40">
-                                    Landing pages SEO
-                                </p>
-                                <h4 className="mt-3 text-2xl font-medium text-black">
-                                    Strony pod konkretne zapytania, nie tylko ogólną ofertę.
-                                </h4>
-                                <p className="mt-4 text-sm leading-6 text-black/60">
-                                    Te podstrony zbierają ruch z fraz long-tail i odsyłają do głównych usług.
-                                </p>
-
-                                <div className="mt-6 space-y-3">
+                            <div className="flex flex-col gap-3 py-8 lg:pl-8" style={{ background: 'var(--panel)' }}>
+                                <span className="ct-eyebrow" style={{ color: 'var(--muted)' }}>Landing pages</span>
+                                <div className="flex flex-col">
                                     {seoLandings.map((item) => (
                                         <Link
                                             key={item.href}
                                             href={item.href}
                                             onClick={onClose}
-                                            className="group flex items-start justify-between gap-4 rounded-2xl border border-black/10 bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-black/20 hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)]"
+                                            className="group flex items-center justify-between gap-4 py-2.5"
+                                            style={{ borderTop: '1px solid var(--line)', color: 'var(--text)' }}
                                         >
-                                            <div>
-                                                <p className="text-sm font-medium text-black">{item.title}</p>
-                                                <p className="mt-1 text-xs leading-5 text-black/55">{item.description}</p>
-                                            </div>
-                                            <span className="mt-0.5 text-black/40 transition-transform group-hover:translate-x-0.5">→</span>
+                                            <span style={{ fontSize: 13.5, fontWeight: 500 }}>{item.title}</span>
+                                            <span className="ct-mono transition-transform group-hover:translate-x-0.5" style={{ color: 'var(--muted-2)', fontSize: 12 }}>→</span>
                                         </Link>
                                     ))}
                                 </div>
