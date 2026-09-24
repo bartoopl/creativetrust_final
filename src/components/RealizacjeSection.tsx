@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getLatestPortfolioProjects, urlFor } from '@/lib/sanity';
-import NotchedButton from './ui/NotchedButton';
+import SectionHeader from './ui/SectionHeader';
 
 interface PortfolioCategory {
     _id: string;
@@ -17,54 +17,83 @@ interface PortfolioProject {
     categories?: PortfolioCategory[];
 }
 
-export default async function RealizacjeSection() {
-    const projects: PortfolioProject[] = await getLatestPortfolioProjects(2);
+interface CaseCard {
+    key: string;
+    href: string;
+    meta: string;
+    title: string;
+    description: string;
+    image?: string;
+}
 
-    if (!projects?.length) return null;
+const fallback: CaseCard[] = [
+    {
+        key: 'beautyclinic',
+        href: '/portfolio',
+        meta: 'beautyclinic.pl · Strony www · e-commerce',
+        title: 'BeautyClinic Karolina Bilińska',
+        description: 'Realizacja strony, prace rozwojowe, kampanie Google Ads i automatyzacja voucherów online.',
+    },
+    {
+        key: 'onkologgorzow',
+        href: '/portfolio',
+        meta: 'onkologgorzow.pl · Strony www',
+        title: 'Dr Bartłomiej Delijewski',
+        description: 'Projekt graficzny i realizacja strony www.',
+    },
+];
+
+export function CaseStudyCard({ card }: { card: CaseCard }) {
+    return (
+        <Link href={card.href} className="ct-card-hover block overflow-hidden" style={{ border: '1px solid rgba(17,24,39,0.1)', borderRadius: 8, color: 'inherit' }}>
+            {card.image ? (
+                <div style={{ height: 220, overflow: 'hidden', background: 'var(--panel2)', borderBottom: '1px solid var(--line)' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={card.image} alt={card.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+            ) : (
+                <div className="ct-placeholder" style={{ height: 180 }}>
+                    <span className="ct-mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--muted)' }}>MIEJSCE NA ZDJĘCIE</span>
+                </div>
+            )}
+            <div className="flex flex-col gap-2" style={{ padding: 22 }}>
+                <span className="ct-meta">{card.meta}</span>
+                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{card.title}</h3>
+                <p className="ct-body" style={{ fontSize: 13 }}>{card.description}</p>
+            </div>
+        </Link>
+    );
+}
+
+export default async function RealizacjeSection() {
+    let projects: PortfolioProject[] = [];
+    try {
+        projects = (await getLatestPortfolioProjects(2)) ?? [];
+    } catch {
+        projects = [];
+    }
+
+    const cards: CaseCard[] = projects.length
+        ? projects.map((item) => ({
+            key: item._id,
+            href: `/portfolio/${item.slug.current}`,
+            meta: item.categories?.slice(0, 2).map((c) => c.title).join(' · ') || 'Realizacja',
+            title: item.client || item.title,
+            description: item.scopeOfWork?.join(' · ') || item.title,
+            image: item.mainImage ? urlFor(item.mainImage).width(900).url() : undefined,
+        }))
+        : fallback;
 
     return (
-        <section style={{ background: '#fff', padding: '72px 16px' }} className="lg:px-[72px] lg:py-[120px]">
-            <div style={{ maxWidth: 1440, margin: '0 auto' }}>
-                <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(28px, 4vw, 43.1px)', fontWeight: 500, lineHeight: '1.15', letterSpacing: '-1.76px', color: '#000', margin: '0 0 40px', textAlign: 'center' }} className="lg:mb-16">
-                    Jak to wygląda w praktyce
-                </h2>
-
-                <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
-                    {projects.map((item) => (
-                        <Link
-                            key={item._id}
-                            href={`/portfolio/${item.slug.current}`}
-                            className="flex-1 overflow-hidden rounded-[4px] border border-[rgba(0,0,0,0.06)]"
-                            style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
-                        >
-                            <div style={{ height: 280, background: 'rgba(0,0,0,0.06)', overflow: 'hidden' }}>
-                                {item.mainImage && (
-                                    <img
-                                        src={urlFor(item.mainImage).width(800).url()}
-                                        alt={item.title}
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                    />
-                                )}
-                            </div>
-                            <div style={{ padding: 32 }}>
-                                <p style={{ fontSize: 11.4, fontWeight: 400, color: 'rgba(0,0,0,0.4)', lineHeight: '18px', margin: '0 0 12px', textTransform: 'uppercase', letterSpacing: '.5px' }}>
-                                    {item.categories?.slice(0, 2).map((c) => c.title).join(' · ') || 'Realizacja'}
-                                </p>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 21.8, fontWeight: 500, lineHeight: '26.4px', letterSpacing: '-0.88px', color: '#000', margin: '0 0 12px' }}>
-                                    {item.client}
-                                </h3>
-                                <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: 'rgba(0,0,0,0.6)', margin: 0 }}>
-                                    {item.scopeOfWork?.join(' · ') || item.title}
-                                </p>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-
-                <div style={{ marginTop: 32, display: 'flex', justifyContent: 'center' }}>
-                    <NotchedButton href="/portfolio" variant="ghost-light">
-                        Wszystkie realizacje
-                    </NotchedButton>
+        <section id="case-studies" className="ct-section" style={{ borderTop: '1px solid var(--line)' }}>
+            <div className="mx-auto flex max-w-[1280px] flex-col gap-10">
+                <SectionHeader
+                    eyebrow="Jak to wygląda w praktyce"
+                    title="Case studies"
+                    right={<Link href="/portfolio" className="ct-link">Wszystkie realizacje →</Link>}
+                />
+                <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))' }}>
+                    {cards.map((card) => <CaseStudyCard key={card.key} card={card} />)}
                 </div>
             </div>
         </section>

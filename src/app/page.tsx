@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import ClientLogos from '@/components/ClientLogos';
 import StatsSection from '@/components/StatsSection';
+import WhyUsSection from '@/components/WhyUsSection';
 import Services from '@/components/Services';
 import ProcessPipelineSection from '@/components/ProcessPipelineSection';
-import ProcessSection from '@/components/ProcessSection';
 import RealizacjeSection from '@/components/RealizacjeSection';
-import LatestBlogPosts from '@/components/LatestBlogPosts';
-import CTASection from '@/components/CTASection';
+import TestimonialSection from '@/components/TestimonialSection';
 import BlogSection from '@/components/BlogSection';
+import CTASection from '@/components/CTASection';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
@@ -25,17 +25,17 @@ export const metadata: Metadata = {
 
 export default function Home() {
     return (
-        <main>
+        <>
             <Hero />
             <ClientLogos />
             <StatsSection />
+            <WhyUsSection />
             <Services />
             <ProcessPipelineSection />
-            <ProcessSection />
             <RealizacjeSection />
-            <LatestBlogPosts />
-            <CTASection />
+            <TestimonialSection />
             <BlogSection />
-        </main>
+            <CTASection />
+        </>
     );
 }
