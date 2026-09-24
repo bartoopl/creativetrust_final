@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import CTASection from '@/components/CTASection';
 import FAQAccordion from '@/components/FAQAccordion';
-import NotchedButton from '@/components/ui/NotchedButton';
+import Card from '@/components/ui/Card';
+import PageHero from '@/components/ui/PageHero';
+import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
@@ -77,133 +78,100 @@ export default function MarketingAutomationPage() {
             <SchemaScript schema={[serviceSchema, faqSchema]} />
 
             {/* Hero */}
-            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(60px, 8vw, 96px) 32px 80px' }}>
-                <div style={{ display: 'grid', gap: 64, alignItems: 'start' }} className="grid-cols-1 lg:grid-cols-[1fr_0.9fr]">
-                    <div>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 16 }}>
-                            MARKETING AUTOMATION
-                        </div>
-                        <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 5vw, 60px)', lineHeight: 0.98, letterSpacing: '-0.045em', margin: '0 0 18px' }}>
-                            Kampanie, które działają <span style={{ color: 'var(--lime-ink)' }}>kiedy śpisz.</span>
-                        </h1>
-                        <p style={{ fontSize: 'clamp(14px, 1.2vw, 17px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 28px' }}>
-                            Wdrażamy SALESmanago i budujemy automatyzacje oparte na danych i AI. Lejki, lead nurturing, personalizacja, integracje CRM — działają bez Twojego udziału.
-                        </p>
-                        <NotchedButton href="/kontakt" variant="primary-light">
-                            Omów projekt
-                        </NotchedButton>
+            <PageHero
+                eyebrow="Marketing Automation"
+                title={<>Kampanie, które działają <span style={{ color: 'var(--accent)' }}>kiedy śpisz.</span></>}
+                description="Wdrażamy SALESmanago i budujemy automatyzacje oparte na danych i AI. Lejki, lead nurturing, personalizacja, integracje CRM — działają bez Twojego udziału."
+                cta={{ label: 'Omów projekt', href: '/kontakt' }}
+                right={
+                    <div className="ct-panel" style={{ padding: 'clamp(24px, 3vw, 32px)' }}>
+                        <div className="ct-meta" style={{ color: 'var(--accent)', marginBottom: 16 }}>// status: active</div>
+                        <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                            {['lead scoring', 'email nurturing', 'CRM sync', 'AI content', 'behavioral triggers', 'real-time personalization'].map((item, i) => (
+                                <li key={item} className="flex items-center gap-3" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
+                                    <span className="ct-bullet" aria-hidden="true" style={{ animation: `ctpulse 2s ease-in-out ${i * 0.3}s infinite` }} />
+                                    <span className="ct-mono" style={{ fontSize: 14, color: 'var(--text)' }}>{item}</span>
+                                    <span className="ct-mono" style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--muted)' }}>running</span>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                    <div style={{ borderRadius: 20, border: '1px solid color-mix(in srgb, var(--lime) 30%, var(--line))', background: 'color-mix(in srgb, var(--lime) 7%, var(--panel))', padding: 32 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, letterSpacing: '.12em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 20 }}>// status: active</div>
-                        {['lead scoring', 'email nurturing', 'CRM sync', 'AI content', 'behavioral triggers', 'real-time personalization'].map((item, i) => (
-                            <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0', borderBottom: i < 5 ? '1px solid var(--line)' : 'none' }}>
-                                <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--lime)', boxShadow: '0 0 8px var(--glow)', flexShrink: 0, animation: `ctpulse 2s ease-in-out ${i * 0.3}s infinite` }} />
-                                <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 14, color: 'var(--text)' }}>{item}</span>
-                                <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--lime-ink)' }}>running</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+                }
+            />
 
             {/* Stats */}
-            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
-                    <div style={{ display: 'grid', gap: 24 }} className="grid-cols-2 md:grid-cols-4">
-                        {stats.map(s => (
-                            <div key={s.value} style={{ borderLeft: '1px solid var(--line)', paddingLeft: 20 }}>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.1vw, 40px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--lime-ink)' }}>{s.value}</div>
-                                <div style={{ color: 'var(--muted)', fontSize: 13, marginTop: 10 }}>{s.label}</div>
-                            </div>
-                        ))}
-                    </div>
+            <Section border={false}>
+                <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+                    {stats.map(s => (
+                        <div key={s.value} className="flex flex-col gap-2.5" style={{ padding: '24px 24px 28px' }}>
+                            <span style={{ fontSize: 'clamp(28px, 3.1vw, 40px)', fontWeight: 600, letterSpacing: '-1.2px', lineHeight: 1 }}>{s.value}</span>
+                            <span className="ct-body" style={{ fontSize: 13 }}>{s.label}</span>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
             {/* Services */}
-            <section id="oferta" style={{ borderTop: '1px solid var(--line)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 12 }}>CO ROBIMY</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Zakres automatyzacji.</h2>
-                    </div>
-                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                        {services.map(s => (
-                            <div key={s.num} style={{ borderRadius: 20, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--lime-ink)', marginBottom: 22 }}>{s.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 17, margin: '0 0 10px' }}>{s.title}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.55, margin: 0 }}>{s.description}</p>
-                            </div>
-                        ))}
-                    </div>
+            <Section id="oferta" eyebrow="Co robimy" title="Zakres automatyzacji.">
+                <div className="ct-grid-lines grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    {services.map(s => (
+                        <div key={s.num} className="flex flex-col gap-2.5" style={{ padding: 28 }}>
+                            <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)', marginBottom: 12 }}>{s.num}</span>
+                            <h3 style={{ margin: 0, fontSize: 17, fontWeight: 600 }}>{s.title}</h3>
+                            <p className="ct-body">{s.description}</p>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
             {/* Use cases */}
-            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 12 }}>ZASTOSOWANIA</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Dla kogo to działa.</h2>
-                    </div>
-                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2">
-                        {usecases.map(u => (
-                            <div key={u.title} style={{ borderRadius: 18, padding: '24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 10px' }}>{u.title}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>{u.description}</p>
+            <Section tint eyebrow="Zastosowania" title="Dla kogo to działa.">
+                <div className="grid grid-cols-1 gap-x-10 md:grid-cols-2">
+                    {usecases.map(u => (
+                        <div key={u.title} className="flex flex-col gap-2" style={{ padding: '20px 0', borderTop: '1px solid var(--line-strong)' }}>
+                            <div className="flex items-center gap-2.5">
+                                <span className="ct-bullet" aria-hidden="true" />
+                                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{u.title}</h3>
                             </div>
-                        ))}
-                    </div>
+                            <p className="ct-body" style={{ fontSize: 15 }}>{u.description}</p>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
             {/* Process */}
-            <section style={{ borderTop: '1px solid var(--line)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 12 }}>PROCES</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Od audytu do automatyzacji.</h2>
-                    </div>
-                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-                        {process.map(step => (
-                            <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: step.featured ? 'linear-gradient(160deg, color-mix(in srgb, var(--lime) 16%, var(--panel)), var(--panel))' : 'var(--panel)', border: step.featured ? '1px solid color-mix(in srgb, var(--lime) 40%, var(--line))' : '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--lime-ink)', marginBottom: 38 }}>{step.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 8px' }}>{step.title}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.5, margin: 0 }}>{step.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <Section eyebrow="Proces" title="Od audytu do automatyzacji.">
+                <ol className="ct-grid-lines grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                    {process.map(step => (
+                        <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>
+                            <span className="ct-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--accent)', marginBottom: 24 }}>{step.num}</span>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{step.title}</h3>
+                            <p className="ct-body">{step.description}</p>
+                        </li>
+                    ))}
+                </ol>
+            </Section>
 
-            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
-                    <div style={{ marginBottom: 32 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 12 }}>WIEDZA I WDROŻENIE</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Zobacz, jak połączyć automation z procesem sprzedaży.</h2>
-                    </div>
-                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2">
-                        <Link href="/blog/wdrozenie-marketing-automation-krok-po-kroku" style={{ borderRadius: 18, padding: 24, background: 'var(--panel)', border: '1px solid var(--line)', color: 'var(--text)', textDecoration: 'none' }}>
-                            <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 10px' }}>Wdrożenie marketing automation krok po kroku</h3>
-                            <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>Przeczytaj, jak uporządkować dane, zgody, segmenty i pierwsze scenariusze.</p>
-                        </Link>
-                        <Link href="/uslugi/wdrozenie-salesmanago" style={{ borderRadius: 18, padding: 24, background: 'var(--panel)', border: '1px solid var(--line)', color: 'var(--text)', textDecoration: 'none' }}>
-                            <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 10px' }}>Wdrożenie SALESmanago</h3>
-                            <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>Poznaj zakres wdrożenia — od trackingu i integracji po lead nurturing.</p>
-                        </Link>
-                    </div>
+            <Section tint eyebrow="Wiedza i wdrożenie" title="Zobacz, jak połączyć automation z procesem sprzedaży.">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <Card
+                        href="/blog/wdrozenie-marketing-automation-krok-po-kroku"
+                        title="Wdrożenie marketing automation krok po kroku"
+                        description="Przeczytaj, jak uporządkować dane, zgody, segmenty i pierwsze scenariusze."
+                    />
+                    <Card
+                        href="/uslugi/wdrozenie-salesmanago"
+                        title="Wdrożenie SALESmanago"
+                        description="Poznaj zakres wdrożenia — od trackingu i integracji po lead nurturing."
+                    />
                 </div>
-            </section>
+            </Section>
 
-            <section style={{ borderTop: '1px solid var(--line)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }}>
-                    <div style={{ maxWidth: 840 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 12 }}>FAQ</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: '0 0 28px', lineHeight: 1.06 }}>Pytania o marketing automation.</h2>
-                        <FAQAccordion items={faqs} />
-                    </div>
+            <Section eyebrow="FAQ" title="Pytania o marketing automation.">
+                <div style={{ maxWidth: 840 }}>
+                    <FAQAccordion items={faqs} />
                 </div>
-            </section>
+            </Section>
 
             <CTASection />
         </main>
