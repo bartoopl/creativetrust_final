@@ -116,15 +116,16 @@ Wiadomość: ${formData.message}`,
 
     if (submitted) {
         return (
-            <div className="rounded-3xl border border-green-200 bg-green-50 p-8 text-center">
-                <h3 className="text-2xl font-medium text-green-900 mb-3">Dziękujemy za wiadomość</h3>
-                <p className="text-green-800 mb-6">
+            <div className="ct-panel p-8 text-center md:p-10">
+                <span className="ct-eyebrow">Wysłano</span>
+                <h3 style={{ fontSize: 24, fontWeight: 600, letterSpacing: '-0.5px', margin: '10px 0 12px' }}>Dziękujemy za wiadomość</h3>
+                <p className="ct-body" style={{ fontSize: 15, maxWidth: '52ch', margin: '0 auto 24px' }}>
                     Formularz został wysłany. Skontaktujemy się z Tobą i wrócimy z kolejnym krokiem.
                 </p>
                 <button
                     type="button"
                     onClick={() => setSubmitted(false)}
-                    className="rounded-full border border-green-300 bg-white px-6 py-3 font-medium text-green-900 hover:bg-green-100 transition-colors"
+                    className="ct-ghost"
                 >
                     Wyślij kolejne zapytanie
                 </button>
@@ -133,12 +134,13 @@ Wiadomość: ${formData.message}`,
     }
 
     return (
-        <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
-            <h2 className="text-3xl font-medium mb-3">{formTitle}</h2>
-            <p className="text-gray-600 mb-8">{formSubtitle}</p>
+        <div className="ct-panel p-6 md:p-10">
+            <span className="ct-eyebrow">Formularz</span>
+            <h2 className="ct-h2">{formTitle}</h2>
+            <p className="ct-body" style={{ fontSize: 15, maxWidth: '64ch', margin: '12px 0 32px' }}>{formSubtitle}</p>
 
             {error && (
-                <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-red-800">
+                <div className="mb-6 p-4 text-sm" style={{ border: '1px solid rgba(220,38,38,0.3)', borderRadius: 'var(--radius-sm)', background: 'rgba(220,38,38,0.04)', color: '#b91c1c' }}>
                     {error}
                 </div>
             )}
@@ -146,8 +148,8 @@ Wiadomość: ${formData.message}`,
             <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                            Imię i nazwisko <span className="text-red-500">*</span>
+                        <label htmlFor="name" className="ct-label">
+                            Imię i nazwisko <span style={{ color: 'var(--accent)' }}>*</span>
                         </label>
                         <input
                             id="name"
@@ -156,13 +158,13 @@ Wiadomość: ${formData.message}`,
                             value={formData.name}
                             onChange={handleChange}
                             required
-                            className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black"
+                            className="ct-input"
                             placeholder="Jan Kowalski"
                         />
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                            Email <span className="text-red-500">*</span>
+                        <label htmlFor="email" className="ct-label">
+                            Email <span style={{ color: 'var(--accent)' }}>*</span>
                         </label>
                         <input
                             id="email"
@@ -171,12 +173,12 @@ Wiadomość: ${formData.message}`,
                             value={formData.email}
                             onChange={handleChange}
                             required
-                            className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black"
+                            className="ct-input"
                             placeholder="jan@firma.pl"
                         />
                     </div>
                     <div>
-                        <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="company" className="ct-label">
                             Firma
                         </label>
                         <input
@@ -185,12 +187,12 @@ Wiadomość: ${formData.message}`,
                             type="text"
                             value={formData.company}
                             onChange={handleChange}
-                            className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black"
+                            className="ct-input"
                             placeholder="Nazwa firmy"
                         />
                     </div>
                     <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="phone" className="ct-label">
                             Telefon
                         </label>
                         <input
@@ -199,7 +201,7 @@ Wiadomość: ${formData.message}`,
                             type="tel"
                             value={formData.phone}
                             onChange={handleChange}
-                            className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black"
+                            className="ct-input"
                             placeholder="+48 123 456 789"
                         />
                     </div>
@@ -207,8 +209,8 @@ Wiadomość: ${formData.message}`,
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">
-                            Zakres <span className="text-red-500">*</span>
+                        <label htmlFor="service" className="ct-label">
+                            Zakres <span style={{ color: 'var(--accent)' }}>*</span>
                         </label>
                         <select
                             id="service"
@@ -216,7 +218,7 @@ Wiadomość: ${formData.message}`,
                             value={formData.service}
                             onChange={handleChange}
                             required
-                            className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black"
+                            className="ct-input"
                         >
                             <option value="" disabled>Wybierz zakres</option>
                             {serviceOptions.map((option) => (
@@ -227,7 +229,7 @@ Wiadomość: ${formData.message}`,
                         </select>
                     </div>
                     <div>
-                        <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="budget" className="ct-label">
                             Budżet / skala
                         </label>
                         <select
@@ -235,7 +237,7 @@ Wiadomość: ${formData.message}`,
                             name="budget"
                             value={formData.budget}
                             onChange={handleChange}
-                            className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black"
+                            className="ct-input"
                         >
                             <option value="" disabled>Wybierz zakres</option>
                             {budgetOptions.map((option) => (
@@ -248,8 +250,8 @@ Wiadomość: ${formData.message}`,
                 </div>
 
                 <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                        Wiadomość <span className="text-red-500">*</span>
+                    <label htmlFor="message" className="ct-label">
+                        Wiadomość <span style={{ color: 'var(--accent)' }}>*</span>
                     </label>
                     <textarea
                         id="message"
@@ -258,7 +260,7 @@ Wiadomość: ${formData.message}`,
                         onChange={handleChange}
                         required
                         rows={5}
-                        className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-black"
+                        className="ct-input"
                         placeholder={messagePlaceholder}
                     />
                 </div>
@@ -280,21 +282,22 @@ Wiadomość: ${formData.message}`,
                     aria-hidden="true"
                 />
 
-                <button
-                    type="submit"
-                    disabled={submitting}
-                    className={`w-full rounded-full px-6 py-3 font-medium transition-colors ${
-                        submitting
-                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                            : 'bg-black text-white hover:bg-gray-800'
-                    }`}
-                >
-                    {submitting ? 'Wysyłanie...' : 'Wyślij zapytanie'}
-                </button>
+                <div className="flex flex-wrap items-center gap-4 pt-1">
+                    <button
+                        type="submit"
+                        disabled={submitting}
+                        className="ct-cta"
+                    >
+                        {submitting ? 'Wysyłanie...' : 'Wyślij zapytanie'}
+                        <span className="ct-badge" aria-hidden="true">
+                            <span className="ct-arrows"><span>→</span><span>→</span></span>
+                        </span>
+                    </button>
+                </div>
 
-                <p className="text-sm text-gray-500">
+                <p className="ct-body" style={{ fontSize: 13, color: 'var(--muted-2)' }}>
                     Wysyłając formularz, zgadzasz się na przetwarzanie danych zgodnie z{' '}
-                    <Link href="/polityka-prywatnosci" className="underline hover:text-black">
+                    <Link href="/polityka-prywatnosci" className="underline">
                         polityką prywatności
                     </Link>.
                 </p>

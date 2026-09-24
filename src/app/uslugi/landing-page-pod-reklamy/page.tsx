@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import LandingLeadForm from '@/components/LandingLeadForm';
 import FAQAccordion from '@/components/FAQAccordion';
 import SchemaScript from '@/components/SchemaScript';
-import NotchedButton from '@/components/ui/NotchedButton';
+import PageHero from '@/components/ui/PageHero';
+import Section from '@/components/ui/Section';
+import { BulletColumns, HeroMedia, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/landing-page-pod-reklamy`;
@@ -93,151 +94,80 @@ export default function LandingPageAdsPage() {
         <main className="min-h-screen bg-white">
             <SchemaScript schema={[breadcrumbSchema, serviceSchema, faqSchema]} />
 
-            <section className="bg-black px-6 py-20 text-white md:py-28">
-                <div className="mx-auto grid max-w-[1800px] grid-cols-1 items-center gap-16 lg:grid-cols-[1fr_0.95fr]">
-                    <div>
-                        <p className="mb-6 text-sm uppercase tracking-[0.3em]" style={{ color: 'var(--lime-ink)' }}>
-                            Performance
-                        </p>
-                        <h1 className="mb-8 text-3xl font-medium leading-tight md:text-5xl">
-                            Landing page pod reklamy, który zwiększa konwersję zamiast ją rozmywać
-                        </h1>
-                        <p className="mb-10 max-w-3xl text-xl text-white/70">
-                            To strona pod kampanię płatną, nie ogólna podstrona usług. Układamy komunikat,
-                            szybkość i CTA tak, żeby ruch z reklam miał prostą drogę do zapytania.
-                        </p>
-                        <div className="flex flex-col gap-4 sm:flex-row">
-                            <NotchedButton href="#formularz" variant="primary-dark">
-                                Zleć landing page
-                            </NotchedButton>
-                            <NotchedButton href="/uslugi/strony-www" variant="ghost-dark">
-                                Oferta stron WWW
-                            </NotchedButton>
-                        </div>
-                    </div>
-
-                    <div className="space-y-6">
-                        <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl">
-                            <Image
-                                src="/images/seo/google-ads-audit-hero.png"
-                                alt="Landing page pod reklamy i kampanie performance"
-                                fill
-                                priority
-                                className="object-cover"
-                            />
-                        </div>
-                        <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 md:p-10">
-                            <p className="mb-6 text-white/40">Kiedy warto?</p>
-                            <div className="space-y-4">
-                                {signals.map((item) => (
-                                    <div key={item} className="flex gap-4">
-                                        <span className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-white" />
-                                        <p className="text-lg text-white/90">{item}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="px-6 py-16 md:py-24">
-                <div className="mx-auto max-w-[1800px]">
-                    <div className="mb-12 max-w-4xl">
-                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>Must-have landing page</p>
-                        <h2 className="text-2xl font-medium md:text-4xl">
-                            Landing pod reklamy powinien być prosty, szybki i bez tarcia
-                        </h2>
-                    </div>
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5">
-                        {essentials.map((item) => (
-                            <div key={item} className="rounded-3xl border border-gray-200 p-8">
-                                <p className="text-gray-700">{item}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="bg-gray-50 px-6 py-16 md:py-24">
-                <div className="mx-auto grid max-w-[1800px] grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-                    <div>
-                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>Dla kogo</p>
-                        <h2 className="text-2xl font-medium leading-tight md:text-4xl">
-                            Dla kampanii, które mają sprzedawać konkretną ofertę, a nie ogólny wizerunek
-                        </h2>
-                    </div>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        {useCases.map((item) => (
-                            <div key={item} className="rounded-2xl bg-white p-6 shadow-sm">
-                                <p className="text-gray-800">{item}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="px-6 py-16 md:py-24">
-                <div className="mx-auto max-w-[1800px]">
-                    <div className="mb-12 max-w-4xl">
-                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>Co robimy</p>
-                        <h2 className="text-2xl font-medium md:text-4xl">
-                            Projekt pod reklamę, od komunikatu po CTA
-                        </h2>
-                    </div>
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-                        {[
-                            'research i intencja użytkownika',
-                            'copy i struktura sekcji',
-                            'projekt i szybkie wdrożenie',
-                            'pomiar i iteracja',
-                        ].map((item, index) => (
-                            <div key={item} className="rounded-3xl bg-black p-8 text-white">
-                                <div className="mb-8 text-3xl font-bold text-white/20">0{index + 1}</div>
-                                <h3 className="mb-4 text-xl font-medium">{item}</h3>
-                                <p className="text-white/70 leading-relaxed">
-                                    Budujemy stronę tak, aby ruch z reklamy miał jedną drogę i jedną decyzję do podjęcia.
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="bg-gray-50 px-6 py-16 md:py-24">
-                <div className="mx-auto max-w-[1100px]">
-                    <div className="mb-10 max-w-3xl">
-                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>FAQ</p>
-                        <h2 className="text-2xl font-medium md:text-4xl">Najczęstsze pytania o strony pod reklamy</h2>
-                    </div>
-                    <FAQAccordion items={faqs.map(({ question, answer }) => ({ question, answer }))} />
-                </div>
-            </section>
-
-            <section id="formularz" className="bg-gray-50 px-6 py-16 md:py-24">
-                <div className="mx-auto max-w-[1100px]">
-                    <LandingLeadForm
-                        formTitle="Landing page pod reklamy"
-                        formSubtitle="Opisz kampanię, ofertę i cel konwersji. Zrobimy stronę pod reklamy, która nie rozprasza i nie miesza komunikatu."
-                        subjectPrefix="Landing page pod reklamy"
-                        serviceOptions={[
-                            'landing page pod Google Ads',
-                            'landing page pod Meta Ads',
-                            'strona pod lead generation',
-                            'test nowej kampanii',
-                            'nie wiem, potrzebuję rekomendacji',
-                        ]}
-                        budgetOptions={[
-                            'do 5 000 zł',
-                            '5 000 - 10 000 zł',
-                            '10 000 - 20 000 zł',
-                            'powyżej 20 000 zł',
-                            'nie wiem / potrzebuję rekomendacji',
-                        ]}
-                        messagePlaceholder="Napisz, jaka oferta ma być promowana, skąd będzie ruch i jaka konwersja ma się wydarzyć po wejściu na stronę."
+            <PageHero
+                eyebrow="Performance"
+                title="Landing page pod reklamy, który zwiększa konwersję zamiast ją rozmywać"
+                description="To strona pod kampanię płatną, nie ogólna podstrona usług. Układamy komunikat, szybkość i CTA tak, żeby ruch z reklam miał prostą drogę do zapytania."
+                cta={{ label: 'Zleć landing page', href: '#formularz' }}
+                ctaSecondary={{ label: 'Oferta stron WWW', href: '/uslugi/strony-www' }}
+                right={
+                    <HeroMedia
+                        src="/images/seo/google-ads-audit-hero.png"
+                        alt="Landing page pod reklamy i kampanie performance"
+                        label="Kiedy warto?"
+                        items={signals}
                     />
-                </div>
-            </section>
+                }
+            />
+
+            <Section
+                border={false}
+                eyebrow="Must-have landing page"
+                title="Landing pod reklamy powinien być prosty, szybki i bez tarcia"
+            >
+                <NumberedGrid cols={5} items={essentials.map((item) => ({ text: item }))} />
+            </Section>
+
+            <Section tint>
+                <SplitLayout
+                    eyebrow="Dla kogo"
+                    title="Dla kampanii, które mają sprzedawać konkretną ofertę, a nie ogólny wizerunek"
+                >
+                    <BulletColumns items={useCases} />
+                </SplitLayout>
+            </Section>
+
+            <Section eyebrow="Co robimy" title="Projekt pod reklamę, od komunikatu po CTA">
+                <NumberedGrid
+                    cols={4}
+                    items={[
+                        'research i intencja użytkownika',
+                        'copy i struktura sekcji',
+                        'projekt i szybkie wdrożenie',
+                        'pomiar i iteracja',
+                    ].map((item) => ({
+                        title: item,
+                        text: 'Budujemy stronę tak, aby ruch z reklamy miał jedną drogę i jedną decyzję do podjęcia.',
+                    }))}
+                />
+            </Section>
+
+            <Section tint eyebrow="FAQ" title="Najczęstsze pytania o strony pod reklamy" maxWidth={1100}>
+                <FAQAccordion items={faqs.map(({ question, answer }) => ({ question, answer }))} />
+            </Section>
+
+            <Section id="formularz" maxWidth={1100}>
+                <LandingLeadForm
+                    formTitle="Landing page pod reklamy"
+                    formSubtitle="Opisz kampanię, ofertę i cel konwersji. Zrobimy stronę pod reklamy, która nie rozprasza i nie miesza komunikatu."
+                    subjectPrefix="Landing page pod reklamy"
+                    serviceOptions={[
+                        'landing page pod Google Ads',
+                        'landing page pod Meta Ads',
+                        'strona pod lead generation',
+                        'test nowej kampanii',
+                        'nie wiem, potrzebuję rekomendacji',
+                    ]}
+                    budgetOptions={[
+                        'do 5 000 zł',
+                        '5 000 - 10 000 zł',
+                        '10 000 - 20 000 zł',
+                        'powyżej 20 000 zł',
+                        'nie wiem / potrzebuję rekomendacji',
+                    ]}
+                    messagePlaceholder="Napisz, jaka oferta ma być promowana, skąd będzie ruch i jaka konwersja ma się wydarzyć po wejściu na stronę."
+                />
+            </Section>
         </main>
     );
 }

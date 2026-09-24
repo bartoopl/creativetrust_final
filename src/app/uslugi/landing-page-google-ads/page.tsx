@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import LandingLeadForm from '@/components/LandingLeadForm';
 import FAQAccordion from '@/components/FAQAccordion';
 import SchemaScript from '@/components/SchemaScript';
-import NotchedButton from '@/components/ui/NotchedButton';
+import PageHero from '@/components/ui/PageHero';
+import Section from '@/components/ui/Section';
+import { BulletColumns, HeroMedia, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/landing-page-google-ads`;
@@ -123,160 +124,71 @@ export default function GoogleAdsLandingPage() {
         <main className="min-h-screen bg-white">
             <SchemaScript schema={[breadcrumbSchema, serviceSchema, faqSchema]} />
 
-            <section className="bg-black px-6 py-20 text-white md:py-28">
-                <div className="mx-auto grid max-w-[1800px] grid-cols-1 items-center gap-16 lg:grid-cols-[1fr_0.95fr]">
-                    <div>
-                        <p className="mb-6 text-sm uppercase tracking-[0.3em]" style={{ color: 'var(--lime-ink)' }}>
-                            Performance landing page
-                        </p>
-                        <h1 className="mb-8 text-3xl font-medium leading-tight md:text-5xl">
-                            Landing page Google Ads, która zamienia kliknięcia w zapytania
-                        </h1>
-                        <p className="mb-10 max-w-3xl text-xl text-white/70">
-                            Projektujemy strony pod reklamy płatne, które mają jedną rolę: zwiększyć konwersję.
-                            Copy, UX, wydajność i CTA układamy pod konkretną ofertę, nie pod ogólną wizytówkę.
-                        </p>
-                        <div className="flex flex-col gap-4 sm:flex-row">
-                            <NotchedButton href="#formularz" variant="primary-dark">
-                                Zleć landing page
-                            </NotchedButton>
-                            <NotchedButton href="/uslugi/strony-www" variant="ghost-dark">
-                                Oferta stron WWW
-                            </NotchedButton>
-                        </div>
-                    </div>
-
-                    <div className="space-y-6">
-                        <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl">
-                            <Image
-                                src="/images/seo/google-ads-audit-hero.png"
-                                alt="Landing page pod Google Ads i kampanie reklamowe"
-                                fill
-                                priority
-                                className="object-cover"
-                            />
-                        </div>
-                        <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 md:p-10">
-                            <p className="mb-6 text-white/40">Kiedy landing page jest potrzebny?</p>
-                            <div className="space-y-4">
-                                {signals.map((item) => (
-                                    <div key={item} className="flex gap-4">
-                                        <span className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-white" />
-                                        <p className="text-lg text-white/90">{item}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="px-6 py-16 md:py-24">
-                <div className="mx-auto max-w-[1800px]">
-                    <div className="mb-12 max-w-4xl">
-                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>Co musi mieć dobra strona pod reklamy?</p>
-                        <h2 className="text-2xl font-medium md:text-4xl">
-                            Landing page pod Google Ads działa, gdy usuwa tarcie i nie rozprasza uwagi
-                        </h2>
-                    </div>
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-                        {essentials.map((item) => (
-                            <div key={item.title} className="rounded-3xl border border-gray-200 p-8">
-                                <h3 className="mb-4 text-xl font-medium">{item.title}</h3>
-                                <p className="text-gray-600 leading-relaxed">{item.text}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="bg-gray-50 px-6 py-16 md:py-24">
-                <div className="mx-auto grid max-w-[1800px] grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-                    <div>
-                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>Dla kogo</p>
-                        <h2 className="text-2xl font-medium leading-tight md:text-4xl">
-                            Jedna strona pod reklamę, jedna oferta, jeden ruch użytkownika
-                        </h2>
-                    </div>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        {useCases.map((item) => (
-                            <div key={item} className="rounded-2xl bg-white p-6 shadow-sm">
-                                <p className="text-gray-800">{item}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="px-6 py-16 md:py-24">
-                <div className="mx-auto max-w-[1800px]">
-                    <div className="mb-12 max-w-4xl">
-                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>Proces</p>
-                        <h2 className="text-2xl font-medium md:text-4xl">
-                            Projektujemy landing page pod kampanię, nie odwrotnie
-                        </h2>
-                    </div>
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-                        {process.map((item, index) => (
-                            <div key={item.title} className="rounded-3xl bg-black p-8 text-white">
-                                <div className="mb-8 text-3xl font-bold text-white/20">
-                                    0{index + 1}
-                                </div>
-                                <h3 className="mb-4 text-xl font-medium">{item.title}</h3>
-                                <p className="text-white/70 leading-relaxed">{item.text}</p>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="mt-12 rounded-3xl bg-gray-50 p-8 md:p-12">
-                        <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
-                            <div>
-                                <h2 className="mb-4 text-3xl font-medium">Masz kampanię i potrzebujesz lepszego landing page?</h2>
-                                <p className="max-w-2xl text-gray-600">
-                                    Zrobimy stronę pod konkretną frazę, reklamę i konwersję. Bez kopiowania homepage.
-                                </p>
-                            </div>
-                            <NotchedButton href="#formularz" variant="primary-light">
-                                Poproś o landing page
-                            </NotchedButton>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="bg-gray-50 px-6 py-16 md:py-24">
-                <div className="mx-auto max-w-[1100px]">
-                    <div className="mb-10 max-w-3xl">
-                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>FAQ</p>
-                        <h2 className="text-2xl font-medium md:text-4xl">Najczęstsze pytania o landing page pod reklamy</h2>
-                    </div>
-                    <FAQAccordion items={faqs.map(({ question, answer }) => ({ question, answer }))} />
-                </div>
-            </section>
-
-            <section id="formularz" className="bg-gray-50 px-6 py-16 md:py-24">
-                <div className="mx-auto max-w-[1100px]">
-                    <LandingLeadForm
-                        formTitle="Landing page pod Google Ads"
-                        formSubtitle="Opisz usługę, kampanię i cel konwersji. Przygotujemy landing page, który dopasuje się do reklamy i nie rozproszy użytkownika."
-                        subjectPrefix="Landing page Google Ads"
-                        serviceOptions={[
-                            'landing page pod Google Ads',
-                            'landing page pod Meta Ads',
-                            'strona pod kampanię performance',
-                            'test nowej oferty / nowego komunikatu',
-                            'nie wiem, potrzebuję rekomendacji',
-                        ]}
-                        budgetOptions={[
-                            'do 5 000 zł',
-                            '5 000 - 10 000 zł',
-                            '10 000 - 20 000 zł',
-                            'powyżej 20 000 zł',
-                            'nie wiem / potrzebuję rekomendacji',
-                        ]}
-                        messagePlaceholder="Napisz, jaka usługa lub oferta ma być promowana, skąd będzie ruch i jaka konwersja ma się wydarzyć po wejściu na stronę."
+            <PageHero
+                eyebrow="Performance landing page"
+                title="Landing page Google Ads, która zamienia kliknięcia w zapytania"
+                description="Projektujemy strony pod reklamy płatne, które mają jedną rolę: zwiększyć konwersję. Copy, UX, wydajność i CTA układamy pod konkretną ofertę, nie pod ogólną wizytówkę."
+                cta={{ label: 'Zleć landing page', href: '#formularz' }}
+                ctaSecondary={{ label: 'Oferta stron WWW', href: '/uslugi/strony-www' }}
+                right={
+                    <HeroMedia
+                        src="/images/seo/google-ads-audit-hero.png"
+                        alt="Landing page pod Google Ads i kampanie reklamowe"
+                        label="Kiedy landing page jest potrzebny?"
+                        items={signals}
                     />
-                </div>
-            </section>
+                }
+            />
+
+            <Section
+                border={false}
+                eyebrow="Co musi mieć dobra strona pod reklamy?"
+                title="Landing page pod Google Ads działa, gdy usuwa tarcie i nie rozprasza uwagi"
+            >
+                <NumberedGrid cols={4} items={essentials} />
+            </Section>
+
+            <Section tint>
+                <SplitLayout eyebrow="Dla kogo" title="Jedna strona pod reklamę, jedna oferta, jeden ruch użytkownika">
+                    <BulletColumns items={useCases} />
+                </SplitLayout>
+            </Section>
+
+            <Section eyebrow="Proces" title="Projektujemy landing page pod kampanię, nie odwrotnie">
+                <NumberedGrid cols={4} items={process} />
+                <InlineCTA
+                    title="Masz kampanię i potrzebujesz lepszego landing page?"
+                    text="Zrobimy stronę pod konkretną frazę, reklamę i konwersję. Bez kopiowania homepage."
+                    cta={{ label: 'Poproś o landing page', href: '#formularz' }}
+                />
+            </Section>
+
+            <Section tint eyebrow="FAQ" title="Najczęstsze pytania o landing page pod reklamy" maxWidth={1100}>
+                <FAQAccordion items={faqs.map(({ question, answer }) => ({ question, answer }))} />
+            </Section>
+
+            <Section id="formularz" maxWidth={1100}>
+                <LandingLeadForm
+                    formTitle="Landing page pod Google Ads"
+                    formSubtitle="Opisz usługę, kampanię i cel konwersji. Przygotujemy landing page, który dopasuje się do reklamy i nie rozproszy użytkownika."
+                    subjectPrefix="Landing page Google Ads"
+                    serviceOptions={[
+                        'landing page pod Google Ads',
+                        'landing page pod Meta Ads',
+                        'strona pod kampanię performance',
+                        'test nowej oferty / nowego komunikatu',
+                        'nie wiem, potrzebuję rekomendacji',
+                    ]}
+                    budgetOptions={[
+                        'do 5 000 zł',
+                        '5 000 - 10 000 zł',
+                        '10 000 - 20 000 zł',
+                        'powyżej 20 000 zł',
+                        'nie wiem / potrzebuję rekomendacji',
+                    ]}
+                    messagePlaceholder="Napisz, jaka usługa lub oferta ma być promowana, skąd będzie ruch i jaka konwersja ma się wydarzyć po wejściu na stronę."
+                />
+            </Section>
         </main>
     );
 }
