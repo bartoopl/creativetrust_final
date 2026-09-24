@@ -53,11 +53,15 @@ Redesign the whole creativetrust.pl marketing site to the light, hairline-border
 
 ## Risks
 
+- `npm run lint` is broken on `main` (eslint-config-next 16 flat config vs FlatCompat); lint excluded from the gate, pre-existing.
+
 - No automated UI test suite exists; verification relies on typecheck/build, the guard script and screenshots.
 - `next build` fetches from Sanity; without credentials pages may fall back to empty data — build is still required to pass.
 - Large visual diff; SEO landing pages share markup patterns so a mechanical restyle may miss per-page details — covered by screenshots.
 
 ## Progress
+
+PR: #1
 
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
@@ -79,15 +83,15 @@ Redesign the whole creativetrust.pl marketing site to the light, hairline-border
 
 ### Phase 3: Inner pages
 
-- [ ] 3.1 Services index
-- [ ] 3.2 Core service pages
-- [ ] 3.3 SEO landing pages
-- [ ] 3.4 Portfolio pages
-- [ ] 3.5 Blog and knowledge base pages
-- [ ] 3.6 About page
-- [ ] 3.7 Contact and legal pages
+- [x] 3.1 Services index — bf35b32
+- [x] 3.2 Core service pages — bf35b32
+- [x] 3.3 SEO landing pages — 166bd70
+- [x] 3.4 Portfolio pages — 6867edb
+- [x] 3.5 Blog and knowledge base pages — 6352cd1
+- [x] 3.6 About page — 1c321ce
+- [x] 3.7 Contact and legal pages — 9d1596c
 
 ### Phase 4: Sweep and verification
 
-- [ ] 4.1 Leftover sweep and design guard
-- [ ] 4.2 Full validation gate and screenshots
+- [x] 4.1 Leftover sweep and design guard — 305a7ef
+- [x] 4.2 Full validation gate and screenshots — 305a7ef
