@@ -1,21 +1,24 @@
+import Eyebrow from './ui/Eyebrow';
+
+const testimonials = [
+    { name: 'Anna', text: 'Creativetrust nie robi tylko tego, co jest na briefie. Aktywnie sugerują co zmienić, żeby osiągnąć lepsze wyniki.' },
+    { name: 'Marcin', text: 'Nasz sklep na Medusa.js działa szybciej, wygląda lepiej i kosztuje nas mniej miesięcznie niż poprzednia platforma.' },
+    { name: 'Karolina', text: 'Automatyzacja marketingu, którą wdrożyli, zmniejszyła nasz czas obsługi leadów o połowę.' },
+    { name: 'Tomasz', text: 'Szczerość i bezpośredniość — wiedzą, co mówią, i mówią to wprost.' },
+];
+
 export default function TestimonialSection() {
     return (
-        <section style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--panel2)' }}>
-            <div style={{ maxWidth: 1000, margin: '0 auto', padding: '68px 32px', textAlign: 'center' }} className="px-4 py-16 sm:px-6 lg:px-8">
-                <div style={{
-                    fontFamily: 'var(--font-space), sans-serif',
-                    fontSize: 'clamp(18px, 2.1vw, 26px)',
-                    fontWeight: 500, lineHeight: 1.4, letterSpacing: '-0.01em',
-                }}>
-                    „Dostaliśmy partnera, który myśli produktem, nie tylko pikselami.{' '}
-                    <span style={{ color: 'var(--accent)' }}>Tempo wdrożeń wzrosło dwukrotnie</span>, a komunikacja zaczęła sprzedawać."
-                </div>
-                <div style={{ marginTop: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
-                    <span style={{ width: 36, height: 36, borderRadius: '50%', background: 'repeating-linear-gradient(135deg, var(--panel) 0 6px, color-mix(in srgb, var(--accent) 14%, var(--panel)) 6px 12px)', border: '1px solid var(--line)', display: 'inline-block' }} />
-                    <div style={{ textAlign: 'left' }}>
-                        <div style={{ fontWeight: 600, fontSize: 14, fontFamily: 'var(--font-space), sans-serif' }}>Klient CreativeTrust</div>
-                        <div style={{ color: 'var(--muted)', fontSize: 12 }}>Head of Growth</div>
-                    </div>
+        <section className="ct-section" style={{ background: 'var(--panel)', borderTop: '1px solid var(--line)' }}>
+            <div className="mx-auto flex max-w-[1280px] flex-col gap-10">
+                <Eyebrow>Klienci</Eyebrow>
+                <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))' }}>
+                    {testimonials.map((t) => (
+                        <figure key={t.name} className="m-0 flex flex-col gap-4" style={{ background: '#fff', border: '1px solid rgba(17,24,39,0.1)', borderRadius: 8, padding: 24 }}>
+                            <blockquote style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: 'var(--text)' }}>„{t.text}”</blockquote>
+                            <figcaption className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)' }}>— {t.name}</figcaption>
+                        </figure>
+                    ))}
                 </div>
             </div>
         </section>

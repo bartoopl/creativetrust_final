@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
-import NotchedButton from '@/components/ui/NotchedButton';
+import PageHero from '@/components/ui/PageHero';
+import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 
@@ -61,109 +62,72 @@ export default function EcommercePage() {
     return (
         <main style={{ minHeight: '100vh' }}>
             <SchemaScript schema={serviceSchema} />
-            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
-                        E-COMMERCE
-                    </div>
-                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: '0 0 18px', maxWidth: '12ch' }}>
-                        Sklepy, które sprzedają i <span style={{ color: 'var(--lime-ink)' }}>skalują się.</span>
-                    </h1>
-                    <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', color: 'rgba(255,255,255,0.6)', maxWidth: '54ch', margin: '0 0 28px' }}>
-                        Projektujemy i wdrażamy sklepy e-commerce oparte na danych i AI. Nowe wdrożenia, migracje platform, integracje ERP — szybciej i z lepszym wynikiem niż tradycyjny proces.
-                    </p>
-                    <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-                        <NotchedButton href="/kontakt" variant="primary-dark">
-                            Omów projekt
-                        </NotchedButton>
-                    </div>
-                </div>
-            </section>
+            <PageHero
+                eyebrow="E-commerce"
+                title={<>Sklepy, które sprzedają i <span style={{ color: 'var(--accent)' }}>skalują się.</span></>}
+                description="Projektujemy i wdrażamy sklepy e-commerce oparte na danych i AI. Nowe wdrożenia, migracje platform, integracje ERP — szybciej i z lepszym wynikiem niż tradycyjny proces."
+                cta={{ label: 'Omów projekt', href: '/kontakt' }}
+            />
 
-            <section style={{ borderTop: '1px solid rgba(255,255,255,0.08)', background: '#000', color: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-sm">
-                    <div style={{ display: 'grid', gap: 24 }} className="grid-cols-2 md:grid-cols-4">
-                        {stats.map(s => (
-                            <div key={s.value} style={{ borderLeft: '1px solid rgba(255,255,255,0.08)', paddingLeft: 20 }}>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(28px, 3.1vw, 43.1px)', letterSpacing: '-1.44px', lineHeight: 1, color: '#fff' }}>{s.value}</div>
-                                <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, marginTop: 10 }}>{s.label}</div>
+            <Section border={false}>
+                <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+                    {stats.map(s => (
+                        <div key={s.value} className="flex flex-col gap-2.5" style={{ padding: '24px 24px 28px' }}>
+                            <span style={{ fontSize: 'clamp(28px, 3.1vw, 40px)', fontWeight: 600, letterSpacing: '-1.2px', lineHeight: 1 }}>{s.value}</span>
+                            <span className="ct-body" style={{ fontSize: 13 }}>{s.label}</span>
+                        </div>
+                    ))}
+                </div>
+            </Section>
+
+            <Section id="oferta" eyebrow="Zakres" title="Typy projektów e-commerce.">
+                <div className="ct-grid-lines grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    {services.map(s => (
+                        <div key={s.num} className="flex flex-col gap-2.5" style={{ padding: 28 }}>
+                            <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)', marginBottom: 12 }}>{s.num}</span>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{s.title}</h3>
+                            <p className="ct-body" style={{ fontSize: 15, flex: 1 }}>{s.description}</p>
+                            <div className="flex flex-wrap gap-2" style={{ marginTop: 6 }}>
+                                {s.tags.map(t => <span key={t} className="ct-pill">{t}</span>)}
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
-            <section id="oferta" style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>ZAKRES</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Typy projektów e-commerce.</h2>
-                    </div>
-                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                        {services.map(s => (
-                            <div key={s.num} style={{ borderRadius: 4, padding: '28px 24px', background: '#fff', border: '1px solid rgba(0,0,0,0.08)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, color: 'rgba(0,0,0,0.4)', marginBottom: 22 }}>{s.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, margin: '0 0 10px', letterSpacing: '-0.8px' }}>{s.title}</h3>
-                                <p style={{ color: 'rgba(0,0,0,0.6)', fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', margin: '0 0 16px' }}>{s.description}</p>
-                                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                                    {s.tags.map(t => (
-                                        <span key={t} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'rgba(0,0,0,0.6)', border: '1px solid rgba(0,0,0,0.08)', padding: '4px 10px', borderRadius: 4 }}>{t}</span>
-                                    ))}
-                                </div>
+            <Section tint eyebrow="Standard" title="Co dostajesz w każdym sklepie.">
+                <div className="grid grid-cols-1 gap-x-10 md:grid-cols-2 lg:grid-cols-3">
+                    {features.map(f => (
+                        <div key={f.title} className="flex flex-col gap-2" style={{ padding: '20px 0', borderTop: '1px solid var(--line-strong)' }}>
+                            <div className="flex items-center gap-2.5">
+                                <span className="ct-bullet" aria-hidden="true" />
+                                <h3 style={{ margin: 0, fontSize: 16, fontWeight: 600 }}>{f.title}</h3>
                             </div>
-                        ))}
-                    </div>
+                            <p className="ct-body" style={{ fontSize: 15 }}>{f.description}</p>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
-            <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>STANDARD</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Co dostajesz w każdym sklepie.</h2>
-                    </div>
-                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                        {features.map(f => (
-                            <div key={f.title} style={{ borderRadius: 4, padding: '24px', background: '#fff', border: '1px solid rgba(0,0,0,0.08)' }}>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, margin: '0 0 10px', letterSpacing: '-0.8px' }}>{f.title}</h3>
-                                <p style={{ color: 'rgba(0,0,0,0.6)', fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', margin: 0 }}>{f.description}</p>
-                            </div>
-                        ))}
-                    </div>
+            <Section eyebrow="Tech stack" title="Platformy i integracje, które obsługujemy.">
+                <div className="flex flex-wrap gap-2.5">
+                    {platforms.map(p => (
+                        <span key={p} className="ct-pill" style={{ fontSize: 12, padding: '8px 14px', color: 'var(--text)' }}>{p}</span>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
-            <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ marginBottom: 40 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>TECH STACK</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Platformy i integracje, które obsługujemy.</h2>
-                    </div>
-                    <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                        {platforms.map(p => (
-                            <span key={p} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, fontWeight: 500, color: '#000', border: '1px solid rgba(0,0,0,0.08)', padding: '9px 14px', borderRadius: 4, background: '#fff' }}>{p}</span>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>PROCES</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Od konceptu do sprzedającego sklepu.</h2>
-                    </div>
-                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-                        {process.map(step => (
-                            <div key={step.num} style={{ borderRadius: 4, padding: '28px 24px', background: step.featured ? 'rgba(0,0,0,0.04)' : '#fff', border: '1px solid rgba(0,0,0,0.08)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, color: 'rgba(0,0,0,0.4)', marginBottom: 38 }}>{step.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, margin: '0 0 8px', letterSpacing: '-0.8px' }}>{step.title}</h3>
-                                <p style={{ color: 'rgba(0,0,0,0.6)', fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', margin: 0 }}>{step.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <Section eyebrow="Proces" title="Od konceptu do sprzedającego sklepu.">
+                <ol className="ct-grid-lines grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                    {process.map(step => (
+                        <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>
+                            <span className="ct-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--accent)', marginBottom: 24 }}>{step.num}</span>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{step.title}</h3>
+                            <p className="ct-body">{step.description}</p>
+                        </li>
+                    ))}
+                </ol>
+            </Section>
 
             <CTASection />
         </main>

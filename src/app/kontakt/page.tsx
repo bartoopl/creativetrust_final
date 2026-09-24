@@ -17,31 +17,29 @@ const contactDetails = [
 export default function ContactPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
-            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+            <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x)' }}>
+                <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
                     <div>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
-                            KONTAKT
-                        </div>
-                        <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: '0 0 18px', maxWidth: '10ch' }}>
+                        <span className="ct-eyebrow">KONTAKT</span>
+                        <h1 className="ct-h1" style={{ margin: '16px 0 18px', maxWidth: '12ch' }}>
                             Zacznijmy od rozmowy.
                         </h1>
-                        <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', color: 'rgba(255,255,255,0.6)', maxWidth: '48ch', margin: '0 0 36px' }}>
+                        <p className="ct-lead" style={{ maxWidth: '48ch', margin: '0 0 36px' }}>
                             30-minutowa konsultacja bez zobowiązań. Pokażemy, gdzie AI realnie skróci Twój czas i podniesie wynik — konkretnie, bez marketingowego szumu.
                         </p>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 32, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 32 }}>
+                        <div className="ct-grid-lines grid-cols-1 sm:grid-cols-2" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                             {contactDetails.map(d => (
-                                <div key={d.label}>
-                                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 8 }}>{d.label}</div>
-                                    <Link href={d.href} className="ct-contact-link" style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, color: '#fff', textDecoration: 'none', letterSpacing: '-0.8px' }}>
+                                <div key={d.label} style={{ padding: '20px 22px' }}>
+                                    <div className="ct-meta" style={{ marginBottom: 8 }}>{d.label}</div>
+                                    <Link href={d.href} className="ct-contact-link" style={{ fontWeight: 600, fontSize: 18, color: 'var(--text)', textDecoration: 'none', letterSpacing: '-0.3px' }}>
                                         {d.value}
                                     </Link>
                                 </div>
                             ))}
-                            <div>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 8 }}>Adres</div>
-                                <p style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 15.4, color: '#fff', margin: 0, lineHeight: '24px', letterSpacing: '-0.32px' }}>
+                            <div className="sm:col-span-2" style={{ padding: '20px 22px' }}>
+                                <div className="ct-meta" style={{ marginBottom: 8 }}>Adres</div>
+                                <p style={{ fontWeight: 500, fontSize: 15, color: 'var(--text)', margin: 0, lineHeight: 1.6 }}>
                                     M34 Business Center<br />
                                     ul. Kombatantów 34/500<br />
                                     66-400 Gorzów Wielkopolski
@@ -49,17 +47,20 @@ export default function ContactPage() {
                             </div>
                         </div>
 
-                        <div style={{ marginTop: 40, padding: 22, borderRadius: 4, border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' }}>
-                            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, letterSpacing: '.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 10 }}>Co możesz opisać w formularzu</div>
-                            <ul style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13.5, lineHeight: 1.7, margin: 0, paddingLeft: 16 }}>
-                                <li>Co chcesz poprawić: markę, stronę, sklep, automatyzację</li>
-                                <li>Skala projektu i horyzont czasowy</li>
-                                <li>Budżet orientacyjny (opcjonalnie)</li>
+                        <div className="ct-panel" style={{ marginTop: 24, padding: 22, background: 'var(--panel)' }}>
+                            <div className="ct-eyebrow" style={{ marginBottom: 6 }}>Co możesz opisać w formularzu</div>
+                            <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                                {['Co chcesz poprawić: markę, stronę, sklep, automatyzację', 'Skala projektu i horyzont czasowy', 'Budżet orientacyjny (opcjonalnie)'].map((item, i) => (
+                                    <li key={item} className="flex items-center gap-3" style={{ padding: '10px 0', borderTop: i === 0 ? 'none' : '1px solid var(--line)', fontSize: 14, color: 'var(--text-2)', lineHeight: 1.5 }}>
+                                        <span className="ct-bullet" />
+                                        {item}
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
 
-                    <div style={{ borderRadius: 4, border: '1px solid rgba(255,255,255,0.08)', background: '#fff', overflow: 'hidden' }}>
+                    <div>
                         <ContactForm />
                     </div>
                 </div>

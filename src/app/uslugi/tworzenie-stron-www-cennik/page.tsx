@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import Button from '@/components/Button';
 import FAQAccordion from '@/components/FAQAccordion';
 import LandingLeadForm from '@/components/LandingLeadForm';
 import SchemaScript from '@/components/SchemaScript';
+import PageHero from '@/components/ui/PageHero';
+import Section from '@/components/ui/Section';
+import { BulletColumns, HeroMedia, InlineCTA, NumberedGrid, PriceGrid, SplitLayout } from '@/components/LandingBlocks';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/tworzenie-stron-www-cennik`;
@@ -112,158 +112,88 @@ export default function WebsitePricingPage() {
         <main className="min-h-screen bg-white">
             <SchemaScript schema={[breadcrumbSchema, serviceSchema, faqSchema]} />
 
-            <section className="px-6 py-20 md:py-28 bg-gray-50">
-                <div className="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-16 items-center">
-                    <div>
-                        <p className="text-sm uppercase tracking-[0.3em] text-gray-500 mb-6">
-                            Cennik stron internetowych
-                        </p>
-                        <h1 className="text-3xl md:text-4xl font-medium leading-tight mb-8">
-                            Ile kosztuje strona internetowa dla firmy?
-                        </h1>
-                        <p className="text-xl text-gray-600 max-w-3xl mb-10">
-                            Cena strony WWW zależy od zakresu, treści, CMS, integracji i celu biznesowego.
-                            Poniżej pokazujemy realne zakresy projektów, które mają działać sprzedażowo,
-                            a nie tylko wyglądać jak wizytówka.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <Button href="#formularz">Poproś o wycenę strony</Button>
-                            <Link
-                                href="/uslugi/strony-www"
-                                className="inline-flex items-center justify-center rounded-full border border-gray-300 px-6 py-3 font-medium text-black hover:bg-black hover:text-white transition-colors"
-                            >
-                                Zobacz ofertę WWW
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="space-y-6">
-                        <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] shadow-xl">
-                            <Image
-                                src="/images/seo/website-pricing-hero.png"
-                                alt="Projektowanie strony internetowej i planowanie zakresu wyceny"
-                                fill
-                                priority
-                                className="object-cover"
-                            />
-                        </div>
-                        <div className="rounded-[2rem] bg-black p-8 md:p-10 text-white">
-                            <p className="text-gray-400 mb-4">Najważniejsza zasada</p>
-                            <p className="text-2xl md:text-3xl font-medium leading-tight mb-6">
+            <PageHero
+                eyebrow="Cennik stron internetowych"
+                title="Ile kosztuje strona internetowa dla firmy?"
+                description="Cena strony WWW zależy od zakresu, treści, CMS, integracji i celu biznesowego. Poniżej pokazujemy realne zakresy projektów, które mają działać sprzedażowo, a nie tylko wyglądać jak wizytówka."
+                cta={{ label: 'Poproś o wycenę strony', href: '#formularz' }}
+                ctaSecondary={{ label: 'Zobacz ofertę WWW', href: '/uslugi/strony-www' }}
+                right={
+                    <HeroMedia
+                        src="/images/seo/website-pricing-hero.png"
+                        alt="Projektowanie strony internetowej i planowanie zakresu wyceny"
+                        label="Najważniejsza zasada"
+                    >
+                        <div style={{ borderTop: '1px solid var(--line)', padding: '16px 0 14px' }}>
+                            <p style={{ margin: '0 0 12px', fontSize: 22, fontWeight: 600, letterSpacing: '-0.5px', lineHeight: 1.25 }}>
                                 Najtańsza strona rzadko jest najtańszą decyzją.
                             </p>
-                            <p className="text-gray-300 leading-relaxed">
+                            <p className="ct-body" style={{ fontSize: 15 }}>
                                 Jeśli strona nie ładuje się szybko, nie ma dobrych treści i nie mierzy konwersji,
                                 kosztuje podwójnie: najpierw przy wdrożeniu, potem w przepalonych kampaniach i
                                 utraconych zapytaniach.
                             </p>
                         </div>
-                    </div>
-                </div>
-            </section>
+                    </HeroMedia>
+                }
+            />
 
-            <section className="px-6 py-16 md:py-24">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="max-w-3xl mb-12">
-                        <p className="text-gray-500 mb-3">Orientacyjne zakresy</p>
-                        <h2 className="text-2xl md:text-4xl font-medium">
-                            Cennik traktujemy jako punkt startu do rozmowy
-                        </h2>
-                    </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        {packages.map((item) => (
-                            <div key={item.name} className="rounded-3xl border border-gray-200 p-8 flex flex-col">
-                                <h3 className="text-2xl font-medium mb-3">{item.name}</h3>
-                                <p className="text-3xl font-bold mb-5">{item.price}</p>
-                                <p className="text-gray-600 mb-8">{item.description}</p>
-                                <ul className="space-y-3 mt-auto">
-                                    {item.features.map((feature) => (
-                                        <li key={feature} className="flex gap-3 text-gray-700">
-                                            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-black" />
-                                            <span>{feature}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <Section
+                border={false}
+                eyebrow="Orientacyjne zakresy"
+                title="Cennik traktujemy jako punkt startu do rozmowy"
+            >
+                <PriceGrid
+                    items={packages.map((item) => ({
+                        name: item.name,
+                        price: item.price,
+                        text: item.description,
+                        features: item.features,
+                    }))}
+                />
+            </Section>
 
-            <section className="px-6 py-16 md:py-24 bg-gray-50">
-                <div className="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12">
-                    <div>
-                        <p className="text-gray-500 mb-3">Od czego zależy cena?</p>
-                        <h2 className="text-2xl md:text-4xl font-medium leading-tight">
-                            Największy wpływ ma nie liczba pikseli, tylko zakres decyzji
-                        </h2>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {costDrivers.map((driver) => (
-                            <div key={driver} className="rounded-2xl bg-white p-6 shadow-sm">
-                                <p className="text-gray-800">{driver}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <Section tint>
+                <SplitLayout eyebrow="Od czego zależy cena?" title="Największy wpływ ma nie liczba pikseli, tylko zakres decyzji">
+                    <BulletColumns items={costDrivers} />
+                </SplitLayout>
+            </Section>
 
-            <section className="px-6 py-16 md:py-24">
-                <div className="max-w-[1800px] mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                        {comparisons.map((item) => (
-                            <div key={item.label} className="rounded-3xl bg-black text-white p-8">
-                                <h3 className="text-2xl font-medium mb-4">{item.label}</h3>
-                                <p className="text-gray-300">{item.text}</p>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="rounded-3xl bg-gray-50 p-8 md:p-12 flex flex-col lg:flex-row gap-8 items-start lg:items-center justify-between">
-                        <div>
-                            <h2 className="text-3xl font-medium mb-4">Chcesz realną wycenę?</h2>
-                            <p className="text-gray-600 max-w-2xl">
-                                Wyślij krótki opis firmy, celu strony i tego, co ma robić użytkownik po wejściu.
-                                Wrócimy z rekomendowanym zakresem, nie tylko z kwotą.
-                            </p>
-                        </div>
-                        <Button href="#formularz">Wyceń projekt WWW</Button>
-                    </div>
-                </div>
-            </section>
+            <Section>
+                <NumberedGrid cols={3} items={comparisons.map((item) => ({ title: item.label, text: item.text }))} />
+                <InlineCTA
+                    title="Chcesz realną wycenę?"
+                    text="Wyślij krótki opis firmy, celu strony i tego, co ma robić użytkownik po wejściu. Wrócimy z rekomendowanym zakresem, nie tylko z kwotą."
+                    cta={{ label: 'Wyceń projekt WWW', href: '#formularz' }}
+                />
+            </Section>
 
-            <section className="bg-gray-50 px-6 py-16 md:py-24">
-                <div className="mx-auto max-w-[1100px]">
-                    <div className="mb-10 max-w-3xl">
-                        <p className="mb-3" style={{ color: 'var(--lime-ink)' }}>FAQ</p>
-                        <h2 className="text-2xl font-medium md:text-4xl">Najczęstsze pytania o cennik stron WWW</h2>
-                    </div>
-                    <FAQAccordion items={faqs.map(({ question, answer }) => ({ question, answer }))} />
-                </div>
-            </section>
+            <Section tint eyebrow="FAQ" title="Najczęstsze pytania o cennik stron WWW" maxWidth={1100}>
+                <FAQAccordion items={faqs.map(({ question, answer }) => ({ question, answer }))} />
+            </Section>
 
-            <section id="formularz" className="px-6 py-16 md:py-24 bg-gray-50">
-                <div className="max-w-[1100px] mx-auto">
-                    <LandingLeadForm
-                        formTitle="Wyceń stronę internetową"
-                        formSubtitle="Podaj typ strony, cel i zakres. Odpowiemy, jaki wariant ma sens i od czego będzie zależeć koszt."
-                        subjectPrefix="Wycena strony WWW"
-                        serviceOptions={[
-                            'landing page',
-                            'strona firmowa',
-                            'rozbudowany serwis z CMS',
-                            'przebudowa istniejącej strony',
-                            'nie wiem, potrzebuję rekomendacji',
-                        ]}
-                        budgetOptions={[
-                            'do 5 000 zł',
-                            '5 000 - 10 000 zł',
-                            '10 000 - 25 000 zł',
-                            'powyżej 25 000 zł',
-                            'nie wiem / potrzebuję rekomendacji',
-                        ]}
-                        messagePlaceholder="Napisz, czym zajmuje się firma, ile podstron przewidujesz i co strona ma robić: zbierać leady, sprzedawać, edukować, wspierać kampanie?"
-                    />
-                </div>
-            </section>
+            <Section id="formularz" maxWidth={1100}>
+                <LandingLeadForm
+                    formTitle="Wyceń stronę internetową"
+                    formSubtitle="Podaj typ strony, cel i zakres. Odpowiemy, jaki wariant ma sens i od czego będzie zależeć koszt."
+                    subjectPrefix="Wycena strony WWW"
+                    serviceOptions={[
+                        'landing page',
+                        'strona firmowa',
+                        'rozbudowany serwis z CMS',
+                        'przebudowa istniejącej strony',
+                        'nie wiem, potrzebuję rekomendacji',
+                    ]}
+                    budgetOptions={[
+                        'do 5 000 zł',
+                        '5 000 - 10 000 zł',
+                        '10 000 - 25 000 zł',
+                        'powyżej 25 000 zł',
+                        'nie wiem / potrzebuję rekomendacji',
+                    ]}
+                    messagePlaceholder="Napisz, czym zajmuje się firma, ile podstron przewidujesz i co strona ma robić: zbierać leady, sprzedawać, edukować, wspierać kampanie?"
+                />
+            </Section>
         </main>
     );
 }

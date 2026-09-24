@@ -105,15 +105,18 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title }) => {
     };
 
     return (
-        <div className="bg-gray-50 rounded-xl p-6 mb-8">
-            <h3 className="text-lg font-medium mb-4">Odsłuchaj wpis w formie dialogu</h3>
+        <div className="ct-panel" style={{ padding: 20, marginBottom: 32, background: 'var(--panel)' }}>
+            <span className="ct-eyebrow">Audio</span>
+            <h3 style={{ margin: '6px 0 16px', fontSize: 16, fontWeight: 600 }}>Odsłuchaj wpis w formie dialogu</h3>
             {error && (
-                <div className="text-red-500 mb-4">{error}</div>
+                <div className="ct-meta" style={{ color: '#dc2626', textTransform: 'none', marginBottom: 12 }}>{error}</div>
             )}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-4">
                 <button
                     onClick={togglePlayPause}
-                    className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors"
+                    className="flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-50"
+                    style={{ width: 44, height: 44, flex: 'none', borderRadius: 'var(--radius-pill)', background: 'var(--accent)', color: '#fff', border: 'none', cursor: 'pointer' }}
+                    aria-label={isPlaying ? 'Pauza' : 'Odtwórz'}
                     disabled={!!error}
                 >
                     {isPlaying ? (
@@ -134,10 +137,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title }) => {
                         max={duration || 100}
                         value={currentTime}
                         onChange={handleSliderChange}
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                        className="w-full cursor-pointer"
+                        style={{ accentColor: 'var(--accent)' }}
                         disabled={!!error}
                     />
-                    <div className="flex justify-between text-sm text-gray-500 mt-1">
+                    <div className="ct-meta flex justify-between" style={{ marginTop: 4, color: 'var(--muted-2)' }}>
                         <span>{formatTime(currentTime)}</span>
                         <span>{formatTime(duration)}</span>
                     </div>

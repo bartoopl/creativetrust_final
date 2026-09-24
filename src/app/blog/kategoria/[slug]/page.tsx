@@ -1,7 +1,9 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
+import PageHero from '@/components/ui/PageHero';
+import NotchedButton from '@/components/ui/NotchedButton';
+import BlogPostCard from '@/components/BlogPostCard';
 import type { Metadata } from 'next';
 import { getBlogPostsByCategory, getBlogCategories } from '@/lib/sanity';
 import { urlFor } from '@/lib/sanity';
@@ -68,180 +70,69 @@ export default async function BlogCategoryPage({
         }).format(date);
     };
 
+    const activePill = { borderColor: 'var(--accent)', color: 'var(--accent)', background: 'var(--accent-soft)' };
+
     return (
-        <main className="min-h-screen bg-white">
-            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
-                        Kategoria
-                    </div>
-                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: 0, maxWidth: '12ch' }}>
-                        {category.title}
-                    </h1>
-                </div>
-            </section>
-            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                <div style={{ maxWidth: 900, margin: '0 auto' }}>
-                <Link href="/blog" className="text-gray-600 mb-8 flex items-center">
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="mr-2"
-                    >
-                        <path
-                            d="M19 12H5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                        <path
-                            d="M12 19L5 12L12 5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-                    Wróć do bloga
-                </Link>
+        <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
+            <PageHero
+                eyebrow="Kategoria"
+                title={category.title}
+                description={category.description}
+            />
 
-                <div className="mb-12">
-                    <h1 className="text-3xl md:text-4xl font-medium mb-6">
-                        Kategoria: {category.title}
-                    </h1>
-                    {category.description && (
-                        <p className="text-xl text-gray-600 max-w-3xl">
-                            {category.description}
-                        </p>
-                    )}
-                </div>
-
-                {/* Kategorie */}
-                <div className="mb-12 flex flex-wrap gap-2">
-                    <Link
-                        href="/blog"
-                        className="px-4 py-2 bg-gray-100 text-gray-800 rounded-full hover:bg-gray-200 transition-colors"
-                    >
+            <div style={{ borderBottom: '1px solid var(--line)', background: 'var(--panel)' }}>
+                <div className="ct-shell-sm mx-auto flex max-w-[1280px] flex-wrap items-center gap-2" style={{ boxSizing: 'content-box' }}>
+                    <Link href="/blog" className="ct-meta ct-contact-link" style={{ marginRight: 10 }}>
+                        ← Wróć do bloga
+                    </Link>
+                    <Link href="/blog" className="ct-pill ct-card-hover">
                         Wszystkie
                     </Link>
                     {categories.map((cat) => (
                         <Link
                             key={cat._id}
                             href={`/blog/kategoria/${cat.slug.current}`}
-                            className={`px-4 py-2 rounded-full hover:bg-gray-200 transition-colors ${
-                                cat.slug.current === slug
-                                    ? 'bg-black text-white'
-                                    : 'bg-gray-100 text-gray-800'
-                            }`}
+                            className="ct-pill ct-card-hover"
+                            style={cat.slug.current === slug ? activePill : undefined}
                         >
-                            {cat.title} {cat.count > 0 && <span className="text-sm">({cat.count})</span>}
+                            {cat.title}{cat.count > 0 && <span style={{ marginLeft: 6, color: 'var(--muted-2)' }}>({cat.count})</span>}
                         </Link>
                     ))}
                 </div>
-
-                {/* Lista postów */}
-                {posts.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                        {posts.map((post) => (
-                            <div key={post._id} className="flex flex-col h-full group">
-                                <div className="aspect-[16/9] relative rounded-xl overflow-hidden mb-6">
-                                    {post.mainImage ? (
-                                        <Image
-                                            src={urlFor(post.mainImage).url()}
-                                            alt={post.title}
-                                            fill
-                                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                                            <span className="text-gray-400">Brak zdjęcia</span>
-                                        </div>
-                                    )}
-                                </div>
-
-                                <div className="mb-2">
-                                    {post.categories?.map((cat) => (
-                                        <Link
-                                            key={cat._id}
-                                            href={`/blog/kategoria/${cat.slug.current}`}
-                                            className={`inline-block mr-2 mb-1 px-2 py-1 text-xs rounded-full ${
-                                                cat.slug.current === slug
-                                                    ? 'bg-black text-white'
-                                                    : 'bg-gray-100 text-gray-800'
-                                            }`}
-                                        >
-                                            {cat.title}
-                                        </Link>
-                                    ))}
-                                </div>
-
-                                <h3 className="text-xl font-medium mb-3">
-                                    <Link href={`/blog/${post.slug.current}`} className="hover:text-gray-600 transition-colors">
-                                        {post.title}
-                                    </Link>
-                                </h3>
-
-                                <p className="text-gray-600 mb-4 text-sm line-clamp-3">{post.excerpt}</p>
-
-                                <div className="flex items-center text-xs text-gray-500 mb-4 mt-auto">
-                                    <span className="mr-4">{formatDate(post.publishedAt)}</span>
-                                    {post.estimatedReadingTime && (
-                                        <span>{post.estimatedReadingTime} min czytania</span>
-                                    )}
-                                </div>
-
-                                <Link
-                                    href={`/blog/${post.slug.current}`}
-                                    className="inline-flex items-center text-black font-medium text-sm group"
-                                >
-                                    Czytaj artykuł
-                                    <svg
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="ml-2 transform transition-transform group-hover:translate-x-1"
-                                    >
-                                        <path
-                                            d="M5 12H19"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <path
-                                            d="M12 5L19 12L12 19"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                </Link>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="text-center py-16">
-                        <h3 className="text-2xl font-medium mb-4">Brak artykułów w tej kategorii</h3>
-                        <p className="text-gray-600 mb-8">
-                            Nie znaleziono żadnych artykułów w kategorii {category.title}.
-                        </p>
-                        <Link
-                            href="/blog"
-                            className="inline-flex items-center justify-center px-6 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
-                        >
-                            Wróć do wszystkich artykułów
-                        </Link>
-                    </div>
-                )}
-                </div>
             </div>
+
+            <section className="ct-section">
+                <div className="mx-auto flex max-w-[1280px] flex-col gap-6">
+                    {/* Lista postów */}
+                    {posts.length > 0 ? (
+                        <>
+                            <span className="ct-eyebrow">Kategoria: {category.title}</span>
+                            <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))' }}>
+                                {posts.map((post) => (
+                                    <BlogPostCard
+                                        key={post._id}
+                                        href={`/blog/${post.slug.current}`}
+                                        title={post.title}
+                                        image={post.mainImage ? urlFor(post.mainImage).width(800).url() : undefined}
+                                        meta={post.categories?.map((cat) => cat.title).join(' · ')}
+                                        excerpt={post.excerpt}
+                                        footer={[formatDate(post.publishedAt), post.estimatedReadingTime && `${post.estimatedReadingTime} min czytania`].filter(Boolean).join(' · ')}
+                                    />
+                                ))}
+                            </div>
+                        </>
+                    ) : (
+                        <div className="ct-panel flex flex-col items-center gap-4 text-center" style={{ padding: 'clamp(32px, 6vw, 64px) 24px', background: 'var(--panel)' }}>
+                            <span className="ct-meta">// brak wyników</span>
+                            <h3 style={{ margin: 0, fontSize: 22, fontWeight: 600 }}>Brak artykułów w tej kategorii</h3>
+                            <p className="ct-body" style={{ fontSize: 15 }}>
+                                Nie znaleziono żadnych artykułów w kategorii {category.title}.
+                            </p>
+                            <NotchedButton href="/blog">Wróć do wszystkich artykułów</NotchedButton>
+                        </div>
+                    )}
+                </div>
+            </section>
         </main>
     );
 }

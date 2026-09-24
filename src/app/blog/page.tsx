@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { getBlogPosts, getBlogCategories, getFeaturedBlogPosts, urlFor } from '@/lib/sanity';
 import { SITE_URL } from '@/lib/schema';
+import PageHero from '@/components/ui/PageHero';
+import BlogPostCard from '@/components/BlogPostCard';
 
 export const metadata: Metadata = {
     title: 'Blog — CreativeTrust | Strategia, design, AI i automatyzacja',
@@ -31,24 +33,19 @@ export default async function BlogPage() {
 
     return (
         <main style={{ minHeight: '100vh' }}>
-            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>BLOG</div>
-                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: '0 0 14px', maxWidth: '12ch' }}>
-                        Wiedza bez ogólników.
-                    </h1>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', maxWidth: '52ch', margin: 0 }}>
-                        Strategia, design, AI, e-commerce i automatyzacja. Piszemy o tym, co realnie zmienia wyniki.
-                    </p>
-                </div>
-            </section>
+            <PageHero
+                eyebrow="Blog"
+                title="Wiedza bez ogólników."
+                description="Strategia, design, AI, e-commerce i automatyzacja. Piszemy o tym, co realnie zmienia wyniki."
+            />
 
             {categories.length > 0 && (
-                <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', borderBottom: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                        <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-sm flex gap-2 flex-wrap">
-                        <Link href="/blog" style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, padding: '7px 14px', borderRadius: 4, border: '1px solid rgba(0,0,0,0.15)', background: 'rgba(0,0,0,0.04)', color: '#000', textDecoration: 'none' }}>Wszystkie</Link>
+                <div style={{ borderBottom: '1px solid var(--line)', background: 'var(--panel)' }}>
+                    <div className="ct-shell-sm mx-auto flex max-w-[1280px] flex-wrap items-center gap-2" style={{ boxSizing: 'content-box' }}>
+                        <span className="ct-meta" style={{ marginRight: 6, color: 'var(--muted-2)' }}>Kategorie</span>
+                        <Link href="/blog" className="ct-pill" style={{ borderColor: 'var(--accent)', color: 'var(--accent)', background: 'var(--accent-soft)' }}>Wszystkie</Link>
                         {categories.map((cat: any) => (
-                            <Link key={cat._id} href={`/blog/kategoria/${cat.slug.current}`} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, padding: '7px 14px', borderRadius: 4, border: '1px solid rgba(0,0,0,0.08)', background: 'transparent', color: 'rgba(0,0,0,0.6)', textDecoration: 'none' }}>
+                            <Link key={cat._id} href={`/blog/kategoria/${cat.slug.current}`} className="ct-pill ct-card-hover">
                                 {cat.title}
                             </Link>
                         ))}
@@ -56,71 +53,63 @@ export default async function BlogPage() {
                 </div>
             )}
 
-            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-
-                {mainPost && (
-                    <div style={{ marginBottom: 64 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 20 }}>WYRÓŻNIONY ARTYKUŁ</div>
-                        <Link href={`/blog/${mainPost.slug.current}`} className="ct-card-hover grid grid-cols-1 overflow-hidden text-[var(--text)] no-underline lg:grid-cols-2" style={{ gap: 0, alignItems: 'stretch', borderRadius: 4, border: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                            <div style={{ background: 'var(--panel2)', overflow: 'hidden', minHeight: 340 }}>
+            {mainPost && (
+                <section className="ct-section">
+                    <div className="mx-auto flex max-w-[1280px] flex-col gap-6">
+                        <span className="ct-eyebrow">Wyróżniony artykuł</span>
+                        <Link href={`/blog/${mainPost.slug.current}`} className="ct-card-hover grid grid-cols-1 overflow-hidden lg:grid-cols-2" style={{ alignItems: 'stretch', borderRadius: 8, border: '1px solid rgba(17,24,39,0.1)', background: '#fff', color: 'inherit' }}>
+                            <div className={mainPost.mainImage ? '' : 'ct-placeholder'} style={{ background: mainPost.mainImage ? 'var(--panel2)' : undefined, overflow: 'hidden', minHeight: 320 }}>
                                 {mainPost.mainImage ? (
-                                    <img src={urlFor(mainPost.mainImage).width(800).url()} alt={mainPost.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                    <img src={urlFor(mainPost.mainImage).width(1000).url()} alt={mainPost.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                 ) : (
-                                    <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--muted)', fontFamily: 'var(--font-mono), monospace', fontSize: 13 }}>// brak zdjęcia</div>
+                                    <span className="ct-mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--muted)' }}>BRAK ZDJĘCIA</span>
                                 )}
                             </div>
-                            <div style={{ padding: '36px 36px 36px 42px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                            <div className="flex flex-col justify-center gap-3 border-t lg:border-t-0 lg:border-l" style={{ padding: 'clamp(24px, 4vw, 44px)', borderColor: 'var(--line)' }}>
                                 {mainPost.categories?.slice(0, 1).map((cat: any) => (
-                                    <div key={cat._id} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, letterSpacing: '.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 14 }}>{cat.title}</div>
+                                    <span key={cat._id} className="ct-meta" style={{ color: 'var(--accent)' }}>{cat.title}</span>
                                 ))}
-                                <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(24px, 3vw, 43.1px)', letterSpacing: '-1.76px', lineHeight: '48.4px', margin: '0 0 14px' }}>{mainPost.title}</h2>
-                                {mainPost.excerpt && <p style={{ color: 'rgba(0,0,0,0.6)', fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', margin: '0 0 24px' }}>{mainPost.excerpt}</p>}
-                                <div style={{ display: 'flex', gap: 16, alignItems: 'center', color: 'rgba(0,0,0,0.4)', fontSize: 13, fontFamily: 'var(--font-mono), monospace' }}>
+                                <h2 className="ct-h2" style={{ margin: 0 }}>{mainPost.title}</h2>
+                                {mainPost.excerpt && <p className="ct-body" style={{ fontSize: 15 }}>{mainPost.excerpt}</p>}
+                                <div className="ct-meta flex items-center gap-2" style={{ marginTop: 8, color: 'var(--muted-2)' }}>
                                     {mainPost.publishedAt && <span>{formatDate(mainPost.publishedAt)}</span>}
                                     {mainPost.estimatedReadingTime && <span>· {mainPost.estimatedReadingTime} min</span>}
                                 </div>
                             </div>
                         </Link>
                     </div>
-                )}
+                </section>
+            )}
 
-                {regularPosts.length > 0 && (
-                    <div>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 28 }}>WSZYSTKIE ARTYKUŁY</div>
-                        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {regularPosts.length > 0 && (
+                <section className="ct-section" style={{ borderTop: '1px solid var(--line)' }}>
+                    <div className="mx-auto flex max-w-[1280px] flex-col gap-6">
+                        <span className="ct-eyebrow">Wszystkie artykuły</span>
+                        <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))' }}>
                             {regularPosts.map((post: any) => (
-                                <Link key={post._id} href={`/blog/${post.slug.current}`} className="ct-card-hover" style={{ textDecoration: 'none', color: 'var(--text)', display: 'flex', flexDirection: 'column', borderRadius: 4, background: '#fff', border: '1px solid rgba(0,0,0,0.08)', overflow: 'hidden' }}>
-                                    <div style={{ aspectRatio: '16/9', background: 'var(--panel2)', overflow: 'hidden' }}>
-                                        {post.mainImage ? (
-                                            <img src={urlFor(post.mainImage).width(600).url()} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                        ) : (
-                                            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--muted)', fontFamily: 'var(--font-mono), monospace', fontSize: 13 }}>// brak</div>
-                                        )}
-                                    </div>
-                                    <div style={{ padding: '18px 20px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                                        {post.categories?.slice(0, 1).map((cat: any) => (
-                                            <div key={cat._id} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, letterSpacing: '.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 8 }}>{cat.title}</div>
-                                        ))}
-                                        <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, lineHeight: '24px', letterSpacing: '-0.8px', margin: '0 0 10px' }}>{post.title}</h3>
-                                        {post.excerpt && <p style={{ color: 'rgba(0,0,0,0.6)', fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', margin: '0 0 16px', flex: 1 }}>{post.excerpt}</p>}
-                                        <div style={{ display: 'flex', gap: 12, color: 'rgba(0,0,0,0.4)', fontSize: 12, fontFamily: 'var(--font-mono), monospace', marginTop: 'auto' }}>
-                                            {post.publishedAt && <span>{formatDate(post.publishedAt)}</span>}
-                                            {post.estimatedReadingTime && <span>· {post.estimatedReadingTime} min</span>}
-                                        </div>
-                                    </div>
-                                </Link>
+                                <BlogPostCard
+                                    key={post._id}
+                                    href={`/blog/${post.slug.current}`}
+                                    title={post.title}
+                                    image={post.mainImage ? urlFor(post.mainImage).width(800).url() : undefined}
+                                    meta={post.categories?.[0]?.title}
+                                    excerpt={post.excerpt}
+                                    footer={[post.publishedAt && formatDate(post.publishedAt), post.estimatedReadingTime && `${post.estimatedReadingTime} min`].filter(Boolean).join(' · ')}
+                                />
                             ))}
                         </div>
                     </div>
-                )}
+                </section>
+            )}
 
-                {allPosts.length === 0 && (
-                    <div style={{ textAlign: 'center', padding: '80px 0', color: 'rgba(0,0,0,0.6)' }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, marginBottom: 16 }}>// brak artykułów</div>
-                        <p>Artykuły pojawią się wkrótce.</p>
+            {allPosts.length === 0 && (
+                <section className="ct-section">
+                    <div className="mx-auto max-w-[1280px] text-center" style={{ padding: '48px 0' }}>
+                        <div className="ct-meta" style={{ marginBottom: 12 }}>// brak artykułów</div>
+                        <p className="ct-body" style={{ fontSize: 15 }}>Artykuły pojawią się wkrótce.</p>
                     </div>
-                )}
-            </div>
+                </section>
+            )}
         </main>
     );
 }

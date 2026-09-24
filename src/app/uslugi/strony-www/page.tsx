@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
-import NotchedButton from '@/components/ui/NotchedButton';
+import PageHero from '@/components/ui/PageHero';
+import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 
@@ -54,110 +55,74 @@ export default function WebsitesPage() {
             <SchemaScript schema={serviceSchema} />
 
             {/* Hero */}
-            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px, 10vw, 120px) 32px 96px' }}>
-                <div style={{ maxWidth: 820 }}>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 20 }}>
-                        STRONY WWW
-                    </div>
-                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 5.2vw, 64px)', lineHeight: 0.98, letterSpacing: '-0.045em', margin: '0 0 18px' }}>
-                        Strony, które przyciągają klientów i <span style={{ color: 'var(--lime-ink)' }}>konwertują.</span>
-                    </h1>
-                    <p style={{ fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 32px' }}>
-                        Projektujemy i wdrażamy strony WWW oparte na danych — od landing page po rozbudowany portal. Headless, szybkie, SEO-ready. Czas realizacji skrócony o 30–40% dzięki AI.
-                    </p>
-                    <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 48 }}>
-                        <NotchedButton href="/kontakt" variant="primary-light">
-                            Wycena projektu
-                        </NotchedButton>
-                    </div>
-                    <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
-                        {[['150+', 'stron'], ['15', 'lat'], ['90+', 'PageSpeed'], ['30-40%', 'szybciej']].map(([val, label]) => (
-                            <div key={label}>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 32, letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--lime-ink)' }}>{val}</div>
-                                <div style={{ color: 'var(--muted)', fontSize: 13, marginTop: 4 }}>{label}</div>
-                            </div>
-                        ))}
-                    </div>
+            <PageHero
+                eyebrow="Strony WWW"
+                title={<>Strony, które przyciągają klientów i <span style={{ color: 'var(--accent)' }}>konwertują.</span></>}
+                description="Projektujemy i wdrażamy strony WWW oparte na danych — od landing page po rozbudowany portal. Headless, szybkie, SEO-ready. Czas realizacji skrócony o 30–40% dzięki AI."
+                cta={{ label: 'Wycena projektu', href: '/kontakt' }}
+            >
+                <div className="ct-grid-lines grid-cols-2 sm:grid-cols-4" style={{ marginTop: 16, borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+                    {[['150+', 'stron'], ['15', 'lat'], ['90+', 'PageSpeed'], ['30-40%', 'szybciej']].map(([val, label]) => (
+                        <div key={label} className="flex flex-col gap-1.5" style={{ padding: '18px 20px' }}>
+                            <span style={{ fontSize: 28, fontWeight: 600, letterSpacing: '-1px', lineHeight: 1 }}>{val}</span>
+                            <span className="ct-meta">{label}</span>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </PageHero>
 
             {/* Types */}
-            <section id="oferta" style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 14 }}>TYPY PROJEKTÓW</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Co możemy zbudować.</h2>
-                    </div>
-                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2">
-                        {types.map(t => (
-                            <div key={t.num} style={{ borderRadius: 20, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--lime-ink)', marginBottom: 28 }}>{t.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 10px' }}>{t.title}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.55, margin: '0 0 20px' }}>{t.description}</p>
-                                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                                    {t.tags.map(tag => (
-                                        <span key={tag} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--muted)', border: '1px solid var(--line)', padding: '4px 10px', borderRadius: 6 }}>{tag}</span>
-                                    ))}
-                                </div>
+            <Section id="oferta" eyebrow="Typy projektów" title="Co możemy zbudować." border={false}>
+                <div className="ct-grid-lines grid-cols-1 md:grid-cols-2">
+                    {types.map(t => (
+                        <div key={t.num} className="flex flex-col gap-2.5" style={{ padding: 28 }}>
+                            <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)', marginBottom: 12 }}>{t.num}</span>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{t.title}</h3>
+                            <p className="ct-body" style={{ fontSize: 15, flex: 1 }}>{t.description}</p>
+                            <div className="flex flex-wrap gap-2" style={{ marginTop: 6 }}>
+                                {t.tags.map(tag => <span key={tag} className="ct-pill">{tag}</span>)}
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
             {/* Features */}
-            <section style={{ borderTop: '1px solid var(--line)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 14 }}>STANDARD PROJEKTU</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Co dostajesz w każdym projekcie.</h2>
-                    </div>
-                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                        {features.map(f => (
-                            <div key={f.title} style={{ borderRadius: 18, padding: '24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 10px' }}>{f.title}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>{f.description}</p>
+            <Section tint eyebrow="Standard projektu" title="Co dostajesz w każdym projekcie.">
+                <div className="grid grid-cols-1 gap-x-10 md:grid-cols-2 lg:grid-cols-3">
+                    {features.map(f => (
+                        <div key={f.title} className="flex flex-col gap-2" style={{ padding: '20px 0', borderTop: '1px solid var(--line-strong)' }}>
+                            <div className="flex items-center gap-2.5">
+                                <span className="ct-bullet" aria-hidden="true" />
+                                <h3 style={{ margin: 0, fontSize: 16, fontWeight: 600 }}>{f.title}</h3>
                             </div>
-                        ))}
-                    </div>
+                            <p className="ct-body" style={{ fontSize: 15 }}>{f.description}</p>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
             {/* Stack */}
-            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
-                    <div style={{ marginBottom: 40 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 14 }}>TECH STACK</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Technologie, które wybieramy z powodu.</h2>
-                    </div>
-                    <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                        {tech.map(t => (
-                            <span key={t} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 14, fontWeight: 500, color: 'var(--text)', border: '1px solid var(--line)', padding: '10px 18px', borderRadius: 10, background: 'var(--panel)' }}>{t}</span>
-                        ))}
-                    </div>
+            <Section eyebrow="Tech stack" title="Technologie, które wybieramy z powodu.">
+                <div className="flex flex-wrap gap-2.5">
+                    {tech.map(t => (
+                        <span key={t} className="ct-pill" style={{ fontSize: 12, padding: '8px 14px', color: 'var(--text)' }}>{t}</span>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
             {/* Process */}
-            <section style={{ borderTop: '1px solid var(--line)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 14 }}>PROCES</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>
-                            Od briefu do gotowej strony.
-                        </h2>
-                    </div>
-                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-                        {process.map(step => (
-                            <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: step.featured ? 'linear-gradient(160deg, color-mix(in srgb, var(--lime) 16%, var(--panel)), var(--panel))' : 'var(--panel)', border: step.featured ? '1px solid color-mix(in srgb, var(--lime) 40%, var(--line))' : '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--lime-ink)', marginBottom: 48 }}>{step.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 8px' }}>{step.title}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.5, margin: 0 }}>{step.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <Section eyebrow="Proces" title="Od briefu do gotowej strony.">
+                <ol className="ct-grid-lines grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                    {process.map(step => (
+                        <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>
+                            <span className="ct-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--accent)', marginBottom: 24 }}>{step.num}</span>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{step.title}</h3>
+                            <p className="ct-body">{step.description}</p>
+                        </li>
+                    ))}
+                </ol>
+            </Section>
 
             <CTASection />
         </main>

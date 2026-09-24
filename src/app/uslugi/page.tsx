@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
+import PageHero from '@/components/ui/PageHero';
+import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildFaqSchema } from '@/lib/schema';
 
@@ -65,123 +67,87 @@ export default function ServicesPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
             <SchemaScript schema={faqSchema} />
-            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl grid grid-cols-1 items-end gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-                    <div>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>Usługi</div>
-                        <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: '0 0 18px', maxWidth: '12ch' }}>
-                            Jeden zespół. Pełen zakres.
-                        </h1>
-                        <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', color: 'rgba(255,255,255,0.6)', maxWidth: '54ch', margin: '0 0 28px' }}>
-                            Strategia, design, development i automatyzacja AI w jednym procesie — bez przekazywania pałeczki między agencjami.
-                        </p>
-                        <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-                            <Link href="/kontakt" style={{ height: 40, display: 'inline-flex', alignItems: 'center', padding: 5, borderRadius: 4, background: '#fff', boxShadow: 'inset 0 0 0 1px #fff', color: '#202124', textDecoration: 'none', fontSize: 13.2, fontWeight: 500 }}>
-                                Umów konsultację
-                                <span style={{ width: 30, height: 30, marginLeft: 12, borderRadius: 2, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.1)' }}>→</span>
-                            </Link>
-                            <Link href="#zakres" style={{ height: 40, display: 'inline-flex', alignItems: 'center', padding: '0 18px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.3)', color: '#fff', textDecoration: 'none', fontSize: 13.2, fontWeight: 500 }}>
-                                Zobacz zakres usług
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-2 overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)', borderRadius: 4 }}>
+            <PageHero
+                eyebrow="Usługi"
+                title="Jeden zespół. Pełen zakres."
+                description="Strategia, design, development i automatyzacja AI w jednym procesie — bez przekazywania pałeczki między agencjami."
+                cta={{ label: 'Umów konsultację', href: '/kontakt' }}
+                ctaSecondary={{ label: 'Zobacz zakres usług', href: '#zakres' }}
+                right={
+                    <div className="ct-grid-lines grid-cols-2" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                         {[['Priorytet', 'Jasny przekaz i sprawny proces'], ['Efekt', 'Mniej tarcia, więcej wyniku'], ['Model', 'Strategia + wdrożenie'], ['Zakres', 'Brand, web, commerce, AI']].map(([label, val]) => (
-                            <div key={label} style={{ background: 'rgba(255,255,255,0.02)', padding: '20px 22px', borderRight: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)' }} className="last:border-r-0 last:border-b-0">
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, letterSpacing: '.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 8 }}>{label}</div>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 15.4, lineHeight: '24px', letterSpacing: '-0.32px' }}>{val}</div>
+                            <div key={label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
+                                <span className="ct-meta">{label}</span>
+                                <span style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.5 }}>{val}</span>
                             </div>
                         ))}
                     </div>
-                </div>
-            </section>
+                }
+            />
 
-            <section id="zakres" style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>ZAKRES USŁUG</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Moduły, które można uruchamiać osobno lub łączyć.</h2>
-                    </div>
-                    <div className="flex flex-col gap-0">
-                        {services.map((s) => (
-                            <Link key={s.href} href={s.href} className="ct-service-row flex flex-col gap-4 border border-[rgba(0,0,0,0.08)] bg-white p-6 text-[var(--text)] no-underline lg:flex-row lg:items-center lg:justify-between lg:gap-6 lg:p-7" style={{ borderRadius: 4, marginBottom: 16 }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 24, flex: 1, minWidth: 0 }}>
-                                    <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, color: 'rgba(0,0,0,0.4)', flexShrink: 0 }}>{s.num}</span>
-                                    <div>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, marginBottom: 4, letterSpacing: '-0.8px' }}>{s.title}</div>
-                                        <div style={{ color: 'rgba(0,0,0,0.6)', fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px' }}>{s.description}</div>
-                                    </div>
+            <Section id="zakres" eyebrow="Zakres usług" title="Moduły, które można uruchamiać osobno lub łączyć." border={false}>
+                <div className="flex flex-col" style={{ border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+                    {services.map((s, i) => (
+                        <Link
+                            key={s.href}
+                            href={s.href}
+                            className="ct-service-row flex flex-col gap-4 bg-white p-6 text-[var(--text)] no-underline lg:flex-row lg:items-center lg:justify-between lg:gap-6 lg:p-7"
+                            style={{ borderTop: i > 0 ? '1px solid var(--line)' : undefined }}
+                        >
+                            <div className="flex min-w-0 flex-1 items-center gap-6">
+                                <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--accent)', flexShrink: 0 }}>{s.num}</span>
+                                <div className="flex flex-col gap-1">
+                                    <span style={{ fontSize: 20, fontWeight: 600, letterSpacing: '-0.4px', color: 'var(--text)' }}>{s.title}</span>
+                                    <span className="ct-body" style={{ fontSize: 15 }}>{s.description}</span>
                                 </div>
-                                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', flexShrink: 0 }} className="lg:ml-auto">
-                                    {s.tags.map(t => (
-                                        <span key={t} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'rgba(0,0,0,0.6)', border: '1px solid rgba(0,0,0,0.08)', padding: '4px 10px', borderRadius: 4 }}>{t}</span>
-                                    ))}
-                                </div>
-                                <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 18, color: '#000', flexShrink: 0 }}>→</span>
-                            </Link>
-                        ))}
-                    </div>
+                            </div>
+                            <div className="flex flex-shrink-0 flex-wrap gap-2 lg:ml-auto">
+                                {s.tags.map(t => <span key={t} className="ct-pill">{t}</span>)}
+                            </div>
+                            <span className="ct-mono" style={{ fontSize: 18, color: 'var(--accent)', flexShrink: 0 }} aria-hidden="true">→</span>
+                        </Link>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
-            <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>LANDING PAGES SEO</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', lineHeight: '48.4px', letterSpacing: '-1.76px', margin: 0 }}>Strony pod konkretne frazy i intencje zakupowe.</h2>
-                    </div>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        {landingPages.map((page) => (
-                            <Link key={page.href} href={page.href} className="ct-service-row rounded-2xl border border-[rgba(0,0,0,0.08)] bg-white p-6 no-underline transition-all hover:bg-white" style={{ marginBottom: 0 }}>
-                                <div className="flex items-start justify-between gap-6">
-                                    <div>
-                                        <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, margin: '0 0 8px', letterSpacing: '-0.8px', color: 'var(--text)' }}>{page.title}</h3>
-                                        <p style={{ color: 'rgba(0,0,0,0.6)', fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', margin: 0, maxWidth: '52ch' }}>{page.description}</p>
-                                    </div>
-                                    <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 18, color: '#000', flexShrink: 0 }}>→</span>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
+            <Section tint eyebrow="Landing pages SEO" title="Strony pod konkretne frazy i intencje zakupowe.">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    {landingPages.map((page) => (
+                        <Link key={page.href} href={page.href} className="ct-card-hover flex items-start justify-between gap-6 no-underline" style={{ padding: 24, background: '#fff', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', color: 'var(--text)' }}>
+                            <div className="flex flex-col gap-2">
+                                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600, letterSpacing: '-0.3px' }}>{page.title}</h3>
+                                <p className="ct-body" style={{ fontSize: 15, maxWidth: '52ch' }}>{page.description}</p>
+                            </div>
+                            <span className="ct-mono" style={{ fontSize: 18, color: 'var(--accent)', flexShrink: 0 }} aria-hidden="true">→</span>
+                        </Link>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
             {/* Process */}
-            <section style={{ borderTop: '1px solid var(--line)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>JAK PRACUJEMY</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Proces napędzany przez AI.</h2>
-                    </div>
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                        {process.map((step) => (
-                            <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: step.featured ? 'linear-gradient(160deg, color-mix(in srgb, var(--accent) 16%, var(--panel)), var(--panel))' : 'var(--panel)', border: step.featured ? '1px solid color-mix(in srgb, var(--accent) 40%, var(--line))' : '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11, color: 'var(--accent)', marginBottom: 38 }}>{step.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 8px' }}>{step.title}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.5, margin: 0 }}>{step.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <Section eyebrow="Jak pracujemy" title="Proces napędzany przez AI.">
+                <ol className="ct-grid-lines grid-cols-1 sm:grid-cols-2 xl:grid-cols-4" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                    {process.map((step) => (
+                        <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>
+                            <span className="ct-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--accent)', marginBottom: 24 }}>{step.num}</span>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{step.title}</h3>
+                            <p className="ct-body">{step.description}</p>
+                        </li>
+                    ))}
+                </ol>
+            </Section>
 
             {/* FAQ */}
-            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '76px 32px' }} className="px-4 py-16 sm:px-6 lg:px-8">
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 12 }}>FAQ</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.045em', margin: 0, lineHeight: 1.06 }}>Najczęstsze pytania.</h2>
-                    </div>
-                    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                        {faq.map(item => (
-                            <div key={item.q} style={{ borderRadius: 18, padding: '24px 20px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 16, margin: '0 0 10px' }}>{item.q}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.55, margin: 0 }}>{item.a}</p>
-                            </div>
-                        ))}
-                    </div>
+            <Section tint eyebrow="FAQ" title="Najczęstsze pytania.">
+                <div className="ct-grid-lines grid-cols-1 lg:grid-cols-2">
+                    {faq.map(item => (
+                        <div key={item.q} className="flex flex-col gap-2.5" style={{ padding: '24px 28px' }}>
+                            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 600 }}>{item.q}</h3>
+                            <p className="ct-body">{item.a}</p>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
             <CTASection />
         </main>

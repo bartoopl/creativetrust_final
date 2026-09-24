@@ -86,96 +86,48 @@ export default async function KnowledgeBaseEntryPage({
     ]);
 
     return (
-        <main className="min-h-screen py-24 px-6">
+        <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
             <SchemaScript schema={[definedTermSchema, breadcrumbSchema]} />
-            <div className="max-w-[1800px] mx-auto">
-                <Link href="/baza-wiedzy" className="text-gray-600 mb-12 flex items-center">
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="mr-2"
-                    >
-                        <path
-                            d="M19 12H5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                        <path
-                            d="M12 19L5 12L12 5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-                    Wróć do bazy wiedzy
-                </Link>
+            <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x) clamp(40px, 6vw, 64px)', borderBottom: '1px solid var(--line)' }}>
+                <div className="mx-auto flex flex-col gap-6" style={{ maxWidth: 720 }}>
+                    <Link href="/baza-wiedzy" className="ct-meta ct-contact-link" style={{ alignSelf: 'flex-start' }}>
+                        ← Wróć do bazy wiedzy
+                    </Link>
 
-                <div className="mb-8">
-                    <div className="flex items-center gap-4 mb-4">
-                        <div className="w-10 h-10 flex items-center justify-center bg-black text-white rounded-full">
+                    <div className="flex items-center gap-3">
+                        <div className="ct-mono flex items-center justify-center" style={{ width: 32, height: 32, borderRadius: 'var(--radius-sm)', border: '1px solid var(--accent)', color: 'var(--accent)', background: 'var(--accent-soft)', fontSize: 14, fontWeight: 500 }}>
                             {entry.letter.toUpperCase()}
                         </div>
-                        <div className="text-gray-500">{formattedDate}</div>
+                        <div className="ct-meta" style={{ color: 'var(--muted-2)' }}>{formattedDate}</div>
                     </div>
 
-                    <h1 className="text-3xl md:text-4xl font-medium mb-6">{entry.title}</h1>
-                    <p className="text-xl text-gray-600 mb-8 max-w-3xl">{entry.shortDescription}</p>
+                    <h1 className="ct-h1" style={{ fontSize: 'clamp(32px, 4.2vw, 50px)', letterSpacing: '-1.2px', lineHeight: 1.1 }}>{entry.title}</h1>
+                    <p className="ct-lead">{entry.shortDescription}</p>
 
                     {entry.tags && entry.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2 mb-12">
+                        <div className="flex flex-wrap gap-2">
                             {entry.tags.map((tag: string, index: number) => (
-                                <span
-                                    key={index}
-                                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full"
-                                >
-                  {tag}
-                </span>
+                                <span key={index} className="ct-pill">
+                                    {tag}
+                                </span>
                             ))}
                         </div>
                     )}
                 </div>
+            </section>
 
-                {/* Renderowanie treści za pomocą PortableText */}
-                {entry.content && <PortableTextContent content={entry.content} />}
+            <div style={{ padding: 'clamp(40px, 6vw, 64px) var(--pad-x) var(--pad-y)' }}>
+                <article className="mx-auto" style={{ maxWidth: 720 }}>
+                    {/* Renderowanie treści za pomocą PortableText */}
+                    {entry.content && <PortableTextContent content={entry.content} />}
 
-                {/* Nawigacja na dole strony */}
-                <div className="mt-16 pt-8 border-t border-gray-200">
-                    <Link
-                        href="/baza-wiedzy"
-                        className="inline-flex items-center text-gray-700 hover:text-black"
-                    >
-                        <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="mr-2"
-                        >
-                            <path
-                                d="M19 12H5"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                            <path
-                                d="M12 19L5 12L12 5"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                        Wróć do pełnej listy wpisów w bazie wiedzy
-                    </Link>
-                </div>
+                    {/* Nawigacja na dole strony */}
+                    <div style={{ marginTop: 48, paddingTop: 24, borderTop: '1px solid var(--line)' }}>
+                        <Link href="/baza-wiedzy" className="ct-link">
+                            ← Wróć do pełnej listy wpisów w bazie wiedzy
+                        </Link>
+                    </div>
+                </article>
             </div>
         </main>
     );

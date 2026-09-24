@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
+import PageHero from '@/components/ui/PageHero';
+import Section from '@/components/ui/Section';
 import CTASection from '@/components/CTASection';
 import { SITE_URL } from '@/lib/schema';
 
@@ -32,79 +33,52 @@ const stats = [
 export default function AboutPage() {
     return (
         <main style={{ minHeight: '100vh' }}>
-            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
-                        O NAS
-                    </div>
-                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: '0 0 18px', maxWidth: '12ch' } as React.CSSProperties}>
-                        AI-native partner produktowy.
-                    </h1>
-                    <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', color: 'rgba(255,255,255,0.6)', maxWidth: '54ch', margin: '0 0 28px' }}>
-                        Łączymy strategię marki, design, development i automatyzację AI w jednym procesie. Pracujemy jak partner, nie podwykonawca — od diagnozy po wynik.
-                    </p>
-                    <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-                        <Link href="/kontakt" style={{ height: 40, display: 'inline-flex', alignItems: 'center', padding: 5, borderRadius: 4, background: '#fff', boxShadow: 'inset 0 0 0 1px #fff', color: '#202124', textDecoration: 'none', fontSize: 13.2, fontWeight: 500 }}>
-                            Porozmawiajmy
-                            <span style={{ width: 30, height: 30, marginLeft: 12, borderRadius: 2, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.1)' }}>→</span>
-                        </Link>
-                        <Link href="/uslugi" style={{ height: 40, display: 'inline-flex', alignItems: 'center', padding: '0 18px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.3)', color: '#fff', textDecoration: 'none', fontSize: 13.2, fontWeight: 500 }}>
-                            Zobacz usługi
-                        </Link>
-                    </div>
+            <PageHero
+                eyebrow="O NAS"
+                title="AI-native partner produktowy."
+                description="Łączymy strategię marki, design, development i automatyzację AI w jednym procesie. Pracujemy jak partner, nie podwykonawca — od diagnozy po wynik."
+                cta={{ label: 'Porozmawiajmy', href: '/kontakt' }}
+                ctaSecondary={{ label: 'Zobacz usługi', href: '/uslugi' }}
+            />
+
+            <section style={{ padding: '0 var(--pad-x)', background: 'var(--panel)', borderBottom: '1px solid var(--line)' }}>
+                <div className="mx-auto grid max-w-[1280px] grid-cols-2 md:grid-cols-4">
+                    {stats.map(([val, label], i) => (
+                        <div
+                            key={label}
+                            className={`${i % 2 === 1 ? 'border-l' : ''} ${i >= 2 ? 'border-t md:border-t-0' : ''} ${i === 2 ? 'md:border-l' : ''}`}
+                            style={{ borderColor: 'var(--line)', padding: 'clamp(24px, 3vw, 36px) clamp(16px, 2vw, 28px)' }}
+                        >
+                            <div style={{ fontWeight: 600, fontSize: 'clamp(28px, 3vw, 40px)', letterSpacing: '-1.2px', lineHeight: 1, color: 'var(--text)' }}>{val}</div>
+                            <div className="ct-meta" style={{ marginTop: 10 }}>{label}</div>
+                        </div>
+                    ))}
                 </div>
             </section>
 
-            <section style={{ borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', background: '#000' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-sm">
-                    <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-                        {stats.map(([val, label]) => (
-                            <div key={label} style={{ borderLeft: '1px solid rgba(255,255,255,0.08)', paddingLeft: 20 }}>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(28px, 3.1vw, 43.1px)', letterSpacing: '-1.44px', lineHeight: 1, color: '#fff' }}>{val}</div>
-                                <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, marginTop: 8 }}>{label}</div>
-                            </div>
-                        ))}
-                    </div>
+            <Section eyebrow="CO NAS PROWADZI" title="Zasady, które trzymają projekt w ryzach." border={false}>
+                <div className="ct-grid-lines grid-cols-1 md:grid-cols-3" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+                    {values.map((v, i) => (
+                        <div key={v.title} className="flex flex-col gap-3" style={{ padding: 28 }}>
+                            <span className="ct-mono" style={{ fontSize: 12, color: 'var(--accent)' }}>0{i + 1}</span>
+                            <h3 style={{ fontWeight: 600, fontSize: 18, margin: '12px 0 0', letterSpacing: '-0.3px' }}>{v.title}</h3>
+                            <p className="ct-body" style={{ fontSize: 15 }}>{v.description}</p>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
-            <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>CO NAS PROWADZI</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', letterSpacing: '-1.76px', margin: 0, lineHeight: '48.4px' }}>Zasady, które trzymają projekt w ryzach.</h2>
-                    </div>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                        {values.map((v, i) => (
-                            <div key={v.title} style={{ borderRadius: 4, padding: 28, background: '#fff', border: '1px solid rgba(0,0,0,0.08)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, color: 'rgba(0,0,0,0.4)', marginBottom: 20 }}>0{i + 1}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, margin: '0 0 10px', letterSpacing: '-0.8px' }}>{v.title}</h3>
-                                <p style={{ color: 'rgba(0,0,0,0.6)', fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', margin: 0 }}>{v.description}</p>
-                            </div>
-                        ))}
-                    </div>
+            <Section eyebrow="NASZA DROGA" title="Budowaliśmy kompetencje tam, gdzie rósł rynek." tint>
+                <div className="ct-grid-lines grid-cols-1 sm:grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+                    {milestones.map((m) => (
+                        <div key={m.year} className="flex flex-col gap-3" style={{ padding: '24px 22px' }}>
+                            <span className="ct-meta" style={{ color: 'var(--accent)' }}>{m.year}</span>
+                            <h3 style={{ fontWeight: 600, fontSize: 18, margin: '12px 0 0', letterSpacing: '-0.3px' }}>{m.title}</h3>
+                            <p className="ct-body" style={{ fontSize: 15 }}>{m.description}</p>
+                        </div>
+                    ))}
                 </div>
-            </section>
-
-            <section style={{ borderTop: '1px solid rgba(0,0,0,0.08)', background: '#fff' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>NASZA DROGA</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(34px, 4vw, 43.1px)', letterSpacing: '-1.76px', margin: 0, lineHeight: '48.4px' }}>
-                            Budowaliśmy kompetencje tam, gdzie rósł rynek.
-                        </h2>
-                    </div>
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
-                        {milestones.map((m) => (
-                            <div key={m.year} style={{ borderRadius: 4, padding: '24px 20px', background: '#fff', border: '1px solid rgba(0,0,0,0.08)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 11.4, color: 'rgba(0,0,0,0.4)', marginBottom: 18 }}>{m.year}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 19.8, margin: '0 0 10px', letterSpacing: '-0.8px' }}>{m.title}</h3>
-                                <p style={{ color: 'rgba(0,0,0,0.6)', fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', margin: 0 }}>{m.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            </Section>
 
             <CTASection />
         </main>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { IBM_Plex_Mono, Inter } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -7,23 +7,16 @@ import CookieConsent from '@/components/CookieConsent';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, organizationSchema } from '@/lib/schema';
 
-const interDisplay = Inter({
-    subsets: ['latin'],
-    variable: '--font-space',
-    display: 'swap',
-    weight: ['400', '500', '600', '700', '800'],
-});
-
-const interSans = Inter({
-    subsets: ['latin'],
-    variable: '--font-hanken',
+const inter = Inter({
+    subsets: ['latin', 'latin-ext'],
+    variable: '--font-inter',
     display: 'swap',
     weight: ['400', '500', '600', '700'],
 });
 
-const plexMono = IBM_Plex_Mono({
-    subsets: ['latin'],
-    variable: '--font-mono',
+const jetbrainsMono = JetBrains_Mono({
+    subsets: ['latin', 'latin-ext'],
+    variable: '--font-jetbrains',
     display: 'swap',
     weight: ['400', '500', '600'],
 });
@@ -76,7 +69,7 @@ export default function RootLayout({
     return (
         <html
             lang="pl"
-            className={`${interDisplay.variable} ${interSans.variable} ${plexMono.variable} overflow-x-hidden`}
+            className={`${inter.variable} ${jetbrainsMono.variable} overflow-x-hidden`}
         >
             <head>
                 <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
@@ -130,7 +123,7 @@ export default function RootLayout({
                     }}
                 />
             </head>
-            <body className="overflow-x-hidden w-full antialiased" style={{ fontFamily: 'var(--font-hanken), sans-serif' }}>
+            <body className="overflow-x-hidden w-full antialiased" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
                 <script
                     dangerouslySetInnerHTML={{
                         __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WTKHM3K');`,

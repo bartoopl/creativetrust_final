@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
-import NotchedButton from '@/components/ui/NotchedButton';
+import PageHero from '@/components/ui/PageHero';
+import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 
@@ -54,93 +55,59 @@ export default function SocialMediaPage() {
             <SchemaScript schema={serviceSchema} />
 
             {/* Hero */}
-            <section style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(60px, 8vw, 96px) 32px 80px' }}>
-                <div style={{ maxWidth: 820 }}>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 16 }}>
-                        SOCIAL MEDIA
-                    </div>
-                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(32px, 5.2vw, 64px)', lineHeight: 0.98, letterSpacing: '-0.045em', margin: '0 0 18px' }}>
-                        Social media, które <span style={{ color: 'var(--lime-ink)' }}>sprzedają.</span>
-                    </h1>
-                    <p style={{ fontSize: 'clamp(14px, 1.2vw, 17px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 28px' }}>
-                        Budujemy obecność w mediach społecznościowych jako kanał sprzedaży i budowania marki — nie tylko jako obowiązek. Strategia, content, kampanie i analityka w jednym procesie.
-                    </p>
-                    <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-                        <NotchedButton href="/kontakt" variant="primary-light">
-                            Umów konsultację
-                        </NotchedButton>
-                    </div>
-                </div>
-            </section>
+            <PageHero
+                eyebrow="Social Media"
+                title={<>Social media, które <span style={{ color: 'var(--accent)' }}>sprzedają.</span></>}
+                description="Budujemy obecność w mediach społecznościowych jako kanał sprzedaży i budowania marki — nie tylko jako obowiązek. Strategia, content, kampanie i analityka w jednym procesie."
+                cta={{ label: 'Umów konsultację', href: '/kontakt' }}
+            />
 
             {/* Results */}
-            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '88px 32px' }}>
-                    <div style={{ display: 'grid', gap: 24 }} className="grid-cols-2 md:grid-cols-4">
-                        {results.map(r => (
-                            <div key={r.value} style={{ borderLeft: '1px solid var(--line)', paddingLeft: 20 }}>
-                                <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3vw, 48px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--lime-ink)' }}>{r.value}</div>
-                                <div style={{ color: 'var(--muted)', fontSize: 14, marginTop: 10 }}>{r.label}</div>
-                            </div>
-                        ))}
-                    </div>
+            <Section border={false}>
+                <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+                    {results.map(r => (
+                        <div key={r.value} className="flex flex-col gap-2.5" style={{ padding: '24px 24px 28px' }}>
+                            <span style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 600, letterSpacing: '-1.2px', lineHeight: 1 }}>{r.value}</span>
+                            <span className="ct-body" style={{ fontSize: 13 }}>{r.label}</span>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
             {/* Services */}
-            <section id="oferta" style={{ borderTop: '1px solid var(--line)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 14 }}>ZAKRES</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Co obejmuje współpraca.</h2>
-                    </div>
-                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                        {services.map(s => (
-                            <div key={s.num} style={{ borderRadius: 20, padding: '28px 24px', background: 'var(--panel)', border: '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--lime-ink)', marginBottom: 28 }}>{s.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 17, margin: '0 0 10px' }}>{s.title}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.55, margin: 0 }}>{s.description}</p>
-                            </div>
-                        ))}
-                    </div>
+            <Section id="oferta" eyebrow="Zakres" title="Co obejmuje współpraca.">
+                <div className="ct-grid-lines grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    {services.map(s => (
+                        <div key={s.num} className="flex flex-col gap-2.5" style={{ padding: 28 }}>
+                            <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)', marginBottom: 12 }}>{s.num}</span>
+                            <h3 style={{ margin: 0, fontSize: 17, fontWeight: 600 }}>{s.title}</h3>
+                            <p className="ct-body">{s.description}</p>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
             {/* Platforms */}
-            <section style={{ borderTop: '1px solid var(--line)', background: 'var(--panel2)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
-                    <div style={{ marginBottom: 40 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 14 }}>PLATFORMY</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>Gdzie budujemy Twoją obecność.</h2>
-                    </div>
-                    <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                        {platforms.map(p => (
-                            <span key={p} style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 14, fontWeight: 500, color: 'var(--text)', border: '1px solid var(--line)', padding: '10px 18px', borderRadius: 10, background: 'var(--panel)' }}>{p}</span>
-                        ))}
-                    </div>
+            <Section tint eyebrow="Platformy" title="Gdzie budujemy Twoją obecność.">
+                <div className="flex flex-wrap gap-2.5">
+                    {platforms.map(p => (
+                        <span key={p} className="ct-pill" style={{ fontSize: 12, padding: '8px 14px', color: 'var(--text)', background: '#fff' }}>{p}</span>
+                    ))}
                 </div>
-            </section>
+            </Section>
 
             {/* Process */}
-            <section style={{ borderTop: '1px solid var(--line)' }}>
-                <div style={{ maxWidth: 1240, margin: '0 auto', padding: '96px 32px' }}>
-                    <div style={{ marginBottom: 48 }}>
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.18em', color: 'var(--lime-ink)', textTransform: 'uppercase', marginBottom: 14 }}>PROCES</div>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 48px)', letterSpacing: '-0.025em', margin: 0, lineHeight: 1.06 }}>
-                            Od diagnozy do wyników.
-                        </h2>
-                    </div>
-                    <div style={{ display: 'grid', gap: 18 }} className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-                        {process.map(step => (
-                            <div key={step.num} style={{ borderRadius: 18, padding: '28px 24px', background: step.featured ? 'linear-gradient(160deg, color-mix(in srgb, var(--lime) 16%, var(--panel)), var(--panel))' : 'var(--panel)', border: step.featured ? '1px solid color-mix(in srgb, var(--lime) 40%, var(--line))' : '1px solid var(--line)' }}>
-                                <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 13, color: 'var(--lime-ink)', marginBottom: 48 }}>{step.num}</div>
-                                <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 18, margin: '0 0 8px' }}>{step.title}</h3>
-                                <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.5, margin: 0 }}>{step.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <Section eyebrow="Proces" title="Od diagnozy do wyników.">
+                <ol className="ct-grid-lines grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                    {process.map(step => (
+                        <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>
+                            <span className="ct-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--accent)', marginBottom: 24 }}>{step.num}</span>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{step.title}</h3>
+                            <p className="ct-body">{step.description}</p>
+                        </li>
+                    ))}
+                </ol>
+            </Section>
 
             <CTASection />
         </main>
