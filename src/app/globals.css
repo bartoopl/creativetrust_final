@@ -68,11 +68,14 @@ body {
 ::selection { background: var(--accent); color: #fff; }
 img { max-width: 100%; height: auto; }
 main { isolation: isolate; }
-a { color: var(--accent); text-decoration: none; transition: color .15s ease; }
-a:hover { color: var(--accent-hover); }
+@layer base {
+  a { color: var(--accent); text-decoration: none; transition: color .15s ease; }
+  a:hover { color: var(--accent-hover); }
+  h1, h2, h3, h4, h5, h6 { line-height: 1.1; color: var(--text); }
+}
 
-h1, h2, h3, h4, h5, h6 { line-height: 1.1; color: var(--text); }
-
+/* Component classes live in the components layer so Tailwind utilities (mt-*, etc.) can override them. */
+@layer components {
 /* ===== Layout shells ===== */
 .ct-shell-xl { padding: var(--pad-y-xl) var(--pad-x) !important; }
 .ct-shell-lg { padding: var(--pad-y) var(--pad-x) !important; }
@@ -125,7 +128,7 @@ h1, h2, h3, h4, h5, h6 { line-height: 1.1; color: var(--text); }
 .ct-cta .ct-badge {
   width: 30px; height: 30px; border-radius: var(--radius-pill);
   background: #fff; color: var(--accent);
-  display: inline-flex; align-items: center; justify-content: center;
+  display: inline-flex; align-items: center; justify-content: flex-start;
   overflow: hidden; flex: none; transition: background .2s ease, color .2s ease;
 }
 .ct-cta.sm .ct-badge { width: 26px; height: 26px; font-size: 13px; }
@@ -216,6 +219,7 @@ h1, h2, h3, h4, h5, h6 { line-height: 1.1; color: var(--text); }
 .ct-legal-links { display: flex; flex-wrap: wrap; gap: 8px; }
 .ct-legal-links a { display: inline-flex; font: 500 11.5px/1.4 var(--font-mono), monospace; text-transform: uppercase; letter-spacing: .3px; color: var(--text); border: 1px solid var(--line-strong); border-radius: 999px; padding: 6px 12px; transition: border-color .15s, color .15s; }
 .ct-legal-links a:hover { border-color: var(--accent); color: var(--accent); }
+}
 
 /* ===== Scroll Reveal ===== */
 [data-reveal] {

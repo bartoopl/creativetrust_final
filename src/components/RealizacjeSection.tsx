@@ -17,7 +17,7 @@ interface PortfolioProject {
     categories?: PortfolioCategory[];
 }
 
-interface CaseCard {
+export interface CaseCard {
     key: string;
     href: string;
     meta: string;
