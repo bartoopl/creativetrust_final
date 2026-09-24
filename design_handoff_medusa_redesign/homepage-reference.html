@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body{margin:0}
+  a{color:#6c63ff;text-decoration:none}
+  a:hover{color:#5148e6}
+  @keyframes ctmarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .ct-marquee-track{display:flex;gap:56px;white-space:nowrap;animation:ctmarquee 32s linear infinite;width:max-content}
+  .ct-tab-btn{cursor:pointer;background:none;border:none;font-family:inherit;text-align:left}
+</style>
+</helmet>
+
+<div style="font-family:'Inter',system-ui,sans-serif;color:#111827;background:#ffffff;line-height:1.4">
+
+  <!-- top strip -->
+  <div style="border-bottom:1px solid rgba(17,24,39,0.08);padding:9px clamp(16px,4vw,72px);display:flex;justify-content:center;background:#fafafa">
+    <span style="font:500 12px 'JetBrains Mono',monospace;color:#5b6472;letter-spacing:-.1px">AI-native partner produktowy — zobacz <a href="#proces" style="font-weight:600">jak działamy →</a></span>
+  </div>
+
+  <!-- nav -->
+  <nav style="display:flex;align-items:center;justify-content:space-between;padding:18px clamp(16px,4vw,72px);border-bottom:1px solid rgba(17,24,39,0.08);flex-wrap:wrap;gap:16px">
+    <span style="font:600 17px 'JetBrains Mono',monospace;letter-spacing:-.5px;color:#111827">creativetrust</span>
+    <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap">
+      <a href="#uslugi" style="font-size:14px;font-weight:500;color:#111827">Usługi</a>
+      <a href="#case-studies" style="font-size:14px;font-weight:500;color:#111827">Case Studies</a>
+      <a href="#" style="font-size:14px;font-weight:500;color:#111827">Blog</a>
+      <a href="#" style="font-size:14px;font-weight:500;color:#111827">O nas</a>
+    </div>
+    <a href="#kontakt" style="display:inline-flex;align-items:center;gap:10px;padding:9px 8px 9px 18px;border-radius:999px;border:1px solid #6c63ff;color:#6c63ff;font-size:14px;font-weight:600">
+      Umów konsultację
+      <span style="width:26px;height:26px;border-radius:999px;background:#6c63ff;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px">→</span>
+    </a>
+  </nav>
+
+  <!-- hero -->
+  <section style="position:relative;padding:clamp(56px,8vw,96px) clamp(16px,4vw,72px) 0;background-image:radial-gradient(circle,rgba(17,24,39,0.08) 1px,transparent 1px);background-size:22px 22px;background-position:-11px -11px">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:48px">
+      <div style="display:flex;flex-direction:column;gap:24px;max-width:640px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="font:500 11.5px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.3px;color:#5b6472;border:1px solid rgba(17,24,39,0.12);border-radius:999px;padding:5px 12px;background:#fff">Strony www</span>
+          <span style="font:500 11.5px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.3px;color:#5b6472;border:1px solid rgba(17,24,39,0.12);border-radius:999px;padding:5px 12px;background:#fff">Ecommerce headless</span>
+          <span style="font:500 11.5px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.3px;color:#5b6472;border:1px solid rgba(17,24,39,0.12);border-radius:999px;padding:5px 12px;background:#fff">Marketing automation</span>
+        </div>
+        <h1 style="font-size:clamp(38px,5vw,60px);font-weight:600;letter-spacing:-1.6px;line-height:1.05;margin:0;color:#111827">Projekty cyfrowe, które działają biznesowo.</h1>
+        <p style="font-size:17px;line-height:1.6;color:#5b6472;margin:0;max-width:46ch">AI skraca research i produkcję. Zespół pilnuje decyzji, jakości i wyniku.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;padding-top:8px">
+          <a href="#kontakt" style="display:inline-flex;align-items:center;gap:12px;padding:11px 10px 11px 22px;border-radius:999px;background:#6c63ff;color:#fff;font-size:14px;font-weight:600">Umów konsultację <span style="width:30px;height:30px;border-radius:999px;background:#fff;color:#6c63ff;display:inline-flex;align-items:center;justify-content:center">→</span></a>
+          <a href="#uslugi" style="display:inline-flex;align-items:center;gap:10px;padding:11px 20px;border-radius:999px;border:1px solid rgba(17,24,39,0.16);color:#111827;font-size:14px;font-weight:500">Jak możemy pomóc</a>
+        </div>
+      </div>
+      <div style="border:1px solid rgba(17,24,39,0.1);border-radius:8px;overflow:hidden;background:repeating-linear-gradient(135deg,#f3f4f6 0px,#f3f4f6 10px,#fafafa 10px,#fafafa 20px);min-height:320px;display:flex;align-items:center;justify-content:center">
+        <span style="font:500 12px 'JetBrains Mono',monospace;color:#5b6472;background:#fff;border:1px solid rgba(17,24,39,0.12);padding:8px 16px;border-radius:6px">PODGLĄD WDROŻENIA — miejsce na screenshot</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- client logos marquee -->
+  <section style="padding:40px clamp(16px,4vw,72px);border-top:1px solid rgba(17,24,39,0.08);border-bottom:1px solid rgba(17,24,39,0.08);overflow:hidden">
+    <div class="ct-marquee-track">
+      <span style="font:600 15px 'JetBrains Mono',monospace;color:rgba(17,24,39,0.35)">MONNARI&nbsp;&nbsp;·&nbsp;&nbsp;QUISQUE&nbsp;&nbsp;·&nbsp;&nbsp;5.10.15&nbsp;&nbsp;·&nbsp;&nbsp;KLINIKI ZIEMLEWSKI&nbsp;&nbsp;·&nbsp;&nbsp;KATARZYNA BATKOWSKA&nbsp;&nbsp;·&nbsp;&nbsp;SULPHUR BUSKO ZDRÓJ&nbsp;&nbsp;·&nbsp;&nbsp;ZIPH&nbsp;&nbsp;·&nbsp;&nbsp;SELFIA&nbsp;&nbsp;·&nbsp;&nbsp;KASKAT</span>
+      <span style="font:600 15px 'JetBrains Mono',monospace;color:rgba(17,24,39,0.35)">MONNARI&nbsp;&nbsp;·&nbsp;&nbsp;QUISQUE&nbsp;&nbsp;·&nbsp;&nbsp;5.10.15&nbsp;&nbsp;·&nbsp;&nbsp;KLINIKI ZIEMLEWSKI&nbsp;&nbsp;·&nbsp;&nbsp;KATARZYNA BATKOWSKA&nbsp;&nbsp;·&nbsp;&nbsp;SULPHUR BUSKO ZDRÓJ&nbsp;&nbsp;·&nbsp;&nbsp;ZIPH&nbsp;&nbsp;·&nbsp;&nbsp;SELFIA&nbsp;&nbsp;·&nbsp;&nbsp;KASKAT</span>
+    </div>
+  </section>
+
+  <!-- stats -->
+  <section style="display:grid;grid-template-columns:repeat(3,1fr)">
+    <div style="padding:40px clamp(16px,4vw,48px);border-right:1px solid rgba(17,24,39,0.08);display:flex;flex-direction:column;gap:6px">
+      <span style="font-size:clamp(32px,4vw,44px);font-weight:600;letter-spacing:-1px;color:#111827">50+</span>
+      <span style="font-size:13px;color:#5b6472">Zrealizowanych projektów</span>
+    </div>
+    <div style="padding:40px clamp(16px,4vw,48px);border-right:1px solid rgba(17,24,39,0.08);display:flex;flex-direction:column;gap:6px">
+      <span style="font-size:clamp(32px,4vw,44px);font-weight:600;letter-spacing:-1px;color:#111827">3×</span>
+      <span style="font-size:13px;color:#5b6472">Szybciej z AI w procesie</span>
+    </div>
+    <div style="padding:40px clamp(16px,4vw,48px);display:flex;flex-direction:column;gap:6px">
+      <span style="font-size:clamp(32px,4vw,44px);font-weight:600;letter-spacing:-1px;color:#111827">100%</span>
+      <span style="font-size:13px;color:#5b6472">Projektów z mierzalnym celem</span>
+    </div>
+  </section>
+
+  <!-- why -->
+  <section style="padding:clamp(56px,8vw,96px) clamp(16px,4vw,72px);border-top:1px solid rgba(17,24,39,0.08);background:#fafafa">
+    <div style="max-width:1280px;margin:0 auto">
+      <span style="font:500 12px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.3px;color:#6c63ff">Dlaczego Creativetrust</span>
+      <h2 style="font-size:clamp(26px,3vw,34px);font-weight:600;letter-spacing:-1px;margin:10px 0 40px;max-width:32ch;color:#111827">Nie jesteśmy agencją od ładnych rzeczy. Jesteśmy partnerem, który wdraża szybko.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(17,24,39,0.08);border:1px solid rgba(17,24,39,0.08)">
+        <div style="background:#fff;padding:28px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#5b6472">01</span>
+          <h3 style="margin:0;font-size:16px;font-weight:600;color:#111827">Jesteśmy w biznesie, nie tylko obok niego</h3>
+          <p style="margin:0;font-size:14px;color:#5b6472;line-height:1.6">Każda decyzja projektowa jest dla nas decyzją biznesową, nie estetyczną.</p>
+        </div>
+        <div style="background:#fff;padding:28px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#5b6472">02</span>
+          <h3 style="margin:0;font-size:16px;font-weight:600;color:#111827">Ludzka decyzja + tempo AI</h3>
+          <p style="margin:0;font-size:14px;color:#5b6472;line-height:1.6">Doświadczenie biznesowe i wdrożenia przyspieszone przez AI — bez utraty jakości.</p>
+        </div>
+        <div style="background:#fff;padding:28px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#5b6472">03</span>
+          <h3 style="margin:0;font-size:16px;font-weight:600;color:#111827">Kompleksowa obsługa</h3>
+          <p style="margin:0;font-size:14px;color:#5b6472;line-height:1.6">Strony, sklepy, marketing automation i social media pod jednym dachem.</p>
+        </div>
+        <div style="background:#fff;padding:28px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#5b6472">04</span>
+          <h3 style="margin:0;font-size:16px;font-weight:600;color:#111827">Open source, sprawdzone technologie</h3>
+          <p style="margin:0;font-size:14px;color:#5b6472;line-height:1.6">Medusa.js, Next.js, React. Zero vendor lock-in, pełna kontrola nad kodem.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- services / feature tabs -->
+  <section id="uslugi" style="padding:clamp(56px,8vw,96px) clamp(16px,4vw,72px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div>
+        <span style="font:500 12px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.3px;color:#6c63ff">Od projektu do wyniku</span>
+        <h2 style="font-size:clamp(26px,3vw,34px);font-weight:600;letter-spacing:-1px;margin:10px 0 0;color:#111827">Wszystko czego potrzebujesz, żeby rosnąć w digital.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid rgba(17,24,39,0.1);border-radius:8px;overflow:hidden">
+        <div style="display:flex;flex-direction:column;border-right:1px solid rgba(17,24,39,0.1)">
+          <sc-for list="{{ servicesView }}" as="s" hint-placeholder-count="4">
+            <button class="ct-tab-btn" onClick="{{ s.onClick }}" style="{{ s.tabStyle }}">
+              <span style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.3px;display:block;margin-bottom:4px">{{ s.eyebrow }}</span>
+              <span style="font-size:15px;font-weight:600;display:block">{{ s.title }} {{ s.subtitle }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <div style="padding:40px;display:flex;flex-direction:column;gap:20px;background:#fafafa">
+          <span style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.3px;color:#6c63ff">{{ current.eyebrow }}</span>
+          <h3 style="margin:0;font-size:24px;font-weight:600;color:#111827">{{ current.title }} {{ current.subtitle }}</h3>
+          <div style="display:flex;flex-direction:column;gap:0">
+            <sc-for list="{{ current.items }}" as="item" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid rgba(17,24,39,0.08)">
+                <span style="width:6px;height:6px;background:#6c63ff;flex:none"></span>
+                <span style="font-size:14px;color:#374151">{{ item }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- process -->
+  <section id="proces" style="padding:clamp(56px,8vw,96px) clamp(16px,4vw,72px);border-top:1px solid rgba(17,24,39,0.08)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div>
+        <span style="font:500 12px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.3px;color:#6c63ff">Jak działamy</span>
+        <h2 style="font-size:clamp(26px,3vw,34px);font-weight:600;letter-spacing:-1px;margin:10px 0 0;color:#111827">Nasz proces. AI w każdym kroku.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(17,24,39,0.08);border:1px solid rgba(17,24,39,0.08)">
+        <div style="background:#fff;padding:24px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 13px 'JetBrains Mono',monospace;color:#6c63ff">01</span>
+          <h4 style="margin:0;font-size:15px;font-weight:600;color:#111827">Brief</h4>
+          <p style="margin:0;font-size:13px;color:#5b6472;line-height:1.6">Rozmawiamy o biznesie, celach i KPIs.</p>
+          <span style="font:500 11px 'JetBrains Mono',monospace;color:#9ca3af;margin-top:auto">1–2 dni</span>
+        </div>
+        <div style="background:#fff;padding:24px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 13px 'JetBrains Mono',monospace;color:#6c63ff">02</span>
+          <h4 style="margin:0;font-size:15px;font-weight:600;color:#111827">AI Strategia</h4>
+          <p style="margin:0;font-size:13px;color:#5b6472;line-height:1.6">AI analizuje rynek i dane. My projektujemy plan.</p>
+          <span style="font:500 11px 'JetBrains Mono',monospace;color:#9ca3af;margin-top:auto">2–3 dni</span>
+        </div>
+        <div style="background:#fff;padding:24px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 13px 'JetBrains Mono',monospace;color:#6c63ff">03</span>
+          <h4 style="margin:0;font-size:15px;font-weight:600;color:#111827">Design</h4>
+          <p style="margin:0;font-size:13px;color:#5b6472;line-height:1.6">Prototypy i UI/UX w godzinach, nie tygodniach.</p>
+          <span style="font:500 11px 'JetBrains Mono',monospace;color:#9ca3af;margin-top:auto">3–5 dni</span>
+        </div>
+        <div style="background:#fff;padding:24px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 13px 'JetBrains Mono',monospace;color:#6c63ff">04</span>
+          <h4 style="margin:0;font-size:15px;font-weight:600;color:#111827">AI×3 Wdrożenie</h4>
+          <p style="margin:0;font-size:13px;color:#5b6472;line-height:1.6">AI przyspiesza coding — 3× szybciej niż standardowo.</p>
+          <span style="font:500 11px 'JetBrains Mono',monospace;color:#9ca3af;margin-top:auto">1–4 tyg.</span>
+        </div>
+        <div style="background:#fff;padding:24px;display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 13px 'JetBrains Mono',monospace;color:#6c63ff">05</span>
+          <h4 style="margin:0;font-size:15px;font-weight:600;color:#111827">Launch &amp; Wzrost</h4>
+          <p style="margin:0;font-size:13px;color:#5b6472;line-height:1.6">Start, monitoring, optymalizacja od dnia pierwszego.</p>
+          <span style="font:500 11px 'JetBrains Mono',monospace;color:#9ca3af;margin-top:auto">Ongoing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- case studies -->
+  <section id="case-studies" style="padding:clamp(56px,8vw,96px) clamp(16px,4vw,72px)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:16px">
+        <div>
+          <span style="font:500 12px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.3px;color:#6c63ff">Jak to wygląda w praktyce</span>
+          <h2 style="font-size:clamp(26px,3vw,34px);font-weight:600;letter-spacing:-1px;margin:10px 0 0;color:#111827">Case studies</h2>
+        </div>
+        <a href="#" style="font-size:14px;font-weight:600;color:#111827;border-bottom:1px solid #111827">Wszystkie realizacje →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px">
+        <a href="#" style="display:block;border:1px solid rgba(17,24,39,0.1);border-radius:8px;overflow:hidden;text-decoration:none">
+          <div style="height:180px;background:repeating-linear-gradient(135deg,#f3f4f6 0px,#f3f4f6 10px,#fafafa 10px,#fafafa 20px);display:flex;align-items:center;justify-content:center">
+            <span style="font:500 11px 'JetBrains Mono',monospace;color:#5b6472">MIEJSCE NA ZDJĘCIE</span>
+          </div>
+          <div style="padding:22px;display:flex;flex-direction:column;gap:8px">
+            <span style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:#5b6472">beautyclinic.pl · Strony www · e-commerce</span>
+            <h3 style="margin:0;font-size:18px;font-weight:600;color:#111827">BeautyClinic Karolina Bilińska</h3>
+            <p style="margin:0;font-size:13px;color:#5b6472">Realizacja strony, prace rozwojowe, kampanie Google Ads i automatyzacja voucherów online.</p>
+          </div>
+        </a>
+        <a href="#" style="display:block;border:1px solid rgba(17,24,39,0.1);border-radius:8px;overflow:hidden;text-decoration:none">
+          <div style="height:180px;background:repeating-linear-gradient(135deg,#f3f4f6 0px,#f3f4f6 10px,#fafafa 10px,#fafafa 20px);display:flex;align-items:center;justify-content:center">
+            <span style="font:500 11px 'JetBrains Mono',monospace;color:#5b6472">MIEJSCE NA ZDJĘCIE</span>
+          </div>
+          <div style="padding:22px;display:flex;flex-direction:column;gap:8px">
+            <span style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:#5b6472">onkologgorzow.pl · Strony www</span>
+            <h3 style="margin:0;font-size:18px;font-weight:600;color:#111827">Dr Bartłomiej Delijewski</h3>
+            <p style="margin:0;font-size:13px;color:#5b6472">Projekt graficzny i realizacja strony www.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- testimonials -->
+  <section style="padding:clamp(56px,8vw,96px) clamp(16px,4vw,72px);background:#fafafa;border-top:1px solid rgba(17,24,39,0.08)">
+    <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <span style="font:500 12px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.3px;color:#6c63ff">Klienci</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px">
+        <div style="background:#fff;border:1px solid rgba(17,24,39,0.1);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px">
+          <p style="margin:0;font-size:15px;color:#111827;line-height:1.6">"Creativetrust nie robi tylko tego, co jest na briefie. Aktywnie sugerują co zmienić, żeby osiągnąć lepsze wyniki."</p>
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#5b6472">— Anna</span>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(17,24,39,0.1);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px">
+          <p style="margin:0;font-size:15px;color:#111827;line-height:1.6">"Nasz sklep na Medusa.js działa szybciej, wygląda lepiej i kosztuje nas mniej miesięcznie niż poprzednia platforma."</p>
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#5b6472">— Marcin</span>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(17,24,39,0.1);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px">
+          <p style="margin:0;font-size:15px;color:#111827;line-height:1.6">"Automatyzacja marketingu, którą wdrożyli, zmniejszyła nasz czas obsługi leadów o połowę."</p>
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#5b6472">— Karolina</span>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(17,24,39,0.1);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:16px">
+          <p style="margin:0;font-size:15px;color:#111827;line-height:1.6">"Szczerość i bezpośredniość — wiedzą, co mówią, i mówią to wprost."</p>
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#5b6472">— Tomasz</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- final CTA -->
+  <section id="kontakt" style="padding:clamp(64px,10vw,120px) clamp(16px,4vw,72px);text-align:center;border-top:1px solid rgba(17,24,39,0.08)">
+    <div style="max-width:640px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px;border:1px solid rgba(17,24,39,0.1);border-radius:12px;padding:56px 40px">
+      <span style="font:500 12px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.3px;color:#6c63ff">Łączymy myślenie biznesowe z prędkością AI</span>
+      <h2 style="font-size:clamp(30px,4vw,44px);font-weight:600;letter-spacing:-1.5px;margin:0;color:#111827">Zacznij budować digitalnie.</h2>
+      <p style="margin:0;font-size:15px;color:#5b6472;line-height:1.6">Senior specjaliści i narzędzia AI — realizujemy projekty szybciej bez obniżania poprzeczki.</p>
+      <a href="#" style="display:inline-flex;align-items:center;gap:12px;padding:12px 10px 12px 24px;border-radius:999px;background:#6c63ff;color:#fff;font-size:14px;font-weight:600;margin-top:8px">Umów bezpłatną konsultację <span style="width:30px;height:30px;border-radius:999px;background:#fff;color:#6c63ff;display:inline-flex;align-items:center;justify-content:center">→</span></a>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer style="padding:56px clamp(16px,4vw,72px) 32px;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px">
+      <span style="font:600 17px 'JetBrains Mono',monospace;letter-spacing:-.5px;color:#111827">creativetrust</span>
+      <div style="display:flex;gap:64px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:#5b6472">Usługi</span>
+          <a href="#" style="font-size:14px;color:#111827">Strony www</a>
+          <a href="#" style="font-size:14px;color:#111827">Ecommerce headless</a>
+          <a href="#" style="font-size:14px;color:#111827">Marketing automation</a>
+          <a href="#" style="font-size:14px;color:#111827">Social media</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:#5b6472">Firma</span>
+          <a href="#" style="font-size:14px;color:#111827">O nas</a>
+          <a href="#" style="font-size:14px;color:#111827">Case studies</a>
+          <a href="#" style="font-size:14px;color:#111827">Blog</a>
+          <a href="#" style="font-size:14px;color:#111827">Kontakt</a>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;border-top:1px solid rgba(17,24,39,0.08)">
+      <span style="font-size:12px;color:#5b6472">© 2026 Creativetrust. Wszelkie prawa zastrzeżone.</span>
+      <div style="display:flex;gap:20px">
+        <a href="#" style="font-size:12px;color:#5b6472">Polityka prywatności</a>
+        <a href="#" style="font-size:12px;color:#5b6472">Regulamin</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { activeIdx: 0 };
+
+  renderVals() {
+    const services = [
+      { eyebrow: 'Strony www', title: 'Buduj szybką', subtitle: 'ścieżkę do klienta', items: ['Projekty oparte o cel biznesowy', 'Wdrożenie przyspieszone przez AI', 'UX, który konwertuje'] },
+      { eyebrow: 'Ecommerce', title: 'Skaluj bez', subtitle: 'ograniczeń platformy', items: ['Architektura headless / Medusa.js', 'Pełna kontrola — zero vendor lock-in', 'Integracje z ERP, CRM, marketplace'] },
+      { eyebrow: 'Marketing automation', title: 'Automatyzuj', subtitle: 'co powtarzalne', items: ['Sekwencje e-mail, SMS, push', 'Segmentacja i lead scoring', 'Raportowanie w czasie rzeczywistym'] },
+      { eyebrow: 'Social media', title: 'Obecność, która', subtitle: 'sprzedaje', items: ['Strategia i harmonogram contentowy', 'Tworzenie treści i grafik', 'Community management i reklamy'] },
+    ];
+    const activeIdx = this.state.activeIdx;
+    const activeStyle = 'width:100%;padding:20px 24px;border-left:2px solid #6c63ff;background:#fafafa;color:#111827';
+    const inactiveStyle = 'width:100%;padding:20px 24px;border-left:2px solid transparent;background:#fff;color:#5b6472';
+    const servicesView = services.map((s, i) => ({
+      ...s,
+      tabStyle: i === activeIdx ? activeStyle : inactiveStyle,
+      onClick: () => this.setState({ activeIdx: i }),
+    }));
+    return { servicesView, current: services[activeIdx] };
+  }
+}
+</script>
+</body>
+</html>
