@@ -2,108 +2,61 @@
 
 import Link from 'next/link';
 
-type Variant = 'primary-dark' | 'ghost-dark' | 'primary-light' | 'ghost-light';
+/**
+ * Pill button from the design system: filled accent (primary) with a trailing
+ * circular arrow badge, accent-outlined (outline) or neutral outlined (ghost).
+ * The legacy `*-dark` / `*-light` variant names are kept as aliases so existing
+ * call sites keep working.
+ */
+type Variant = 'primary' | 'outline' | 'ghost' | 'primary-dark' | 'ghost-dark' | 'primary-light' | 'ghost-light';
 
 interface NotchedButtonProps {
     children: React.ReactNode;
     href?: string;
     onClick?: () => void;
     variant?: Variant;
+    size?: 'md' | 'sm';
     className?: string;
     type?: 'button' | 'submit';
     disabled?: boolean;
 }
 
-const NOTCH = 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%)';
-
-const VARIANT_STYLE: Record<Variant, React.CSSProperties> = {
-    'primary-dark': {
-        background: 'var(--lime)',
-        color: '#000',
-        clipPath: NOTCH,
-        padding: '0 14px',
-    },
-    'ghost-dark': {
-        background: 'transparent',
-        border: '1px solid rgba(255,255,255,0.15)',
-        borderLeft: '2px solid var(--lime)',
-        color: 'rgba(255,255,255,0.75)',
-        padding: '0 14px 0 12px',
-    },
-    'primary-light': {
-        background: '#000',
-        color: '#fff',
-        clipPath: NOTCH,
-        padding: '0 14px',
-    },
-    'ghost-light': {
-        background: 'transparent',
-        border: '1px solid rgba(0,0,0,0.1)',
-        borderLeft: '2px solid var(--lime-ink)',
-        color: '#000',
-        padding: '0 14px 0 12px',
-    },
-};
-
-const HAS_ICON: Record<Variant, boolean> = {
-    'primary-dark': true,
-    'ghost-dark': false,
-    'primary-light': true,
-    'ghost-light': false,
-};
-
-const ICON_FILL: Record<Variant, string> = {
-    'primary-dark': '#000',
-    'ghost-dark': 'currentColor',
-    'primary-light': 'var(--lime)',
-    'ghost-light': 'currentColor',
-};
-
-function ArrowIcon({ fill }: { fill: string }) {
-    return (
-        <svg width="9" height="9" viewBox="0 0 9.333 9.333" fill={fill}>
-            <path d="M 8.167 0 L 8.167 9.333 L 9.333 9.333 L 9.333 0 L 8.167 0 Z M 0 4.083 L 0 5.25 L 4.667 5.25 L 4.667 6.417 L 3.5 6.417 L 3.5 7.583 L 4.667 7.583 L 4.667 6.417 L 5.833 6.417 L 5.833 5.25 L 7 5.25 L 7 4.083 L 5.833 4.083 L 5.833 2.917 L 4.667 2.917 L 4.667 1.75 L 3.5 1.75 L 3.5 2.917 L 4.667 2.917 L 4.667 4.083 L 0 4.083 Z" fillRule="evenodd" />
-        </svg>
-    );
+function resolve(variant: Variant): 'primary' | 'outline' | 'ghost' {
+    if (variant === 'outline') return 'outline';
+    if (variant.startsWith('ghost')) return 'ghost';
+    return 'primary';
 }
 
-export default function NotchedButton({ children, href, onClick, variant = 'primary-dark', className = '', type = 'button', disabled = false }: NotchedButtonProps) {
-    const style: React.CSSProperties = {
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 8,
-        height: 40,
-        fontSize: 11,
-        fontWeight: 600,
-        letterSpacing: '0.09em',
-        textTransform: 'uppercase',
-        whiteSpace: 'nowrap',
-        cursor: disabled ? 'not-allowed' : 'pointer',
-        textDecoration: 'none',
-        opacity: disabled ? 0.5 : 1,
-        border: 'none',
-        transition: variant.startsWith('primary') ? 'opacity 0.15s' : 'border-color 0.15s',
-        ...VARIANT_STYLE[variant],
-    };
+export default function NotchedButton({ children, href, onClick, variant = 'primary', size = 'md', className = '', type = 'button', disabled = false }: NotchedButtonProps) {
+    const kind = resolve(variant);
+    const classes = [
+        kind === 'ghost' ? 'ct-ghost' : 'ct-cta',
+        kind === 'outline' ? 'outline' : '',
+        size === 'sm' ? 'sm' : '',
+        className,
+    ].filter(Boolean).join(' ');
 
     const content = (
         <>
-            {HAS_ICON[variant] && <ArrowIcon fill={ICON_FILL[variant]} />}
             {children}
+            {kind !== 'ghost' && (
+                <span className="ct-badge" aria-hidden="true">
+                    <span className="ct-arrows"><span>→</span><span>→</span></span>
+                </span>
+            )}
         </>
     );
 
     if (href) {
         return (
-            <Link href={href} onClick={onClick} className={className} style={style}>
+            <Link href={href} onClick={onClick} className={classes}>
                 {content}
             </Link>
         );
     }
 
     return (
-        <button type={type} onClick={onClick} disabled={disabled} className={className} style={style}>
+        <button type={type} onClick={onClick} disabled={disabled} className={classes}>
             {content}
         </button>
     );

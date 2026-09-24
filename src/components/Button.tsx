@@ -14,9 +14,7 @@ const Button: React.FC<ButtonProps> = ({ href, children, className = '', onClick
     if (variant === 'ghost') {
         return (
             <Link href={href} className={`ct-ghost ${className}`} onClick={onClick}>
-                <span className="ct-dot" />
                 {children}
-                <span className="ct-tail">→</span>
             </Link>
         );
     }
@@ -24,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({ href, children, className = '', onClick
     return (
         <Link href={href} className={`ct-cta ${className}`} onClick={onClick}>
             {children}
-            <span className="ct-badge">
+            <span className="ct-badge" aria-hidden="true">
                 <span className="ct-arrows"><span>→</span><span>→</span></span>
             </span>
         </Link>

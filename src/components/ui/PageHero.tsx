@@ -3,53 +3,45 @@ import Link from 'next/link';
 interface PageHeroProps {
     eyebrow: string;
     title: React.ReactNode;
-    description?: string;
+    description?: React.ReactNode;
     cta?: { label: string; href: string };
     ctaSecondary?: { label: string; href: string };
+    badges?: string[];
     right?: React.ReactNode;
+    children?: React.ReactNode;
 }
 
-export default function PageHero({ eyebrow, title, description, cta, ctaSecondary, right }: PageHeroProps) {
+/** Inner-page hero: dot-grid background, pills/eyebrow, H1, lead, pill CTAs. */
+export default function PageHero({ eyebrow, title, description, cta, ctaSecondary, badges, right, children }: PageHeroProps) {
     return (
-        <section style={{
-            maxWidth: 1240, margin: '0 auto',
-            padding: 'clamp(60px, 8vw, 96px) 32px clamp(56px, 7vw, 84px)',
-        }} className="px-4 sm:px-6 lg:px-8">
-            <div className={`grid items-center gap-10 ${right ? 'grid-cols-1 lg:grid-cols-[1fr_0.8fr] lg:gap-16' : 'grid-cols-1'}`}>
-                <div style={{ maxWidth: right ? '100%' : 820 }}>
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 10, letterSpacing: '0.18em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 16 }}>
-                        {eyebrow}
-                    </div>
-                    <h1 style={{
-                        fontFamily: 'var(--font-space), sans-serif', fontWeight: 700,
-                        fontSize: 'clamp(32px, 5.2vw, 64px)', lineHeight: 0.98,
-                        letterSpacing: '-0.045em', margin: '0 0 18px',
-                        textWrap: 'balance',
-                    } as React.CSSProperties}>
-                        {title}
-                    </h1>
-                    {description && (
-                        <p style={{ fontSize: 'clamp(14px, 1.2vw, 17px)', lineHeight: 1.55, color: 'var(--muted)', maxWidth: '54ch', margin: '0 0 28px' }}>
-                            {description}
-                        </p>
+        <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x)', borderBottom: '1px solid var(--line)' }}>
+            <div className={`mx-auto grid max-w-[1280px] items-center gap-12 ${right ? 'grid-cols-1 lg:grid-cols-[1fr_0.9fr]' : 'grid-cols-1'}`}>
+                <div className="flex flex-col gap-6" style={{ maxWidth: right ? '100%' : 760 }}>
+                    {badges && badges.length > 0 ? (
+                        <div className="flex flex-wrap gap-2">
+                            {badges.map((b) => <span key={b} className="ct-pill">{b}</span>)}
+                        </div>
+                    ) : (
+                        <span className="ct-eyebrow">{eyebrow}</span>
                     )}
+                    <h1 className="ct-h1">{title}</h1>
+                    {description && <p className="ct-lead" style={{ maxWidth: '54ch' }}>{description}</p>}
                     {(cta || ctaSecondary) && (
-                        <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                        <div className="flex flex-wrap gap-3.5 pt-2">
                             {cta && (
                                 <Link href={cta.href} className="ct-cta">
                                     {cta.label}
-                                    <span className="ct-badge"><span className="ct-arrows"><span>→</span><span>→</span></span></span>
+                                    <span className="ct-badge" aria-hidden="true"><span className="ct-arrows"><span>→</span><span>→</span></span></span>
                                 </Link>
                             )}
                             {ctaSecondary && (
                                 <Link href={ctaSecondary.href} className="ct-ghost">
-                                    <span className="ct-dot" />
                                     {ctaSecondary.label}
-                                    <span className="ct-tail">↓</span>
                                 </Link>
                             )}
                         </div>
                     )}
+                    {children}
                 </div>
                 {right && <div>{right}</div>}
             </div>
