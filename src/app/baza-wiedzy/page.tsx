@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { getKnowledgeBase, getKnowledgeBaseLetters } from '@/lib/sanity';
 import { Metadata } from 'next';
+import PageHero from '@/components/ui/PageHero';
+import Card from '@/components/ui/Card';
 
 export const metadata: Metadata = {
     title: 'Baza wiedzy - Agencja Marketingowa',
@@ -26,68 +28,64 @@ export default async function KnowledgeBasePage() {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
     return (
-        <main className="min-h-screen py-24 px-6">
-            <div className="max-w-[1800px] mx-auto">
-                <h1 className="text-3xl md:text-4xl font-medium mb-4">Baza wiedzy</h1>
-                <p className="text-xl text-gray-600 mb-12 max-w-3xl">
-                    Zapoznaj się z naszą bazą wiedzy na temat marketingu, designu, UX/UI i innych tematów związanych z rozwojem biznesu online.
-                </p>
+        <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
+            <PageHero
+                eyebrow="Baza wiedzy"
+                title="Baza wiedzy"
+                description="Zapoznaj się z naszą bazą wiedzy na temat marketingu, designu, UX/UI i innych tematów związanych z rozwojem biznesu online."
+            />
 
-                {/* Alfabetyczna nawigacja */}
-                <div className="flex flex-wrap gap-2 mb-16">
+            {/* Alfabetyczna nawigacja */}
+            <div style={{ borderBottom: '1px solid var(--line)', background: 'var(--panel)' }}>
+                <div className="ct-shell-sm mx-auto flex max-w-[1280px] flex-wrap gap-1.5" style={{ boxSizing: 'content-box' }}>
                     {alphabet.map((letter) => {
                         const hasEntries = availableLetters.includes(letter.toLowerCase());
                         return (
                             <Link
                                 key={letter}
                                 href={hasEntries ? `#${letter}` : '#'}
-                                className={`
-                  w-10 h-10 flex items-center justify-center rounded-full
-                  ${hasEntries
-                                    ? 'bg-black text-white hover:bg-gray-800'
-                                    : 'bg-gray-100 text-gray-400 cursor-not-allowed'}
-                `}
+                                className={`ct-mono flex items-center justify-center ${hasEntries ? 'ct-card-hover' : 'cursor-not-allowed'}`}
+                                style={{
+                                    width: 34, height: 34, fontSize: 13, fontWeight: 500,
+                                    borderRadius: 'var(--radius-sm)',
+                                    border: '1px solid var(--line-strong)',
+                                    background: hasEntries ? '#fff' : 'transparent',
+                                    color: hasEntries ? 'var(--text)' : 'var(--muted-2)',
+                                    opacity: hasEntries ? 1 : 0.6,
+                                }}
                             >
                                 {letter}
                             </Link>
                         );
                     })}
                 </div>
+            </div>
 
-                {/* Lista wpisów według liter */}
-                <div className="space-y-16">
+            {/* Lista wpisów według liter */}
+            <div style={{ padding: 'var(--pad-y) var(--pad-x)' }}>
+                <div className="mx-auto flex max-w-[1280px] flex-col" style={{ gap: 'clamp(40px, 6vw, 64px)' }}>
                     {alphabet.map((letter) => {
                         const entries = entriesByLetter[letter] || [];
                         if (entries.length === 0) return null;
 
                         return (
                             <section key={letter} id={letter} className="scroll-mt-24">
-                                <h2 className="text-4xl md:text-5xl font-bold mb-8 border-b pb-4">{letter}</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                <h2 className="ct-mono flex items-baseline justify-between" style={{ margin: '0 0 20px', paddingBottom: 12, borderBottom: '1px solid var(--line)', fontSize: 28, fontWeight: 500, color: 'var(--accent)' }}>
+                                    {letter}
+                                    <span className="ct-meta" style={{ color: 'var(--muted-2)' }}>{String(entries.length).padStart(2, '0')}</span>
+                                </h2>
+                                <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))' }}>
                                     {entries.map((entry: any) => (
-                                        <Link
+                                        <Card
                                             key={entry._id}
                                             href={`/baza-wiedzy/${entry.slug.current}`}
-                                            className="block p-6 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
-                                        >
-                                            <h3 className="text-xl font-medium mb-2">{entry.title}</h3>
-                                            <p className="text-gray-600 mb-4">{entry.shortDescription}</p>
-                                            <div className="flex flex-wrap gap-2">
-                                                {entry.tags?.slice(0, 3).map((tag: string, index: number) => (
-                                                    <span
-                                                        key={index}
-                                                        className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
-                                                    >
-                            {tag}
-                          </span>
-                                                ))}
-                                                {entry.tags?.length > 3 && (
-                                                    <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
-                            +{entry.tags.length - 3}
-                          </span>
-                                                )}
-                                            </div>
-                                        </Link>
+                                            title={entry.title}
+                                            description={entry.shortDescription}
+                                            tags={[
+                                                ...(entry.tags?.slice(0, 3) || []),
+                                                ...(entry.tags?.length > 3 ? [`+${entry.tags.length - 3}`] : []),
+                                            ]}
+                                        />
                                     ))}
                                 </div>
                             </section>

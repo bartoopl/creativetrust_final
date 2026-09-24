@@ -8,6 +8,7 @@ import { urlFor } from '@/lib/sanity';
 import PortableTextContent from '@/components/PortableTextContent';
 import AudioPlayer from '@/components/AudioPlayer';
 import BlogServiceLinks from '@/components/BlogServiceLinks';
+import BlogPostCard from '@/components/BlogPostCard';
 import SchemaScript from '@/components/SchemaScript';
 import { getBlogSeoConfig } from '@/lib/blog-seo';
 import { SITE_URL, buildBlogPostingSchema, buildBreadcrumbSchema } from '@/lib/schema';
@@ -96,118 +97,86 @@ export default async function BlogPostPage({
     ]);
 
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
             <SchemaScript schema={[blogSchema, breadcrumbSchema]} />
-            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
-                        Blog
-                    </div>
-                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: 0, maxWidth: '12ch' }}>
-                        {post.title}
-                    </h1>
-                </div>
-            </section>
-            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                <div style={{ maxWidth: 900, margin: '0 auto' }}>
-                    <Link href="/blog" className="text-gray-600 mb-8 sm:mb-12 flex items-center">
-                        <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="mr-2"
-                        >
-                            <path
-                                d="M19 12H5"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                            <path
-                                d="M12 19L5 12L12 5"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                        Wróć do bloga
+            <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x) clamp(40px, 6vw, 64px)', borderBottom: '1px solid var(--line)' }}>
+                <div className="mx-auto flex flex-col gap-6" style={{ maxWidth: 720 }}>
+                    <Link href="/blog" className="ct-meta ct-contact-link" style={{ alignSelf: 'flex-start' }}>
+                        ← Wróć do bloga
                     </Link>
 
-                    <div className="mb-8">
-                        <div className="flex flex-wrap gap-2 mb-4">
-                            {post.categories?.map((category) => (
+                    {post.categories && post.categories.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                            {post.categories.map((category) => (
                                 <Link
                                     key={category._id}
                                     href={`/blog/kategoria/${category.slug.current}`}
-                                    className="px-3 py-1 bg-gray-100 text-sm text-gray-700 rounded-full"
+                                    className="ct-pill ct-card-hover"
                                 >
                                     {category.title}
                                 </Link>
                             ))}
                         </div>
-
-                        <h1 className="text-3xl md:text-4xl font-medium mb-5 sm:mb-6 leading-tight">{post.title}</h1>
-
-                        {post.excerpt && (
-                            <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8">{post.excerpt}</p>
-                        )}
-
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mb-8">
-                            <div className="flex items-center">
-                                {post.author?.image ? (
-                                    <div className="w-10 h-10 rounded-full overflow-hidden mr-3 relative">
-                                        <Image
-                                            src={urlFor(post.author.image).url()}
-                                            alt={post.author.name}
-                                            fill
-                                            className="object-cover"
-                                        />
-                                    </div>
-                                ) : (
-                                    <div className="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full mr-3">
-                                        {post.author?.name.charAt(0)}
-                                    </div>
-                                )}
-                                <div>
-                                    <div className="font-medium">
-                                        <Link
-                                            href={`/blog/autor/${post.author?.slug.current}`}
-                                            className="hover:text-gray-600 transition-colors"
-                                        >
-                                            {post.author?.name}
-                                        </Link>
-                                    </div>
-                                    <div className="text-sm text-gray-500">
-                                        {post.author?.role}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="text-gray-500 text-sm flex items-center">
-                                <span className="mr-4">{formattedDate}</span>
-                                {post.estimatedReadingTime && (
-                                    <span>{post.estimatedReadingTime} min czytania</span>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-
-                    {post.mainImage && (
-                        <div className="aspect-[16/9] relative rounded-xl overflow-hidden mb-12">
-                            <Image
-                                src={urlFor(post.mainImage).url()}
-                                alt={post.title}
-                                fill
-                                priority
-                                className="object-cover"
-                            />
-                        </div>
                     )}
 
+                    <h1 className="ct-h1" style={{ fontSize: 'clamp(32px, 4.2vw, 50px)', letterSpacing: '-1.2px', lineHeight: 1.1 }}>{post.title}</h1>
+
+                    {post.excerpt && (
+                        <p className="ct-lead">{post.excerpt}</p>
+                    )}
+
+                    <div className="flex flex-wrap items-center gap-x-6 gap-y-3" style={{ paddingTop: 18, borderTop: '1px solid var(--line)' }}>
+                        <div className="flex items-center gap-3">
+                            {post.author?.image ? (
+                                <div className="relative overflow-hidden" style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid var(--line-strong)' }}>
+                                    <Image
+                                        src={urlFor(post.author.image).url()}
+                                        alt={post.author.name}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </div>
+                            ) : (
+                                <div className="ct-mono flex items-center justify-center" style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid var(--line-strong)', background: 'var(--panel)', color: 'var(--muted)', fontSize: 13 }}>
+                                    {post.author?.name.charAt(0)}
+                                </div>
+                            )}
+                            <div className="flex flex-col">
+                                <Link
+                                    href={`/blog/autor/${post.author?.slug.current}`}
+                                    className="ct-contact-link"
+                                    style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}
+                                >
+                                    {post.author?.name}
+                                </Link>
+                                {post.author?.role && <span className="ct-body" style={{ fontSize: 12.5 }}>{post.author.role}</span>}
+                            </div>
+                        </div>
+
+                        <div className="ct-meta flex items-center gap-2" style={{ color: 'var(--muted-2)' }}>
+                            <span>{formattedDate}</span>
+                            {post.estimatedReadingTime && (
+                                <span>· {post.estimatedReadingTime} min czytania</span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div style={{ padding: 'clamp(40px, 6vw, 64px) var(--pad-x) var(--pad-y)' }}>
+                {post.mainImage && (
+                    <div className="relative mx-auto overflow-hidden" style={{ maxWidth: 960, aspectRatio: '16/9', marginBottom: 'clamp(40px, 6vw, 56px)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--line-strong)', background: 'var(--panel2)' }}>
+                        <Image
+                            src={urlFor(post.mainImage).url()}
+                            alt={post.title}
+                            fill
+                            priority
+                            className="object-cover"
+                        />
+                    </div>
+                )}
+
+                <article className="mx-auto" style={{ maxWidth: 720 }}>
                     {/* Audio Player */}
                     {post.audioFile && (
                         <AudioPlayer
@@ -221,112 +190,69 @@ export default async function BlogPostPage({
                     <BlogServiceLinks links={seoConfig?.links || []} />
 
                     {/* Informacje o autorze */}
-                    <div className="mt-16 pt-8 border-t border-gray-200">
-                        <div className="flex items-start md:items-center flex-col md:flex-row">
-                            {post.author?.image ? (
-                                <div className="w-16 h-16 rounded-full overflow-hidden mr-6 relative flex-shrink-0 mb-4 md:mb-0">
-                                    <Image
-                                        src={urlFor(post.author.image).url()}
-                                        alt={post.author.name}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
-                            ) : (
-                                <div className="w-16 h-16 flex items-center justify-center bg-gray-200 rounded-full mr-6 flex-shrink-0 mb-4 md:mb-0">
-                                    {post.author?.name.charAt(0)}
-                                </div>
+                    <div className="ct-panel flex flex-col items-start gap-5 md:flex-row" style={{ marginTop: 56, padding: 24 }}>
+                        {post.author?.image ? (
+                            <div className="relative flex-shrink-0 overflow-hidden" style={{ width: 64, height: 64, borderRadius: '50%', border: '1px solid var(--line-strong)' }}>
+                                <Image
+                                    src={urlFor(post.author.image).url()}
+                                    alt={post.author.name}
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+                        ) : (
+                            <div className="ct-mono flex flex-shrink-0 items-center justify-center" style={{ width: 64, height: 64, borderRadius: '50%', border: '1px solid var(--line-strong)', background: 'var(--panel)', color: 'var(--muted)', fontSize: 20 }}>
+                                {post.author?.name.charAt(0)}
+                            </div>
+                        )}
+                        <div className="flex flex-col gap-1.5">
+                            <span className="ct-eyebrow">Autor</span>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>
+                                <Link
+                                    href={`/blog/autor/${post.author?.slug.current}`}
+                                    className="ct-contact-link"
+                                    style={{ color: 'var(--text)' }}
+                                >
+                                    {post.author?.name}
+                                </Link>
+                            </h3>
+                            {post.author?.role && (
+                                <p className="ct-meta">{post.author.role}</p>
                             )}
-                            <div>
-                                <h3 className="text-xl font-medium mb-2">
-                                    <Link
-                                        href={`/blog/autor/${post.author?.slug.current}`}
-                                        className="hover:text-gray-600 transition-colors"
-                                    >
-                                        {post.author?.name}
-                                    </Link>
-                                </h3>
-                                {post.author?.role && (
-                                    <p className="text-gray-600 mb-3">{post.author.role}</p>
-                                )}
-                                {post.author?.bio && (
-                                    <div className="text-sm text-gray-600 prose max-w-none">
-                                        <PortableTextContent content={post.author.bio} />
-                                    </div>
-                                )}
-                            </div>
+                            {post.author?.bio && (
+                                <PortableTextContent content={post.author.bio} compact />
+                            )}
                         </div>
                     </div>
+                </article>
 
-                    {/* Powiązane artykuły */}
-                    {post.relatedPosts && post.relatedPosts.length > 0 && (
-                        <div className="mt-12 sm:mt-16">
-                            <h3 className="text-2xl font-medium mb-6 sm:mb-8">Powiązane artykuły</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                                {post.relatedPosts.map((relatedPost) => (
-                                    <Link
-                                        key={relatedPost._id}
-                                        href={`/blog/${relatedPost.slug.current}`}
-                                        className="group"
-                                    >
-                                        <div className="aspect-[16/9] relative rounded-lg overflow-hidden mb-4">
-                                            {relatedPost.mainImage ? (
-                                                <Image
-                                                    src={urlFor(relatedPost.mainImage).url()}
-                                                    alt={relatedPost.title}
-                                                    fill
-                                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                                />
-                                            ) : (
-                                                <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                                                    <span className="text-gray-400 text-sm">Brak zdjęcia</span>
-                                                </div>
-                                            )}
-                                        </div>
-                                        <h4 className="font-medium group-hover:text-gray-600 transition-colors">
-                                            {relatedPost.title}
-                                        </h4>
-                                        <p className="text-sm text-gray-500 mt-1">
-                                            {new Date(relatedPost.publishedAt).toLocaleDateString('pl-PL')}
-                                        </p>
-                                    </Link>
-                                ))}
-                            </div>
+                {/* Powiązane artykuły */}
+                {post.relatedPosts && post.relatedPosts.length > 0 && (
+                    <div className="mx-auto flex flex-col gap-6" style={{ maxWidth: 1280, marginTop: 'var(--pad-y)', paddingTop: 'var(--pad-y)', borderTop: '1px solid var(--line)' }}>
+                        <div>
+                            <span className="ct-eyebrow">Czytaj dalej</span>
+                            <h3 className="ct-h2">Powiązane artykuły</h3>
                         </div>
-                    )}
-
-                    {/* Nawigacja na dole strony */}
-                    <div className="mt-12 sm:mt-16 pt-8 border-t border-gray-200">
-                        <Link
-                            href="/blog"
-                            className="inline-flex items-center text-gray-700 hover:text-black"
-                        >
-                            <svg
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="mr-2"
-                            >
-                                <path
-                                    d="M19 12H5"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
+                        <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))' }}>
+                            {post.relatedPosts.map((relatedPost) => (
+                                <BlogPostCard
+                                    key={relatedPost._id}
+                                    as="h4"
+                                    href={`/blog/${relatedPost.slug.current}`}
+                                    title={relatedPost.title}
+                                    image={relatedPost.mainImage ? urlFor(relatedPost.mainImage).width(800).url() : undefined}
+                                    footer={new Date(relatedPost.publishedAt).toLocaleDateString('pl-PL')}
                                 />
-                                <path
-                                    d="M12 19L5 12L12 5"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                            Wróć do pełnej listy artykułów
-                        </Link>
+                            ))}
+                        </div>
                     </div>
+                )}
+
+                {/* Nawigacja na dole strony */}
+                <div className="mx-auto" style={{ maxWidth: post.relatedPosts && post.relatedPosts.length > 0 ? 1280 : 720, marginTop: 48, paddingTop: 24, borderTop: '1px solid var(--line)' }}>
+                    <Link href="/blog" className="ct-link">
+                        ← Wróć do pełnej listy artykułów
+                    </Link>
                 </div>
             </div>
         </main>

@@ -6,6 +6,8 @@ import type { Metadata } from 'next';
 import { getBlogAuthor } from '@/lib/sanity';
 import { urlFor } from '@/lib/sanity';
 import PortableTextContent from '@/components/PortableTextContent';
+import NotchedButton from '@/components/ui/NotchedButton';
+import BlogPostCard from '@/components/BlogPostCard';
 
 // Define the params type as a Promise as required in Next.js v15
 type Params = Promise<{ slug: string }>;
@@ -60,51 +62,17 @@ export default async function AuthorPage({
     };
 
     return (
-        <main className="min-h-screen bg-white">
-            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
-                        Autor
-                    </div>
-                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: 0, maxWidth: '12ch' }}>
-                        {author.name}
-                    </h1>
-                </div>
-            </section>
-            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                <div style={{ maxWidth: 900, margin: '0 auto' }}>
-                <Link href="/blog" className="text-gray-600 mb-6 sm:mb-8 flex items-center">
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="mr-2"
-                    >
-                        <path
-                            d="M19 12H5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                        <path
-                            d="M12 19L5 12L12 5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-                    Wróć do bloga
-                </Link>
+        <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
+            <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x)', borderBottom: '1px solid var(--line)' }}>
+                <div className="mx-auto flex max-w-[1280px] flex-col gap-8">
+                    <Link href="/blog" className="ct-meta ct-contact-link" style={{ alignSelf: 'flex-start' }}>
+                        ← Wróć do bloga
+                    </Link>
 
-                {/* Profil autora */}
-                <div className="mb-16">
-                    <div className="flex flex-col md:flex-row items-center md:items-start gap-6 sm:gap-8">
+                    {/* Profil autora */}
+                    <div className="flex flex-col items-start gap-8 md:flex-row">
                         {author.image ? (
-                            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden relative">
+                            <div className="relative flex-shrink-0 overflow-hidden" style={{ width: 120, height: 120, borderRadius: 'var(--radius-lg)', border: '1px solid var(--line-strong)', background: 'var(--panel2)' }}>
                                 <Image
                                     src={urlFor(author.image).url()}
                                     alt={author.name}
@@ -113,38 +81,37 @@ export default async function AuthorPage({
                                 />
                             </div>
                         ) : (
-                            <div className="w-24 h-24 sm:w-32 sm:h-32 flex items-center justify-center bg-gray-200 rounded-full">
-                                <span className="text-2xl sm:text-3xl text-gray-600">{author.name.charAt(0)}</span>
+                            <div className="ct-mono flex flex-shrink-0 items-center justify-center" style={{ width: 120, height: 120, borderRadius: 'var(--radius-lg)', border: '1px solid var(--line-strong)', background: 'var(--panel)', color: 'var(--muted)', fontSize: 36 }}>
+                                {author.name.charAt(0)}
                             </div>
                         )}
 
-                        <div className="text-center md:text-left">
-                            <h1 className="text-3xl md:text-4xl font-medium mb-4 leading-tight">{author.name}</h1>
+                        <div className="flex flex-col gap-4" style={{ maxWidth: 720 }}>
+                            <span className="ct-eyebrow">Autor</span>
+                            <h1 className="ct-h1">{author.name}</h1>
 
                             {author.role && (
-                                <p className="text-lg sm:text-xl text-gray-600 mb-5 sm:mb-6">{author.role}</p>
+                                <p className="ct-meta" style={{ fontSize: 12 }}>{author.role}</p>
                             )}
 
                             {author.bio && (
-                                <div className="text-gray-700 max-w-2xl mb-6 prose">
-                                    <PortableTextContent content={author.bio}/>
-                                </div>
+                                <PortableTextContent content={author.bio}/>
                             )}
 
                             {/* Social Links */}
                             {author.socialLinks && (
-                                <div className="flex flex-wrap justify-center md:justify-start gap-4">
+                                <div className="flex flex-wrap gap-2">
                                     {author.socialLinks.linkedin && (
                                         <a
                                             href={author.socialLinks.linkedin}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center text-gray-700 hover:text-black"
+                                            className="ct-pill ct-card-hover"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
-                                                width="18"
-                                                height="18"
+                                                width="14"
+                                                height="14"
                                                 viewBox="0 0 24 24"
                                                 fill="none"
                                                 stroke="currentColor"
@@ -167,12 +134,12 @@ export default async function AuthorPage({
                                             href={author.socialLinks.twitter}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center text-gray-700 hover:text-black"
+                                            className="ct-pill ct-card-hover"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
-                                                width="18"
-                                                height="18"
+                                                width="14"
+                                                height="14"
                                                 viewBox="0 0 24 24"
                                                 fill="none"
                                                 stroke="currentColor"
@@ -193,12 +160,12 @@ export default async function AuthorPage({
                                             href={author.socialLinks.instagram}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center text-gray-700 hover:text-black"
+                                            className="ct-pill ct-card-hover"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
-                                                width="18"
-                                                height="18"
+                                                width="14"
+                                                height="14"
                                                 viewBox="0 0 24 24"
                                                 fill="none"
                                                 stroke="currentColor"
@@ -219,95 +186,42 @@ export default async function AuthorPage({
                         </div>
                     </div>
                 </div>
+            </section>
 
-                {/* Artykuły autora */}
-                {author.posts && author.posts.length > 0 ? (
-                    <div>
-                        <h2 className="text-2xl font-medium mb-8">Artykuły autora ({author.posts.length})</h2>
+            <section className="ct-section">
+                <div className="mx-auto flex max-w-[1280px] flex-col gap-8">
+                    {/* Artykuły autora */}
+                    {author.posts && author.posts.length > 0 ? (
+                        <>
+                            <div>
+                                <span className="ct-eyebrow">Publikacje</span>
+                                <h2 className="ct-h2">Artykuły autora <span className="ct-mono" style={{ color: 'var(--muted-2)', fontWeight: 500 }}>({author.posts.length})</span></h2>
+                            </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
-                            {author.posts.map((post) => (
-                                <div key={post._id} className="flex flex-col h-full group">
-                                    <div className="aspect-[16/9] relative rounded-xl overflow-hidden mb-6">
-                                        {post.mainImage ? (
-                                            <Image
-                                                src={urlFor(post.mainImage).url()}
-                                                alt={post.title}
-                                                fill
-                                                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                            />
-                                        ) : (
-                                            <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                                                <span className="text-gray-400">Brak zdjęcia</span>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    <h3 className="text-xl font-medium mb-3">
-                                        <Link href={`/blog/${post.slug.current}`}
-                                              className="hover:text-gray-600 transition-colors">
-                                            {post.title}
-                                        </Link>
-                                    </h3>
-
-                                    <p className="text-gray-600 mb-4 text-sm line-clamp-3">{post.excerpt}</p>
-
-                                    <div className="flex items-center text-xs text-gray-500 mb-4 mt-auto">
-                                        <span className="mr-4">{formatDate(post.publishedAt)}</span>
-                                        {post.estimatedReadingTime && (
-                                            <span>{post.estimatedReadingTime} min czytania</span>
-                                        )}
-                                    </div>
-
-                                    <Link
+                            <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))' }}>
+                                {author.posts.map((post) => (
+                                    <BlogPostCard
+                                        key={post._id}
                                         href={`/blog/${post.slug.current}`}
-                                        className="inline-flex items-center text-black font-medium text-sm group"
-                                    >
-                                        Czytaj artykuł
-                                        <svg
-                                            width="16"
-                                            height="16"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="ml-2 transform transition-transform group-hover:translate-x-1"
-                                        >
-                                            <path
-                                                d="M5 12H19"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                            <path
-                                                d="M12 5L19 12L12 19"
-                                                stroke="currentColor"
-                                                strokeWidth="2"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
-                                    </Link>
-                                </div>
-                            ))}
+                                        title={post.title}
+                                        image={post.mainImage ? urlFor(post.mainImage).width(800).url() : undefined}
+                                        excerpt={post.excerpt}
+                                        footer={[formatDate(post.publishedAt), post.estimatedReadingTime && `${post.estimatedReadingTime} min czytania`].filter(Boolean).join(' · ')}
+                                    />
+                                ))}
+                            </div>
+                        </>
+                    ) : (
+                        <div className="ct-panel flex flex-col items-center gap-4 text-center" style={{ padding: 'clamp(32px, 6vw, 64px) 24px', background: 'var(--panel)' }}>
+                            <h2 style={{ margin: 0, fontSize: 22, fontWeight: 600 }}>Brak artykułów</h2>
+                            <p className="ct-body" style={{ fontSize: 15 }}>
+                                {author.name} nie opublikował(a) jeszcze żadnych artykułów.
+                            </p>
+                            <NotchedButton href="/blog">Przejdź do bloga</NotchedButton>
                         </div>
-                    </div>
-                ) : (
-                    <div className="text-center py-16">
-                        <h2 className="text-2xl font-medium mb-4">Brak artykułów</h2>
-                        <p className="text-gray-600 mb-8">
-                            {author.name} nie opublikował(a) jeszcze żadnych artykułów.
-                        </p>
-                        <Link
-                            href="/blog"
-                            className="inline-flex items-center justify-center px-6 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
-                        >
-                            Przejdź do bloga
-                        </Link>
-                    </div>
-                )}
+                    )}
                 </div>
-            </div>
+            </section>
         </main>
     );
 }
