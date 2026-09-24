@@ -1,141 +1,24 @@
-import NotchedButton from './ui/NotchedButton';
+const stats = [
+    { value: '50+', label: 'Zrealizowanych projektów' },
+    { value: '3×', label: 'Szybciej z AI w procesie' },
+    { value: '100%', label: 'Projektów z mierzalnym celem' },
+];
 
 export default function StatsSection() {
     return (
-        <section style={{ background: '#fff', padding: '72px 16px' }} className="lg:px-[72px] lg:py-[120px]">
-            <div style={{ maxWidth: 1440, margin: '0 auto' }}>
-                <div style={{ textAlign: 'center', marginBottom: 40 }} className="lg:mb-16">
-                    <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(28px, 4vw, 43.1px)', lineHeight: '1.15', letterSpacing: '-1.76px', color: '#000', margin: 0 }}>
-                        Dlaczego firmy stawiają na Creativetrust
-                    </h2>
-                    <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', color: 'rgba(0,0,0,0.6)', margin: '8px 0 0' }}>
-                        Nie jesteśmy agencją od ładnych rzeczy. Jesteśmy partnerem, który rozumie biznes i wdraża szybko.
-                    </p>
+        <section className="grid grid-cols-1 sm:grid-cols-3" aria-label="CreativeTrust w liczbach">
+            {stats.map((stat, i) => (
+                <div
+                    key={stat.label}
+                    className={`flex flex-col gap-1.5 ${i < stats.length - 1 ? 'border-b sm:border-b-0 sm:border-r' : ''}`}
+                    style={{ padding: '40px clamp(16px, 4vw, 48px)', borderColor: 'var(--line)' }}
+                >
+                    <span style={{ fontSize: 'clamp(32px, 4vw, 44px)', fontWeight: 600, letterSpacing: '-1px', color: 'var(--text)', lineHeight: 1.1 }}>
+                        {stat.value}
+                    </span>
+                    <span style={{ fontSize: 13, color: 'var(--muted)' }}>{stat.label}</span>
                 </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: 0 }} className="lg:gap-8 lg:px-20">
-                    <div className="flex flex-col gap-4 lg:flex-row lg:gap-8 lg:min-h-[360px]">
-                        <div style={{ flex: 662, borderRadius: 4, background: '#000', overflow: 'hidden', padding: 32, display: 'flex', flexDirection: 'column', gap: 24, justifyContent: 'space-between' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 461 }}>
-                                <p style={{ fontSize: 17, fontWeight: 500, lineHeight: '27px', letterSpacing: '-0.36px', color: '#fff', margin: 0 }}>
-                                    Jesteśmy w biznesie, nie tylko obok niego.
-                                </p>
-                                <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: 'rgba(255,255,255,0.6)', margin: 0 }}>
-                                    Zarządzamy firmami klientów od środka. Każda decyzja projektowa jest dla nas decyzją biznesową - nie estetyczną.
-                                </p>
-                            </div>
-                            <p style={{ fontSize: 15.4, fontWeight: 500, lineHeight: '24px', letterSpacing: '-0.32px', color: '#fff', margin: 0 }}>
-                                Klienci z Polski i z zagranicy · Projekty z mierzalnymi wynikami
-                            </p>
-                        </div>
-                        <div style={{ flex: 441, borderRadius: 4, background: '#fff', boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.08)', overflow: 'hidden', padding: 24 }} className="lg:p-8">
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                                <p style={{ fontSize: 17, fontWeight: 500, lineHeight: '27px', letterSpacing: '-0.36px', color: '#000', margin: 0 }}>
-                                    Ludzka decyzja + tempo AI.
-                                </p>
-                                <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: 'rgba(0,0,0,0.6)', margin: 0 }}>
-                                    Łączymy doświadczenie biznesowe z wdrożeniami przyspieszonymi przez AI. Dostajesz wyniki szybciej, bez obniżania jakości.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col gap-4 lg:flex-row lg:gap-8">
-                        <div style={{ flex: 441, borderRadius: 4, background: '#fff', boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.08)', overflow: 'hidden', padding: 24 }} className="lg:p-8">
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 376 }}>
-                                <p style={{ fontSize: 17, fontWeight: 500, lineHeight: '27px', letterSpacing: '-0.36px', color: '#000', margin: 0 }}>
-                                    Kompleksowa obsługa - od projektu do sprzedaży.
-                                </p>
-                                <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: 'rgba(0,0,0,0.6)', margin: 0 }}>
-                                    Strony, sklepy, marketing automation i social media pod jednym dachem. Jeden partner, spójna strategia.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div style={{ flex: 662, borderRadius: 4, background: 'rgba(0,0,0,0.04)', overflow: 'hidden', padding: 24, display: 'flex', flexDirection: 'column', gap: 24 }} className="lg:p-8 lg:gap-9">
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                                <p style={{ fontSize: 17, fontWeight: 500, lineHeight: '27px', letterSpacing: '-0.36px', color: '#000', margin: 0 }}>
-                                    Open source i sprawdzone technologie.
-                                </p>
-                                <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: 'rgba(0,0,0,0.6)', margin: 0 }}>
-                                    Budujemy na otwartych, dojrzałych stackach - Medusa.js, Next.js, React. Brak vendor lock-in, pełna kontrola nad kodem.
-                                </p>
-                            </div>
-                            <NotchedButton variant="ghost-light" className="self-start">
-                                Nasze podejście technologiczne
-                            </NotchedButton>
-                            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
-                                    <p style={{ fontSize: 35.6, fontWeight: 500, lineHeight: '39.6px', letterSpacing: '-1.44px', color: '#000', margin: 0 }}>50+</p>
-                                    <p style={{ fontSize: 13, lineHeight: '21px', letterSpacing: '-0.245px', color: 'rgba(0,0,0,0.4)', margin: 0 }}>Zrealizowanych projektów</p>
-                                </div>
-                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
-                                    <p style={{ fontSize: 35.6, fontWeight: 500, lineHeight: '39.6px', letterSpacing: '-1.44px', color: '#000', margin: 0 }}>3×</p>
-                                    <p style={{ fontSize: 13, lineHeight: '21px', letterSpacing: '-0.245px', color: 'rgba(0,0,0,0.4)', margin: 0 }}>Szybciej z AI w procesie</p>
-                                </div>
-                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
-                                    <p style={{ fontSize: 35.6, fontWeight: 500, lineHeight: '39.6px', letterSpacing: '-1.44px', color: '#000', margin: 0 }}>100%</p>
-                                    <p style={{ fontSize: 13, lineHeight: '21px', letterSpacing: '-0.245px', color: 'rgba(0,0,0,0.4)', margin: 0 }}>Projektów z mierzalnym celem</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col gap-4 lg:flex-row lg:gap-8">
-                        <div style={{ flex: 1, borderRadius: 4, background: '#000', overflow: 'hidden', position: 'relative', padding: 24, minHeight: 260 }} className="lg:min-h-[360px] lg:p-8">
-                            <img src="/design-handoff-v7/7299d9657a69413b.jpg" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} />
-                            <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 383 }}>
-                                <p style={{ fontSize: 17, fontWeight: 500, lineHeight: '27px', letterSpacing: '-0.36px', color: '#fff', margin: 0 }}>
-                                    Dla firm, które chcą więcej niż ładną stronę.
-                                </p>
-                                <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: 'rgba(255,255,255,0.6)', margin: 0 }}>
-                                    Robimy projekty cyfrowe, które mają sens biznesowy - i sprawdzamy to wspólnie z klientem na każdym etapie.
-                                </p>
-                            </div>
-                            <div style={{ position: 'absolute', bottom: 24, left: 24 }} className="lg:bottom-8 lg:left-8">
-                                <NotchedButton variant="primary-dark">
-                                    Zobacz case studies
-                                </NotchedButton>
-                            </div>
-                        </div>
-                        <div style={{ flex: 1, borderRadius: 4, background: '#fff', boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.08)', overflow: 'hidden', position: 'relative', padding: 24, minHeight: 260 }} className="lg:min-h-[360px] lg:p-8">
-                            <img src="/design-handoff-v7/122e661108f6caa0.png" alt="" style={{ position: 'absolute', right: 0, top: 0, height: '100%', opacity: 0.3, objectFit: 'cover' }} />
-                            <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 304 }}>
-                                <p style={{ fontSize: 17, fontWeight: 500, lineHeight: '27px', letterSpacing: '-0.36px', color: '#000', margin: 0 }}>
-                                    Pracujemy jak partner, nie jak agency.
-                                </p>
-                                <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: 'rgba(0,0,0,0.6)', margin: 0 }}>
-                                    Masz bezpośredni kontakt z osobami decyzyjnymi - bez account managerów i gry w głuchy telefon.
-                                </p>
-                            </div>
-                            <div style={{ position: 'absolute', bottom: 24, left: 24 }} className="lg:bottom-8 lg:left-8">
-                                <NotchedButton variant="primary-light">
-                                    O nas
-                                </NotchedButton>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style={{ borderRadius: 4, background: '#000', overflow: 'hidden', position: 'relative' }}>
-                        <img src="/design-handoff-v7/4d41d6b59840649b.png" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} />
-                        <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'flex-start', padding: 24, minHeight: 280 }} className="lg:p-16 lg:min-h-[399px]">
-                            <div style={{ width: '100%', maxWidth: 512, borderRadius: '4px 4px 0 0', background: '#fff', borderBottom: '1px solid rgba(0,0,0,0.08)', padding: 24, display: 'flex', flexDirection: 'column', gap: 24 }} className="lg:p-16 lg:gap-8">
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                                    <p style={{ fontSize: 17, lineHeight: '27px', letterSpacing: '-0.36px', color: '#000', margin: 0 }}>
-                                        Kiedy zmienia się sposób robienia biznesu w digital, my pomagamy firmom to wdrożyć.
-                                    </p>
-                                    <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: 'rgba(0,0,0,0.6)', margin: 0 }}>
-                                        AI przyspiesza wdrożenia. My wiemy, jak to przełożyć na wyniki - nie na slajdy.
-                                    </p>
-                                </div>
-                                <NotchedButton variant="primary-light" className="self-start">
-                                    Jak działamy
-                                </NotchedButton>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            ))}
         </section>
     );
 }
