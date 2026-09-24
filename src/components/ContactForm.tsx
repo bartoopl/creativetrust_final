@@ -11,27 +11,6 @@ interface FormData {
     message: string;
 }
 
-const inputStyle: React.CSSProperties = {
-    width: '100%',
-    padding: '12px 14px',
-    borderRadius: 4,
-    border: '1px solid rgba(0,0,0,0.12)',
-    fontSize: 15.1,
-    letterSpacing: '-0.32px',
-    color: '#000',
-    background: '#fff',
-    fontFamily: 'inherit',
-};
-
-const labelStyle: React.CSSProperties = {
-    display: 'block',
-    fontSize: 12.2,
-    fontWeight: 500,
-    color: 'rgba(0,0,0,0.6)',
-    letterSpacing: '-0.36px',
-    marginBottom: 6,
-};
-
 export default function ContactForm() {
     const formStartTime = useRef<number>(Date.now());
 
@@ -105,31 +84,35 @@ export default function ContactForm() {
 
     if (submitted) {
         return (
-            <div style={{ padding: 32 }} className="lg:p-10">
-                <div style={{ borderLeft: '2px solid var(--lime)', paddingLeft: 20 }}>
-                    <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 21.8, letterSpacing: '-0.88px', color: '#000', margin: '0 0 8px' }}>
+            <div className="ct-panel" style={{ padding: 'clamp(24px, 4vw, 40px)' }}>
+                <div className="flex flex-col gap-3" style={{ borderLeft: '2px solid var(--accent)', paddingLeft: 20 }}>
+                    <span className="ct-eyebrow">Wysłano</span>
+                    <h3 style={{ fontWeight: 600, fontSize: 22, letterSpacing: '-0.5px', color: 'var(--text)', margin: 0 }}>
                         Dziękujemy za wiadomość!
                     </h3>
-                    <p style={{ fontSize: 15.1, lineHeight: '24px', letterSpacing: '-0.32px', color: 'rgba(0,0,0,0.6)', margin: '0 0 20px' }}>
+                    <p className="ct-body" style={{ fontSize: 15, margin: '0 0 8px' }}>
                         {success || 'Twoja wiadomość została wysłana. Skontaktujemy się z Tobą najszybciej jak to możliwe.'}
                     </p>
-                    <NotchedButton variant="ghost-light" onClick={() => setSubmitted(false)}>
-                        Wyślij nową wiadomość
-                    </NotchedButton>
+                    <div>
+                        <NotchedButton variant="ghost" onClick={() => setSubmitted(false)}>
+                            Wyślij nową wiadomość
+                        </NotchedButton>
+                    </div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div style={{ padding: 32 }} className="lg:p-10">
-            <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 21.8, letterSpacing: '-0.88px', color: '#000', margin: '0 0 24px' }}>
+        <div className="ct-panel" style={{ padding: 'clamp(24px, 4vw, 40px)' }}>
+            <span className="ct-eyebrow">Formularz</span>
+            <h2 style={{ fontWeight: 600, fontSize: 22, letterSpacing: '-0.5px', color: 'var(--text)', margin: '8px 0 24px' }}>
                 Napisz do nas
             </h2>
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 <div>
-                    <label htmlFor="name" style={labelStyle}>Imię i nazwisko *</label>
+                    <label htmlFor="name" className="ct-label">Imię i nazwisko *</label>
                     <input
                         type="text"
                         id="name"
@@ -137,13 +120,13 @@ export default function ContactForm() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        style={inputStyle}
+                        className="ct-input"
                         placeholder="Twoje imię i nazwisko"
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="email" style={labelStyle}>Email *</label>
+                    <label htmlFor="email" className="ct-label">Email *</label>
                     <input
                         type="email"
                         id="email"
@@ -151,20 +134,20 @@ export default function ContactForm() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        style={inputStyle}
+                        className="ct-input"
                         placeholder="Twój adres email"
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="subject" style={labelStyle}>Temat *</label>
+                    <label htmlFor="subject" className="ct-label">Temat *</label>
                     <select
                         id="subject"
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
                         required
-                        style={inputStyle}
+                        className="ct-input"
                     >
                         <option value="" disabled>Wybierz temat</option>
                         <option value="general">Zapytanie ogólne</option>
@@ -176,7 +159,7 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="message" style={labelStyle}>Wiadomość *</label>
+                    <label htmlFor="message" className="ct-label">Wiadomość *</label>
                     <textarea
                         id="message"
                         name="message"
@@ -184,7 +167,8 @@ export default function ContactForm() {
                         onChange={handleChange}
                         required
                         rows={6}
-                        style={{ ...inputStyle, resize: 'vertical' }}
+                        className="ct-input"
+                        style={{ resize: 'vertical' }}
                         placeholder="Twoja wiadomość..."
                     />
                 </div>
@@ -208,18 +192,18 @@ export default function ContactForm() {
                 />
 
                 {error && (
-                    <div style={{ padding: 14, borderRadius: 4, border: '1px solid rgba(220,38,38,0.2)', background: 'rgba(220,38,38,0.04)', color: '#b91c1c', fontSize: 13.5 }}>
+                    <div style={{ padding: 14, borderRadius: 'var(--radius-sm)', border: '1px solid rgba(220,38,38,0.2)', background: 'rgba(220,38,38,0.04)', color: '#b91c1c', fontSize: 13.5 }}>
                         {error}
                     </div>
                 )}
 
-                <NotchedButton type="submit" variant="primary-light" disabled={submitting} className="self-start">
+                <NotchedButton type="submit" variant="primary" disabled={submitting} className="self-start">
                     {submitting ? 'Wysyłanie...' : 'Wyślij wiadomość'}
                 </NotchedButton>
 
-                <p style={{ fontSize: 12.2, color: 'rgba(0,0,0,0.4)', lineHeight: 1.6, margin: 0 }}>
+                <p style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.6, margin: 0 }}>
                     Wysyłając ten formularz, zgadzasz się na przetwarzanie Twoich danych osobowych zgodnie z naszą{' '}
-                    <a href="/polityka-prywatnosci" style={{ color: 'rgba(0,0,0,0.6)', textDecoration: 'underline' }}>polityką prywatności</a>.
+                    <a href="/polityka-prywatnosci" style={{ color: 'var(--muted)', textDecoration: 'underline' }}>polityką prywatności</a>.
                 </p>
             </form>
         </div>

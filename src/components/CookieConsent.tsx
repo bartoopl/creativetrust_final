@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import ConsentManager from './ConsentManager';
+import NotchedButton from './ui/NotchedButton';
 import { updateConsent } from '@/lib/consent-utils';
 
 const CookieConsent = () => {
@@ -55,37 +56,32 @@ const CookieConsent = () => {
     return (
         <>
             {visible && (
-                <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 border-t border-gray-200 p-4 md:p-6">
-                    <div className="max-w-[1800px] mx-auto">
-                        <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+                <div
+                    className="fixed bottom-0 left-0 right-0 z-50"
+                    style={{ background: '#fff', borderTop: '1px solid var(--line-strong)', padding: '20px var(--pad-x)' }}
+                >
+                    <div className="mx-auto max-w-[1280px]">
+                        <div className="flex flex-col md:flex-row items-start md:items-center gap-5">
                             <div className="flex-1">
-                                <h3 className="text-lg font-medium mb-2">Pliki cookie</h3>
-                                <p className="text-gray-600 text-sm">
+                                <span className="ct-eyebrow">Cookies</span>
+                                <h3 style={{ fontSize: 16, fontWeight: 600, margin: '6px 0 6px', color: 'var(--text)' }}>Pliki cookie</h3>
+                                <p className="ct-body" style={{ fontSize: 13.5, maxWidth: '90ch' }}>
                                     Używamy cookies, aby zapewnić najlepsze wrażenia podczas korzystania z naszej strony.
                                     Niektóre są niezbędne do funkcjonowania serwisu, inne pomagają nam analizować ruch i
                                     personalizować treści. Używając tej strony, wyrażasz zgodę na naszą{' '}
-                                    <a href="/polityka-prywatnosci" className="underline">politykę prywatności</a>.
+                                    <a href="/polityka-prywatnosci" style={{ textDecoration: 'underline' }}>politykę prywatności</a>.
                                 </p>
                             </div>
-                            <div className="flex flex-col sm:flex-row gap-2">
-                                <button
-                                    onClick={acceptEssential}
-                                    className="px-4 py-2 border border-gray-300 rounded-full text-sm hover:bg-gray-50 transition-colors"
-                                >
+                            <div className="flex flex-col sm:flex-row flex-wrap gap-2">
+                                <NotchedButton variant="ghost" onClick={acceptEssential}>
                                     Tylko niezbędne
-                                </button>
-                                <button
-                                    onClick={showAdvancedSettings}
-                                    className="px-4 py-2 border border-gray-300 rounded-full text-sm hover:bg-gray-50 transition-colors"
-                                >
+                                </NotchedButton>
+                                <NotchedButton variant="ghost" onClick={showAdvancedSettings}>
                                     Ustawienia
-                                </button>
-                                <button
-                                    onClick={acceptAll}
-                                    className="px-4 py-2 bg-black text-white rounded-full text-sm hover:bg-gray-800 transition-colors"
-                                >
+                                </NotchedButton>
+                                <NotchedButton variant="primary" onClick={acceptAll}>
                                     Akceptuję wszystkie
-                                </button>
+                                </NotchedButton>
                             </div>
                         </div>
                     </div>

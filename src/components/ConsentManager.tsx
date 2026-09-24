@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { ConsentSettings, loadConsent, updateConsent } from '@/lib/consent-utils';
+import NotchedButton from './ui/NotchedButton';
 
 interface ConsentManagerProps {
     onClose: () => void;
@@ -71,14 +72,56 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
         }));
     };
 
+    const toggle = (on: boolean) => (
+        <div className="relative w-10 h-6">
+            <div className="block w-10 h-6 rounded-full transition-colors" style={{ background: on ? 'var(--accent)' : 'var(--line-strong)' }}></div>
+            <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ${on ? 'transform translate-x-4' : ''}`}></div>
+        </div>
+    );
+
+    const categories: { key: keyof ConsentSettings; title: string; description: string; ariaOn: string; ariaOff: string }[] = [
+        {
+            key: 'functionality_storage',
+            title: 'Funkcjonalne',
+            description: 'Te pliki cookie umożliwiają stronie internetowej zapamiętanie wyborów dokonanych przez użytkownika i zapewniają lepszą funkcjonalność i personalizację.',
+            ariaOn: 'Wyłącz funkcjonalne',
+            ariaOff: 'Włącz funkcjonalne',
+        },
+        {
+            key: 'analytics_storage',
+            title: 'Analityczne',
+            description: 'Te pliki cookie pozwalają nam analizować użytkowanie strony, aby poprawić jej funkcjonowanie i dostosować do potrzeb użytkowników.',
+            ariaOn: 'Wyłącz analityczne',
+            ariaOff: 'Włącz analityczne',
+        },
+        {
+            key: 'ad_storage',
+            title: 'Marketingowe',
+            description: 'Te pliki cookie są używane do śledzenia skuteczności reklam i wyświetlania bardziej odpowiednich treści reklamowych.',
+            ariaOn: 'Wyłącz marketingowe',
+            ariaOff: 'Włącz marketingowe',
+        },
+        {
+            key: 'personalization_storage',
+            title: 'Personalizacja',
+            description: 'Te pliki cookie umożliwiają personalizację treści, które widzisz na naszej stronie, na podstawie Twoich wcześniejszych zachowań i preferencji.',
+            ariaOn: 'Wyłącz personalizację',
+            ariaOff: 'Włącz personalizację',
+        },
+    ];
+
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-xl shadow-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
-                <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-2xl font-medium">Ustawienia prywatności</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(17,24,39,0.24)' }}>
+            <div className="ct-panel max-w-2xl w-full max-h-[90vh] overflow-y-auto" style={{ padding: 'clamp(20px, 4vw, 32px)', borderRadius: 'var(--radius-lg)' }}>
+                <div className="flex justify-between items-start mb-6 gap-4">
+                    <div>
+                        <span className="ct-eyebrow">Cookies</span>
+                        <h2 style={{ fontSize: 24, fontWeight: 600, letterSpacing: '-0.5px', margin: '6px 0 0' }}>Ustawienia prywatności</h2>
+                    </div>
                     <button
                         onClick={onClose}
-                        className="text-gray-500 hover:text-black"
+                        className="ct-contact-link"
+                        style={{ color: 'var(--muted)' }}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -86,127 +129,47 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
                     </button>
                 </div>
 
-                <div className="space-y-6">
+                <div className="ct-grid-lines grid-cols-1" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {/* Niezbędne */}
-                    <div className="p-4 border border-gray-200 rounded-lg">
-                        <div className="flex items-center justify-between mb-2">
-                            <span className="font-medium">Niezbędne (zawsze aktywne)</span>
-                            <div className="relative w-10 h-6">
-                                <div className="block bg-black w-10 h-6 rounded-full"></div>
-                                <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transform translate-x-4"></div>
-                            </div>
+                    <div style={{ padding: '16px 18px' }}>
+                        <div className="flex items-center justify-between mb-2 gap-4">
+                            <span style={{ fontWeight: 600, fontSize: 15 }}>Niezbędne (zawsze aktywne)</span>
+                            {toggle(true)}
                         </div>
-                        <p className="text-sm text-gray-600">
+                        <p className="ct-body" style={{ fontSize: 13.5 }}>
                             Te pliki cookie są niezbędne do funkcjonowania strony internetowej i nie mogą być wyłączone.
                         </p>
                     </div>
 
-                    {/* Funkcjonalne */}
-                    <div className="p-4 border border-gray-200 rounded-lg">
-                        <div className="flex items-center justify-between mb-2">
-                            <span className="font-medium">Funkcjonalne</span>
-                            <button
-                                onClick={() => handleConsentChange('functionality_storage')}
-                                className="focus:outline-none"
-                                aria-label={consents.functionality_storage ? "Wyłącz funkcjonalne" : "Włącz funkcjonalne"}
-                            >
-                                <div className="relative w-10 h-6">
-                                    <div className={`block w-10 h-6 rounded-full transition-colors ${consents.functionality_storage ? 'bg-black' : 'bg-gray-300'}`}></div>
-                                    <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ${consents.functionality_storage ? 'transform translate-x-4' : ''}`}></div>
-                                </div>
-                            </button>
+                    {categories.map((c) => (
+                        <div key={c.key} style={{ padding: '16px 18px' }}>
+                            <div className="flex items-center justify-between mb-2 gap-4">
+                                <span style={{ fontWeight: 600, fontSize: 15 }}>{c.title}</span>
+                                <button
+                                    onClick={() => handleConsentChange(c.key)}
+                                    className="focus:outline-none"
+                                    aria-label={consents[c.key] ? c.ariaOn : c.ariaOff}
+                                >
+                                    {toggle(consents[c.key])}
+                                </button>
+                            </div>
+                            <p className="ct-body" style={{ fontSize: 13.5 }}>{c.description}</p>
                         </div>
-                        <p className="text-sm text-gray-600">
-                            Te pliki cookie umożliwiają stronie internetowej zapamiętanie wyborów dokonanych przez użytkownika
-                            i zapewniają lepszą funkcjonalność i personalizację.
-                        </p>
-                    </div>
-
-                    {/* Analityczne */}
-                    <div className="p-4 border border-gray-200 rounded-lg">
-                        <div className="flex items-center justify-between mb-2">
-                            <span className="font-medium">Analityczne</span>
-                            <button
-                                onClick={() => handleConsentChange('analytics_storage')}
-                                className="focus:outline-none"
-                                aria-label={consents.analytics_storage ? "Wyłącz analityczne" : "Włącz analityczne"}
-                            >
-                                <div className="relative w-10 h-6">
-                                    <div className={`block w-10 h-6 rounded-full transition-colors ${consents.analytics_storage ? 'bg-black' : 'bg-gray-300'}`}></div>
-                                    <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ${consents.analytics_storage ? 'transform translate-x-4' : ''}`}></div>
-                                </div>
-                            </button>
-                        </div>
-                        <p className="text-sm text-gray-600">
-                            Te pliki cookie pozwalają nam analizować użytkowanie strony, aby poprawić jej funkcjonowanie
-                            i dostosować do potrzeb użytkowników.
-                        </p>
-                    </div>
-
-                    {/* Marketingowe */}
-                    <div className="p-4 border border-gray-200 rounded-lg">
-                        <div className="flex items-center justify-between mb-2">
-                            <span className="font-medium">Marketingowe</span>
-                            <button
-                                onClick={() => handleConsentChange('ad_storage')}
-                                className="focus:outline-none"
-                                aria-label={consents.ad_storage ? "Wyłącz marketingowe" : "Włącz marketingowe"}
-                            >
-                                <div className="relative w-10 h-6">
-                                    <div className={`block w-10 h-6 rounded-full transition-colors ${consents.ad_storage ? 'bg-black' : 'bg-gray-300'}`}></div>
-                                    <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ${consents.ad_storage ? 'transform translate-x-4' : ''}`}></div>
-                                </div>
-                            </button>
-                        </div>
-                        <p className="text-sm text-gray-600">
-                            Te pliki cookie są używane do śledzenia skuteczności reklam i wyświetlania bardziej
-                            odpowiednich treści reklamowych.
-                        </p>
-                    </div>
-
-                    {/* Personalizacja */}
-                    <div className="p-4 border border-gray-200 rounded-lg">
-                        <div className="flex items-center justify-between mb-2">
-                            <span className="font-medium">Personalizacja</span>
-                            <button
-                                onClick={() => handleConsentChange('personalization_storage')}
-                                className="focus:outline-none"
-                                aria-label={consents.personalization_storage ? "Wyłącz personalizację" : "Włącz personalizację"}
-                            >
-                                <div className="relative w-10 h-6">
-                                    <div className={`block w-10 h-6 rounded-full transition-colors ${consents.personalization_storage ? 'bg-black' : 'bg-gray-300'}`}></div>
-                                    <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ${consents.personalization_storage ? 'transform translate-x-4' : ''}`}></div>
-                                </div>
-                            </button>
-                        </div>
-                        <p className="text-sm text-gray-600">
-                            Te pliki cookie umożliwiają personalizację treści, które widzisz na naszej stronie,
-                            na podstawie Twoich wcześniejszych zachowań i preferencji.
-                        </p>
-                    </div>
+                    ))}
                 </div>
 
-                <div className="mt-8 flex justify-between items-center">
-                    <div className="space-x-4">
-                        <button
-                            onClick={rejectAll}
-                            className="px-4 py-2 border border-gray-300 rounded-full text-sm hover:bg-gray-50 transition-colors"
-                        >
+                <div className="mt-8 flex flex-wrap justify-between items-center gap-3">
+                    <div className="flex flex-wrap gap-2">
+                        <NotchedButton variant="ghost" onClick={rejectAll}>
                             Odrzuć opcjonalne
-                        </button>
-                        <button
-                            onClick={acceptAll}
-                            className="px-4 py-2 bg-black text-white rounded-full text-sm hover:bg-gray-800 transition-colors"
-                        >
+                        </NotchedButton>
+                        <NotchedButton variant="primary" onClick={acceptAll}>
                             Akceptuj wszystkie
-                        </button>
+                        </NotchedButton>
                     </div>
-                    <button
-                        onClick={savePreferences}
-                        className="px-4 py-2 bg-black text-white rounded-full text-sm hover:bg-gray-800 transition-colors"
-                    >
+                    <NotchedButton variant="ghost" onClick={savePreferences}>
                         Zapisz preferencje
-                    </button>
+                    </NotchedButton>
                 </div>
             </div>
         </div>
