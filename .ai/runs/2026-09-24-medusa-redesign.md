@@ -63,19 +63,19 @@ Redesign the whole creativetrust.pl marketing site to the light, hairline-border
 
 ### Phase 1: Design system foundation
 
-- [ ] 1.1 Design tokens and fonts
-- [ ] 1.2 Shared UI primitives
-- [ ] 1.3 Header, announcement strip and menus
-- [ ] 1.4 Footer
+- [x] 1.1 Design tokens and fonts — 57493bb
+- [x] 1.2 Shared UI primitives — a7e0ad3
+- [x] 1.3 Header, announcement strip and menus — dff7de6
+- [x] 1.4 Footer — dff7de6
 
 ### Phase 2: Homepage
 
-- [ ] 2.1 Hero
-- [ ] 2.2 Logo marquee and stats
-- [ ] 2.3 Why-us grid and services tab switcher
-- [ ] 2.4 Process grid
-- [ ] 2.5 Case studies and testimonials
-- [ ] 2.6 Final CTA and homepage composition
+- [x] 2.1 Hero — 8294ce5
+- [x] 2.2 Logo marquee and stats — 7676f20
+- [x] 2.3 Why-us grid and services tab switcher — 5e27536
+- [x] 2.4 Process grid — 8294ce5
+- [x] 2.5 Case studies and testimonials — 8294ce5
+- [x] 2.6 Final CTA and homepage composition — 8294ce5
 
 ### Phase 3: Inner pages
 
