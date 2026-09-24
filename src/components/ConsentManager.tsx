@@ -147,7 +147,7 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
                                 <span style={{ fontWeight: 600, fontSize: 15 }}>{c.title}</span>
                                 <button
                                     onClick={() => handleConsentChange(c.key)}
-                                    className="focus:outline-none"
+                                    className="rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                                     aria-label={consents[c.key] ? c.ariaOn : c.ariaOff}
                                 >
                                     {toggle(consents[c.key])}

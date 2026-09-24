@@ -46,7 +46,7 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
                             </span>
                         </button>
                         {isOpen && (
-                            <div className="ct-body" style={{ fontSize: 15, paddingBottom: 22, paddingRight: 40, maxWidth: '75ch', animation: 'ctfade .2s ease' }}>
+                            <div className="ct-body ct-fade" style={{ fontSize: 15, paddingBottom: 22, paddingRight: 40, maxWidth: '75ch' }}>
                                 {item.answer}
                             </div>
                         )}

@@ -14,6 +14,10 @@ test('flags dark section backgrounds', () => {
     assert.equal(findViolations("background: 'rgba(0,0,0,0.8)'").length, 1);
 });
 
+test('backdrop allowance does not hide other dark backgrounds', () => {
+    assert.equal(findViolations("style={{ backdropFilter: 'blur(8px)', background: '#000' }}").length, 1);
+});
+
 test('flags removed tokens and legacy display font', () => {
     assert.equal(findViolations("color: 'var(--accent2)'").length, 1);
     assert.equal(findViolations("fontFamily: 'var(--font-space), sans-serif'").length, 1);

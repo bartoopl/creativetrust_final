@@ -5,10 +5,8 @@ import Link from 'next/link';
 /**
  * Pill button from the design system: filled accent (primary) with a trailing
  * circular arrow badge, accent-outlined (outline) or neutral outlined (ghost).
- * The legacy `*-dark` / `*-light` variant names are kept as aliases so existing
- * call sites keep working.
  */
-type Variant = 'primary' | 'outline' | 'ghost' | 'primary-dark' | 'ghost-dark' | 'primary-light' | 'ghost-light';
+type Variant = 'primary' | 'outline' | 'ghost';
 
 interface NotchedButtonProps {
     children: React.ReactNode;
@@ -21,14 +19,8 @@ interface NotchedButtonProps {
     disabled?: boolean;
 }
 
-function resolve(variant: Variant): 'primary' | 'outline' | 'ghost' {
-    if (variant === 'outline') return 'outline';
-    if (variant.startsWith('ghost')) return 'ghost';
-    return 'primary';
-}
-
 export default function NotchedButton({ children, href, onClick, variant = 'primary', size = 'md', className = '', type = 'button', disabled = false }: NotchedButtonProps) {
-    const kind = resolve(variant);
+    const kind = variant;
     const classes = [
         kind === 'ghost' ? 'ct-ghost' : 'ct-cta',
         kind === 'outline' ? 'outline' : '',

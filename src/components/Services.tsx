@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import SectionHeader from './ui/SectionHeader';
 
 const services = [
@@ -37,7 +37,23 @@ const services = [
 
 export default function Services() {
     const [activeIdx, setActiveIdx] = useState<number>(0);
-    const current = services[activeIdx];
+    const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+    const onKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+        const last = services.length - 1;
+        const next = {
+            ArrowDown: activeIdx === last ? 0 : activeIdx + 1,
+            ArrowRight: activeIdx === last ? 0 : activeIdx + 1,
+            ArrowUp: activeIdx === 0 ? last : activeIdx - 1,
+            ArrowLeft: activeIdx === 0 ? last : activeIdx - 1,
+            Home: 0,
+            End: last,
+        }[e.key];
+        if (next === undefined) return;
+        e.preventDefault();
+        setActiveIdx(next);
+        tabRefs.current[next]?.focus();
+    };
 
     return (
         <section id="uslugi" className="ct-section" style={{ scrollMarginTop: 80 }}>
@@ -45,7 +61,7 @@ export default function Services() {
                 <SectionHeader eyebrow="Od projektu do wyniku" title="Wszystko czego potrzebujesz, żeby rosnąć w digital." maxWidth="none" />
 
                 <div className="grid grid-cols-1 overflow-hidden md:grid-cols-[280px_1fr]" style={{ border: '1px solid rgba(17,24,39,0.1)', borderRadius: 8 }}>
-                    <div role="tablist" aria-label="Usługi" className="flex flex-col border-b md:border-b-0 md:border-r" style={{ borderColor: 'rgba(17,24,39,0.1)' }}>
+                    <div role="tablist" aria-label="Usługi" aria-orientation="vertical" className="flex flex-col border-b md:border-b-0 md:border-r" style={{ borderColor: 'rgba(17,24,39,0.1)' }}>
                         {services.map((service, i) => {
                             const active = i === activeIdx;
                             return (
@@ -54,9 +70,12 @@ export default function Services() {
                                     type="button"
                                     role="tab"
                                     id={`service-tab-${i}`}
+                                    ref={(el) => { tabRefs.current[i] = el; }}
                                     aria-selected={active}
-                                    aria-controls="service-panel"
+                                    aria-controls={`service-panel-${i}`}
+                                    tabIndex={active ? 0 : -1}
                                     onClick={() => setActiveIdx(i)}
+                                    onKeyDown={onKeyDown}
                                     style={{
                                         width: '100%', padding: '20px 24px', textAlign: 'left', cursor: 'pointer',
                                         fontFamily: 'inherit', border: 'none',
@@ -78,30 +97,33 @@ export default function Services() {
                         })}
                     </div>
 
-                    <div
-                        key={activeIdx}
-                        id="service-panel"
-                        role="tabpanel"
-                        aria-labelledby={`service-tab-${activeIdx}`}
-                        className="flex flex-col gap-5"
-                        style={{ padding: 'clamp(24px, 4vw, 40px)', background: 'var(--panel)', animation: 'ctfade .18s ease-out' }}
-                    >
-                        <span className="ct-meta" style={{ color: 'var(--accent)' }}>{current.eyebrow}</span>
-                        <h3 style={{ margin: 0, fontSize: 24, fontWeight: 600, letterSpacing: '-0.5px' }}>
-                            {current.title} {current.subtitle}
-                        </h3>
-                        <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-                            {current.items.map((item) => (
-                                <li key={item} className="flex items-center gap-2.5" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
-                                    <span className="ct-bullet" aria-hidden="true" />
-                                    <span style={{ fontSize: 14, color: 'var(--text-2)' }}>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                        <div>
-                            <Link href={current.href} className="ct-link">Zobacz usługę →</Link>
+                    {services.map((service, i) => (
+                        <div
+                            key={service.eyebrow}
+                            id={`service-panel-${i}`}
+                            role="tabpanel"
+                            aria-labelledby={`service-tab-${i}`}
+                            hidden={i !== activeIdx}
+                            className="ct-fade flex-col gap-5"
+                            style={{ display: i === activeIdx ? 'flex' : undefined, padding: 'clamp(24px, 4vw, 40px)', background: 'var(--panel)' }}
+                        >
+                            <span className="ct-meta" style={{ color: 'var(--accent)' }}>{service.eyebrow}</span>
+                            <h3 style={{ margin: 0, fontSize: 24, fontWeight: 600, letterSpacing: '-0.5px' }}>
+                                {service.title} {service.subtitle}
+                            </h3>
+                            <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                                {service.items.map((item) => (
+                                    <li key={item} className="flex items-center gap-2.5" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
+                                        <span className="ct-bullet" aria-hidden="true" />
+                                        <span style={{ fontSize: 14, color: 'var(--text-2)' }}>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            <div>
+                                <Link href={service.href} className="ct-link">Zobacz usługę →</Link>
+                            </div>
                         </div>
-                    </div>
+                    ))}
                 </div>
             </div>
         </section>

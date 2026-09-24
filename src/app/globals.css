@@ -3,8 +3,6 @@
 /* ===== Design Tokens (Medusa-inspired system, single accent) ===== */
 :root {
   --font-sans: var(--font-inter, "Inter"), system-ui, "Segoe UI", Arial, sans-serif;
-  --font-hanken: var(--font-sans);
-  --font-space: var(--font-sans);
   --font-mono: var(--font-jetbrains, "JetBrains Mono"), "SFMono-Regular", Consolas, Menlo, monospace;
   --bg: #ffffff;
   --panel: #fafafa;
@@ -39,17 +37,14 @@
   --color-muted-2: var(--muted-2);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
-  --font-mono: var(--font-mono);
-  --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-md);
-  --radius-lg: var(--radius-lg);
+  --radius-ct-sm: var(--radius-sm);
+  --radius-ct-md: var(--radius-md);
+  --radius-ct-lg: var(--radius-lg);
 }
 
 /* ===== Keyframes ===== */
-@keyframes ctspin { to { transform: rotate(360deg); } }
 @keyframes ctmarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes ctpulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
-@keyframes ctblink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 @keyframes ctfade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
 html { scroll-behavior: smooth; font-size: 14px; }
@@ -77,16 +72,11 @@ main { isolation: isolate; }
 /* Component classes live in the components layer so Tailwind utilities (mt-*, etc.) can override them. */
 @layer components {
 /* ===== Layout shells ===== */
-.ct-shell-xl { padding: var(--pad-y-xl) var(--pad-x) !important; }
-.ct-shell-lg { padding: var(--pad-y) var(--pad-x) !important; }
-.ct-shell-sm { padding: clamp(18px, 4vw, 32px) var(--pad-x) !important; }
-.ct-shell-xs { padding: clamp(12px, 3vw, 18px) var(--pad-x) !important; }
-.ct-container { max-width: 1280px; margin: 0 auto; width: 100%; }
-.ct-header-shell { padding: 18px var(--pad-x) !important; }
+.ct-shell-sm { padding: clamp(18px, 4vw, 32px) var(--pad-x); }
+.ct-header-shell { padding: 18px var(--pad-x); }
 
 .ct-section { padding: var(--pad-y) var(--pad-x); }
-.ct-section + .ct-section, .ct-section.ct-bt { border-top: 1px solid var(--line); }
-.ct-section.ct-tint { background: var(--panel); }
+.ct-section + .ct-section { border-top: 1px solid var(--line); }
 
 /* ===== Type ===== */
 .ct-mono { font-family: var(--font-mono), monospace; }
@@ -155,9 +145,6 @@ main { isolation: isolate; }
   transition: border-color .2s ease, color .2s ease;
 }
 .ct-ghost:hover { border-color: var(--accent); color: var(--accent); }
-.ct-ghost .ct-dot { width: 6px; height: 6px; background: var(--accent); flex: none; }
-.ct-ghost .ct-tail { color: var(--muted); transition: color .2s ease; }
-.ct-ghost:hover .ct-tail { color: var(--accent); }
 
 /* Text link with underline */
 .ct-link {
@@ -228,24 +215,9 @@ main { isolation: isolate; }
 }
 [data-reveal].is-revealed { opacity: 1; transform: translateY(0); }
 
+.ct-fade { animation: ctfade .18s ease-out; }
+
 @media (prefers-reduced-motion: reduce) {
-  .ct-marquee-track { animation: none; }
+  .ct-marquee-track, .ct-fade { animation: none; }
   html { scroll-behavior: auto; }
 }
-
-/* ===== Consent Manager ===== */
-.dot { transition: transform 0.3s ease-in-out; }
-input:checked ~ .dot { transform: translateX(100%); }
-.consent-toggle { position: relative; display: inline-block; width: 40px; height: 24px; }
-.consent-toggle input { opacity: 0; width: 0; height: 0; }
-.consent-slider {
-  position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #d1d5db; transition: .4s; border-radius: 34px;
-}
-.consent-slider:before {
-  position: absolute; content: ""; height: 16px; width: 16px;
-  left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%;
-}
-input:checked + .consent-slider { background-color: var(--accent); }
-input:checked + .consent-slider:before { transform: translateX(16px); }
-input:focus + .consent-slider { box-shadow: 0 0 1px var(--accent); }

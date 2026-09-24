@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import PageHero from '@/components/ui/PageHero';
-import { CaseStudyCard } from '@/components/RealizacjeSection';
+import CaseStudyCard from '@/components/CaseStudyCard';
 import { getPortfolioProjects, getServiceCategories, urlFor } from '@/lib/sanity';
 
 interface Project {
