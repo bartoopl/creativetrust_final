@@ -61,6 +61,11 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
 
     if (!isOpen) return null;
 
+    const controlStyle: React.CSSProperties = {
+        width: 44, height: 44, borderRadius: 'var(--radius-pill)', background: '#fff',
+        border: '1px solid var(--line-strong)', color: 'var(--text)', cursor: 'pointer',
+    };
+
     const currentImage = images[currentIndex];
 
     return (
@@ -70,18 +75,20 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 md:p-10"
+                    className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10"
+                    style={{ background: 'rgba(250, 250, 250, 0.96)', backdropFilter: 'blur(6px)' }}
                     onClick={handleBackdropClick}
                 >
                     {/* Przycisk zamknięcia */}
                     <button
-                        className="absolute top-6 right-6 text-white z-10 w-10 h-10 rounded-full flex items-center justify-center hover:bg-white hover:bg-opacity-20 transition-colors"
+                        className="ct-card-hover absolute top-6 right-6 z-10 flex items-center justify-center"
+                        style={controlStyle}
                         onClick={onClose}
                         aria-label="Zamknij"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-8 w-8"
+                            className="h-5 w-5"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -94,7 +101,8 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                     {images.length > 1 && (
                         <>
                             <button
-                                className="absolute left-4 md:left-10 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-opacity-70 transition-colors"
+                                className="ct-card-hover absolute left-4 md:left-10 top-1/2 z-10 -translate-y-1/2 flex items-center justify-center"
+                                style={controlStyle}
                                 onClick={handlePrevious}
                                 aria-label="Poprzednie zdjęcie"
                             >
@@ -110,7 +118,8 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                             </button>
 
                             <button
-                                className="absolute right-4 md:right-10 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:bg-opacity-70 transition-colors"
+                                className="ct-card-hover absolute right-4 md:right-10 top-1/2 z-10 -translate-y-1/2 flex items-center justify-center"
+                                style={controlStyle}
                                 onClick={handleNext}
                                 aria-label="Następne zdjęcie"
                             >
@@ -128,7 +137,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                     )}
 
                     {/* Licznik zdjęć */}
-                    <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded-full text-sm">
+                    <div className="ct-pill absolute bottom-6 left-1/2 -translate-x-1/2">
                         {currentIndex + 1} / {images.length}
                     </div>
 
@@ -145,12 +154,14 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                             <img
                                 src={urlFor(currentImage).width(1200).url()}
                                 alt={currentImage.alt || `Zdjęcie ${currentIndex + 1}`}
-                                className="max-w-full max-h-[85vh] object-contain"
+                                className="max-w-full max-h-[80vh] object-contain"
+                                style={{ border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', background: '#fff' }}
                             />
 
                             {/* Podpis zdjęcia */}
                             {currentImage.caption && (
-                                <div className="mt-4 text-center text-white bg-black bg-opacity-50 p-3 rounded-lg max-w-lg mx-auto">
+                                <div className="ct-body mt-4 text-center max-w-lg mx-auto"
+                                    style={{ padding: '10px 14px', background: '#fff', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-sm)' }}>
                                     {currentImage.caption}
                                 </div>
                             )}

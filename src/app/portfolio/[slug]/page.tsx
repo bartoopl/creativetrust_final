@@ -82,134 +82,108 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
         document.body.style.overflow = 'hidden';
     };
 
+    const zoomIcon = (
+        <span
+            className="absolute flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+            style={{ top: 12, right: 12, width: 36, height: 36, borderRadius: 'var(--radius-pill)', background: '#fff', border: '1px solid var(--line-strong)', color: 'var(--accent)' }}
+            aria-hidden="true"
+        >
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+            </svg>
+        </span>
+    );
+
+    const imagePanel: React.CSSProperties = { background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', overflow: 'hidden', cursor: 'pointer' };
+
     if (loading) {
         return (
-            <main className="min-h-screen bg-white">
-                <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                    <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                        <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
-                            Portfolio
-                        </div>
-                        <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: 0, maxWidth: '12ch' }}>
-                            Projekt wczytywany
-                        </h1>
+            <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
+                <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x)', borderBottom: '1px solid var(--line)' }}>
+                    <div className="mx-auto flex max-w-[1280px] flex-col gap-4">
+                        <span className="ct-eyebrow">Portfolio</span>
+                        <h1 className="ct-h1">Projekt wczytywany</h1>
                     </div>
                 </section>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div className="h-96 w-full animate-pulse bg-gray-200" style={{ borderRadius: 4 }}></div>
-                </div>
+                <section className="ct-section">
+                    <div className="ct-placeholder mx-auto max-w-[1280px]" style={{ height: 384, borderRadius: 'var(--radius-md)', border: '1px solid var(--line-strong)', animation: 'ctpulse 1.5s ease-in-out infinite' }} />
+                </section>
             </main>
         );
     }
 
     if (!project) {
         return (
-            <div className="max-w-[1800px] mx-auto px-6 py-24">
-                <h1 className="text-3xl font-medium mb-8">Projekt nie istnieje</h1>
-                <Link href="/portfolio" className="underline">
-                    Wróć do portfolio
-                </Link>
-            </div>
+            <main className="ct-section">
+                <div className="mx-auto flex max-w-[1280px] flex-col items-start gap-6">
+                    <h1 className="ct-h2">Projekt nie istnieje</h1>
+                    <Link href="/portfolio" className="ct-link">
+                        Wróć do portfolio
+                    </Link>
+                </div>
+            </main>
         );
     }
 
     return (
-        <main className="min-h-screen bg-white">
-            <section style={{ background: '#000', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                    <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: 12, letterSpacing: '0.5px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: 12, fontWeight: 500 }}>
-                        Realizacje
-                    </div>
-                    <h1 style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 500, fontSize: 'clamp(38px, 4.8vw, 60.8px)', lineHeight: '66px', letterSpacing: '-2.4px', margin: 0, maxWidth: '12ch' }}>
+        <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
+            <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x)', borderBottom: '1px solid var(--line)' }}>
+                <div className="mx-auto flex max-w-[1280px] flex-col gap-6">
+                    <Link href="/portfolio" className="ct-meta ct-contact-link" style={{ alignSelf: 'flex-start' }}>
+                        ← Wróć do portfolio
+                    </Link>
+                    <span className="ct-eyebrow">Realizacje</span>
+                    <h1 className="ct-h1" style={{ maxWidth: '20ch' }}>
                         {project.title}
                     </h1>
+                    {project.categories && project.categories.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                            {project.categories.map((category: Category) => (
+                                <span key={category._id} className="ct-pill">{category.title}</span>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </section>
-            <div style={{ maxWidth: 1440, margin: '0 auto' }} className="ct-shell-xl">
-                <div style={{ maxWidth: 1800, margin: '0 auto' }}>
-                <Link href="/portfolio" className="text-gray-600 mb-12 block flex items-center">
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="mr-2"
-                    >
-                        <path
-                            d="M19 12H5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                        <path
-                            d="M12 19L5 12L12 5"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-                    Wróć do portfolio
-                </Link>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <section className="ct-section">
+                <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
                     {/* Lewa kolumna - główne zdjęcie i informacje */}
-                    <div>
+                    <div className="flex flex-col gap-8">
                         {project.mainImage && (
-                            <div className="mb-8 overflow-hidden rounded-lg shadow-md bg-gray-50 p-4 cursor-pointer" onClick={() => openLightbox(-1)}>
-                                <div className="w-full relative group">
-                                    <img
-                                        src={urlFor(project.mainImage).width(800).url()}
-                                        alt={project.title}
-                                        className="w-full h-auto object-contain max-h-[500px]"
-                                    />
-                                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                        <svg
-                                            className="w-12 h-12 text-white"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-                                            />
-                                        </svg>
-                                    </div>
-                                </div>
+                            <div className="ct-card-hover group relative" style={{ ...imagePanel, padding: 16 }} onClick={() => openLightbox(-1)}>
+                                <img
+                                    src={urlFor(project.mainImage).width(800).url()}
+                                    alt={project.title}
+                                    className="mx-auto h-auto max-h-[500px] w-full object-contain"
+                                />
+                                {zoomIcon}
                             </div>
                         )}
 
-                        <div className="mb-6 border-t border-gray-200 pt-6">
-                            <h2 className="text-xl font-medium mb-4">Informacje o projekcie</h2>
+                        <div className="ct-panel" style={{ padding: 24 }}>
+                            <span className="ct-eyebrow">Projekt</span>
+                            <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 600 }}>Informacje o projekcie</h2>
 
-                            <div className="space-y-4">
-                                <div>
-                                    <h3 className="text-gray-600 text-sm">Klient</h3>
-                                    <p className="font-medium">{project.client}</p>
+                            <div className="flex flex-col">
+                                <div className="flex flex-wrap items-baseline justify-between gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
+                                    <h3 className="ct-meta" style={{ margin: 0 }}>Klient</h3>
+                                    <p style={{ margin: 0, fontSize: 14, fontWeight: 600 }}>{project.client}</p>
                                 </div>
 
                                 {project.publishedAt && (
-                                    <div>
-                                        <h3 className="text-gray-600 text-sm">Data realizacji</h3>
-                                        <p className="font-medium">{formatDate(project.publishedAt)}</p>
+                                    <div className="flex flex-wrap items-baseline justify-between gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
+                                        <h3 className="ct-meta" style={{ margin: 0 }}>Data realizacji</h3>
+                                        <p style={{ margin: 0, fontSize: 14, fontWeight: 600 }}>{formatDate(project.publishedAt)}</p>
                                     </div>
                                 )}
 
                                 {project.categories && project.categories.length > 0 && (
-                                    <div>
-                                        <h3 className="text-gray-600 text-sm">Kategorie</h3>
-                                        <div className="flex flex-wrap gap-2 mt-1">
+                                    <div className="flex flex-col gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
+                                        <h3 className="ct-meta" style={{ margin: 0 }}>Kategorie</h3>
+                                        <div className="flex flex-wrap gap-2">
                                             {project.categories.map((category: Category) => (
-                                                <span
-                                                    key={category._id}
-                                                    className="px-3 py-1 bg-gray-100 rounded-full text-sm"
-                                                >
+                                                <span key={category._id} className="ct-pill">
                                                     {category.title}
                                                 </span>
                                             ))}
@@ -218,29 +192,21 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                                 )}
 
                                 {project.projectUrl && (
-                                    <div>
-                                        <h3 className="text-gray-600 text-sm mb-2">Link do projektu</h3>
+                                    <div className="flex flex-col gap-3" style={{ padding: '12px 0 0', borderTop: '1px solid var(--line)' }}>
+                                        <h3 className="ct-meta" style={{ margin: 0 }}>Link do projektu</h3>
                                         <a
                                             href={project.projectUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+                                            className="ct-cta sm"
+                                            style={{ alignSelf: 'flex-start' }}
                                         >
                                             Zobacz realizację
-                                            <svg
-                                                className="ml-2 w-4 h-4"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="2"
-                                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                                />
-                                            </svg>
+                                            <span className="ct-badge" aria-hidden="true">
+                                                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                </svg>
+                                            </span>
                                         </a>
                                     </div>
                                 )}
@@ -249,24 +215,23 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                     </div>
 
                     {/* Prawa kolumna - opis, zakres prac i galeria */}
-                    <div>
-                        <h1 className="text-3xl md:text-4xl font-medium mb-6">{project.title}</h1>
-
-                        <div className="prose max-w-none mb-8">
+                    <div className="flex flex-col gap-12">
+                        <div>
                             {typeof project.description === 'string' ? (
-                                <p className="whitespace-pre-line text-lg">{project.description}</p>
+                                <p className="ct-lead whitespace-pre-line">{project.description}</p>
                             ) : (
                                 <PortableTextContent content={project.description} />
                             )}
                         </div>
 
                         {project.scopeOfWork && project.scopeOfWork.length > 0 && (
-                            <div className="mb-10">
-                                <h2 className="text-xl font-medium mb-4">Zakres prac</h2>
-                                <ul className="space-y-2">
+                            <div>
+                                <span className="ct-eyebrow">Zakres</span>
+                                <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 600 }}>Zakres prac</h2>
+                                <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
                                     {project.scopeOfWork.map((item: string, index: number) => (
-                                        <li key={index} className="flex items-start">
-                                            <span className="text-black mr-2">•</span>
+                                        <li key={index} className="flex items-center gap-3" style={{ padding: '12px 0', borderTop: '1px solid var(--line)', fontSize: 14.5, color: 'var(--text-2)' }}>
+                                            <span className="ct-bullet" />
                                             <span>{item}</span>
                                         </li>
                                     ))}
@@ -276,40 +241,27 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
 
                         {/* Galeria zdjęć z możliwością kliknięcia i otwarcia lighboxa */}
                         {project.galleryImages && project.galleryImages.length > 0 && (
-                            <div className="mt-10">
-                                <h2 className="text-xl font-medium mb-6">Galeria projektu</h2>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <span className="ct-eyebrow">Galeria</span>
+                                <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 600 }}>Galeria projektu</h2>
+                                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     {project.galleryImages.map((image: ImageWithCaption, index: number) => (
                                         <div
                                             key={index}
-                                            className="rounded-lg overflow-hidden shadow-md bg-gray-50 p-3 cursor-pointer group"
+                                            className="ct-card-hover group relative"
+                                            style={imagePanel}
                                             onClick={() => openLightbox(index)}
                                         >
-                                            <div className="w-full relative">
+                                            <div style={{ padding: 12 }}>
                                                 <img
                                                     src={urlFor(image).width(600).url()}
                                                     alt={image.alt || `Zdjęcie ${index + 1} projektu ${project.title}`}
-                                                    className="w-full h-auto object-contain max-h-[300px] transition-transform duration-300 group-hover:scale-105"
+                                                    className="mx-auto h-auto max-h-[300px] w-full object-contain"
                                                 />
-                                                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                                    <svg
-                                                        className="w-10 h-10 text-white"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        viewBox="0 0 24 24"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                    >
-                                                        <path
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            strokeWidth={2}
-                                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-                                                        />
-                                                    </svg>
-                                                </div>
                                             </div>
+                                            {zoomIcon}
                                             {image.caption && (
-                                                <div className="p-2 bg-gray-50 text-sm text-gray-600">
+                                                <div className="ct-body" style={{ padding: '10px 14px', fontSize: 13, borderTop: '1px solid var(--line)', background: '#fff' }}>
                                                     {image.caption}
                                                 </div>
                                             )}
@@ -320,8 +272,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                         )}
                     </div>
                 </div>
-                </div>
-            </div>
+            </section>
 
             {/* Lightbox dla obrazów galerii */}
             {project.galleryImages && lightboxOpen && (
