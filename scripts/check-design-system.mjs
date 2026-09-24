@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+// Guards the Medusa-inspired design system (design_handoff_medusa_redesign/):
+// a single violet accent and no dark/filled sections. Fails when legacy
+// lime-accent or dark-section styling is reintroduced under src/.
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { join, relative } from 'node:path';
+
+const ROOT = new URL('..', import.meta.url).pathname;
+const SRC = join(ROOT, 'src');
+
+const RULES = [
+    { name: 'lime accent', re: /#caff04|202\s*,\s*255\s*,\s*4|--lime\b|--lime-ink\b/i },
+    { name: 'removed token', re: /var\(--(accent2|glow|bg-dark-2)\)/ },
+    { name: 'dark background', re: /background(-color)?\s*:\s*['"]?(#000(000)?|#080808|#0a0a0a|black)\b|\bbg-black\b|\bbg-\[#000(000)?\]/i },
+    { name: 'dark translucent background', re: /background(-color)?\s*:\s*['"]?rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*0?\.[5-9]/i },
+    { name: 'legacy display font', re: /var\(--font-space\)/ },
+];
+
+// Modal backdrops may dim the page; they are overlays, not sections.
+const ALLOW = [/backdrop/i, /overlay/i];
+
+function walk(dir) {
+    return readdirSync(dir).flatMap((name) => {
+        const path = join(dir, name);
+        if (statSync(path).isDirectory()) return walk(path);
+        return /\.(tsx?|css)$/.test(name) ? [path] : [];
+    });
+}
+
+export function findViolations(source, file = '<input>') {
+    const found = [];
+    source.split('\n').forEach((line, i) => {
+        if (ALLOW.some((re) => re.test(line))) return;
+        for (const rule of RULES) {
+            if (rule.re.test(line)) {
+                found.push(`${file}:${i + 1} [${rule.name}] ${line.trim().slice(0, 120)}`);
+            }
+        }
+    });
+    return found;
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+    const violations = walk(SRC).flatMap((file) => findViolations(readFileSync(file, 'utf8'), relative(ROOT, file)));
+    if (violations.length) {
+        console.error(`Design system check failed (${violations.length}):\n${violations.join('\n')}`);
+        process.exit(1);
+    }
+    console.log('Design system check passed.');
+}
