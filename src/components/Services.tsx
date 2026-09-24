@@ -1,17 +1,22 @@
+"use client";
+
+import Link from 'next/link';
+import { useState } from 'react';
+import SectionHeader from './ui/SectionHeader';
+
 const services = [
     {
         eyebrow: 'Strony www',
         title: 'Buduj szybką',
         subtitle: 'ścieżkę do klienta',
         items: ['Projekty oparte o cel biznesowy', 'Wdrożenie przyspieszone przez AI', 'UX, który konwertuje'],
-        active: true,
-    href: '/uslugi/strony-www',
+        href: '/uslugi/strony-www',
     },
     {
         eyebrow: 'Ecommerce',
         title: 'Skaluj bez',
         subtitle: 'ograniczeń platformy',
-        items: ['Architektura headless / Medusa.js', 'Pełna kontrola - zero vendor lock-in', 'Integracje z ERP, CRM, marketplace'],
+        items: ['Architektura headless / Medusa.js', 'Pełna kontrola — zero vendor lock-in', 'Integracje z ERP, CRM, marketplace'],
         href: '/uslugi/e-commerce',
     },
     {
@@ -30,53 +35,72 @@ const services = [
     },
 ];
 
-function Bullet({ active }: { active?: boolean }) {
-    return (
-        <svg width="8" height="8" viewBox="0 0 8 8" fill={active ? 'var(--lime)' : 'rgba(255,255,255,0.4)'}>
-            <rect width="8" height="8" />
-        </svg>
-    );
-}
-
 export default function Services() {
-    return (
-        <section id="uslugi" style={{ background: '#000', padding: '72px 16px 80px' }} className="lg:px-[72px] lg:py-[112px]">
-            <div style={{ maxWidth: 1440, margin: '0 auto' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }} className="lg:gap-20">
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-                        <span style={{ fontSize: 12.2, fontWeight: 500, color: 'rgba(255,255,255,0.4)', letterSpacing: '-0.36px', lineHeight: '20px' }}>
-                            OD PROJEKTU DO WYNIKU
-                        </span>
-                        <h2 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(34px, 4vw, 43.1px)', fontWeight: 500, lineHeight: '48.4px', letterSpacing: '-1.76px', color: '#fff', margin: 0 }}>
-                            Wszystko czego potrzebujesz,<br />
-                            żeby rosnąć w digital.
-                        </h2>
-                    </div>
+    const [activeIdx, setActiveIdx] = useState<number>(0);
+    const current = services[activeIdx];
 
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4" style={{ gap: 16 }} >
-                        {services.map((service) => (
-                            <div key={service.eyebrow} style={{ borderRadius: 4, border: service.active ? '1px solid var(--lime)' : '1px solid rgba(255,255,255,0.08)', padding: '24px 20px', display: 'flex', flexDirection: 'column', gap: 20, background: service.active ? 'rgba(202,255,4,0.04)' : 'transparent' }} className="lg:p-8">
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                                    <span style={{ fontSize: 11.4, fontWeight: 400, color: service.active ? 'var(--lime)' : 'rgba(255,255,255,0.4)', lineHeight: '18px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+    return (
+        <section id="uslugi" className="ct-section" style={{ scrollMarginTop: 80 }}>
+            <div className="mx-auto flex max-w-[1280px] flex-col gap-10">
+                <SectionHeader eyebrow="Od projektu do wyniku" title="Wszystko czego potrzebujesz, żeby rosnąć w digital." maxWidth="none" />
+
+                <div className="grid grid-cols-1 overflow-hidden md:grid-cols-[280px_1fr]" style={{ border: '1px solid rgba(17,24,39,0.1)', borderRadius: 8 }}>
+                    <div role="tablist" aria-label="Usługi" className="flex flex-col border-b md:border-b-0 md:border-r" style={{ borderColor: 'rgba(17,24,39,0.1)' }}>
+                        {services.map((service, i) => {
+                            const active = i === activeIdx;
+                            return (
+                                <button
+                                    key={service.eyebrow}
+                                    type="button"
+                                    role="tab"
+                                    id={`service-tab-${i}`}
+                                    aria-selected={active}
+                                    aria-controls="service-panel"
+                                    onClick={() => setActiveIdx(i)}
+                                    style={{
+                                        width: '100%', padding: '20px 24px', textAlign: 'left', cursor: 'pointer',
+                                        fontFamily: 'inherit', border: 'none',
+                                        borderLeft: `2px solid ${active ? 'var(--accent)' : 'transparent'}`,
+                                        borderTop: i > 0 ? '1px solid var(--line)' : 'none',
+                                        background: active ? 'var(--panel)' : '#fff',
+                                        color: active ? 'var(--text)' : 'var(--muted)',
+                                        transition: 'background .15s ease, color .15s ease, border-color .15s ease',
+                                    }}
+                                >
+                                    <span className="ct-mono" style={{ display: 'block', marginBottom: 4, fontSize: 11, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '.3px', color: active ? 'var(--accent)' : undefined }}>
                                         {service.eyebrow}
                                     </span>
-                                    <p style={{ fontSize: 15.4, fontWeight: 500, lineHeight: '22px', letterSpacing: '-0.32px', color: '#fff', margin: 0 }}>
-                                    {service.title}
-                                    <br />
-                                    {service.subtitle}
-                                </p>
-                                </div>
+                                    <span style={{ display: 'block', fontSize: 15, fontWeight: 600 }}>
+                                        {service.title} {service.subtitle}
+                                    </span>
+                                </button>
+                            );
+                        })}
+                    </div>
 
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                                    {service.items.map((item) => (
-                                        <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 0', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                                            <Bullet active={service.active} />
-                                            <span style={{ fontSize: 12.2, fontWeight: 400, color: 'rgba(255,255,255,0.6)', lineHeight: '18px' }}>{item}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
+                    <div
+                        key={activeIdx}
+                        id="service-panel"
+                        role="tabpanel"
+                        aria-labelledby={`service-tab-${activeIdx}`}
+                        className="flex flex-col gap-5"
+                        style={{ padding: 'clamp(24px, 4vw, 40px)', background: 'var(--panel)', animation: 'ctfade .18s ease-out' }}
+                    >
+                        <span className="ct-meta" style={{ color: 'var(--accent)' }}>{current.eyebrow}</span>
+                        <h3 style={{ margin: 0, fontSize: 24, fontWeight: 600, letterSpacing: '-0.5px' }}>
+                            {current.title} {current.subtitle}
+                        </h3>
+                        <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                            {current.items.map((item) => (
+                                <li key={item} className="flex items-center gap-2.5" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
+                                    <span className="ct-bullet" aria-hidden="true" />
+                                    <span style={{ fontSize: 14, color: 'var(--text-2)' }}>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                        <div>
+                            <Link href={current.href} className="ct-link">Zobacz usługę →</Link>
+                        </div>
                     </div>
                 </div>
             </div>
