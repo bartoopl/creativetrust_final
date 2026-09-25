@@ -59,6 +59,10 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
     const goTo = (target: number, velocity = 0) => {
         const clamped = Math.max(0, Math.min(count - 1, target));
         setCurrentIndex(clamped);
+        // The prev/next button disappears at the ends; keep focus in the dialog instead of dropping it to <body>.
+        if ((clamped === 0 || clamped === count - 1) && (document.activeElement as HTMLElement | null)?.closest('[data-nav]')) {
+            dialogRef.current?.focus({ preventScroll: true });
+        }
         const to = -clamped * width;
         if (reduceMotion || !width) {
             x.jump(to);
@@ -269,6 +273,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                         <button
                             className="ct-card-hover absolute left-4 md:left-10 top-1/2 z-10 -translate-y-1/2 flex items-center justify-center"
                             style={controlStyle}
+                            data-nav=""
                             onClick={showPrevious}
                             aria-label="Poprzednie zdjęcie"
                         >
@@ -287,6 +292,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                         <button
                             className="ct-card-hover absolute right-4 md:right-10 top-1/2 z-10 -translate-y-1/2 flex items-center justify-center"
                             style={controlStyle}
+                            data-nav=""
                             onClick={showNext}
                             aria-label="Następne zdjęcie"
                         >

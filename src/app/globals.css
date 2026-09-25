@@ -259,6 +259,7 @@ main { isolation: isolate; }
   .ct-marquee-track { animation: none; }
   .ct-fade { animation-name: ctfadeonly; }
   .ct-disclosure { transition: opacity .15s ease, visibility 0s linear .15s; }
+  .ct-disclosure[data-open="true"] { transition-delay: 0s; }
 }
 
 /* Higher contrast: stronger hairlines and secondary text. */

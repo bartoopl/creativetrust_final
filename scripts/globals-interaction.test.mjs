@@ -49,3 +49,8 @@ test('FAQ disclosure animates height and drops the travel under reduced motion',
 test('reduced transparency makes the lightbox backdrop solid', () => {
     assert.match(css, /@media \(prefers-reduced-transparency: reduce\) \{[^@]*\.ct-lightbox \{ background: var\(--panel\);[^}]*backdrop-filter: none; \}/);
 });
+
+test('reduced motion does not delay showing an opened FAQ answer', () => {
+    const reduced = css.match(/@media \(prefers-reduced-motion: reduce\)\s*\{([\s\S]*?)\n\}/)?.[1] ?? '';
+    assert.match(reduced, /\.ct-disclosure\[data-open="true"\] \{ transition-delay: 0s; \}/);
+});
