@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, animate, useMotionValue, useReducedMotion, useTransform } from 'framer-motion';
 import { urlFor } from '@/lib/sanity';
 import { ImageWithCaption } from '@/types'
@@ -12,6 +13,8 @@ interface LightboxProps {
     onClose: () => void;
     isOpen: boolean;
 }
+
+const noopSubscribe = () => () => {};
 
 /** Movement (px) before a press becomes a drag, so taps on the image or controls stay taps. */
 const DRAG_THRESHOLD = 10;
@@ -33,6 +36,8 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
     const dialogRef = useRef<HTMLDivElement>(null);
     const viewportRef = useRef<HTMLDivElement>(null);
     const reduceMotion = useReducedMotion();
+    // False during SSR and hydration, true afterwards — the portal target only exists on the client.
+    const isClient = useSyncExternalStore(noopSubscribe, () => true, () => false);
 
     // The whole strip of images moves on one horizontal value; vertical drag (dismiss) is a separate spring.
     const x = useMotionValue(0);
@@ -172,8 +177,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
             didDragRef.current = false;
             return;
         }
-        const target = e.target as HTMLElement;
-        if (target === e.currentTarget || target.dataset.slide !== undefined) {
+        if (!(e.target as HTMLElement).closest('img, button, [data-caption]')) {
             onClose();
         }
     };
@@ -188,8 +192,10 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
         .map((image, index) => ({ image, index }))
         .filter(({ index }) => Math.abs(index - currentIndex) <= 1);
 
-    // Always rendered so AnimatePresence can play the exit when isOpen turns false.
-    return (
+    // Always rendered so AnimatePresence can play the exit when isOpen turns false. Portalled to <body>
+    // because <main> is an isolated stacking context that would keep it under the sticky header.
+    if (!isClient) return null;
+    return createPortal(
         <AnimatePresence>
             {isOpen && count > 0 && (
                 <motion.div
@@ -202,7 +208,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="ct-lightbox fixed inset-0 z-50 flex items-center justify-center p-4 outline-none md:p-10"
+                    className="ct-lightbox fixed inset-0 z-[200] flex items-center justify-center p-4 outline-none md:p-10"
                     onClick={handleBackdropClick}
                 >
                     {/* Przycisk zamknięcia */}
@@ -280,7 +286,6 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                             {visible.map(({ image, index }) => (
                                 <div
                                     key={index}
-                                    data-slide=""
                                     className="absolute inset-y-0 flex flex-col items-center justify-center"
                                     style={{ left: index * width, width: width || '100%' }}
                                 >
@@ -294,7 +299,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
 
                                     {/* Podpis zdjęcia */}
                                     {image.caption && (
-                                        <div className="ct-body mt-4 text-center max-w-lg mx-auto"
+                                        <div data-caption="" className="ct-body mt-4 text-center max-w-lg mx-auto"
                                             style={{ padding: '10px 14px', background: '#fff', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-sm)' }}>
                                             {image.caption}
                                         </div>
@@ -305,7 +310,8 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                     </div>
                 </motion.div>
             )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body,
     );
 };
 
