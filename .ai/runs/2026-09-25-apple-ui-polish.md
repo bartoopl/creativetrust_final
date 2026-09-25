@@ -50,6 +50,8 @@ Make the site's interactions feel immediate, interruptible and accessible: fix t
 
 ## Progress
 
+PR: #2
+
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
 ### Phase 1: Global foundations
