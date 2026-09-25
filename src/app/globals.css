@@ -68,6 +68,10 @@ main { isolation: isolate; }
   a { color: var(--accent); text-decoration: none; transition: color .15s ease; }
   a:hover { color: var(--accent-hover); }
   h1, h2, h3, h4, h5, h6 { line-height: 1.1; color: var(--text); }
+  /* One visible focus ring for every interactive element; mouse clicks stay ring-free. */
+  :where(a, button, summary, [role="tab"], [tabindex]):focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px;
+  }
 }
 
 /* Component classes live in the components layer so Tailwind utilities (mt-*, etc.) can override them. */
@@ -112,7 +116,7 @@ main { isolation: isolate; }
   border: 1px solid var(--accent); background: var(--accent);
   color: #fff; font-weight: 600; font-size: 14px; line-height: 1.2;
   text-decoration: none; cursor: pointer; white-space: nowrap;
-  transition: background .2s ease, border-color .2s ease, color .2s ease;
+  transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
 }
 .ct-cta:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
 .ct-cta.sm { font-size: 13px; padding: 4px 4px 4px 16px; min-height: 36px; gap: 10px; }
@@ -143,9 +147,13 @@ main { isolation: isolate; }
   border: 1px solid rgba(17, 24, 39, 0.16); background: transparent;
   color: var(--text); font-weight: 500; font-size: 14px; line-height: 1.2;
   text-decoration: none; cursor: pointer; white-space: nowrap;
-  transition: border-color .2s ease, color .2s ease;
+  transition: border-color .2s ease, color .2s ease, transform .2s ease;
 }
 .ct-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Press feedback lands on pointer-down, fast; release eases back over .2s. */
+.ct-cta:active, .ct-ghost:active { transform: scale(.97); transition-duration: 80ms; }
+.ct-cta:disabled:active, .ct-cta[aria-disabled="true"]:active { transform: none; }
 
 /* Text link with underline */
 .ct-link {
