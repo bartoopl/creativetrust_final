@@ -72,9 +72,15 @@ export class VelocityTracker {
         this.samples = [];
     }
 
-    velocity(): { x: number; y: number } {
-        const first = this.samples[0];
-        const last = this.samples[this.samples.length - 1];
+    /**
+     * Velocity over the samples within the window ending at `now` (default: the newest sample).
+     * Pass the release time so a finger that stopped before lifting reads as still, not as its last movement.
+     */
+    velocity(now?: number): { x: number; y: number } {
+        const end = now ?? this.samples[this.samples.length - 1]?.t ?? 0;
+        const recent = this.samples.filter((s) => end - s.t <= this.windowMs);
+        const first = recent[0];
+        const last = recent[recent.length - 1];
         if (!first || !last || last.t === first.t) return { x: 0, y: 0 };
         const dt = (last.t - first.t) / 1000;
         return { x: (last.x - first.x) / dt, y: (last.y - first.y) / dt };

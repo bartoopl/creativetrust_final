@@ -66,3 +66,22 @@ test('velocity tracker uses only the recent window', () => {
     v.reset();
     assert.deepEqual(v.velocity(), { x: 0, y: 0 });
 });
+
+test('a finger that stops before lifting has no release velocity', () => {
+    const v = new VelocityTracker(100);
+    v.add(0, 0, 0);
+    v.add(16, 40, 0);
+    v.add(32, 80, 0);
+    // Held still for a second: no pointermove fires, then pointerup at t=1032.
+    v.add(1032, 80, 0);
+    assert.deepEqual(v.velocity(1032), { x: 0, y: 0 });
+    assert.deepEqual(new VelocityTracker(100).velocity(500), { x: 0, y: 0 });
+});
+
+test('velocity(now) ignores samples older than the window before now', () => {
+    const v = new VelocityTracker(100);
+    v.add(0, 0, 0);
+    v.add(50, 100, 0);
+    assert.deepEqual(v.velocity(400), { x: 0, y: 0 });
+    close(v.velocity(50).x, 2000);
+});
