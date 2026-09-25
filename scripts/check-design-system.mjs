@@ -16,6 +16,10 @@ const RULES = [
     // Modal backdrops may dim the page; they are overlays, not sections.
     { name: 'dark translucent background', re: /background(-color)?\s*:\s*['"]?rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*0?\.[5-9]/i, allow: /backdrop|overlay/i },
     { name: 'legacy display font', re: /var\(--font-space\)/ },
+    // A px root size overrides the user's browser text-size setting.
+    { name: 'fixed root font size', re: /^\s*html\s*\{[^}]*font-size:\s*\d+(\.\d+)?px/ },
+    // Tracking must scale with fluid type: px letter-spacing next to a clamp() size is wrong at one end.
+    { name: 'px tracking on fluid type', re: /font-?[sS]ize:\s*['"]?clamp\(.*letter-?[sS]pacing:\s*['"]?-?\d+(\.\d+)?px|letter-?[sS]pacing:\s*['"]?-?\d+(\.\d+)?px.*font-?[sS]ize:\s*['"]?clamp\(/ },
 ];
 
 function walk(dir) {

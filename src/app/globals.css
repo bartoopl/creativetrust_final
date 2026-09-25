@@ -47,7 +47,8 @@
 @keyframes ctpulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
 @keyframes ctfade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
-html { scroll-behavior: smooth; font-size: 14px; }
+/* 87.5% = 14px at the default browser size, but still follows the user's text-size setting. */
+html { scroll-behavior: smooth; font-size: 87.5%; }
 html, body { margin: 0; padding: 0; }
 
 body {
@@ -85,11 +86,11 @@ main { isolation: isolate; }
   text-transform: uppercase; letter-spacing: .3px; color: var(--accent);
 }
 .ct-h1 {
-  font-size: clamp(38px, 5vw, 60px); font-weight: 600; letter-spacing: -1.6px;
+  font-size: clamp(38px, 5vw, 60px); font-weight: 600; letter-spacing: -0.027em;
   line-height: 1.05; margin: 0; color: var(--text); text-wrap: balance;
 }
 .ct-h2 {
-  font-size: clamp(26px, 3vw, 34px); font-weight: 600; letter-spacing: -1px;
+  font-size: clamp(26px, 3vw, 34px); font-weight: 600; letter-spacing: -0.03em;
   line-height: 1.15; margin: 10px 0 0; color: var(--text); text-wrap: balance;
 }
 .ct-lead { font-size: 17px; line-height: 1.6; color: var(--muted); margin: 0; }
@@ -198,7 +199,7 @@ main { isolation: isolate; }
 
 /* ===== Long-form reading (legal pages) ===== */
 .ct-legal { font-size: 15px; line-height: 1.7; color: var(--muted); }
-.ct-legal h2 { font-size: clamp(20px, 2.2vw, 24px); font-weight: 600; letter-spacing: -0.5px; line-height: 1.25; color: var(--text); margin: 48px 0 14px; padding-top: 24px; border-top: 1px solid var(--line); }
+.ct-legal h2 { font-size: clamp(20px, 2.2vw, 24px); font-weight: 600; letter-spacing: -0.021em; line-height: 1.25; color: var(--text); margin: 48px 0 14px; padding-top: 24px; border-top: 1px solid var(--line); }
 .ct-legal p { margin: 0 0 14px; }
 .ct-legal ul { margin: 0 0 16px; padding: 0; list-style: none; }
 .ct-legal ul:not(.ct-legal-links) li { position: relative; padding: 8px 0 8px 18px; border-top: 1px solid var(--line); }

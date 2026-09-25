@@ -49,7 +49,7 @@ export default function AboutPage() {
                             className={`${i % 2 === 1 ? 'border-l' : ''} ${i >= 2 ? 'border-t md:border-t-0' : ''} ${i === 2 ? 'md:border-l' : ''}`}
                             style={{ borderColor: 'var(--line)', padding: 'clamp(24px, 3vw, 36px) clamp(16px, 2vw, 28px)' }}
                         >
-                            <div style={{ fontWeight: 600, fontSize: 'clamp(28px, 3vw, 40px)', letterSpacing: '-1.2px', lineHeight: 1, color: 'var(--text)' }}>{val}</div>
+                            <div style={{ fontWeight: 600, fontSize: 'clamp(28px, 3vw, 40px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--text)' }}>{val}</div>
                             <div className="ct-meta" style={{ marginTop: 10 }}>{label}</div>
                         </div>
                     ))}

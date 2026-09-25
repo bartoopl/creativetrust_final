@@ -73,7 +73,7 @@ export default function EcommercePage() {
                 <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {stats.map(s => (
                         <div key={s.value} className="flex flex-col gap-2.5" style={{ padding: '24px 24px 28px' }}>
-                            <span style={{ fontSize: 'clamp(28px, 3.1vw, 40px)', fontWeight: 600, letterSpacing: '-1.2px', lineHeight: 1 }}>{s.value}</span>
+                            <span style={{ fontSize: 'clamp(28px, 3.1vw, 40px)', fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1 }}>{s.value}</span>
                             <span className="ct-body" style={{ fontSize: 13 }}>{s.label}</span>
                         </div>
                     ))}
