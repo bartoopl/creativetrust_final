@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import NotchedButton from './ui/NotchedButton';
 import MegaMenu from './MegaMenu';
 import Wordmark from './ui/Wordmark';
@@ -16,6 +17,11 @@ const navItems = [
 
 export default function Header() {
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [sheetTop, setSheetTop] = useState(0);
+    const headerRef = useRef<HTMLElement>(null);
+    const mobileToggleRef = useRef<HTMLButtonElement>(null);
+    const mobileSheetRef = useRef<HTMLDivElement>(null);
+    const reduceMotion = useReducedMotion();
     const [servicesOpen, setServicesOpen] = useState(false);
     const servicesTriggerRef = useRef<HTMLButtonElement>(null);
     const servicesPanelRef = useRef<HTMLDivElement>(null);
@@ -64,10 +70,41 @@ export default function Header() {
         if (next) closeServices();
     };
 
+    const toggleMobile = () => {
+        // Pin the sheet to the header's live bottom edge (the announcement strip may still be on screen).
+        if (!mobileOpen) setSheetTop(headerRef.current?.getBoundingClientRect().bottom ?? 0);
+        setMobileOpen((v) => !v);
+    };
+
     useEffect(() => {
-        document.body.style.overflow = mobileOpen ? 'hidden' : '';
+        if (!mobileOpen) return;
+        document.body.style.overflow = 'hidden';
+        const sheet = mobileSheetRef.current;
+        sheet?.querySelector<HTMLElement>('a[href]')?.focus({ preventScroll: true });
+
+        // Escape closes; Tab cycles between the toggle and the sheet so focus never falls behind it.
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                setMobileOpen(false);
+                mobileToggleRef.current?.focus();
+                return;
+            }
+            if (e.key !== 'Tab' || !sheet) return;
+            const focusables = [mobileToggleRef.current, ...sheet.querySelectorAll<HTMLElement>('a[href], button')].filter(Boolean) as HTMLElement[];
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        };
+        document.addEventListener('keydown', onKeyDown);
         return () => {
             document.body.style.overflow = '';
+            document.removeEventListener('keydown', onKeyDown);
         };
     }, [mobileOpen]);
 
@@ -80,7 +117,7 @@ export default function Header() {
                 </span>
             </div>
 
-            <header style={{ position: 'sticky', top: 0, zIndex: 110, background: 'rgba(255,255,255,0.92)', backdropFilter: 'saturate(180%) blur(8px)', WebkitBackdropFilter: 'saturate(180%) blur(8px)', borderBottom: '1px solid var(--line)' }}>
+            <header ref={headerRef} style={{ position: 'sticky', top: 0, zIndex: 110, background: 'rgba(255,255,255,0.92)', backdropFilter: 'saturate(180%) blur(8px)', WebkitBackdropFilter: 'saturate(180%) blur(8px)', borderBottom: '1px solid var(--line)' }}>
                 {/* Sits above the MegaMenu scrim so the trigger stays hoverable while the menu is open. */}
                 <div className="ct-header-shell relative z-[60] mx-auto flex max-w-[1440px] items-center justify-between gap-4">
                     <Link href="/" aria-label="CreativeTrust — strona główna" style={{ display: 'flex', alignItems: 'center', flex: 'none' }}>
@@ -119,9 +156,11 @@ export default function Header() {
                     </NotchedButton>
 
                     <button
+                        ref={mobileToggleRef}
                         type="button"
                         className="inline-flex items-center justify-center md:hidden"
-                        onClick={() => setMobileOpen((v) => !v)}
+                        onClick={toggleMobile}
+                        aria-controls="mobile-menu"
                         aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
                         aria-expanded={mobileOpen}
                         style={{ background: '#fff', border: '1px solid var(--line-strong)', borderRadius: 999, width: 40, height: 40, color: 'var(--text)', cursor: 'pointer', flex: 'none', padding: 0, touchAction: 'manipulation' }}
@@ -140,8 +179,21 @@ export default function Header() {
                     onBlur={onServicesBlur}
                 />
 
+            </header>
+
+            {/* Unrolls downward from the header and rolls back up the same way; critically damped, no bounce. */}
+            <AnimatePresence>
                 {mobileOpen && (
-                    <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, height: 'calc(100dvh - 100%)', background: '#fff', zIndex: 130, padding: '8px var(--pad-x) 32px', overflowY: 'auto', borderTop: '1px solid var(--line)' }} className="flex flex-col md:hidden">
+                    <motion.div
+                        ref={mobileSheetRef}
+                        id="mobile-menu"
+                        initial={reduceMotion ? { opacity: 0 } : { clipPath: 'inset(0 0 100% 0)' }}
+                        animate={reduceMotion ? { opacity: 1 } : { clipPath: 'inset(0 0 0% 0)' }}
+                        exit={reduceMotion ? { opacity: 0 } : { clipPath: 'inset(0 0 100% 0)' }}
+                        transition={reduceMotion ? { duration: 0.15 } : { type: 'spring', bounce: 0, duration: 0.35 }}
+                        style={{ position: 'fixed', top: sheetTop, bottom: 0, left: 0, right: 0, background: '#fff', zIndex: 130, padding: '8px var(--pad-x) 32px', overflowY: 'auto', overscrollBehavior: 'contain', borderTop: '1px solid var(--line)' }}
+                        className="flex flex-col md:hidden"
+                    >
                         {[{ href: '/uslugi', label: 'Usługi' }, ...navItems, { href: '/kontakt', label: 'Kontakt' }].map((item) => (
                             <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="flex items-center justify-between" style={{ fontSize: 18, fontWeight: 500, color: 'var(--text)', padding: '16px 0', borderBottom: '1px solid var(--line)' }}>
                                 {item.label}
@@ -153,9 +205,9 @@ export default function Header() {
                                 Umów konsultację
                             </NotchedButton>
                         </div>
-                    </div>
+                    </motion.div>
                 )}
-            </header>
+            </AnimatePresence>
         </>
     );
 }
