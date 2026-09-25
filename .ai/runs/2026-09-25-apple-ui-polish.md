@@ -66,9 +66,9 @@ Make the site's interactions feel immediate, interruptible and accessible: fix t
 
 ### Phase 3: Components
 
-- [ ] 3.1 FAQ height transition and ARIA
-- [ ] 3.2 Cookie banner symmetric enter/exit
-- [ ] 3.3 Lightbox exit animation, keyboard and focus fixes
+- [x] 3.1 FAQ height transition and ARIA — 863c338
+- [x] 3.2 Cookie banner symmetric enter/exit — 53f5a1d
+- [x] 3.3 Lightbox exit animation, keyboard and focus fixes — f24bf3e
 
 ### Phase 4: Lightbox gesture
 
