@@ -38,3 +38,10 @@ test('header material blurs on a pseudo-element, not the header itself', () => {
 test('reduced transparency makes the header solid', () => {
     assert.match(css, /@media \(prefers-reduced-transparency: reduce\) \{\s*\.ct-header::before \{ background: #fff; [^}]*backdrop-filter: none; \}/);
 });
+
+test('FAQ disclosure animates height and drops the travel under reduced motion', () => {
+    assert.match(css, /\.ct-disclosure \{[^}]*grid-template-rows: 0fr;[^}]*transition: grid-template-rows/);
+    assert.match(css, /\.ct-disclosure\[data-open="true"\] \{ grid-template-rows: 1fr;/);
+    const reduced = css.match(/@media \(prefers-reduced-motion: reduce\)\s*\{([\s\S]*?)\n\}/)?.[1] ?? '';
+    assert.match(reduced, /\.ct-disclosure \{ transition: opacity/);
+});

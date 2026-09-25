@@ -207,6 +207,14 @@ main { isolation: isolate; }
 .ct-nav-link { font-size: 14px; font-weight: 500; color: var(--text); }
 .ct-nav-link:hover { color: var(--accent); }
 
+/* ===== Disclosure (FAQ) — interruptible height transition ===== */
+.ct-disclosure {
+  display: grid; grid-template-rows: 0fr; opacity: 0;
+  transition: grid-template-rows .22s cubic-bezier(.2,.7,.2,1), opacity .18s ease;
+}
+.ct-disclosure[data-open="true"] { grid-template-rows: 1fr; opacity: 1; }
+.ct-disclosure > * { overflow: hidden; min-height: 0; }
+
 /* ===== Marquee ===== */
 .ct-marquee-track {
   display: flex; gap: 56px; white-space: nowrap; width: max-content;
@@ -243,6 +251,7 @@ main { isolation: isolate; }
   html { scroll-behavior: auto; }
   .ct-marquee-track { animation: none; }
   .ct-fade { animation-name: ctfadeonly; }
+  .ct-disclosure { transition: opacity .15s ease; }
 }
 
 /* Higher contrast: stronger hairlines and secondary text. */
