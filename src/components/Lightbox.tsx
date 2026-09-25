@@ -61,7 +61,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
         setCurrentIndex(clamped);
         const to = -clamped * width;
         if (reduceMotion || !width) {
-            x.set(to);
+            x.jump(to);
             return;
         }
         // Overshoot only when a flick put momentum into the gesture.
@@ -83,7 +83,8 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
     }, [isOpen]);
 
     useLayoutEffect(() => {
-        if (!dragRef.current) x.set(-currentIndex * width);
+        // jump() also stops a settle spring still heading for the old width's target.
+        if (!dragRef.current) x.jump(-currentIndex * width);
         // Only re-align on open/resize; index changes animate through goTo().
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [width, isOpen]);
@@ -99,9 +100,24 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
         const opener = document.activeElement as HTMLElement | null;
         document.body.style.overflow = 'hidden';
         dialogRef.current?.focus({ preventScroll: true });
-        y.set(0);
+        y.jump(0);
+        dragRef.current = null;
+        didDragRef.current = false;
 
         const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Tab') {
+                // aria-modal: keep Tab cycling through the dialog's own controls.
+                const dialog = dialogRef.current;
+                const focusables = dialog ? [...dialog.querySelectorAll<HTMLElement>('button')] : [];
+                if (!focusables.length) return;
+                const index = focusables.indexOf(document.activeElement as HTMLElement);
+                const next = e.shiftKey
+                    ? focusables[index <= 0 ? focusables.length - 1 : index - 1]
+                    : focusables[index === -1 || index === focusables.length - 1 ? 0 : index + 1];
+                e.preventDefault();
+                next.focus();
+                return;
+            }
             if (e.key === 'Escape') handlersRef.current.onClose();
             else if (e.key === 'ArrowRight') handlersRef.current.showNext();
             else if (e.key === 'ArrowLeft') handlersRef.current.showPrevious();
@@ -111,6 +127,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
             document.body.style.overflow = '';
+            dragRef.current = null;
             // Hand focus back to whatever opened the lightbox.
             opener?.focus?.({ preventScroll: true });
         };
@@ -129,9 +146,23 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
         trackerRef.current.add(e.timeStamp, e.clientX, e.clientY);
     };
 
+    // Abandon a drag without committing it: settle back on the current image.
+    const cancelDrag = () => {
+        const drag = dragRef.current;
+        dragRef.current = null;
+        if (!drag?.axis) return;
+        goTo(currentIndex);
+        animate(y, 0, reduceMotion ? { duration: 0 } : { type: 'spring', bounce: 0, duration: 0.3 });
+    };
+
     const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
         const drag = dragRef.current;
         if (!drag || drag.pointerId !== e.pointerId) return;
+        // The button was released somewhere we never heard about (e.g. over a control before capture).
+        if (e.pointerType === 'mouse' && e.buttons === 0) {
+            cancelDrag();
+            return;
+        }
         trackerRef.current.add(e.timeStamp, e.clientX, e.clientY);
         const dx = e.clientX - drag.startX;
         const dy = e.clientY - drag.startY;
@@ -159,7 +190,9 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
         if (!drag || drag.pointerId !== e.pointerId) return;
         dragRef.current = null;
         if (!drag.axis) return;
-        const velocity = trackerRef.current.velocity();
+        // Sample the release itself, so a finger that stopped before lifting reads as still.
+        trackerRef.current.add(e.timeStamp, e.clientX, e.clientY);
+        const velocity = trackerRef.current.velocity(e.timeStamp);
 
         if (drag.axis === 'x') {
             const offset = x.get() + currentIndex * width;
@@ -177,7 +210,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
             didDragRef.current = false;
             return;
         }
-        if (!(e.target as HTMLElement).closest('img, button, [data-caption]')) {
+        if (!(e.target as HTMLElement).closest('img, button, [data-caption], [data-counter]')) {
             onClose();
         }
     };
@@ -202,7 +235,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                     ref={dialogRef}
                     role="dialog"
                     aria-modal="true"
-                    aria-label={`Galeria — zdjęcie ${currentIndex + 1} z ${count}`}
+                    aria-label="Galeria zdjęć"
                     tabIndex={-1}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -210,6 +243,8 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                     transition={{ duration: 0.2 }}
                     className="ct-lightbox fixed inset-0 z-[200] flex items-center justify-center p-4 outline-none md:p-10"
                     onClick={handleBackdropClick}
+                    // Any fresh press starts a new tap; a touch swipe (no click) must not swallow the next one.
+                    onPointerDownCapture={() => { didDragRef.current = false; }}
                 >
                     {/* Przycisk zamknięcia */}
                     <button
@@ -268,7 +303,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                     )}
 
                     {/* Licznik zdjęć */}
-                    <div className="ct-pill absolute bottom-6 left-1/2 -translate-x-1/2" aria-live="polite">
+                    <div data-counter="" className="ct-pill absolute bottom-6 left-1/2 z-10 -translate-x-1/2" aria-live="polite">
                         {currentIndex + 1} / {count}
                     </div>
 
@@ -280,32 +315,36 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                         onPointerDown={onPointerDown}
                         onPointerMove={onPointerMove}
                         onPointerUp={endDrag}
-                        onPointerCancel={endDrag}
+                        onPointerCancel={cancelDrag}
+                        onLostPointerCapture={(e) => { if (dragRef.current?.pointerId === e.pointerId) cancelDrag(); }}
                     >
-                        <motion.div className="absolute inset-0" style={{ x, y, scale: dismissScale }}>
-                            {visible.map(({ image, index }) => (
-                                <div
-                                    key={index}
-                                    className="absolute inset-y-0 flex flex-col items-center justify-center"
-                                    style={{ left: index * width, width: width || '100%' }}
-                                >
-                                    <img
-                                        src={urlFor(image).width(1200).url()}
-                                        alt={image.alt || `Zdjęcie ${index + 1}`}
-                                        draggable={false}
-                                        className="max-w-full max-h-[80vh] select-none object-contain"
-                                        style={{ border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', background: '#fff' }}
-                                    />
+                        {/* Outer layer: vertical dismiss (y + scale around the viewport centre). Inner layer: the horizontal strip. */}
+                        <motion.div className="absolute inset-0" style={{ y, scale: dismissScale }}>
+                            <motion.div className="absolute inset-0" style={{ x }}>
+                                {visible.map(({ image, index }) => (
+                                    <div
+                                        key={index}
+                                        className="absolute inset-y-0 flex flex-col items-center justify-center"
+                                        style={{ left: index * width, width: width || '100%' }}
+                                    >
+                                        <img
+                                            src={urlFor(image).width(1200).url()}
+                                            alt={image.alt || `Zdjęcie ${index + 1}`}
+                                            draggable={false}
+                                            className="max-w-full max-h-[80vh] select-none object-contain"
+                                            style={{ border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', background: '#fff' }}
+                                        />
 
-                                    {/* Podpis zdjęcia */}
-                                    {image.caption && (
-                                        <div data-caption="" className="ct-body mt-4 text-center max-w-lg mx-auto"
-                                            style={{ padding: '10px 14px', background: '#fff', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-sm)' }}>
-                                            {image.caption}
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
+                                        {/* Podpis zdjęcia */}
+                                        {image.caption && (
+                                            <div data-caption="" className="ct-body mt-4 text-center max-w-lg mx-auto"
+                                                style={{ padding: '10px 14px', background: '#fff', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-sm)' }}>
+                                                {image.caption}
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </motion.div>
                         </motion.div>
                     </div>
                 </motion.div>
