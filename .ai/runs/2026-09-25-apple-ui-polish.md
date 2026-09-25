@@ -72,5 +72,5 @@ Make the site's interactions feel immediate, interruptible and accessible: fix t
 
 ### Phase 4: Lightbox gesture
 
-- [ ] 4.1 Gesture math with unit tests
-- [ ] 4.2 Lightbox swipe with momentum and rubber-banding
+- [x] 4.1 Gesture math with unit tests — 2782257, f68ffae
+- [x] 4.2 Lightbox swipe with momentum and rubber-banding — 737bf04, c9adedd
