@@ -1,11 +1,17 @@
 "use client";
 
 import Link from 'next/link';
+import type { Ref } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 interface MegaMenuProps {
+    id: string;
     isOpen: boolean;
     onClose: () => void;
+    panelRef?: Ref<HTMLDivElement>;
+    onPointerEnter?: (e: React.PointerEvent) => void;
+    onPointerLeave?: (e: React.PointerEvent) => void;
+    onBlur?: (e: React.FocusEvent<HTMLDivElement>) => void;
 }
 
 const services = [
@@ -53,12 +59,14 @@ const seoLandings = [
     },
 ];
 
-export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
+export default function MegaMenu({ id, isOpen, onClose, panelRef, onPointerEnter, onPointerLeave, onBlur }: MegaMenuProps) {
     return (
         <AnimatePresence>
             {isOpen ? (
                 <>
                     <motion.button
+                        type="button"
+                        tabIndex={-1}
                         aria-label="Zamknij menu"
                         className="fixed inset-0 z-40 cursor-default"
                         style={{ background: 'rgba(17,24,39,0.12)', border: 'none' }}
@@ -68,14 +76,19 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
                         onClick={onClose}
                     />
 
+                    {/* Drops down out of the header along the same path it leaves by; critically damped, no overshoot. */}
                     <motion.div
+                        id={id}
+                        ref={panelRef}
                         initial={{ opacity: 0, y: -6 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -6 }}
-                        transition={{ duration: 0.15 }}
+                        transition={{ type: 'spring', bounce: 0, duration: 0.25 }}
                         className="absolute left-0 right-0 top-full z-50"
                         style={{ background: '#fff', borderBottom: '1px solid var(--line-strong)' }}
-                        onMouseLeave={onClose}
+                        onPointerEnter={onPointerEnter}
+                        onPointerLeave={onPointerLeave}
+                        onBlur={onBlur}
                     >
                         <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[0.9fr_1.4fr_1fr]" style={{ padding: '0 var(--pad-x)' }}>
                             <div className="flex flex-col gap-4 py-8 lg:pr-8" style={{ borderRight: '1px solid var(--line)' }}>
