@@ -60,9 +60,9 @@ Make the site's interactions feel immediate, interruptible and accessible: fix t
 
 ### Phase 2: Navigation
 
-- [ ] 2.1 MegaMenu hover intent, click and Escape behaviour
-- [ ] 2.2 Animated mobile menu sheet
-- [ ] 2.3 Header material with scroll-edge hairline
+- [x] 2.1 MegaMenu hover intent, click and Escape behaviour — 6c2c0ad
+- [x] 2.2 Animated mobile menu sheet — 85b0b0e
+- [x] 2.3 Header material with scroll-edge hairline — 31a295e
 
 ### Phase 3: Components
 
