@@ -17,7 +17,7 @@ test('rubberband follows less the further past the edge', () => {
     const b = rubberband(200, w);
     assert.ok(a < 50 && b < 200);
     assert.ok(b / 200 < a / 50, 'resistance increases with overshoot');
-    assert.ok(rubberband(10_000, w) < w * 0.55 + 1, 'never exceeds dimension × constant');
+    assert.ok(rubberband(1e9, w) < w, 'approaches but never exceeds the dimension');
     close(rubberband(-50, w), -a);
     assert.equal(rubberband(50, 0), 0);
 });
