@@ -80,6 +80,24 @@ main { isolation: isolate; }
 .ct-shell-sm { padding: clamp(18px, 4vw, 32px) var(--pad-x); }
 .ct-header-shell { padding: 18px var(--pad-x); }
 
+/* ===== Header material =====
+   Translucent layer the page scrolls under. The blur lives on ::before so the header itself is not a
+   containing block for fixed descendants (the MegaMenu scrim). The hairline appears only once content
+   actually runs under the header (scroll-edge), instead of a permanent divider. */
+.ct-header {
+  position: sticky; top: 0; z-index: 110;
+  border-bottom: 1px solid transparent; transition: border-color .2s ease;
+}
+.ct-header::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+}
+.ct-header[data-scrolled="true"] { border-bottom-color: var(--line); }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .ct-header::before { background: rgba(255, 255, 255, 0.96); }
+}
+
 .ct-section { padding: var(--pad-y) var(--pad-x); }
 .ct-section + .ct-section { border-top: 1px solid var(--line); }
 
@@ -235,4 +253,11 @@ main { isolation: isolate; }
     --muted: #374151;
     --muted-2: #4b5563;
   }
+  .ct-header { border-bottom-color: var(--line-strong); }
+  .ct-header::before { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* Reduced transparency: solid chrome, no blur. */
+@media (prefers-reduced-transparency: reduce) {
+  .ct-header::before { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
 }

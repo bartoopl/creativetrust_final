@@ -27,3 +27,14 @@ test('higher contrast strengthens hairlines', () => {
 test('no content is hidden behind an unused scroll-reveal hook', () => {
     assert.doesNotMatch(css, /\[data-reveal\]/);
 });
+
+test('header material blurs on a pseudo-element, not the header itself', () => {
+    const header = css.match(/\.ct-header \{([^}]*)\}/)?.[1] ?? '';
+    assert.doesNotMatch(header, /backdrop-filter/, 'backdrop-filter on .ct-header would trap fixed descendants');
+    assert.match(css, /\.ct-header::before \{[^}]*backdrop-filter: saturate\(180%\) blur\(20px\)/);
+    assert.match(css, /\.ct-header\[data-scrolled="true"\] \{ border-bottom-color: var\(--line\); \}/);
+});
+
+test('reduced transparency makes the header solid', () => {
+    assert.match(css, /@media \(prefers-reduced-transparency: reduce\) \{\s*\.ct-header::before \{ background: #fff; [^}]*backdrop-filter: none; \}/);
+});

@@ -18,6 +18,8 @@ const navItems = [
 export default function Header() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [sheetTop, setSheetTop] = useState(0);
+    const [scrolled, setScrolled] = useState(false);
+    const stripRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLElement>(null);
     const mobileToggleRef = useRef<HTMLButtonElement>(null);
     const mobileSheetRef = useRef<HTMLDivElement>(null);
@@ -70,6 +72,15 @@ export default function Header() {
         if (next) closeServices();
     };
 
+    // The header is "scrolled" once the announcement strip above it has left the viewport.
+    useEffect(() => {
+        const strip = stripRef.current;
+        if (!strip) return;
+        const observer = new IntersectionObserver(([entry]) => setScrolled(!entry.isIntersecting));
+        observer.observe(strip);
+        return () => observer.disconnect();
+    }, []);
+
     const toggleMobile = () => {
         // Pin the sheet to the header's live bottom edge (the announcement strip may still be on screen).
         if (!mobileOpen) setSheetTop(headerRef.current?.getBoundingClientRect().bottom ?? 0);
@@ -110,14 +121,14 @@ export default function Header() {
 
     return (
         <>
-            <div style={{ borderBottom: '1px solid var(--line)', padding: '9px var(--pad-x)', display: 'flex', justifyContent: 'center', background: 'var(--panel)', textAlign: 'center' }}>
+            <div ref={stripRef} style={{ borderBottom: '1px solid var(--line)', padding: '9px var(--pad-x)', display: 'flex', justifyContent: 'center', background: 'var(--panel)', textAlign: 'center' }}>
                 <span className="ct-mono" style={{ fontWeight: 500, fontSize: 12, color: 'var(--muted)', letterSpacing: '-0.1px' }}>
                     AI-native partner produktowy — zobacz{' '}
                     <Link href="/#proces" style={{ fontWeight: 600 }}>jak działamy →</Link>
                 </span>
             </div>
 
-            <header ref={headerRef} style={{ position: 'sticky', top: 0, zIndex: 110, background: 'rgba(255,255,255,0.92)', backdropFilter: 'saturate(180%) blur(8px)', WebkitBackdropFilter: 'saturate(180%) blur(8px)', borderBottom: '1px solid var(--line)' }}>
+            <header ref={headerRef} className="ct-header" data-scrolled={scrolled}>
                 {/* Sits above the MegaMenu scrim so the trigger stays hoverable while the menu is open. */}
                 <div className="ct-header-shell relative z-[60] mx-auto flex max-w-[1440px] items-center justify-between gap-4">
                     <Link href="/" aria-label="CreativeTrust — strona główna" style={{ display: 'flex', alignItems: 'center', flex: 'none' }}>
