@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { urlFor } from '@/lib/sanity';
 import { ImageWithCaption } from '@/types'
 
@@ -14,43 +14,46 @@ interface LightboxProps {
 
 const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, isOpen }) => {
     const [currentIndex, setCurrentIndex] = useState(initialIndex);
+    const [wasOpen, setWasOpen] = useState(isOpen);
+    const dialogRef = useRef<HTMLDivElement>(null);
+    const reduceMotion = useReducedMotion();
 
-    // Obsługa klawiszy strzałek i Escape
+    // Each time the lightbox opens, start from the image that was clicked.
+    if (isOpen !== wasOpen) {
+        setWasOpen(isOpen);
+        if (isOpen) setCurrentIndex(initialIndex);
+    }
+
+    const count = images.length;
+    const showNext = () => setCurrentIndex((prev) => (prev + 1) % count);
+    const showPrevious = () => setCurrentIndex((prev) => (prev - 1 + count) % count);
+
+    // Latest handlers for the keyboard listener, so it never acts on a stale index or onClose.
+    const handlersRef = useRef({ onClose, showNext, showPrevious });
     useEffect(() => {
+        handlersRef.current = { onClose, showNext, showPrevious };
+    });
+
+    useEffect(() => {
+        if (!isOpen) return;
+        const opener = document.activeElement as HTMLElement | null;
+        document.body.style.overflow = 'hidden';
+        dialogRef.current?.focus({ preventScroll: true });
+
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (!isOpen) return;
-
-            if (e.key === 'Escape') {
-                onClose();
-            } else if (e.key === 'ArrowRight') {
-                handleNext();
-            } else if (e.key === 'ArrowLeft') {
-                handlePrevious();
-            }
+            if (e.key === 'Escape') handlersRef.current.onClose();
+            else if (e.key === 'ArrowRight') handlersRef.current.showNext();
+            else if (e.key === 'ArrowLeft') handlersRef.current.showPrevious();
         };
-
         window.addEventListener('keydown', handleKeyDown);
-
-        // Blokowanie scrollowania strony gdy lightbox jest otwarty
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        }
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
             document.body.style.overflow = '';
+            // Hand focus back to whatever opened the lightbox.
+            opener?.focus?.({ preventScroll: true });
         };
-    }, [isOpen, currentIndex, images.length]);
-
-    // Przejście do następnego zdjęcia
-    const handleNext = () => {
-        setCurrentIndex((prev) => (prev + 1) % images.length);
-    };
-
-    // Przejście do poprzedniego zdjęcia
-    const handlePrevious = () => {
-        setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-    };
+    }, [isOpen]);
 
     // Zamknięcie lightboxa po kliknięciu w tło
     const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -59,8 +62,6 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
         }
     };
 
-    if (!isOpen) return null;
-
     const controlStyle: React.CSSProperties = {
         width: 44, height: 44, borderRadius: 'var(--radius-pill)', background: '#fff',
         border: '1px solid var(--line-strong)', color: 'var(--text)', cursor: 'pointer',
@@ -68,15 +69,21 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
 
     const currentImage = images[currentIndex];
 
+    // Always rendered so AnimatePresence can play the exit when isOpen turns false.
     return (
         <AnimatePresence>
-            {isOpen && (
+            {isOpen && currentImage && (
                 <motion.div
+                    ref={dialogRef}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label={`Galeria — zdjęcie ${currentIndex + 1} z ${count}`}
+                    tabIndex={-1}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10"
-                    style={{ background: 'rgba(250, 250, 250, 0.96)', backdropFilter: 'blur(6px)' }}
+                    transition={{ duration: 0.2 }}
+                    className="ct-lightbox fixed inset-0 z-50 flex items-center justify-center p-4 outline-none md:p-10"
                     onClick={handleBackdropClick}
                 >
                     {/* Przycisk zamknięcia */}
@@ -98,12 +105,12 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                     </button>
 
                     {/* Przyciski nawigacji */}
-                    {images.length > 1 && (
+                    {count > 1 && (
                         <>
                             <button
                                 className="ct-card-hover absolute left-4 md:left-10 top-1/2 z-10 -translate-y-1/2 flex items-center justify-center"
                                 style={controlStyle}
-                                onClick={handlePrevious}
+                                onClick={showPrevious}
                                 aria-label="Poprzednie zdjęcie"
                             >
                                 <svg
@@ -120,7 +127,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                             <button
                                 className="ct-card-hover absolute right-4 md:right-10 top-1/2 z-10 -translate-y-1/2 flex items-center justify-center"
                                 style={controlStyle}
-                                onClick={handleNext}
+                                onClick={showNext}
                                 aria-label="Następne zdjęcie"
                             >
                                 <svg
@@ -137,18 +144,17 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex = 0, onClose, 
                     )}
 
                     {/* Licznik zdjęć */}
-                    <div className="ct-pill absolute bottom-6 left-1/2 -translate-x-1/2">
-                        {currentIndex + 1} / {images.length}
+                    <div className="ct-pill absolute bottom-6 left-1/2 -translate-x-1/2" aria-live="polite">
+                        {currentIndex + 1} / {count}
                     </div>
 
                     {/* Główne zdjęcie */}
                     <div className="relative w-full h-full flex items-center justify-center">
                         <motion.div
                             key={currentIndex}
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ type: "spring", duration: 0.3 }}
+                            transition={{ type: 'spring', bounce: 0, duration: 0.3 }}
                             className="max-w-full max-h-full"
                         >
                             <img
