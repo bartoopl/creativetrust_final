@@ -76,7 +76,7 @@ const PortableTextContent: React.FC<PortableTextContentProps> = ({ content, comp
         },
         block: {
             h2: ({ children }: any) => (
-                <h2 style={{ ...headingStyle, fontSize: 'clamp(22px, 2.4vw, 28px)', letterSpacing: '-0.6px', margin: '48px 0 16px' }}>{children}</h2>
+                <h2 style={{ ...headingStyle, fontSize: 'clamp(22px, 2.4vw, 28px)', letterSpacing: '-0.021em', margin: '48px 0 16px' }}>{children}</h2>
             ),
             h3: ({ children }: any) => (
                 <h3 style={{ ...headingStyle, fontSize: 20, letterSpacing: '-0.3px', margin: '36px 0 12px' }}>{children}</h3>

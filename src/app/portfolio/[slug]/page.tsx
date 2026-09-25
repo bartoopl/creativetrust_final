@@ -77,9 +77,6 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
     const openLightbox = (index: number) => {
         setLightboxIndex(index);
         setLightboxOpen(true);
-
-        // Opcjonalnie: zatrzymaj przewijanie strony podczas otwartego lightboxa
-        document.body.style.overflow = 'hidden';
     };
 
     const zoomIcon = (
@@ -275,7 +272,8 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
             </section>
 
             {/* Lightbox dla obrazów galerii */}
-            {project.galleryImages && lightboxOpen && (
+            {/* Stays mounted so the lightbox can animate its exit. */}
+            {project.galleryImages && (
                 <Lightbox
                     images={lightboxIndex === -1 ? [project.mainImage, ...project.galleryImages] : project.galleryImages}
                     initialIndex={lightboxIndex === -1 ? 0 : lightboxIndex}

@@ -119,7 +119,7 @@ export default async function BlogPostPage({
                         </div>
                     )}
 
-                    <h1 className="ct-h1" style={{ fontSize: 'clamp(32px, 4.2vw, 50px)', letterSpacing: '-1.2px', lineHeight: 1.1 }}>{post.title}</h1>
+                    <h1 className="ct-h1" style={{ fontSize: 'clamp(32px, 4.2vw, 50px)', letterSpacing: '-0.024em', lineHeight: 1.1 }}>{post.title}</h1>
 
                     {post.excerpt && (
                         <p className="ct-lead">{post.excerpt}</p>

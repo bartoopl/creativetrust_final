@@ -101,7 +101,7 @@ export default async function KnowledgeBaseEntryPage({
                         <div className="ct-meta" style={{ color: 'var(--muted-2)' }}>{formattedDate}</div>
                     </div>
 
-                    <h1 className="ct-h1" style={{ fontSize: 'clamp(32px, 4.2vw, 50px)', letterSpacing: '-1.2px', lineHeight: 1.1 }}>{entry.title}</h1>
+                    <h1 className="ct-h1" style={{ fontSize: 'clamp(32px, 4.2vw, 50px)', letterSpacing: '-0.024em', lineHeight: 1.1 }}>{entry.title}</h1>
                     <p className="ct-lead">{entry.shortDescription}</p>
 
                     {entry.tags && entry.tags.length > 0 && (

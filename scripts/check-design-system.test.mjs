@@ -29,3 +29,16 @@ test('allows the design system and modal backdrops', () => {
     assert.deepEqual(findViolations("className=\"backdrop\" style={{ background: 'rgba(0,0,0,0.6)' }}"), []);
     assert.deepEqual(findViolations("color: '#000000'"), []);
 });
+
+test('flags a px root font size but allows a percentage', () => {
+    assert.equal(findViolations('html { scroll-behavior: smooth; font-size: 14px; }').length, 1);
+    assert.deepEqual(findViolations('html { scroll-behavior: smooth; font-size: 87.5%; }'), []);
+    assert.deepEqual(findViolations('.ct-body { font-size: 14px; }'), []);
+});
+
+test('flags px tracking on fluid type only', () => {
+    assert.equal(findViolations("fontSize: 'clamp(28px, 3vw, 40px)', letterSpacing: '-1.2px'").length, 1);
+    assert.equal(findViolations('font-size: clamp(38px, 5vw, 60px); font-weight: 600; letter-spacing: -1.6px;').length, 1);
+    assert.deepEqual(findViolations("fontSize: 'clamp(28px, 3vw, 40px)', letterSpacing: '-0.03em'"), []);
+    assert.deepEqual(findViolations("fontSize: 20, letterSpacing: '-0.5px', padding: 'clamp(16px, 4vw, 72px)'"), []);
+});

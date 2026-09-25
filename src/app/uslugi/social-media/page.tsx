@@ -67,7 +67,7 @@ export default function SocialMediaPage() {
                 <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {results.map(r => (
                         <div key={r.value} className="flex flex-col gap-2.5" style={{ padding: '24px 24px 28px' }}>
-                            <span style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 600, letterSpacing: '-1.2px', lineHeight: 1 }}>{r.value}</span>
+                            <span style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1 }}>{r.value}</span>
                             <span className="ct-body" style={{ fontSize: 13 }}>{r.label}</span>
                         </div>
                     ))}
