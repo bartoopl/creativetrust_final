@@ -217,16 +217,22 @@ main { isolation: isolate; }
 .ct-legal-links a:hover { border-color: var(--accent); color: var(--accent); }
 }
 
-/* ===== Scroll Reveal ===== */
-[data-reveal] {
-  opacity: 0; transform: translateY(16px);
-  transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1);
-}
-[data-reveal].is-revealed { opacity: 1; transform: translateY(0); }
-
 .ct-fade { animation: ctfade .18s ease-out; }
 
+/* Reduced motion keeps the feedback but drops the travel: opacity only, no marquee, no smooth scroll. */
+@keyframes ctfadeonly { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
-  .ct-marquee-track, .ct-fade { animation: none; }
   html { scroll-behavior: auto; }
+  .ct-marquee-track { animation: none; }
+  .ct-fade { animation-name: ctfadeonly; }
+}
+
+/* Higher contrast: stronger hairlines and secondary text. */
+@media (prefers-contrast: more) {
+  :root {
+    --line: rgba(17, 24, 39, 0.24);
+    --line-strong: rgba(17, 24, 39, 0.4);
+    --muted: #374151;
+    --muted-2: #4b5563;
+  }
 }
