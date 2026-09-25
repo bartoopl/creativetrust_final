@@ -42,9 +42,23 @@ export default function Header() {
     useEffect(() => {
         if (!servicesOpen) return;
         const onKeyDown = (e: KeyboardEvent) => {
-            if (e.key !== 'Escape') return;
-            closeServices();
-            servicesTriggerRef.current?.focus();
+            if (e.key === 'Escape') {
+                closeServices();
+                servicesTriggerRef.current?.focus();
+                return;
+            }
+            // The panel follows the whole nav in DOM order; stitch Tab back into the nav at both ends.
+            const links = [...(servicesPanelRef.current?.querySelectorAll<HTMLElement>('a[href]') ?? [])];
+            if (e.key !== 'Tab' || !links.length) return;
+            const active = document.activeElement;
+            if (e.shiftKey && active === links[0]) {
+                e.preventDefault();
+                servicesTriggerRef.current?.focus();
+            } else if (!e.shiftKey && active === links[links.length - 1]) {
+                e.preventDefault();
+                closeServices();
+                (servicesTriggerRef.current?.nextElementSibling as HTMLElement | null)?.focus();
+            }
         };
         document.addEventListener('keydown', onKeyDown);
         return () => document.removeEventListener('keydown', onKeyDown);
@@ -104,7 +118,11 @@ export default function Header() {
             const focusables = [mobileToggleRef.current, ...sheet.querySelectorAll<HTMLElement>('a[href], button')].filter(Boolean) as HTMLElement[];
             const first = focusables[0];
             const last = focusables[focusables.length - 1];
-            if (e.shiftKey && document.activeElement === first) {
+            const inside = focusables.includes(document.activeElement as HTMLElement);
+            if (!inside) {
+                e.preventDefault();
+                (e.shiftKey ? last : first).focus();
+            } else if (e.shiftKey && document.activeElement === first) {
                 e.preventDefault();
                 last.focus();
             } else if (!e.shiftKey && document.activeElement === last) {
@@ -112,10 +130,18 @@ export default function Header() {
                 first.focus();
             }
         };
+        // Re-pin to the header after rotation/resize; close once the desktop nav takes over (sheet is md:hidden).
+        const desktop = window.matchMedia('(min-width: 768px)');
+        const onResize = () => {
+            if (desktop.matches) setMobileOpen(false);
+            else setSheetTop(headerRef.current?.getBoundingClientRect().bottom ?? 0);
+        };
         document.addEventListener('keydown', onKeyDown);
+        window.addEventListener('resize', onResize);
         return () => {
             document.body.style.overflow = '';
             document.removeEventListener('keydown', onKeyDown);
+            window.removeEventListener('resize', onResize);
         };
     }, [mobileOpen]);
 
