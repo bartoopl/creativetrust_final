@@ -54,9 +54,9 @@ Make the site's interactions feel immediate, interruptible and accessible: fix t
 
 ### Phase 1: Global foundations
 
-- [ ] 1.1 Root font size 87.5% and em-based heading tracking
-- [ ] 1.2 Focus-visible ring and active press feedback
-- [ ] 1.3 Reduced motion, transparency and contrast coverage
+- [x] 1.1 Root font size 87.5% and em-based heading tracking — 9ef5f90
+- [x] 1.2 Focus-visible ring and active press feedback — cf16190
+- [x] 1.3 Reduced motion, transparency and contrast coverage — df8b391
 
 ### Phase 2: Navigation
 
