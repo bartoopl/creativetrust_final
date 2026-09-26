@@ -222,9 +222,11 @@ main { isolation: isolate; }
 .ct-disclosure[data-open="true"] { grid-template-rows: 1fr; opacity: 1; visibility: visible; transition-delay: 0s; }
 .ct-disclosure > * { overflow: hidden; min-height: 0; }
 
-/* ===== Hero pipeline steps (mirrored with the 3D modules) ===== */
+/* ===== Elements mirrored with 3D scene pieces ([data-scene-target]) ===== */
 .ct-step { background: #fff; transition: background .2s ease; }
 .ct-step:hover, .ct-step[data-active="true"] { background: var(--panel); }
+.ct-scene-chip { cursor: default; transition: border-color .2s ease, color .2s ease; }
+.ct-scene-chip:hover, .ct-scene-chip[data-active="true"] { border-color: var(--accent); color: var(--accent); }
 
 /* ===== Marquee ===== */
 .ct-marquee-track {

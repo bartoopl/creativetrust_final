@@ -3,6 +3,7 @@ import CTASection from '@/components/CTASection';
 import FAQAccordion from '@/components/FAQAccordion';
 import Card from '@/components/ui/Card';
 import PageHero from '@/components/ui/PageHero';
+import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
@@ -84,8 +85,10 @@ export default function MarketingAutomationPage() {
                 description="Wdrażamy SALESmanago i budujemy automatyzacje oparte na danych i AI. Lejki, lead nurturing, personalizacja, integracje CRM — działają bez Twojego udziału."
                 cta={{ label: 'Omów projekt', href: '/kontakt' }}
                 right={
-                    <div className="ct-panel" style={{ padding: 'clamp(24px, 3vw, 32px)' }}>
-                        <div className="ct-meta" style={{ color: 'var(--accent)', marginBottom: 16 }}>// status: active</div>
+                    <>
+                    <SceneWithLegend id="automation-flow" label="Automatyzacje w procesie" />
+                    <div className="ct-panel lg:hidden" style={{ padding: 'clamp(24px, 3vw, 32px)' }}>
+                        <div className="ct-meta" style={{ color: 'var(--accent)', marginBottom: 16 }}>{'// status: active'}</div>
                         <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                             {['lead scoring', 'email nurturing', 'CRM sync', 'AI content', 'behavioral triggers', 'real-time personalization'].map((item, i) => (
                                 <li key={item} className="flex items-center gap-3" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
@@ -96,6 +99,7 @@ export default function MarketingAutomationPage() {
                             ))}
                         </ul>
                     </div>
+                    </>
                 }
             />
 
