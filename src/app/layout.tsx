@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
+import WebMcpTools from '@/components/WebMcpTools';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, organizationSchema } from '@/lib/schema';
 
@@ -139,6 +140,7 @@ export default function RootLayout({
                     <main className="w-full overflow-x-hidden">{children}</main>
                     <Footer />
                     <CookieConsent />
+                    <WebMcpTools />
                 </div>
             </body>
         </html>
