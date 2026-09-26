@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import type { Ref } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { services, seoLandings } from '@/lib/site-services';
 
 interface MegaMenuProps {
     id: string;
@@ -13,51 +14,6 @@ interface MegaMenuProps {
     onPointerLeave?: (e: React.PointerEvent) => void;
     onBlur?: (e: React.FocusEvent<HTMLDivElement>) => void;
 }
-
-const services = [
-    { href: '/uslugi/strony-www', title: 'Strony WWW', description: 'Strony firmowe, landing pages, UX i performance.', accent: 'Konwersja' },
-    { href: '/uslugi/e-commerce', title: 'E-commerce', description: 'Headless commerce, migracje i integracje systemów.', accent: 'Skalowanie' },
-    { href: '/uslugi/marketing-automation', title: 'Marketing Automation', description: 'SALESmanago, lejki, CRM i personalizacja.', accent: 'Automatyzacja' },
-    { href: '/uslugi/social-media', title: 'Social Media', description: 'Strategia, content, kampanie i raportowanie.', accent: 'Widoczność' },
-];
-
-const seoLandings = [
-    {
-        href: '/uslugi/migracja-woocommerce-do-headless',
-        title: 'Migracja WooCommerce do headless',
-        description: 'Fraza dla sklepów, które rosną ponad monolit.',
-    },
-    {
-        href: '/uslugi/wdrozenie-salesmanago',
-        title: 'Wdrożenie SALESmanago',
-        description: 'Landing pod zapytania o partnera i implementację.',
-    },
-    {
-        href: '/uslugi/landing-page-google-ads',
-        title: 'Landing page Google Ads',
-        description: 'Strony pod kampanie i reklamy płatne.',
-    },
-    {
-        href: '/uslugi/tworzenie-stron-www-cennik',
-        title: 'Tworzenie stron WWW cennik',
-        description: 'Wycena, zakres i orientacyjny budżet.',
-    },
-    {
-        href: '/uslugi/strona-firmowa-cena',
-        title: 'Strona firmowa cena',
-        description: 'Wycena strony firmowej i zakres projektu.',
-    },
-    {
-        href: '/uslugi/landing-page-pod-reklamy',
-        title: 'Landing page pod reklamy',
-        description: 'Strona pod kampanie i lead generation.',
-    },
-    {
-        href: '/uslugi/headless-woocommerce',
-        title: 'Headless WooCommerce',
-        description: 'Nowy storefront dla rozwijającego się sklepu.',
-    },
-];
 
 export default function MegaMenu({ id, isOpen, onClose, panelRef, onPointerEnter, onPointerLeave, onBlur }: MegaMenuProps) {
     return (
