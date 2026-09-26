@@ -42,3 +42,4 @@ next-env.d.ts
 
 # Blender backups
 *.blend1
+__pycache__/
