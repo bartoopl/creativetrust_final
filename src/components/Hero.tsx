@@ -1,4 +1,5 @@
 import NotchedButton from './ui/NotchedButton';
+import HeroPipeline3D from './hero/HeroPipeline3D';
 
 const signals = [
     'Strony www',
@@ -7,11 +8,11 @@ const signals = [
 ];
 
 const pipeline = [
-    { num: '01', title: 'Cel biznesowy', text: 'KPI i mierzalny wynik przed pierwszym pikselem.', status: 'brief' },
-    { num: '02', title: 'Research z AI', text: 'Rynek, konkurencja i dane — w dni, nie tygodnie.', status: 'strategia' },
-    { num: '03', title: 'Prototyp', text: 'UX i UI testowane na realnych scenariuszach.', status: 'design' },
-    { num: '04', title: 'Wdrożenie', text: 'Next.js, Medusa.js, automatyzacje i integracje.', status: 'development' },
-    { num: '05', title: 'Optymalizacja', text: 'Monitoring i iteracje od dnia startu.', status: 'wzrost' },
+    { num: '01', title: 'Cel biznesowy', text: 'KPI i mierzalny wynik przed pierwszym pikselem.', status: 'brief', module: 'module_goal' },
+    { num: '02', title: 'Research z AI', text: 'Rynek, konkurencja i dane — w dni, nie tygodnie.', status: 'strategia', module: 'module_research' },
+    { num: '03', title: 'Prototyp', text: 'UX i UI testowane na realnych scenariuszach.', status: 'design', module: 'module_prototype' },
+    { num: '04', title: 'Wdrożenie', text: 'Next.js, Medusa.js, automatyzacje i integracje.', status: 'development', module: 'module_deploy' },
+    { num: '05', title: 'Optymalizacja', text: 'Monitoring i iteracje od dnia startu.', status: 'wzrost', module: 'module_optimize' },
 ];
 
 export default function Hero() {
@@ -20,7 +21,7 @@ export default function Hero() {
             className="ct-dotgrid relative"
             style={{ padding: 'var(--pad-y) var(--pad-x) 0' }}
         >
-            <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-12">
+            <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-8">
                 <div className="flex max-w-[640px] flex-col gap-6">
                     <div className="flex flex-wrap gap-2">
                         {signals.map((signal) => (
@@ -40,8 +41,10 @@ export default function Hero() {
                     </div>
                 </div>
 
+                <HeroPipeline3D />
+
                 <div
-                    className="overflow-hidden"
+                    className="overflow-hidden lg:col-span-2"
                     style={{ border: '1px solid rgba(17,24,39,0.1)', borderRadius: 8, background: '#fff' }}
                     aria-label="Przykładowy przebieg wdrożenia"
                 >
@@ -51,7 +54,7 @@ export default function Hero() {
                     </div>
                     <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5" style={{ listStyle: 'none', margin: 0, padding: 0, gap: 1, background: 'var(--line)' }}>
                         {pipeline.map((step) => (
-                            <li key={step.num} className="flex flex-col gap-2" style={{ background: '#fff', padding: '24px 20px', minHeight: 140 }}>
+                            <li key={step.num} data-pipeline-step={step.module} className="ct-step flex flex-col gap-2" style={{ padding: '24px 20px', minHeight: 140 }}>
                                 <span className="ct-mono" style={{ fontSize: 12, color: 'var(--accent)' }}>{step.num}</span>
                                 <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)' }}>{step.title}</span>
                                 <span className="ct-body" style={{ fontSize: 13 }}>{step.text}</span>
