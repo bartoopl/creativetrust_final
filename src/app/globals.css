@@ -222,6 +222,10 @@ main { isolation: isolate; }
 .ct-disclosure[data-open="true"] { grid-template-rows: 1fr; opacity: 1; visibility: visible; transition-delay: 0s; }
 .ct-disclosure > * { overflow: hidden; min-height: 0; }
 
+/* ===== Hero pipeline steps (mirrored with the 3D modules) ===== */
+.ct-step { background: #fff; transition: background .2s ease; }
+.ct-step:hover, .ct-step[data-active="true"] { background: var(--panel); }
+
 /* ===== Marquee ===== */
 .ct-marquee-track {
   display: flex; gap: 56px; white-space: nowrap; width: max-content;

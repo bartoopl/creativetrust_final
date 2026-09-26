@@ -10,11 +10,13 @@
     "postbuild": "next-sitemap",
     "check:design": "node scripts/check-design-system.mjs",
     "typecheck": "tsc --noEmit -p .",
-    "test": "node --test scripts/*.test.mjs"
+    "test": "node --test scripts/*.test.mjs",
+    "model:hero": "/Applications/Blender.app/Contents/MacOS/Blender -b --factory-startup --python blender/hero-pipeline/build.py -- --export public/models/hero-pipeline.glb --poster blender/hero-pipeline/.poster.png --save blender/hero-pipeline/hero-pipeline.blend && cwebp -quiet -q 82 -alpha_q 90 blender/hero-pipeline/.poster.png -o public/models/hero-pipeline-poster.webp && rm blender/hero-pipeline/.poster.png"
   },
   "dependencies": {
     "@node-rs/bcrypt": "^1.10.7",
     "@portabletext/react": "^3.2.1",
+    "@react-three/fiber": "^9.8.1",
     "@sanity/client": "^7.14.1",
     "@sanity/image-url": "^2.0.3",
     "@sanity/vision": "^5.6.0",
@@ -30,7 +32,8 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "recharts": "^2.15.1",
-    "sanity": "^5.6.0"
+    "sanity": "^5.6.0",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -38,6 +41,7 @@
     "@types/node": "^20.17.27",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19",
+    "@types/three": "^0.186.0",
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "^16.1.4",
