@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
 import PageHero from '@/components/ui/PageHero';
+import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildServiceSchema } from '@/lib/schema';
@@ -67,6 +68,7 @@ export default function EcommercePage() {
                 title={<>Sklepy, które sprzedają i <span style={{ color: 'var(--accent)' }}>skalują się.</span></>}
                 description="Projektujemy i wdrażamy sklepy e-commerce oparte na danych i AI. Nowe wdrożenia, migracje platform, integracje ERP — szybciej i z lepszym wynikiem niż tradycyjny proces."
                 cta={{ label: 'Omów projekt', href: '/kontakt' }}
+                right={<SceneWithLegend id="ecommerce-layers" label="Warstwy sklepu headless" />}
             />
 
             <Section border={false}>

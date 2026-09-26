@@ -2,13 +2,13 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
-import type { ModuleName } from './HeroPipelineScene';
+import { scenes, type SceneId } from '@/lib/scenes3d';
 
-// three.js + the scene load only on the client, only where the 3D is actually shown.
-const HeroPipelineScene = dynamic(() => import('./HeroPipelineScene'), { ssr: false });
+// three.js + the canvas load only on the client, only where 3D is actually shown.
+const Scene3DCanvas = dynamic(() => import('./Scene3DCanvas'), { ssr: false });
 
-const POSTER = '/models/hero-pipeline-poster.webp';
-const STEP_SELECTOR = '[data-pipeline-step]';
+/** Page elements that mirror a scene target: hovering one lifts the 3D piece, and vice versa. */
+const TARGET_SELECTOR = '[data-scene-target]';
 
 /** 3D is an enhancement: desktop, motion allowed, no data saver, WebGL available. */
 function canRender3D(): boolean {
@@ -25,13 +25,14 @@ function canRender3D(): boolean {
 const noopSubscribe = () => () => {};
 
 /**
- * Isometric "pipeline" beside the hero headline. Live canvas where 3D is allowed — modules
- * assemble on load (their arrival *is* the loading state), the token
- * follows scroll, modules lift on hover — mirrored with the step panel below — and the whole
- * scene tilts slightly towards the pointer. Elsewhere (reduced motion, data saver, no WebGL) a
- * static poster of the assembled scene stands in. Decorative: the panel carries the same content.
+ * Isometric scene built in Blender (see src/lib/scenes3d.ts). Live canvas where 3D is allowed:
+ * the pieces assemble on load (their arrival *is* the loading state), scroll drives the scene's
+ * scroll clip, hovering a piece lifts it — mirrored with `[data-scene-target]` elements in the
+ * same section — and the scene tilts slightly towards the pointer. Elsewhere (reduced motion,
+ * data saver, no WebGL) a static poster stands in. Decorative: the page carries the content.
  */
-export default function HeroPipeline3D() {
+export default function Scene3D({ id, className = '' }: { id: SceneId; className?: string }) {
+    const scene = scenes[id];
     const containerRef = useRef<HTMLDivElement>(null);
     const enabled = useSyncExternalStore(noopSubscribe, canRender3D, () => false);
     const isClient = useSyncExternalStore(noopSubscribe, () => true, () => false);
@@ -39,21 +40,26 @@ export default function HeroPipeline3D() {
 
     const progress = useRef(0);
     const pointer = useRef<{ x: number; y: number } | null>(null);
-    const panelHover = useRef<ModuleName | null>(null);
+    const pageHover = useRef<string | null>(null);
+
+    const targets = () => {
+        const section = containerRef.current?.closest('section');
+        return section ? [...section.querySelectorAll<HTMLElement>(TARGET_SELECTOR)] : [];
+    };
 
     useEffect(() => {
         const container = containerRef.current;
-        const hero = container?.closest('section');
-        if (!enabled || !container || !hero) return;
+        const section = container?.closest('section');
+        if (!enabled || !container || !section) return;
 
         // Scroll progress: 0 at the top of the page, 1 when the scene's bottom edge reaches 30% of
-        // the viewport — the token completes 01 → 05 while the scene is still in view.
+        // the viewport — the scroll clip completes while the scene is still in view.
         const onScroll = () => {
             const bottom = container.getBoundingClientRect().bottom + window.scrollY;
             const distance = Math.max(1, bottom - window.innerHeight * 0.3);
             progress.current = Math.min(1, Math.max(0, window.scrollY / distance));
         };
-        // Pointer over the hero, normalised around the scene's centre.
+        // Pointer over the section, normalised around the scene's centre.
         const onPointerMove = (e: PointerEvent) => {
             if (e.pointerType !== 'mouse') return;
             const rect = container.getBoundingClientRect();
@@ -65,56 +71,55 @@ export default function HeroPipeline3D() {
         const onPointerLeave = () => {
             pointer.current = null;
         };
-        // Step panel ↔ 3D: hovering or focusing a step lifts its module.
-        const steps = [...document.querySelectorAll<HTMLElement>(STEP_SELECTOR)];
-        const stepHandlers = steps.map((step) => {
+        // Page → 3D: hovering or focusing a mirrored element lifts its piece.
+        const offs = targets().map((el) => {
             const enter = () => {
-                panelHover.current = step.dataset.pipelineStep as ModuleName;
+                pageHover.current = el.dataset.sceneTarget ?? null;
             };
             const leave = () => {
-                if (panelHover.current === step.dataset.pipelineStep) panelHover.current = null;
+                if (pageHover.current === el.dataset.sceneTarget) pageHover.current = null;
             };
-            step.addEventListener('pointerenter', enter);
-            step.addEventListener('pointerleave', leave);
-            step.addEventListener('focusin', enter);
-            step.addEventListener('focusout', leave);
+            el.addEventListener('pointerenter', enter);
+            el.addEventListener('pointerleave', leave);
+            el.addEventListener('focusin', enter);
+            el.addEventListener('focusout', leave);
             return () => {
-                step.removeEventListener('pointerenter', enter);
-                step.removeEventListener('pointerleave', leave);
-                step.removeEventListener('focusin', enter);
-                step.removeEventListener('focusout', leave);
+                el.removeEventListener('pointerenter', enter);
+                el.removeEventListener('pointerleave', leave);
+                el.removeEventListener('focusin', enter);
+                el.removeEventListener('focusout', leave);
             };
         });
-        // Stop rendering while the hero is off screen.
+        // Stop rendering while the scene is off screen.
         const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting));
         observer.observe(container);
 
         onScroll();
         window.addEventListener('scroll', onScroll, { passive: true });
-        hero.addEventListener('pointermove', onPointerMove);
-        hero.addEventListener('pointerleave', onPointerLeave);
+        section.addEventListener('pointermove', onPointerMove);
+        section.addEventListener('pointerleave', onPointerLeave);
         return () => {
             window.removeEventListener('scroll', onScroll);
-            hero.removeEventListener('pointermove', onPointerMove);
-            hero.removeEventListener('pointerleave', onPointerLeave);
-            stepHandlers.forEach((off) => off());
+            section.removeEventListener('pointermove', onPointerMove);
+            section.removeEventListener('pointerleave', onPointerLeave);
+            offs.forEach((off) => off());
             observer.disconnect();
         };
     }, [enabled]);
 
-    // 3D hover → highlight the matching step in the panel.
-    const onModuleHover = (module: ModuleName | null) => {
-        document.querySelectorAll<HTMLElement>(STEP_SELECTOR).forEach((step) => {
-            if (step.dataset.pipelineStep === module) step.dataset.active = 'true';
-            else delete step.dataset.active;
+    // 3D → page: highlight the mirrored element.
+    const onTargetHover = (node: string | null) => {
+        targets().forEach((el) => {
+            if (el.dataset.sceneTarget === node) el.dataset.active = 'true';
+            else delete el.dataset.active;
         });
     };
 
     return (
-        <div ref={containerRef} className="relative hidden w-full lg:block" style={{ aspectRatio: '6 / 5' }} aria-hidden="true">
+        <div ref={containerRef} className={`relative w-full ${className}`} style={{ aspectRatio: '6 / 5' }} aria-hidden="true">
             {/* eslint-disable-next-line @next/next/no-img-element -- static transparent poster, sized by the container */}
             <img
-                src={POSTER}
+                src={scene.poster}
                 alt=""
                 width={1200}
                 height={1000}
@@ -124,12 +129,13 @@ export default function HeroPipeline3D() {
                 draggable={false}
             />
             {enabled && (
-                <HeroPipelineScene
+                <Scene3DCanvas
+                    scene={scene}
                     active={visible}
                     progress={progress}
                     pointer={pointer}
-                    panelHover={panelHover}
-                    onModuleHover={onModuleHover}
+                    pageHover={pageHover}
+                    onTargetHover={onTargetHover}
                 />
             )}
         </div>
