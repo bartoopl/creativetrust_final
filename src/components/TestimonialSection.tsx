@@ -1,6 +1,6 @@
 import Eyebrow from './ui/Eyebrow';
 
-const testimonials = [
+export const testimonials = [
     { name: 'Anna', text: 'Creativetrust nie robi tylko tego, co jest na briefie. Aktywnie sugerują co zmienić, żeby osiągnąć lepsze wyniki.' },
     { name: 'Marcin', text: 'Nasz sklep na Medusa.js działa szybciej, wygląda lepiej i kosztuje nas mniej miesięcznie niż poprzednia platforma.' },
     { name: 'Karolina', text: 'Automatyzacja marketingu, którą wdrożyli, zmniejszyła nasz czas obsługi leadów o połowę.' },

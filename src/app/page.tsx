@@ -1,15 +1,14 @@
 import type { Metadata } from 'next';
-import Hero from '@/components/Hero';
 import AskHero from '@/components/home/AskHero';
-import ClientLogos from '@/components/ClientLogos';
-import StatsSection from '@/components/StatsSection';
-import WhyUsSection from '@/components/WhyUsSection';
-import Services from '@/components/Services';
-import ProcessPipelineSection from '@/components/ProcessPipelineSection';
+import HomeShowcase from '@/components/home/HomeShowcase';
+import HomeProof from '@/components/home/HomeProof';
+import HomeServices from '@/components/home/HomeServices';
+import HomeWhyUs from '@/components/home/HomeWhyUs';
+import HomeProcess from '@/components/home/HomeProcess';
+import HomeVoices from '@/components/home/HomeVoices';
+import HomeClosing from '@/components/home/HomeClosing';
 import RealizacjeSection from '@/components/RealizacjeSection';
-import TestimonialSection from '@/components/TestimonialSection';
 import BlogSection from '@/components/BlogSection';
-import CTASection from '@/components/CTASection';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
@@ -24,21 +23,21 @@ export const metadata: Metadata = {
     },
 };
 
+/** Homepage trial redesign: everything inside .ct-v2 uses the "electric ink on drafting paper" theme. */
 export default function Home() {
     return (
         <div className="ct-v2">
             <AskHero />
             <div id="dalej" style={{ scrollMarginTop: 72 }} />
-            <Hero />
-            <ClientLogos />
-            <StatsSection />
-            <WhyUsSection />
-            <Services />
-            <ProcessPipelineSection />
+            <HomeShowcase />
+            <HomeProof />
+            <HomeServices />
+            <HomeWhyUs />
+            <HomeProcess />
             <RealizacjeSection />
-            <TestimonialSection />
+            <HomeVoices />
             <BlogSection />
-            <CTASection />
+            <HomeClosing />
         </div>
     );
 }
