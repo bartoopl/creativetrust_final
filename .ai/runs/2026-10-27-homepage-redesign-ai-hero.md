@@ -53,12 +53,12 @@ Trial redesign of the homepage only: a full-viewport (100svh) centered hero wher
 
 ### Phase 1: Foundations
 
-- [ ] 1.1 .ct-v2 theme scope and fonts
+- [x] 1.1 .ct-v2 theme scope and fonts — 22e1359
 
 ### Phase 2: Offer assistant backend
 
-- [ ] 2.1 Offer assistant core logic with tests
-- [ ] 2.2 Offer assistant API route
+- [x] 2.1 Offer assistant core logic with tests — 6729bf9
+- [x] 2.2 Offer assistant API route — d3b6de7
 
 ### Phase 3: AI hero
 
