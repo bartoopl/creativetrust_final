@@ -45,9 +45,12 @@ Trial redesign of the homepage only: a full-viewport (100svh) centered hero wher
 - Cost/abuse: question capped at 600 chars, `max_tokens` bounded, in-memory per-IP limit (best-effort on serverless), honeypot.
 - `ANTHROPIC_API_KEY` must be configured on Netlify (`ANTHROPIC_MODEL` optional); without it the hero degrades to a contact prompt instead of erroring.
 - `body:has()` scoping: unsupported browsers (very old) just see the current theme in header/footer.
+- Validation gate blocker: `npm run lint` is broken on `main` independently of this run (`next lint` was removed in Next 16; `eslint` crashes on a circular config). Gate run = typecheck + test + check:design + build.
 - SEO: the homepage keeps a descriptive `<h1>` in the hero; previous hero heading becomes `<h2>`.
 
 ## Progress
+
+PR: #6
 
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
