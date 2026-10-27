@@ -68,6 +68,6 @@ Trial redesign of the homepage only: a full-viewport (100svh) centered hero wher
 
 ### Phase 4: Homepage sections
 
-- [ ] 4.1 Pipeline workspace frame, logo tiles and stats
-- [ ] 4.2 Services, why-us bento and process
-- [ ] 4.3 Testimonials, CTA and page composition
+- [x] 4.1 Pipeline workspace frame, logo tiles and stats — f27dde2
+- [x] 4.2 Services, why-us bento and process — e4d79ce
+- [x] 4.3 Testimonials, CTA and page composition — 6f40ec6
