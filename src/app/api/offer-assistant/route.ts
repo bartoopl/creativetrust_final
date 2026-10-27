@@ -8,7 +8,8 @@ import {
 
 const catalogue: Catalogue = { services, landings: seoLandings, prices: publishedPrices };
 const DEFAULT_MODEL = 'claude-haiku-5-5';
-const TIMEOUT_MS = 20_000;
+// Below Netlify's 10 s synchronous function limit, so a slow answer still ends in a readable error.
+const TIMEOUT_MS = 9_000;
 const limit = createRateLimiter(8, 10 * 60 * 1000);
 
 const fail = (status: number, error: string, headers?: HeadersInit) =>
@@ -25,6 +26,7 @@ export async function POST(request: Request) {
     } catch {
         return fail(400, 'Nieprawidłowe zapytanie.');
     }
+    if (!body || typeof body !== 'object' || Array.isArray(body)) return fail(400, 'Nieprawidłowe zapytanie.');
 
     // Honeypot: bots fill every field; answer like a validation error so they learn nothing.
     if (typeof body.website === 'string' && body.website.trim()) return fail(400, 'Nieprawidłowe zapytanie.');
