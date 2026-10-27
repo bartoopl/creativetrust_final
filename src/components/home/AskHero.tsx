@@ -77,9 +77,9 @@ export default function AskHero() {
     const loading = state.kind === 'loading';
 
     return (
-        <section ref={sectionRef} className="ct-ask-hero ct-dotgrid" aria-labelledby="ask-hero-title">
+        <section ref={sectionRef} className="ct-ask-hero" aria-labelledby="ask-hero-title">
             <div className="ct-ask-inner">
-                <span className="ct-ask-badge"><span className="ct-ask-dot" aria-hidden="true" /> Asystent oferty AI</span>
+                <span className="ct-eyebrow">Asystent oferty AI</span>
 
                 <h1 id="ask-hero-title" className="ct-h1 ct-statement" style={{ maxWidth: '16ch' }}>
                     Projekty cyfrowe, które działają <span className="ct-electric">biznesowo.</span>
@@ -151,7 +151,7 @@ export default function AskHero() {
 
             <a href="#dalej" className="ct-scroll-cue" aria-label="Przewiń do dalszej części strony">
                 <span>Poznaj nas bliżej</span>
-                <ArrowDown size={18} strokeWidth={1.5} aria-hidden="true" />
+                <ArrowDown size={22} strokeWidth={1.25} aria-hidden="true" />
             </a>
         </section>
     );
