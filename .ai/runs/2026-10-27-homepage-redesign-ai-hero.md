@@ -50,6 +50,12 @@ Trial redesign of the homepage only: a full-viewport (100svh) centered hero wher
 ### Phase 7: Minimal first screen (follow-up)
 1. Homepage chrome reduced to wordmark + menu toggle; hero reduced to headline, one line of copy and a one-line chat box.
 
+### Phase 8: Subpages in the v2 style (follow-up)
+1. Theme wrapper in the root layout; shared components (cards, grids, labels, sections, CTA) restyled; inline 600 weights and legacy colours replaced.
+
+### Phase 9: Markdown for AI + SEO (follow-up, delegated child task)
+1. `.md` twins, `Accept: text/markdown`, dynamic `llms.txt` / `llms-full.txt`, tests — brief in `.ai/briefs/markdown-for-ai.md`.
+
 ## Risks
 
 - Hallucinated offers/prices: the prompt lists only catalogue data, and the server drops any price not present in `publishedPrices` and any unknown service slug.
@@ -99,3 +105,11 @@ PR: #6
 ### Phase 7: Minimal first screen
 
 - [x] 7.1 Minimal homepage chrome and hero — 94d0022
+
+### Phase 8: Subpages in v2
+
+- [x] 8.1 Site-wide v2 theme — edd02cd
+
+### Phase 9: Markdown for AI
+
+- [ ] 9.1 Markdown twins, llms.txt and proxy
