@@ -27,7 +27,7 @@ export interface PortableTextOptions {
     imageUrl?: (image: PortableTextBlock) => string | null | undefined;
 }
 
-const HEADING: Record<string, string> = { h1: '##', h2: '##', h3: '###', h4: '####', h5: '####', h6: '####' };
+const HEADING_RANK: Record<string, number> = { h1: 1, h2: 2, h3: 3, h4: 4, h5: 5, h6: 6 };
 const DECORATORS = ['code', 'em', 'strong'] as const;
 
 /** Escapes characters that would otherwise turn plain text into markup. */
@@ -115,11 +115,43 @@ function renderImage(block: PortableTextBlock, options: PortableTextOptions): st
     return caption ? `![${alt}](${url})\n\n*${escapeMarkdown(caption)}*` : `![${alt}](${url})`;
 }
 
-function renderTextBlock(block: PortableTextBlock): string {
+const isHeading = (block: PortableTextBlock) => block._type === 'block' && !block.listItem && HEADING_RANK[block.style ?? ''] !== undefined;
+
+/** Headings carry their own weight, so bold inside them is noise. */
+function withoutStrong(block: PortableTextBlock): PortableTextBlock {
+    return {
+        ...block,
+        children: block.children?.map((child) =>
+            child._type === 'span' ? { ...child, marks: ((child as PortableTextSpan).marks ?? []).filter((m) => m !== 'strong') } : child,
+        ),
+    };
+}
+
+/**
+ * Editors pick heading styles for looks (an entry may use only h4), so the
+ * levels actually used are re-ranked from `##` under the document's `#`, and
+ * a heading never goes more than one level deeper than the previous one.
+ */
+function headingLevels(blocks: PortableTextBlock[]): Map<PortableTextBlock, number> {
+    const headings = blocks.filter((block) => isHeading(block) && renderInline(block).trim());
+    const ranks = [...new Set(headings.map((block) => HEADING_RANK[block.style!]))].sort((a, b) => a - b);
+    const levels = new Map<PortableTextBlock, number>();
+    let previous = 1;
+    for (const block of headings) {
+        const level = Math.min(2 + ranks.indexOf(HEADING_RANK[block.style!]), previous + 1, 6);
+        levels.set(block, level);
+        previous = level;
+    }
+    return levels;
+}
+
+function renderTextBlock(block: PortableTextBlock, headingLevel?: number): string {
+    if (headingLevel) {
+        const text = renderInline(withoutStrong(block)).trim().replace(/\s*\n\s*/g, ' ');
+        return text ? `${'#'.repeat(headingLevel)} ${text}` : '';
+    }
     const inline = renderInline(block).trim();
     if (!inline) return '';
-    const heading = HEADING[block.style ?? 'normal'];
-    if (heading) return `${heading} ${inline.replace(/\s*\n\s*/g, ' ')}`;
     if (block.style === 'blockquote') {
         return inline.split('\n').map((line) => `> ${line}`).join('\n');
     }
@@ -135,6 +167,7 @@ export function portableTextToMarkdown(
     const chunks: string[] = [];
     let list: string[] = [];
     const counters: number[] = [];
+    const levels = headingLevels(blocks);
 
     const flushList = () => {
         if (list.length) chunks.push(list.join('\n'));
@@ -156,7 +189,7 @@ export function portableTextToMarkdown(
         flushList();
         const rendered =
             block._type === 'block'
-                ? renderTextBlock(block)
+                ? renderTextBlock(block, levels.get(block))
                 : block._type === 'image'
                   ? renderImage(block, options)
                   : block._type === 'code'

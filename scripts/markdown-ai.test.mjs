@@ -302,6 +302,18 @@ test('converts headings, paragraphs and blockquotes', () => {
     assert.equal(md, '## Wstęp\n\nAkapit\n\n### Szczegół\n\n#### Mniejszy\n\n> Cytat\n> drugi wiersz\n\n## Tytuł w treści');
 });
 
+test('re-ranks heading levels so they never skip and drops bold inside headings', () => {
+    // Knowledge-base entries use h4 as their only heading style.
+    assert.equal(
+        portableTextToMarkdown([block([span('Jak działa?', ['strong'])], { style: 'h4' }), block([span('Opis')]), block([span('Zalety')], { style: 'h4' })]),
+        '## Jak działa?\n\nOpis\n\n## Zalety',
+    );
+    assert.equal(
+        portableTextToMarkdown([block([span('A')], { style: 'h2' }), block([span('B')], { style: 'h4' }), block([span('C')], { style: 'h3' }), block([span('D')], { style: 'h4' })]),
+        '## A\n\n### B\n\n### C\n\n#### D',
+    );
+});
+
 test('skips empty blocks so no empty headings are produced', () => {
     assert.equal(portableTextToMarkdown([block([span('  ')], { style: 'h2' }), block([span('Treść')])]), 'Treść');
 });

@@ -1,14 +1,12 @@
 import { SITE_URL } from '@/lib/schema';
-import { handlerPathFor, markdownPages, markdownTargetFor, routeFromHandlerSegments } from '@/lib/markdown/pages';
+import { markdownPages, markdownTargetFor, routeFromHandlerSegments } from '@/lib/markdown/pages';
 import { getArticleMarkdown, loadPage, markdownResponse } from '@/lib/markdown/server';
 
 // Reached through the proxy: `/uslugi/strony-www.md` and `Accept: text/markdown`
 // on `/uslugi/strony-www` are both rewritten to `/md/uslugi/strony-www`.
-export const revalidate = 3600;
-
-export function generateStaticParams() {
-    return markdownPages.map((page) => ({ path: handlerPathFor({ kind: 'page', route: page.route }).split('/').slice(2) }));
-}
+// Rendered per request and cached by the CDN (s-maxage): prerendering would
+// make next-sitemap list the internal /md/* paths in the public sitemap.
+export const dynamic = 'force-dynamic';
 
 const notFound = (canonical: string) =>
     markdownResponse('# Nie znaleziono\n\nTa strona nie ma wersji Markdown. Spis dostępnych dokumentów: /llms.txt\n', { canonical, status: 404 });

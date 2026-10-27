@@ -8,8 +8,5 @@ Host: https://www.creativetrust.pl
 # AI access policy
 Content-Signal: search=yes,ai-input=yes,ai-train=no
 
-# Markdown for AI agents: index of .md pages (also served for Accept: text/markdown)
-# https://www.creativetrust.pl/llms.txt
-
 # Sitemaps
 Sitemap: https://www.creativetrust.pl/sitemap.xml
