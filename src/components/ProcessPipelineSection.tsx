@@ -1,6 +1,6 @@
 import Section from './ui/Section';
 
-const steps = [
+export const steps = [
     { num: '01', title: 'Brief', description: 'Rozmawiamy o biznesie, celach i KPIs.', duration: '1–2 dni' },
     { num: '02', title: 'AI Strategia', description: 'AI analizuje rynek i dane. My projektujemy plan.', duration: '2–3 dni' },
     { num: '03', title: 'Design', description: 'Prototypy i UI/UX w godzinach, nie tygodniach.', duration: '3–5 dni' },

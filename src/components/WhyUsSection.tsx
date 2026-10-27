@@ -1,6 +1,6 @@
 import Section from './ui/Section';
 
-const reasons = [
+export const reasons = [
     { title: 'Jesteśmy w biznesie, nie tylko obok niego', text: 'Każda decyzja projektowa jest dla nas decyzją biznesową, nie estetyczną.' },
     { title: 'Ludzka decyzja + tempo AI', text: 'Doświadczenie biznesowe i wdrożenia przyspieszone przez AI — bez utraty jakości.' },
     { title: 'Kompleksowa obsługa', text: 'Strony, sklepy, marketing automation i social media pod jednym dachem.' },
