@@ -44,6 +44,9 @@ Trial redesign of the homepage only: a full-viewport (100svh) centered hero wher
 2. Case studies and blog sections in the v2 language.
 3. Hero cleanup: plain Paper, no extra badge, Tile Gray question box, 64px section display.
 
+### Phase 6: Assistant works without an API key (follow-up)
+1. Keyword catalogue fallback when the key is missing or Claude fails, marked as non-AI in the UI.
+
 ## Risks
 
 - Hallucinated offers/prices: the prompt lists only catalogue data, and the server drops any price not present in `publishedPrices` and any unknown service slug.
@@ -85,3 +88,7 @@ PR: #6
 - [x] 5.1 Header strip, wordmark and footer in v2 — e832912
 - [x] 5.2 Case studies and blog in v2 — 5a2f13b
 - [x] 5.3 Hero cleanup and 64px display — cdd214d
+
+### Phase 6: Assistant fallback
+
+- [x] 6.1 Catalogue fallback without API key — 4e661e5
