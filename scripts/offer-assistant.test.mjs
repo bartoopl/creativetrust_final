@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
     MAX_QUESTION_LENGTH, TOOL_NAME, validateQuestion, buildSystemPrompt, buildAnswerTool,
-    buildMessagesRequest, extractToolInput, normalizeAnswer, formatLeadMessage,
+    buildMessagesRequest, extractToolInput, normalizeAnswer, formatLeadMessage, createRateLimiter,
 } from '../src/lib/offer-assistant.ts';
 import { services, seoLandings, publishedPrices } from '../src/lib/site-services.ts';
 
@@ -108,4 +108,19 @@ test('formatLeadMessage includes the question, answer, services, prices and note
         assert.ok(text.includes(part), part);
     }
     assert.equal(formatLeadMessage('Q', null, ''), 'Pytanie z asystenta oferty na stronie głównej:\nQ');
+});
+
+// ---------- createRateLimiter ----------
+
+test('rate limiter allows up to the limit per key and resets after the window', () => {
+    let t = 0;
+    const limit = createRateLimiter(2, 1000, () => t);
+    assert.equal(limit('a').allowed, true);
+    assert.equal(limit('a').allowed, true);
+    const blocked = limit('a');
+    assert.equal(blocked.allowed, false);
+    assert.equal(blocked.retryAfterSeconds, 1);
+    assert.equal(limit('b').allowed, true);
+    t = 1000;
+    assert.equal(limit('a').allowed, true);
 });

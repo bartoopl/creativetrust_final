@@ -126,6 +126,26 @@ export function normalizeAnswer(input: unknown, { services, prices }: Catalogue)
     };
 }
 
+/**
+ * Fixed-window per-key limiter. In-memory, so on serverless it only bounds one warm instance —
+ * a cost guard against bursts, not a hard quota.
+ */
+export function createRateLimiter(limit: number, windowMs: number, now: () => number = Date.now) {
+    const hits = new Map<string, { count: number; resetAt: number }>();
+    return (key: string): { allowed: boolean; retryAfterSeconds: number } => {
+        const t = now();
+        if (hits.size > 5000) for (const [k, v] of hits) if (v.resetAt <= t) hits.delete(k);
+        const entry = hits.get(key);
+        if (!entry || entry.resetAt <= t) {
+            hits.set(key, { count: 1, resetAt: t + windowMs });
+            return { allowed: true, retryAfterSeconds: 0 };
+        }
+        if (entry.count >= limit) return { allowed: false, retryAfterSeconds: Math.ceil((entry.resetAt - t) / 1000) };
+        entry.count += 1;
+        return { allowed: true, retryAfterSeconds: 0 };
+    };
+}
+
 /** Plain-text summary attached to a contact request sent from the hero. */
 export function formatLeadMessage(question: string, answer: OfferAnswer | null, note: string): string {
     const parts = [`Pytanie z asystenta oferty na stronie głównej:\n${question}`];
