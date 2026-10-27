@@ -82,6 +82,6 @@ PR: #6
 
 ### Phase 5: Style-reference compliance
 
-- [ ] 5.1 Header strip, wordmark and footer in v2
-- [ ] 5.2 Case studies and blog in v2
-- [ ] 5.3 Hero cleanup and 64px display
+- [x] 5.1 Header strip, wordmark and footer in v2 — e832912
+- [x] 5.2 Case studies and blog in v2 — 5a2f13b
+- [x] 5.3 Hero cleanup and 64px display — cdd214d
