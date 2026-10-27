@@ -7,8 +7,8 @@ import HomeWhyUs from '@/components/home/HomeWhyUs';
 import HomeProcess from '@/components/home/HomeProcess';
 import HomeVoices from '@/components/home/HomeVoices';
 import HomeClosing from '@/components/home/HomeClosing';
-import RealizacjeSection from '@/components/RealizacjeSection';
-import BlogSection from '@/components/BlogSection';
+import HomeCases from '@/components/home/HomeCases';
+import HomeBlog from '@/components/home/HomeBlog';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
@@ -34,9 +34,9 @@ export default function Home() {
             <HomeServices />
             <HomeWhyUs />
             <HomeProcess />
-            <RealizacjeSection />
+            <HomeCases />
             <HomeVoices />
-            <BlogSection />
+            <HomeBlog />
             <HomeClosing />
         </div>
     );

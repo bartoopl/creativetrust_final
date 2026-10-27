@@ -309,6 +309,11 @@ body:has(.ct-v2) .ct-cta.sm { font-size: 14px; min-height: 32px; }
 .ct-v2 .ct-section { padding-block: clamp(64px, 9vw, 120px); }
 .ct-v2-service-link { font-size: clamp(22px, 2.2vw, 26px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.25; color: var(--accent); }
 .ct-v2-service-link:hover { color: var(--text); }
+.ct-v2-card { transition: background .2s ease; }
+.ct-v2-card:hover { background: var(--panel2); }
+.ct-v2-card:hover h3 { color: var(--accent); }
+.ct-v2-media { overflow: hidden; border-radius: 10px; background: var(--panel2); }
+.ct-v2-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ct-v2-step { padding: 14px 12px; border-radius: 10px; transition: background .2s ease; }
 .ct-v2-step:hover, .ct-v2-step[data-active="true"] { background: var(--bg); }
 
