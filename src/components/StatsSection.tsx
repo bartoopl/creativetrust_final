@@ -1,4 +1,4 @@
-const stats = [
+export const stats = [
     { value: '50+', label: 'Zrealizowanych projektów' },
     { value: '3×', label: 'Szybciej z AI w procesie' },
     { value: '100%', label: 'Projektów z mierzalnym celem' },

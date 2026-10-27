@@ -1,4 +1,4 @@
-const clients = [
+export const clients = [
     'Monnari',
     'Quisque',
     '5.10.15',

@@ -7,7 +7,7 @@ const signals = [
     'Marketing automation',
 ];
 
-const pipeline = [
+export const pipeline = [
     { num: '01', title: 'Cel biznesowy', text: 'KPI i mierzalny wynik przed pierwszym pikselem.', status: 'brief', module: 'module_goal' },
     { num: '02', title: 'Research z AI', text: 'Rynek, konkurencja i dane — w dni, nie tygodnie.', status: 'strategia', module: 'module_research' },
     { num: '03', title: 'Prototyp', text: 'UX i UI testowane na realnych scenariuszach.', status: 'design', module: 'module_prototype' },
