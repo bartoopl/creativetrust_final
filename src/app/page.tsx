@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
+import AskHero from '@/components/home/AskHero';
 import ClientLogos from '@/components/ClientLogos';
 import StatsSection from '@/components/StatsSection';
 import WhyUsSection from '@/components/WhyUsSection';
@@ -25,7 +26,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
     return (
-        <>
+        <div className="ct-v2">
+            <AskHero />
+            <div id="dalej" style={{ scrollMarginTop: 72 }} />
             <Hero />
             <ClientLogos />
             <StatsSection />
@@ -36,6 +39,6 @@ export default function Home() {
             <TestimonialSection />
             <BlogSection />
             <CTASection />
-        </>
+        </div>
     );
 }
