@@ -5,13 +5,6 @@ import { ArrowDown, ArrowUp } from 'lucide-react';
 import { MAX_QUESTION_LENGTH, type OfferAnswer } from '@/lib/offer-assistant';
 import AnswerPanel from './AnswerPanel';
 
-const suggestions = [
-    'Sklep internetowy na Medusa.js',
-    'Landing page pod Google Ads',
-    'Wdrożenie SALESmanago',
-    'Strona firmowa z CMS — ile kosztuje?',
-];
-
 const thinking = ['przeszukuję katalog usług', 'sprawdzam opublikowany cennik', 'układam odpowiedź'];
 
 export type AskState =
@@ -79,13 +72,11 @@ export default function AskHero() {
     return (
         <section ref={sectionRef} className="ct-ask-hero" aria-labelledby="ask-hero-title">
             <div className="ct-ask-inner">
-                <span className="ct-eyebrow">Asystent oferty AI</span>
-
-                <h1 id="ask-hero-title" className="ct-h1 ct-statement" style={{ maxWidth: '16ch' }}>
+                <h1 id="ask-hero-title" className="ct-ask-title">
                     Projekty cyfrowe, które działają <span className="ct-electric">biznesowo.</span>
                 </h1>
 
-                <p className="ct-lead" style={{ maxWidth: '46ch', textAlign: 'center' }}>
+                <p className="ct-ask-sub">
                     Opisz, czego potrzebujesz. Nasz asystent AI powie, czy to robimy, jak do tego podejdziemy i ile to kosztuje.
                 </p>
 
@@ -116,24 +107,14 @@ export default function AskHero() {
                         tabIndex={-1} autoComplete="off" aria-hidden="true" className="ct-hp"
                     />
                     <div className="ct-ask-bar">
-                        <span className="ct-mono ct-ask-hint">
-                            {question.length > MAX_QUESTION_LENGTH - 100 ? `${question.length}/${MAX_QUESTION_LENGTH}` : 'Enter — wyślij · Shift+Enter — nowa linia'}
-                        </span>
+                        {question.length > MAX_QUESTION_LENGTH - 100 && (
+                            <span className="ct-mono ct-ask-hint">{question.length}/{MAX_QUESTION_LENGTH}</span>
+                        )}
                         <button type="submit" className="ct-ask-submit" disabled={loading || question.trim().length < 3} aria-label="Zapytaj asystenta">
-                            <ArrowUp size={18} strokeWidth={2} aria-hidden="true" />
+                            <ArrowUp size={16} strokeWidth={2} aria-hidden="true" />
                         </button>
                     </div>
                 </form>
-
-                {state.kind === 'idle' && (
-                    <ul className="ct-ask-chips" aria-label="Przykładowe pytania">
-                        {suggestions.map((s) => (
-                            <li key={s}>
-                                <button type="button" className="ct-pill" onClick={() => ask(s)}>{s}</button>
-                            </li>
-                        ))}
-                    </ul>
-                )}
 
                 <div aria-live="polite" className="w-full">
                     {loading && (
@@ -150,8 +131,7 @@ export default function AskHero() {
             </div>
 
             <a href="#dalej" className="ct-scroll-cue" aria-label="Przewiń do dalszej części strony">
-                <span>Poznaj nas bliżej</span>
-                <ArrowDown size={22} strokeWidth={1.25} aria-hidden="true" />
+                <ArrowDown size={18} strokeWidth={1.25} aria-hidden="true" />
             </a>
         </section>
     );
