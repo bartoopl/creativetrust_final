@@ -39,6 +39,11 @@ Trial redesign of the homepage only: a full-viewport (100svh) centered hero wher
 2. Services, why-us Graphite bento, process.
 3. Testimonials, closing CTA, `page.tsx` composition with case studies and blog.
 
+### Phase 5: Style-reference compliance (follow-up audit)
+1. Header strip, wordmark, permanent divider and footer in the v2 language on `/`.
+2. Case studies and blog sections in the v2 language.
+3. Hero cleanup: plain Paper, no extra badge, Tile Gray question box, 64px section display.
+
 ## Risks
 
 - Hallucinated offers/prices: the prompt lists only catalogue data, and the server drops any price not present in `publishedPrices` and any unknown service slug.
@@ -74,3 +79,9 @@ PR: #6
 - [x] 4.1 Pipeline workspace frame, logo tiles and stats — f27dde2
 - [x] 4.2 Services, why-us bento and process — e4d79ce
 - [x] 4.3 Testimonials, CTA and page composition — 6f40ec6
+
+### Phase 5: Style-reference compliance
+
+- [ ] 5.1 Header strip, wordmark and footer in v2
+- [ ] 5.2 Case studies and blog in v2
+- [ ] 5.3 Hero cleanup and 64px display
