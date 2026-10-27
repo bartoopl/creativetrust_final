@@ -160,18 +160,18 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
 
                         <div className="ct-panel" style={{ padding: 24 }}>
                             <span className="ct-eyebrow">Projekt</span>
-                            <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 600 }}>Informacje o projekcie</h2>
+                            <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 500 }}>Informacje o projekcie</h2>
 
                             <div className="flex flex-col">
                                 <div className="flex flex-wrap items-baseline justify-between gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
                                     <h3 className="ct-meta" style={{ margin: 0 }}>Klient</h3>
-                                    <p style={{ margin: 0, fontSize: 14, fontWeight: 600 }}>{project.client}</p>
+                                    <p style={{ margin: 0, fontSize: 14, fontWeight: 500 }}>{project.client}</p>
                                 </div>
 
                                 {project.publishedAt && (
                                     <div className="flex flex-wrap items-baseline justify-between gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
                                         <h3 className="ct-meta" style={{ margin: 0 }}>Data realizacji</h3>
-                                        <p style={{ margin: 0, fontSize: 14, fontWeight: 600 }}>{formatDate(project.publishedAt)}</p>
+                                        <p style={{ margin: 0, fontSize: 14, fontWeight: 500 }}>{formatDate(project.publishedAt)}</p>
                                     </div>
                                 )}
 
@@ -224,7 +224,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                         {project.scopeOfWork && project.scopeOfWork.length > 0 && (
                             <div>
                                 <span className="ct-eyebrow">Zakres</span>
-                                <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 600 }}>Zakres prac</h2>
+                                <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 500 }}>Zakres prac</h2>
                                 <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
                                     {project.scopeOfWork.map((item: string, index: number) => (
                                         <li key={index} className="flex items-center gap-3" style={{ padding: '12px 0', borderTop: '1px solid var(--line)', fontSize: 14.5, color: 'var(--text-2)' }}>
@@ -240,7 +240,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                         {project.galleryImages && project.galleryImages.length > 0 && (
                             <div>
                                 <span className="ct-eyebrow">Galeria</span>
-                                <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 600 }}>Galeria projektu</h2>
+                                <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 500 }}>Galeria projektu</h2>
                                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     {project.galleryImages.map((image: ImageWithCaption, index: number) => (
                                         <div

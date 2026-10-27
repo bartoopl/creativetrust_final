@@ -159,7 +159,7 @@ export default function Header() {
             {!minimal && <div ref={stripRef} className="ct-strip" style={{ borderBottom: '1px solid var(--line)', padding: '9px var(--pad-x)', display: 'flex', justifyContent: 'center', background: 'var(--panel)', textAlign: 'center' }}>
                 <span className="ct-mono" style={{ fontWeight: 500, fontSize: 12, color: 'var(--muted)', letterSpacing: '-0.1px' }}>
                     AI-native partner produktowy — zobacz{' '}
-                    <Link href="/#proces" style={{ fontWeight: 600 }}>jak działamy →</Link>
+                    <Link href="/#proces" style={{ fontWeight: 500 }}>jak działamy →</Link>
                 </span>
             </div>}
 

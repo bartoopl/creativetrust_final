@@ -11,7 +11,7 @@ export interface CaseCard {
 
 export default function CaseStudyCard({ card }: { card: CaseCard }) {
     return (
-        <Link href={card.href} className="ct-card-hover block overflow-hidden" style={{ border: '1px solid rgba(17,24,39,0.1)', borderRadius: 8, color: 'inherit' }}>
+        <Link href={card.href} className="ct-card-hover block overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.1)', borderRadius: 16, color: 'inherit' }}>
             {card.image ? (
                 <div style={{ height: 220, overflow: 'hidden', background: 'var(--panel2)', borderBottom: '1px solid var(--line)' }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -24,7 +24,7 @@ export default function CaseStudyCard({ card }: { card: CaseCard }) {
             )}
             <div className="flex flex-col gap-2" style={{ padding: 22 }}>
                 <span className="ct-meta">{card.meta}</span>
-                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{card.title}</h3>
+                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 500 }}>{card.title}</h3>
                 <p className="ct-body" style={{ fontSize: 13 }}>{card.description}</p>
             </div>
         </Link>

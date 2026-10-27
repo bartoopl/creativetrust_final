@@ -15,7 +15,7 @@ export default function ProcessPipelineSection() {
                 {steps.map((step) => (
                     <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: 24 }}>
                         <span className="ct-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--accent)' }}>{step.num}</span>
-                        <h3 style={{ margin: 0, fontSize: 15, fontWeight: 600 }}>{step.title}</h3>
+                        <h3 style={{ margin: 0, fontSize: 15, fontWeight: 500 }}>{step.title}</h3>
                         <p className="ct-body" style={{ fontSize: 13 }}>{step.description}</p>
                         <span className="ct-mono" style={{ marginTop: 'auto', fontSize: 11, fontWeight: 500, color: 'var(--muted-2)' }}>{step.duration}</span>
                     </li>

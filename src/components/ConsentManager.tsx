@@ -111,12 +111,12 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
     ];
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(17,24,39,0.24)' }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.24)' }}>
             <div className="ct-panel max-w-2xl w-full max-h-[90vh] overflow-y-auto" style={{ padding: 'clamp(20px, 4vw, 32px)', borderRadius: 'var(--radius-lg)' }}>
                 <div className="flex justify-between items-start mb-6 gap-4">
                     <div>
                         <span className="ct-eyebrow">Cookies</span>
-                        <h2 style={{ fontSize: 24, fontWeight: 600, letterSpacing: '-0.5px', margin: '6px 0 0' }}>Ustawienia prywatności</h2>
+                        <h2 style={{ fontSize: 24, fontWeight: 500, letterSpacing: '-0.5px', margin: '6px 0 0' }}>Ustawienia prywatności</h2>
                     </div>
                     <button
                         onClick={onClose}
@@ -133,7 +133,7 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
                     {/* Niezbędne */}
                     <div style={{ padding: '16px 18px' }}>
                         <div className="flex items-center justify-between mb-2 gap-4">
-                            <span style={{ fontWeight: 600, fontSize: 15 }}>Niezbędne (zawsze aktywne)</span>
+                            <span style={{ fontWeight: 500, fontSize: 15 }}>Niezbędne (zawsze aktywne)</span>
                             {toggle(true)}
                         </div>
                         <p className="ct-body" style={{ fontSize: 13.5 }}>
@@ -144,7 +144,7 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onClose }) => {
                     {categories.map((c) => (
                         <div key={c.key} style={{ padding: '16px 18px' }}>
                             <div className="flex items-center justify-between mb-2 gap-4">
-                                <span style={{ fontWeight: 600, fontSize: 15 }}>{c.title}</span>
+                                <span style={{ fontWeight: 500, fontSize: 15 }}>{c.title}</span>
                                 <button
                                     onClick={() => handleConsentChange(c.key)}
                                     className="rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"

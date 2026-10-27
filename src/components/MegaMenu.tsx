@@ -25,7 +25,7 @@ export default function MegaMenu({ id, isOpen, onClose, panelRef, onPointerEnter
                         tabIndex={-1}
                         aria-label="Zamknij menu"
                         className="fixed inset-0 z-40 cursor-default"
-                        style={{ background: 'rgba(17,24,39,0.12)', border: 'none' }}
+                        style={{ background: 'rgba(0,0,0,0.12)', border: 'none' }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -41,7 +41,7 @@ export default function MegaMenu({ id, isOpen, onClose, panelRef, onPointerEnter
                         exit={{ opacity: 0, y: -6 }}
                         transition={{ type: 'spring', bounce: 0, duration: 0.25 }}
                         className="absolute left-0 right-0 top-full z-50"
-                        style={{ background: '#fff', borderBottom: '1px solid var(--line-strong)' }}
+                        style={{ background: 'var(--bg)', borderBottom: '1px solid var(--line-strong)' }}
                         onPointerEnter={onPointerEnter}
                         onPointerLeave={onPointerLeave}
                         onBlur={onBlur}
@@ -49,7 +49,7 @@ export default function MegaMenu({ id, isOpen, onClose, panelRef, onPointerEnter
                         <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[0.9fr_1.4fr_1fr]" style={{ padding: '0 var(--pad-x)' }}>
                             <div className="flex flex-col gap-4 py-8 lg:pr-8" style={{ borderRight: '1px solid var(--line)' }}>
                                 <span className="ct-eyebrow">Zakres usług</span>
-                                <p style={{ margin: 0, fontSize: 20, fontWeight: 600, letterSpacing: '-0.5px', lineHeight: 1.25, color: 'var(--text)' }}>
+                                <p style={{ margin: 0, fontSize: 20, fontWeight: 500, letterSpacing: '-0.5px', lineHeight: 1.25, color: 'var(--text)' }}>
                                     Wybierasz obszar, my spinamy strategię, wykonanie i rozwój.
                                 </p>
                                 <p className="ct-body">
@@ -69,10 +69,10 @@ export default function MegaMenu({ id, isOpen, onClose, panelRef, onPointerEnter
                                         href={service.href}
                                         onClick={onClose}
                                         className="group flex flex-col gap-2 p-6 transition-colors"
-                                        style={{ background: '#fff' }}
+                                        style={{ background: 'var(--bg)' }}
                                     >
                                         <span className="ct-meta" style={{ color: 'var(--accent)' }}>{service.accent}</span>
-                                        <span className="flex items-center justify-between gap-4" style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)' }}>
+                                        <span className="flex items-center justify-between gap-4" style={{ fontSize: 16, fontWeight: 500, color: 'var(--text)' }}>
                                             {service.title}
                                             <span className="ct-mono transition-transform group-hover:translate-x-0.5" style={{ color: 'var(--accent)', fontSize: 13 }}>→</span>
                                         </span>

@@ -45,7 +45,7 @@ export default function Hero() {
 
                 <div
                     className="overflow-hidden lg:col-span-2"
-                    style={{ border: '1px solid rgba(17,24,39,0.1)', borderRadius: 8, background: '#fff' }}
+                    style={{ border: '1px solid rgba(0,0,0,0.1)', borderRadius: 8, background: '#fff' }}
                     aria-label="Przykładowy przebieg wdrożenia"
                 >
                     <div className="flex items-center justify-between gap-4" style={{ padding: '12px 20px', borderBottom: '1px solid var(--line)', background: 'var(--panel)' }}>
@@ -56,7 +56,7 @@ export default function Hero() {
                         {pipeline.map((step) => (
                             <li key={step.num} data-scene-target={step.module} className="ct-step flex flex-col gap-2" style={{ padding: '24px 20px', minHeight: 140 }}>
                                 <span className="ct-mono" style={{ fontSize: 12, color: 'var(--accent)' }}>{step.num}</span>
-                                <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)' }}>{step.title}</span>
+                                <span style={{ fontSize: 15, fontWeight: 500, color: 'var(--text)' }}>{step.title}</span>
                                 <span className="ct-body" style={{ fontSize: 13 }}>{step.text}</span>
                                 <span className="ct-mono" style={{ marginTop: 'auto', fontSize: 11, color: 'var(--muted-2)' }}>{step.status}</span>
                             </li>

@@ -28,7 +28,7 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
                 const panelId = `${baseId}-a${index}`;
                 return (
                     <div key={index} style={{ borderTop: '1px solid var(--line)' }}>
-                        <h3 style={{ fontSize: 17, fontWeight: 600, lineHeight: 1.4, margin: 0 }}>
+                        <h3 style={{ fontSize: 17, fontWeight: 500, lineHeight: 1.4, margin: 0 }}>
                             <button
                                 type="button"
                                 id={buttonId}

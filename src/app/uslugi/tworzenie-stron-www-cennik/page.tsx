@@ -125,7 +125,7 @@ export default function WebsitePricingPage() {
                         label="Najważniejsza zasada"
                     >
                         <div style={{ borderTop: '1px solid var(--line)', padding: '16px 0 14px' }}>
-                            <p style={{ margin: '0 0 12px', fontSize: 22, fontWeight: 600, letterSpacing: '-0.5px', lineHeight: 1.25 }}>
+                            <p style={{ margin: '0 0 12px', fontSize: 22, fontWeight: 500, letterSpacing: '-0.5px', lineHeight: 1.25 }}>
                                 Najtańsza strona rzadko jest najtańszą decyzją.
                             </p>
                             <p className="ct-body" style={{ fontSize: 15 }}>

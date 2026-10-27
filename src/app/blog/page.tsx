@@ -57,7 +57,7 @@ export default async function BlogPage() {
                 <section className="ct-section">
                     <div className="mx-auto flex max-w-[1280px] flex-col gap-6">
                         <span className="ct-eyebrow">Wyróżniony artykuł</span>
-                        <Link href={`/blog/${mainPost.slug.current}`} className="ct-card-hover grid grid-cols-1 overflow-hidden lg:grid-cols-2" style={{ alignItems: 'stretch', borderRadius: 8, border: '1px solid rgba(17,24,39,0.1)', background: '#fff', color: 'inherit' }}>
+                        <Link href={`/blog/${mainPost.slug.current}`} className="ct-card-hover grid grid-cols-1 overflow-hidden lg:grid-cols-2" style={{ alignItems: 'stretch', borderRadius: 16, border: '1px solid rgba(0,0,0,0.1)', background: '#fff', color: 'inherit' }}>
                             <div className={mainPost.mainImage ? '' : 'ct-placeholder'} style={{ background: mainPost.mainImage ? 'var(--panel2)' : undefined, overflow: 'hidden', minHeight: 320 }}>
                                 {mainPost.mainImage ? (
                                     <img src={urlFor(mainPost.mainImage).width(1000).url()} alt={mainPost.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />

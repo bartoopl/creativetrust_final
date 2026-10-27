@@ -81,7 +81,7 @@ export default function PortfolioPage() {
                     {loading ? (
                         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                             {[1, 2, 3, 4].map(i => (
-                                <div key={i} style={{ borderRadius: 8, border: '1px solid var(--line-strong)', overflow: 'hidden', animation: 'ctpulse 1.5s ease-in-out infinite' }}>
+                                <div key={i} style={{ borderRadius: 16, border: '1px solid var(--line-strong)', overflow: 'hidden', animation: 'ctpulse 1.5s ease-in-out infinite' }}>
                                     <div className="ct-placeholder" style={{ height: 220 }} />
                                     <div style={{ height: 110, background: '#fff' }} />
                                 </div>

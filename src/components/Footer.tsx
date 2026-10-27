@@ -32,7 +32,7 @@ export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="ct-footer" style={{ background: '#fff', borderTop: '1px solid var(--line)', padding: '56px var(--pad-x) 32px' }}>
+        <footer className="ct-footer" style={{ background: 'var(--bg)', borderTop: '1px solid var(--line)', padding: '56px var(--pad-x) 32px' }}>
             <div className="mx-auto flex max-w-[1280px] flex-col gap-10">
                 <div className="flex flex-wrap justify-between gap-10">
                     <div className="flex flex-col gap-3" style={{ maxWidth: 320 }}>

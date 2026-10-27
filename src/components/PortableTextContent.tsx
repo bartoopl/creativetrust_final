@@ -12,7 +12,7 @@ interface PortableTextContentProps {
     compact?: boolean;
 }
 
-const headingStyle: React.CSSProperties = { color: 'var(--text)', fontWeight: 600, lineHeight: 1.25 };
+const headingStyle: React.CSSProperties = { color: 'var(--text)', fontWeight: 500, lineHeight: 1.25 };
 
 const PortableTextContent: React.FC<PortableTextContentProps> = ({ content, compact = false }) => {
     const components = {
@@ -68,7 +68,7 @@ const PortableTextContent: React.FC<PortableTextContentProps> = ({ content, comp
                 );
             },
             strong: ({ children }: any) => (
-                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>{children}</strong>
+                <strong style={{ color: 'var(--text)', fontWeight: 500 }}>{children}</strong>
             ),
             code: ({ children }: any) => (
                 <code className="ct-mono" style={{ fontSize: '0.88em', color: 'var(--text)', background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 4, padding: '1px 5px' }}>{children}</code>

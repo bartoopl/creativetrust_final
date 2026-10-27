@@ -25,7 +25,7 @@ export default function ClientLogos() {
                         key={i}
                         aria-hidden={i > 0}
                         className="ct-mono"
-                        style={{ fontWeight: 600, fontSize: 15, color: 'rgba(17,24,39,0.35)', whiteSpace: 'pre' }}
+                        style={{ fontWeight: 500, fontSize: 15, color: 'rgba(0,0,0,0.35)', whiteSpace: 'pre' }}
                     >
                         {line}
                     </span>

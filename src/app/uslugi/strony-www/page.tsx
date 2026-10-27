@@ -64,7 +64,7 @@ export default function WebsitesPage() {
                 <div className="ct-grid-lines grid-cols-2 sm:grid-cols-4" style={{ marginTop: 16, borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {[['150+', 'stron'], ['15', 'lat'], ['90+', 'PageSpeed'], ['30-40%', 'szybciej']].map(([val, label]) => (
                         <div key={label} className="flex flex-col gap-1.5" style={{ padding: '18px 20px' }}>
-                            <span style={{ fontSize: 28, fontWeight: 600, letterSpacing: '-1px', lineHeight: 1 }}>{val}</span>
+                            <span style={{ fontSize: 28, fontWeight: 500, letterSpacing: '-1px', lineHeight: 1 }}>{val}</span>
                             <span className="ct-meta">{label}</span>
                         </div>
                     ))}
@@ -77,7 +77,7 @@ export default function WebsitesPage() {
                     {types.map(t => (
                         <div key={t.num} className="flex flex-col gap-2.5" style={{ padding: 28 }}>
                             <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)', marginBottom: 12 }}>{t.num}</span>
-                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{t.title}</h3>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 500 }}>{t.title}</h3>
                             <p className="ct-body" style={{ fontSize: 15, flex: 1 }}>{t.description}</p>
                             <div className="flex flex-wrap gap-2" style={{ marginTop: 6 }}>
                                 {t.tags.map(tag => <span key={tag} className="ct-pill">{tag}</span>)}
@@ -94,7 +94,7 @@ export default function WebsitesPage() {
                         <div key={f.title} className="flex flex-col gap-2" style={{ padding: '20px 0', borderTop: '1px solid var(--line-strong)' }}>
                             <div className="flex items-center gap-2.5">
                                 <span className="ct-bullet" aria-hidden="true" />
-                                <h3 style={{ margin: 0, fontSize: 16, fontWeight: 600 }}>{f.title}</h3>
+                                <h3 style={{ margin: 0, fontSize: 16, fontWeight: 500 }}>{f.title}</h3>
                             </div>
                             <p className="ct-body" style={{ fontSize: 15 }}>{f.description}</p>
                         </div>
@@ -117,7 +117,7 @@ export default function WebsitesPage() {
                     {process.map(step => (
                         <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>
                             <span className="ct-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--accent)', marginBottom: 24 }}>{step.num}</span>
-                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{step.title}</h3>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 500 }}>{step.title}</h3>
                             <p className="ct-body">{step.description}</p>
                         </li>
                     ))}

@@ -32,7 +32,7 @@ export default function ContactPage() {
                             {contactDetails.map(d => (
                                 <div key={d.label} style={{ padding: '20px 22px' }}>
                                     <div className="ct-meta" style={{ marginBottom: 8 }}>{d.label}</div>
-                                    <Link href={d.href} className="ct-contact-link" style={{ fontWeight: 600, fontSize: 18, color: 'var(--text)', textDecoration: 'none', letterSpacing: '-0.3px' }}>
+                                    <Link href={d.href} className="ct-contact-link" style={{ fontWeight: 500, fontSize: 18, color: 'var(--text)', textDecoration: 'none', letterSpacing: '-0.3px' }}>
                                         {d.value}
                                     </Link>
                                 </div>

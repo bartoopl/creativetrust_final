@@ -78,7 +78,7 @@ export default function ServicesPage() {
                         {[['Priorytet', 'Jasny przekaz i sprawny proces'], ['Efekt', 'Mniej tarcia, więcej wyniku'], ['Model', 'Strategia + wdrożenie'], ['Zakres', 'Brand, web, commerce, AI']].map(([label, val]) => (
                             <div key={label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
                                 <span className="ct-meta">{label}</span>
-                                <span style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.5 }}>{val}</span>
+                                <span style={{ fontSize: 15, fontWeight: 500, lineHeight: 1.5 }}>{val}</span>
                             </div>
                         ))}
                     </div>
@@ -97,7 +97,7 @@ export default function ServicesPage() {
                             <div className="flex min-w-0 flex-1 items-center gap-6">
                                 <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--accent)', flexShrink: 0 }}>{s.num}</span>
                                 <div className="flex flex-col gap-1">
-                                    <span style={{ fontSize: 20, fontWeight: 600, letterSpacing: '-0.4px', color: 'var(--text)' }}>{s.title}</span>
+                                    <span style={{ fontSize: 20, fontWeight: 500, letterSpacing: '-0.4px', color: 'var(--text)' }}>{s.title}</span>
                                     <span className="ct-body" style={{ fontSize: 15 }}>{s.description}</span>
                                 </div>
                             </div>
@@ -113,9 +113,9 @@ export default function ServicesPage() {
             <Section tint eyebrow="Landing pages SEO" title="Strony pod konkretne frazy i intencje zakupowe.">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     {landingPages.map((page) => (
-                        <Link key={page.href} href={page.href} className="ct-card-hover flex items-start justify-between gap-6 no-underline" style={{ padding: 24, background: '#fff', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', color: 'var(--text)' }}>
+                        <Link key={page.href} href={page.href} className="ct-card-hover flex items-start justify-between gap-6 no-underline" style={{ padding: 24, background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', color: 'var(--text)' }}>
                             <div className="flex flex-col gap-2">
-                                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600, letterSpacing: '-0.3px' }}>{page.title}</h3>
+                                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 500, letterSpacing: '-0.3px' }}>{page.title}</h3>
                                 <p className="ct-body" style={{ fontSize: 15, maxWidth: '52ch' }}>{page.description}</p>
                             </div>
                             <span className="ct-mono" style={{ fontSize: 18, color: 'var(--accent)', flexShrink: 0 }} aria-hidden="true">→</span>
@@ -130,7 +130,7 @@ export default function ServicesPage() {
                     {process.map((step) => (
                         <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>
                             <span className="ct-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--accent)', marginBottom: 24 }}>{step.num}</span>
-                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{step.title}</h3>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 500 }}>{step.title}</h3>
                             <p className="ct-body">{step.description}</p>
                         </li>
                     ))}
@@ -142,7 +142,7 @@ export default function ServicesPage() {
                 <div className="ct-grid-lines grid-cols-1 lg:grid-cols-2">
                     {faq.map(item => (
                         <div key={item.q} className="flex flex-col gap-2.5" style={{ padding: '24px 28px' }}>
-                            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 600 }}>{item.q}</h3>
+                            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 500 }}>{item.q}</h3>
                             <p className="ct-body">{item.a}</p>
                         </div>
                     ))}

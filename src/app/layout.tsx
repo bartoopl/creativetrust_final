@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
     weight: ['400', '500', '600'],
 });
 
-// Technical detail type of the homepage (.ct-v2) theme; not preloaded so other pages never fetch it.
+// Technical detail type of the site theme (.ct-v2); not preloaded, loads when first used.
 const geistMono = Geist_Mono({
     subsets: ['latin', 'latin-ext'],
     variable: '--font-geist-mono',
@@ -144,7 +144,7 @@ export default function RootLayout({
                         __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WTKHM3K" height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
                     }}
                 />
-                <div className="w-full overflow-x-hidden">
+                <div className="ct-v2 w-full overflow-x-hidden">
                     <Header />
                     <main className="w-full overflow-x-hidden">{children}</main>
                     <Footer />

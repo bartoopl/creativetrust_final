@@ -184,7 +184,7 @@ export default function WooCommerceHeadlessMigrationPage() {
                                     {String(i + 1).padStart(2, '0')}
                                 </span>
                                 <div>
-                                    <h3 style={{ margin: '0 0 6px', fontSize: 18, fontWeight: 600 }}>{scenario.title}</h3>
+                                    <h3 style={{ margin: '0 0 6px', fontSize: 18, fontWeight: 500 }}>{scenario.title}</h3>
                                     <p className="ct-body">{scenario.text}</p>
                                 </div>
                             </div>

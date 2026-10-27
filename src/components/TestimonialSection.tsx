@@ -9,12 +9,12 @@ export const testimonials = [
 
 export default function TestimonialSection() {
     return (
-        <section className="ct-section" style={{ background: 'var(--panel)', borderTop: '1px solid var(--line)' }}>
+        <section className="ct-section">
             <div className="mx-auto flex max-w-[1280px] flex-col gap-10">
                 <Eyebrow>Klienci</Eyebrow>
                 <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))' }}>
                     {testimonials.map((t) => (
-                        <figure key={t.name} className="m-0 flex flex-col gap-4" style={{ background: '#fff', border: '1px solid rgba(17,24,39,0.1)', borderRadius: 8, padding: 24 }}>
+                        <figure key={t.name} className="m-0 flex flex-col gap-4" style={{ background: 'var(--panel)', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 16, padding: 24 }}>
                             <blockquote style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: 'var(--text)' }}>„{t.text}”</blockquote>
                             <figcaption className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)' }}>— {t.name}</figcaption>
                         </figure>

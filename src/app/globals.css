@@ -297,13 +297,34 @@ body:has(.ct-v2) .ct-cta.outline, body:has(.ct-v2) .ct-ghost {
 body:has(.ct-v2) .ct-cta.outline:hover, body:has(.ct-v2) .ct-ghost:hover { background: var(--text); color: #fff; border-color: var(--text); }
 body:has(.ct-v2) .ct-cta.sm { font-size: 14px; min-height: 32px; }
 
+/* Shared components in the v2 language: flat Tile Gray cards and grids, plain Paper heroes, quiet labels. */
+body:has(.ct-v2) .ct-dotgrid { background-image: none; }
+body:has(.ct-v2) .ct-meta { font: 400 13px/1.4 var(--font-sans), sans-serif; text-transform: none; letter-spacing: 0; color: var(--muted-2); }
+body:has(.ct-v2) .ct-placeholder { background: var(--panel2); }
+body:has(.ct-v2) .ct-placeholder-label { background: var(--bg); border-color: var(--line); border-radius: 2px; font-family: var(--font-sans), sans-serif; }
+body:has(.ct-v2) .ct-panel { background: var(--panel); border-color: transparent; border-radius: 16px; }
+body:has(.ct-v2) .ct-grid-lines { gap: 4px; background: transparent; border: 0; }
+body:has(.ct-v2) .ct-grid-lines > * { background: var(--panel); border-radius: 16px; }
+body:has(.ct-v2) .ct-card-hover { background: var(--panel) !important; border-color: transparent !important; border-radius: 16px !important; transition: background .2s ease; }
+body:has(.ct-v2) .ct-card-hover:hover { background: var(--panel2) !important; border-color: transparent !important; }
+body:has(.ct-v2) .ct-card-hover:hover h2, body:has(.ct-v2) .ct-card-hover:hover h3 { color: var(--accent) !important; }
+body:has(.ct-v2) .ct-service-row:hover { border-color: var(--text) !important; background: var(--panel); }
+body:has(.ct-v2) .ct-step { background: var(--panel); }
+body:has(.ct-v2) .ct-step:hover, body:has(.ct-v2) .ct-step[data-active="true"] { background: var(--panel2); }
+body:has(.ct-v2) .ct-bullet { border-radius: 50%; }
+body:has(.ct-v2) .ct-legal h2 { font-weight: 500; letter-spacing: -0.03em; }
+body:has(.ct-v2) .ct-legal-links a { font: 400 13px/1.4 var(--font-sans), sans-serif; text-transform: none; letter-spacing: 0; border-color: var(--text); }
+body:has(.ct-v2) .ct-label { font: 400 13px/1.4 var(--font-sans), sans-serif; text-transform: none; letter-spacing: 0; color: var(--muted); }
+body:has(.ct-v2) .ct-input { background: #fff; border-radius: 2px; border-color: var(--line-strong); }
+body:has(.ct-v2) .ct-input:focus { border-color: var(--text); box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06); }
+body:has(.ct-v2) .ct-marquee-track span { font-family: var(--font-sans), sans-serif !important; font-weight: 500 !important; letter-spacing: -0.01em; color: var(--muted-2) !important; }
+
 /* Flat surfaces */
 .ct-v2 .ct-tile { background: var(--panel); border-radius: 16px; }
 .ct-v2 .ct-bento { background: #1f1f1f; color: #e7e7e7; border-radius: 16px; }
 .ct-v2 .ct-bento h3 { color: #e7e7e7; }
 .ct-v2 .ct-frame { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); }
 .ct-v2 .ct-electric { color: var(--accent); }
-.ct-v2 .ct-input { background: var(--bg); border-radius: 2px; }
 .ct-v2 .ct-statement { max-width: 22ch; margin-inline: auto; text-align: center; }
 /* Sections separate through whitespace, not hairlines (inline borders on shared sections included). */
 .ct-v2 .ct-section, .ct-v2 > section { border-top-color: transparent !important; }

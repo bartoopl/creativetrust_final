@@ -20,7 +20,7 @@ export default function WhyUsSection() {
                         <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)' }}>
                             {String(i + 1).padStart(2, '0')}
                         </span>
-                        <h3 style={{ margin: 0, fontSize: 16, fontWeight: 600 }}>{reason.title}</h3>
+                        <h3 style={{ margin: 0, fontSize: 16, fontWeight: 500 }}>{reason.title}</h3>
                         <p className="ct-body">{reason.text}</p>
                     </div>
                 ))}

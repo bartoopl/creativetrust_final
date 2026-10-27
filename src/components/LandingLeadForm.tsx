@@ -118,7 +118,7 @@ Wiadomość: ${formData.message}`,
         return (
             <div className="ct-panel p-8 text-center md:p-10">
                 <span className="ct-eyebrow">Wysłano</span>
-                <h3 style={{ fontSize: 24, fontWeight: 600, letterSpacing: '-0.5px', margin: '10px 0 12px' }}>Dziękujemy za wiadomość</h3>
+                <h3 style={{ fontSize: 24, fontWeight: 500, letterSpacing: '-0.5px', margin: '10px 0 12px' }}>Dziękujemy za wiadomość</h3>
                 <p className="ct-body" style={{ fontSize: 15, maxWidth: '52ch', margin: '0 auto 24px' }}>
                     Formularz został wysłany. Skontaktujemy się z Tobą i wrócimy z kolejnym krokiem.
                 </p>
