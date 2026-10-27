@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Geist_Mono, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -20,6 +20,15 @@ const jetbrainsMono = JetBrains_Mono({
     variable: '--font-jetbrains',
     display: 'swap',
     weight: ['400', '500', '600'],
+});
+
+// Technical detail type of the homepage (.ct-v2) theme; not preloaded so other pages never fetch it.
+const geistMono = Geist_Mono({
+    subsets: ['latin', 'latin-ext'],
+    variable: '--font-geist-mono',
+    display: 'swap',
+    weight: ['400', '500'],
+    preload: false,
 });
 
 export const metadata: Metadata = {
@@ -70,7 +79,7 @@ export default function RootLayout({
     return (
         <html
             lang="pl"
-            className={`${inter.variable} ${jetbrainsMono.variable} overflow-x-hidden`}
+            className={`${inter.variable} ${jetbrainsMono.variable} ${geistMono.variable} overflow-x-hidden`}
         >
             <head>
                 <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />

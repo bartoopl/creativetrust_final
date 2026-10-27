@@ -254,6 +254,61 @@ main { isolation: isolate; }
 .ct-legal-links { display: flex; flex-wrap: wrap; gap: 8px; }
 .ct-legal-links a { display: inline-flex; font: 500 11.5px/1.4 var(--font-mono), monospace; text-transform: uppercase; letter-spacing: .3px; color: var(--text); border: 1px solid var(--line-strong); border-radius: 999px; padding: 6px 12px; transition: border-color .15s, color .15s; }
 .ct-legal-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ===== Homepage trial theme (.ct-v2) — "electric ink on drafting paper" =====
+   Paper canvas, Carbon type and controls, flat Tile Gray / Graphite surfaces, Electric Blue as the one
+   switched-on signal. Scoped to pages rendering .ct-v2 (body:has) so the header and footer follow on the
+   homepage while every other page keeps the current theme. */
+body:has(.ct-v2) .ct-header::before { background: rgba(247, 246, 245, 0.8); }
+body:has(.ct-v2) .ct-h1 { font-size: clamp(40px, 6.2vw, 70px); font-weight: 500; letter-spacing: -0.04em; line-height: 1; }
+body:has(.ct-v2) .ct-h2 { font-size: clamp(30px, 4.4vw, 56px); font-weight: 500; letter-spacing: -0.04em; line-height: 1.08; }
+body:has(.ct-v2) .ct-lead { font-size: 17px; line-height: 1.5; }
+body:has(.ct-v2) .ct-eyebrow { font: 400 clamp(16px, 1.6vw, 21px)/1.5 var(--font-sans), sans-serif; text-transform: none; letter-spacing: 0; color: var(--muted-2); }
+body:has(.ct-v2) .ct-pill { font: 400 13px/1.4 var(--font-sans), sans-serif; text-transform: none; letter-spacing: 0; color: var(--text); border-color: var(--text); background: transparent; padding: 6px 8px 5px 12px; }
+body:has(.ct-v2) .ct-link { font-weight: 500; }
+body:has(.ct-v2) .ct-grid-lines > * { background: var(--bg); }
+body:has(.ct-v2) .ct-panel { background: var(--bg); }
+
+/* Compact Carbon controls: 2px radius, no arrow badge. */
+body:has(.ct-v2) .ct-cta {
+  gap: 8px; padding: 6px 12px 5px; min-height: 36px; border-radius: var(--radius-sm);
+  background: var(--text); border-color: var(--text); color: #fff; font-weight: 400; font-size: 15px;
+}
+body:has(.ct-v2) .ct-cta:hover { background: #2e2e2e; border-color: #2e2e2e; }
+body:has(.ct-v2) .ct-cta .ct-badge { display: none; }
+body:has(.ct-v2) .ct-cta.outline, body:has(.ct-v2) .ct-ghost {
+  padding: 6px 8px 5px 12px; min-height: 36px; border-radius: var(--radius-sm);
+  background: transparent; border: 1px solid var(--text); color: var(--text); font-weight: 400; font-size: 15px;
+}
+body:has(.ct-v2) .ct-cta.outline:hover, body:has(.ct-v2) .ct-ghost:hover { background: var(--text); color: #fff; border-color: var(--text); }
+body:has(.ct-v2) .ct-cta.sm { font-size: 14px; min-height: 32px; }
+
+/* Flat surfaces */
+.ct-v2 .ct-tile { background: var(--panel); border-radius: 16px; }
+.ct-v2 .ct-bento { background: #1f1f1f; color: #e7e7e7; border-radius: 16px; }
+.ct-v2 .ct-bento h3 { color: #e7e7e7; }
+.ct-v2 .ct-frame { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); }
+.ct-v2 .ct-electric { color: var(--accent); }
+.ct-v2 .ct-statement { max-width: 22ch; margin-inline: auto; text-align: center; }
+}
+
+body:has(.ct-v2) {
+  --font-mono: var(--font-geist-mono, "Geist Mono"), "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --bg: #f7f6f5;
+  --panel: #efefef;
+  --panel2: #e7e7e7;
+  --line: rgba(0, 0, 0, 0.1);
+  --line-strong: rgba(0, 0, 0, 0.16);
+  --text: #141414;
+  --text-2: #2b2b2b;
+  --muted: #5c5c5c;
+  --muted-2: #7d7d7d;
+  --accent: #2200ff;
+  --accent-hover: #1a00c4;
+  --accent-soft: rgba(34, 0, 255, 0.08);
+  --radius-sm: 2px;
+  --radius-md: 16px;
+  --dot-grid: radial-gradient(circle, rgba(0, 0, 0, 0.07) 1px, transparent 1px);
 }
 
 .ct-fade { animation: ctfade .18s ease-out; }
