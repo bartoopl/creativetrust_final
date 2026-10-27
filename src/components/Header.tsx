@@ -147,7 +147,7 @@ export default function Header() {
 
     return (
         <>
-            <div ref={stripRef} style={{ borderBottom: '1px solid var(--line)', padding: '9px var(--pad-x)', display: 'flex', justifyContent: 'center', background: 'var(--panel)', textAlign: 'center' }}>
+            <div ref={stripRef} className="ct-strip" style={{ borderBottom: '1px solid var(--line)', padding: '9px var(--pad-x)', display: 'flex', justifyContent: 'center', background: 'var(--panel)', textAlign: 'center' }}>
                 <span className="ct-mono" style={{ fontWeight: 500, fontSize: 12, color: 'var(--muted)', letterSpacing: '-0.1px' }}>
                     AI-native partner produktowy — zobacz{' '}
                     <Link href="/#proces" style={{ fontWeight: 600 }}>jak działamy →</Link>
@@ -195,7 +195,7 @@ export default function Header() {
                     <button
                         ref={mobileToggleRef}
                         type="button"
-                        className="inline-flex items-center justify-center md:hidden"
+                        className="ct-menu-toggle inline-flex items-center justify-center md:hidden"
                         onClick={toggleMobile}
                         aria-controls="mobile-menu"
                         aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}

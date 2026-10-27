@@ -259,7 +259,21 @@ main { isolation: isolate; }
    Paper canvas, Carbon type and controls, flat Tile Gray / Graphite surfaces, Electric Blue as the one
    switched-on signal. Scoped to pages rendering .ct-v2 (body:has) so the header and footer follow on the
    homepage while every other page keeps the current theme. */
-body:has(.ct-v2) .ct-header::before { background: rgba(247, 246, 245, 0.8); }
+/* Chrome: Paper bar with a permanent hairline, sans wordmark and strip, quiet 14px/400 navigation. */
+body:has(.ct-v2) .ct-header::before { background: rgba(247, 246, 245, 0.92); }
+body:has(.ct-v2) .ct-header { border-bottom-color: var(--line); }
+body:has(.ct-v2) .ct-strip { background: var(--bg) !important; border-bottom-color: var(--line) !important; }
+body:has(.ct-v2) .ct-strip .ct-mono { font: 400 14px/1.4 var(--font-sans), sans-serif !important; letter-spacing: 0 !important; color: var(--muted) !important; }
+body:has(.ct-v2) .ct-strip a { font-weight: 400 !important; }
+body:has(.ct-v2) .ct-wordmark { font: 500 19px/1 var(--font-sans), sans-serif !important; letter-spacing: -0.04em !important; }
+body:has(.ct-v2) .ct-nav-link { font-size: 14px; font-weight: 400; color: var(--text); }
+body:has(.ct-v2) .ct-nav-link:hover { color: var(--muted); }
+body:has(.ct-v2) .ct-menu-toggle { background: transparent !important; border-color: var(--text) !important; border-radius: 2px !important; width: 36px !important; height: 36px !important; }
+body:has(.ct-v2) #mobile-menu { background: var(--bg) !important; }
+body:has(.ct-v2) .ct-footer { background: var(--bg) !important; }
+body:has(.ct-v2) .ct-footer .ct-meta { font: 400 14px/1.4 var(--font-sans), sans-serif; text-transform: none; letter-spacing: 0; color: var(--muted-2); }
+body:has(.ct-v2) .ct-footer-link { font-size: 16px; line-height: 1.5; }
+body:has(.ct-v2) .ct-footer-lead { font-size: 15px !important; }
 body:has(.ct-v2) .ct-h1 { font-size: clamp(40px, 6.2vw, 70px); font-weight: 500; letter-spacing: -0.04em; line-height: 1; }
 body:has(.ct-v2) .ct-h2 { font-size: clamp(30px, 4.4vw, 56px); font-weight: 500; letter-spacing: -0.04em; line-height: 1.08; }
 body:has(.ct-v2) .ct-lead { font-size: 17px; line-height: 1.5; }
