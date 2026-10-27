@@ -62,9 +62,9 @@ Trial redesign of the homepage only: a full-viewport (100svh) centered hero wher
 
 ### Phase 3: AI hero
 
-- [ ] 3.1 AskHero layout, question box and scroll arrow
-- [ ] 3.2 Answer panel
-- [ ] 3.3 Inline contact request
+- [x] 3.1 AskHero layout, question box and scroll arrow — 14b0dfe
+- [x] 3.2 Answer panel — 14b0dfe
+- [x] 3.3 Inline contact request — 14b0dfe
 
 ### Phase 4: Homepage sections
 
