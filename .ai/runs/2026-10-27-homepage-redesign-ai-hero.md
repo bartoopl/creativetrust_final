@@ -112,4 +112,4 @@ PR: #6
 
 ### Phase 9: Markdown for AI
 
-- [ ] 9.1 Markdown twins, llms.txt and proxy
+- [x] 9.1 Markdown twins, llms.txt and proxy — af90db2
