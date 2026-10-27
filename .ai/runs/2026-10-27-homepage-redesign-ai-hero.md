@@ -47,6 +47,9 @@ Trial redesign of the homepage only: a full-viewport (100svh) centered hero wher
 ### Phase 6: Assistant works without an API key (follow-up)
 1. Keyword catalogue fallback when the key is missing or Claude fails, marked as non-AI in the UI.
 
+### Phase 7: Minimal first screen (follow-up)
+1. Homepage chrome reduced to wordmark + menu toggle; hero reduced to headline, one line of copy and a one-line chat box.
+
 ## Risks
 
 - Hallucinated offers/prices: the prompt lists only catalogue data, and the server drops any price not present in `publishedPrices` and any unknown service slug.
@@ -92,3 +95,7 @@ PR: #6
 ### Phase 6: Assistant fallback
 
 - [x] 6.1 Catalogue fallback without API key — 4e661e5
+
+### Phase 7: Minimal first screen
+
+- [x] 7.1 Minimal homepage chrome and hero — 94d0022
