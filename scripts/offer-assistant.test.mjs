@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
     MAX_QUESTION_LENGTH, TOOL_NAME, validateQuestion, buildSystemPrompt, buildAnswerTool,
-    buildMessagesRequest, extractToolInput, normalizeAnswer, formatLeadMessage, createRateLimiter,
+    buildMessagesRequest, extractToolInput, normalizeAnswer, formatLeadMessage, createRateLimiter, answerFromCatalogue, fold,
 } from '../src/lib/offer-assistant.ts';
 import { services, seoLandings, publishedPrices } from '../src/lib/site-services.ts';
 
@@ -123,4 +123,45 @@ test('rate limiter allows up to the limit per key and resets after the window', 
     assert.equal(limit('b').allowed, true);
     t = 1000;
     assert.equal(limit('a').allowed, true);
+});
+
+// ---------- answerFromCatalogue (no-AI fallback) ----------
+
+test('normalizeAnswer marks model answers with source "ai"', () => {
+    assert.equal(normalizeAnswer({ verdict: 'yes', answer: 'Tak.' }, catalogue).source, 'ai');
+});
+
+test('fold lowercases and strips Polish diacritics', () => {
+    assert.equal(fold('SKLEPÓW Łódź żółć'), 'sklepow lodz zolc');
+});
+
+test('catalogue fallback matches a shop question to e-commerce', () => {
+    const a = answerFromCatalogue('Potrzebuję sklepu internetowego na Medusie', catalogue);
+    assert.equal(a.verdict, 'yes');
+    assert.equal(a.source, 'catalogue');
+    assert.deepEqual(a.services.map((s) => s.slug), ['e-commerce']);
+    assert.deepEqual(a.prices, []);
+});
+
+test('catalogue fallback attaches only the published price for the deliverable named', () => {
+    const a = answerFromCatalogue('Ile kosztuje landing page pod Google Ads?', catalogue);
+    assert.equal(a.verdict, 'yes');
+    assert.deepEqual(a.prices.map((p) => p.name), ['Landing page']);
+    for (const p of a.prices) assert.ok(publishedPrices.includes(p));
+});
+
+test('catalogue fallback lists basic website prices when a price is asked without a specific deliverable', () => {
+    const a = answerFromCatalogue('Ile kosztuje strona www?', catalogue);
+    assert.ok(a.prices.length > 0);
+    assert.ok(a.prices.every((p) => p.service === 'strony-www' && p.name !== 'Serwis rozbudowany'));
+});
+
+test('catalogue fallback says no to things outside the offer', () => {
+    const a = answerFromCatalogue('Zrobicie aplikację mobilną na Androida?', catalogue);
+    assert.equal(a.verdict, 'no');
+    assert.deepEqual(a.prices, []);
+});
+
+test('catalogue fallback is unclear for off-topic questions and does not trip on substrings', () => {
+    assert.equal(answerFromCatalogue('Jaka będzie pogoda wiosną?', catalogue).verdict, 'unclear');
 });

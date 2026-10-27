@@ -27,6 +27,8 @@ export interface OfferAnswer {
     answer: string;
     services: Pick<Service, 'slug' | 'title' | 'href'>[];
     prices: PublishedPrice[];
+    /** 'ai' — answered by the model; 'catalogue' — keyword match without AI (no key or upstream failure). */
+    source: 'ai' | 'catalogue';
 }
 
 export type QuestionCheck = { ok: true; question: string } | { ok: false; error: string };
@@ -123,7 +125,92 @@ export function normalizeAnswer(input: unknown, { services, prices }: Catalogue)
         answer: answer.length > MAX_ANSWER_LENGTH ? `${answer.slice(0, MAX_ANSWER_LENGTH - 1).trimEnd()}…` : answer,
         services: services.filter((s) => slugs.has(s.slug)).map(({ slug, title, href }) => ({ slug, title, href })),
         prices: verdict === 'no' ? [] : prices.filter((p) => priceNames.has(p.name)),
+        source: 'ai',
     };
+}
+
+// ---------- Catalogue fallback (no AI) ----------
+
+/** Lowercase, Polish diacritics folded, so "Sklep", "sklepu" and "SKLEPÓW" all hit the same stems. */
+export const fold = (text: string) =>
+    text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
+
+const SERVICE_STEMS: Record<string, string[]> = {
+    'strony-www': ['stron', 'www', 'witryn', 'landing', 'wordpress', 'next.js', 'nextjs', 'cms', 'serwis', 'ux', 'ui ', 'portal', 'wizytowk'],
+    'e-commerce': ['sklep', 'commerce', 'medusa', 'woocommerce', 'shopify', 'headless', 'koszyk', 'marketplace', 'allegro', 'erp', 'b2b', 'b2c', 'magento', 'prestashop'],
+    'marketing-automation': ['salesmanago', 'automatyz', 'automation', 'crm', 'lead', 'mailing', 'newsletter', 'e-mail', 'email', 'sms', 'lejk', 'lejek', 'scoring', 'segmentac', 'personalizac'],
+    'social-media': ['social', 'facebook', 'instagram', 'linkedin', 'tiktok', 'youtube', 'posty', 'postow', 'community', 'tresci', 'content'],
+};
+
+/** Things we clearly do not do; the answer points to the closest service instead. */
+const NOT_OFFERED: { stems: string[]; label: string; nearest?: string }[] = [
+    { stems: ['aplikacj mobiln', 'aplikacja mobiln', 'android', ' ios ', 'app store', 'google play'], label: 'natywnych aplikacji mobilnych', nearest: 'strony-www' },
+    { stems: ['druk', 'ulotk', 'wizytowki papier', 'billboard'], label: 'materiałów drukowanych' },
+    { stems: ['gr komputer', 'gry ', 'gamedev'], label: 'gier' },
+];
+
+/** How we approach each service, in visitor-facing words (landing descriptions are internal SEO notes). */
+const HOW: Record<string, string> = {
+    'strony-www': 'Projektujemy stronę pod konkretny cel (leady, sprzedaż, wizerunek), prototypujemy UX i wdrażamy ją w Next.js z dbałością o szybkość i SEO.',
+    'e-commerce': 'Budujemy sklepy headless (m.in. na Medusa.js), migrujemy z monolitów jak WooCommerce bez utraty SEO i integrujemy je z ERP, CRM i marketplace.',
+    'marketing-automation': 'Wdrażamy SALESmanago i podobne narzędzia: lejki, segmentację, lead scoring i komunikację e-mail/SMS połączoną z CRM.',
+    'social-media': 'Przygotowujemy strategię i harmonogram, tworzymy treści i kampanie, a wyniki raportujemy co miesiąc.',
+};
+
+const PRICE_STEMS: Record<string, string[]> = {
+    'Landing page': ['landing', 'kampani', 'google ads', 'reklam'],
+    'Strona firmowa': ['firmow', 'wizytowk'],
+    'Strona firmowa z CMS': ['cms', 'edytowa', 'panel'],
+    'Serwis rozbudowany': ['portal', 'rozbudowan', 'serwis'],
+};
+
+const asksForPrice = (q: string) => /(cen|koszt|ile |budzet|wycen|kosztuj|stawk)/.test(q);
+const hasAny = (q: string, stems: string[]) => stems.some((stem) => q.includes(stem));
+
+/**
+ * Deterministic answer from the catalogue when the model is unavailable: keyword match to services,
+ * published prices for the specific deliverable named, otherwise an honest "we'll quote it".
+ */
+export function answerFromCatalogue(question: string, { services, prices }: Catalogue): OfferAnswer {
+    const q = ` ${fold(question)} `;
+    const pick = (slugs: string[]) => services.filter((s) => slugs.includes(s.slug)).map(({ slug, title, href }) => ({ slug, title, href }));
+
+    const notOffered = NOT_OFFERED.find((n) => hasAny(q, n.stems));
+    if (notOffered) {
+        return {
+            verdict: 'no',
+            answer: `Nie tworzymy ${notOffered.label}.${notOffered.nearest ? ' Możemy za to zaprojektować i wdrożyć szybką stronę lub aplikację webową, która działa na telefonach.' : ' Jeśli potrzebujesz strony, sklepu, automatyzacji marketingu albo social mediów — w tym możemy pomóc.'}`,
+            services: pick(notOffered.nearest ? [notOffered.nearest] : []),
+            prices: [],
+            source: 'catalogue',
+        };
+    }
+
+    const matched = services.filter((s) => hasAny(q, SERVICE_STEMS[s.slug] ?? [fold(s.title)])).map((s) => s.slug);
+    if (!matched.length) {
+        return {
+            verdict: 'unclear',
+            answer: 'Nie jestem pewien, czego dokładnie potrzebujesz. Robimy strony www, sklepy e-commerce (także headless), marketing automation i social media — napisz, o który obszar chodzi, albo poproś o kontakt, a doprecyzujemy to w rozmowie.',
+            services: pick(services.map((s) => s.slug)),
+            prices: [],
+            source: 'catalogue',
+        };
+    }
+
+    let matchedPrices = prices.filter((p) => matched.includes(p.service) && hasAny(q, PRICE_STEMS[p.name] ?? []));
+    if (!matchedPrices.length && asksForPrice(q)) {
+        matchedPrices = prices.filter((p) => matched.includes(p.service) && p.name !== 'Serwis rozbudowany');
+    }
+
+    const titles = pick(matched).map((s) => s.title);
+    const parts = [
+        `Tak — to mieści się w naszej ofercie (${titles.join(', ')}).`,
+        ...matched.slice(0, 2).map((slug) => HOW[slug]).filter(Boolean),
+        'Każdy projekt zaczynamy od celu biznesowego i KPI, a AI przyspiesza research i produkcję.',
+        matchedPrices.length ? 'Orientacyjne ceny poniżej pochodzą z naszego cennika.' : 'Cena zależy od zakresu — przygotujemy wycenę po krótkiej rozmowie.',
+    ];
+
+    return { verdict: 'yes', answer: parts.join(' '), services: pick(matched), prices: matchedPrices, source: 'catalogue' };
 }
 
 /**

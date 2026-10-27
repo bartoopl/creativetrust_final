@@ -71,7 +71,11 @@ export default function AnswerPanel({ state, onReset }: AnswerPanelProps) {
                     </div>
                 )}
 
-                <p className="ct-ask-note">Odpowiedź generuje AI na podstawie naszej oferty — wiążąca jest wycena od zespołu.</p>
+                <p className="ct-ask-note">
+                    {answer?.source === 'catalogue'
+                        ? 'Odpowiedź dopasowana automatycznie do naszej oferty — wiążąca jest wycena od zespołu.'
+                        : 'Odpowiedź generuje AI na podstawie naszej oferty — wiążąca jest wycena od zespołu.'}
+                </p>
             </div>
         </article>
     );
