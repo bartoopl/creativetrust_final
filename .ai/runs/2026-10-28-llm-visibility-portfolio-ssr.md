@@ -60,8 +60,8 @@ Make every case study, the author and the company readable as consistent entitie
 
 ### Phase 2: Portfolio for AI agents
 
-- [ ] 2.1 Portfolio Markdown twin, alternate Link header, Markdown 404 for unknown slugs
-- [ ] 2.2 llms.txt case studies section and complete blog / knowledge-base lists
+- [x] 2.1 Portfolio Markdown twin, alternate Link header, Markdown 404 for unknown slugs — 82a6dd7
+- [x] 2.2 llms.txt case studies section and complete blog / knowledge-base lists — ac8b99b
 
 ### Phase 3: Author and canonicals
 
