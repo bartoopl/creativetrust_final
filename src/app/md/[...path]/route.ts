@@ -1,6 +1,6 @@
 import { SITE_URL } from '@/lib/schema';
 import { markdownPages, markdownTargetFor, routeFromHandlerSegments } from '@/lib/markdown/pages';
-import { getArticleMarkdown, getPortfolioMarkdown, loadPage, markdownResponse } from '@/lib/markdown/server';
+import { getArticleMarkdown, getAuthorMarkdown, getPortfolioIndexMarkdown, getPortfolioMarkdown, loadPage, markdownResponse } from '@/lib/markdown/server';
 
 // Reached through the proxy: `/uslugi/strony-www.md` and `Accept: text/markdown`
 // on `/uslugi/strony-www` are both rewritten to `/md/uslugi/strony-www`.
@@ -24,6 +24,13 @@ export async function GET(_request: Request, { params }: { params: Promise<{ pat
         return markdownResponse(loaded.raw, { canonical });
     }
 
-    const markdown = target.kind === 'portfolio' ? await getPortfolioMarkdown(target.slug) : await getArticleMarkdown(target.kind, target.slug);
+    if (target.kind === 'portfolio-index') return markdownResponse(await getPortfolioIndexMarkdown(), { canonical });
+
+    const markdown =
+        target.kind === 'portfolio'
+            ? await getPortfolioMarkdown(target.slug)
+            : target.kind === 'author'
+              ? await getAuthorMarkdown(target.slug)
+              : await getArticleMarkdown(target.kind, target.slug);
     return markdown ? markdownResponse(markdown, { canonical }) : notFound(canonical);
 }

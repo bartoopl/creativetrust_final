@@ -1,5 +1,7 @@
 import type { NextConfig } from 'next';
-import { retiredBlogPosts } from './src/lib/markdown/pages';
+// Blog posts replaced by a current page (301 here, left out of llms.txt and the
+// sitemap): AI answers quote outdated 2023 prices and trends.
+import retiredBlogPosts from './retired-blog-posts.json';
 
 const nextConfig: NextConfig = {
     poweredByHeader: false,
@@ -37,7 +39,7 @@ const nextConfig: NextConfig = {
                 permanent: true,
             },
             // Retired posts (e.g. outdated 2023 prices) → the current page, HTML and Markdown twin.
-            ...Object.entries(retiredBlogPosts).flatMap(([slug, destination]) => [
+            ...Object.entries(retiredBlogPosts as Record<string, string>).flatMap(([slug, destination]) => [
                 { source: `/blog/${slug}`, destination, permanent: true },
                 { source: `/blog/${slug}.md`, destination: `${destination}.md`, permanent: true },
             ]),

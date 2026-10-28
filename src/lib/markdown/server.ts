@@ -1,12 +1,14 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { client, getBlogPost, getKnowledgeBaseEntry, getPortfolioProject, urlFor } from '@/lib/sanity';
+import { client, getBlogAuthor, getBlogPost, getKnowledgeBaseEntry, getPortfolioProject, urlFor } from '@/lib/sanity';
+import { authorMarkdown, portfolioIndexMarkdown } from './collections';
 import { SITE_URL } from '@/lib/schema';
 import { resolveAuthor, type SanityAuthor } from '@/lib/authors';
 import { articleFrontmatter, articleLead, type ArticleDocument } from './article';
 import { frontmatterString, parseFrontmatter, serializeFrontmatter } from './frontmatter';
 import type { LlmsArticle, LlmsPage } from './llms';
-import { articleBase, contentFileFor, markdownPages, markdownUrlFor, retiredBlogPosts, type ArticleKind, type MarkdownPage } from './pages';
+import { articleBase, contentFileFor, markdownPages, markdownUrlFor, type ArticleKind, type MarkdownPage } from './pages';
+import retiredBlogPosts from '../../../retired-blog-posts.json';
 import { portableTextToMarkdown, portableTextToPlainText, type PortableTextBlock } from './portable-text';
 import { portfolioFrontmatter, portfolioMarkdown, projectSummary, type PortfolioProjectDocument } from './portfolio';
 
@@ -179,6 +181,60 @@ export async function getArticleMarkdown(kind: Exclude<ArticleKind, 'portfolio'>
         body ? `\n${body}` : '',
         `\n---\n\nWersja HTML: ${canonical}\n`,
     ].join('\n');
+}
+
+/** `/portfolio.md`: every case study with its summary. */
+export async function getPortfolioIndexMarkdown(): Promise<string> {
+    const canonical = `${SITE_URL}${articleBase.portfolio}`;
+    const projects = (await getArticleIndex()).filter((a) => a.kind === 'portfolio');
+    const frontmatter = serializeFrontmatter({
+        title: 'Portfolio i realizacje CreativeTrust',
+        description: 'Wszystkie opisane realizacje CreativeTrust: strony WWW, e-commerce, marketing automation i kampanie.',
+        canonical,
+        lang: 'pl-PL',
+        type: 'collection',
+        ai_summary: `Lista ${projects.length} realizacji CreativeTrust z linkami do pełnych opisów case studies w Markdown.`,
+        target_audience: ['Firmy sprawdzające doświadczenie i realizacje wykonawcy'],
+        semantic_keywords: ['portfolio', 'realizacje', 'case study', 'CreativeTrust'],
+    });
+    return portfolioIndexMarkdown({ frontmatter, canonical, projects });
+}
+
+interface SanityAuthorProfile extends SanityAuthor {
+    bio?: PortableTextBlock[] | null;
+    posts?: Array<{ title?: string; slug?: { current?: string }; excerpt?: string | null }> | null;
+}
+
+/** `/blog/autor/<slug>.md`: the author entity and their articles; null when unknown. */
+export async function getAuthorMarkdown(slug: string): Promise<string | null> {
+    const doc = await failSoft<SanityAuthorProfile | null>(() => getBlogAuthor(slug), null);
+    const author = resolveAuthor(doc);
+    if (!doc || !author) return null;
+
+    const canonical = `${SITE_URL}/blog/autor/${slug}`;
+    const posts = (doc.posts ?? [])
+        .filter((post) => post.title && post.slug?.current && !(post.slug.current in retiredBlogPosts))
+        .map((post) => ({ title: post.title!, url: `${SITE_URL}${articleBase.blog}/${post.slug!.current}.md`, summary: post.excerpt }));
+    const frontmatter = serializeFrontmatter({
+        title: `${author.name} — autor bloga CreativeTrust`,
+        description: `${author.name}${author.jobTitle ? `, ${author.jobTitle}` : ''}. Artykuły na blogu CreativeTrust.`,
+        canonical,
+        lang: 'pl-PL',
+        type: 'person',
+        ai_summary: `${author.name}${author.jobTitle ? ` (${author.jobTitle})` : ''} — autor ${posts.length} artykułów na blogu CreativeTrust.`,
+        target_audience: ['Osoby sprawdzające autora i jego doświadczenie'],
+        semantic_keywords: [author.name, 'CreativeTrust', ...(author.jobTitle ? [author.jobTitle] : [])],
+        same_as: author.sameAs.length ? author.sameAs : undefined,
+    });
+    return authorMarkdown({
+        frontmatter,
+        canonical,
+        name: author.name,
+        jobTitle: author.jobTitle,
+        bioMarkdown: portableTextToMarkdown(doc.bio),
+        sameAs: author.sameAs,
+        posts,
+    });
 }
 
 export interface MarkdownResponseOptions {

@@ -350,11 +350,16 @@ body:has(.ct-v2) .ct-marquee-track span { font-family: var(--font-sans), sans-se
   margin: 0; max-width: 20ch; text-align: center; text-wrap: balance; color: var(--text);
   font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.1;
 }
-.ct-ask-sub { margin: 0; max-width: 44ch; text-align: center; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.ct-ask-kicker { margin: 0; font-size: 13px; color: var(--muted-2); text-align: center; }
+.ct-ask-label { display: block; flex-basis: 100%; padding: 12px 16px 0; font-size: 13px; color: var(--muted); }
+.ct-ask-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; list-style: none; margin: 4px 0 0; padding: 0; font-size: 13px; color: var(--muted); }
+.ct-ask-steps li { display: inline-flex; align-items: center; gap: 8px; }
+.ct-ask-steps span { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--line-strong); font: 500 11px/1 var(--font-mono), monospace; color: var(--text); }
+.ct-ask-sub { margin: 0; max-width: 52ch; text-align: center; font-size: 15px; line-height: 1.5; color: var(--muted); }
 
 .ct-ask-box {
   width: 100%; margin-top: 14px; text-align: left;
-  display: flex; align-items: flex-end; gap: 8px;
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0 8px;
   background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   transition: border-color .15s ease, box-shadow .15s ease;
@@ -362,14 +367,15 @@ body:has(.ct-v2) .ct-marquee-track span { font-family: var(--font-sans), sans-se
 .ct-ask-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
 .ct-ask-box textarea {
   display: block; resize: none; border: 0; outline: none; background: transparent;
-  flex: 1; min-width: 0; padding: 13px 0 13px 16px; font: 400 15px/1.5 var(--font-sans), sans-serif; color: var(--text);
+  flex: 1; min-width: 0; padding: 4px 0 12px 16px; font: 400 15px/1.5 var(--font-sans), sans-serif; color: var(--text);
 }
 .ct-ask-box textarea::placeholder { color: var(--muted-2); }
 .ct-ask-box[data-busy="true"] textarea { color: var(--muted); }
 .ct-ask-bar { display: flex; align-items: center; gap: 8px; padding: 9px 9px 9px 0; flex: none; }
 .ct-ask-hint { font-size: 12px; color: var(--muted-2); }
 .ct-ask-submit {
-  display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; flex: none; margin-left: auto;
+  display: inline-flex; align-items: center; justify-content: center; height: 32px; padding: 0 14px; flex: none; margin-left: auto;
+  font: 500 14px/1 var(--font-sans), sans-serif;
   border: 0; border-radius: 7.2px; background: var(--accent); color: #fff; cursor: pointer;
   transition: background .15s ease, opacity .15s ease, transform .2s ease;
 }

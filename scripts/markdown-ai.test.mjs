@@ -205,7 +205,7 @@ test('maps .md URLs, handler paths and HTML routes consistently', () => {
     assert.deepEqual(markdownTargetFor('/uslugi/strony-www/'), { kind: 'page', route: '/uslugi/strony-www' });
     assert.deepEqual(markdownTargetFor('/blog/migracja-sklepu-bez-utraty-seo'), { kind: 'blog', route: '/blog/migracja-sklepu-bez-utraty-seo', slug: 'migracja-sklepu-bez-utraty-seo' });
     assert.equal(markdownTargetFor('/baza-wiedzy/crm')?.kind, 'knowledge-base');
-    for (const route of ['/polityka-prywatnosci', '/regulamin', '/admin', '/blog', '/blog/kategoria/seo', '/blog/Zly_Slug', '/portfolio']) {
+    for (const route of ['/polityka-prywatnosci', '/regulamin', '/admin', '/blog', '/blog/kategoria/seo', '/blog/Zly_Slug']) {
         assert.equal(markdownTargetFor(route), null, route);
     }
     for (const page of markdownPages) {

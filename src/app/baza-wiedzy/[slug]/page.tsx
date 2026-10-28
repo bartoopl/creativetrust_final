@@ -6,6 +6,10 @@ import PortableTextContent from '@/components/PortableTextContent';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildBreadcrumbSchema, buildDefinedTermSchema } from '@/lib/schema';
 
+// Regenerated hourly so Sanity edits (and dateModified) reach the site
+// without a deploy; without it the CDN kept the first render for a year.
+export const revalidate = 3600;
+
 // Define the params type as a Promise as required in Next.js v15
 type Params = Promise<{ slug: string }>;
 
