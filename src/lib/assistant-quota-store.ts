@@ -29,13 +29,23 @@ function blobsStore(): CounterStore | null {
     return persistent;
 }
 
-/** Persistent store with a per-call fallback to memory, so a Blobs outage never takes the form down. */
+const BLOBS_OP_TIMEOUT_MS = 1_000;
+
+/** The Blobs call, or the memory fallback when it fails or does not answer in time. */
+function orMemory(op: Promise<number>, fallback: () => Promise<number>): Promise<number> {
+    return Promise.race([
+        op.catch(fallback),
+        new Promise<number>((resolve) => setTimeout(() => resolve(fallback()), BLOBS_OP_TIMEOUT_MS)),
+    ]);
+}
+
+/** Persistent store with a per-call fallback to memory, so a slow or failing Blobs never takes the form down. */
 export function quotaStore(): CounterStore {
     const blobs = blobsStore();
     if (!blobs) return memory;
     return {
-        get: (key) => blobs.get(key).catch(() => memory.get(key)),
-        increment: (key) => blobs.increment(key).catch(() => memory.increment(key)),
+        get: (key) => orMemory(blobs.get(key), () => memory.get(key)),
+        increment: (key) => orMemory(blobs.increment(key), () => memory.increment(key)),
     };
 }
 
