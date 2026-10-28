@@ -1,12 +1,13 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { client, getBlogPost, getKnowledgeBaseEntry, urlFor } from '@/lib/sanity';
+import { client, getBlogPost, getKnowledgeBaseEntry, getPortfolioProject, urlFor } from '@/lib/sanity';
 import { SITE_URL } from '@/lib/schema';
 import { articleFrontmatter, articleLead, type ArticleDocument } from './article';
 import { frontmatterString, parseFrontmatter, serializeFrontmatter } from './frontmatter';
 import type { LlmsArticle, LlmsPage } from './llms';
 import { articleBase, contentFileFor, markdownPages, markdownUrlFor, type ArticleKind, type MarkdownPage } from './pages';
-import { portableTextToMarkdown, type PortableTextBlock } from './portable-text';
+import { portableTextToMarkdown, portableTextToPlainText, type PortableTextBlock } from './portable-text';
+import { portfolioFrontmatter, portfolioMarkdown, projectSummary, type PortfolioProjectDocument } from './portfolio';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'ai');
 const SANITY_TIMEOUT_MS = 4000;
@@ -63,41 +64,94 @@ async function failSoft<T>(work: () => Promise<T>, fallback: T): Promise<T> {
 }
 
 interface ArticleListItem {
-    _type: 'blogPost' | 'knowledgeBase';
+    _type: 'blogPost' | 'knowledgeBase' | 'portfolioProject';
     title?: string;
     slug?: string;
     summary?: string | null;
 }
 
-/** Latest published blog posts and knowledge-base entries; [] when Sanity fails. */
-export async function getLatestArticles(blogLimit = 20, knowledgeLimit = 30): Promise<LlmsArticle[]> {
+type PortfolioListItem = PortfolioProjectDocument & { slug?: string; description?: PortableTextBlock[] | string | null };
+
+const ARTICLE_KIND: Record<ArticleListItem['_type'], ArticleKind> = {
+    blogPost: 'blog',
+    knowledgeBase: 'knowledge-base',
+    portfolioProject: 'portfolio',
+};
+
+/**
+ * Every published case study, blog post and knowledge-base entry for llms.txt
+ * (a partial list hides most of the evidence from AI agents); [] when Sanity fails.
+ */
+export async function getArticleIndex(): Promise<LlmsArticle[]> {
     const docs = await failSoft<ArticleListItem[]>(
         () =>
             client.fetch(
                 `{
-                    "blog": *[_type == "blogPost" && defined(slug.current) && !(_id in path("drafts.**"))] | order(publishedAt desc)[0...$blogLimit] {
+                    "portfolio": *[_type == "portfolioProject" && defined(slug.current) && !(_id in path("drafts.**"))] | order(publishedAt desc) {
+                        title, client, scopeOfWork, description, "slug": slug.current, "categories": categories[]->{ title }
+                    },
+                    "blog": *[_type == "blogPost" && defined(slug.current) && !(_id in path("drafts.**"))] | order(publishedAt desc) {
                         _type, title, "slug": slug.current, "summary": excerpt
                     },
-                    "kb": *[_type == "knowledgeBase" && defined(slug.current) && !(_id in path("drafts.**"))] | order(publishedAt desc)[0...$knowledgeLimit] {
+                    "kb": *[_type == "knowledgeBase" && defined(slug.current) && !(_id in path("drafts.**"))] | order(title asc) {
                         _type, title, "slug": slug.current, "summary": shortDescription
                     }
                 }`,
-                { blogLimit, knowledgeLimit },
-            ).then((result: { blog?: ArticleListItem[]; kb?: ArticleListItem[] }) => [...(result?.blog ?? []), ...(result?.kb ?? [])]),
+            ).then((result: { portfolio?: PortfolioListItem[]; blog?: ArticleListItem[]; kb?: ArticleListItem[] }) => [
+                ...(result?.portfolio ?? []).map(
+                    (project): ArticleListItem => ({
+                        _type: 'portfolioProject',
+                        title: project.title ?? undefined,
+                        slug: project.slug,
+                        summary: projectSummary(project, portableTextToPlainText(project.description, 200)),
+                    }),
+                ),
+                ...(result?.blog ?? []),
+                ...(result?.kb ?? []),
+            ]),
         [],
     );
     return docs
         .filter((doc) => doc.title && doc.slug)
         .map((doc) => {
-            const kind: ArticleKind = doc._type === 'blogPost' ? 'blog' : 'knowledge-base';
+            const kind = ARTICLE_KIND[doc._type];
             return { kind, title: doc.title!, summary: doc.summary, url: `${SITE_URL}${articleBase[kind]}/${doc.slug}.md` };
         });
+}
+
+/** Markdown twin of a portfolio case study; null when it does not exist. */
+export async function getPortfolioMarkdown(slug: string): Promise<string | null> {
+    const doc = await failSoft<(PortfolioProjectDocument & { description?: PortableTextBlock[] | string | null; mainImage?: PortableTextBlock | null }) | null>(
+        () => getPortfolioProject(slug),
+        null,
+    );
+    if (!doc?.title) return null;
+
+    const canonical = `${SITE_URL}${articleBase.portfolio}/${slug}`;
+    const imageUrl = (image: PortableTextBlock) => {
+        try {
+            return image.asset ? urlFor(image).width(1200).auto('format').url() : null;
+        } catch {
+            return null;
+        }
+    };
+    const summary = projectSummary(doc, portableTextToPlainText(doc.description, 300));
+    const descriptionMarkdown =
+        typeof doc.description === 'string' ? doc.description : portableTextToMarkdown(doc.description, { imageUrl });
+
+    return portfolioMarkdown({
+        doc,
+        canonical,
+        frontmatter: serializeFrontmatter(portfolioFrontmatter(doc, canonical, summary)),
+        descriptionMarkdown,
+        mainImageUrl: doc.mainImage ? imageUrl(doc.mainImage) : null,
+    });
 }
 
 type SanityArticle = ArticleDocument & { content?: PortableTextBlock[] };
 
 /** Markdown twin of a blog post or knowledge-base entry; null when it does not exist. */
-export async function getArticleMarkdown(kind: ArticleKind, slug: string): Promise<string | null> {
+export async function getArticleMarkdown(kind: Exclude<ArticleKind, 'portfolio'>, slug: string): Promise<string | null> {
     const fetcher = kind === 'blog' ? getBlogPost : getKnowledgeBaseEntry;
     const doc = await failSoft<SanityArticle | null>(() => fetcher(slug), null);
     if (!doc?.title) return null;

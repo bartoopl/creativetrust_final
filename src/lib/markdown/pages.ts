@@ -38,11 +38,12 @@ const staticRoutes = new Set(markdownPages.map((page) => page.route));
 /** Sanity slugs are lowercase kebab-case; anything else is not an article. */
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-export type ArticleKind = 'blog' | 'knowledge-base';
+export type ArticleKind = 'blog' | 'knowledge-base' | 'portfolio';
 
 export const articleBase: Record<ArticleKind, string> = {
     blog: '/blog',
     'knowledge-base': '/baza-wiedzy',
+    portfolio: '/portfolio',
 };
 
 /** `/uslugi/` → `/uslugi`, keeps `/`. */
