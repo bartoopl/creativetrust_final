@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Wordmark from './ui/Wordmark';
+import TrustpilotReviewCollector from './TrustpilotReviewCollector';
 
 const services = [
     { href: '/uslugi/strony-www', label: 'Strony www' },
@@ -40,6 +41,7 @@ export default function Footer() {
                         <p className="ct-body ct-footer-lead" style={{ fontSize: 13 }}>
                             Strony www, ecommerce headless, marketing automation i social media — z tempem AI.
                         </p>
+                        <TrustpilotReviewCollector />
                     </div>
                     <div className="flex flex-wrap gap-16">
                         <FooterColumn title="Usługi" items={services} />
