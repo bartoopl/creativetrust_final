@@ -12,7 +12,7 @@ const catalogue: Catalogue = { services, landings: seoLandings, prices: publishe
 const DEFAULT_MODEL = 'claude-haiku-5-5';
 // Below Netlify's 10 s synchronous function limit, so a slow answer still ends in a readable reply.
 const CLAUDE_TIMEOUT_MS = 8_000;
-const QUOTA_TIMEOUT_MS = 1_500;
+const QUOTA_TIMEOUT_MS = 500;
 
 const ok = (answer: OfferAnswer, headers?: HeadersInit) =>
     NextResponse.json({ ok: true, answer }, { headers: { 'Cache-Control': 'no-store', ...headers } });

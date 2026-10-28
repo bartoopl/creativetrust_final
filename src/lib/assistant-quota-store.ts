@@ -1,53 +1,16 @@
 import { createHash } from 'node:crypto';
-import { getStore } from '@netlify/blobs';
 import { createMemoryStore, type CounterStore } from './assistant-quota';
 
-const memory = createMemoryStore();
-let persistent: CounterStore | null | undefined;
-
 /**
- * Netlify Blobs when running on Netlify (counters survive cold starts and are shared between function
- * instances), in-memory otherwise. Default (eventual) consistency: strong reads hung on Netlify, and coarse
- * limits tolerate a few seconds of staleness. Increments are read-then-write, not atomic.
+ * In-memory counters, per server instance. Netlify Blobs was tried and every read/write hung from the
+ * Next.js functions on this site (deploy previews #7, both strong and eventual consistency), so limits
+ * hold per warm instance: enough to stop a single prankster hammering the form. The hard cost ceiling
+ * is the spend limit on the Anthropic workspace that owns ANTHROPIC_API_KEY.
  */
-function blobsStore(): CounterStore | null {
-    if (persistent !== undefined) return persistent;
-    try {
-        const store = getStore('offer-assistant-quota');
-        const read = async (key: string) => Number(await store.get(key)) || 0;
-        persistent = {
-            get: read,
-            async increment(key) {
-                const next = (await read(key)) + 1;
-                await store.set(key, String(next));
-                return next;
-            },
-        };
-    } catch {
-        // No Netlify Blobs context (local dev, other hosting).
-        persistent = null;
-    }
-    return persistent;
-}
+const memory = createMemoryStore();
 
-const BLOBS_OP_TIMEOUT_MS = 1_000;
-
-/** The Blobs call, or the memory fallback when it fails or does not answer in time. */
-function orMemory(op: Promise<number>, fallback: () => Promise<number>): Promise<number> {
-    return Promise.race([
-        op.catch(fallback),
-        new Promise<number>((resolve) => setTimeout(() => resolve(fallback()), BLOBS_OP_TIMEOUT_MS)),
-    ]);
-}
-
-/** Persistent store with a per-call fallback to memory, so a slow or failing Blobs never takes the form down. */
 export function quotaStore(): CounterStore {
-    const blobs = blobsStore();
-    if (!blobs) return memory;
-    return {
-        get: (key) => orMemory(blobs.get(key), () => memory.get(key)),
-        increment: (key) => orMemory(blobs.increment(key), () => memory.increment(key)),
-    };
+    return memory;
 }
 
 /** Visitor id: salted hash of the IP — counters never store a raw address. */
