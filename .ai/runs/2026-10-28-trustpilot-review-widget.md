@@ -17,7 +17,7 @@ Every page's footer invites past clients to review CreativeTrust on Trustpilot.
 
 ## Progress
 
-PR: (set after opening)
+PR: #11
 
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
