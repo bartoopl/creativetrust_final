@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     description: 'Zobacz wybrane realizacje CreativeTrust: strony internetowe, e-commerce i kampanie marketingowe.',
     alternates: {
         canonical: `${SITE_URL}/portfolio`,
+        types: { 'text/markdown': `${SITE_URL}/portfolio.md` },
     },
     openGraph: {
         title: 'Portfolio i realizacje | CreativeTrust',

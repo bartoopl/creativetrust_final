@@ -6,6 +6,10 @@ import { Metadata } from 'next';
 import PageHero from '@/components/ui/PageHero';
 import Card from '@/components/ui/Card';
 
+// Regenerated hourly so Sanity edits (and dateModified) reach the site
+// without a deploy; without it the CDN kept the first render for a year.
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
     title: 'Baza wiedzy — marketing, design, AI i e-commerce',
     description: 'Zapoznaj się z naszą bazą wiedzy na temat marketingu, designu, UX/UI i innych tematów związanych z rozwojem biznesu online.',

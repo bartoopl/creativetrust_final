@@ -17,12 +17,9 @@ const monthYear = (date: string) => {
 
 /** Latest three articles as flat Tile Gray cards under a centered statement. */
 export default async function HomeBlog() {
-    let posts: BlogPost[] = [];
-    try {
-        posts = (await getBlogPosts()) ?? [];
-    } catch {
-        posts = [];
-    }
+    // Sanity errors are thrown: on hourly revalidation Next keeps the last good
+    // homepage instead of caching one without this section.
+    const posts: BlogPost[] = (await getBlogPosts()) ?? [];
     if (!posts.length) return null;
 
     return (

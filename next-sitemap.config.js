@@ -22,9 +22,7 @@ module.exports = {
         '/panel-klienta/*',
         '/rejestracja-klienta',
         '/uslugi/landing-page-google-ads',
-        '/uslugi/landing-page-pod-reklamy',
-        // Retired posts redirected with 301 (retiredBlogPosts in src/lib/markdown/pages.ts).
-        '/blog/ile-kosztuje-strona-internetowa-w-2023-roku-wszystko-co-musisz-wiedziec'
+        '/uslugi/landing-page-pod-reklamy'
     ],
     additionalPaths: async (config) => {
         const { createClient } = require('next-sanity');
@@ -78,7 +76,10 @@ module.exports = {
         `);
 
         // Tworzenie ścieżek dla wszystkich dynamicznych stron
-        const blogPostPaths = blogPosts.map(post => ({
+        // `exclude` runs before additionalPaths are added, so retired posts
+        // (301 in next.config.ts) are filtered here: the sitemap lists only 200s.
+        const retiredBlogPosts = require('./retired-blog-posts.json');
+        const blogPostPaths = blogPosts.filter(post => !(post.slug in retiredBlogPosts)).map(post => ({
             loc: `/blog/${post.slug}`,
             changefreq: 'weekly',
             priority: 0.8,

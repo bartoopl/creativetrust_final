@@ -12,6 +12,10 @@ import SchemaScript from '@/components/SchemaScript';
 import { resolveAuthor } from '@/lib/authors';
 import { SITE_URL, buildBreadcrumbSchema, buildProfilePageSchema } from '@/lib/schema';
 
+// Regenerated hourly so Sanity edits (and dateModified) reach the site
+// without a deploy; without it the CDN kept the first render for a year.
+export const revalidate = 3600;
+
 // Define the params type as a Promise as required in Next.js v15
 type Params = Promise<{ slug: string }>;
 
@@ -40,7 +44,7 @@ export async function generateMetadata({
         title: `${name} — autor | Blog`,
         description,
         // Own canonical: without it the page inherited the homepage's.
-        alternates: { canonical: url },
+        alternates: { canonical: url, types: { 'text/markdown': `${url}.md` } },
         openGraph: { title: `${name} — autor bloga CreativeTrust`, description, url, type: 'profile', locale: 'pl_PL' },
     };
 }

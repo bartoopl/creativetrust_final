@@ -11,6 +11,9 @@ import HomeCases from '@/components/home/HomeCases';
 import HomeBlog from '@/components/home/HomeBlog';
 import { SITE_URL } from '@/lib/schema';
 
+// Latest case studies and posts come from Sanity: regenerated hourly.
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
     // Already branded: absolute, so the root template does not add a second „| CreativeTrust”.
     title: { absolute: 'CreativeTrust — Projekty cyfrowe, które działają biznesowo' },

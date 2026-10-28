@@ -8,6 +8,13 @@ const SITE_URL = 'https://www.creativetrust.pl';
 export const COMPANY_DESCRIPTION =
     'CreativeTrust to AI-native partner produktowy z Gorzowa Wielkopolskiego, działający od 2010 roku. W jednym zespole łączy strategię, design, development i automatyzację AI: projektuje i wdraża strony WWW, sklepy e-commerce (w tym headless), marketing automation (SALESmanago) i social media.';
 export const FOUNDING_YEAR = '2010';
+
+/** Legal identity, as published in the privacy policy (operator of the site). */
+export const LEGAL_NAME = 'CreativeTrust Natalia Staszak';
+/** NIP, digits only. Set it to add `taxID`/`vatID` to the JSON-LD and NIP to the footer. */
+export const TAX_ID: string | undefined = '5993026880';
+export const STREET_ADDRESS = 'ul. Kombatantów 34/500';
+export const POSTAL_CITY = '66-400 Gorzów Wielkopolski';
 const LOGO_URL = `${SITE_URL}/logo.svg`;
 
 type JsonLd = Record<string, unknown>;
@@ -20,6 +27,9 @@ export const organizationSchema: JsonLd = {
             '@id': `${SITE_URL}/#organization`,
             name: 'CreativeTrust',
             url: SITE_URL,
+            legalName: LEGAL_NAME,
+            taxID: TAX_ID,
+            vatID: TAX_ID ? `PL${TAX_ID}` : undefined,
             foundingDate: FOUNDING_YEAR,
             description: COMPANY_DESCRIPTION,
             logo: {
@@ -31,7 +41,7 @@ export const organizationSchema: JsonLd = {
             telephone: '+48570526421',
             address: {
                 '@type': 'PostalAddress',
-                streetAddress: 'ul. Kombatantów 34/500',
+                streetAddress: STREET_ADDRESS,
                 addressLocality: 'Gorzów Wielkopolski',
                 postalCode: '66-400',
                 addressCountry: 'PL',
@@ -55,7 +65,7 @@ export const organizationSchema: JsonLd = {
             email: 'office@creativetrust.pl',
             address: {
                 '@type': 'PostalAddress',
-                streetAddress: 'ul. Kombatantów 34/500',
+                streetAddress: STREET_ADDRESS,
                 addressLocality: 'Gorzów Wielkopolski',
                 postalCode: '66-400',
                 addressCountry: 'PL',

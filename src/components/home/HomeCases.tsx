@@ -13,12 +13,9 @@ interface PortfolioProject {
 
 /** Case studies as flat Tile Gray cards: the work is the proof, the image sits inset. */
 export default async function HomeCases() {
-    let projects: PortfolioProject[] = [];
-    try {
-        projects = (await getLatestPortfolioProjects(2)) ?? [];
-    } catch {
-        projects = [];
-    }
+    // Sanity errors are thrown: on hourly revalidation Next keeps the last good
+    // homepage instead of caching one without this section.
+    const projects: PortfolioProject[] = (await getLatestPortfolioProjects(2)) ?? [];
     if (!projects.length) return null;
 
     return (
