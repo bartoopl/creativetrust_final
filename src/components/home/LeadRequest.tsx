@@ -48,7 +48,7 @@ export default function LeadRequest({ question, answer }: LeadRequestProps) {
     if (status === 'sent') {
         return (
             <p className="ct-ask-sent" role="status">
-                Dziękujemy — mamy Twoje pytanie i odpowiedź asystenta. Odezwiemy się w ciągu jednego dnia roboczego.
+                Dziękujemy — mamy Twoje pytanie. Odezwie się do Ciebie osoba z zespołu, zwykle w ciągu jednego dnia roboczego.
             </p>
         );
     }
@@ -73,7 +73,7 @@ export default function LeadRequest({ question, answer }: LeadRequestProps) {
             {status === 'error' && <p className="ct-ask-note" role="alert" style={{ color: '#b42318' }}>{error}</p>}
             <div className="flex flex-wrap items-center justify-between gap-3">
                 <p className="ct-ask-note" style={{ textAlign: 'left', margin: 0, maxWidth: '44ch' }}>
-                    Wysyłając, zgadzasz się na przetwarzanie danych zgodnie z naszą <a href="/polityka-prywatnosci">polityką prywatności</a>. Do wiadomości dołączymy Twoje pytanie i odpowiedź asystenta.
+                    Wysyłając, zgadzasz się na przetwarzanie danych zgodnie z naszą <a href="/polityka-prywatnosci">polityką prywatności</a>. Dołączymy Twoje pytanie, żeby nie trzeba było go powtarzać.
                 </p>
                 <button type="submit" className="ct-cta" disabled={status === 'sending'}>
                     {status === 'sending' ? 'Wysyłanie…' : 'Wyślij prośbę o kontakt'}

@@ -5,7 +5,7 @@ import { ArrowDown, ArrowUp } from 'lucide-react';
 import { MAX_QUESTION_LENGTH, type OfferAnswer } from '@/lib/offer-assistant';
 import AnswerPanel from './AnswerPanel';
 
-const thinking = ['przeszukuję katalog usług', 'sprawdzam opublikowany cennik', 'układam odpowiedź'];
+const thinking = ['sprawdzamy ofertę', 'sprawdzamy cennik', 'przygotowujemy odpowiedź'];
 
 export type AskState =
     | { kind: 'idle' }
@@ -55,7 +55,7 @@ export default function AskHero() {
             });
             const data = await res.json().catch(() => null);
             if (res.ok && data?.ok) setState({ kind: 'answer', question: q, answer: data.answer });
-            else setState({ kind: 'error', question: q, error: data?.error || 'Asystent nie odpowiedział. Spróbuj ponownie albo napisz do nas.' });
+            else setState({ kind: 'error', question: q, error: data?.error || 'Nie udało się przygotować odpowiedzi. Spróbuj ponownie albo napisz do nas.' });
         } catch {
             setState({ kind: 'error', question: q, error: 'Brak połączenia. Spróbuj ponownie albo napisz do nas.' });
         }
@@ -77,7 +77,7 @@ export default function AskHero() {
                 </h1>
 
                 <p className="ct-ask-sub">
-                    Opisz, czego potrzebujesz. Nasz asystent AI powie, czy to robimy, jak do tego podejdziemy i ile to kosztuje.
+                    Opisz, czego potrzebujesz — od razu podpowiemy, czy to robimy, jak do tego podejdziemy i ile to może kosztować.
                 </p>
 
                 <form
@@ -110,7 +110,7 @@ export default function AskHero() {
                         {question.length > MAX_QUESTION_LENGTH - 100 && (
                             <span className="ct-mono ct-ask-hint">{question.length}/{MAX_QUESTION_LENGTH}</span>
                         )}
-                        <button type="submit" className="ct-ask-submit" disabled={loading || question.trim().length < 3} aria-label="Zapytaj asystenta">
+                        <button type="submit" className="ct-ask-submit" disabled={loading || question.trim().length < 3} aria-label="Wyślij pytanie">
                             <ArrowUp size={16} strokeWidth={2} aria-hidden="true" />
                         </button>
                     </div>

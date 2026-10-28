@@ -10,7 +10,7 @@ export default function HomeClosing() {
                 <p className="ct-lead" style={{ maxWidth: '48ch' }}>Senior specjaliści i narzędzia AI — realizujemy projekty szybciej, bez obniżania poprzeczki.</p>
                 <div className="flex flex-wrap justify-center gap-2 pt-2">
                     <NotchedButton href="/kontakt">Umów bezpłatną konsultację</NotchedButton>
-                    <NotchedButton href="#ask-hero-title" variant="ghost">Zapytaj asystenta AI</NotchedButton>
+                    <NotchedButton href="#ask-hero-title" variant="ghost">Zadaj nam pytanie</NotchedButton>
                 </div>
             </div>
         </section>

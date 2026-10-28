@@ -25,9 +25,9 @@ export default function AnswerPanel({ state, onReset }: AnswerPanelProps) {
     const verdict = answer ? verdicts[answer.verdict] : null;
 
     return (
-        <article className="ct-ask-answer ct-fade" aria-label="Odpowiedź asystenta">
+        <article className="ct-ask-answer ct-fade" aria-label="Wstępna odpowiedź">
             <header className="ct-ask-answer-head">
-                <span className="ct-mono">creativetrust / asystent oferty</span>
+                <span className="ct-mono">creativetrust / wstępna odpowiedź</span>
                 {verdict && (
                     <span className="ct-mono" data-verdict={answer?.verdict}>{verdict.mark} {verdict.label}</span>
                 )}
@@ -72,9 +72,7 @@ export default function AnswerPanel({ state, onReset }: AnswerPanelProps) {
                 )}
 
                 <p className="ct-ask-note">
-                    {answer?.source === 'catalogue'
-                        ? 'Odpowiedź dopasowana automatycznie do naszej oferty — wiążąca jest wycena od zespołu.'
-                        : 'Odpowiedź generuje AI na podstawie naszej oferty — wiążąca jest wycena od zespołu.'}
+                    Wstępna odpowiedź na podstawie naszej oferty. Szczegóły i wycenę zawsze potwierdza ktoś z zespołu.
                 </p>
             </div>
         </article>
