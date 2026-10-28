@@ -38,15 +38,6 @@ const staticRoutes = new Set(markdownPages.map((page) => page.route));
 /** Sanity slugs are lowercase kebab-case; anything else is not an article. */
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-/**
- * Blog posts replaced by a current page (301 in next.config.ts, left out of
- * llms.txt and the sitemap). AI answers quote outdated prices, so a 2023
- * price article points at the current price list.
- */
-export const retiredBlogPosts: Record<string, string> = {
-    'ile-kosztuje-strona-internetowa-w-2023-roku-wszystko-co-musisz-wiedziec': '/uslugi/tworzenie-stron-www-cennik',
-};
-
 export type ArticleKind = 'blog' | 'knowledge-base' | 'portfolio';
 
 export const articleBase: Record<ArticleKind, string> = {
@@ -71,14 +62,25 @@ export function markdownUrlFor(route: string): string {
     return route === '/' ? '/index.md' : `${route}.md`;
 }
 
+export const PORTFOLIO_INDEX = '/portfolio';
+export const AUTHOR_BASE = '/blog/autor';
+
 export type MarkdownTarget =
     | { kind: 'page'; route: string }
+    | { kind: 'portfolio-index'; route: string }
+    | { kind: 'author'; route: string; slug: string }
     | { kind: ArticleKind; route: string; slug: string };
 
 /** Which Markdown document (if any) mirrors this HTML route. */
 export function markdownTargetFor(pathname: string): MarkdownTarget | null {
     const route = normalizeRoute(pathname);
     if (staticRoutes.has(route)) return { kind: 'page', route };
+    if (route === PORTFOLIO_INDEX) return { kind: 'portfolio-index', route };
+    // Before the blog prefix: `/blog/autor/x` is not a post.
+    if (route.startsWith(`${AUTHOR_BASE}/`)) {
+        const slug = route.slice(AUTHOR_BASE.length + 1);
+        return SLUG.test(slug) ? { kind: 'author', route, slug } : null;
+    }
     for (const kind of Object.keys(articleBase) as ArticleKind[]) {
         const prefix = `${articleBase[kind]}/`;
         if (route.startsWith(prefix)) {
