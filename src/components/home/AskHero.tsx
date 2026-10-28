@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from 'react';
-import { ArrowDown, ArrowUp } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { MAX_QUESTION_LENGTH, type OfferAnswer } from '@/lib/offer-assistant';
 import AnswerPanel from './AnswerPanel';
 
@@ -72,12 +72,15 @@ export default function AskHero() {
     return (
         <section ref={sectionRef} className="ct-ask-hero" aria-labelledby="ask-hero-title">
             <div className="ct-ask-inner">
+                <p className="ct-ask-kicker">CreativeTrust · strony WWW, e-commerce, marketing automation</p>
+
                 <h1 id="ask-hero-title" className="ct-ask-title">
-                    Projekty cyfrowe, które działają <span className="ct-electric">biznesowo.</span>
+                    Sprawdź, jak zrealizujemy <span className="ct-electric">Twój projekt.</span>
                 </h1>
 
                 <p className="ct-ask-sub">
-                    Opisz, czego potrzebujesz — od razu podpowiemy, czy to robimy, jak do tego podejdziemy i ile to może kosztować.
+                    Opisz w 1–2 zdaniach, czego potrzebujesz — od razu zobaczysz, czy to robimy, jak do tego podejdziemy
+                    i orientacyjną cenę z naszego cennika.
                 </p>
 
                 <form
@@ -85,14 +88,14 @@ export default function AskHero() {
                     data-busy={loading}
                     onSubmit={(e) => { e.preventDefault(); ask(question); }}
                 >
-                    <label htmlFor="ask-input" className="sr-only">Czego potrzebujesz?</label>
+                    <label htmlFor="ask-input" className="ct-ask-label">Czego potrzebujesz?</label>
                     <textarea
                         id="ask-input"
                         ref={inputRef}
                         rows={1}
                         value={question}
                         maxLength={MAX_QUESTION_LENGTH}
-                        placeholder="Np. potrzebuję sklepu, który zintegruje się z naszym ERP…"
+                        placeholder="Np. sklep internetowy zintegrowany z naszym ERP albo landing page pod kampanię Google Ads"
                         onChange={(e) => setQuestion(e.target.value)}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
@@ -110,11 +113,19 @@ export default function AskHero() {
                         {question.length > MAX_QUESTION_LENGTH - 100 && (
                             <span className="ct-mono ct-ask-hint">{question.length}/{MAX_QUESTION_LENGTH}</span>
                         )}
-                        <button type="submit" className="ct-ask-submit" disabled={loading || question.trim().length < 3} aria-label="Wyślij pytanie">
-                            <ArrowUp size={16} strokeWidth={2} aria-hidden="true" />
+                        <button type="submit" className="ct-ask-submit" disabled={loading || question.trim().length < 3}>
+                            Sprawdź
                         </button>
                     </div>
                 </form>
+
+                {state.kind === 'idle' && (
+                    <ol className="ct-ask-steps" aria-label="Jak to działa">
+                        <li><span>1</span> Opisujesz potrzebę</li>
+                        <li><span>2</span> Widzisz zakres i orientacyjną cenę</li>
+                        <li><span>3</span> Szczegóły ustalasz z zespołem</li>
+                    </ol>
+                )}
 
                 <div aria-live="polite" className="w-full">
                     {loading && (
