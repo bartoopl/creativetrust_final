@@ -49,7 +49,13 @@ Make every case study, the author and the company readable as consistent entitie
 - Server rendering depends on Sanity at build/revalidate time; pages use ISR (`revalidate`) and `generateStaticParams` so a Sanity outage at request time serves the last good page. Locally there is no Sanity token, but the public dataset is readable, so the build prerenders real projects.
 - The 301 removes an indexed URL; it targets the page with the same intent (current website prices), so link equity is preserved.
 
+## Review
+
+`om-auto-review-pr` (autofix): one major fixed in 5ef21f5 (ISR pages swallowed Sanity errors → cached 404 / empty list), llms index uses `pt::text`. Verdict APPROVED.
+
 ## Progress
+
+PR: #9
 
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
