@@ -70,5 +70,5 @@ Make every case study, the author and the company readable as consistent entitie
 
 ### Phase 4: Company consistency and small fixes
 
-- [ ] 4.1 One company description, foundingDate 2010, Organization logo
-- [ ] 4.2 Quiosque typo, double title suffix, robots.txt Host, 301 for the outdated 2023 pricing post
+- [x] 4.1 One company description, foundingDate 2010, Organization logo — e33c3f8
+- [x] 4.2 Quiosque typo, double title suffix, robots.txt Host, 301 for the outdated 2023 pricing post — 263623b
