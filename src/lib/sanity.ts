@@ -243,7 +243,8 @@ export async function getBlogPost(slug: string) {
         slug,
         image,
         bio,
-        role
+        role,
+        socialLinks
       },
       "categories": categories[]->{ _id, title, slug, color },
       "relatedPosts": *[_type == "blogPost" && 

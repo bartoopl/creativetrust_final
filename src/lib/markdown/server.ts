@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { client, getBlogPost, getKnowledgeBaseEntry, getPortfolioProject, urlFor } from '@/lib/sanity';
 import { SITE_URL } from '@/lib/schema';
+import { resolveAuthor, type SanityAuthor } from '@/lib/authors';
 import { articleFrontmatter, articleLead, type ArticleDocument } from './article';
 import { frontmatterString, parseFrontmatter, serializeFrontmatter } from './frontmatter';
 import type { LlmsArticle, LlmsPage } from './llms';
@@ -169,7 +170,9 @@ export async function getArticleMarkdown(kind: Exclude<ArticleKind, 'portfolio'>
     });
 
     return [
-        serializeFrontmatter(articleFrontmatter(doc, kind, canonical)),
+        serializeFrontmatter(
+            articleFrontmatter({ ...doc, author: { name: resolveAuthor(doc.author as SanityAuthor)?.name ?? doc.author?.name } }, kind, canonical),
+        ),
         `# ${doc.title.replace(/\s+/g, ' ').trim()}`,
         lead ? `\n${lead}` : '',
         body ? `\n${body}` : '',

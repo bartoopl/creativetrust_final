@@ -124,3 +124,33 @@ test('llms.txt lists case studies after services and every article', async () =>
     assert.ok(full.indexOf('## Realizacje (case studies)') < full.indexOf('## Artykuły i baza wiedzy'));
     assert.ok(!full.slice(full.indexOf('## Artykuły i baza wiedzy')).includes('beautyclinic'));
 });
+
+test('author resolves to a full Person entity with sameAs', async () => {
+    const { resolveAuthor } = await import('../src/lib/authors.ts');
+    const { buildPersonSchema, buildProfilePageSchema, buildBlogPostingSchema } = await import('../src/lib/schema.ts');
+    const sanityAuthor = {
+        name: 'Bartosz',
+        role: 'CEO',
+        slug: { current: 'bartosz' },
+        socialLinks: { linkedin: 'https://www.linkedin.com/in/x/', twitter: '', instagram: 'https://instagram.com/x' },
+    };
+    const author = resolveAuthor(sanityAuthor);
+    assert.equal(author.name, 'Bartosz Łyśniewski');
+    assert.equal(author.jobTitle, 'CEO CreativeTrust');
+    assert.deepEqual(author.sameAs, ['https://www.linkedin.com/in/x/', 'https://instagram.com/x']);
+    assert.equal(resolveAuthor({ name: 'Anna', role: 'Copywriter', slug: 'anna' }).name, 'Anna', 'unknown authors keep their Sanity name');
+    assert.equal(resolveAuthor({ name: ' ' }), null);
+
+    const person = buildPersonSchema(author);
+    assert.equal(person['@id'], `${SITE_URL}/blog/autor/bartosz#person`);
+    assert.equal(person.url, `${SITE_URL}/blog/autor/bartosz`);
+    assert.deepEqual(person.worksFor, { '@id': `${SITE_URL}/#organization` });
+
+    const profile = buildProfilePageSchema({ ...author, slug: 'bartosz' });
+    assert.equal(profile['@type'], 'ProfilePage');
+    assert.equal(profile.mainEntity.name, 'Bartosz Łyśniewski');
+
+    const post = buildBlogPostingSchema({ title: 'T', url: `${SITE_URL}/blog/t`, datePublished: '2025-01-01', author, authorName: 'Bartosz' });
+    assert.equal(post.author.name, 'Bartosz Łyśniewski');
+    assert.equal(post.author['@id'], person['@id']);
+});

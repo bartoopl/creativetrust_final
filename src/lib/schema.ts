@@ -124,6 +124,45 @@ export function buildFaqSchema(items: Array<{ question: string; answer: string }
     };
 }
 
+export interface PersonInput {
+    name: string;
+    /** Author slug: `/blog/autor/<slug>` is the person's page. */
+    slug?: string;
+    jobTitle?: string;
+    sameAs?: string[];
+    image?: string;
+    description?: string;
+}
+
+export function personId(slug: string): string {
+    return `${SITE_URL}/blog/autor/${slug}#person`;
+}
+
+/** Person node (no @context) to embed as an author or a page's main entity. */
+export function buildPersonSchema({ name, slug, jobTitle, sameAs, image, description }: PersonInput): JsonLd {
+    return {
+        '@type': 'Person',
+        '@id': slug ? personId(slug) : undefined,
+        name,
+        url: slug ? `${SITE_URL}/blog/autor/${slug}` : undefined,
+        jobTitle,
+        description,
+        image,
+        sameAs: sameAs?.length ? sameAs : undefined,
+        worksFor: { '@id': `${SITE_URL}/#organization` },
+    };
+}
+
+export function buildProfilePageSchema(person: PersonInput & { slug: string }): JsonLd {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        url: `${SITE_URL}/blog/autor/${person.slug}`,
+        inLanguage: 'pl-PL',
+        mainEntity: buildPersonSchema(person),
+    };
+}
+
 export function buildBlogPostingSchema({
     title,
     description,
@@ -132,6 +171,7 @@ export function buildBlogPostingSchema({
     dateModified,
     image,
     authorName,
+    author,
 }: {
     title: string;
     description?: string;
@@ -140,6 +180,8 @@ export function buildBlogPostingSchema({
     dateModified?: string;
     image?: string;
     authorName?: string;
+    /** Full author entity; takes precedence over authorName. */
+    author?: PersonInput;
 }): JsonLd {
     return {
         '@context': 'https://schema.org',
@@ -150,12 +192,14 @@ export function buildBlogPostingSchema({
         datePublished,
         dateModified: dateModified || datePublished,
         image,
-        author: authorName
-            ? {
-                  '@type': 'Person',
-                  name: authorName,
-              }
-            : undefined,
+        author: author
+            ? buildPersonSchema(author)
+            : authorName
+              ? {
+                    '@type': 'Person',
+                    name: authorName,
+                }
+              : undefined,
         publisher: {
             '@type': 'Organization',
             '@id': `${SITE_URL}/#organization`,
