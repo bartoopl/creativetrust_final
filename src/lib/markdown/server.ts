@@ -89,7 +89,8 @@ export async function getArticleIndex(): Promise<LlmsArticle[]> {
             client.fetch(
                 `{
                     "portfolio": *[_type == "portfolioProject" && defined(slug.current) && !(_id in path("drafts.**"))] | order(publishedAt desc) {
-                        title, client, scopeOfWork, description, "slug": slug.current, "categories": categories[]->{ title }
+                        title, client, scopeOfWork, "slug": slug.current, "categories": categories[]->{ title },
+                        "description": coalesce(pt::text(description), description)
                     },
                     "blog": *[_type == "blogPost" && defined(slug.current) && !(_id in path("drafts.**"))] | order(publishedAt desc) {
                         _type, title, "slug": slug.current, "summary": excerpt

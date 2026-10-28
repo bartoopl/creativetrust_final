@@ -23,14 +23,11 @@ interface Category {
     slug: { current: string };
 }
 
+// Sanity errors are thrown, not rendered as an empty list: on revalidation Next
+// then keeps serving the last good page.
 async function loadPortfolio(): Promise<{ projects: Project[]; categories: Category[] }> {
-    try {
-        const [projects, categories] = await Promise.all([getPortfolioProjects(), getServiceCategories()]);
-        return { projects: projects ?? [], categories: categories ?? [] };
-    } catch (error) {
-        console.error('Błąd podczas ładowania portfolio:', error);
-        return { projects: [], categories: [] };
-    }
+    const [projects, categories] = await Promise.all([getPortfolioProjects(), getServiceCategories()]);
+    return { projects: projects ?? [], categories: categories ?? [] };
 }
 
 export default async function PortfolioPage() {

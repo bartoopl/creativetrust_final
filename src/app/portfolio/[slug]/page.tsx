@@ -19,13 +19,10 @@ type Params = Promise<{ slug: string }>;
 
 type ProjectDocument = Project & { _updatedAt?: string };
 
+// Sanity errors are thrown, not turned into a 404: on revalidation Next then
+// keeps serving the last good page instead of caching "not found" for an hour.
 async function loadProject(slug: string): Promise<ProjectDocument | null> {
-    try {
-        return (await getPortfolioProject(slug)) ?? null;
-    } catch (error) {
-        console.error('Błąd podczas ładowania projektu:', error);
-        return null;
-    }
+    return (await getPortfolioProject(slug)) ?? null;
 }
 
 const hasAsset = (image: unknown): boolean => Boolean((image as { asset?: unknown } | null | undefined)?.asset);
