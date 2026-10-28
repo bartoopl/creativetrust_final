@@ -1,13 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
+import { SITE_URL } from '@/lib/schema';
 import { getKnowledgeBase, getKnowledgeBaseLetters } from '@/lib/sanity';
 import { Metadata } from 'next';
 import PageHero from '@/components/ui/PageHero';
 import Card from '@/components/ui/Card';
 
 export const metadata: Metadata = {
-    title: 'Baza wiedzy - Agencja Marketingowa',
+    title: 'Baza wiedzy — marketing, design, AI i e-commerce',
     description: 'Zapoznaj się z naszą bazą wiedzy na temat marketingu, designu, UX/UI i innych tematów związanych z rozwojem biznesu online.',
+    alternates: { canonical: `${SITE_URL}/baza-wiedzy` },
 };
 
 export default async function KnowledgeBasePage() {

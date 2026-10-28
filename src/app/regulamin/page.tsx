@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Regulamin — CreativeTrust',
+    title: 'Regulamin',
     alternates: { canonical: `${SITE_URL}/regulamin` },
 };
 

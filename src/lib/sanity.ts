@@ -56,9 +56,15 @@ export async function getPortfolioProject(slug: string) {
         slug
       },
       description,
-      publishedAt
+      publishedAt,
+      _updatedAt
     }
   `, { slug });
+}
+
+// Slugi wszystkich projektów portfolio (prerender stron realizacji)
+export async function getPortfolioSlugs(): Promise<string[]> {
+    return await client.fetch(`*[_type == "portfolioProject" && defined(slug.current) && !(_id in path("drafts.**"))].slug.current`);
 }
 
 // Funkcja do pobierania najnowszych projektów portfolio (np. do sekcji na stronie głównej)
@@ -237,7 +243,8 @@ export async function getBlogPost(slug: string) {
         slug,
         image,
         bio,
-        role
+        role,
+        socialLinks
       },
       "categories": categories[]->{ _id, title, slug, color },
       "relatedPosts": *[_type == "blogPost" && 

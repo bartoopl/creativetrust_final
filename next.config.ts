@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { retiredBlogPosts } from './src/lib/markdown/pages';
 
 const nextConfig: NextConfig = {
     poweredByHeader: false,
@@ -35,6 +36,11 @@ const nextConfig: NextConfig = {
                 destination: '/uslugi',
                 permanent: true,
             },
+            // Retired posts (e.g. outdated 2023 prices) → the current page, HTML and Markdown twin.
+            ...Object.entries(retiredBlogPosts).flatMap(([slug, destination]) => [
+                { source: `/blog/${slug}`, destination, permanent: true },
+                { source: `/blog/${slug}.md`, destination: `${destination}.md`, permanent: true },
+            ]),
         ];
     },
     async headers() {

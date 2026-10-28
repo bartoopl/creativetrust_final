@@ -1,5 +1,15 @@
 const SITE_URL = 'https://www.creativetrust.pl';
 
+/**
+ * The one company description, used verbatim by the Organization JSON-LD,
+ * llms.txt and the homepage Markdown twin: models assemble the description of
+ * a company from these signals, so they must not disagree.
+ */
+export const COMPANY_DESCRIPTION =
+    'CreativeTrust to AI-native partner produktowy z Gorzowa Wielkopolskiego, działający od 2010 roku. W jednym zespole łączy strategię, design, development i automatyzację AI: projektuje i wdraża strony WWW, sklepy e-commerce (w tym headless), marketing automation (SALESmanago) i social media.';
+export const FOUNDING_YEAR = '2010';
+const LOGO_URL = `${SITE_URL}/logo.svg`;
+
 type JsonLd = Record<string, unknown>;
 
 export const organizationSchema: JsonLd = {
@@ -10,9 +20,13 @@ export const organizationSchema: JsonLd = {
             '@id': `${SITE_URL}/#organization`,
             name: 'CreativeTrust',
             url: SITE_URL,
-            foundingDate: '2016',
-            description:
-                'Agencja marketingowa specjalizująca się w stronach WWW, e-commerce, marketing automation i performance marketingu.',
+            foundingDate: FOUNDING_YEAR,
+            description: COMPANY_DESCRIPTION,
+            logo: {
+                '@type': 'ImageObject',
+                url: LOGO_URL,
+            },
+            image: LOGO_URL,
             email: 'office@creativetrust.pl',
             telephone: '+48570526421',
             address: {
@@ -33,6 +47,10 @@ export const organizationSchema: JsonLd = {
             '@id': `${SITE_URL}/#localbusiness`,
             name: 'CreativeTrust',
             url: SITE_URL,
+            description: COMPANY_DESCRIPTION,
+            image: LOGO_URL,
+            logo: LOGO_URL,
+            parentOrganization: { '@id': `${SITE_URL}/#organization` },
             telephone: '+48570526421',
             email: 'office@creativetrust.pl',
             address: {
@@ -124,6 +142,45 @@ export function buildFaqSchema(items: Array<{ question: string; answer: string }
     };
 }
 
+export interface PersonInput {
+    name: string;
+    /** Author slug: `/blog/autor/<slug>` is the person's page. */
+    slug?: string;
+    jobTitle?: string;
+    sameAs?: string[];
+    image?: string;
+    description?: string;
+}
+
+export function personId(slug: string): string {
+    return `${SITE_URL}/blog/autor/${slug}#person`;
+}
+
+/** Person node (no @context) to embed as an author or a page's main entity. */
+export function buildPersonSchema({ name, slug, jobTitle, sameAs, image, description }: PersonInput): JsonLd {
+    return {
+        '@type': 'Person',
+        '@id': slug ? personId(slug) : undefined,
+        name,
+        url: slug ? `${SITE_URL}/blog/autor/${slug}` : undefined,
+        jobTitle,
+        description,
+        image,
+        sameAs: sameAs?.length ? sameAs : undefined,
+        worksFor: { '@id': `${SITE_URL}/#organization` },
+    };
+}
+
+export function buildProfilePageSchema(person: PersonInput & { slug: string }): JsonLd {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        url: `${SITE_URL}/blog/autor/${person.slug}`,
+        inLanguage: 'pl-PL',
+        mainEntity: buildPersonSchema(person),
+    };
+}
+
 export function buildBlogPostingSchema({
     title,
     description,
@@ -132,6 +189,7 @@ export function buildBlogPostingSchema({
     dateModified,
     image,
     authorName,
+    author,
 }: {
     title: string;
     description?: string;
@@ -140,6 +198,8 @@ export function buildBlogPostingSchema({
     dateModified?: string;
     image?: string;
     authorName?: string;
+    /** Full author entity; takes precedence over authorName. */
+    author?: PersonInput;
 }): JsonLd {
     return {
         '@context': 'https://schema.org',
@@ -150,17 +210,60 @@ export function buildBlogPostingSchema({
         datePublished,
         dateModified: dateModified || datePublished,
         image,
-        author: authorName
-            ? {
-                  '@type': 'Person',
-                  name: authorName,
-              }
-            : undefined,
+        author: author
+            ? buildPersonSchema(author)
+            : authorName
+              ? {
+                    '@type': 'Person',
+                    name: authorName,
+                }
+              : undefined,
         publisher: {
             '@type': 'Organization',
             '@id': `${SITE_URL}/#organization`,
             name: 'CreativeTrust',
         },
+        inLanguage: 'pl-PL',
+    };
+}
+
+/** A portfolio case study: work CreativeTrust created for a client. */
+export function buildCreativeWorkSchema({
+    name,
+    description,
+    url,
+    clientName,
+    dateCreated,
+    image,
+    keywords,
+    sameAs,
+}: {
+    name: string;
+    description?: string;
+    url: string;
+    clientName?: string;
+    dateCreated?: string;
+    image?: string[];
+    keywords?: string[];
+    /** The live project, when public. */
+    sameAs?: string;
+}): JsonLd {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        '@id': `${url}#creativework`,
+        name,
+        headline: name,
+        description: description || undefined,
+        url,
+        mainEntityOfPage: url,
+        dateCreated,
+        image: image?.length ? image : undefined,
+        keywords: keywords?.length ? keywords.join(', ') : undefined,
+        sameAs,
+        creator: { '@id': `${SITE_URL}/#organization` },
+        publisher: { '@id': `${SITE_URL}/#organization` },
+        about: clientName ? { '@type': 'Organization', name: clientName } : undefined,
         inLanguage: 'pl-PL',
     };
 }

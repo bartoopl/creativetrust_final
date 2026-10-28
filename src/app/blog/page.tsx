@@ -6,7 +6,7 @@ import PageHero from '@/components/ui/PageHero';
 import BlogPostCard from '@/components/BlogPostCard';
 
 export const metadata: Metadata = {
-    title: 'Blog — CreativeTrust | Strategia, design, AI i automatyzacja',
+    title: 'Blog | Strategia, design, AI i automatyzacja',
     description: 'Artykuły o strategii marki, web designie, e-commerce i AI w marketingu. Konkretna wiedza — bez ogólników.',
     alternates: { canonical: `${SITE_URL}/blog` },
     openGraph: {

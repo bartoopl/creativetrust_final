@@ -8,6 +8,9 @@ import { urlFor } from '@/lib/sanity';
 import PortableTextContent from '@/components/PortableTextContent';
 import NotchedButton from '@/components/ui/NotchedButton';
 import BlogPostCard from '@/components/BlogPostCard';
+import SchemaScript from '@/components/SchemaScript';
+import { resolveAuthor } from '@/lib/authors';
+import { SITE_URL, buildBreadcrumbSchema, buildProfilePageSchema } from '@/lib/schema';
 
 // Define the params type as a Promise as required in Next.js v15
 type Params = Promise<{ slug: string }>;
@@ -28,9 +31,17 @@ export async function generateMetadata({
         };
     }
 
+    const person = resolveAuthor(author);
+    const name = person?.name ?? author.name;
+    const url = `${SITE_URL}/blog/autor/${slug}`;
+    const description = `Artykuły napisane przez ${name}${person?.jobTitle ? ` (${person.jobTitle})` : ''} na blogu CreativeTrust.`;
+
     return {
-        title: `${author.name} - Autor | Blog`,
-        description: `Artykuły napisane przez ${author.name}${author.role ? ` - ${author.role}` : ''}`
+        title: `${name} — autor | Blog`,
+        description,
+        // Own canonical: without it the page inherited the homepage's.
+        alternates: { canonical: url },
+        openGraph: { title: `${name} — autor bloga CreativeTrust`, description, url, type: 'profile', locale: 'pl_PL' },
     };
 }
 
@@ -51,6 +62,24 @@ export default async function AuthorPage({
         notFound();
     }
 
+    const person = resolveAuthor(author);
+    const displayName = person?.name ?? author.name;
+    const url = `${SITE_URL}/blog/autor/${slug}`;
+    const schema = [
+        buildProfilePageSchema({
+            name: displayName,
+            slug,
+            jobTitle: person?.jobTitle,
+            sameAs: person?.sameAs,
+            image: author.image ? urlFor(author.image).width(400).url() : undefined,
+        }),
+        buildBreadcrumbSchema([
+            { name: 'Strona główna', url: SITE_URL },
+            { name: 'Blog', url: `${SITE_URL}/blog` },
+            { name: displayName, url },
+        ]),
+    ];
+
     // Formatuj datę
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -63,6 +92,7 @@ export default async function AuthorPage({
 
     return (
         <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
+            <SchemaScript schema={schema} />
             <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x)', borderBottom: '1px solid var(--line)' }}>
                 <div className="mx-auto flex max-w-[1280px] flex-col gap-8">
                     <Link href="/blog" className="ct-meta ct-contact-link" style={{ alignSelf: 'flex-start' }}>
@@ -75,7 +105,7 @@ export default async function AuthorPage({
                             <div className="relative flex-shrink-0 overflow-hidden" style={{ width: 120, height: 120, borderRadius: 'var(--radius-lg)', border: '1px solid var(--line-strong)', background: 'var(--panel2)' }}>
                                 <Image
                                     src={urlFor(author.image).url()}
-                                    alt={author.name}
+                                    alt={displayName}
                                     fill
                                     className="object-cover"
                                 />
@@ -88,7 +118,7 @@ export default async function AuthorPage({
 
                         <div className="flex flex-col gap-4" style={{ maxWidth: 720 }}>
                             <span className="ct-eyebrow">Autor</span>
-                            <h1 className="ct-h1">{author.name}</h1>
+                            <h1 className="ct-h1">{displayName}</h1>
 
                             {author.role && (
                                 <p className="ct-meta" style={{ fontSize: 12 }}>{author.role}</p>
@@ -215,7 +245,7 @@ export default async function AuthorPage({
                         <div className="ct-panel flex flex-col items-center gap-4 text-center" style={{ padding: 'clamp(32px, 6vw, 64px) 24px', background: 'var(--panel)' }}>
                             <h2 style={{ margin: 0, fontSize: 22, fontWeight: 500 }}>Brak artykułów</h2>
                             <p className="ct-body" style={{ fontSize: 15 }}>
-                                {author.name} nie opublikował(a) jeszcze żadnych artykułów.
+                                {displayName} nie opublikował(a) jeszcze żadnych artykułów.
                             </p>
                             <NotchedButton href="/blog">Przejdź do bloga</NotchedButton>
                         </div>

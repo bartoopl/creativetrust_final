@@ -3,7 +3,8 @@ import type { ReactNode } from 'react';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Portfolio i realizacje',
+    // Project pages keep the brand suffix (a plain string title here would drop the root template).
+    title: { default: 'Portfolio i realizacje', template: '%s | CreativeTrust' },
     description: 'Zobacz wybrane realizacje CreativeTrust: strony internetowe, e-commerce i kampanie marketingowe.',
     alternates: {
         canonical: `${SITE_URL}/portfolio`,

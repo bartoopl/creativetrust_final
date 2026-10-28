@@ -1,6 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { SITE_URL } from '@/lib/schema';
 import PageHero from '@/components/ui/PageHero';
 import NotchedButton from '@/components/ui/NotchedButton';
 import BlogPostCard from '@/components/BlogPostCard';
@@ -32,7 +33,9 @@ export async function generateMetadata({
 
     return {
         title: `${category.title} - Blog`,
-        description: category.description || `Artykuły z kategorii ${category.title}`
+        description: category.description || `Artykuły z kategorii ${category.title}`,
+        // Own canonical: without it the page inherited the homepage's.
+        alternates: { canonical: `${SITE_URL}/blog/kategoria/${slug}` },
     };
 }
 

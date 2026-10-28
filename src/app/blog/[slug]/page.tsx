@@ -12,6 +12,7 @@ import BlogPostCard from '@/components/BlogPostCard';
 import SchemaScript from '@/components/SchemaScript';
 import { getBlogSeoConfig } from '@/lib/blog-seo';
 import { SITE_URL, buildBlogPostingSchema, buildBreadcrumbSchema } from '@/lib/schema';
+import { resolveAuthor } from '@/lib/authors';
 
 // Define the params type as a Promise as required in Next.js v15
 type Params = Promise<{ slug: string }>;
@@ -80,7 +81,14 @@ export default async function BlogPostPage({
         month: 'long',
         year: 'numeric'
     }).format(publishDate);
+    // Shown when the post was edited at least a day after publishing.
+    const updated = post._updatedAt ? new Date(post._updatedAt) : null;
+    const formattedUpdate =
+        updated && !Number.isNaN(updated.getTime()) && updated.getTime() - publishDate.getTime() > 24 * 60 * 60 * 1000
+            ? new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' }).format(updated)
+            : null;
     const canonicalUrl = `${SITE_URL}/blog/${slug}`;
+    const author = resolveAuthor(post.author);
     const blogSchema = buildBlogPostingSchema({
         title: post.title,
         description: post.excerpt || post.seoDescription,
@@ -88,7 +96,15 @@ export default async function BlogPostPage({
         datePublished: post.publishedAt,
         dateModified: post._updatedAt || post.publishedAt,
         image: post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined,
-        authorName: post.author?.name,
+        author: author
+            ? {
+                  name: author.name,
+                  slug: author.slug,
+                  jobTitle: author.jobTitle,
+                  sameAs: author.sameAs,
+                  image: post.author?.image ? urlFor(post.author.image).width(400).url() : undefined,
+              }
+            : undefined,
     });
     const breadcrumbSchema = buildBreadcrumbSchema([
         { name: 'Strona główna', url: SITE_URL },
@@ -147,14 +163,17 @@ export default async function BlogPostPage({
                                     className="ct-contact-link"
                                     style={{ fontSize: 14, fontWeight: 500, color: 'var(--text)' }}
                                 >
-                                    {post.author?.name}
+                                    {author?.name ?? post.author?.name}
                                 </Link>
                                 {post.author?.role && <span className="ct-body" style={{ fontSize: 12.5 }}>{post.author.role}</span>}
                             </div>
                         </div>
 
                         <div className="ct-meta flex items-center gap-2" style={{ color: 'var(--muted-2)' }}>
-                            <span>{formattedDate}</span>
+                            <time dateTime={post.publishedAt}>{formattedDate}</time>
+                            {formattedUpdate && (
+                                <span>· Zaktualizowano <time dateTime={post._updatedAt}>{formattedUpdate}</time></span>
+                            )}
                             {post.estimatedReadingTime && (
                                 <span>· {post.estimatedReadingTime} min czytania</span>
                             )}
@@ -213,7 +232,7 @@ export default async function BlogPostPage({
                                     className="ct-contact-link"
                                     style={{ color: 'var(--text)' }}
                                 >
-                                    {post.author?.name}
+                                    {author?.name ?? post.author?.name}
                                 </Link>
                             </h3>
                             {post.author?.role && (

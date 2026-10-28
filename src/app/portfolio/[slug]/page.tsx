@@ -1,129 +1,142 @@
-"use client";
-
-import { useState, useEffect } from 'react';
+import type { CSSProperties } from 'react';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { client, urlFor } from '@/lib/sanity';
-import Image from 'next/image';
 import Link from 'next/link';
-import Lightbox from '@/components/Lightbox';
+import { getPortfolioProject, getPortfolioSlugs, urlFor } from '@/lib/sanity';
 import PortableTextContent from '@/components/PortableTextContent';
+import SchemaScript from '@/components/SchemaScript';
+import { GalleryTrigger, ProjectGallery } from '@/components/ProjectGallery';
 import { Project, Category, ImageWithCaption } from '@/types';
-import { use } from 'react';
+import { SITE_URL, buildBreadcrumbSchema, buildCreativeWorkSchema } from '@/lib/schema';
+import { portableTextToPlainText, type PortableTextBlock } from '@/lib/markdown/portable-text';
+import { projectCategories, projectSummary } from '@/lib/markdown/portfolio';
 
-// Pobieranie danych projektu
-async function getProject(slug: string) {
-    return await client.fetch(`
-    *[_type == "portfolioProject" && slug.current == $slug][0] {
-      _id,
-      title,
-      slug,
-      client,
-      mainImage,
-      galleryImages,
-      projectUrl,
-      scopeOfWork,
-      categories[]->{
-        _id,
-        title,
-        slug
-      },
-      description,
-      publishedAt
-    }
-  `, { slug });
+// Server-rendered so crawlers and AI agents that do not run JavaScript see the
+// case study; regenerated hourly when the project changes in Sanity.
+export const revalidate = 3600;
+
+type Params = Promise<{ slug: string }>;
+
+type ProjectDocument = Project & { _updatedAt?: string };
+
+// Sanity errors are thrown, not turned into a 404: on revalidation Next then
+// keeps serving the last good page instead of caching "not found" for an hour.
+async function loadProject(slug: string): Promise<ProjectDocument | null> {
+    return (await getPortfolioProject(slug)) ?? null;
 }
 
-export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
-    // Rozpakowanie parametrów za pomocą React.use()
-    const resolvedParams = use(params);
-    const { slug } = resolvedParams;
+const hasAsset = (image: unknown): boolean => Boolean((image as { asset?: unknown } | null | undefined)?.asset);
 
-    const [project, setProject] = useState<Project | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [lightboxOpen, setLightboxOpen] = useState(false);
-    const [lightboxIndex, setLightboxIndex] = useState(0);
+function summaryOf(project: ProjectDocument, maxLength = 160) {
+    return projectSummary(project, portableTextToPlainText(project.description as unknown as PortableTextBlock[] | string, maxLength));
+}
 
-    // Formatuj datę
-    const formatDate = (dateString: string) => {
-        if (!dateString) return '';
-        const date = new Date(dateString);
-        return new Intl.DateTimeFormat('pl-PL', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        }).format(date);
-    };
-
-    useEffect(() => {
-        async function loadProject() {
-            try {
-                const data = await getProject(slug);
-                if (!data) {
-                    notFound();
-                }
-                setProject(data);
-            } catch (error) {
-                console.error("Błąd podczas ładowania projektu:", error);
-                notFound();
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        loadProject();
-    }, [slug]);
-
-    // Otwieranie Lightbox z określonym indeksem
-    const openLightbox = (index: number) => {
-        setLightboxIndex(index);
-        setLightboxOpen(true);
-    };
-
-    const zoomIcon = (
-        <span
-            className="absolute flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-            style={{ top: 12, right: 12, width: 36, height: 36, borderRadius: 'var(--radius-pill)', background: '#fff', border: '1px solid var(--line-strong)', color: 'var(--accent)' }}
-            aria-hidden="true"
-        >
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-            </svg>
-        </span>
-    );
-
-    const imagePanel: React.CSSProperties = { background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', overflow: 'hidden', cursor: 'pointer' };
-
-    if (loading) {
-        return (
-            <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
-                <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x)', borderBottom: '1px solid var(--line)' }}>
-                    <div className="mx-auto flex max-w-[1280px] flex-col gap-4">
-                        <span className="ct-eyebrow">Portfolio</span>
-                        <h1 className="ct-h1">Projekt wczytywany</h1>
-                    </div>
-                </section>
-                <section className="ct-section">
-                    <div className="ct-placeholder mx-auto max-w-[1280px]" style={{ height: 384, borderRadius: 'var(--radius-md)', border: '1px solid var(--line-strong)', animation: 'ctpulse 1.5s ease-in-out infinite' }} />
-                </section>
-            </main>
-        );
+export async function generateStaticParams() {
+    try {
+        const slugs = await getPortfolioSlugs();
+        return slugs.map((slug) => ({ slug }));
+    } catch {
+        // Sanity unreachable at build time: pages render on first request instead.
+        return [];
     }
+}
 
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+    const { slug } = await params;
+    const project = await loadProject(slug);
     if (!project) {
-        return (
-            <main className="ct-section">
-                <div className="mx-auto flex max-w-[1280px] flex-col items-start gap-6">
-                    <h1 className="ct-h2">Projekt nie istnieje</h1>
-                    <Link href="/portfolio" className="ct-link">
-                        Wróć do portfolio
-                    </Link>
-                </div>
-            </main>
-        );
+        return { title: 'Nie znaleziono projektu', robots: { index: false } };
     }
+
+    const url = `${SITE_URL}/portfolio/${slug}`;
+    const name = project.title.replace(/\s+/g, ' ').trim();
+    const client = project.client?.replace(/\s+/g, ' ').trim();
+    const title = client && client.toLowerCase() !== name.toLowerCase() ? `${name} — realizacja dla ${client}` : `${name} — realizacja`;
+    const description = summaryOf(project);
+    const image = hasAsset(project.mainImage) ? urlFor(project.mainImage).width(1200).height(630).fit('max').url() : undefined;
+
+    return {
+        title: `${title} | Portfolio`,
+        description,
+        alternates: {
+            canonical: url,
+            types: { 'text/markdown': `${url}.md` },
+        },
+        openGraph: {
+            title,
+            description,
+            url,
+            siteName: 'CreativeTrust',
+            locale: 'pl_PL',
+            type: 'article',
+            images: image ? [{ url: image }] : undefined,
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+        },
+    };
+}
+
+// Formatuj datę
+const formatDate = (dateString: string) => {
+    if (!dateString) return '';
+    return new Intl.DateTimeFormat('pl-PL', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+    }).format(new Date(dateString));
+};
+
+const zoomIcon = (
+    <span
+        className="absolute flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+        style={{ top: 12, right: 12, width: 36, height: 36, borderRadius: 'var(--radius-pill)', background: '#fff', border: '1px solid var(--line-strong)', color: 'var(--accent)' }}
+        aria-hidden="true"
+    >
+        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+        </svg>
+    </span>
+);
+
+const imagePanel: CSSProperties = { background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', overflow: 'hidden', cursor: 'pointer' };
+
+export default async function ProjectPage({ params }: { params: Params }) {
+    const { slug } = await params;
+    const project = await loadProject(slug);
+    if (!project) notFound();
+
+    const url = `${SITE_URL}/portfolio/${slug}`;
+    // Sanity allows image entries without an uploaded file; they have no URL.
+    const mainImage = hasAsset(project.mainImage) ? project.mainImage : null;
+    const galleryImages: ImageWithCaption[] = (project.galleryImages ?? []).filter(hasAsset);
+    // Lightbox order: main image first, then the gallery.
+    const lightboxImages: ImageWithCaption[] = [...(mainImage ? [mainImage] : []), ...galleryImages];
+    const galleryOffset = mainImage ? 1 : 0;
+
+    const schema = [
+        buildCreativeWorkSchema({
+            name: project.title,
+            description: summaryOf(project, 500),
+            url,
+            clientName: project.client,
+            dateCreated: project.publishedAt,
+            image: lightboxImages.slice(0, 4).map((image) => urlFor(image).width(1200).fit('max').url()),
+            keywords: projectCategories(project),
+            sameAs: project.projectUrl,
+        }),
+        buildBreadcrumbSchema([
+            { name: 'Strona główna', url: SITE_URL },
+            { name: 'Portfolio', url: `${SITE_URL}/portfolio` },
+            { name: project.title, url },
+        ]),
+    ];
 
     return (
         <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
+            <SchemaScript schema={schema} />
             <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x)', borderBottom: '1px solid var(--line)' }}>
                 <div className="mx-auto flex max-w-[1280px] flex-col gap-6">
                     <Link href="/portfolio" className="ct-meta ct-contact-link" style={{ alignSelf: 'flex-start' }}>
@@ -143,144 +156,136 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
                 </div>
             </section>
 
-            <section className="ct-section">
-                <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-                    {/* Lewa kolumna - główne zdjęcie i informacje */}
-                    <div className="flex flex-col gap-8">
-                        {project.mainImage && (
-                            <div className="ct-card-hover group relative" style={{ ...imagePanel, padding: 16 }} onClick={() => openLightbox(-1)}>
-                                <img
-                                    src={urlFor(project.mainImage).width(800).url()}
-                                    alt={project.title}
-                                    className="mx-auto h-auto max-h-[500px] w-full object-contain"
-                                />
-                                {zoomIcon}
-                            </div>
-                        )}
+            <ProjectGallery images={lightboxImages}>
+                <section className="ct-section">
+                    <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+                        {/* Lewa kolumna - główne zdjęcie i informacje */}
+                        <div className="flex flex-col gap-8">
+                            {mainImage && (
+                                <GalleryTrigger index={0} label={`Powiększ zdjęcie projektu ${project.title}`} className="ct-card-hover group relative" style={{ ...imagePanel, padding: 16 }}>
+                                    <img
+                                        src={urlFor(mainImage).width(800).url()}
+                                        alt={project.title}
+                                        className="mx-auto h-auto max-h-[500px] w-full object-contain"
+                                    />
+                                    {zoomIcon}
+                                </GalleryTrigger>
+                            )}
 
-                        <div className="ct-panel" style={{ padding: 24 }}>
-                            <span className="ct-eyebrow">Projekt</span>
-                            <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 500 }}>Informacje o projekcie</h2>
+                            <div className="ct-panel" style={{ padding: 24 }}>
+                                <span className="ct-eyebrow">Projekt</span>
+                                <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 500 }}>Informacje o projekcie</h2>
 
-                            <div className="flex flex-col">
-                                <div className="flex flex-wrap items-baseline justify-between gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
-                                    <h3 className="ct-meta" style={{ margin: 0 }}>Klient</h3>
-                                    <p style={{ margin: 0, fontSize: 14, fontWeight: 500 }}>{project.client}</p>
-                                </div>
-
-                                {project.publishedAt && (
+                                <div className="flex flex-col">
                                     <div className="flex flex-wrap items-baseline justify-between gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
-                                        <h3 className="ct-meta" style={{ margin: 0 }}>Data realizacji</h3>
-                                        <p style={{ margin: 0, fontSize: 14, fontWeight: 500 }}>{formatDate(project.publishedAt)}</p>
+                                        <h3 className="ct-meta" style={{ margin: 0 }}>Klient</h3>
+                                        <p style={{ margin: 0, fontSize: 14, fontWeight: 500 }}>{project.client}</p>
                                     </div>
-                                )}
 
-                                {project.categories && project.categories.length > 0 && (
-                                    <div className="flex flex-col gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
-                                        <h3 className="ct-meta" style={{ margin: 0 }}>Kategorie</h3>
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.categories.map((category: Category) => (
-                                                <span key={category._id} className="ct-pill">
-                                                    {category.title}
-                                                </span>
-                                            ))}
+                                    {project.publishedAt && (
+                                        <div className="flex flex-wrap items-baseline justify-between gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
+                                            <h3 className="ct-meta" style={{ margin: 0 }}>Data realizacji</h3>
+                                            <p style={{ margin: 0, fontSize: 14, fontWeight: 500 }}>
+                                                <time dateTime={project.publishedAt}>{formatDate(project.publishedAt)}</time>
+                                            </p>
                                         </div>
-                                    </div>
-                                )}
+                                    )}
 
-                                {project.projectUrl && (
-                                    <div className="flex flex-col gap-3" style={{ padding: '12px 0 0', borderTop: '1px solid var(--line)' }}>
-                                        <h3 className="ct-meta" style={{ margin: 0 }}>Link do projektu</h3>
-                                        <a
-                                            href={project.projectUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="ct-cta sm"
-                                            style={{ alignSelf: 'flex-start' }}
-                                        >
-                                            Zobacz realizację
-                                            <span className="ct-badge" aria-hidden="true">
-                                                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </div>
-                                )}
+                                    {project.categories && project.categories.length > 0 && (
+                                        <div className="flex flex-col gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
+                                            <h3 className="ct-meta" style={{ margin: 0 }}>Kategorie</h3>
+                                            <div className="flex flex-wrap gap-2">
+                                                {project.categories.map((category: Category) => (
+                                                    <span key={category._id} className="ct-pill">
+                                                        {category.title}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {project.projectUrl && (
+                                        <div className="flex flex-col gap-3" style={{ padding: '12px 0 0', borderTop: '1px solid var(--line)' }}>
+                                            <h3 className="ct-meta" style={{ margin: 0 }}>Link do projektu</h3>
+                                            <a
+                                                href={project.projectUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="ct-cta sm"
+                                                style={{ alignSelf: 'flex-start' }}
+                                            >
+                                                Zobacz realizację
+                                                <span className="ct-badge" aria-hidden="true">
+                                                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                    </svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    {/* Prawa kolumna - opis, zakres prac i galeria */}
-                    <div className="flex flex-col gap-12">
-                        <div>
-                            {typeof project.description === 'string' ? (
-                                <p className="ct-lead whitespace-pre-line">{project.description}</p>
-                            ) : (
-                                <PortableTextContent content={project.description} />
+                        {/* Prawa kolumna - opis, zakres prac i galeria */}
+                        <div className="flex flex-col gap-12">
+                            <div>
+                                {typeof project.description === 'string' ? (
+                                    <p className="ct-lead whitespace-pre-line">{project.description}</p>
+                                ) : (
+                                    <PortableTextContent content={project.description} />
+                                )}
+                            </div>
+
+                            {project.scopeOfWork && project.scopeOfWork.length > 0 && (
+                                <div>
+                                    <span className="ct-eyebrow">Zakres</span>
+                                    <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 500 }}>Zakres prac</h2>
+                                    <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                                        {project.scopeOfWork.map((item: string, index: number) => (
+                                            <li key={index} className="flex items-center gap-3" style={{ padding: '12px 0', borderTop: '1px solid var(--line)', fontSize: 14.5, color: 'var(--text-2)' }}>
+                                                <span className="ct-bullet" />
+                                                <span>{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            {/* Galeria zdjęć z możliwością kliknięcia i otwarcia lighboxa */}
+                            {galleryImages.length > 0 && (
+                                <div>
+                                    <span className="ct-eyebrow">Galeria</span>
+                                    <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 500 }}>Galeria projektu</h2>
+                                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                        {galleryImages.map((image, index) => {
+                                            const alt = image.alt || `Zdjęcie ${index + 1} projektu ${project.title}`;
+                                            return (
+                                                <GalleryTrigger key={index} index={galleryOffset + index} label={`Powiększ: ${alt}`} className="ct-card-hover group relative" style={imagePanel}>
+                                                    <div style={{ padding: 12 }}>
+                                                        <img
+                                                            src={urlFor(image).width(600).url()}
+                                                            alt={alt}
+                                                            loading="lazy"
+                                                            className="mx-auto h-auto max-h-[300px] w-full object-contain"
+                                                        />
+                                                    </div>
+                                                    {zoomIcon}
+                                                    {image.caption && (
+                                                        <div className="ct-body" style={{ padding: '10px 14px', fontSize: 13, borderTop: '1px solid var(--line)', background: '#fff' }}>
+                                                            {image.caption}
+                                                        </div>
+                                                    )}
+                                                </GalleryTrigger>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
                             )}
                         </div>
-
-                        {project.scopeOfWork && project.scopeOfWork.length > 0 && (
-                            <div>
-                                <span className="ct-eyebrow">Zakres</span>
-                                <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 500 }}>Zakres prac</h2>
-                                <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-                                    {project.scopeOfWork.map((item: string, index: number) => (
-                                        <li key={index} className="flex items-center gap-3" style={{ padding: '12px 0', borderTop: '1px solid var(--line)', fontSize: 14.5, color: 'var(--text-2)' }}>
-                                            <span className="ct-bullet" />
-                                            <span>{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-
-                        {/* Galeria zdjęć z możliwością kliknięcia i otwarcia lighboxa */}
-                        {project.galleryImages && project.galleryImages.length > 0 && (
-                            <div>
-                                <span className="ct-eyebrow">Galeria</span>
-                                <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 500 }}>Galeria projektu</h2>
-                                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                    {project.galleryImages.map((image: ImageWithCaption, index: number) => (
-                                        <div
-                                            key={index}
-                                            className="ct-card-hover group relative"
-                                            style={imagePanel}
-                                            onClick={() => openLightbox(index)}
-                                        >
-                                            <div style={{ padding: 12 }}>
-                                                <img
-                                                    src={urlFor(image).width(600).url()}
-                                                    alt={image.alt || `Zdjęcie ${index + 1} projektu ${project.title}`}
-                                                    className="mx-auto h-auto max-h-[300px] w-full object-contain"
-                                                />
-                                            </div>
-                                            {zoomIcon}
-                                            {image.caption && (
-                                                <div className="ct-body" style={{ padding: '10px 14px', fontSize: 13, borderTop: '1px solid var(--line)', background: '#fff' }}>
-                                                    {image.caption}
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
                     </div>
-                </div>
-            </section>
-
-            {/* Lightbox dla obrazów galerii */}
-            {/* Stays mounted so the lightbox can animate its exit. */}
-            {project.galleryImages && (
-                <Lightbox
-                    images={lightboxIndex === -1 ? [project.mainImage, ...project.galleryImages] : project.galleryImages}
-                    initialIndex={lightboxIndex === -1 ? 0 : lightboxIndex}
-                    isOpen={lightboxOpen}
-                    onClose={() => setLightboxOpen(false)}
-                />
-            )}
+                </section>
+            </ProjectGallery>
         </main>
     );
 }
