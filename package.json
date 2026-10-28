@@ -17,7 +17,6 @@
     "model:all": "node scripts/build-model.mjs --all"
   },
   "dependencies": {
-    "@netlify/blobs": "^11.1.7",
     "@node-rs/bcrypt": "^1.10.7",
     "@portabletext/react": "^3.2.1",
     "@react-three/fiber": "^9.8.1",

@@ -1,6 +1,6 @@
 /**
  * Usage limits for the homepage offer assistant. Pure logic (no Next, no Netlify), so `node --test`
- * loads it directly; the persistent counter store lives in `assistant-quota-store.ts`.
+ * loads it directly; the counter store lives in `assistant-quota-store.ts`.
  *
  * Three tiers, so pranksters cost nothing and real visitors are never stonewalled:
  * - within the AI limits → Claude answers;
