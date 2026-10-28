@@ -55,8 +55,8 @@ Make every case study, the author and the company readable as consistent entitie
 
 ### Phase 1: Portfolio server-rendered
 
-- [ ] 1.1 Portfolio project page as a server component with metadata, canonical, CreativeWork + Breadcrumb JSON-LD and a client gallery
-- [ ] 1.2 Portfolio listing as a server component with a client category filter
+- [x] 1.1 Portfolio project page as a server component with metadata, canonical, CreativeWork + Breadcrumb JSON-LD and a client gallery — 58d8fc0
+- [x] 1.2 Portfolio listing as a server component with a client category filter — c8be44c
 
 ### Phase 2: Portfolio for AI agents
 
