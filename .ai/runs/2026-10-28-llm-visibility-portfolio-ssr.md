@@ -65,8 +65,8 @@ Make every case study, the author and the company readable as consistent entitie
 
 ### Phase 3: Author and canonicals
 
-- [ ] 3.1 Author profile, Person schema, author page canonical and ProfilePage JSON-LD
-- [ ] 3.2 Own canonical for blog category and knowledge-base pages, visible update date on posts
+- [x] 3.1 Author profile, Person schema, author page canonical and ProfilePage JSON-LD — 59e687d
+- [x] 3.2 Own canonical for blog category and knowledge-base pages, visible update date on posts — 59e687d, 6ba721d
 
 ### Phase 4: Company consistency and small fixes
 
