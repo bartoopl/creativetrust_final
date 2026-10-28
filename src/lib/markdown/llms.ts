@@ -35,8 +35,9 @@ const SECTION_TITLES: Record<LlmsPage['section'], string> = {
     landings: 'Specjalizacje',
 };
 
-const SUMMARY =
-    'CreativeTrust to agencja z Gorzowa Wielkopolskiego, która projektuje i wdraża strony WWW, sklepy e-commerce (w tym headless), marketing automation (SALESmanago) i social media. AI przyspiesza research i produkcję, a decyzje i jakość zostają po stronie zespołu.';
+/** Same text as COMPANY_DESCRIPTION in src/lib/schema.ts (kept import-free; a test keeps them equal). */
+export const SUMMARY =
+    'CreativeTrust to AI-native partner produktowy z Gorzowa Wielkopolskiego, działający od 2010 roku. W jednym zespole łączy strategię, design, development i automatyzację AI: projektuje i wdraża strony WWW, sklepy e-commerce (w tym headless), marketing automation (SALESmanago) i social media.';
 
 const oneLine = (text?: string | null) => (text ?? '').replace(/\s+/g, ' ').trim();
 

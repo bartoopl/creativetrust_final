@@ -4,7 +4,7 @@ description: "Strony www, ecommerce headless, marketing automation i social medi
 date: "2026-10-27"
 canonical: "https://www.creativetrust.pl/"
 lang: "pl-PL"
-ai_summary: "CreativeTrust to agencja z Gorzowa Wielkopolskiego, która w jednym zespole robi strony WWW, sklepy e-commerce (headless, Medusa.js, Next.js), marketing automation (SALESmanago) i social media. AI przyspiesza research i produkcję, a zespół odpowiada za decyzje, jakość i wynik."
+ai_summary: "CreativeTrust to AI-native partner produktowy z Gorzowa Wielkopolskiego, działający od 2010 roku. W jednym zespole łączy strategię, design, development i automatyzację AI: projektuje i wdraża strony WWW, sklepy e-commerce (w tym headless), marketing automation (SALESmanago) i social media."
 target_audience:
   - "Firmy B2B i B2C planujące nową stronę WWW lub przebudowę obecnej"
   - "Sklepy internetowe, które rosną ponad możliwości swojej platformy"

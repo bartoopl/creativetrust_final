@@ -154,3 +154,23 @@ test('author resolves to a full Person entity with sameAs', async () => {
     assert.equal(post.author.name, 'Bartosz Łyśniewski');
     assert.equal(post.author['@id'], person['@id']);
 });
+
+test('one company description and founding year across JSON-LD, llms.txt and the site', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { organizationSchema, COMPANY_DESCRIPTION, FOUNDING_YEAR } = await import('../src/lib/schema.ts');
+    const { SUMMARY } = await import('../src/lib/markdown/llms.ts');
+    const { parseFrontmatter } = await import('../src/lib/markdown/frontmatter.ts');
+    const org = organizationSchema['@graph'].find((node) => node['@type'] === 'Organization');
+    assert.equal(org.description, COMPANY_DESCRIPTION);
+    assert.equal(SUMMARY, COMPANY_DESCRIPTION, 'llms.txt summary matches the Organization description');
+    assert.match(COMPANY_DESCRIPTION, /AI-native partner produktowy/);
+    assert.doesNotMatch(COMPANY_DESCRIPTION, /agencja marketingowa|performance marketing/i);
+    assert.equal(org.foundingDate, FOUNDING_YEAR);
+    assert.ok(org.logo?.url?.startsWith(SITE_URL), 'Organization has a logo');
+
+    const home = parseFrontmatter(readFileSync(new URL('../content/ai/index.md', import.meta.url), 'utf8'));
+    assert.equal(home.data.ai_summary, COMPANY_DESCRIPTION);
+    const about = readFileSync(new URL('../src/app/o-nas/page.tsx', import.meta.url), 'utf8');
+    const firstYear = about.match(/year: '(\d{4})'/)[1];
+    assert.equal(firstYear, FOUNDING_YEAR, 'the „O nas” timeline starts in the founding year');
+});

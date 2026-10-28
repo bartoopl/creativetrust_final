@@ -1,5 +1,15 @@
 const SITE_URL = 'https://www.creativetrust.pl';
 
+/**
+ * The one company description, used verbatim by the Organization JSON-LD,
+ * llms.txt and the homepage Markdown twin: models assemble the description of
+ * a company from these signals, so they must not disagree.
+ */
+export const COMPANY_DESCRIPTION =
+    'CreativeTrust to AI-native partner produktowy z Gorzowa Wielkopolskiego, działający od 2010 roku. W jednym zespole łączy strategię, design, development i automatyzację AI: projektuje i wdraża strony WWW, sklepy e-commerce (w tym headless), marketing automation (SALESmanago) i social media.';
+export const FOUNDING_YEAR = '2010';
+const LOGO_URL = `${SITE_URL}/logo.svg`;
+
 type JsonLd = Record<string, unknown>;
 
 export const organizationSchema: JsonLd = {
@@ -10,9 +20,13 @@ export const organizationSchema: JsonLd = {
             '@id': `${SITE_URL}/#organization`,
             name: 'CreativeTrust',
             url: SITE_URL,
-            foundingDate: '2016',
-            description:
-                'Agencja marketingowa specjalizująca się w stronach WWW, e-commerce, marketing automation i performance marketingu.',
+            foundingDate: FOUNDING_YEAR,
+            description: COMPANY_DESCRIPTION,
+            logo: {
+                '@type': 'ImageObject',
+                url: LOGO_URL,
+            },
+            image: LOGO_URL,
             email: 'office@creativetrust.pl',
             telephone: '+48570526421',
             address: {
@@ -33,6 +47,10 @@ export const organizationSchema: JsonLd = {
             '@id': `${SITE_URL}/#localbusiness`,
             name: 'CreativeTrust',
             url: SITE_URL,
+            description: COMPANY_DESCRIPTION,
+            image: LOGO_URL,
+            logo: LOGO_URL,
+            parentOrganization: { '@id': `${SITE_URL}/#organization` },
             telephone: '+48570526421',
             email: 'office@creativetrust.pl',
             address: {
