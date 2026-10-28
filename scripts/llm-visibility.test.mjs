@@ -253,3 +253,20 @@ test('portfolio index and author Markdown twins', async () => {
     assert.ok(!/\n\n\n/.test(author), 'no blank-line runs');
     assert.ok(!/^#+\s*$/m.test(author));
 });
+
+test('legal identity matches the privacy policy and appears in Organization and the footer', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { organizationSchema, LEGAL_NAME, TAX_ID } = await import('../src/lib/schema.ts');
+    const org = organizationSchema['@graph'].find((node) => node['@type'] === 'Organization');
+    assert.equal(org.legalName, LEGAL_NAME);
+    if (TAX_ID) {
+        assert.match(TAX_ID, /^\d{10}$/, 'NIP is 10 digits');
+        assert.equal(org.taxID, TAX_ID);
+    } else {
+        assert.equal(org.taxID, undefined);
+    }
+    const policy = readFileSync(new URL('../src/app/polityka-prywatnosci/page.tsx', import.meta.url), 'utf8');
+    assert.ok(policy.includes(LEGAL_NAME), 'same legal name as the privacy policy');
+    const footer = readFileSync(new URL('../src/components/Footer.tsx', import.meta.url), 'utf8');
+    assert.ok(footer.includes('{LEGAL_NAME}'));
+});

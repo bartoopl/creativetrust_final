@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Wordmark from './ui/Wordmark';
+import { LEGAL_NAME, POSTAL_CITY, STREET_ADDRESS, TAX_ID } from '@/lib/schema';
 
 const services = [
     { href: '/uslugi/strony-www', label: 'Strony www' },
@@ -49,7 +50,9 @@ export default function Footer() {
 
                 <div className="flex flex-wrap justify-between gap-3" style={{ paddingTop: 24, borderTop: '1px solid var(--line)' }}>
                     <p style={{ fontSize: 12, color: 'var(--muted)', margin: 0 }}>
-                        © {year} Creativetrust. Wszelkie prawa zastrzeżone.
+                        © {year} CreativeTrust. Wszelkie prawa zastrzeżone.
+                        <br />
+                        {LEGAL_NAME}, {STREET_ADDRESS}, {POSTAL_CITY}{TAX_ID ? `, NIP ${TAX_ID}` : ''}
                     </p>
                     <div className="flex gap-5">
                         <Link href="/polityka-prywatnosci" className="ct-contact-link" style={{ fontSize: 12, color: 'var(--muted)' }}>Polityka prywatności</Link>
