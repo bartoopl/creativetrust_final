@@ -14,6 +14,10 @@ import { getBlogSeoConfig } from '@/lib/blog-seo';
 import { SITE_URL, buildBlogPostingSchema, buildBreadcrumbSchema } from '@/lib/schema';
 import { resolveAuthor } from '@/lib/authors';
 
+// Regenerated hourly so Sanity edits (and dateModified) reach the site
+// without a deploy; without it the CDN kept the first render for a year.
+export const revalidate = 3600;
+
 // Define the params type as a Promise as required in Next.js v15
 type Params = Promise<{ slug: string }>;
 
