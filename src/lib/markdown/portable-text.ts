@@ -200,3 +200,23 @@ export function portableTextToMarkdown(
     flushList();
     return chunks.join('\n\n');
 }
+
+/** Plain text of the text blocks (for meta descriptions and JSON-LD), cut on a word boundary. */
+export function portableTextToPlainText(blocks: PortableTextBlock[] | string | null | undefined, maxLength = Infinity): string {
+    const text = (
+        typeof blocks === 'string'
+            ? blocks
+            : Array.isArray(blocks)
+              ? blocks
+                    .filter((block) => block._type === 'block')
+                    .map((block) => (block.children ?? []).map((child) => (typeof child.text === 'string' ? child.text : '')).join(''))
+                    .join(' ')
+              : ''
+    )
+        .replace(/\s+/g, ' ')
+        .trim();
+    if (text.length <= maxLength) return text;
+    const cut = text.slice(0, maxLength - 1);
+    const lastSpace = cut.lastIndexOf(' ');
+    return `${(lastSpace > maxLength * 0.6 ? cut.slice(0, lastSpace) : cut).replace(/[\s,.;:–—-]+$/, '')}…`;
+}

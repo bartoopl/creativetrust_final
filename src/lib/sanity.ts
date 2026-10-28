@@ -56,9 +56,15 @@ export async function getPortfolioProject(slug: string) {
         slug
       },
       description,
-      publishedAt
+      publishedAt,
+      _updatedAt
     }
   `, { slug });
+}
+
+// Slugi wszystkich projektów portfolio (prerender stron realizacji)
+export async function getPortfolioSlugs(): Promise<string[]> {
+    return await client.fetch(`*[_type == "portfolioProject" && defined(slug.current) && !(_id in path("drafts.**"))].slug.current`);
 }
 
 // Funkcja do pobierania najnowszych projektów portfolio (np. do sekcji na stronie głównej)

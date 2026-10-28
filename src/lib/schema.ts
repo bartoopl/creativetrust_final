@@ -165,6 +165,47 @@ export function buildBlogPostingSchema({
     };
 }
 
+/** A portfolio case study: work CreativeTrust created for a client. */
+export function buildCreativeWorkSchema({
+    name,
+    description,
+    url,
+    clientName,
+    dateCreated,
+    image,
+    keywords,
+    sameAs,
+}: {
+    name: string;
+    description?: string;
+    url: string;
+    clientName?: string;
+    dateCreated?: string;
+    image?: string[];
+    keywords?: string[];
+    /** The live project, when public. */
+    sameAs?: string;
+}): JsonLd {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        '@id': `${url}#creativework`,
+        name,
+        headline: name,
+        description: description || undefined,
+        url,
+        mainEntityOfPage: url,
+        dateCreated,
+        image: image?.length ? image : undefined,
+        keywords: keywords?.length ? keywords.join(', ') : undefined,
+        sameAs,
+        creator: { '@id': `${SITE_URL}/#organization` },
+        publisher: { '@id': `${SITE_URL}/#organization` },
+        about: clientName ? { '@type': 'Organization', name: clientName } : undefined,
+        inLanguage: 'pl-PL',
+    };
+}
+
 export function buildDefinedTermSchema({
     title,
     description,
