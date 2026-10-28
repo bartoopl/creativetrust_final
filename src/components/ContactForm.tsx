@@ -88,7 +88,7 @@ export default function ContactForm() {
             <div className="ct-panel" style={{ padding: 'clamp(24px, 4vw, 40px)' }}>
                 <div className="flex flex-col gap-3" style={{ borderLeft: '2px solid var(--accent)', paddingLeft: 20 }}>
                     <span className="ct-eyebrow">Wysłano</span>
-                    <h3 style={{ fontWeight: 600, fontSize: 22, letterSpacing: '-0.5px', color: 'var(--text)', margin: 0 }}>
+                    <h3 style={{ fontWeight: 500, fontSize: 22, letterSpacing: '-0.5px', color: 'var(--text)', margin: 0 }}>
                         Dziękujemy za wiadomość!
                     </h3>
                     <p className="ct-body" style={{ fontSize: 15, margin: '0 0 8px' }}>
@@ -107,7 +107,7 @@ export default function ContactForm() {
     return (
         <div className="ct-panel" style={{ padding: 'clamp(24px, 4vw, 40px)' }}>
             <span className="ct-eyebrow">Formularz</span>
-            <h2 style={{ fontWeight: 600, fontSize: 22, letterSpacing: '-0.5px', color: 'var(--text)', margin: '8px 0 24px' }}>
+            <h2 style={{ fontWeight: 500, fontSize: 22, letterSpacing: '-0.5px', color: 'var(--text)', margin: '8px 0 24px' }}>
                 Napisz do nas
             </h2>
 

@@ -20,7 +20,7 @@ function FooterColumn({ title, items }: { title: string; items: { href: string; 
         <div className="flex flex-col gap-2.5">
             <span className="ct-meta">{title}</span>
             {items.map((item) => (
-                <Link key={item.href + item.label} href={item.href} className="ct-nav-link" style={{ fontWeight: 400 }}>
+                <Link key={item.href + item.label} href={item.href} className="ct-nav-link ct-footer-link" style={{ fontWeight: 400 }}>
                     {item.label}
                 </Link>
             ))}
@@ -32,12 +32,12 @@ export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer style={{ background: '#fff', borderTop: '1px solid var(--line)', padding: '56px var(--pad-x) 32px' }}>
+        <footer className="ct-footer" style={{ background: 'var(--bg)', borderTop: '1px solid var(--line)', padding: '56px var(--pad-x) 32px' }}>
             <div className="mx-auto flex max-w-[1280px] flex-col gap-10">
                 <div className="flex flex-wrap justify-between gap-10">
                     <div className="flex flex-col gap-3" style={{ maxWidth: 320 }}>
                         <Link href="/" aria-label="CreativeTrust — strona główna"><Wordmark /></Link>
-                        <p className="ct-body" style={{ fontSize: 13 }}>
+                        <p className="ct-body ct-footer-lead" style={{ fontSize: 13 }}>
                             Strony www, ecommerce headless, marketing automation i social media — z tempem AI.
                         </p>
                     </div>

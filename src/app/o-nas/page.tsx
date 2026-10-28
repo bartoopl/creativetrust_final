@@ -49,7 +49,7 @@ export default function AboutPage() {
                             className={`${i % 2 === 1 ? 'border-l' : ''} ${i >= 2 ? 'border-t md:border-t-0' : ''} ${i === 2 ? 'md:border-l' : ''}`}
                             style={{ borderColor: 'var(--line)', padding: 'clamp(24px, 3vw, 36px) clamp(16px, 2vw, 28px)' }}
                         >
-                            <div style={{ fontWeight: 600, fontSize: 'clamp(28px, 3vw, 40px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--text)' }}>{val}</div>
+                            <div style={{ fontWeight: 500, fontSize: 'clamp(28px, 3vw, 40px)', letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--text)' }}>{val}</div>
                             <div className="ct-meta" style={{ marginTop: 10 }}>{label}</div>
                         </div>
                     ))}
@@ -61,7 +61,7 @@ export default function AboutPage() {
                     {values.map((v, i) => (
                         <div key={v.title} className="flex flex-col gap-3" style={{ padding: 28 }}>
                             <span className="ct-mono" style={{ fontSize: 12, color: 'var(--accent)' }}>0{i + 1}</span>
-                            <h3 style={{ fontWeight: 600, fontSize: 18, margin: '12px 0 0', letterSpacing: '-0.3px' }}>{v.title}</h3>
+                            <h3 style={{ fontWeight: 500, fontSize: 18, margin: '12px 0 0', letterSpacing: '-0.3px' }}>{v.title}</h3>
                             <p className="ct-body" style={{ fontSize: 15 }}>{v.description}</p>
                         </div>
                     ))}
@@ -73,7 +73,7 @@ export default function AboutPage() {
                     {milestones.map((m) => (
                         <div key={m.year} className="flex flex-col gap-3" style={{ padding: '24px 22px' }}>
                             <span className="ct-meta" style={{ color: 'var(--accent)' }}>{m.year}</span>
-                            <h3 style={{ fontWeight: 600, fontSize: 18, margin: '12px 0 0', letterSpacing: '-0.3px' }}>{m.title}</h3>
+                            <h3 style={{ fontWeight: 500, fontSize: 18, margin: '12px 0 0', letterSpacing: '-0.3px' }}>{m.title}</h3>
                             <p className="ct-body" style={{ fontSize: 15 }}>{m.description}</p>
                         </div>
                     ))}

@@ -67,7 +67,7 @@ export default function SocialMediaPage() {
                 <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {results.map(r => (
                         <div key={r.value} className="flex flex-col gap-2.5" style={{ padding: '24px 24px 28px' }}>
-                            <span style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1 }}>{r.value}</span>
+                            <span style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1 }}>{r.value}</span>
                             <span className="ct-body" style={{ fontSize: 13 }}>{r.label}</span>
                         </div>
                     ))}
@@ -80,7 +80,7 @@ export default function SocialMediaPage() {
                     {services.map(s => (
                         <div key={s.num} className="flex flex-col gap-2.5" style={{ padding: 28 }}>
                             <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)', marginBottom: 12 }}>{s.num}</span>
-                            <h3 style={{ margin: 0, fontSize: 17, fontWeight: 600 }}>{s.title}</h3>
+                            <h3 style={{ margin: 0, fontSize: 17, fontWeight: 500 }}>{s.title}</h3>
                             <p className="ct-body">{s.description}</p>
                         </div>
                     ))}
@@ -91,7 +91,7 @@ export default function SocialMediaPage() {
             <Section tint eyebrow="Platformy" title="Gdzie budujemy Twoją obecność.">
                 <div className="flex flex-wrap gap-2.5">
                     {platforms.map(p => (
-                        <span key={p} className="ct-pill" style={{ fontSize: 12, padding: '8px 14px', color: 'var(--text)', background: '#fff' }}>{p}</span>
+                        <span key={p} className="ct-pill" style={{ fontSize: 12, padding: '8px 14px', color: 'var(--text)', background: 'transparent' }}>{p}</span>
                     ))}
                 </div>
             </Section>
@@ -102,7 +102,7 @@ export default function SocialMediaPage() {
                     {process.map(step => (
                         <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>
                             <span className="ct-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--accent)', marginBottom: 24 }}>{step.num}</span>
-                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{step.title}</h3>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 500 }}>{step.title}</h3>
                             <p className="ct-body">{step.description}</p>
                         </li>
                     ))}

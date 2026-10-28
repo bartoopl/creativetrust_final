@@ -108,7 +108,7 @@ export default function MarketingAutomationPage() {
                 <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {stats.map(s => (
                         <div key={s.value} className="flex flex-col gap-2.5" style={{ padding: '24px 24px 28px' }}>
-                            <span style={{ fontSize: 'clamp(28px, 3.1vw, 40px)', fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1 }}>{s.value}</span>
+                            <span style={{ fontSize: 'clamp(28px, 3.1vw, 40px)', fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1 }}>{s.value}</span>
                             <span className="ct-body" style={{ fontSize: 13 }}>{s.label}</span>
                         </div>
                     ))}
@@ -121,7 +121,7 @@ export default function MarketingAutomationPage() {
                     {services.map(s => (
                         <div key={s.num} className="flex flex-col gap-2.5" style={{ padding: 28 }}>
                             <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)', marginBottom: 12 }}>{s.num}</span>
-                            <h3 style={{ margin: 0, fontSize: 17, fontWeight: 600 }}>{s.title}</h3>
+                            <h3 style={{ margin: 0, fontSize: 17, fontWeight: 500 }}>{s.title}</h3>
                             <p className="ct-body">{s.description}</p>
                         </div>
                     ))}
@@ -135,7 +135,7 @@ export default function MarketingAutomationPage() {
                         <div key={u.title} className="flex flex-col gap-2" style={{ padding: '20px 0', borderTop: '1px solid var(--line-strong)' }}>
                             <div className="flex items-center gap-2.5">
                                 <span className="ct-bullet" aria-hidden="true" />
-                                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{u.title}</h3>
+                                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 500 }}>{u.title}</h3>
                             </div>
                             <p className="ct-body" style={{ fontSize: 15 }}>{u.description}</p>
                         </div>
@@ -149,7 +149,7 @@ export default function MarketingAutomationPage() {
                     {process.map(step => (
                         <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>
                             <span className="ct-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--accent)', marginBottom: 24 }}>{step.num}</span>
-                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>{step.title}</h3>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 500 }}>{step.title}</h3>
                             <p className="ct-body">{step.description}</p>
                         </li>
                     ))}

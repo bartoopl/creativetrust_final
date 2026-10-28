@@ -124,7 +124,7 @@ export default async function BlogCategoryPage({
                     ) : (
                         <div className="ct-panel flex flex-col items-center gap-4 text-center" style={{ padding: 'clamp(32px, 6vw, 64px) 24px', background: 'var(--panel)' }}>
                             <span className="ct-meta">// brak wyników</span>
-                            <h3 style={{ margin: 0, fontSize: 22, fontWeight: 600 }}>Brak artykułów w tej kategorii</h3>
+                            <h3 style={{ margin: 0, fontSize: 22, fontWeight: 500 }}>Brak artykułów w tej kategorii</h3>
                             <p className="ct-body" style={{ fontSize: 15 }}>
                                 Nie znaleziono żadnych artykułów w kategorii {category.title}.
                             </p>

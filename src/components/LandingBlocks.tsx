@@ -84,7 +84,7 @@ export function NumberedGrid({ items, cols = 4, numbered = true }: { items: Grid
                             {String(i + 1).padStart(2, '0')}
                         </span>
                     )}
-                    {item.title && <h3 style={{ margin: 0, fontSize: 17, fontWeight: 600, lineHeight: 1.3 }}>{item.title}</h3>}
+                    {item.title && <h3 style={{ margin: 0, fontSize: 17, fontWeight: 500, lineHeight: 1.3 }}>{item.title}</h3>}
                     {item.text && (
                         item.title
                             ? <p className="ct-body">{item.text}</p>
@@ -113,7 +113,7 @@ export function InlineCTA({ title, text, cta }: { title: string; text: string; c
     return (
         <div className="ct-panel flex flex-col items-start justify-between gap-6 p-8 md:p-10 lg:flex-row lg:items-center" style={{ background: 'var(--panel)' }}>
             <div>
-                <h2 style={{ margin: '0 0 10px', fontSize: 24, fontWeight: 600, letterSpacing: '-0.5px' }}>{title}</h2>
+                <h2 style={{ margin: '0 0 10px', fontSize: 24, fontWeight: 500, letterSpacing: '-0.5px' }}>{title}</h2>
                 <p className="ct-body" style={{ fontSize: 15, maxWidth: '62ch' }}>{text}</p>
             </div>
             <NotchedButton href={cta.href}>{cta.label}</NotchedButton>
@@ -132,8 +132,8 @@ export function PriceGrid({ items }: { items: PriceItem[] }) {
                     <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)', marginBottom: 20 }}>
                         {String(i + 1).padStart(2, '0')}
                     </span>
-                    <h3 style={{ margin: '0 0 8px', fontSize: 20, fontWeight: 600 }}>{item.name}</h3>
-                    <p style={{ margin: '0 0 14px', fontSize: 28, fontWeight: 600, letterSpacing: '-0.8px', color: 'var(--accent)' }}>{item.price}</p>
+                    <h3 style={{ margin: '0 0 8px', fontSize: 20, fontWeight: 500 }}>{item.name}</h3>
+                    <p style={{ margin: '0 0 14px', fontSize: 28, fontWeight: 500, letterSpacing: '-0.8px', color: 'var(--accent)' }}>{item.price}</p>
                     <p className="ct-body" style={{ fontSize: 15 }}>{item.text}</p>
                     {item.features && (
                         <div className="mt-auto pt-6">

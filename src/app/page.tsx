@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
-import Hero from '@/components/Hero';
-import ClientLogos from '@/components/ClientLogos';
-import StatsSection from '@/components/StatsSection';
-import WhyUsSection from '@/components/WhyUsSection';
-import Services from '@/components/Services';
-import ProcessPipelineSection from '@/components/ProcessPipelineSection';
-import RealizacjeSection from '@/components/RealizacjeSection';
-import TestimonialSection from '@/components/TestimonialSection';
-import BlogSection from '@/components/BlogSection';
-import CTASection from '@/components/CTASection';
+import AskHero from '@/components/home/AskHero';
+import HomeShowcase from '@/components/home/HomeShowcase';
+import HomeProof from '@/components/home/HomeProof';
+import HomeServices from '@/components/home/HomeServices';
+import HomeWhyUs from '@/components/home/HomeWhyUs';
+import HomeProcess from '@/components/home/HomeProcess';
+import HomeVoices from '@/components/home/HomeVoices';
+import HomeClosing from '@/components/home/HomeClosing';
+import HomeCases from '@/components/home/HomeCases';
+import HomeBlog from '@/components/home/HomeBlog';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
@@ -23,19 +23,21 @@ export const metadata: Metadata = {
     },
 };
 
+/** Homepage trial redesign: everything inside .ct-v2 uses the "electric ink on drafting paper" theme. */
 export default function Home() {
     return (
-        <>
-            <Hero />
-            <ClientLogos />
-            <StatsSection />
-            <WhyUsSection />
-            <Services />
-            <ProcessPipelineSection />
-            <RealizacjeSection />
-            <TestimonialSection />
-            <BlogSection />
-            <CTASection />
-        </>
+        <div className="ct-v2">
+            <AskHero />
+            <div id="dalej" style={{ scrollMarginTop: 72 }} />
+            <HomeShowcase />
+            <HomeProof />
+            <HomeServices />
+            <HomeWhyUs />
+            <HomeProcess />
+            <HomeCases />
+            <HomeVoices />
+            <HomeBlog />
+            <HomeClosing />
+        </div>
     );
 }

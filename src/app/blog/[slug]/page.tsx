@@ -145,7 +145,7 @@ export default async function BlogPostPage({
                                 <Link
                                     href={`/blog/autor/${post.author?.slug.current}`}
                                     className="ct-contact-link"
-                                    style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}
+                                    style={{ fontSize: 14, fontWeight: 500, color: 'var(--text)' }}
                                 >
                                     {post.author?.name}
                                 </Link>
@@ -207,7 +207,7 @@ export default async function BlogPostPage({
                         )}
                         <div className="flex flex-col gap-1.5">
                             <span className="ct-eyebrow">Autor</span>
-                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>
+                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 500 }}>
                                 <Link
                                     href={`/blog/autor/${post.author?.slug.current}`}
                                     className="ct-contact-link"

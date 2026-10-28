@@ -1,6 +1,6 @@
 import Section from './ui/Section';
 
-const reasons = [
+export const reasons = [
     { title: 'Jesteśmy w biznesie, nie tylko obok niego', text: 'Każda decyzja projektowa jest dla nas decyzją biznesową, nie estetyczną.' },
     { title: 'Ludzka decyzja + tempo AI', text: 'Doświadczenie biznesowe i wdrożenia przyspieszone przez AI — bez utraty jakości.' },
     { title: 'Kompleksowa obsługa', text: 'Strony, sklepy, marketing automation i social media pod jednym dachem.' },
@@ -20,7 +20,7 @@ export default function WhyUsSection() {
                         <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)' }}>
                             {String(i + 1).padStart(2, '0')}
                         </span>
-                        <h3 style={{ margin: 0, fontSize: 16, fontWeight: 600 }}>{reason.title}</h3>
+                        <h3 style={{ margin: 0, fontSize: 16, fontWeight: 500 }}>{reason.title}</h3>
                         <p className="ct-body">{reason.text}</p>
                     </div>
                 ))}

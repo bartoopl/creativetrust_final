@@ -213,7 +213,7 @@ export default async function AuthorPage({
                         </>
                     ) : (
                         <div className="ct-panel flex flex-col items-center gap-4 text-center" style={{ padding: 'clamp(32px, 6vw, 64px) 24px', background: 'var(--panel)' }}>
-                            <h2 style={{ margin: 0, fontSize: 22, fontWeight: 600 }}>Brak artykułów</h2>
+                            <h2 style={{ margin: 0, fontSize: 22, fontWeight: 500 }}>Brak artykułów</h2>
                             <p className="ct-body" style={{ fontSize: 15 }}>
                                 {author.name} nie opublikował(a) jeszcze żadnych artykułów.
                             </p>

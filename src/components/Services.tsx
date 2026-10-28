@@ -60,8 +60,8 @@ export default function Services() {
             <div className="mx-auto flex max-w-[1280px] flex-col gap-10">
                 <SectionHeader eyebrow="Od projektu do wyniku" title="Wszystko czego potrzebujesz, żeby rosnąć w digital." maxWidth="none" />
 
-                <div className="grid grid-cols-1 overflow-hidden md:grid-cols-[280px_1fr]" style={{ border: '1px solid rgba(17,24,39,0.1)', borderRadius: 8 }}>
-                    <div role="tablist" aria-label="Usługi" aria-orientation="vertical" className="flex flex-col border-b md:border-b-0 md:border-r" style={{ borderColor: 'rgba(17,24,39,0.1)' }}>
+                <div className="grid grid-cols-1 overflow-hidden md:grid-cols-[280px_1fr]" style={{ border: '1px solid rgba(0,0,0,0.1)', borderRadius: 8 }}>
+                    <div role="tablist" aria-label="Usługi" aria-orientation="vertical" className="flex flex-col border-b md:border-b-0 md:border-r" style={{ borderColor: 'rgba(0,0,0,0.1)' }}>
                         {services.map((service, i) => {
                             const active = i === activeIdx;
                             return (
@@ -81,7 +81,7 @@ export default function Services() {
                                         fontFamily: 'inherit', border: 'none',
                                         borderLeft: `2px solid ${active ? 'var(--accent)' : 'transparent'}`,
                                         borderTop: i > 0 ? '1px solid var(--line)' : 'none',
-                                        background: active ? 'var(--panel)' : '#fff',
+                                        background: active ? 'var(--panel)' : 'var(--bg)',
                                         color: active ? 'var(--text)' : 'var(--muted)',
                                         transition: 'background .15s ease, color .15s ease, border-color .15s ease',
                                     }}
@@ -89,7 +89,7 @@ export default function Services() {
                                     <span className="ct-mono" style={{ display: 'block', marginBottom: 4, fontSize: 11, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '.3px', color: active ? 'var(--accent)' : undefined }}>
                                         {service.eyebrow}
                                     </span>
-                                    <span style={{ display: 'block', fontSize: 15, fontWeight: 600 }}>
+                                    <span style={{ display: 'block', fontSize: 15, fontWeight: 500 }}>
                                         {service.title} {service.subtitle}
                                     </span>
                                 </button>
@@ -108,7 +108,7 @@ export default function Services() {
                             style={{ display: i === activeIdx ? 'flex' : undefined, padding: 'clamp(24px, 4vw, 40px)', background: 'var(--panel)' }}
                         >
                             <span className="ct-meta" style={{ color: 'var(--accent)' }}>{service.eyebrow}</span>
-                            <h3 style={{ margin: 0, fontSize: 24, fontWeight: 600, letterSpacing: '-0.5px' }}>
+                            <h3 style={{ margin: 0, fontSize: 24, fontWeight: 500, letterSpacing: '-0.5px' }}>
                                 {service.title} {service.subtitle}
                             </h3>
                             <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>

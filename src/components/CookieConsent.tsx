@@ -66,13 +66,13 @@ const CookieConsent = () => {
                         role="region"
                         aria-label="Zgoda na pliki cookie"
                         className="fixed bottom-0 left-0 right-0 z-50"
-                        style={{ background: '#fff', borderTop: '1px solid var(--line-strong)', padding: '20px var(--pad-x)' }}
+                        style={{ background: 'var(--bg)', borderTop: '1px solid var(--line-strong)', padding: '20px var(--pad-x)' }}
                     >
                         <div className="mx-auto max-w-[1280px]">
                             <div className="flex flex-col md:flex-row items-start md:items-center gap-5">
                                 <div className="flex-1">
                                     <span className="ct-eyebrow">Cookies</span>
-                                    <h3 style={{ fontSize: 16, fontWeight: 600, margin: '6px 0 6px', color: 'var(--text)' }}>Pliki cookie</h3>
+                                    <h3 style={{ fontSize: 16, fontWeight: 500, margin: '6px 0 6px', color: 'var(--text)' }}>Pliki cookie</h3>
                                     <p className="ct-body" style={{ fontSize: 13.5, maxWidth: '90ch' }}>
                                         Używamy cookies, aby zapewnić najlepsze wrażenia podczas korzystania z naszej strony.
                                         Niektóre są niezbędne do funkcjonowania serwisu, inne pomagają nam analizować ruch i

@@ -107,7 +107,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title }) => {
     return (
         <div className="ct-panel" style={{ padding: 20, marginBottom: 32, background: 'var(--panel)' }}>
             <span className="ct-eyebrow">Audio</span>
-            <h3 style={{ margin: '6px 0 16px', fontSize: 16, fontWeight: 600 }}>Odsłuchaj wpis w formie dialogu</h3>
+            <h3 style={{ margin: '6px 0 16px', fontSize: 16, fontWeight: 500 }}>Odsłuchaj wpis w formie dialogu</h3>
             {error && (
                 <div className="ct-meta" style={{ color: '#dc2626', textTransform: 'none', marginBottom: 12 }}>{error}</div>
             )}
