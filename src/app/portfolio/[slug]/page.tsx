@@ -50,7 +50,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     }
 
     const url = `${SITE_URL}/portfolio/${slug}`;
-    const title = project.client && project.client !== project.title ? `${project.title} — realizacja dla ${project.client}` : `${project.title} — realizacja`;
+    const name = project.title.replace(/\s+/g, ' ').trim();
+    const client = project.client?.replace(/\s+/g, ' ').trim();
+    const title = client && client.toLowerCase() !== name.toLowerCase() ? `${name} — realizacja dla ${client}` : `${name} — realizacja`;
     const description = summaryOf(project);
     const image = project.mainImage ? urlFor(project.mainImage).width(1200).height(630).fit('max').url() : undefined;
 
