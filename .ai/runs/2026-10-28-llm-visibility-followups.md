@@ -25,6 +25,6 @@ Close the remaining crawler gaps: the sitemap lists only URLs that return 200, t
 
 ### Phase 1: Follow-ups
 
-- [ ] 1.1 Sitemap lists only 200s, colour-trends post retired
-- [ ] 1.2 Hourly revalidation of Sanity pages
-- [ ] 1.3 Markdown twins for the portfolio index and author pages
+- [x] 1.1 Sitemap lists only 200s, colour-trends post retired — 5a70388
+- [x] 1.2 Hourly revalidation of Sanity pages — 8bf20ff
+- [x] 1.3 Markdown twins for the portfolio index and author pages — ea3bc0c
