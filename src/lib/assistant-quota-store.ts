@@ -7,12 +7,13 @@ let persistent: CounterStore | null | undefined;
 
 /**
  * Netlify Blobs when running on Netlify (counters survive cold starts and are shared between function
- * instances), in-memory otherwise. Increments are read-then-write, not atomic — fine for coarse limits.
+ * instances), in-memory otherwise. Default (eventual) consistency: strong reads hung on Netlify, and coarse
+ * limits tolerate a few seconds of staleness. Increments are read-then-write, not atomic.
  */
 function blobsStore(): CounterStore | null {
     if (persistent !== undefined) return persistent;
     try {
-        const store = getStore({ name: 'offer-assistant-quota', consistency: 'strong' });
+        const store = getStore('offer-assistant-quota');
         const read = async (key: string) => Number(await store.get(key)) || 0;
         persistent = {
             get: read,
