@@ -7,7 +7,7 @@ import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'E-commerce — CreativeTrust | Sklepy headless, migracje, WooCommerce, Shopify',
+    title: 'E-commerce | Sklepy headless, migracje, WooCommerce, Shopify',
     description: 'Projektujemy i wdrażamy sklepy internetowe, które sprzedają i skalują się bez bólu. Headless e-commerce, migracje platform, integracje ERP i AI-assisted development.',
     alternates: { canonical: `${SITE_URL}/uslugi/e-commerce` },
     openGraph: {

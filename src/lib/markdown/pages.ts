@@ -38,6 +38,15 @@ const staticRoutes = new Set(markdownPages.map((page) => page.route));
 /** Sanity slugs are lowercase kebab-case; anything else is not an article. */
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
+/**
+ * Blog posts replaced by a current page (301 in next.config.ts, left out of
+ * llms.txt and the sitemap). AI answers quote outdated prices, so a 2023
+ * price article points at the current price list.
+ */
+export const retiredBlogPosts: Record<string, string> = {
+    'ile-kosztuje-strona-internetowa-w-2023-roku-wszystko-co-musisz-wiedziec': '/uslugi/tworzenie-stron-www-cennik',
+};
+
 export type ArticleKind = 'blog' | 'knowledge-base' | 'portfolio';
 
 export const articleBase: Record<ArticleKind, string> = {

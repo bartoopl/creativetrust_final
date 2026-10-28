@@ -5,7 +5,7 @@ import CTASection from '@/components/CTASection';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'O nas — CreativeTrust | AI-native partner produktowy',
+    title: 'O nas | AI-native partner produktowy',
     description: 'CreativeTrust to AI-native partner produktowy. Łączymy strategię, design, development i automatyzację AI w jednym procesie. 15 lat doświadczenia, 150+ projektów.',
     alternates: { canonical: `${SITE_URL}/o-nas` },
 };

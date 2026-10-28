@@ -12,7 +12,8 @@ import HomeBlog from '@/components/home/HomeBlog';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'CreativeTrust — Projekty cyfrowe, które działają biznesowo',
+    // Already branded: absolute, so the root template does not add a second „| CreativeTrust”.
+    title: { absolute: 'CreativeTrust — Projekty cyfrowe, które działają biznesowo' },
     description: 'Strony www, ecommerce headless, marketing automation i social media. Strategia, design i wdrożenie w jednym zespole.',
     alternates: { canonical: '/' },
     openGraph: {

@@ -174,3 +174,22 @@ test('one company description and founding year across JSON-LD, llms.txt and the
     const firstYear = about.match(/year: '(\d{4})'/)[1];
     assert.equal(firstYear, FOUNDING_YEAR, 'the „O nas” timeline starts in the founding year');
 });
+
+test('retired blog posts point at a page that exists and are excluded from the sitemap', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { retiredBlogPosts, markdownPages } = await import('../src/lib/markdown/pages.ts');
+    const sitemapConfig = readFileSync(new URL('../next-sitemap.config.js', import.meta.url), 'utf8');
+    for (const [slug, destination] of Object.entries(retiredBlogPosts)) {
+        assert.ok(markdownPages.some((p) => p.route === destination), `${destination} has a Markdown twin`);
+        assert.ok(sitemapConfig.includes(`'/blog/${slug}'`), `${slug} excluded from the sitemap`);
+    }
+});
+
+test('robots.txt transform drops the Host line and keeps Content-Signal', async () => {
+    const { createRequire } = await import('node:module');
+    const config = createRequire(import.meta.url)('../next-sitemap.config.js');
+    const generated = '# *\nUser-agent: *\nAllow: /\n\n# Host\nHost: https://www.creativetrust.pl\n\n# Sitemaps\nSitemap: https://www.creativetrust.pl/sitemap.xml\n';
+    const robots = await config.robotsTxtOptions.transformRobotsTxt({}, generated);
+    assert.ok(!robots.includes('Host:'));
+    assert.match(robots, /Content-Signal: search=yes,ai-input=yes,ai-train=no\n\n# Sitemaps/);
+});

@@ -4,10 +4,13 @@ module.exports = {
     generateRobotsTxt: true,
     robotsTxtOptions: {
         transformRobotsTxt: async (config, robotsTxt) => {
-            return robotsTxt.replace(
-                '# Sitemaps',
-                '# AI access policy\nContent-Signal: search=yes,ai-input=yes,ai-train=no\n\n# Sitemaps'
-            );
+            return robotsTxt
+                // Host: is a Yandex-only directive; Google ignores it.
+                .replace(/# Host\nHost: [^\n]*\n\n/, '')
+                .replace(
+                    '# Sitemaps',
+                    '# AI access policy\nContent-Signal: search=yes,ai-input=yes,ai-train=no\n\n# Sitemaps'
+                );
         },
     },
     generateIndexSitemap: true,
@@ -19,7 +22,9 @@ module.exports = {
         '/panel-klienta/*',
         '/rejestracja-klienta',
         '/uslugi/landing-page-google-ads',
-        '/uslugi/landing-page-pod-reklamy'
+        '/uslugi/landing-page-pod-reklamy',
+        // Retired posts redirected with 301 (retiredBlogPosts in src/lib/markdown/pages.ts).
+        '/blog/ile-kosztuje-strona-internetowa-w-2023-roku-wszystko-co-musisz-wiedziec'
     ],
     additionalPaths: async (config) => {
         const { createClient } = require('next-sanity');

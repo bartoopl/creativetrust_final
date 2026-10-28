@@ -1,6 +1,6 @@
 export const clients = [
     'Monnari',
-    'Quisque',
+    'Quiosque',
     '5.10.15',
     'Kliniki Ziemlewski',
     'Katarzyna Batkowska',

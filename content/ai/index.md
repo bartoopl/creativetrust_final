@@ -55,7 +55,7 @@ Proces CreativeTrust ma pięć kroków, a AI wspiera każdy z nich:
 
 ## Klienci i opinie o CreativeTrust
 
-Wśród marek, z którymi pracuje CreativeTrust, są: Monnari, Quisque, 5.10.15, Kliniki Ziemlewski, Katarzyna Batkowska, Sulphur Busko Zdrój, ZIPH, Selfia i Kaskat.
+Wśród marek, z którymi pracuje CreativeTrust, są: Monnari, Quiosque, 5.10.15, Kliniki Ziemlewski, Katarzyna Batkowska, Sulphur Busko Zdrój, ZIPH, Selfia i Kaskat.
 
 Wybrane opinie klientów ze strony głównej:
 

@@ -7,7 +7,7 @@ import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildFaqSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Usługi — CreativeTrust | WWW, e-commerce, AI i automatyzacja',
+    title: 'Usługi | WWW, e-commerce, AI i automatyzacja',
     description: 'Web design, e-commerce, marketing automation i AI — w jednym zespole. Pracujemy od diagnozy po wdrożenie i rozwój. Wyniki, nie obietnice.',
     alternates: { canonical: `${SITE_URL}/uslugi` },
 };

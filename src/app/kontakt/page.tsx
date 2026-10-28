@@ -4,7 +4,7 @@ import { SITE_URL } from '@/lib/schema';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
-    title: 'Kontakt — CreativeTrust | Umów konsultację AI-native',
+    title: 'Kontakt | Umów konsultację AI-native',
     description: 'Porozmawiajmy o Twoim projekcie. 30-minutowa konsultacja — pokażemy, gdzie AI realnie skróci czas i podniesie wynik. Strategia, design, development, automatyzacja.',
     alternates: { canonical: `${SITE_URL}/kontakt` },
 };

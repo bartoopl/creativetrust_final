@@ -6,7 +6,7 @@ import { resolveAuthor, type SanityAuthor } from '@/lib/authors';
 import { articleFrontmatter, articleLead, type ArticleDocument } from './article';
 import { frontmatterString, parseFrontmatter, serializeFrontmatter } from './frontmatter';
 import type { LlmsArticle, LlmsPage } from './llms';
-import { articleBase, contentFileFor, markdownPages, markdownUrlFor, type ArticleKind, type MarkdownPage } from './pages';
+import { articleBase, contentFileFor, markdownPages, markdownUrlFor, retiredBlogPosts, type ArticleKind, type MarkdownPage } from './pages';
 import { portableTextToMarkdown, portableTextToPlainText, type PortableTextBlock } from './portable-text';
 import { portfolioFrontmatter, portfolioMarkdown, projectSummary, type PortfolioProjectDocument } from './portfolio';
 
@@ -113,7 +113,7 @@ export async function getArticleIndex(): Promise<LlmsArticle[]> {
         [],
     );
     return docs
-        .filter((doc) => doc.title && doc.slug)
+        .filter((doc) => doc.title && doc.slug && !(doc._type === 'blogPost' && doc.slug in retiredBlogPosts))
         .map((doc) => {
             const kind = ARTICLE_KIND[doc._type];
             return { kind, title: doc.title!, summary: doc.summary, url: `${SITE_URL}${articleBase[kind]}/${doc.slug}.md` };

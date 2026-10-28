@@ -9,7 +9,7 @@ import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Marketing Automation dla Firm — CreativeTrust | AI, SALESmanago, lejki, CRM',
+    title: 'Marketing Automation dla Firm | AI, SALESmanago, lejki, CRM',
     description: 'Automatyzacja marketingu oparta na danych i AI. Wdrażamy SALESmanago, budujemy lejki, integrujemy CRM i ustawiamy kampanie, które działają bez Twojej obecności.',
     alternates: { canonical: `${SITE_URL}/uslugi/marketing-automation` },
     openGraph: {

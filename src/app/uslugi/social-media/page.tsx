@@ -6,7 +6,7 @@ import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Social Media Marketing — CreativeTrust | Strategia, content, wyniki',
+    title: 'Social Media Marketing | Strategia, content, wyniki',
     description: 'Budujemy obecność w Social Media, która sprzedaje — nie tylko buduje zasięg. Strategia, content plan, community management i analityka w jednym procesie.',
     alternates: { canonical: `${SITE_URL}/uslugi/social-media` },
     openGraph: {

@@ -6,7 +6,7 @@ import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Tworzenie stron internetowych — CreativeTrust | Szybkie, skuteczne, AI-assisted',
+    title: 'Tworzenie stron internetowych | Szybkie, skuteczne, AI-assisted',
     description: 'Projektujemy i wdrażamy strony WWW, które generują leady i sprzedają. Headless, Next.js, performance. Krótszy time-to-market dzięki AI. Sprawdź zakres.',
     alternates: { canonical: `${SITE_URL}/uslugi/strony-www` },
     openGraph: {
