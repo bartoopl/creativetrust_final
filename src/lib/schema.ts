@@ -12,7 +12,7 @@ export const FOUNDING_YEAR = '2010';
 /** Legal identity, as published in the privacy policy (operator of the site). */
 export const LEGAL_NAME = 'CreativeTrust Natalia Staszak';
 /** NIP, digits only. Set it to add `taxID`/`vatID` to the JSON-LD and NIP to the footer. */
-export const TAX_ID: string | undefined = undefined;
+export const TAX_ID: string | undefined = '5993026880';
 export const STREET_ADDRESS = 'ul. Kombatantów 34/500';
 export const POSTAL_CITY = '66-400 Gorzów Wielkopolski';
 const LOGO_URL = `${SITE_URL}/logo.svg`;

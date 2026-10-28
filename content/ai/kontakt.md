@@ -24,6 +24,7 @@ Współpraca z CreativeTrust zaczyna się od rozmowy: 30-minutowej konsultacji b
 - **E-mail:** office@creativetrust.pl
 - **Telefon:** +48 570 526 421
 - **Adres:** M34 Business Center, ul. Kombatantów 34/500, 66-400 Gorzów Wielkopolski
+- **Dane firmy:** CreativeTrust Natalia Staszak, NIP 5993026880
 - **Godziny pracy:** poniedziałek–piątek, 9:00–17:00
 - **Formularz:** https://www.creativetrust.pl/kontakt
 

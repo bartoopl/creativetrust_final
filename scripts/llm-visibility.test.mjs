@@ -270,3 +270,12 @@ test('legal identity matches the privacy policy and appears in Organization and 
     const footer = readFileSync(new URL('../src/components/Footer.tsx', import.meta.url), 'utf8');
     assert.ok(footer.includes('{LEGAL_NAME}'));
 });
+
+test('NIP passes the official checksum', async () => {
+    const { TAX_ID } = await import('../src/lib/schema.ts');
+    assert.ok(TAX_ID, 'NIP is set');
+    const weights = [6, 5, 7, 2, 3, 4, 5, 6, 7];
+    const digits = [...TAX_ID].map(Number);
+    const sum = weights.reduce((acc, w, i) => acc + w * digits[i], 0);
+    assert.equal(sum % 11, digits[9]);
+});
