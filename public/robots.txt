@@ -2,9 +2,6 @@
 User-agent: *
 Allow: /
 
-# Host
-Host: https://www.creativetrust.pl
-
 # AI access policy
 Content-Signal: search=yes,ai-input=yes,ai-train=no
 

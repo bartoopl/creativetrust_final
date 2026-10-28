@@ -28,6 +28,8 @@ async function loadProject(slug: string): Promise<ProjectDocument | null> {
     }
 }
 
+const hasAsset = (image: unknown): boolean => Boolean((image as { asset?: unknown } | null | undefined)?.asset);
+
 function summaryOf(project: ProjectDocument, maxLength = 160) {
     return projectSummary(project, portableTextToPlainText(project.description as unknown as PortableTextBlock[] | string, maxLength));
 }
@@ -54,7 +56,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     const client = project.client?.replace(/\s+/g, ' ').trim();
     const title = client && client.toLowerCase() !== name.toLowerCase() ? `${name} — realizacja dla ${client}` : `${name} — realizacja`;
     const description = summaryOf(project);
-    const image = project.mainImage ? urlFor(project.mainImage).width(1200).height(630).fit('max').url() : undefined;
+    const image = hasAsset(project.mainImage) ? urlFor(project.mainImage).width(1200).height(630).fit('max').url() : undefined;
 
     return {
         title: `${title} | Portfolio`,
@@ -110,10 +112,12 @@ export default async function ProjectPage({ params }: { params: Params }) {
     if (!project) notFound();
 
     const url = `${SITE_URL}/portfolio/${slug}`;
-    const galleryImages: ImageWithCaption[] = project.galleryImages ?? [];
+    // Sanity allows image entries without an uploaded file; they have no URL.
+    const mainImage = hasAsset(project.mainImage) ? project.mainImage : null;
+    const galleryImages: ImageWithCaption[] = (project.galleryImages ?? []).filter(hasAsset);
     // Lightbox order: main image first, then the gallery.
-    const lightboxImages: ImageWithCaption[] = [...(project.mainImage ? [project.mainImage] : []), ...galleryImages];
-    const galleryOffset = project.mainImage ? 1 : 0;
+    const lightboxImages: ImageWithCaption[] = [...(mainImage ? [mainImage] : []), ...galleryImages];
+    const galleryOffset = mainImage ? 1 : 0;
 
     const schema = [
         buildCreativeWorkSchema({
@@ -160,10 +164,10 @@ export default async function ProjectPage({ params }: { params: Params }) {
                     <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
                         {/* Lewa kolumna - główne zdjęcie i informacje */}
                         <div className="flex flex-col gap-8">
-                            {project.mainImage && (
+                            {mainImage && (
                                 <GalleryTrigger index={0} label={`Powiększ zdjęcie projektu ${project.title}`} className="ct-card-hover group relative" style={{ ...imagePanel, padding: 16 }}>
                                     <img
-                                        src={urlFor(project.mainImage).width(800).url()}
+                                        src={urlFor(mainImage).width(800).url()}
                                         alt={project.title}
                                         className="mx-auto h-auto max-h-[500px] w-full object-contain"
                                     />

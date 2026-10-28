@@ -44,7 +44,7 @@ export default async function PortfolioPage() {
             meta: project.client,
             title: project.title,
             description: project.categories?.map(c => c.title).join(' · ') || '',
-            image: project.mainImage ? urlFor(project.mainImage).width(900).url() : undefined,
+            image: project.mainImage?.asset ? urlFor(project.mainImage).width(900).url() : undefined,
             categorySlugs: project.categories?.map(c => c.slug.current) ?? [],
         }));
     const filters: PortfolioFilter[] = categories.map((c) => ({ id: c._id, title: c.title, slug: c.slug.current }));
