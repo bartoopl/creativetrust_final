@@ -23,4 +23,4 @@ PR: (set after opening)
 
 ### Phase 1: Footer widget
 
-- [ ] 1.1 Review Collector TrustBox in the footer with a server-rendered fallback link
+- [x] 1.1 Review Collector TrustBox in the footer with a server-rendered fallback link — 38be883
