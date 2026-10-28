@@ -86,3 +86,41 @@ test('CreativeWork schema links the case study to the organization and the clien
     assert.equal(schema.keywords, 'SEO');
     assert.equal(schema.image, undefined);
 });
+
+test('portfolio projects have a Markdown twin URL', async () => {
+    const { markdownTargetFor, routeFromMarkdownUrl, handlerPathFor } = await import('../src/lib/markdown/pages.ts');
+    const target = markdownTargetFor('/portfolio/beautyclinic-pl');
+    assert.deepEqual(target, { kind: 'portfolio', route: '/portfolio/beautyclinic-pl', slug: 'beautyclinic-pl' });
+    assert.equal(routeFromMarkdownUrl('/portfolio/beautyclinic-pl.md'), '/portfolio/beautyclinic-pl');
+    assert.equal(handlerPathFor(target), '/md/portfolio/beautyclinic-pl');
+    assert.equal(markdownTargetFor('/portfolio'), null);
+    assert.equal(markdownTargetFor('/portfolio/Zly_Slug'), null);
+});
+
+test('llms.txt lists case studies after services and every article', async () => {
+    const { buildLlmsTxt, buildLlmsFullTxt } = await import('../src/lib/markdown/llms.ts');
+    const origin = SITE_URL;
+    const pages = [
+        { title: 'Strona główna', description: 'Start', url: `${origin}/index.md`, section: 'company' },
+        { title: 'Strony WWW', description: 'Usługa', url: `${origin}/uslugi/strony-www.md`, section: 'services' },
+        { title: 'Cennik', description: 'Ceny', url: `${origin}/uslugi/tworzenie-stron-www-cennik.md`, section: 'pricing' },
+    ];
+    const articles = [
+        { kind: 'portfolio', title: 'Beauty Clinic', url: `${origin}/portfolio/beautyclinic-pl.md`, summary: 'Strona kliniki.' },
+        ...Array.from({ length: 70 }, (_, i) => ({ kind: 'blog', title: `Wpis ${i}`, url: `${origin}/blog/wpis-${i}.md` })),
+        { kind: 'knowledge-base', title: 'CRM', url: `${origin}/baza-wiedzy/crm.md` },
+    ];
+    const txt = buildLlmsTxt({ origin, pages, articles });
+    const services = txt.indexOf('## Usługi');
+    const cases = txt.indexOf('## Realizacje (case studies)');
+    const pricing = txt.indexOf('## Cenniki');
+    assert.ok(services < cases && cases < pricing, 'case studies sit between services and pricing');
+    assert.ok(txt.includes(`- [Beauty Clinic](${origin}/portfolio/beautyclinic-pl.md): Strona kliniki.`));
+    assert.equal((txt.match(/\]\(https:\/\/www\.creativetrust\.pl\/blog\/wpis-/g) ?? []).length, 70, 'no blog cap');
+    const blogSection = txt.slice(txt.indexOf('## Blog'));
+    assert.ok(!blogSection.includes('beautyclinic'), 'case studies are not listed as blog posts');
+
+    const full = buildLlmsFullTxt({ origin, documents: [], articles });
+    assert.ok(full.indexOf('## Realizacje (case studies)') < full.indexOf('## Artykuły i baza wiedzy'));
+    assert.ok(!full.slice(full.indexOf('## Artykuły i baza wiedzy')).includes('beautyclinic'));
+});

@@ -19,7 +19,7 @@ export interface LlmsArticle {
     title: string;
     url: string;
     summary?: string | null;
-    kind: 'blog' | 'knowledge-base';
+    kind: 'blog' | 'knowledge-base' | 'portfolio';
 }
 
 export interface LlmsInput {
@@ -59,10 +59,15 @@ function header(origin: string): string[] {
 
 export function buildLlmsTxt({ origin, pages, articles }: LlmsInput): string {
     const lines = header(origin);
+    const caseStudies = articles.filter((a) => a.kind === 'portfolio');
     for (const section of Object.keys(SECTION_TITLES) as LlmsPage['section'][]) {
         const items = pages.filter((p) => p.section === section && !p.optional);
         if (!items.length) continue;
         lines.push('', `## ${SECTION_TITLES[section]}`, '', ...items.map((p) => link(p.title, p.url, p.description)));
+        // Case studies right after the services they prove.
+        if (section === 'services' && caseStudies.length) {
+            lines.push('', '## Realizacje (case studies)', '', ...caseStudies.map((a) => link(a.title, a.url, a.summary)));
+        }
     }
 
     const blog = articles.filter((a) => a.kind === 'blog');
@@ -106,14 +111,27 @@ export function buildLlmsFullTxt({ origin, documents, articles }: { origin: stri
     for (const doc of documents) {
         parts.push(`Źródło: ${doc.url}\n\n${demoteHeadings(doc.body.trim())}`);
     }
-    if (articles.length) {
+    const caseStudies = articles.filter((a) => a.kind === 'portfolio');
+    if (caseStudies.length) {
+        parts.push(
+            [
+                '## Realizacje (case studies)',
+                '',
+                'Projekty zrealizowane przez CreativeTrust. Pełny opis każdej realizacji (klient, zakres prac, kategorie) jest pod podanym adresem `.md`.',
+                '',
+                ...caseStudies.map((a) => link(a.title, a.url, a.summary)),
+            ].join('\n'),
+        );
+    }
+    const texts = articles.filter((a) => a.kind !== 'portfolio');
+    if (texts.length) {
         parts.push(
             [
                 '## Artykuły i baza wiedzy',
                 '',
-                'Najnowsze artykuły bloga i hasła bazy wiedzy CreativeTrust. Pełna treść każdego z nich jest pod podanym adresem `.md`.',
+                'Wszystkie artykuły bloga i hasła bazy wiedzy CreativeTrust. Pełna treść każdego z nich jest pod podanym adresem `.md`.',
                 '',
-                ...articles.map((a) => link(a.title, a.url, a.summary)),
+                ...texts.map((a) => link(a.title, a.url, a.summary)),
             ].join('\n'),
         );
     }
