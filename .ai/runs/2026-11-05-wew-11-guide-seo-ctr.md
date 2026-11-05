@@ -36,7 +36,7 @@ No Sanity write token is available to this run, and the repo already overrides p
 
 - „2026” in the title goes stale in January 2027.
 - The CTR > 2% criterion can only be measured 28 days after deployment.
-- `.ai/agentic.config.json` is absent. Values follow the previous runs instead of generating pipeline files in an SEO PR: base `main`, runs in `.ai/runs`, GitHub tracker, gate = `lint`, `typecheck`, `test`, `check:design`, `build`.
+- `.ai/agentic.config.json` is absent. Values follow the previous runs instead of generating pipeline files in an SEO PR: base `main`, runs in `.ai/runs`, GitHub tracker, gate = `typecheck`, `test`, `check:design`, `build`. `npm run lint` stays out, as in the recent runs: it is already broken on `main`.
 
 ## Implementation Plan
 
@@ -46,6 +46,8 @@ No Sanity write token is available to this run, and the repo already overrides p
 - 1.2 Apply the fixes in `getBlogPost` and render the title as absolute.
 
 ## Progress
+
+PR: #12
 
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
