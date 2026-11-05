@@ -40,14 +40,16 @@ Source: Jira WEW-12 (brief pasted into the task, 2026-11-05).
 
 ## Progress
 
+PR: #13
+
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
 ### Phase 1: Override and rendering
 
-- [ ] 1.1 Add the override module with the content of both entries
-- [ ] 1.2 Apply it in getKnowledgeBaseEntry and render headline as the H1
-- [ ] 1.3 Add tests
+- [x] 1.1 Add the override module with the content of both entries — 971c2dd
+- [x] 1.2 Apply it in getKnowledgeBaseEntry and render headline as the H1 — c6040f6
+- [x] 1.3 Add tests — 9ab9e3f
 
 ### Phase 2: Verification
 
-- [ ] 2.1 Run the validation gate and confirm the result in server-rendered HTML
+- [x] 2.1 Run the validation gate and confirm the result in server-rendered HTML — 9ab9e3f
