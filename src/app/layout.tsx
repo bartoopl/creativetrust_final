@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
 import WebMcpTools from '@/components/WebMcpTools';
+import LeadLinkTracking from '@/components/LeadLinkTracking';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, organizationSchema } from '@/lib/schema';
 import { CONSENT_BOOTSTRAP_SCRIPT, GTM_ID, gtmLoaderScript } from '@/lib/analytics';
@@ -101,6 +102,7 @@ export default function RootLayout({
                     <Footer />
                     <CookieConsent />
                     <WebMcpTools />
+                    <LeadLinkTracking />
                 </div>
             </body>
         </html>

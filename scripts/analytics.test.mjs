@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
-import { CONSENT_BOOTSTRAP_SCRIPT, GTM_ID, gtmLoaderScript } from '../src/lib/analytics.ts';
+import { CONSENT_BOOTSTRAP_SCRIPT, GTM_ID, gtmLoaderScript, leadSourceForHref, trackLead } from '../src/lib/analytics.ts';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const read = (path) => readFileSync(join(ROOT, path), 'utf8');
@@ -77,4 +77,34 @@ test('custom settings win over the consent type, and refusals stay denied', () =
 
 test('corrupted stored settings leave the defaults in place', () => {
     assert.equal(bootstrap({ cookieConsentSettings: '{not json' }).update, undefined);
+});
+
+test('trackLead pushes generate_lead with the source and nothing else', () => {
+    const previous = globalThis.window;
+    globalThis.window = {};
+    try {
+        trackLead('contact_form');
+        assert.deepEqual(window.dataLayer, [{ event: 'generate_lead', lead_source: 'contact_form' }]);
+    } finally {
+        globalThis.window = previous;
+    }
+});
+
+test('each form reports a lead only after the send is confirmed', () => {
+    const order = (path, confirmed, source) => {
+        const code = read(path);
+        const tracked = code.indexOf(`trackLead('${source}')`);
+        assert.ok(tracked > code.indexOf(confirmed) && code.indexOf(confirmed) > -1, path);
+    };
+    order('src/components/ContactForm.tsx', 'await submission;', 'contact_form');
+    order('src/components/LandingLeadForm.tsx', 'if (!response.ok)', 'landing_form');
+    order('src/components/home/LeadRequest.tsx', 'if (res.ok && data?.success !== false)', 'assistant_form');
+});
+
+test('mailto and tel links map to their lead source, other links to none', () => {
+    assert.equal(leadSourceForHref('mailto:office@creativetrust.pl'), 'email_click');
+    assert.equal(leadSourceForHref('tel:+48570526421'), 'phone_click');
+    assert.equal(leadSourceForHref('/kontakt'), null);
+    assert.equal(leadSourceForHref('https://example.com/?mailto:x'), null);
+    assert.match(read('src/app/layout.tsx'), /<LeadLinkTracking \/>/);
 });
