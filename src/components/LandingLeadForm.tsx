@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { HONEYPOT_FIELD_NAME } from '@/lib/antispam';
+import { trackLead } from '@/lib/analytics';
 
 type LandingLeadFormProps = {
     formTitle: string;
@@ -97,6 +98,7 @@ Wiadomość: ${formData.message}`,
                 throw new Error(data.message || 'Wystąpił błąd podczas wysyłania formularza');
             }
 
+            trackLead('landing_form');
             setSubmitted(true);
             setFormData({
                 name: '',

@@ -5,8 +5,10 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
 import WebMcpTools from '@/components/WebMcpTools';
+import LeadLinkTracking from '@/components/LeadLinkTracking';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, organizationSchema } from '@/lib/schema';
+import { CONSENT_BOOTSTRAP_SCRIPT, GTM_ID, gtmLoaderScript } from '@/lib/analytics';
 
 const inter = Inter({
     subsets: ['latin', 'latin-ext'],
@@ -85,63 +87,13 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
                 <link rel="dns-prefetch" href="https://cdn.sanity.io" />
                 <SchemaScript schema={organizationSchema} />
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('consent', 'default', {
-                            'ad_storage': 'denied',
-                            'analytics_storage': 'denied',
-                            'functionality_storage': 'denied',
-                            'personalization_storage': 'denied',
-                            'security_storage': 'granted',
-                            'wait_for_update': 500
-                        });
-                        function restoreConsents() {
-                            try {
-                                const consentType = localStorage.getItem('cookieConsent');
-                                const consentSettings = localStorage.getItem('cookieConsentSettings');
-                                if (consentSettings) {
-                                    const settings = JSON.parse(consentSettings);
-                                    window.dataLayer.push({ event: 'consent_update', consent: {
-                                        'ad_storage': settings.ad_storage ? 'granted' : 'denied',
-                                        'analytics_storage': settings.analytics_storage ? 'granted' : 'denied',
-                                        'functionality_storage': settings.functionality_storage ? 'granted' : 'denied',
-                                        'personalization_storage': settings.personalization_storage ? 'granted' : 'denied',
-                                        'security_storage': 'granted'
-                                    }});
-                                    return;
-                                }
-                                if (consentType === 'all') {
-                                    window.dataLayer.push({ event: 'consent_update', consent: {
-                                        ad_storage: 'granted', analytics_storage: 'granted',
-                                        functionality_storage: 'granted', personalization_storage: 'granted',
-                                        security_storage: 'granted'
-                                    }});
-                                } else if (consentType === 'essential') {
-                                    window.dataLayer.push({ event: 'consent_update', consent: {
-                                        ad_storage: 'denied', analytics_storage: 'denied',
-                                        functionality_storage: 'granted', personalization_storage: 'denied',
-                                        security_storage: 'granted'
-                                    }});
-                                }
-                            } catch(e) {}
-                        }
-                        restoreConsents();
-                    `,
-                    }}
-                />
+                <script dangerouslySetInnerHTML={{ __html: CONSENT_BOOTSTRAP_SCRIPT }} />
             </head>
             <body className="overflow-x-hidden w-full antialiased" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WTKHM3K');`,
-                    }}
-                />
+                <script dangerouslySetInnerHTML={{ __html: gtmLoaderScript(new URL(SITE_URL).hostname) }} />
                 <noscript
                     dangerouslySetInnerHTML={{
-                        __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WTKHM3K" height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
+                        __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
                     }}
                 />
                 <div className="ct-v2 w-full overflow-x-hidden">
@@ -150,6 +102,7 @@ export default function RootLayout({
                     <Footer />
                     <CookieConsent />
                     <WebMcpTools />
+                    <LeadLinkTracking />
                 </div>
             </body>
         </html>

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { formatLeadMessage, type OfferAnswer } from '@/lib/offer-assistant';
+import { trackLead } from '@/lib/analytics';
 
 interface LeadRequestProps {
     question: string;
@@ -34,6 +35,7 @@ export default function LeadRequest({ question, answer }: LeadRequestProps) {
             });
             const data = await res.json().catch(() => null);
             if (res.ok && data?.success !== false) {
+                trackLead('assistant_form');
                 setStatus('sent');
             } else {
                 setError(data?.message || 'Nie udało się wysłać. Spróbuj ponownie.');
