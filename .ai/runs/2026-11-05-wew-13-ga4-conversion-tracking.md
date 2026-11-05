@@ -56,8 +56,8 @@ Contact leads become measurable in GA4 (`generate_lead`), development traffic st
 
 ### Phase 2: generate_lead
 
-- [ ] 2.1 Push generate_lead from the three forms after a confirmed send
-- [ ] 2.2 Push generate_lead for mailto/tel clicks
+- [x] 2.1 Push generate_lead from the three forms after a confirmed send — 18221e8
+- [x] 2.2 Push generate_lead for mailto/tel clicks — 18221e8
 
 ### Phase 3: Canonical links
 
