@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import { CONSENT_BOOTSTRAP_SCRIPT, GTM_ID, gtmLoaderScript, leadSourceForHref, trackLead } from '../src/lib/analytics.ts';
+import { canonicalHref, renderInline } from '../src/lib/markdown/portable-text.ts';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const read = (path) => readFileSync(join(ROOT, path), 'utf8');
@@ -107,4 +108,23 @@ test('mailto and tel links map to their lead source, other links to none', () =>
     assert.equal(leadSourceForHref('/kontakt'), null);
     assert.equal(leadSourceForHref('https://example.com/?mailto:x'), null);
     assert.match(read('src/app/layout.tsx'), /<LeadLinkTracking \/>/);
+});
+
+test('canonicalHref moves non-www links to www and leaves everything else alone', () => {
+    assert.equal(canonicalHref('https://creativetrust.pl/kontakt'), 'https://www.creativetrust.pl/kontakt');
+    assert.equal(canonicalHref('http://creativetrust.pl'), 'https://www.creativetrust.pl');
+    assert.equal(canonicalHref('https://creativetrust.pl?x=1'), 'https://www.creativetrust.pl?x=1');
+    for (const href of ['https://www.creativetrust.pl/blog', '/kontakt', 'mailto:office@creativetrust.pl', 'https://creativetrust.pl.example.com/', 'https://pl.trustpilot.com/evaluate/creativetrust.pl']) {
+        assert.equal(canonicalHref(href), href);
+    }
+});
+
+test('both renderers apply canonicalHref', () => {
+    const block = {
+        _type: 'block',
+        markDefs: [{ _key: 'a', _type: 'link', href: 'https://creativetrust.pl/kontakt' }],
+        children: [{ _type: 'span', text: 'kontakt', marks: ['a'] }],
+    };
+    assert.equal(renderInline(block), '[kontakt](https://www.creativetrust.pl/kontakt)');
+    assert.match(read('src/components/PortableTextContent.tsx'), /href=\{canonicalHref\(/);
 });

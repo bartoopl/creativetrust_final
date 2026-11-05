@@ -3,6 +3,7 @@
 import React from 'react';
 import { PortableText } from '@portabletext/react';
 import { urlFor } from '@/lib/sanity';
+import { canonicalHref } from '@/lib/markdown/portable-text';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -58,7 +59,7 @@ const PortableTextContent: React.FC<PortableTextContentProps> = ({ content, comp
                 const target = value?.blank ? '_blank' : undefined;
                 return (
                     <Link
-                        href={value?.href}
+                        href={canonicalHref(value?.href ?? '')}
                         rel={rel}
                         target={target}
                         style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3, textDecorationThickness: 1 }}

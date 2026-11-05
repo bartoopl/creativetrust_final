@@ -22,6 +22,11 @@ export interface PortableTextBlock {
     [key: string]: unknown;
 }
 
+/** CMS links written against the old non-www host, pointed straight at the canonical one. */
+export function canonicalHref(href: string): string {
+    return href.replace(/^https?:\/\/creativetrust\.pl(?=[/?#]|$)/i, 'https://www.creativetrust.pl');
+}
+
 export interface PortableTextOptions {
     /** Absolute URL for an image block, or null to skip it. */
     imageUrl?: (image: PortableTextBlock) => string | null | undefined;
@@ -94,7 +99,7 @@ export function renderInline(block: PortableTextBlock): string {
             i += 1;
         }
         const href = defs.get(linkKey)?.href;
-        out += href ? `[${label.trim()}](${href.replace(/[()\s]/g, encodeURIComponent)})` : label;
+        out += href ? `[${label.trim()}](${canonicalHref(href).replace(/[()\s]/g, encodeURIComponent)})` : label;
     }
     return out;
 }
