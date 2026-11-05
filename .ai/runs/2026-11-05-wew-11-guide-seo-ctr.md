@@ -51,5 +51,5 @@ No Sanity write token is available to this run, and the repo already overrides p
 
 ### Phase 1: Metadata and body fixes
 
-- [ ] 1.1 Add the guide's title, description and body fixes with tests
-- [ ] 1.2 Apply the fixes in getBlogPost and render the title as absolute
+- [x] 1.1 Add the guide's title, description and body fixes with tests — b1ce2e0
+- [x] 1.2 Apply the fixes in getBlogPost and render the title as absolute — 94e8b52
