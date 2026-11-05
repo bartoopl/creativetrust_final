@@ -51,8 +51,8 @@ Contact leads become measurable in GA4 (`generate_lead`), development traffic st
 
 ### Phase 1: GA4 bootstrap
 
-- [ ] 1.1 Load GTM only on the production hostname
-- [ ] 1.2 Restore stored consent through gtag consent update
+- [x] 1.1 Load GTM only on the production hostname — 1c20f5e
+- [x] 1.2 Restore stored consent through gtag consent update — 1c20f5e
 
 ### Phase 2: generate_lead
 
