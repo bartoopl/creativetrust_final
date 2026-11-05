@@ -61,4 +61,4 @@ Contact leads become measurable in GA4 (`generate_lead`), development traffic st
 
 ### Phase 3: Canonical links
 
-- [ ] 3.1 Rewrite non-www links from CMS content in HTML and Markdown output
+- [x] 3.1 Rewrite non-www links from CMS content in HTML and Markdown output — 940cf36
