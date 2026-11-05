@@ -39,7 +39,7 @@ export async function generateMetadata({
     }
 
     return {
-        title: seoConfig?.title || post.seoTitle || `${post.title} - Blog`,
+        title: seoConfig?.title ? { absolute: seoConfig.title } : post.seoTitle || `${post.title} - Blog`,
         description: seoConfig?.description || post.seoDescription || post.excerpt || '',
         alternates: {
             canonical: `${SITE_URL}/blog/${slug}`,

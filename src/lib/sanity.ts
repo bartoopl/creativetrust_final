@@ -1,5 +1,6 @@
 import { createClient } from 'next-sanity';
 import { createImageUrlBuilder } from '@sanity/image-url';
+import { applyBlogPostFixes } from './blog-seo';
 
 export const client = createClient({
     projectId: '8mtbrwl1', // Zastąp ID projektu z sanity.json
@@ -223,7 +224,7 @@ export async function getFeaturedBlogPosts() {
 
 // Funkcja pobierająca pojedynczy wpis bloga
 export async function getBlogPost(slug: string) {
-    return await client.fetch(`
+    const post = await client.fetch(`
     *[_type == "blogPost" && slug.current == $slug][0] {
       _id,
       title,
@@ -261,6 +262,8 @@ export async function getBlogPost(slug: string) {
       seoDescription
     }
   `, { slug });
+
+    return applyBlogPostFixes(slug, post);
 }
 
 // Funkcja pobierająca wpisy bloga według kategorii
