@@ -152,7 +152,7 @@ export async function getPortfolioMarkdown(slug: string): Promise<string | null>
     });
 }
 
-type SanityArticle = ArticleDocument & { content?: PortableTextBlock[] };
+type SanityArticle = ArticleDocument & { content?: PortableTextBlock[]; headline?: string };
 
 /** Markdown twin of a blog post or knowledge-base entry; null when it does not exist. */
 export async function getArticleMarkdown(kind: Exclude<ArticleKind, 'portfolio'>, slug: string): Promise<string | null> {
@@ -176,7 +176,7 @@ export async function getArticleMarkdown(kind: Exclude<ArticleKind, 'portfolio'>
         serializeFrontmatter(
             articleFrontmatter({ ...doc, author: { name: resolveAuthor(doc.author as SanityAuthor)?.name ?? doc.author?.name } }, kind, canonical),
         ),
-        `# ${doc.title.replace(/\s+/g, ' ').trim()}`,
+        `# ${(doc.headline ?? doc.title).replace(/\s+/g, ' ').trim()}`,
         lead ? `\n${lead}` : '',
         body ? `\n${body}` : '',
         `\n---\n\nWersja HTML: ${canonical}\n`,

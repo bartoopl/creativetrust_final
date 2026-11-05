@@ -1,6 +1,7 @@
 import { createClient } from 'next-sanity';
 import { createImageUrlBuilder } from '@sanity/image-url';
 import { applyBlogPostFixes } from './blog-seo';
+import { applyKnowledgeBaseSeo } from './knowledge-base-seo';
 
 export const client = createClient({
     projectId: '8mtbrwl1', // Zastąp ID projektu z sanity.json
@@ -150,7 +151,7 @@ export async function getKnowledgeBaseByLetter(letter: string) {
 
 // Funkcja pobierająca pojedynczy wpis z bazy wiedzy
 export async function getKnowledgeBaseEntry(slug: string) {
-    return await client.fetch(`
+    const entry = await client.fetch(`
     *[_type == "knowledgeBase" && slug.current == $slug][0] {
       _id,
       title,
@@ -165,6 +166,7 @@ export async function getKnowledgeBaseEntry(slug: string) {
       seoDescription
     }
   `, { slug });
+    return applyKnowledgeBaseSeo(slug, entry);
 }
 
 // Funkcja pobierająca wszystkie dostępne litery z istniejących wpisów
