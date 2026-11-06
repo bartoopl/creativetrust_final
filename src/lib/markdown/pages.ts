@@ -24,6 +24,7 @@ export const markdownPages: MarkdownPage[] = [
     { route: '/uslugi/e-commerce', section: 'services' },
     { route: '/uslugi/marketing-automation', section: 'services' },
     { route: '/uslugi/social-media', section: 'services' },
+    { route: '/uslugi/konsulting-e-commerce', section: 'services' },
     { route: '/uslugi/tworzenie-stron-www-cennik', section: 'pricing' },
     { route: '/uslugi/strona-firmowa-cena', section: 'pricing' },
     { route: '/uslugi/migracja-woocommerce-do-headless', section: 'landings' },

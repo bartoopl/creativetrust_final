@@ -33,6 +33,7 @@ export const services: Service[] = [
     { slug: 'e-commerce', href: '/uslugi/e-commerce', title: 'E-commerce', description: 'Headless commerce, migracje i integracje systemów.', accent: 'Skalowanie' },
     { slug: 'marketing-automation', href: '/uslugi/marketing-automation', title: 'Marketing Automation', description: 'SALESmanago, lejki, CRM i personalizacja.', accent: 'Automatyzacja' },
     { slug: 'social-media', href: '/uslugi/social-media', title: 'Social Media', description: 'Strategia, content, kampanie i raportowanie.', accent: 'Widoczność' },
+    { slug: 'konsulting-e-commerce', href: '/uslugi/konsulting-e-commerce', title: 'Konsulting e-commerce', description: 'Sprzedaż, marża i architektura sklepu. Start od płatnej Diagnozy.', accent: 'Marża' },
 ];
 
 export const seoLandings: Landing[] = [

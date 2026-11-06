@@ -62,7 +62,8 @@ export default function MegaMenu({ id, isOpen, onClose, panelRef, onPointerEnter
                                 </div>
                             </div>
 
-                            <div className="grid sm:grid-cols-2" style={{ gap: 1, background: 'var(--line)', borderRight: '1px solid var(--line)' }}>
+                            {/* Odd service count: the last tile spans the row instead of leaving an empty hairline cell. */}
+                            <div className="grid sm:grid-cols-2 sm:[&>*:last-child:nth-child(odd)]:col-span-2" style={{ gap: 1, background: 'var(--line)', borderRight: '1px solid var(--line)' }}>
                                 {services.map((service) => (
                                     <Link
                                         key={service.href}

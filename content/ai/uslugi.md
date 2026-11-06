@@ -4,7 +4,7 @@ description: "Web design, e-commerce, marketing automation i AI — w jednym zes
 date: "2026-10-27"
 canonical: "https://www.creativetrust.pl/uslugi"
 lang: "pl-PL"
-ai_summary: "Przegląd usług CreativeTrust: strony WWW, e-commerce, social media i marketing automation, uruchamiane osobno lub razem, plus landing pages pod konkretne potrzeby (cennik stron, migracja WooCommerce do headless, wdrożenie SALESmanago). Proces: diagnoza, projekt, wdrożenie, rozwój — z AI na każdym etapie."
+ai_summary: "Przegląd usług CreativeTrust: strony WWW, e-commerce, social media, marketing automation i konsulting e-commerce (start od płatnej Diagnozy), uruchamiane osobno lub razem, plus landing pages pod konkretne potrzeby (cennik stron, migracja WooCommerce do headless, wdrożenie SALESmanago). Proces: diagnoza, projekt, wdrożenie, rozwój — z AI na każdym etapie."
 target_audience:
   - "Firmy, które szukają jednego zespołu od strategii, designu, developmentu i automatyzacji"
   - "Osoby porównujące zakres usług agencji digital"
@@ -30,6 +30,7 @@ Usługi CreativeTrust to moduły, które można uruchamiać osobno lub łączyć
 2. **[E-commerce](https://www.creativetrust.pl/uslugi/e-commerce.md)** — sklepy headless i migracje, które sprzedają i skalują się bez bólu (headless, migracje, integracje).
 3. **[Social Media](https://www.creativetrust.pl/uslugi/social-media.md)** — komunikacja pod zasięg, spójność i sprzedaż, nie tylko pod publikacje (strategia, content, analityka).
 4. **[Marketing Automation](https://www.creativetrust.pl/uslugi/marketing-automation.md)** — lejki, CRM i kampanie sterowane danymi i AI (SALESmanago, lead nurturing, AI).
+5. **[Konsulting e-commerce](https://www.creativetrust.pl/uslugi/konsulting-e-commerce.md)** — sprzedaż, marża i architektura sklepu; start od płatnej Diagnozy Wąskich Gardeł i Architektury eCommerce (diagnoza, marżowość, dashboardy).
 
 ## Strony CreativeTrust pod konkretne potrzeby
 
@@ -64,4 +65,4 @@ AI przyspiesza research, generowanie wariantów, development i optymalizację. D
 
 ### Czy możecie zacząć od audytu?
 
-Tak. Audyt jest dobrym punktem startowym, jeśli firma potrzebuje decyzji, co robić dalej i w jakiej kolejności.
+Tak. Audyt jest dobrym punktem startowym, jeśli firma potrzebuje decyzji, co robić dalej i w jakiej kolejności. Dla sklepów internetowych CreativeTrust prowadzi Diagnozę Wąskich Gardeł i Architektury eCommerce w ramach [konsultingu e-commerce](https://www.creativetrust.pl/uslugi/konsulting-e-commerce.md).
