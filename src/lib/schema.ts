@@ -15,7 +15,8 @@ export const LEGAL_NAME = 'CreativeTrust Natalia Staszak';
 export const TAX_ID: string | undefined = '5993026880';
 export const STREET_ADDRESS = 'ul. Kombatantów 34/500';
 export const POSTAL_CITY = '66-400 Gorzów Wielkopolski';
-const LOGO_URL = `${SITE_URL}/logo.svg`;
+// Raster: Google’s logo guidelines expect a bitmap of at least 112 px.
+const LOGO_URL = `${SITE_URL}/logo.png`;
 
 type JsonLd = Record<string, unknown>;
 
