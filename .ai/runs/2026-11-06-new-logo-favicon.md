@@ -44,6 +44,8 @@ The site shows the new creativetrust logo everywhere the brand mark appears, and
 
 ## Progress
 
+PR: #16
+
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
 ### Phase 1: Logo
