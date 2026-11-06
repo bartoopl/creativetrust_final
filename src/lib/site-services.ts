@@ -33,6 +33,7 @@ export const services: Service[] = [
     { slug: 'e-commerce', href: '/uslugi/e-commerce', title: 'E-commerce', description: 'Headless commerce, migracje i integracje systemów.', accent: 'Skalowanie' },
     { slug: 'marketing-automation', href: '/uslugi/marketing-automation', title: 'Marketing Automation', description: 'SALESmanago, lejki, CRM i personalizacja.', accent: 'Automatyzacja' },
     { slug: 'social-media', href: '/uslugi/social-media', title: 'Social Media', description: 'Strategia, content, kampanie i raportowanie.', accent: 'Widoczność' },
+    { slug: 'konsulting-e-commerce', href: '/uslugi/konsulting-e-commerce', title: 'Konsulting e-commerce', description: 'Sprzedaż, marża i architektura sklepu. Start od płatnej Diagnozy.', accent: 'Marża' },
 ];
 
 export const seoLandings: Landing[] = [
@@ -89,4 +90,5 @@ export const publishedPrices: PublishedPrice[] = [
     { service: 'strony-www', name: 'Strona firmowa', price: 'od 7 500 zł netto', source: '/uslugi/tworzenie-stron-www-cennik' },
     { service: 'strony-www', name: 'Strona firmowa z CMS', price: 'od 10 000 zł netto', source: '/uslugi/strona-firmowa-cena' },
     { service: 'strony-www', name: 'Serwis rozbudowany', price: 'wycena indywidualna', source: '/uslugi/tworzenie-stron-www-cennik' },
+    { service: 'konsulting-e-commerce', name: 'Diagnoza Wąskich Gardeł i Architektury eCommerce', price: '2 900 zł netto', source: '/uslugi/konsulting-e-commerce' },
 ];

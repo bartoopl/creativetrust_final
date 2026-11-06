@@ -17,6 +17,7 @@ const services = [
     { num: '02', title: 'E-commerce', href: '/uslugi/e-commerce', description: 'Sklepy headless i migracje, które sprzedają i skalują się bez bólu.', tags: ['Headless', 'Migracje', 'Integracje'] },
     { num: '03', title: 'Social Media', href: '/uslugi/social-media', description: 'Komunikacja pod zasięg, spójność i sprzedaż — nie tylko pod publikacje.', tags: ['Strategia', 'Content', 'Analityka'] },
     { num: '04', title: 'Marketing Automation', href: '/uslugi/marketing-automation', description: 'Lejki, CRM i kampanie sterowane danymi i AI. Działają, kiedy śpisz.', tags: ['SALESmanago', 'Lead nurturing', 'AI'] },
+    { num: '05', title: 'Konsulting e-commerce', href: '/uslugi/konsulting-e-commerce', description: 'Sprzedaż, marża i architektura sklepu. Zaczynamy od płatnej Diagnozy wąskich gardeł.', tags: ['Diagnoza', 'Marżowość', 'Dashboardy'] },
 ];
 
 const landingPages = [
@@ -58,7 +59,7 @@ const faq = [
     { q: 'Od czego najlepiej zacząć?', a: 'Najczęściej od diagnozy: marka, strona, sklep albo automatyzacja. Wybór zależy od tego, gdzie dziś tracisz najwięcej potencjału.' },
     { q: 'Czy łączycie kilka usług w jednym projekcie?', a: 'Tak. To zwykle lepszy model niż oddzielne zamawianie WWW, e-commerce i komunikacji u różnych wykonawców.' },
     { q: 'Jak wygląda rola AI w projektach?', a: 'AI przyspiesza research, generowanie wariantów, development i optymalizację. Decyzje zostają po stronie ludzi — wiemy, kiedy i gdzie AI realnie pomaga.' },
-    { q: 'Czy możecie zacząć od audytu?', a: 'Tak. Audyt jest dobrym punktem startowym, jeśli potrzebujesz decyzji, co robić dalej i w jakiej kolejności.' },
+    { q: 'Czy możecie zacząć od audytu?', a: 'Tak. Audyt jest dobrym punktem startowym, jeśli potrzebujesz decyzji, co robić dalej i w jakiej kolejności. Dla sklepów internetowych mamy Diagnozę Wąskich Gardeł i Architektury eCommerce w ramach konsultingu e-commerce.' },
 ];
 
 export default function ServicesPage() {

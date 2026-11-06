@@ -8,6 +8,7 @@ const services = [
     { href: '/uslugi/e-commerce', label: 'Ecommerce headless' },
     { href: '/uslugi/marketing-automation', label: 'Marketing automation' },
     { href: '/uslugi/social-media', label: 'Social media' },
+    { href: '/uslugi/konsulting-e-commerce', label: 'Konsulting e-commerce' },
 ];
 
 const company = [
