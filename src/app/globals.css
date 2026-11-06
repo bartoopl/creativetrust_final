@@ -264,7 +264,6 @@ body:has(.ct-v2) .ct-header::before { background: rgba(247, 246, 245, 0.92); }
 body:has(.ct-v2) .ct-strip { background: var(--bg) !important; border-bottom-color: var(--line) !important; }
 body:has(.ct-v2) .ct-strip .ct-mono { font: 400 14px/1.4 var(--font-sans), sans-serif !important; letter-spacing: 0 !important; color: var(--muted) !important; }
 body:has(.ct-v2) .ct-strip a { font-weight: 400 !important; }
-body:has(.ct-v2) .ct-wordmark { font: 500 19px/1 var(--font-sans), sans-serif !important; letter-spacing: -0.04em !important; }
 body:has(.ct-v2) .ct-nav-link { font-size: 14px; font-weight: 400; color: var(--text); }
 body:has(.ct-v2) .ct-nav-link:hover { color: var(--muted); }
 body:has(.ct-v2) .ct-menu-toggle { background: transparent !important; border-color: var(--text) !important; border-radius: 2px !important; width: 36px !important; height: 36px !important; }
