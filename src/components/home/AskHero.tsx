@@ -39,7 +39,7 @@ export default function AskHero() {
         const el = inputRef.current;
         if (!el) return;
         el.style.height = 'auto';
-        el.style.height = `${Math.min(el.scrollHeight, 180)}px`;
+        el.style.height = `${Math.min(el.scrollHeight, 240)}px`;
     }, [question]);
 
     const ask = async (text: string) => {

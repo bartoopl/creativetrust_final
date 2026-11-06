@@ -266,7 +266,7 @@ body:has(.ct-v2) .ct-strip .ct-mono { font: 400 14px/1.4 var(--font-sans), sans-
 body:has(.ct-v2) .ct-strip a { font-weight: 400 !important; }
 body:has(.ct-v2) .ct-nav-link { font-size: 14px; font-weight: 400; color: var(--text); }
 body:has(.ct-v2) .ct-nav-link:hover { color: var(--muted); }
-body:has(.ct-v2) .ct-menu-toggle { background: transparent !important; border-color: var(--text) !important; border-radius: 2px !important; width: 36px !important; height: 36px !important; }
+body:has(.ct-v2) .ct-menu-toggle { background: transparent !important; border-color: var(--text) !important; border-radius: var(--radius-sm) !important; width: 36px !important; height: 36px !important; }
 body:has(.ct-v2) #mobile-menu a { font-size: 16px !important; font-weight: 400 !important; padding-block: 13px !important; }
 body:has(.ct-v2) #mobile-menu { background: var(--bg) !important; padding-inline: max(var(--pad-x), calc((100vw - 640px) / 2)) !important; }
 body:has(.ct-v2) .ct-footer { background: var(--bg) !important; }
@@ -282,7 +282,7 @@ body:has(.ct-v2) .ct-link { font-weight: 500; }
 body:has(.ct-v2) .ct-grid-lines > * { background: var(--bg); }
 body:has(.ct-v2) .ct-panel { background: var(--bg); }
 
-/* Compact Carbon controls: 2px radius, no arrow badge. */
+/* Compact Carbon controls: soft radius (--radius-sm) matching the 16px frames, no arrow badge. */
 body:has(.ct-v2) .ct-cta {
   gap: 8px; padding: 6px 12px 5px; min-height: 36px; border-radius: var(--radius-sm);
   background: var(--text); border-color: var(--text); color: #fff; font-weight: 400; font-size: 15px;
@@ -300,7 +300,7 @@ body:has(.ct-v2) .ct-cta.sm { font-size: 14px; min-height: 32px; }
 body:has(.ct-v2) .ct-dotgrid { background-image: none; }
 body:has(.ct-v2) .ct-meta { font: 400 13px/1.4 var(--font-sans), sans-serif; text-transform: none; letter-spacing: 0; color: var(--muted-2); }
 body:has(.ct-v2) .ct-placeholder { background: var(--panel2); }
-body:has(.ct-v2) .ct-placeholder-label { background: var(--bg); border-color: var(--line); border-radius: 2px; font-family: var(--font-sans), sans-serif; }
+body:has(.ct-v2) .ct-placeholder-label { background: var(--bg); border-color: var(--line); border-radius: var(--radius-sm); font-family: var(--font-sans), sans-serif; }
 body:has(.ct-v2) .ct-panel { background: var(--panel); border-color: transparent; border-radius: 16px; }
 body:has(.ct-v2) .ct-grid-lines { gap: 4px; background: transparent; border: 0; }
 body:has(.ct-v2) .ct-grid-lines > * { background: var(--panel); border-radius: 16px; }
@@ -314,7 +314,7 @@ body:has(.ct-v2) .ct-bullet { border-radius: 50%; }
 body:has(.ct-v2) .ct-legal h2 { font-weight: 500; letter-spacing: -0.03em; }
 body:has(.ct-v2) .ct-legal-links a { font: 400 13px/1.4 var(--font-sans), sans-serif; text-transform: none; letter-spacing: 0; border-color: var(--text); }
 body:has(.ct-v2) .ct-label { font: 400 13px/1.4 var(--font-sans), sans-serif; text-transform: none; letter-spacing: 0; color: var(--muted); }
-body:has(.ct-v2) .ct-input { background: #fff; border-radius: 2px; border-color: var(--line-strong); }
+body:has(.ct-v2) .ct-input { background: #fff; border-radius: var(--radius-sm); border-color: var(--line-strong); }
 body:has(.ct-v2) .ct-input:focus { border-color: var(--text); box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06); }
 body:has(.ct-v2) .ct-marquee-track span { font-family: var(--font-sans), sans-serif !important; font-weight: 500 !important; letter-spacing: -0.01em; color: var(--muted-2) !important; }
 
@@ -344,13 +344,13 @@ body:has(.ct-v2) .ct-marquee-track span { font-family: var(--font-sans), sans-se
   min-height: calc(100svh - var(--ask-offset, 112px));
   padding: 72px var(--pad-x) 120px;
 }
-.ct-ask-inner { width: 100%; max-width: 620px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.ct-ask-inner { width: 100%; max-width: 680px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .ct-ask-title {
   margin: 0; max-width: 20ch; text-align: center; text-wrap: balance; color: var(--text);
   font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.1;
 }
 .ct-ask-kicker { margin: 0; font-size: 13px; color: var(--muted-2); text-align: center; }
-.ct-ask-label { display: block; flex-basis: 100%; padding: 12px 16px 0; font-size: 13px; color: var(--muted); }
+.ct-ask-label { display: block; flex-basis: 100%; padding: 18px 20px 0; font-size: 13px; color: var(--muted); }
 .ct-ask-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; list-style: none; margin: 4px 0 0; padding: 0; font-size: 13px; color: var(--muted); }
 .ct-ask-steps li { display: inline-flex; align-items: center; gap: 8px; }
 .ct-ask-steps span { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--line-strong); font: 500 11px/1 var(--font-mono), monospace; color: var(--text); }
@@ -366,16 +366,17 @@ body:has(.ct-v2) .ct-marquee-track span { font-family: var(--font-sans), sans-se
 .ct-ask-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
 .ct-ask-box textarea {
   display: block; resize: none; border: 0; outline: none; background: transparent;
-  flex: 1; min-width: 0; padding: 4px 0 12px 16px; font: 400 15px/1.5 var(--font-sans), sans-serif; color: var(--text);
+  flex: 1 1 100%; min-width: 0; min-height: calc(4.5em + 14px); padding: 8px 20px 6px;
+  font: 400 16px/1.5 var(--font-sans), sans-serif; color: var(--text);
 }
 .ct-ask-box textarea::placeholder { color: var(--muted-2); }
 .ct-ask-box[data-busy="true"] textarea { color: var(--muted); }
-.ct-ask-bar { display: flex; align-items: center; gap: 8px; padding: 9px 9px 9px 0; flex: none; }
+.ct-ask-bar { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex: 1 1 100%; padding: 4px 12px 12px 20px; }
 .ct-ask-hint { font-size: 12px; color: var(--muted-2); }
 .ct-ask-submit {
-  display: inline-flex; align-items: center; justify-content: center; height: 32px; padding: 0 14px; flex: none; margin-left: auto;
+  display: inline-flex; align-items: center; justify-content: center; height: 38px; padding: 0 18px; flex: none; margin-left: auto;
   font: 500 14px/1 var(--font-sans), sans-serif;
-  border: 0; border-radius: 7.2px; background: var(--accent); color: #fff; cursor: pointer;
+  border: 0; border-radius: var(--radius-sm); background: var(--accent); color: #fff; cursor: pointer;
   transition: background .15s ease, opacity .15s ease, transform .2s ease;
 }
 .ct-ask-submit:hover { background: var(--accent-hover); }
@@ -403,7 +404,7 @@ body:has(.ct-v2) .ct-marquee-track span { font-family: var(--font-sans), sans-se
 .ct-ask-prices dd { margin: 0; font: 500 14px/1.4 var(--font-mono), monospace; color: var(--accent); white-space: nowrap; }
 .ct-ask-prices .ct-ask-note { background: var(--panel); padding: 8px 0 0; text-align: left; }
 .ct-ask-services { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
-.ct-ask-services a { display: inline-flex; gap: 6px; padding: 6px 12px 5px; border-radius: 2px; background: var(--bg); border: 1px solid var(--line-strong); color: var(--text); font-size: 14px; }
+.ct-ask-services a { display: inline-flex; gap: 6px; padding: 6px 12px 5px; border-radius: var(--radius-sm); background: var(--bg); border: 1px solid var(--line-strong); color: var(--text); font-size: 14px; }
 .ct-ask-services a:hover { border-color: var(--accent); color: var(--accent); }
 .ct-ask-note { margin: 0; font-size: 12px; line-height: 1.5; color: var(--muted); text-align: center; }
 .ct-ask-note a { color: var(--text); text-decoration: underline; }
@@ -441,7 +442,7 @@ body:has(.ct-v2) {
   --accent: #2200ff;
   --accent-hover: #1a00c4;
   --accent-soft: rgba(34, 0, 255, 0.08);
-  --radius-sm: 2px;
+  --radius-sm: 8px;
   --radius-md: 16px;
   --dot-grid: radial-gradient(circle, rgba(0, 0, 0, 0.07) 1px, transparent 1px);
 }
