@@ -53,6 +53,12 @@ test('get_pricing returns only published prices, or says the service is quoted i
     assert.equal((await tools().get_pricing.execute({})).isError, true);
 });
 
+test('get_pricing quotes the paid Diagnoza as the e-commerce consulting entry product', async () => {
+    const consulting = parse(await tools().get_pricing.execute({ service: 'konsulting-e-commerce' }));
+    assert.deepEqual(consulting.prices.map((p) => p.price), ['2 900 zł netto']);
+    assert.match(consulting.prices[0].name, /^Diagnoza/);
+});
+
 test('search_articles validates and clamps input before searching', async () => {
     const calls = [];
     const t = tools(async (q, limit) => {
