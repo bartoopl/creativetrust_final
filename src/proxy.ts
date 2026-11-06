@@ -40,6 +40,6 @@ export const config = {
     // Pages and `.md` URLs only: no Next internals, API, admin/studio, the
     // handler itself or static assets.
     matcher: [
-        '/((?!_next/|api/|admin|studio|md/|llms|favicon\\.ico|robots\\.txt|sitemap|.*\\.(?:png|jpe?g|gif|svg|webp|avif|ico|mp4|webm|glb|gltf|bin|hdr|txt|xml|json|js|css|map|woff2?|ttf|otf|pdf)$).*)',
+        '/((?!_next/|api/|admin|studio|md/|llms|favicon\\.ico|robots\\.txt|sitemap|.*\\.(?:png|jpe?g|gif|svg|webp|avif|ico|mp4|webm|glb|gltf|bin|hdr|txt|xml|json|js|css|map|webmanifest|woff2?|ttf|otf|pdf)$).*)',
     ],
 };
