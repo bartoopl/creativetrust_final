@@ -48,8 +48,8 @@ The site shows the new creativetrust logo everywhere the brand mark appears, and
 
 ### Phase 1: Logo
 
-- [ ] 1.1 Swap the Wordmark for the new horizontal logo
-- [ ] 1.2 Replace public/logo.svg and point JSON-LD at a raster logo
+- [x] 1.1 Swap the Wordmark for the new horizontal logo — 885ffa9
+- [x] 1.2 Replace public/logo.svg and point JSON-LD at a raster logo — 51a9e04
 
 ### Phase 2: Favicon and social image
 
