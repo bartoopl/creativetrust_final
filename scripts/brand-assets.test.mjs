@@ -40,3 +40,26 @@ test('JSON-LD points at the raster logo', () => {
         if (logo) assert.equal(logo, `${SITE_URL}/logo.png`, `${node['@type']} logo`);
     }
 });
+
+test('favicon set covers Safari: ICO, PNG fallback, SVG and apple-touch-icon', () => {
+    const ico = read('src/app/favicon.ico');
+    assert.equal(ico.readUInt16LE(2), 1, 'favicon.ico is an icon resource');
+    assert.ok(ico.readUInt16LE(4) >= 2, 'favicon.ico carries several sizes');
+    assert.match(read('src/app/icon1.svg').toString(), /prefers-color-scheme:\s*dark/, 'SVG icon adapts to dark mode');
+    assert.deepEqual(pngSize('src/app/icon2.png'), { width: 32, height: 32 }, 'PNG fallback for Safari without SVG favicons');
+    assert.deepEqual(pngSize('src/app/apple-icon.png'), { width: 180, height: 180 });
+    assert.deepEqual(pngSize('public/apple-touch-icon.png'), { width: 180, height: 180 }, 'root path Safari requests directly');
+    assert.deepEqual(pngSize('src/app/opengraph-image.png'), { width: 1200, height: 630 });
+});
+
+test('web manifest icons exist and the proxy leaves the manifest alone', async () => {
+    const { default: manifest } = await import('../src/app/manifest.ts');
+    const { icons } = manifest();
+    assert.ok(icons.length >= 2);
+    for (const icon of icons) {
+        const [width, height] = icon.sizes.split('x').map(Number);
+        assert.deepEqual(pngSize(join('public', icon.src)), { width, height }, icon.src);
+    }
+    assert.match(read('src/proxy.ts').toString(), /\|webmanifest\|/);
+    assert.ok(!existsSync(join(ROOT, 'public/favicon.ico')), 'one favicon.ico, served from src/app');
+});
