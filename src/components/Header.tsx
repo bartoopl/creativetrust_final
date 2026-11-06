@@ -1,7 +1,6 @@
 "use client";
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
@@ -17,8 +16,6 @@ const navItems = [
 ];
 
 export default function Header() {
-    // Homepage: minimal chrome — wordmark and menu toggle only, the AI hero carries the first screen.
-    const minimal = usePathname() === '/';
     const [mobileOpen, setMobileOpen] = useState(false);
     const [sheetTop, setSheetTop] = useState(0);
     const [scrolled, setScrolled] = useState(false);
@@ -92,17 +89,11 @@ export default function Header() {
     // The header is "scrolled" once the announcement strip above it has left the viewport.
     useEffect(() => {
         const strip = stripRef.current;
-        if (!strip) {
-            // No strip (minimal homepage chrome): the hairline appears as soon as content scrolls under.
-            const onScroll = () => setScrolled(window.scrollY > 0);
-            onScroll();
-            window.addEventListener('scroll', onScroll, { passive: true });
-            return () => window.removeEventListener('scroll', onScroll);
-        }
+        if (!strip) return;
         const observer = new IntersectionObserver(([entry]) => setScrolled(!entry.isIntersecting));
         observer.observe(strip);
         return () => observer.disconnect();
-    }, [minimal]);
+    }, []);
 
     const toggleMobile = () => {
         // Pin the sheet to the header's live bottom edge (the announcement strip may still be on screen).
@@ -142,7 +133,7 @@ export default function Header() {
         // Re-pin to the header after rotation/resize; close once the desktop nav takes over (sheet is md:hidden).
         const desktop = window.matchMedia('(min-width: 768px)');
         const onResize = () => {
-            if (desktop.matches && !minimal) setMobileOpen(false);
+            if (desktop.matches) setMobileOpen(false);
             else setSheetTop(headerRef.current?.getBoundingClientRect().bottom ?? 0);
         };
         document.addEventListener('keydown', onKeyDown);
@@ -152,16 +143,16 @@ export default function Header() {
             document.removeEventListener('keydown', onKeyDown);
             window.removeEventListener('resize', onResize);
         };
-    }, [mobileOpen, minimal]);
+    }, [mobileOpen]);
 
     return (
         <>
-            {!minimal && <div ref={stripRef} className="ct-strip" style={{ borderBottom: '1px solid var(--line)', padding: '9px var(--pad-x)', display: 'flex', justifyContent: 'center', background: 'var(--panel)', textAlign: 'center' }}>
+            <div ref={stripRef} className="ct-strip" style={{ borderBottom: '1px solid var(--line)', padding: '9px var(--pad-x)', display: 'flex', justifyContent: 'center', background: 'var(--panel)', textAlign: 'center' }}>
                 <span className="ct-mono" style={{ fontWeight: 500, fontSize: 12, color: 'var(--muted)', letterSpacing: '-0.1px' }}>
                     AI-native partner produktowy — zobacz{' '}
                     <Link href="/#proces" style={{ fontWeight: 500 }}>jak działamy →</Link>
                 </span>
-            </div>}
+            </div>
 
             <header ref={headerRef} className="ct-header" data-scrolled={scrolled}>
                 {/* Sits above the MegaMenu scrim so the trigger stays hoverable while the menu is open. */}
@@ -170,7 +161,7 @@ export default function Header() {
                         <Wordmark />
                     </Link>
 
-                    <nav className={minimal ? 'hidden' : 'hidden items-center gap-8 md:flex'} aria-label="Główna nawigacja">
+                    <nav className="hidden items-center gap-8 md:flex" aria-label="Główna nawigacja">
                         <button
                             ref={servicesTriggerRef}
                             type="button"
@@ -197,14 +188,14 @@ export default function Header() {
                         ))}
                     </nav>
 
-                    <NotchedButton href="/kontakt" variant="outline" size="sm" className={minimal ? 'hidden' : 'hidden md:inline-flex'}>
+                    <NotchedButton href="/kontakt" variant="outline" size="sm" className="hidden md:inline-flex">
                         Umów konsultację
                     </NotchedButton>
 
                     <button
                         ref={mobileToggleRef}
                         type="button"
-                        className={`ct-menu-toggle inline-flex items-center justify-center ${minimal ? '' : 'md:hidden'}`}
+                        className="ct-menu-toggle inline-flex items-center justify-center md:hidden"
                         onClick={toggleMobile}
                         aria-controls="mobile-menu"
                         aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
@@ -238,7 +229,7 @@ export default function Header() {
                         exit={reduceMotion ? { opacity: 0 } : { clipPath: 'inset(0 0 100% 0)' }}
                         transition={reduceMotion ? { duration: 0.15 } : { type: 'spring', bounce: 0, duration: 0.35 }}
                         style={{ position: 'fixed', top: sheetTop, bottom: 0, left: 0, right: 0, background: '#fff', zIndex: 130, padding: '8px var(--pad-x) 32px', overflowY: 'auto', overscrollBehavior: 'contain', borderTop: '1px solid var(--line)' }}
-                        className={`flex flex-col ${minimal ? '' : 'md:hidden'}`}
+                        className="flex flex-col md:hidden"
                     >
                         {[{ href: '/uslugi', label: 'Usługi' }, ...navItems, { href: '/kontakt', label: 'Kontakt' }].map((item) => (
                             <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="flex items-center justify-between" style={{ fontSize: 18, fontWeight: 500, color: 'var(--text)', padding: '16px 0', borderBottom: '1px solid var(--line)' }}>
