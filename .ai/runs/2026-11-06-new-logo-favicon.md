@@ -40,7 +40,7 @@ The site shows the new creativetrust logo everywhere the brand mark appears, and
 ## Risks
 
 - Safari caches favicons aggressively (`~/Library/Safari/Favicon Cache`); the change may only be visible after clearing it or in a private window.
-- Page-level `openGraph` objects replace the root one; the file-based `opengraph-image` is inherited regardless — verified in the build output.
+- Page-level `openGraph` objects replace the root one, so pages that define their own `openGraph` (most /uslugi/*, blog index, portfolio, knowledge base) get `twitter:image` but no `og:image` — verified on the built /uslugi/strony-www. They had no og:image before either; adding one per page is a follow-up.
 
 ## Progress
 
@@ -53,5 +53,5 @@ The site shows the new creativetrust logo everywhere the brand mark appears, and
 
 ### Phase 2: Favicon and social image
 
-- [ ] 2.1 Add the favicon set and web manifest
-- [ ] 2.2 Add the default Open Graph image
+- [x] 2.1 Add the favicon set and web manifest — 97e2382
+- [x] 2.2 Add the default Open Graph image — 89e63e5
