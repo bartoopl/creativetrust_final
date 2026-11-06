@@ -1,10 +1,10 @@
 ---
 title: "Konsulting e-commerce | Sprzedaż, marża i architektura sklepu"
-description: "Konsulting e-commerce dla sklepów, które rosną szybciej niż ich procesy. Zaczynamy od płatnej Diagnozy Wąskich Gardeł i Architektury eCommerce: 5–7 dni, 2 900 zł netto, koszt odliczany od współpracy."
+description: "Konsulting e-commerce dla sklepów, które rosną szybciej niż ich procesy. Zaczynamy od płatnej Diagnozy Wąskich Gardeł i Architektury eCommerce: 5–7 dni roboczych, stała kwota znana z góry, koszt odliczany od współpracy."
 date: "2026-11-06"
 canonical: "https://www.creativetrust.pl/uslugi/konsulting-e-commerce"
 lang: "pl-PL"
-ai_summary: "CreativeTrust prowadzi konsulting e-commerce oparty na doświadczeniu z pracy w dużych sklepach internetowych: budowa sprzedaży, sterowanie marżą, architektura danych i IT, operacje i czas zespołu. Pierwszym krokiem jest płatna Diagnoza Wąskich Gardeł i Architektury eCommerce (2 900 zł netto, 5–7 dni roboczych, 2 godziny wywiadu i dostęp read-only na 3 dni), która kończy się mapą straconego czasu, audytem długu technologicznego i roadmapą. Koszt Diagnozy jest odliczany w pierwszym miesiącu stałej współpracy."
+ai_summary: "CreativeTrust prowadzi konsulting e-commerce oparty na doświadczeniu z pracy w dużych sklepach internetowych: budowa sprzedaży, sterowanie marżą, architektura danych i IT, operacje i czas zespołu. Pierwszym krokiem jest płatna Diagnoza Wąskich Gardeł i Architektury eCommerce (stała kwota ustalana z góry, 5–7 dni roboczych, 2 godziny wywiadu i dostęp read-only na 3 dni), która kończy się mapą straconego czasu, audytem długu technologicznego i roadmapą. Koszt Diagnozy jest odliczany w pierwszym miesiącu stałej współpracy."
 target_audience:
   - "Dyrektorzy i managerowie e-commerce w rosnących sklepach internetowych"
   - "Marki D2C i retail z branży beauty, dom i ogród, które sprzedają na dużą skalę"
@@ -45,7 +45,7 @@ CreativeTrust doradza z perspektywy zysku, strat i czasu pracy managerów:
 
 Diagnoza to płatny, ustrukturyzowany pierwszy krok. Zamiast sprzedawać stałą obsługę w ciemno, CreativeTrust najpierw mapuje problemy, które potem rozwiązuje w ramach stałej współpracy.
 
-- **Cena:** 2 900 zł netto.
+- **Rozliczenie:** stała kwota ustalana z góry na rozmowie wstępnej, odliczana w pierwszym miesiącu stałej współpracy.
 - **Czas realizacji:** 5–7 dni roboczych.
 - **Zaangażowanie zespołu klienta:** 2 godziny wywiadu.
 - **Dostępy:** read-only do analityki i zaplecza sklepu na 3 dni.
@@ -70,7 +70,7 @@ CreativeTrust zaczyna od wyniku biznesowego, nie od listy funkcji: sprzedaży, m
 
 ### Dlaczego Diagnoza jest płatna?
 
-To konkretna praca analityczna z konkretnym wynikiem. Kwota zwykle mieści się w budżecie operacyjnym dyrektora e-commerce i nie wymaga akceptacji zarządu.
+To konkretna praca analityczna z konkretnym wynikiem. Kwotę CreativeTrust ustala z góry na rozmowie wstępnej; zwykle mieści się w budżecie operacyjnym dyrektora e-commerce i nie wymaga akceptacji zarządu.
 
 ### Co się dzieje z kosztem Diagnozy przy dalszej współpracy?
 

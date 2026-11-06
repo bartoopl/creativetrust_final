@@ -90,5 +90,4 @@ export const publishedPrices: PublishedPrice[] = [
     { service: 'strony-www', name: 'Strona firmowa', price: 'od 7 500 zł netto', source: '/uslugi/tworzenie-stron-www-cennik' },
     { service: 'strony-www', name: 'Strona firmowa z CMS', price: 'od 10 000 zł netto', source: '/uslugi/strona-firmowa-cena' },
     { service: 'strony-www', name: 'Serwis rozbudowany', price: 'wycena indywidualna', source: '/uslugi/tworzenie-stron-www-cennik' },
-    { service: 'konsulting-e-commerce', name: 'Diagnoza Wąskich Gardeł i Architektury eCommerce', price: '2 900 zł netto', source: '/uslugi/konsulting-e-commerce' },
 ];

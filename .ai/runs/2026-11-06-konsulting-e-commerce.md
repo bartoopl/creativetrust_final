@@ -4,12 +4,12 @@ Source: user brief (conversation, 2026-11-06) — „Model Sprzedaży Doradczo-W
 
 ## Goal
 
-Nowa podstrona `/uslugi/konsulting-e-commerce` pozycjonuje CreativeTrust jako konsultanta e-commerce i sprzedaje płatną „Diagnozę Wąskich Gardeł i Architektury eCommerce” (2 900 zł netto, 5–7 dni roboczych, koszt odliczany w pierwszym miesiącu stałej współpracy) jako pierwszy krok.
+Nowa podstrona `/uslugi/konsulting-e-commerce` pozycjonuje CreativeTrust jako konsultanta e-commerce i sprzedaje płatną „Diagnozę Wąskich Gardeł i Architektury eCommerce” (5–7 dni roboczych, cena nie jest publikowana — ustalana na rozmowie, odliczana w pierwszym miesiącu stałej współpracy) jako pierwszy krok.
 
 ## Scope
 
 - `src/app/uslugi/konsulting-e-commerce/page.tsx` — strona usługi na istniejących blokach (`PageHero`, `Section`, `LandingBlocks`, `LandingLeadForm`), breadcrumb + Service/FAQ schema.
-- `src/lib/site-services.ts` — nowa usługa w katalogu (MegaMenu, WebMCP, asystent ofertowy) i opublikowana cena diagnozy.
+- `src/lib/site-services.ts` — nowa usługa w katalogu (MegaMenu, WebMCP, asystent ofertowy); cena diagnozy celowo NIE trafia do `publishedPrices`.
 - `src/components/Footer.tsx` — link w kolumnie usług.
 - `src/components/MegaMenu.tsx` — nieparzysta liczba usług: ostatni kafel na pełną szerokość.
 - `src/app/uslugi/page.tsx` — pozycja 05 na liście usług.
@@ -20,11 +20,11 @@ Nowa podstrona `/uslugi/konsulting-e-commerce` pozycjonuje CreativeTrust jako ko
 - Wewnętrzne elementy modelu sprzedaży (schemat pracy BDR, skrypt outreachu, plan postów LinkedIn) — nie trafiają na publiczną stronę.
 - Nazwy klientów (Monnari, Floslek, NeoArt) — świadomie pominięte.
 - Zmiany na stronie głównej.
+- Publikowanie ceny Diagnozy — decyzja właściciela (2026-11-06): ceny nie pokazujemy; test w `scripts/webmcp.test.mjs` pilnuje, żeby nie wróciła.
 
 ## Risks
 
 - `npm run lint` (eslint) pada na `main` niezależnie od zmiany (circular JSON w konfiguracji) — poza zakresem.
-- Cena 2 900 zł netto publikowana publicznie — przyjęta z action planu; łatwa do zmiany w jednym miejscu (`publishedPrices` + strona + twin).
 
 ## Progress
 

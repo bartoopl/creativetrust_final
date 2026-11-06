@@ -9,14 +9,13 @@ import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } f
 
 const canonicalUrl = `${SITE_URL}/uslugi/konsulting-e-commerce`;
 
-/** Published in `publishedPrices` (site-services.ts); a test keeps the two in sync. */
-const DIAGNOSIS_PRICE = '2 900 zł netto';
+/** The Diagnoza fee is quoted on the intro call, never published (see webmcp.test.mjs). */
 const DIAGNOSIS_NAME = 'Diagnoza Wąskich Gardeł i Architektury eCommerce';
 
 export const metadata: Metadata = {
     title: 'Konsulting e-commerce | Sprzedaż, marża i architektura sklepu',
     description:
-        'Konsulting e-commerce dla sklepów, które rosną szybciej niż ich procesy. Zaczynamy od płatnej Diagnozy Wąskich Gardeł i Architektury eCommerce: 5–7 dni, 2 900 zł netto, koszt odliczany od współpracy.',
+        'Konsulting e-commerce dla sklepów, które rosną szybciej niż ich procesy. Zaczynamy od płatnej Diagnozy Wąskich Gardeł i Architektury eCommerce: 5–7 dni roboczych, stała kwota znana z góry, koszt odliczany od współpracy.',
     alternates: {
         canonical: canonicalUrl,
     },
@@ -39,7 +38,7 @@ export const metadata: Metadata = {
 
 const heroFacts = [
     { label: 'Pierwszy krok', value: 'Diagnoza wąskich gardeł' },
-    { label: 'Cena', value: DIAGNOSIS_PRICE },
+    { label: 'Rozliczenie', value: 'stała kwota, znana z góry' },
     { label: 'Czas realizacji', value: '5–7 dni roboczych' },
     { label: 'Twój czas', value: '2 godziny wywiadu' },
 ];
@@ -88,7 +87,7 @@ const deliverables = [
 ];
 
 const diagnosisFacts = [
-    { label: 'Cena', value: DIAGNOSIS_PRICE },
+    { label: 'Rozliczenie', value: 'stała kwota, odliczana od abonamentu' },
     { label: 'Czas realizacji', value: '5–7 dni roboczych' },
     { label: 'Zaangażowanie zespołu', value: '2 godziny wywiadu' },
     { label: 'Dostępy', value: 'read-only do analityki i zaplecza na 3 dni' },
@@ -118,7 +117,7 @@ const faqs = [
     {
         question: 'Dlaczego Diagnoza jest płatna?',
         answer:
-            `To konkretna praca analityczna z konkretnym wynikiem: mapą straconego czasu, audytem długu technologicznego i roadmapą. ${DIAGNOSIS_PRICE} to kwota, która zwykle mieści się w budżecie operacyjnym dyrektora e-commerce i nie wymaga akceptacji zarządu.`,
+            `To konkretna praca analityczna z konkretnym wynikiem: mapą straconego czasu, audytem długu technologicznego i roadmapą. Kwotę ustalamy z góry na rozmowie wstępnej — zwykle mieści się w budżecie operacyjnym dyrektora e-commerce i nie wymaga akceptacji zarządu.`,
     },
     {
         question: 'Co się dzieje z kosztem Diagnozy, jeśli zdecydujemy się na współpracę?',
@@ -151,7 +150,7 @@ export default function EcommerceConsultingPage() {
     const serviceSchema = buildServiceSchema({
         name: 'Konsulting e-commerce',
         description:
-            `Konsulting e-commerce: budowa sprzedaży, sterowanie marżą, architektura danych i operacje sklepu. Pierwszy krok: ${DIAGNOSIS_NAME} (${DIAGNOSIS_PRICE}, 5–7 dni roboczych).`,
+            `Konsulting e-commerce: budowa sprzedaży, sterowanie marżą, architektura danych i operacje sklepu. Pierwszy krok: ${DIAGNOSIS_NAME} (5–7 dni roboczych).`,
         url: canonicalUrl,
         serviceType: 'Konsulting e-commerce',
     });
@@ -235,7 +234,7 @@ export default function EcommerceConsultingPage() {
                     formSubtitle="Opisz sklep, skalę sprzedaży i to, co dziś najbardziej spowalnia zespół. Odezwiemy się, żeby umówić 15-minutową rozmowę z głównym architektem."
                     subjectPrefix="Konsulting e-commerce"
                     serviceOptions={[
-                        `${DIAGNOSIS_NAME} (${DIAGNOSIS_PRICE})`,
+                        DIAGNOSIS_NAME,
                         'rozmowa wstępna (15 min)',
                         'stała współpraca konsultingowo-wdrożeniowa',
                         'nie wiem, potrzebuję rekomendacji',
