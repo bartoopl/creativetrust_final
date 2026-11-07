@@ -3,10 +3,31 @@
 import Link from 'next/link';
 import type { Ref } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { services, seoLandings } from '@/lib/site-services';
+import { servicesFor, landingsFor } from '@/lib/site-services';
+import type { Locale } from '@/lib/i18n';
+
+const copy = {
+    pl: {
+        close: 'Zamknij menu',
+        eyebrow: 'Zakres usług',
+        lead: 'Wybierasz obszar, my spinamy strategię, wykonanie i rozwój.',
+        body: 'Najczęściej wchodzimy od jednego problemu, ale układamy całość tak, żeby oferta, treść i sprzedaż pracowały razem.',
+        all: { href: '/uslugi', label: 'Wszystkie usługi →' },
+        contact: { href: '/kontakt', label: 'Kontakt →' },
+    },
+    en: {
+        close: 'Close menu',
+        eyebrow: 'What we do',
+        lead: 'You pick the area; we tie together strategy, delivery and growth.',
+        body: 'We usually start from a single problem, then shape the whole so your offer, content and sales work together.',
+        all: { href: '/en/services', label: 'All services →' },
+        contact: { href: '/en/contact', label: 'Contact →' },
+    },
+};
 
 interface MegaMenuProps {
     id: string;
+    locale: Locale;
     isOpen: boolean;
     onClose: () => void;
     panelRef?: Ref<HTMLDivElement>;
@@ -15,7 +36,10 @@ interface MegaMenuProps {
     onBlur?: (e: React.FocusEvent<HTMLDivElement>) => void;
 }
 
-export default function MegaMenu({ id, isOpen, onClose, panelRef, onPointerEnter, onPointerLeave, onBlur }: MegaMenuProps) {
+export default function MegaMenu({ id, locale, isOpen, onClose, panelRef, onPointerEnter, onPointerLeave, onBlur }: MegaMenuProps) {
+    const t = copy[locale];
+    const services = servicesFor(locale);
+    const seoLandings = landingsFor(locale);
     return (
         <AnimatePresence>
             {isOpen ? (
@@ -23,7 +47,7 @@ export default function MegaMenu({ id, isOpen, onClose, panelRef, onPointerEnter
                     <motion.button
                         type="button"
                         tabIndex={-1}
-                        aria-label="Zamknij menu"
+                        aria-label={t.close}
                         className="fixed inset-0 z-40 cursor-default"
                         style={{ background: 'rgba(0,0,0,0.12)', border: 'none' }}
                         initial={{ opacity: 0 }}
@@ -48,17 +72,14 @@ export default function MegaMenu({ id, isOpen, onClose, panelRef, onPointerEnter
                     >
                         <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[0.9fr_1.4fr_1fr]" style={{ padding: '0 var(--pad-x)' }}>
                             <div className="flex flex-col gap-4 py-8 lg:pr-8" style={{ borderRight: '1px solid var(--line)' }}>
-                                <span className="ct-eyebrow">Zakres usług</span>
+                                <span className="ct-eyebrow">{t.eyebrow}</span>
                                 <p style={{ margin: 0, fontSize: 20, fontWeight: 500, letterSpacing: '-0.5px', lineHeight: 1.25, color: 'var(--text)' }}>
-                                    Wybierasz obszar, my spinamy strategię, wykonanie i rozwój.
+                                    {t.lead}
                                 </p>
-                                <p className="ct-body">
-                                    Najczęściej wchodzimy od jednego problemu, ale układamy całość tak, żeby oferta, treść i
-                                    sprzedaż pracowały razem.
-                                </p>
+                                <p className="ct-body">{t.body}</p>
                                 <div className="mt-2 flex flex-wrap gap-3">
-                                    <Link href="/uslugi" onClick={onClose} className="ct-link">Wszystkie usługi →</Link>
-                                    <Link href="/kontakt" onClick={onClose} className="ct-link">Kontakt →</Link>
+                                    <Link href={t.all.href} onClick={onClose} className="ct-link">{t.all.label}</Link>
+                                    <Link href={t.contact.href} onClick={onClose} className="ct-link">{t.contact.label}</Link>
                                 </div>
                             </div>
 

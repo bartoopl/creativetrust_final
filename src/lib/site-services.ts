@@ -81,6 +81,36 @@ export const seoLandings: Landing[] = [
     },
 ];
 
+type Copy = Pick<Service, 'href' | 'title' | 'description' | 'accent'>;
+
+/** English copy of the catalogue (pages under /en/services), keyed by service slug. */
+const servicesEn: Record<Service['slug'], Copy> = {
+    'strony-www': { href: '/en/services/websites', title: 'Websites', description: 'Company websites, landing pages, UX and performance.', accent: 'Conversion' },
+    'e-commerce': { href: '/en/services/e-commerce', title: 'E-commerce', description: 'Headless commerce, migrations and system integrations.', accent: 'Scale' },
+    'marketing-automation': { href: '/en/services/marketing-automation', title: 'Marketing Automation', description: 'SALESmanago, funnels, CRM and personalisation.', accent: 'Automation' },
+    'social-media': { href: '/en/services/social-media', title: 'Social Media', description: 'Strategy, content, campaigns and reporting.', accent: 'Visibility' },
+    'konsulting-e-commerce': { href: '/en/services/e-commerce-consulting', title: 'E-commerce consulting', description: 'Sales, margin and store architecture. Starts with a paid Diagnosis.', accent: 'Margin' },
+};
+
+const landingsEn: Record<Landing['href'], Pick<Landing, 'href' | 'title' | 'description'>> = {
+    '/uslugi/migracja-woocommerce-do-headless': { href: '/en/services/woocommerce-to-headless-migration', title: 'WooCommerce to headless migration', description: 'For stores that have outgrown the monolith.' },
+    '/uslugi/wdrozenie-salesmanago': { href: '/en/services/salesmanago-implementation', title: 'SALESmanago implementation', description: 'Partner-led setup and rollout.' },
+    '/uslugi/landing-page-google-ads': { href: '/en/services/google-ads-landing-page', title: 'Google Ads landing page', description: 'Pages built for paid campaigns.' },
+    '/uslugi/tworzenie-stron-www-cennik': { href: '/en/services/website-pricing', title: 'Website pricing', description: 'Quote, scope and indicative budget.' },
+    '/uslugi/strona-firmowa-cena': { href: '/en/services/company-website-cost', title: 'Company website cost', description: 'What a company website costs and includes.' },
+    '/uslugi/landing-page-pod-reklamy': { href: '/en/services/ad-landing-page', title: 'Landing page for ads', description: 'Pages for campaigns and lead generation.' },
+    '/uslugi/headless-woocommerce': { href: '/en/services/headless-woocommerce', title: 'Headless WooCommerce', description: 'A new storefront for a growing store.' },
+};
+
+/** The catalogue in the visitor's language; slugs stay Polish so both lists join on them. */
+export function servicesFor(locale: 'pl' | 'en'): Service[] {
+    return locale === 'en' ? services.map((s) => ({ ...s, ...servicesEn[s.slug] })) : services;
+}
+
+export function landingsFor(locale: 'pl' | 'en'): Landing[] {
+    return locale === 'en' ? seoLandings.map((l) => ({ ...l, ...landingsEn[l.href] })) : seoLandings;
+}
+
 /**
  * Prices published on the pricing pages. A test checks each string still
  * appears in its source page, so this list cannot silently drift.

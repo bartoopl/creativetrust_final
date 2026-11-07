@@ -10,14 +10,15 @@ const source = readFileSync(join(ROOT, 'src/components/TrustpilotReviewCollector
 test('Review Collector uses the CreativeTrust business unit and a working fallback link', () => {
     assert.match(source, /TRUSTPILOT_BUSINESS_UNIT_ID = '[a-f0-9]{24}'/);
     assert.match(source, /TRUSTPILOT_REVIEW_COLLECTOR_TEMPLATE = '56278e9abfbbba0bdcd568bc'/);
-    assert.match(source, /href=\{TRUSTPILOT_REVIEW_URL\}/, 'server-rendered link inside the widget');
+    assert.match(source, /href=\{t\.url\}/, 'server-rendered link inside the widget');
+    assert.match(source, /url: TRUSTPILOT_REVIEW_URL\b/, 'Polish pages link to the Polish review form');
     assert.match(source, /https:\/\/pl\.trustpilot\.com\/evaluate\/creativetrust\.pl/);
     assert.match(source, /rel="noopener noreferrer"/);
 });
 
 test('the footer renders the review prompt', () => {
     const footer = readFileSync(join(ROOT, 'src/components/Footer.tsx'), 'utf8');
-    assert.match(footer, /<TrustpilotReviewCollector \/>/);
+    assert.match(footer, /<TrustpilotReviewCollector locale=\{locale\} \/>/);
 });
 
 test('no Trustpilot secret key in the source tree', () => {
