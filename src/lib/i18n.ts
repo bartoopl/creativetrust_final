@@ -58,15 +58,6 @@ export function alternatePathFor(pathname: string, target: Locale): string {
     return EN_TO_PL.get(path) ?? '/';
 }
 
-/** The page's path in `locale`, given its Polish path; links to Polish-only pages pass through. */
-export function localizedHref(plPath: string, locale: Locale): string {
-    if (locale === 'pl') return plPath;
-    const [path, hash] = plPath.split('#');
-    const en = PL_TO_EN.get(normalize(path || '/'));
-    if (!en) return plPath;
-    return hash !== undefined ? `${en}#${hash}` : en;
-}
-
 /**
  * Next.js `alternates` for a page that exists in both languages: canonical for the
  * current language plus hreflang links to both versions (x-default → Polish).

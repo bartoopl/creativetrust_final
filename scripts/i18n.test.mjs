@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
-import { ROUTE_PAIRS, alternatePathFor, localeFromPath, localizedHref, pageAlternates } from '../src/lib/i18n.ts';
+import { ROUTE_PAIRS, alternatePathFor, localeFromPath, pageAlternates } from '../src/lib/i18n.ts';
 
 const SITE = 'https://www.creativetrust.pl';
 
@@ -40,13 +40,6 @@ test('alternatePathFor switches to the translated page or the other home', () =>
     assert.equal(alternatePathFor('/blog/some-post', 'en'), '/en');
     assert.equal(alternatePathFor('/en/unknown', 'pl'), '/');
     assert.equal(alternatePathFor('/kontakt', 'pl'), '/kontakt');
-});
-
-test('localizedHref maps Polish links, keeps hashes and passes Polish-only pages through', () => {
-    assert.equal(localizedHref('/kontakt', 'pl'), '/kontakt');
-    assert.equal(localizedHref('/kontakt', 'en'), '/en/contact');
-    assert.equal(localizedHref('/#proces', 'en'), '/en#proces');
-    assert.equal(localizedHref('/blog', 'en'), '/blog');
 });
 
 test('pageAlternates gives a self canonical and reciprocal hreflang links', () => {
