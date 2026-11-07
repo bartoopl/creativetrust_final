@@ -40,6 +40,8 @@ Cała publiczna strona marketingowa CreativeTrust jest dostępna po angielsku po
 
 ## Progress
 
+PR: #19
+
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
 ### Phase 1: Fundament i18n
@@ -55,15 +57,15 @@ Cała publiczna strona marketingowa CreativeTrust jest dostępna po angielsku po
 
 ### Phase 3: Usługi
 
-- [ ] 3.1 /en/services i główne strony usług
-- [ ] 3.2 Landingi SEO po angielsku
+- [x] 3.1 /en/services i główne strony usług — 3a02872, 9418179
+- [x] 3.2 Landingi SEO po angielsku — ed4a38a
 
 ### Phase 4: Firma i strony prawne
 
-- [ ] 4.1 About, Contact, Portfolio
-- [ ] 4.2 Privacy policy i Terms
+- [x] 4.1 About, Contact, Portfolio — 8c3797b
+- [x] 4.2 Privacy policy i Terms — 8c3797b
 
 ### Phase 5: SEO i walidacja
 
-- [ ] 5.1 hreflang, sitemap i schema dla wersji EN
-- [ ] 5.2 Pełna walidacja (test, typecheck, design check, build)
+- [x] 5.1 hreflang, sitemap i schema dla wersji EN — 2afffb0, b87ffef
+- [x] 5.2 Pełna walidacja (test, typecheck, design check, build) — b87ffef
