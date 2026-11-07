@@ -1,6 +1,23 @@
 import NotchedButton from './ui/NotchedButton';
+import type { Locale } from '@/lib/i18n';
+
+const defaults = {
+    pl: {
+        eyebrow: 'Łączymy myślenie biznesowe z prędkością AI',
+        title: 'Zacznij budować digitalnie.',
+        description: 'Senior specjaliści i narzędzia AI — realizujemy projekty szybciej bez obniżania poprzeczki.',
+        cta: { label: 'Umów bezpłatną konsultację', href: '/kontakt' },
+    },
+    en: {
+        eyebrow: 'Business thinking at the speed of AI',
+        title: 'Start building digitally.',
+        description: 'Senior specialists and AI tools — we deliver projects faster without lowering the bar.',
+        cta: { label: 'Book a free consultation', href: '/en/contact' },
+    },
+};
 
 interface CTASectionProps {
+    locale?: Locale;
     eyebrow?: string;
     title?: string;
     description?: string;
@@ -8,10 +25,11 @@ interface CTASectionProps {
 }
 
 export default function CTASection({
-    eyebrow = 'Łączymy myślenie biznesowe z prędkością AI',
-    title = 'Zacznij budować digitalnie.',
-    description = 'Senior specjaliści i narzędzia AI — realizujemy projekty szybciej bez obniżania poprzeczki.',
-    cta = { label: 'Umów bezpłatną konsultację', href: '/kontakt' },
+    locale = 'pl',
+    eyebrow = defaults[locale].eyebrow,
+    title = defaults[locale].title,
+    description = defaults[locale].description,
+    cta = defaults[locale].cta,
 }: CTASectionProps) {
     return (
         <section id="kontakt" style={{ padding: 'var(--pad-y-xl) var(--pad-x)', textAlign: 'center', borderTop: '1px solid var(--line)' }}>

@@ -1,21 +1,19 @@
 import Link from 'next/link';
-import { services } from '@/lib/site-services';
-
-const details: Record<string, string[]> = {
-    'strony-www': ['Projekt pod cel biznesowy', 'UX, który konwertuje', 'Next.js i performance'],
-    'e-commerce': ['Headless / Medusa.js', 'Migracje bez utraty SEO', 'Integracje ERP, CRM, marketplace'],
-    'marketing-automation': ['Wdrożenia SALESmanago', 'Lejki, scoring, segmentacja', 'E-mail, SMS, push'],
-    'social-media': ['Strategia i harmonogram', 'Content i kampanie', 'Raportowanie wyników'],
-};
+import { servicesFor } from '@/lib/site-services';
+import type { Locale } from '@/lib/i18n';
+import { homeCopy } from './home-copy';
 
 /** Four pale service tiles under a centered statement; the service name is the one Electric link. */
-export default function HomeServices() {
+export default function HomeServices({ locale }: { locale: Locale }) {
+    const t = homeCopy[locale].services;
+    const { details } = t;
+    const services = servicesFor(locale);
     return (
         <section id="uslugi" className="ct-section" style={{ scrollMarginTop: 80 }}>
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-12">
                 <div className="flex flex-col items-center gap-3 text-center">
-                    <span className="ct-eyebrow">Od projektu do wyniku</span>
-                    <h2 className="ct-h2 ct-statement">Wszystko, czego potrzebujesz, żeby <span className="ct-electric">rosnąć</span> w digital.</h2>
+                    <span className="ct-eyebrow">{t.eyebrow}</span>
+                    <h2 className="ct-h2 ct-statement">{t.title[0]}<span className="ct-electric">{t.title[1]}</span>{t.title[2]}</h2>
                 </div>
                 <ul className="grid w-full grid-cols-1 gap-1 md:grid-cols-2" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                     {services.map((service) => (

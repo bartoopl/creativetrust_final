@@ -173,7 +173,7 @@ test('one company description and founding year across JSON-LD, llms.txt and the
 
     const home = parseFrontmatter(readFileSync(new URL('../content/ai/index.md', import.meta.url), 'utf8'));
     assert.equal(home.data.ai_summary, COMPANY_DESCRIPTION);
-    const about = readFileSync(new URL('../src/app/o-nas/page.tsx', import.meta.url), 'utf8');
+    const about = readFileSync(new URL('../src/app/(pl)/o-nas/page.tsx', import.meta.url), 'utf8');
     const firstYear = about.match(/year: '(\d{4})'/)[1];
     assert.equal(firstYear, FOUNDING_YEAR, 'the „O nas” timeline starts in the founding year');
 });
@@ -265,7 +265,7 @@ test('legal identity matches the privacy policy and appears in Organization and 
     } else {
         assert.equal(org.taxID, undefined);
     }
-    const policy = readFileSync(new URL('../src/app/polityka-prywatnosci/page.tsx', import.meta.url), 'utf8');
+    const policy = readFileSync(new URL('../src/app/(pl)/polityka-prywatnosci/page.tsx', import.meta.url), 'utf8');
     assert.ok(policy.includes(LEGAL_NAME), 'same legal name as the privacy policy');
     const footer = readFileSync(new URL('../src/components/Footer.tsx', import.meta.url), 'utf8');
     assert.ok(footer.includes('{LEGAL_NAME}'));

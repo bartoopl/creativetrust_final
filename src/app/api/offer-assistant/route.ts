@@ -1,14 +1,22 @@
 import { NextResponse } from 'next/server';
 import { getClientIP } from '@/lib/antispam';
-import { publishedPrices, seoLandings, services } from '@/lib/site-services';
+import { landingsFor, pricesFor, servicesFor } from '@/lib/site-services';
 import {
-    answerFromCatalogue, buildMessagesRequest, extractToolInput, normalizeAnswer, validateQuestion,
-    type Catalogue, type OfferAnswer,
+    answerFromCatalogue, assistantLocale, buildMessagesRequest, extractToolInput, normalizeAnswer, validateQuestion,
+    type AssistantLocale, type Catalogue, type OfferAnswer,
 } from '@/lib/offer-assistant';
 import { checkQuota, limitsFromEnv, recordAiAnswer } from '@/lib/assistant-quota';
 import { quotaStore, visitorId } from '@/lib/assistant-quota-store';
 
-const catalogue: Catalogue = { services, landings: seoLandings, prices: publishedPrices };
+const catalogues: Record<AssistantLocale, Catalogue> = {
+    pl: { services: servicesFor('pl'), landings: landingsFor('pl'), prices: pricesFor('pl') },
+    en: { services: servicesFor('en'), landings: landingsFor('en'), prices: pricesFor('en') },
+};
+
+const ERRORS = {
+    pl: { invalid: 'Nieprawidłowe zapytanie.', flood: 'Dużo pytań w krótkim czasie — spróbuj za jakiś czas albo napisz do nas.' },
+    en: { invalid: 'Invalid request.', flood: 'Too many questions in a short time — try again later or write to us.' },
+};
 const DEFAULT_MODEL = 'claude-haiku-5-5';
 // Below Netlify's 10 s synchronous function limit, so a slow answer still ends in a readable reply.
 const CLAUDE_TIMEOUT_MS = 8_000;
@@ -19,20 +27,23 @@ const ok = (answer: OfferAnswer, headers?: HeadersInit) =>
 const fail = (status: number, error: string, headers?: HeadersInit) =>
     NextResponse.json({ ok: false, error }, { status, headers });
 
-/** POST { question, website? } → { ok: true, answer: OfferAnswer } */
+/** POST { question, locale?, website? } → { ok: true, answer: OfferAnswer } */
 export async function POST(request: Request) {
     let body: Record<string, unknown>;
     try {
         body = await request.json();
     } catch {
-        return fail(400, 'Nieprawidłowe zapytanie.');
+        return fail(400, ERRORS.pl.invalid);
     }
-    if (!body || typeof body !== 'object' || Array.isArray(body)) return fail(400, 'Nieprawidłowe zapytanie.');
+    if (!body || typeof body !== 'object' || Array.isArray(body)) return fail(400, ERRORS.pl.invalid);
+
+    const locale = assistantLocale(body.locale);
+    const catalogue = catalogues[locale];
 
     // Honeypot: bots fill every field; answer like a validation error so they learn nothing.
-    if (typeof body.website === 'string' && body.website.trim()) return fail(400, 'Nieprawidłowe zapytanie.');
+    if (typeof body.website === 'string' && body.website.trim()) return fail(400, ERRORS[locale].invalid);
 
-    const check = validateQuestion(body.question);
+    const check = validateQuestion(body.question, locale);
     if (!check.ok) return fail(400, check.error);
 
     const timing = new ServerTiming();
@@ -44,10 +55,10 @@ export async function POST(request: Request) {
         QUOTA_TIMEOUT_MS,
     ));
     if (quota?.decision === 'block') {
-        return fail(429, 'Dużo pytań w krótkim czasie — spróbuj za jakiś czas albo napisz do nas.', { 'Retry-After': '3600' });
+        return fail(429, ERRORS[locale].flood, { 'Retry-After': '3600' });
     }
 
-    const catalogueAnswer = (reason: string) => ok(answerFromCatalogue(check.question, catalogue), timing.note(reason));
+    const catalogueAnswer = (reason: string) => ok(answerFromCatalogue(check.question, catalogue, locale), timing.note(reason));
 
     // Without a key (local dev, misconfigured env) the visitor still gets a catalogue-based answer.
     const apiKey = process.env.ANTHROPIC_API_KEY?.trim();
@@ -64,7 +75,7 @@ export async function POST(request: Request) {
                 'x-api-key': apiKey,
                 'anthropic-version': '2023-06-01',
             },
-            body: JSON.stringify(buildMessagesRequest(check.question, catalogue, process.env.ANTHROPIC_MODEL?.trim() || DEFAULT_MODEL)),
+            body: JSON.stringify(buildMessagesRequest(check.question, catalogue, process.env.ANTHROPIC_MODEL?.trim() || DEFAULT_MODEL, locale)),
             signal: controller.signal,
             cache: 'no-store',
         }));

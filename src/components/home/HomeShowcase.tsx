@@ -1,25 +1,27 @@
 import NotchedButton from '../ui/NotchedButton';
 import Scene3D from '../scene3d/Scene3D';
-import { pipeline } from '../Hero';
+import type { Locale } from '@/lib/i18n';
+import { homeCopy } from './home-copy';
 
 /** Centered statement + action pair, resolved by a broad product-workspace frame of how a project runs. */
-export default function HomeShowcase() {
+export default function HomeShowcase({ locale }: { locale: Locale }) {
+    const { showcase: t, pipeline, contactHref } = homeCopy[locale];
     return (
         <section className="ct-section" style={{ paddingTop: 'var(--pad-y-xl)' }}>
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-6 text-center">
-                <span className="ct-eyebrow">AI-native partner produktowy</span>
+                <span className="ct-eyebrow">{t.eyebrow}</span>
                 <h2 className="ct-h2 ct-statement">
-                    AI skraca research i produkcję. <span className="ct-electric">Zespół</span> pilnuje decyzji, jakości i wyniku.
+                    {t.title[0]}<span className="ct-electric">{t.title[1]}</span>{t.title[2]}
                 </h2>
                 <div className="flex flex-wrap justify-center gap-2 pt-2">
-                    <NotchedButton href="/kontakt">Umów konsultację</NotchedButton>
-                    <NotchedButton href="#uslugi" variant="ghost">Zobacz usługi</NotchedButton>
+                    <NotchedButton href={contactHref}>{t.cta}</NotchedButton>
+                    <NotchedButton href="#uslugi" variant="ghost">{t.secondary}</NotchedButton>
                 </div>
 
-                <div className="ct-frame mt-10 w-full text-left" aria-label="Przykładowy przebieg wdrożenia">
+                <div className="ct-frame mt-10 w-full text-left" aria-label={t.frameLabel}>
                     <div className="flex items-center justify-between gap-4" style={{ padding: '10px 16px', borderBottom: '1px solid var(--line)' }}>
-                        <span className="ct-mono" style={{ fontSize: 12, color: 'var(--muted)' }}>creativetrust / wdrożenie</span>
-                        <span className="ct-mono" style={{ fontSize: 12, color: 'var(--accent)' }}>● AI w procesie</span>
+                        <span className="ct-mono" style={{ fontSize: 12, color: 'var(--muted)' }}>{t.frameTitle}</span>
+                        <span className="ct-mono" style={{ fontSize: 12, color: 'var(--accent)' }}>{t.frameBadge}</span>
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
                         <ol className="flex flex-col" style={{ listStyle: 'none', margin: 0, padding: 8 }}>

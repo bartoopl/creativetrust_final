@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { buildTools } from '../src/lib/webmcp/tools.ts';
 import { findModelContext, registerTools } from '../src/lib/webmcp/register.ts';
 import { parseArticleQuery, articleSearchGroq, matchTerms, toHit } from '../src/lib/webmcp/articles.ts';
-import { services, seoLandings, publishedPrices } from '../src/lib/site-services.ts';
+import { services, seoLandings, publishedPrices, pricesFor } from '../src/lib/site-services.ts';
 
 const ORIGIN = 'https://www.creativetrust.pl';
 const parse = (result) => JSON.parse(result.content[0].text);
@@ -57,7 +57,7 @@ test('e-commerce consulting (and its Diagnoza) is quoted individually, never wit
     const consulting = parse(await tools().get_pricing.execute({ service: 'konsulting-e-commerce' }));
     assert.deepEqual(consulting.prices, []);
     assert.match(consulting.note, /quoted individually/);
-    for (const rel of ['../src/app/uslugi/konsulting-e-commerce/page.tsx', '../content/ai/uslugi/konsulting-e-commerce.md']) {
+    for (const rel of ['../src/app/(pl)/uslugi/konsulting-e-commerce/page.tsx', '../content/ai/uslugi/konsulting-e-commerce.md']) {
         const text = readFileSync(new URL(rel, import.meta.url), 'utf8');
         // Our prices are always net; the lead form's budget brackets (visitor's budget) are not.
         assert.doesNotMatch(text, /\d[\d\s]*zł netto/, `${rel} must not publish a price`);
@@ -144,6 +144,13 @@ test('toHit maps blog and knowledge-base documents to public URLs', () => {
 
 test('published prices still appear verbatim on their source pages', () => {
     for (const { price, source } of publishedPrices) {
+        const page = readFileSync(new URL(`../src/app/(pl)${source}/page.tsx`, import.meta.url), 'utf8');
+        assert.ok(page.includes(`'${price}'`), `${price} not found on ${source}`);
+    }
+});
+
+test('published English prices appear verbatim on their English source pages', () => {
+    for (const { price, source } of pricesFor('en')) {
         const page = readFileSync(new URL(`../src/app${source}/page.tsx`, import.meta.url), 'utf8');
         assert.ok(page.includes(`'${price}'`), `${price} not found on ${source}`);
     }

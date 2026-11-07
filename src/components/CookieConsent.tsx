@@ -5,8 +5,31 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import ConsentManager from './ConsentManager';
 import NotchedButton from './ui/NotchedButton';
 import { updateConsent } from '@/lib/consent-utils';
+import type { Locale } from '@/lib/i18n';
 
-const CookieConsent = () => {
+const copy = {
+    pl: {
+        region: 'Zgoda na pliki cookie',
+        title: 'Pliki cookie',
+        body: 'Używamy cookies, aby zapewnić najlepsze wrażenia podczas korzystania z naszej strony. Niektóre są niezbędne do funkcjonowania serwisu, inne pomagają nam analizować ruch i personalizować treści. Używając tej strony, wyrażasz zgodę na naszą',
+        policy: { href: '/polityka-prywatnosci', label: 'politykę prywatności' },
+        essential: 'Tylko niezbędne',
+        settings: 'Ustawienia',
+        acceptAll: 'Akceptuję wszystkie',
+    },
+    en: {
+        region: 'Cookie consent',
+        title: 'Cookies',
+        body: 'We use cookies to give you the best experience on our website. Some are essential for the site to work; others help us analyse traffic and personalise content. By using this site, you agree to our',
+        policy: { href: '/en/privacy-policy', label: 'privacy policy' },
+        essential: 'Essential only',
+        settings: 'Settings',
+        acceptAll: 'Accept all',
+    },
+};
+
+const CookieConsent = ({ locale = 'pl' }: { locale?: Locale }) => {
+    const t = copy[locale];
     const [visible, setVisible] = useState(false);
     const [showManager, setShowManager] = useState(false);
     const reduceMotion = useReducedMotion();
@@ -64,7 +87,7 @@ const CookieConsent = () => {
                         exit={reduceMotion ? { opacity: 0 } : { y: '100%' }}
                         transition={reduceMotion ? { duration: 0.15 } : { type: 'spring', bounce: 0, duration: 0.4 }}
                         role="region"
-                        aria-label="Zgoda na pliki cookie"
+                        aria-label={t.region}
                         className="fixed bottom-0 left-0 right-0 z-50"
                         style={{ background: 'var(--bg)', borderTop: '1px solid var(--line-strong)', padding: '20px var(--pad-x)' }}
                     >
@@ -72,23 +95,21 @@ const CookieConsent = () => {
                             <div className="flex flex-col md:flex-row items-start md:items-center gap-5">
                                 <div className="flex-1">
                                     <span className="ct-eyebrow">Cookies</span>
-                                    <h3 style={{ fontSize: 16, fontWeight: 500, margin: '6px 0 6px', color: 'var(--text)' }}>Pliki cookie</h3>
+                                    <h3 style={{ fontSize: 16, fontWeight: 500, margin: '6px 0 6px', color: 'var(--text)' }}>{t.title}</h3>
                                     <p className="ct-body" style={{ fontSize: 13.5, maxWidth: '90ch' }}>
-                                        Używamy cookies, aby zapewnić najlepsze wrażenia podczas korzystania z naszej strony.
-                                        Niektóre są niezbędne do funkcjonowania serwisu, inne pomagają nam analizować ruch i
-                                        personalizować treści. Używając tej strony, wyrażasz zgodę na naszą{' '}
-                                        <a href="/polityka-prywatnosci" style={{ textDecoration: 'underline' }}>politykę prywatności</a>.
+                                        {t.body}{' '}
+                                        <a href={t.policy.href} style={{ textDecoration: 'underline' }}>{t.policy.label}</a>.
                                     </p>
                                 </div>
                                 <div className="flex flex-col sm:flex-row flex-wrap gap-2">
                                     <NotchedButton variant="ghost" onClick={acceptEssential}>
-                                        Tylko niezbędne
+                                        {t.essential}
                                     </NotchedButton>
                                     <NotchedButton variant="ghost" onClick={showAdvancedSettings}>
-                                        Ustawienia
+                                        {t.settings}
                                     </NotchedButton>
                                     <NotchedButton variant="primary" onClick={acceptAll}>
-                                        Akceptuję wszystkie
+                                        {t.acceptAll}
                                     </NotchedButton>
                                 </div>
                             </div>
@@ -97,7 +118,7 @@ const CookieConsent = () => {
                 )}
             </AnimatePresence>
 
-            {showManager && <ConsentManager onClose={() => setShowManager(false)} />}
+            {showManager && <ConsentManager locale={locale} onClose={() => setShowManager(false)} />}
         </>
     );
 };

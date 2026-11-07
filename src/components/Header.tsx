@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
@@ -8,14 +9,78 @@ import NotchedButton from './ui/NotchedButton';
 import MegaMenu from './MegaMenu';
 import Wordmark from './ui/Wordmark';
 import { createHoverIntent, type HoverIntent } from '@/lib/hover-intent';
+import { alternatePathFor, type Locale } from '@/lib/i18n';
 
-const navItems = [
-    { href: '/portfolio', label: 'Case Studies' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/o-nas', label: 'O nas' },
-];
+const copy = {
+    pl: {
+        nav: [
+            { href: '/portfolio', label: 'Case Studies' },
+            { href: '/blog', label: 'Blog' },
+            { href: '/o-nas', label: 'O nas' },
+        ],
+        services: { href: '/uslugi', label: 'Usługi' },
+        contact: { href: '/kontakt', label: 'Kontakt' },
+        home: '/',
+        processHref: '/#proces',
+        stripLead: 'AI-native partner produktowy — zobacz',
+        stripLink: 'jak działamy →',
+        homeLabel: 'CreativeTrust — strona główna',
+        navLabel: 'Główna nawigacja',
+        cta: 'Umów konsultację',
+        openMenu: 'Otwórz menu',
+        closeMenu: 'Zamknij menu',
+    },
+    en: {
+        // Blog articles are Polish only (Sanity content), so the link says so.
+        nav: [
+            { href: '/en/portfolio', label: 'Case Studies' },
+            { href: '/blog', label: 'Blog (PL)', hrefLang: 'pl' },
+            { href: '/en/about', label: 'About' },
+        ],
+        services: { href: '/en/services', label: 'Services' },
+        contact: { href: '/en/contact', label: 'Contact' },
+        home: '/en',
+        processHref: '/en#proces',
+        stripLead: 'AI-native product partner — see',
+        stripLink: 'how we work →',
+        homeLabel: 'CreativeTrust — home',
+        navLabel: 'Main navigation',
+        cta: 'Book a consultation',
+        openMenu: 'Open menu',
+        closeMenu: 'Close menu',
+    },
+};
 
-export default function Header() {
+const switchLabel = {
+    pl: { code: 'EN', name: 'English', aria: 'Switch to English' },
+    en: { code: 'PL', name: 'Polski', aria: 'Przełącz na polski' },
+};
+
+/** Link to the same page in the other language (full reload: each language has its own root layout). */
+function LanguageSwitch({ locale, mobile = false }: { locale: Locale; mobile?: boolean }) {
+    const pathname = usePathname() ?? '/';
+    const target: Locale = locale === 'pl' ? 'en' : 'pl';
+    const label = switchLabel[locale];
+    return (
+        <a
+            href={alternatePathFor(pathname, target)}
+            hrefLang={target}
+            lang={target}
+            aria-label={label.aria}
+            className={mobile ? 'flex items-center justify-between' : 'ct-nav-link ct-mono'}
+            style={mobile
+                ? { fontSize: 18, fontWeight: 500, color: 'var(--text)', padding: '16px 0', borderBottom: '1px solid var(--line)' }
+                : { fontSize: 12, fontWeight: 500, letterSpacing: '0.04em' }}
+        >
+            {mobile ? label.name : label.code}
+            {mobile && <span className="ct-mono" style={{ color: 'var(--muted-2)', fontSize: 13 }}>{label.code}</span>}
+        </a>
+    );
+}
+
+export default function Header({ locale }: { locale: Locale }) {
+    const t = copy[locale];
+    const navItems = t.nav;
     const [mobileOpen, setMobileOpen] = useState(false);
     const [sheetTop, setSheetTop] = useState(0);
     const [scrolled, setScrolled] = useState(false);
@@ -149,19 +214,19 @@ export default function Header() {
         <>
             <div ref={stripRef} className="ct-strip" style={{ borderBottom: '1px solid var(--line)', padding: '9px var(--pad-x)', display: 'flex', justifyContent: 'center', background: 'var(--panel)', textAlign: 'center' }}>
                 <span className="ct-mono" style={{ fontWeight: 500, fontSize: 12, color: 'var(--muted)', letterSpacing: '-0.1px' }}>
-                    AI-native partner produktowy — zobacz{' '}
-                    <Link href="/#proces" style={{ fontWeight: 500 }}>jak działamy →</Link>
+                    {t.stripLead}{' '}
+                    <Link href={t.processHref} style={{ fontWeight: 500 }}>{t.stripLink}</Link>
                 </span>
             </div>
 
             <header ref={headerRef} className="ct-header" data-scrolled={scrolled}>
                 {/* Sits above the MegaMenu scrim so the trigger stays hoverable while the menu is open. */}
                 <div className="ct-header-shell relative z-[60] mx-auto flex max-w-[1440px] items-center justify-between gap-4">
-                    <Link href="/" aria-label="CreativeTrust — strona główna" style={{ display: 'flex', alignItems: 'center', flex: 'none' }}>
+                    <Link href={t.home} aria-label={t.homeLabel} style={{ display: 'flex', alignItems: 'center', flex: 'none' }}>
                         <Wordmark />
                     </Link>
 
-                    <nav className="hidden items-center gap-8 md:flex" aria-label="Główna nawigacja">
+                    <nav className="hidden items-center gap-8 md:flex" aria-label={t.navLabel}>
                         <button
                             ref={servicesTriggerRef}
                             type="button"
@@ -178,19 +243,22 @@ export default function Header() {
                             className="ct-nav-link"
                             style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit', color: servicesOpen ? 'var(--accent)' : undefined }}
                         >
-                            Usługi
+                            {t.services.label}
                             <ChevronDown size={14} style={{ transform: servicesOpen ? 'rotate(180deg)' : 'none', transition: 'transform .15s ease' }} />
                         </button>
                         {navItems.map((item) => (
-                            <Link key={item.href} href={item.href} className="ct-nav-link">
+                            <Link key={item.href} href={item.href} hrefLang={'hrefLang' in item ? item.hrefLang : undefined} className="ct-nav-link">
                                 {item.label}
                             </Link>
                         ))}
                     </nav>
 
-                    <NotchedButton href="/kontakt" variant="outline" size="sm" className="hidden md:inline-flex">
-                        Umów konsultację
-                    </NotchedButton>
+                    <div className="hidden items-center gap-5 md:flex">
+                        <LanguageSwitch locale={locale} />
+                        <NotchedButton href={t.contact.href} variant="outline" size="sm">
+                            {t.cta}
+                        </NotchedButton>
+                    </div>
 
                     <button
                         ref={mobileToggleRef}
@@ -198,7 +266,7 @@ export default function Header() {
                         className="ct-menu-toggle inline-flex items-center justify-center md:hidden"
                         onClick={toggleMobile}
                         aria-controls="mobile-menu"
-                        aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
+                        aria-label={mobileOpen ? t.closeMenu : t.openMenu}
                         aria-expanded={mobileOpen}
                         style={{ background: '#fff', border: '1px solid var(--line-strong)', borderRadius: 999, width: 40, height: 40, color: 'var(--text)', cursor: 'pointer', flex: 'none', padding: 0, touchAction: 'manipulation' }}
                     >
@@ -208,6 +276,7 @@ export default function Header() {
 
                 <MegaMenu
                     id="services-menu"
+                    locale={locale}
                     isOpen={servicesOpen}
                     onClose={closeServices}
                     panelRef={servicesPanelRef}
@@ -231,15 +300,16 @@ export default function Header() {
                         style={{ position: 'fixed', top: sheetTop, bottom: 0, left: 0, right: 0, background: '#fff', zIndex: 130, padding: '8px var(--pad-x) 32px', overflowY: 'auto', overscrollBehavior: 'contain', borderTop: '1px solid var(--line)' }}
                         className="flex flex-col md:hidden"
                     >
-                        {[{ href: '/uslugi', label: 'Usługi' }, ...navItems, { href: '/kontakt', label: 'Kontakt' }].map((item) => (
+                        {[t.services, ...navItems, t.contact].map((item) => (
                             <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="flex items-center justify-between" style={{ fontSize: 18, fontWeight: 500, color: 'var(--text)', padding: '16px 0', borderBottom: '1px solid var(--line)' }}>
                                 {item.label}
                                 <span className="ct-mono" style={{ color: 'var(--muted-2)', fontSize: 13 }}>→</span>
                             </Link>
                         ))}
+                        <LanguageSwitch locale={locale} mobile />
                         <div style={{ paddingTop: 24 }}>
-                            <NotchedButton href="/kontakt" onClick={() => setMobileOpen(false)}>
-                                Umów konsultację
+                            <NotchedButton href={t.contact.href} onClick={() => setMobileOpen(false)}>
+                                {t.cta}
                             </NotchedButton>
                         </div>
                     </motion.div>

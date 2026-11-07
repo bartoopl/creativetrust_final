@@ -2,6 +2,46 @@ import { NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/email';
 import { validateAntispam } from '@/lib/antispam';
 
+// Replies follow the page the form was sent from; e-mails to the team stay Polish.
+const REPLIES = {
+    pl: {
+        spam: null,
+        required: 'Wymagane pola są puste',
+        email: 'Niepoprawny format adresu e-mail',
+        failed: 'Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.',
+        sent: 'Wiadomość została wysłana. Dziękujemy za kontakt!',
+        confirmationSubject: 'Potwierdzenie otrzymania wiadomości - CreativeTrust',
+        confirmation: (name: string, message: string) => `Witaj ${name},
+
+Dziękujemy za kontakt z CreativeTrust. Otrzymaliśmy Twoją wiadomość i odpowiemy na nią najszybciej jak to możliwe.
+
+Twoja wiadomość:
+${message}
+
+Pozdrawiamy,
+Zespół CreativeTrust
+`,
+    },
+    en: {
+        spam: 'We could not process the form. Please try again later.',
+        required: 'Required fields are empty',
+        email: 'Invalid e-mail address',
+        failed: 'Something went wrong while sending your message. Please try again later.',
+        sent: 'Your message has been sent. Thank you for getting in touch!',
+        confirmationSubject: 'We have received your message - CreativeTrust',
+        confirmation: (name: string, message: string) => `Hi ${name},
+
+Thank you for contacting CreativeTrust. We have received your message and will reply as soon as possible.
+
+Your message:
+${message}
+
+Best regards,
+The CreativeTrust team
+`,
+    },
+};
+
 export async function POST(request: Request) {
     try {
         // Logowanie informacji o żądaniu dla debugowania
@@ -10,13 +50,15 @@ export async function POST(request: Request) {
         // Pobieranie danych z żądania
         const data = await request.json();
         const { name, email, subject, message, type, formTimestamp } = data;
+        const locale = data?.locale === 'en' ? 'en' : 'pl';
+        const reply = REPLIES[locale];
         
         // Antyspam validation
         const antispamResult = validateAntispam(request, data, formTimestamp);
         if (!antispamResult.valid) {
             console.log('Antyspam validation failed:', antispamResult.error);
             return NextResponse.json(
-                { success: false, message: antispamResult.error || 'Wystąpił błąd podczas przetwarzania formularza.' },
+                { success: false, message: reply.spam ?? antispamResult.error ?? 'Wystąpił błąd podczas przetwarzania formularza.' },
                 { status: 429 }
             );
         }
@@ -33,7 +75,7 @@ export async function POST(request: Request) {
         if (!name || !email || !message) {
             console.log('Brak wymaganych pól w formularzu');
             return NextResponse.json(
-                { success: false, message: 'Wymagane pola są puste' },
+                { success: false, message: reply.required },
                 { status: 400 }
             );
         }
@@ -43,7 +85,7 @@ export async function POST(request: Request) {
         if (!emailRegex.test(email)) {
             console.log('Nieprawidłowy format email:', email);
             return NextResponse.json(
-                { success: false, message: 'Niepoprawny format adresu e-mail' },
+                { success: false, message: reply.email },
                 { status: 400 }
             );
         }
@@ -65,9 +107,9 @@ export async function POST(request: Request) {
         };
 
         // Przygotuj temat e-maila
-        const emailSubject = type === 'automation'
+        const emailSubject = (locale === 'en' ? '[EN] ' : '') + (type === 'automation'
             ? `[Marketing Automation] Nowe zapytanie od ${name}`
-            : `[Formularz kontaktowy] ${subjectLabels[subject] || subject || 'Nowa wiadomość'}`;
+            : `[Formularz kontaktowy] ${subjectLabels[subject] || subject || 'Nowa wiadomość'}`);
 
         console.log('Przygotowanie do wysłania email do:', recipient);
         console.log('Temat:', emailSubject);
@@ -103,7 +145,7 @@ Ta wiadomość została wysłana za pomocą formularza kontaktowego na stronie c
             // Zwracamy błąd tylko w środowisku deweloperskim, na produkcji udajemy sukces
             if (process.env.NODE_ENV === 'development') {
                 return NextResponse.json(
-                    { success: false, message: 'Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.' },
+                    { success: false, message: reply.failed },
                     { status: 500 }
                 );
             }
@@ -113,17 +155,8 @@ Ta wiadomość została wysłana za pomocą formularza kontaktowego na stronie c
         try {
             await sendEmail({
                 to: email,
-                subject: 'Potwierdzenie otrzymania wiadomości - CreativeTrust',
-                text: `Witaj ${name},
-
-Dziękujemy za kontakt z CreativeTrust. Otrzymaliśmy Twoją wiadomość i odpowiemy na nią najszybciej jak to możliwe.
-
-Twoja wiadomość:
-${message}
-
-Pozdrawiamy,
-Zespół CreativeTrust
-`,
+                subject: reply.confirmationSubject,
+                text: reply.confirmation(name, message),
             });
             console.log('Email z potwierdzeniem wysłany pomyślnie');
         } catch (confirmationError) {
@@ -135,7 +168,7 @@ Zespół CreativeTrust
         console.log('Pomyślnie zakończono obsługę formularza');
         return NextResponse.json({
             success: true,
-            message: 'Wiadomość została wysłana. Dziękujemy za kontakt!'
+            message: reply.sent
         });
 
     } catch (error) {
