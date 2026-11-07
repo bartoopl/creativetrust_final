@@ -31,7 +31,7 @@ test('GTM loads on the production hostname only', () => {
 });
 
 test('the layout loads GTM through the guarded loader', () => {
-    const layout = read('src/app/layout.tsx');
+    const layout = read('src/components/SiteShell.tsx');
     assert.match(layout, /gtmLoaderScript\(new URL\(SITE_URL\)\.hostname\)/);
     assert.doesNotMatch(layout, /googletagmanager\.com\/gtm\.js/);
 });
@@ -107,7 +107,7 @@ test('mailto and tel links map to their lead source, other links to none', () =>
     assert.equal(leadSourceForHref('tel:+48570526421'), 'phone_click');
     assert.equal(leadSourceForHref('/kontakt'), null);
     assert.equal(leadSourceForHref('https://example.com/?mailto:x'), null);
-    assert.match(read('src/app/layout.tsx'), /<LeadLinkTracking \/>/);
+    assert.match(read('src/components/SiteShell.tsx'), /<LeadLinkTracking \/>/);
 });
 
 test('canonicalHref moves non-www links to www and leaves everything else alone', () => {
