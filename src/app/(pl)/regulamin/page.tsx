@@ -1,9 +1,10 @@
 import { Metadata } from 'next';
 import { SITE_URL } from '@/lib/schema';
+import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: 'Regulamin',
-    alternates: { canonical: `${SITE_URL}/regulamin` },
+    alternates: pageAlternates('/regulamin', 'pl', SITE_URL),
 };
 
 export default function RegulationsPage() {

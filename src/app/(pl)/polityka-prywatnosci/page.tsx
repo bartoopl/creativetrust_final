@@ -2,13 +2,12 @@ import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL } from '@/lib/schema';
+import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: 'Polityka Prywatności',
     description: 'Polityka prywatności opisuje zasady przetwarzania przez nas informacji na Twój temat, w tym danych osobowych oraz ciasteczek, czyli tzw. cookies.',
-    alternates: {
-        canonical: `${SITE_URL}/polityka-prywatnosci`,
-    },
+    alternates: pageAlternates('/polityka-prywatnosci', 'pl', SITE_URL),
 };
 
 export default function PrivacyPolicyPage() {

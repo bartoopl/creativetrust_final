@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { SITE_URL } from '@/lib/schema';
+import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     // Project pages keep the brand suffix (a plain string title here would drop the root template).
     title: { default: 'Portfolio i realizacje', template: '%s | CreativeTrust' },
     description: 'Zobacz wybrane realizacje CreativeTrust: strony internetowe, e-commerce i kampanie marketingowe.',
     alternates: {
-        canonical: `${SITE_URL}/portfolio`,
+        ...pageAlternates('/portfolio', 'pl', SITE_URL),
         types: { 'text/markdown': `${SITE_URL}/portfolio.md` },
     },
     openGraph: {

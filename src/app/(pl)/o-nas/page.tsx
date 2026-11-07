@@ -3,11 +3,12 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import CTASection from '@/components/CTASection';
 import { SITE_URL } from '@/lib/schema';
+import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: 'O nas | AI-native partner produktowy',
     description: 'CreativeTrust to AI-native partner produktowy. Łączymy strategię, design, development i automatyzację AI w jednym procesie. 15 lat doświadczenia, 150+ projektów.',
-    alternates: { canonical: `${SITE_URL}/o-nas` },
+    alternates: pageAlternates('/o-nas', 'pl', SITE_URL),
 };
 
 const values = [

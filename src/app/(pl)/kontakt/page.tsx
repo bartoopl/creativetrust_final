@@ -1,12 +1,13 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL } from '@/lib/schema';
+import { pageAlternates } from '@/lib/i18n';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
     title: 'Kontakt | Umów konsultację AI-native',
     description: 'Porozmawiajmy o Twoim projekcie. 30-minutowa konsultacja — pokażemy, gdzie AI realnie skróci czas i podniesie wynik. Strategia, design, development, automatyzacja.',
-    alternates: { canonical: `${SITE_URL}/kontakt` },
+    alternates: pageAlternates('/kontakt', 'pl', SITE_URL),
 };
 
 const contactDetails = [
