@@ -44,9 +44,9 @@ Cała publiczna strona marketingowa CreativeTrust jest dostępna po angielsku po
 
 ### Phase 1: Fundament i18n
 
-- [ ] 1.1 Mapa tras PL↔EN i helpery i18n z testem
-- [ ] 1.2 Dwa root layouty (pl/en) ze wspólnym SiteShell
-- [ ] 1.3 Chrome dwujęzyczny: Header z przełącznikiem, MegaMenu, Footer, cookies
+- [x] 1.1 Mapa tras PL↔EN i helpery i18n z testem — 16afd93
+- [x] 1.2 Dwa root layouty (pl/en) ze wspólnym SiteShell — d7ec74d
+- [x] 1.3 Chrome dwujęzyczny: Header z przełącznikiem, MegaMenu, Footer, cookies — 94b1d86
 
 ### Phase 2: Strona główna
 
