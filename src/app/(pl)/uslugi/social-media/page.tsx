@@ -4,11 +4,12 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildServiceSchema } from '@/lib/schema';
+import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: 'Social Media Marketing | Strategia, content, wyniki',
     description: 'Budujemy obecność w Social Media, która sprzedaje — nie tylko buduje zasięg. Strategia, content plan, community management i analityka w jednym procesie.',
-    alternates: { canonical: `${SITE_URL}/uslugi/social-media` },
+    alternates: pageAlternates('/uslugi/social-media', 'pl', SITE_URL),
     openGraph: {
         title: 'Social Media Marketing | CreativeTrust',
         description: 'Strategia, content, analityka i wyniki. Social media jako kanał sprzedaży — nie tylko prestiżu.',

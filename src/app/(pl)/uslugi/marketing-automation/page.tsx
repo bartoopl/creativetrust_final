@@ -7,11 +7,12 @@ import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: 'Marketing Automation dla Firm | AI, SALESmanago, lejki, CRM',
     description: 'Automatyzacja marketingu oparta na danych i AI. Wdrażamy SALESmanago, budujemy lejki, integrujemy CRM i ustawiamy kampanie, które działają bez Twojej obecności.',
-    alternates: { canonical: `${SITE_URL}/uslugi/marketing-automation` },
+    alternates: pageAlternates('/uslugi/marketing-automation', 'pl', SITE_URL),
     openGraph: {
         title: 'Marketing Automation dla Firm | CreativeTrust',
         description: 'SALESmanago, lejki, lead nurturing, automatyczne kampanie. Działają, kiedy śpisz.',

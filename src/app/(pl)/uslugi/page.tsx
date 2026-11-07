@@ -5,11 +5,12 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildFaqSchema } from '@/lib/schema';
+import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: 'Usługi | WWW, e-commerce, AI i automatyzacja',
     description: 'Web design, e-commerce, marketing automation i AI — w jednym zespole. Pracujemy od diagnozy po wdrożenie i rozwój. Wyniki, nie obietnice.',
-    alternates: { canonical: `${SITE_URL}/uslugi` },
+    alternates: pageAlternates('/uslugi', 'pl', SITE_URL),
 };
 
 const services = [
