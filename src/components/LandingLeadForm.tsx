@@ -26,6 +26,8 @@ const copy = {
         scope: 'Zakres',
         choose: 'Wybierz zakres',
         budget: 'Budżet / skala',
+        budgetLabel: 'Budżet',
+        notGiven: 'Nie podano',
         message: 'Wiadomość',
         sending: 'Wysyłanie...',
         submit: 'Wyślij zapytanie',
@@ -51,6 +53,8 @@ const copy = {
         scope: 'Scope',
         choose: 'Choose a scope',
         budget: 'Budget / scale',
+        budgetLabel: 'Budget',
+        notGiven: 'Not provided',
         message: 'Message',
         sending: 'Sending...',
         submit: 'Send enquiry',
@@ -133,13 +137,13 @@ export default function LandingLeadForm({
                     locale,
                     subject: `${subjectPrefix} - ${formData.service}`,
                     message: `${subjectPrefix}
-Imię i nazwisko: ${formData.name}
-Email: ${formData.email}
-Firma: ${formData.company || 'Nie podano'}
-Telefon: ${formData.phone || 'Nie podano'}
-Zakres: ${formData.service}
-Budżet: ${formData.budget || 'Nie podano'}
-Wiadomość: ${formData.message}`,
+${t.name}: ${formData.name}
+${t.email}: ${formData.email}
+${t.company}: ${formData.company || t.notGiven}
+${t.phone}: ${formData.phone || t.notGiven}
+${t.scope}: ${formData.service}
+${t.budgetLabel}: ${formData.budget || t.notGiven}
+${t.message}: ${formData.message}`,
                     formTimestamp: formStartTime.current,
                 }),
             });

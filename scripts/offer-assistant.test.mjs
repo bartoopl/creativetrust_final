@@ -191,6 +191,16 @@ test('English catalogue fallback answers in English with English price names', (
     assert.match(answerFromCatalogue('What will the weather be?', catalogueEn, 'en').answer, /^I'm not sure/);
 });
 
-test('formatLeadMessage flags leads from the English page', () => {
-    assert.match(formatLeadMessage('Q', null, '', 'en'), /wersja angielska/);
+test('formatLeadMessage uses English labels for leads from the English page', () => {
+    const text = formatLeadMessage('Q', null, ' May ', 'en');
+    assert.match(text, /^Question from the offer assistant on the English homepage:\nQ/);
+    assert.match(text, /Additional message:\nMay$/);
+    assert.doesNotMatch(text, /[ąęłśżźćńó]/i);
+});
+
+test('English fallback matches whole words and priced deliverables by phrase', () => {
+    assert.equal(answerFromCatalogue('Can you restore old photographs?', catalogueEn, 'en').verdict, 'unclear');
+    const landing = answerFromCatalogue('A landing page for my company — what does it cost?', catalogueEn, 'en');
+    assert.deepEqual(landing.prices.map((p) => p.name), ['Landing page']);
+    assert.deepEqual(answerFromCatalogue('We need an online store.', catalogueEn, 'en').services.map((s) => s.slug), ['e-commerce']);
 });

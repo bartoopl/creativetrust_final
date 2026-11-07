@@ -158,11 +158,12 @@ export function normalizeAnswer(input: unknown, { services, prices }: Catalogue)
 export const fold = (text: string) =>
     text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
 
-// Polish stems plus their English counterparts, so the fallback works on both language versions.
+// Polish stems plus English words; English ones start with a space so they match whole words only
+// ("restore" is not a store).
 const SERVICE_STEMS: Record<string, string[]> = {
-    'strony-www': ['stron', 'www', 'witryn', 'landing', 'wordpress', 'next.js', 'nextjs', 'cms', 'serwis', 'ux', 'ui ', 'portal', 'wizytowk', 'website', ' site', 'web page', 'webpage'],
-    'e-commerce': ['sklep', 'commerce', 'medusa', 'woocommerce', 'shopify', 'headless', 'koszyk', 'marketplace', 'allegro', 'erp', 'b2b', 'b2c', 'magento', 'prestashop', ' shop', 'store', 'checkout', ' cart'],
-    'marketing-automation': ['salesmanago', 'automatyz', 'automation', 'automate', 'crm', 'lead', 'mailing', 'newsletter', 'e-mail', 'email', 'sms', 'lejk', 'lejek', 'scoring', 'segmentac', 'personalizac', 'funnel', 'segmentation', 'personalis', 'personaliz'],
+    'strony-www': ['stron', 'www', 'witryn', 'landing', 'wordpress', 'next.js', 'nextjs', 'cms', 'serwis', 'ux', 'ui ', 'portal', 'wizytowk', ' website', ' site', ' web page', ' webpage'],
+    'e-commerce': ['sklep', 'commerce', 'medusa', 'woocommerce', 'shopify', 'headless', 'koszyk', 'marketplace', 'allegro', 'erp', 'b2b', 'b2c', 'magento', 'prestashop', ' shop', ' store', ' online store', ' checkout', ' cart'],
+    'marketing-automation': ['salesmanago', 'automatyz', 'automation', 'automate', 'crm', 'lead', 'mailing', 'newsletter', 'e-mail', 'email', 'sms', 'lejk', 'lejek', 'scoring', 'segmentac', 'personalizac', ' funnel', ' segmentation', ' personalis', ' personaliz'],
     'social-media': ['social', 'facebook', 'instagram', 'linkedin', 'tiktok', 'youtube', 'posty', 'postow', 'community', 'tresci', 'content', ' posts'],
 };
 
@@ -192,9 +193,9 @@ const HOW: Record<AssistantLocale, Record<string, string>> = {
 /** Keyed by the Polish price name; English price names map onto the same entries. */
 const PRICE_STEMS: Record<string, string[]> = {
     'Landing page': ['landing', 'kampani', 'google ads', 'reklam', 'campaign', ' ads'],
-    'Strona firmowa': ['firmow', 'wizytowk', 'company', 'business website'],
-    'Strona firmowa z CMS': ['cms', 'edytowa', 'panel', 'editable'],
-    'Serwis rozbudowany': ['portal', 'rozbudowan', 'serwis', 'extended', 'complex'],
+    'Strona firmowa': ['firmow', 'wizytowk', 'company website', 'business website', 'corporate website'],
+    'Strona firmowa z CMS': ['cms', 'edytowa', 'panel', ' editable'],
+    'Serwis rozbudowany': ['portal', 'rozbudowan', 'serwis', 'extended website', 'complex website'],
 };
 const PRICE_KEY: Record<string, string> = {
     'Company website': 'Strona firmowa',
@@ -273,13 +274,20 @@ export function answerFromCatalogue(question: string, { services, prices }: Cata
 }
 
 /** Plain-text summary attached to a contact request sent from the hero. */
+const LEAD_LABELS = {
+    pl: { question: 'Pytanie z asystenta oferty na stronie głównej', answer: 'Odpowiedź asystenta', services: 'Usługi', prices: 'Ceny', note: 'Dodatkowa wiadomość' },
+    en: { question: 'Question from the offer assistant on the English homepage', answer: "Assistant's answer", services: 'Services', prices: 'Prices', note: 'Additional message' },
+};
+
+/** The visitor's confirmation e-mail echoes this text, so it follows the page language. */
 export function formatLeadMessage(question: string, answer: OfferAnswer | null, note: string, locale: AssistantLocale = 'pl'): string {
-    const parts = [`Pytanie z asystenta oferty na stronie głównej${locale === 'en' ? ' (wersja angielska)' : ''}:\n${question}`];
+    const l = LEAD_LABELS[locale];
+    const parts = [`${l.question}:\n${question}`];
     if (answer) {
-        parts.push(`Odpowiedź asystenta (${answer.verdict}):\n${answer.answer}`);
-        if (answer.services.length) parts.push(`Usługi: ${answer.services.map((s) => s.title).join(', ')}`);
-        if (answer.prices.length) parts.push(`Ceny: ${answer.prices.map((p) => `${p.name} — ${p.price}`).join('; ')}`);
+        parts.push(`${l.answer} (${answer.verdict}):\n${answer.answer}`);
+        if (answer.services.length) parts.push(`${l.services}: ${answer.services.map((s) => s.title).join(', ')}`);
+        if (answer.prices.length) parts.push(`${l.prices}: ${answer.prices.map((p) => `${p.name} — ${p.price}`).join('; ')}`);
     }
-    if (note.trim()) parts.push(`Dodatkowa wiadomość:\n${note.trim()}`);
+    if (note.trim()) parts.push(`${l.note}:\n${note.trim()}`);
     return parts.join('\n\n');
 }
