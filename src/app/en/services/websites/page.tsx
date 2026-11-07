@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Website design and development for companies | CreativeTrust',
         description: 'Websites designed for conversion, SEO and performance. Headless, Next.js, UX — one team from concept to launch.',
-        url: `${SITE_URL}/en/services/websites`, siteName: 'CreativeTrust', locale: 'en_US', type: 'website',
+        url: `${SITE_URL}/en/services/websites`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',
     },
 };
 

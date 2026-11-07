@@ -18,7 +18,7 @@ export const metadata: Metadata = {
         description: 'Strategy, design, development and AI automation in one team. We build digital products at AI speed.',
         url: `${SITE_URL}/en`,
         siteName: 'CreativeTrust',
-        locale: 'en_US',
+        locale: 'en_GB',
         type: 'website',
     },
     twitter: {

@@ -7,12 +7,8 @@
 
 export type Locale = 'pl' | 'en';
 
-export const LOCALES: readonly Locale[] = ['pl', 'en'];
-export const DEFAULT_LOCALE: Locale = 'pl';
 export const EN_PREFIX = '/en';
 
-export const OG_LOCALE: Record<Locale, string> = { pl: 'pl_PL', en: 'en_US' };
-export const SCHEMA_LANGUAGE: Record<Locale, string> = { pl: 'pl-PL', en: 'en' };
 export const HREFLANG: Record<Locale, string> = { pl: 'pl-PL', en: 'en' };
 
 /** [Polish path, English path] for every page that exists in both languages. */

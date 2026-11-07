@@ -11,7 +11,7 @@ const TRUSTPILOT_REVIEW_URL_EN = 'https://www.trustpilot.com/evaluate/creativetr
 
 const copy = {
     pl: { prompt: 'Współpracowaliśmy?', widgetLocale: 'pl-PL', url: TRUSTPILOT_REVIEW_URL, link: 'Oceń nas na Trustpilot' },
-    en: { prompt: 'Worked with us?', widgetLocale: 'en-US', url: TRUSTPILOT_REVIEW_URL_EN, link: 'Review us on Trustpilot' },
+    en: { prompt: 'Worked with us?', widgetLocale: 'en-GB', url: TRUSTPILOT_REVIEW_URL_EN, link: 'Review us on Trustpilot' },
 };
 const BOOTSTRAP_SRC = 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js';
 

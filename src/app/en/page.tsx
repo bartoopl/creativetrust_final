@@ -14,7 +14,7 @@ export const metadata: Metadata = {
         title: 'CreativeTrust — Digital projects that work for your business',
         description: 'Websites, headless e-commerce, marketing automation and social media.',
         url: `${SITE_URL}/en`,
-        locale: 'en_US',
+        locale: 'en_GB',
         type: 'website',
     },
 };
