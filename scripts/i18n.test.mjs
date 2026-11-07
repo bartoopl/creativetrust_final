@@ -10,7 +10,7 @@ const pageFile = (path) => (path.startsWith('/en')
     ? `src/app${path}/page.tsx`
     : `src/app/(pl)${path === '/' ? '' : path}/page.tsx`);
 
-test('every route pair has a page in both languages', { skip: 'English pages land in phases 2–4' }, () => {
+test('every route pair has a page in both languages', () => {
     for (const [pl, en] of ROUTE_PAIRS) {
         assert.ok(existsSync(pageFile(pl)), `missing ${pageFile(pl)}`);
         assert.ok(existsSync(pageFile(en)), `missing ${pageFile(en)}`);
