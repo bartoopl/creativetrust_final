@@ -5,11 +5,12 @@ import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildServiceSchema } from '@/lib/schema';
+import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: 'E-commerce | Sklepy headless, migracje, WooCommerce, Shopify',
     description: 'Projektujemy i wdrażamy sklepy internetowe, które sprzedają i skalują się bez bólu. Headless e-commerce, migracje platform, integracje ERP i AI-assisted development.',
-    alternates: { canonical: `${SITE_URL}/uslugi/e-commerce` },
+    alternates: pageAlternates('/uslugi/e-commerce', 'pl', SITE_URL),
     openGraph: {
         title: 'E-commerce i sklepy internetowe | CreativeTrust',
         description: 'Sklepy headless i migracje platform. WooCommerce, Shopify, Next.js Commerce — jeden zespół od projektu po wdrożenie.',

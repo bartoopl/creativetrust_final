@@ -6,6 +6,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { pageAlternates } from '@/lib/i18n';
 
 const canonicalUrl = `${SITE_URL}/uslugi/konsulting-e-commerce`;
 
@@ -16,9 +17,7 @@ export const metadata: Metadata = {
     title: 'Konsulting e-commerce | Sprzedaż, marża i architektura sklepu',
     description:
         'Konsulting e-commerce dla sklepów, które rosną szybciej niż ich procesy. Zaczynamy od płatnej Diagnozy Wąskich Gardeł i Architektury eCommerce: 5–7 dni roboczych, stała kwota znana z góry, koszt odliczany od współpracy.',
-    alternates: {
-        canonical: canonicalUrl,
-    },
+    alternates: pageAlternates('/uslugi/konsulting-e-commerce', 'pl', SITE_URL),
     openGraph: {
         title: 'Konsulting e-commerce | CreativeTrust',
         description:
