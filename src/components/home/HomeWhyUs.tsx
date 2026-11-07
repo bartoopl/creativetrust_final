@@ -1,13 +1,15 @@
-import { reasons } from '../WhyUsSection';
+import type { Locale } from '@/lib/i18n';
+import { homeCopy } from './home-copy';
 
 /** Why-us as a bento: Graphite feature cards punctuate the pale page, Tile Gray cards fill the rest. */
-export default function HomeWhyUs() {
+export default function HomeWhyUs({ locale }: { locale: Locale }) {
+    const { whyUs: t, reasons } = homeCopy[locale];
     return (
         <section className="ct-section">
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-12">
                 <div className="flex flex-col items-center gap-3 text-center">
-                    <span className="ct-eyebrow">Dlaczego CreativeTrust</span>
-                    <h2 className="ct-h2 ct-statement">Nie agencja od ładnych rzeczy. <span className="ct-electric">Partner</span>, który wdraża szybko.</h2>
+                    <span className="ct-eyebrow">{t.eyebrow}</span>
+                    <h2 className="ct-h2 ct-statement">{t.title[0]}<span className="ct-electric">{t.title[1]}</span>{t.title[2]}</h2>
                 </div>
                 <ul className="grid w-full grid-cols-1 gap-1 md:grid-cols-5" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                     {reasons.map((reason, i) => {

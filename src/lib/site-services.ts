@@ -121,3 +121,15 @@ export const publishedPrices: PublishedPrice[] = [
     { service: 'strony-www', name: 'Strona firmowa z CMS', price: 'od 10 000 zł netto', source: '/uslugi/strona-firmowa-cena' },
     { service: 'strony-www', name: 'Serwis rozbudowany', price: 'wycena indywidualna', source: '/uslugi/tworzenie-stron-www-cennik' },
 ];
+
+/** English labels of the published prices; amounts unchanged (net, PLN), source is the English pricing page. */
+const pricesEn: Record<PublishedPrice['name'], Pick<PublishedPrice, 'name' | 'price' | 'source'>> = {
+    'Landing page': { name: 'Landing page', price: 'from PLN 3,500 net', source: '/en/services/website-pricing' },
+    'Strona firmowa': { name: 'Company website', price: 'from PLN 7,500 net', source: '/en/services/website-pricing' },
+    'Strona firmowa z CMS': { name: 'Company website with CMS', price: 'from PLN 10,000 net', source: '/en/services/company-website-cost' },
+    'Serwis rozbudowany': { name: 'Extended website', price: 'individual quote', source: '/en/services/website-pricing' },
+};
+
+export function pricesFor(locale: 'pl' | 'en'): PublishedPrice[] {
+    return locale === 'en' ? publishedPrices.map((p) => ({ ...p, ...pricesEn[p.name] })) : publishedPrices;
+}

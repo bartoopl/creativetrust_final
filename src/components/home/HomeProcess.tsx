@@ -1,13 +1,15 @@
-import { steps } from '../ProcessPipelineSection';
+import type { Locale } from '@/lib/i18n';
+import { homeCopy } from './home-copy';
 
 /** The process as a flat timeline frame: step, what happens, how long — durations in mono. */
-export default function HomeProcess() {
+export default function HomeProcess({ locale }: { locale: Locale }) {
+    const { process: t, steps } = homeCopy[locale];
     return (
         <section id="proces" className="ct-section" style={{ scrollMarginTop: 80 }}>
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-12">
                 <div className="flex flex-col items-center gap-3 text-center">
-                    <span className="ct-eyebrow">Jak działamy</span>
-                    <h2 className="ct-h2 ct-statement">Nasz proces. <span className="ct-electric">AI</span> w każdym kroku.</h2>
+                    <span className="ct-eyebrow">{t.eyebrow}</span>
+                    <h2 className="ct-h2 ct-statement">{t.title[0]}<span className="ct-electric">{t.title[1]}</span>{t.title[2]}</h2>
                 </div>
                 <ol className="ct-frame grid w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-5" style={{ listStyle: 'none', margin: 0, padding: 0, gap: 1, background: 'var(--line)' }}>
                     {steps.map((step) => (

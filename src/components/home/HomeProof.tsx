@@ -1,12 +1,14 @@
 import { clients } from '../ClientLogos';
-import { stats } from '../StatsSection';
+import type { Locale } from '@/lib/i18n';
+import { homeCopy } from './home-copy';
 
 /** Customer proof: Steel names in a band of pale tiles, then the numbers as quiet display figures. */
-export default function HomeProof() {
+export default function HomeProof({ locale }: { locale: Locale }) {
+    const { proof: t, stats } = homeCopy[locale];
     return (
-        <section className="ct-section" aria-label="Nasi klienci i liczby">
+        <section className="ct-section" aria-label={t.label}>
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-10">
-                <span className="ct-eyebrow text-center">Zaufali nam m.in.</span>
+                <span className="ct-eyebrow text-center">{t.eyebrow}</span>
                 <ul className="grid w-full grid-cols-2 gap-1 sm:grid-cols-3" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                     {clients.slice(0, 10).map((client) => (
                         <li key={client} className="ct-tile flex items-center justify-center text-center" style={{ minHeight: 88, padding: '4px 12px' }}>
