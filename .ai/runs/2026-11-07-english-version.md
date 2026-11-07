@@ -50,8 +50,8 @@ Cała publiczna strona marketingowa CreativeTrust jest dostępna po angielsku po
 
 ### Phase 2: Strona główna
 
-- [ ] 2.1 Komponenty strony głównej z kopią EN i strona /en
-- [ ] 2.2 Asystent ofertowy i formularz kontaktu po angielsku
+- [x] 2.1 Komponenty strony głównej z kopią EN i strona /en — 1eec16d
+- [x] 2.2 Asystent ofertowy i formularz kontaktu po angielsku — 1eec16d
 
 ### Phase 3: Usługi
 
