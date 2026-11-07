@@ -5,6 +5,7 @@ import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, HeroMedia, InlineCTA, NumberedGrid, PriceGrid, SplitLayout } from '@/components/LandingBlocks';
+import { pageAlternates } from '@/lib/i18n';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/tworzenie-stron-www-cennik`;
@@ -13,9 +14,7 @@ export const metadata: Metadata = {
     title: 'Tworzenie strony internetowej cena | Cennik WWW',
     description:
         'Ile kosztuje strona internetowa dla firmy? Zobacz orientacyjne zakresy: landing page, strona firmowa, serwis z CMS, SEO i integracje.',
-    alternates: {
-        canonical: canonicalUrl,
-    },
+    alternates: pageAlternates('/uslugi/tworzenie-stron-www-cennik', 'pl', SITE_URL),
     openGraph: {
         title: 'Tworzenie strony internetowej cena | CreativeTrust',
         description:

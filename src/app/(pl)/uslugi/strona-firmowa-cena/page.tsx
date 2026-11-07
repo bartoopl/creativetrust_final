@@ -5,6 +5,7 @@ import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, HeroMedia, NumberedGrid, PriceGrid, SplitLayout } from '@/components/LandingBlocks';
+import { pageAlternates } from '@/lib/i18n';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/strona-firmowa-cena`;
@@ -13,9 +14,7 @@ export const metadata: Metadata = {
     title: 'Strona firmowa cena | Ile kosztuje strona dla firmy',
     description:
         'Ile kosztuje strona firmowa? Landing page pod frazę: strona firmowa cena, koszt strony firmowej, wycena strony dla firmy. Zobacz realne zakresy.',
-    alternates: {
-        canonical: canonicalUrl,
-    },
+    alternates: pageAlternates('/uslugi/strona-firmowa-cena', 'pl', SITE_URL),
     openGraph: {
         title: 'Strona firmowa cena | CreativeTrust',
         description:

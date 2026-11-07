@@ -5,6 +5,7 @@ import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { HeroMedia, NumberedGrid } from '@/components/LandingBlocks';
+import { pageAlternates } from '@/lib/i18n';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/headless-woocommerce`;
@@ -13,9 +14,7 @@ export const metadata: Metadata = {
     title: 'Headless WooCommerce | Sklep bez ograniczeń WordPress',
     description:
         'Headless WooCommerce dla sklepów, które chcą szybszy frontend, lepszy UX i większą kontrolę nad rozwojem. Landing pod long-tail SEO i migracje.',
-    alternates: {
-        canonical: canonicalUrl,
-    },
+    alternates: pageAlternates('/uslugi/headless-woocommerce', 'pl', SITE_URL),
     openGraph: {
         title: 'Headless WooCommerce | CreativeTrust',
         description:

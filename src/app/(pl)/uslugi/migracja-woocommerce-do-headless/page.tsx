@@ -8,6 +8,7 @@ import Section from '@/components/ui/Section';
 import SectionHeader from '@/components/ui/SectionHeader';
 import NotchedButton from '@/components/ui/NotchedButton';
 import { BulletColumns, HeroMedia, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
+import { pageAlternates } from '@/lib/i18n';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/migracja-woocommerce-do-headless`;
@@ -16,9 +17,7 @@ export const metadata: Metadata = {
     title: 'Migracja WooCommerce do headless | Next.js e-commerce',
     description:
         'Migracja WooCommerce do architektury headless: Next.js storefront, API, lepsza wydajność, SEO i kontrola nad UX sklepu.',
-    alternates: {
-        canonical: canonicalUrl,
-    },
+    alternates: pageAlternates('/uslugi/migracja-woocommerce-do-headless', 'pl', SITE_URL),
     openGraph: {
         title: 'Migracja WooCommerce do headless | CreativeTrust',
         description:
