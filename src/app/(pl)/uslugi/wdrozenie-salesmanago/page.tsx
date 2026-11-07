@@ -4,6 +4,7 @@ import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, HeroMedia, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
+import { pageAlternates } from '@/lib/i18n';
 import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/wdrozenie-salesmanago`;
@@ -12,9 +13,7 @@ export const metadata: Metadata = {
     title: 'Wdrożenie SALESmanago | Marketing automation dla firm',
     description:
         'Wdrożenie SALESmanago, automatyzacje, segmentacja i lead nurturing. Landing page pod frazy: wdrożenie SALESmanago, partner SALESmanago, marketing automation.',
-    alternates: {
-        canonical: canonicalUrl,
-    },
+    alternates: pageAlternates('/uslugi/wdrozenie-salesmanago', 'pl', SITE_URL),
     openGraph: {
         title: 'Wdrożenie SALESmanago | CreativeTrust',
         description:

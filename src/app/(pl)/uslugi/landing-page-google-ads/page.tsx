@@ -5,6 +5,7 @@ import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, HeroMedia, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
+import { pageAlternates } from '@/lib/i18n';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/landing-page-google-ads`;
@@ -13,9 +14,7 @@ export const metadata: Metadata = {
     title: 'Landing page Google Ads | Strona pod kampanie i reklamy',
     description:
         'Landing page Google Ads, Meta Ads i performance marketing. Strona pod reklamy, która zwiększa konwersję i wspiera SEO. Projektujemy pod zapytania sprzedażowe.',
-    alternates: {
-        canonical: canonicalUrl,
-    },
+    alternates: pageAlternates('/uslugi/landing-page-google-ads', 'pl', SITE_URL),
     openGraph: {
         title: 'Landing page Google Ads | CreativeTrust',
         description:
