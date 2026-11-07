@@ -4,11 +4,12 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildServiceSchema } from '@/lib/schema';
+import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: 'Tworzenie stron internetowych | Szybkie, skuteczne, AI-assisted',
     description: 'Projektujemy i wdrażamy strony WWW, które generują leady i sprzedają. Headless, Next.js, performance. Krótszy time-to-market dzięki AI. Sprawdź zakres.',
-    alternates: { canonical: `${SITE_URL}/uslugi/strony-www` },
+    alternates: pageAlternates('/uslugi/strony-www', 'pl', SITE_URL),
     openGraph: {
         title: 'Tworzenie stron internetowych dla firm | CreativeTrust',
         description: 'Strony WWW zaprojektowane pod konwersję, SEO i performance. Headless, Next.js, UX — jeden zespół od konceptu po wdrożenie.',

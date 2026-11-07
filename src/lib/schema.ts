@@ -90,7 +90,7 @@ export const organizationSchema: JsonLd = {
             '@id': `${SITE_URL}/#website`,
             name: 'CreativeTrust',
             url: SITE_URL,
-            inLanguage: 'pl-PL',
+            inLanguage: ['pl-PL', 'en'],
             publisher: {
                 '@id': `${SITE_URL}/#organization`,
             },
@@ -117,12 +117,15 @@ export function buildServiceSchema({
     url,
     serviceType,
     areaServed = 'PL',
+    inLanguage,
 }: {
     name: string;
     description: string;
     url: string;
     serviceType: string;
     areaServed?: string;
+    /** Set on the English pages ('en'); Polish pages leave it out as before. */
+    inLanguage?: string;
 }): JsonLd {
     return {
         '@context': 'https://schema.org',
@@ -135,6 +138,7 @@ export function buildServiceSchema({
         },
         areaServed,
         url,
+        ...(inLanguage ? { inLanguage } : {}),
     };
 }
 

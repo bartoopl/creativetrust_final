@@ -4,8 +4,63 @@ import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { HONEYPOT_FIELD_NAME } from '@/lib/antispam';
 import { trackLead } from '@/lib/analytics';
+import type { Locale } from '@/lib/i18n';
+
+const copy = {
+    pl: {
+        budgetOptions: ['do 5 000 zł', '5 000 - 15 000 zł', '15 000 - 50 000 zł', 'powyżej 50 000 zł', 'nie wiem / potrzebuję rekomendacji'],
+        failed: 'Wystąpił błąd podczas wysyłania formularza',
+        sentEyebrow: 'Wysłano',
+        sentTitle: 'Dziękujemy za wiadomość',
+        sentBody: 'Formularz został wysłany. Skontaktujemy się z Tobą i wrócimy z kolejnym krokiem.',
+        again: 'Wyślij kolejne zapytanie',
+        eyebrow: 'Formularz',
+        name: 'Imię i nazwisko',
+        namePlaceholder: 'Jan Kowalski',
+        email: 'Email',
+        emailPlaceholder: 'jan@firma.pl',
+        company: 'Firma',
+        companyPlaceholder: 'Nazwa firmy',
+        phone: 'Telefon',
+        phonePlaceholder: '+48 123 456 789',
+        scope: 'Zakres',
+        choose: 'Wybierz zakres',
+        budget: 'Budżet / skala',
+        message: 'Wiadomość',
+        sending: 'Wysyłanie...',
+        submit: 'Wyślij zapytanie',
+        consent: 'Wysyłając formularz, zgadzasz się na przetwarzanie danych zgodnie z',
+        policy: { href: '/polityka-prywatnosci', label: 'polityką prywatności' },
+    },
+    en: {
+        budgetOptions: ['up to PLN 5,000', 'PLN 5,000 – 15,000', 'PLN 15,000 – 50,000', 'over PLN 50,000', "I don't know / I need a recommendation"],
+        failed: 'Something went wrong while sending the form',
+        sentEyebrow: 'Sent',
+        sentTitle: 'Thank you for your message',
+        sentBody: "Your form has been sent. We'll get in touch and come back with the next step.",
+        again: 'Send another enquiry',
+        eyebrow: 'Form',
+        name: 'Full name',
+        namePlaceholder: 'Jane Smith',
+        email: 'Email',
+        emailPlaceholder: 'jane@company.com',
+        company: 'Company',
+        companyPlaceholder: 'Company name',
+        phone: 'Phone',
+        phonePlaceholder: '+44 20 1234 5678',
+        scope: 'Scope',
+        choose: 'Choose a scope',
+        budget: 'Budget / scale',
+        message: 'Message',
+        sending: 'Sending...',
+        submit: 'Send enquiry',
+        consent: 'By sending the form, you agree to the processing of your data in line with our',
+        policy: { href: '/en/privacy-policy', label: 'privacy policy' },
+    },
+};
 
 type LandingLeadFormProps = {
+    locale?: Locale;
     formTitle: string;
     formSubtitle: string;
     subjectPrefix: string;
@@ -25,19 +80,15 @@ type FormData = {
 };
 
 export default function LandingLeadForm({
+    locale = 'pl',
     formTitle,
     formSubtitle,
     subjectPrefix,
     serviceOptions,
-    budgetOptions = [
-        'do 5 000 zł',
-        '5 000 - 15 000 zł',
-        '15 000 - 50 000 zł',
-        'powyżej 50 000 zł',
-        'nie wiem / potrzebuję rekomendacji',
-    ],
+    budgetOptions = copy[locale].budgetOptions,
     messagePlaceholder,
 }: LandingLeadFormProps) {
+    const t = copy[locale];
     const formStartTime = useRef<number>(Date.now());
     const [formData, setFormData] = useState<FormData>({
         name: '',
@@ -79,6 +130,7 @@ export default function LandingLeadForm({
                     email: formData.email,
                     company: formData.company,
                     [HONEYPOT_FIELD_NAME]: honeypotValue,
+                    locale,
                     subject: `${subjectPrefix} - ${formData.service}`,
                     message: `${subjectPrefix}
 Imię i nazwisko: ${formData.name}
@@ -95,7 +147,7 @@ Wiadomość: ${formData.message}`,
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.message || 'Wystąpił błąd podczas wysyłania formularza');
+                throw new Error(data.message || t.failed);
             }
 
             trackLead('landing_form');
@@ -110,7 +162,7 @@ Wiadomość: ${formData.message}`,
                 message: '',
             });
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'Wystąpił błąd podczas wysyłania formularza');
+            setError(err instanceof Error ? err.message : t.failed);
         } finally {
             setSubmitting(false);
         }
@@ -119,17 +171,17 @@ Wiadomość: ${formData.message}`,
     if (submitted) {
         return (
             <div className="ct-panel p-8 text-center md:p-10">
-                <span className="ct-eyebrow">Wysłano</span>
-                <h3 style={{ fontSize: 24, fontWeight: 500, letterSpacing: '-0.5px', margin: '10px 0 12px' }}>Dziękujemy za wiadomość</h3>
+                <span className="ct-eyebrow">{t.sentEyebrow}</span>
+                <h3 style={{ fontSize: 24, fontWeight: 500, letterSpacing: '-0.5px', margin: '10px 0 12px' }}>{t.sentTitle}</h3>
                 <p className="ct-body" style={{ fontSize: 15, maxWidth: '52ch', margin: '0 auto 24px' }}>
-                    Formularz został wysłany. Skontaktujemy się z Tobą i wrócimy z kolejnym krokiem.
+                    {t.sentBody}
                 </p>
                 <button
                     type="button"
                     onClick={() => setSubmitted(false)}
                     className="ct-ghost"
                 >
-                    Wyślij kolejne zapytanie
+                    {t.again}
                 </button>
             </div>
         );
@@ -137,7 +189,7 @@ Wiadomość: ${formData.message}`,
 
     return (
         <div className="ct-panel p-6 md:p-10">
-            <span className="ct-eyebrow">Formularz</span>
+            <span className="ct-eyebrow">{t.eyebrow}</span>
             <h2 className="ct-h2">{formTitle}</h2>
             <p className="ct-body" style={{ fontSize: 15, maxWidth: '64ch', margin: '12px 0 32px' }}>{formSubtitle}</p>
 
@@ -151,7 +203,7 @@ Wiadomość: ${formData.message}`,
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label htmlFor="name" className="ct-label">
-                            Imię i nazwisko <span style={{ color: 'var(--accent)' }}>*</span>
+                            {t.name} <span style={{ color: 'var(--accent)' }}>*</span>
                         </label>
                         <input
                             id="name"
@@ -161,12 +213,12 @@ Wiadomość: ${formData.message}`,
                             onChange={handleChange}
                             required
                             className="ct-input"
-                            placeholder="Jan Kowalski"
+                            placeholder={t.namePlaceholder}
                         />
                     </div>
                     <div>
                         <label htmlFor="email" className="ct-label">
-                            Email <span style={{ color: 'var(--accent)' }}>*</span>
+                            {t.email} <span style={{ color: 'var(--accent)' }}>*</span>
                         </label>
                         <input
                             id="email"
@@ -176,12 +228,12 @@ Wiadomość: ${formData.message}`,
                             onChange={handleChange}
                             required
                             className="ct-input"
-                            placeholder="jan@firma.pl"
+                            placeholder={t.emailPlaceholder}
                         />
                     </div>
                     <div>
                         <label htmlFor="company" className="ct-label">
-                            Firma
+                            {t.company}
                         </label>
                         <input
                             id="company"
@@ -190,12 +242,12 @@ Wiadomość: ${formData.message}`,
                             value={formData.company}
                             onChange={handleChange}
                             className="ct-input"
-                            placeholder="Nazwa firmy"
+                            placeholder={t.companyPlaceholder}
                         />
                     </div>
                     <div>
                         <label htmlFor="phone" className="ct-label">
-                            Telefon
+                            {t.phone}
                         </label>
                         <input
                             id="phone"
@@ -204,7 +256,7 @@ Wiadomość: ${formData.message}`,
                             value={formData.phone}
                             onChange={handleChange}
                             className="ct-input"
-                            placeholder="+48 123 456 789"
+                            placeholder={t.phonePlaceholder}
                         />
                     </div>
                 </div>
@@ -212,7 +264,7 @@ Wiadomość: ${formData.message}`,
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label htmlFor="service" className="ct-label">
-                            Zakres <span style={{ color: 'var(--accent)' }}>*</span>
+                            {t.scope} <span style={{ color: 'var(--accent)' }}>*</span>
                         </label>
                         <select
                             id="service"
@@ -222,7 +274,7 @@ Wiadomość: ${formData.message}`,
                             required
                             className="ct-input"
                         >
-                            <option value="" disabled>Wybierz zakres</option>
+                            <option value="" disabled>{t.choose}</option>
                             {serviceOptions.map((option) => (
                                 <option key={option} value={option}>
                                     {option}
@@ -232,7 +284,7 @@ Wiadomość: ${formData.message}`,
                     </div>
                     <div>
                         <label htmlFor="budget" className="ct-label">
-                            Budżet / skala
+                            {t.budget}
                         </label>
                         <select
                             id="budget"
@@ -241,7 +293,7 @@ Wiadomość: ${formData.message}`,
                             onChange={handleChange}
                             className="ct-input"
                         >
-                            <option value="" disabled>Wybierz zakres</option>
+                            <option value="" disabled>{t.choose}</option>
                             {budgetOptions.map((option) => (
                                 <option key={option} value={option}>
                                     {option}
@@ -253,7 +305,7 @@ Wiadomość: ${formData.message}`,
 
                 <div>
                     <label htmlFor="message" className="ct-label">
-                        Wiadomość <span style={{ color: 'var(--accent)' }}>*</span>
+                        {t.message} <span style={{ color: 'var(--accent)' }}>*</span>
                     </label>
                     <textarea
                         id="message"
@@ -290,7 +342,7 @@ Wiadomość: ${formData.message}`,
                         disabled={submitting}
                         className="ct-cta"
                     >
-                        {submitting ? 'Wysyłanie...' : 'Wyślij zapytanie'}
+                        {submitting ? t.sending : t.submit}
                         <span className="ct-badge" aria-hidden="true">
                             <span className="ct-arrows"><span>→</span><span>→</span></span>
                         </span>
@@ -298,9 +350,9 @@ Wiadomość: ${formData.message}`,
                 </div>
 
                 <p className="ct-body" style={{ fontSize: 13, color: 'var(--muted-2)' }}>
-                    Wysyłając formularz, zgadzasz się na przetwarzanie danych zgodnie z{' '}
-                    <Link href="/polityka-prywatnosci" className="underline">
-                        polityką prywatności
+                    {t.consent}{' '}
+                    <Link href={t.policy.href} className="underline">
+                        {t.policy.label}
                     </Link>.
                 </p>
             </form>
