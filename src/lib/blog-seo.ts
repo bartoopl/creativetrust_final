@@ -155,7 +155,7 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                 },
                 {
                     question: 'Czym Google Ads różni się od AdWords?',
-                    answer: 'Niczym poza nazwą: Google AdWords w 2018 roku zmieniło nazwę na Google Ads. Porady o AdWords B2B nadal dotyczą tych samych kampanii w wyszukiwarce, choć panel i automatyczne strategie stawek bardzo się od tego czasu zmieniły.',
+                    answer: 'To ta sama usługa: w 2018 roku Google AdWords zmieniło nazwę na Google Ads. Porady o AdWords B2B nadal dotyczą tych samych kampanii w wyszukiwarce, choć panel i automatyczne strategie stawek od tego czasu mocno się zmieniły.',
                 },
                 {
                     question: 'Jak mierzyć skuteczność Google Ads w B2B?',
