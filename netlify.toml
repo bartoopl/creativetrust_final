@@ -5,6 +5,21 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+# Domena bez www → https://www jednym skokiem 301 (WEW-17), także z http://.
+# Cel to zawsze inny host, więc reguły nie zapętlą się w żadnym trybie SSL
+# Cloudflare. http://www → https://www robi przekierowanie HTTPS Netlify/Cloudflare.
+[[redirects]]
+  from = "http://creativetrust.pl/*"
+  to = "https://www.creativetrust.pl/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://creativetrust.pl/*"
+  to = "https://www.creativetrust.pl/:splat"
+  status = 301
+  force = true
+
 # Przekierowanie API do funkcji Netlify
 [[redirects]]
   from = "/api/contact"
