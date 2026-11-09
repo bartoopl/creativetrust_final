@@ -41,8 +41,10 @@ Every `http://` and apex variant of creativetrust.pl answers with a single 301 t
 
 ## Progress
 
+PR: #23
+
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
 ### Phase 1: Apex → www in one hop
 
-- [ ] 1.1 Add domain-level apex redirects to netlify.toml with a guard test
+- [x] 1.1 Add domain-level apex redirects to netlify.toml with a guard test — 4a58684
