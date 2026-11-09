@@ -184,3 +184,15 @@ test('the short answer rewrite yields to CMS edits', () => {
     post.content[1] = block('normal', 'Nowa krótka odpowiedź od redakcji.');
     assert.equal(text(applyBlogPostFixes(B2B, post).content[1]), 'Nowa krótka odpowiedź od redakcji.');
 });
+
+test('the B2B FAQPage JSON-LD mirrors the rendered questions and answers', async () => {
+    const { buildFaqSchema } = await import('../src/lib/schema.ts');
+    const { content } = applyBlogPostFixes(B2B, sanityB2b());
+    const schema = buildFaqSchema(getBlogSeoConfig(B2B).faq.items);
+    assert.equal(schema['@type'], 'FAQPage');
+    for (const { name, acceptedAnswer } of schema.mainEntity) {
+        const q = content.findIndex((b) => b.style === 'h3' && text(b) === name);
+        assert.ok(q > 0, name);
+        assert.equal(text(content[q + 1]), acceptedAnswer.text);
+    }
+});

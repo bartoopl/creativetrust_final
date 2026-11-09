@@ -11,7 +11,7 @@ import BlogServiceLinks from '@/components/BlogServiceLinks';
 import BlogPostCard from '@/components/BlogPostCard';
 import SchemaScript from '@/components/SchemaScript';
 import { getBlogSeoConfig } from '@/lib/blog-seo';
-import { SITE_URL, buildBlogPostingSchema, buildBreadcrumbSchema } from '@/lib/schema';
+import { SITE_URL, buildBlogPostingSchema, buildBreadcrumbSchema, buildFaqSchema } from '@/lib/schema';
 import { resolveAuthor } from '@/lib/authors';
 
 // Regenerated hourly so Sanity edits (and dateModified) reach the site
@@ -115,10 +115,12 @@ export default async function BlogPostPage({
         { name: 'Blog', url: `${SITE_URL}/blog` },
         { name: post.title, url: canonicalUrl },
     ]);
+    // Same items applyBlogPostFixes renders in the body, so the FAQPage matches visible content.
+    const faqSchema = seoConfig?.faq ? buildFaqSchema(seoConfig.faq.items) : null;
 
     return (
         <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
-            <SchemaScript schema={[blogSchema, breadcrumbSchema]} />
+            <SchemaScript schema={faqSchema ? [blogSchema, breadcrumbSchema, faqSchema] : [blogSchema, breadcrumbSchema]} />
             <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x) clamp(40px, 6vw, 64px)', borderBottom: '1px solid var(--line)' }}>
                 <div className="mx-auto flex flex-col gap-6" style={{ maxWidth: 720 }}>
                     <Link href="/blog" className="ct-meta ct-contact-link" style={{ alignSelf: 'flex-start' }}>
