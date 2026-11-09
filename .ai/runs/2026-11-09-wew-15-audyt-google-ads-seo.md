@@ -47,13 +47,15 @@ Same as WEW-11 and WEW-12: this run has no Sanity write token, and `blog-seo.ts`
 
 ## Progress
 
+PR: #21
+
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
 ### Phase 1: Overrides
 
-- [ ] 1.1 Generalise inline links into section replacements and inserts
-- [ ] 1.2 Add the checklist, cost and B2B article overrides with tests
+- [x] 1.1 Generalise inline links into section replacements and inserts — 0a3e093
+- [x] 1.2 Add the checklist, cost and B2B article overrides with tests — c38c912
 
 ### Phase 2: Verification
 
-- [ ] 2.1 Run the validation gate
+- [x] 2.1 Run the validation gate — c38c912
