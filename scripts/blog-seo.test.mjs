@@ -110,3 +110,58 @@ test('posts without fixes pass through untouched', () => {
     assert.equal(linksOnly.title, 'Inny');
     assert.deepEqual(linksOnly.content, post.content);
 });
+
+// WEW-18. H2s of the article as it stands in Sanity (blogPost db20f2fc-91f1-400f-a94f-e151a9b96d1a).
+const SSL = 'ssl-co-to-jest-i-czy-jest-potrzebne-4-powody-dla-ktorych-powinienes-go-wlaczyc';
+const SANITY_SSL_H2 = ['Wstęp', 'Definicja SSL', 'Jak działa SSL?', 'Certyfikaty SSL', 'Korzyści z zastosowania SSL', 'Czy SSL jest potrzebne?', 'Podsumowanie'];
+const sanitySsl = () => ({
+    title: 'SSL – co to jest i czy jest potrzebne? 4 powody dla których powinieneś go włączyć.',
+    seoTitle: 'SSL – co to jest i dlaczego jest niezbędny dla bezpieczeństwa strony?',
+    seoDescription: 'SSL to kluczowy protokół szyfrowania chroniący dane przesyłane w Internecie.',
+    content: SANITY_SSL_H2.flatMap((heading) => [block('h2', heading), block('normal', `Treść: ${heading}`)]),
+});
+
+test('the SSL article carries the WEW-18 title, meta description and H1', () => {
+    const post = applyBlogPostFixes(SSL, sanitySsl());
+    assert.equal(post.seoTitle, 'Co to jest SSL? Jak działa certyfikat SSL i czy jest potrzebny | CreativeTrust');
+    assert.equal(
+        post.seoDescription,
+        'SSL to certyfikat szyfrujący połączenie ze stroną (kłódka i https). Wyjaśniamy prosto, jak działa, jakie są rodzaje SSL i jak wpływa na SEO.',
+    );
+    assert.equal(post.title, 'Co to jest SSL i czy jest potrzebny? 4 powody, by go włączyć');
+    assert.equal(getBlogSeoConfig(SSL).title, post.seoTitle, 'rendered as absolute, without a second suffix');
+});
+
+test('the SSL article opens with a „SSL to…” definition', () => {
+    const [first] = applyBlogPostFixes(SSL, sanitySsl()).content;
+    assert.equal(first.style, 'normal');
+    assert.match(text(first), /^SSL to [^.]{20,200}\.$/);
+});
+
+test('the SSL article adds the four H2s from the ticket and keeps „Jak działa SSL?”', () => {
+    const h2 = headings(applyBlogPostFixes(SSL, sanitySsl()).content, 'h2');
+    for (const heading of ['Jak działa SSL?', 'Rodzaje certyfikatów SSL (DV, OV, EV)', 'SSL a SEO', 'FAQ']) {
+        assert.ok(h2.includes(heading), heading);
+    }
+    const added = h2.filter((heading) => !SANITY_SSL_H2.includes(heading));
+    assert.ok(added.length >= 4, added.join(' | '));
+});
+
+test('the four reasons and the FAQ questions are H3s', () => {
+    const h3 = headings(applyBlogPostFixes(SSL, sanitySsl()).content, 'h3');
+    assert.deepEqual(h3.filter((heading) => /^\d\. /.test(heading)).map((heading) => heading[0]), ['1', '2', '3', '4']);
+    assert.ok(h3.filter((heading) => heading.endsWith('?')).length >= 4);
+});
+
+test('the SSL article links to the glossary entry and replaces the Sanity body', () => {
+    const { content } = applyBlogPostFixes(SSL, sanitySsl());
+    const markdown = portableTextToMarkdown(content);
+    assert.match(markdown, /\]\(\/baza-wiedzy\/ssl\)/);
+    assert.match(markdown, /^## FAQ$/m);
+    assert.match(markdown, /^1\. /m);
+    assert.ok(!content.some((b) => text(b).startsWith('Treść: ')), 'no Sanity paragraph is left over');
+    assert.equal(new Set(content.map((b) => b._key)).size, content.length);
+    for (const b of content) {
+        assert.deepEqual(b.children.flatMap((child) => child.marks).sort(), b.markDefs.map((def) => def._key).sort());
+    }
+});
