@@ -42,9 +42,11 @@ Same as WEW-11 (PR #12): no Sanity write token for this run, and `blog-seo.ts` i
 
 ## Progress
 
+PR: #20
+
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
 ### Phase 1: Article overrides
 
-- [ ] 1.1 Title, meta, short-answer rewrite and FAQ section in blog-seo.ts with tests
-- [ ] 1.2 FAQPage JSON-LD on the blog post page
+- [x] 1.1 Title, meta, short-answer rewrite and FAQ section in blog-seo.ts with tests — 156d368
+- [x] 1.2 FAQPage JSON-LD on the blog post page — 7021f12
