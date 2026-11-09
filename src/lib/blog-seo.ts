@@ -11,13 +11,18 @@ type HeadingFix = {
     style?: 'h2' | 'h3' | 'h4';
 };
 
-type InlineLink = {
-    /** The paragraph goes right before the heading with this Sanity text. */
-    beforeHeading: string;
-    href: string;
-    before: string;
-    anchor: string;
-    after: string;
+/** Text with optional links: `['Zobacz ', { text: 'cennik', href: '/cennik' }, '.']`. */
+type RichText = string | Array<string | { text: string; href: string }>;
+
+/** Content authored in code, turned into Portable Text by `toPortableText`. */
+type AuthoredBlock = { h2: string } | { h3: string } | { p: RichText } | { bullet: RichText };
+
+type SectionFix = {
+    /** Replaces this Sanity heading and everything up to the next heading of the same or higher rank. */
+    replace?: string;
+    /** Inserts the blocks right before the heading with this Sanity text. */
+    beforeHeading?: string;
+    blocks: AuthoredBlock[];
 };
 
 type BlogSeoConfig = {
@@ -28,7 +33,12 @@ type BlogSeoConfig = {
     /** H1, when it differs from the Sanity title. */
     heading?: string;
     headings?: HeadingFix[];
-    inlineLink?: InlineLink;
+    /**
+     * Applied to the Sanity content, matched on its current heading text: once an editor
+     * renames the heading, the fix stops applying. An insert whose link already exists
+     * in Sanity is skipped, so it never doubles.
+     */
+    sections?: SectionFix[];
 };
 
 type PortableBlock = {
@@ -101,13 +111,20 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                 to: 'Krok 6: Testowanie i wdrożenie – uruchomienie Twojej nowej strony',
             },
         ],
-        inlineLink: {
-            beforeHeading: 'Krok 4: Optymalizacja SEO – Bądź Widoczny w Wyszukiwarkach',
-            href: '/uslugi/strony-www',
-            before: 'Chcesz przejść ten etap z zespołem? Zobacz, jak wygląda nasze ',
-            anchor: 'projektowanie stron www',
-            after: '.',
-        },
+        sections: [
+            {
+                beforeHeading: 'Krok 4: Optymalizacja SEO – Bądź Widoczny w Wyszukiwarkach',
+                blocks: [
+                    {
+                        p: [
+                            'Chcesz przejść ten etap z zespołem? Zobacz, jak wygląda nasze ',
+                            { text: 'projektowanie stron www', href: '/uslugi/strony-www' },
+                            '.',
+                        ],
+                    },
+                ],
+            },
+        ],
     },
     'ile-kosztuje-strona-internetowa-dla-firmy': {
         links: [
@@ -169,24 +186,43 @@ function fixHeading(block: PortableBlock, fixes: HeadingFix[]): PortableBlock {
     return { ...block, style: fix.style ?? block.style, children: [{ ...first, text: fix.to, marks: [] }] };
 }
 
-function linkParagraph({ href, before, anchor, after }: InlineLink): PortableBlock {
-    const span = (key: string, text: string, marks: string[] = []) => ({ _type: 'span', _key: key, text, marks });
+const headingRank = (block: PortableBlock) => Number(block.style?.slice(1));
 
-    return {
-        _type: 'block',
-        _key: 'seo-inline-link',
-        style: 'normal',
-        markDefs: [{ _type: 'link', _key: 'seo-inline-link-mark', href }],
-        children: [span('seo-inline-link-0', before), span('seo-inline-link-1', anchor, ['seo-inline-link-mark']), span('seo-inline-link-2', after)],
-    };
+function toPortableText(blocks: AuthoredBlock[], keyPrefix: string): PortableBlock[] {
+    return blocks.map((authored, index) => {
+        const key = `${keyPrefix}-${index}`;
+        const [style, value] = Object.entries(authored)[0] as ['h2' | 'h3' | 'p' | 'bullet', RichText];
+        const parts = typeof value === 'string' ? [value] : value;
+        const markDefs: Array<{ _type: string; _key: string; href: string }> = [];
+        const children = parts.map((part, partIndex) => {
+            const spanKey = `${key}-${partIndex}`;
+            if (typeof part === 'string') return { _type: 'span', _key: spanKey, text: part, marks: [] };
+            markDefs.push({ _type: 'link', _key: `${spanKey}-link`, href: part.href });
+            return { _type: 'span', _key: spanKey, text: part.text, marks: [`${spanKey}-link`] };
+        });
+        const list = style === 'bullet' ? { listItem: 'bullet', level: 1 } : {};
+
+        return { _type: 'block', _key: key, style: style === 'h2' || style === 'h3' ? style : 'normal', ...list, markDefs, children };
+    });
 }
 
-function insertInlineLink(content: PortableBlock[], link: InlineLink): PortableBlock[] {
-    const alreadyLinked = content.some((block) => block.markDefs?.some(({ href }) => href === link.href));
-    const index = content.findIndex((block) => isHeading(block) && blockText(block) === link.beforeHeading);
-    if (alreadyLinked || index < 0) return content;
+const linkedHrefs = (blocks: PortableBlock[]) => new Set(blocks.flatMap((block) => block.markDefs?.map(({ href }) => href) ?? []));
 
-    return [...content.slice(0, index), linkParagraph(link), ...content.slice(index)];
+function applySection(content: PortableBlock[], fix: SectionFix, keyPrefix: string): PortableBlock[] {
+    const anchorText = fix.replace ?? fix.beforeHeading;
+    const start = content.findIndex((block) => isHeading(block) && blockText(block) === anchorText);
+    if (start < 0) return content;
+
+    const blocks = toPortableText(fix.blocks, keyPrefix);
+    if (fix.replace) {
+        const rank = headingRank(content[start]);
+        const next = content.findIndex((block, index) => index > start && isHeading(block) && headingRank(block) <= rank);
+        return [...content.slice(0, start), ...blocks, ...content.slice(next < 0 ? content.length : next)];
+    }
+
+    const existing = linkedHrefs(content);
+    if ([...linkedHrefs(blocks)].some((href) => existing.has(href))) return content;
+    return [...content.slice(0, start), ...blocks, ...content.slice(start)];
 }
 
 /** Overlays the `blog-seo.ts` fixes on a post fetched from Sanity. */
@@ -194,14 +230,16 @@ export function applyBlogPostFixes<T extends BlogPostFields>(slug: string, post:
     const config = blogSeoConfig[slug];
     if (!post || !config) return post;
 
-    const { title, description, heading, headings = [], inlineLink } = config;
-    const linked = post.content && inlineLink ? insertInlineLink(post.content, inlineLink) : post.content;
+    const { title, description, heading, headings = [], sections = [] } = config;
+    const fixed = post.content
+        ? sections.reduce((content, fix, index) => applySection(content, fix, `seo-${index}`), post.content)
+        : post.content;
 
     return {
         ...post,
         title: heading ?? post.title,
         seoTitle: title ?? post.seoTitle,
         seoDescription: description ?? post.seoDescription,
-        content: linked?.map((block) => fixHeading(block, headings)),
+        content: fixed?.map((block) => fixHeading(block, headings)),
     };
 }
