@@ -25,7 +25,7 @@ The links are not in a shared CTA component: they are inline links in the Sanity
 - `/uslugi/performance-marketing/google-ads` → `/uslugi/audyt-google-ads`: the audit is now the only Google Ads offer on the site. `/uslugi/landing-page-google-ads` is an ad landing kept out of the sitemap, so it is not a link target.
 - `/uslugi/performance-marketing/meta-ads` → `/uslugi/social-media`: that page offers paid Meta Ads campaigns.
 - `/uslugi/performance-marketing` → `/uslugi`: there is no performance-marketing service any more, and `/uslugi` (200) lists every service.
-- One map, `retired-service-pages.json`, drives both the 308 redirects in `next.config.ts` (external backlinks) and the href rewrite in post bodies, so the two cannot drift.
+- One map, `RETIRED_SERVICE_PAGES` in `src/lib/retired-links.ts`, drives both the 308 redirects in `next.config.ts` (external backlinks) and the href rewrite in post bodies, so the two cannot drift.
 
 ## Why code and not Sanity
 
@@ -33,9 +33,9 @@ No Sanity write token is available to this run. Hrefs are rewritten in `getBlogP
 
 ## Scope
 
-- `retired-service-pages.json`, `next.config.ts` — redirect map; `/uslugi/audyt-google-ads` no longer redirects.
-- `src/lib/retired-links.ts` (new) + `src/lib/sanity.ts` — href rewrite for all blog posts.
-- `src/app/(pl)/uslugi/audyt-google-ads/page.tsx` (new), `content/ai/uslugi/audyt-google-ads.md` (new), `src/lib/markdown/pages.ts`, `src/lib/site-services.ts` — landing, Markdown twin, menu/WebMCP listing.
+- `src/lib/retired-links.ts` (new), `next.config.ts` — redirect map; `/uslugi/audyt-google-ads` no longer redirects.
+- `src/lib/sanity.ts` — href rewrite for all blog posts.
+- `src/app/(pl)/uslugi/audyt-google-ads/page.tsx` (new), `content/ai/uslugi/audyt-google-ads.md` (new), `src/lib/markdown/pages.ts`, `src/lib/site-services.ts` — landing, Markdown twin, menu/WebMCP listing (kept out of the English menu).
 - `scripts/import-*.cjs` — source links updated, so a re-import does not bring them back.
 - `scripts/retired-links.test.mjs` (new) — unit tests.
 
@@ -64,13 +64,15 @@ No Sanity write token is available to this run. Hrefs are rewritten in `getBlogP
 
 ## Progress
 
+PR: #22
+
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
 ### Phase 1: Link rewrite
 
-- [ ] 1.1 Add the retired-page map, the redirects and the href rewrite with tests
-- [ ] 1.2 Update the import scripts' source links
+- [x] 1.1 Add the retired-page map, the redirects and the href rewrite with tests — 8eef969
+- [x] 1.2 Update the import scripts' source links — afd14de
 
 ### Phase 2: Audit landing
 
-- [ ] 2.1 Add the /uslugi/audyt-google-ads page, its Markdown twin and service listing
+- [x] 2.1 Add the /uslugi/audyt-google-ads page, its Markdown twin and service listing — a8b8130, bdb05ff
