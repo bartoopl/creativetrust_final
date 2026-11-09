@@ -6,7 +6,6 @@ import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, HeroMedia, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
-import { pageAlternates } from '@/lib/i18n';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/audyt-google-ads`;
@@ -15,7 +14,8 @@ export const metadata: Metadata = {
     title: 'Audyt Google Ads – audyt konta i kampanii',
     description:
         'Audyt konta Google Ads: konwersje, struktura kampanii, słowa kluczowe, budżet i landing page. Dostajesz listę błędów z priorytetami i plan naprawy.',
-    alternates: pageAlternates('/uslugi/audyt-google-ads', 'pl', SITE_URL),
+    // Polish only (no English twin), so no hreflang pair.
+    alternates: { canonical: canonicalUrl },
     openGraph: {
         title: 'Audyt Google Ads | CreativeTrust',
         description:
