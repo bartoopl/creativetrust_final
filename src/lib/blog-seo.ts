@@ -126,6 +126,121 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
             },
         ],
     },
+    'audyt-konta-google-ads-checklista': {
+        // Keep the number in sync with the bullets of the checklist section (enforced by a test).
+        title: 'Audyt Google Ads: checklista 30 punktów krok po kroku (2026) | CreativeTrust',
+        description:
+            'Darmowa checklista audytu konta Google Ads: konwersje i tracking, struktura kampanii, wyszukiwane hasła, budżet i landing page. Sprawdź, gdzie ucieka budżet.',
+        links: [],
+        heading: 'Audyt Google Ads: checklista, która pokazuje, gdzie ucieka budżet',
+        sections: [
+            {
+                replace: 'Jak podejść do tematu krok po kroku?',
+                blocks: [
+                    { h2: 'Checklista audytu Google Ads: 30 punktów w 5 obszarach' },
+                    {
+                        p: 'Przejdź obszary w tej kolejności: najpierw dane, potem struktura, a dopiero na końcu skalowanie. Jeśli tracking jest błędny, każda kolejna rekomendacja opiera się na złych liczbach. Przy każdym punkcie zanotuj stan – OK, do poprawy albo krytyczne – żeby na końcu ułożyć priorytety według wpływu na wynik.',
+                    },
+                    { h3: 'Audyt konwersji i trackingu' },
+                    {
+                        p: 'To fundament audytu: sprawdzasz, czy algorytm Google Ads uczy się na zdarzeniach, które mają wartość dla biznesu.',
+                    },
+                    { bullet: 'konwersje primary to tylko zdarzenia biznesowe (lead, zakup), a mikrokonwersje są ustawione jako secondary' },
+                    { bullet: 'żadna konwersja nie jest liczona podwójnie, np. przez tag Google Ads i import z GA4 tego samego zdarzenia' },
+                    { bullet: 'tag działa na wszystkich formularzach i stronach podziękowania, także po ostatnich zmianach w GTM' },
+                    { bullet: 'Consent Mode v2 jest wdrożony, a konwersje rozszerzone są włączone' },
+                    { bullet: 'wartości konwersji odpowiadają realnej wartości zamówienia lub leada' },
+                    { bullet: 'liczba konwersji w Google Ads, GA4 i CRM różni się w zakresie, który umiesz wyjaśnić' },
+                    { h3: 'Struktura konta i kampanii' },
+                    { p: 'Struktura powinna odzwierciedlać intencje klientów i marże, a nie historię konta.' },
+                    { bullet: 'kampanie są podzielone według intencji: brand, produkty lub usługi, konkurencja, remarketing' },
+                    { bullet: 'ruch brandowy jest oddzielony od pozyskiwania nowych klientów, także w Performance Max' },
+                    { bullet: 'grupy reklam mają spójne tematycznie słowa kluczowe zamiast kilkudziesięciu luźnych fraz' },
+                    { bullet: 'kierowanie na lokalizację obejmuje osoby przebywające w danym obszarze, a nie tylko nim zainteresowane' },
+                    { bullet: 'kampanie w sieci wyszukiwania nie mają włączonej sieci reklamowej bez świadomej decyzji' },
+                    { bullet: 'kampanie nie konkurują ze sobą o te same zapytania' },
+                    { h3: 'Słowa kluczowe i wyszukiwane hasła' },
+                    {
+                        p: 'Raport wyszukiwanych haseł pokazuje, za co naprawdę płacisz. Często są to zupełnie inne zapytania niż słowa kluczowe na koncie.',
+                    },
+                    { bullet: 'wyszukiwane hasła z ostatnich 30–90 dni są przejrzane pod kątem przypadkowych zapytań' },
+                    { bullet: 'listy wykluczających słów kluczowych są aktualne i przypisane do właściwych kampanii' },
+                    { bullet: 'dopasowanie przybliżone działa tylko tam, gdzie są inteligentne stawki i poprawne konwersje' },
+                    { bullet: 'frazy informacyjne, rekrutacyjne i „za darmo” nie zabierają budżetu frazom zakupowym' },
+                    { bullet: 'słowa bez wyświetleń lub z niskim wynikiem jakości mają decyzję: poprawić, przenieść albo usunąć' },
+                    { bullet: 'zapytania, które konwertują, mają własne słowa kluczowe i dopasowaną reklamę' },
+                    { h3: 'Budżet i stawki' },
+                    {
+                        p: 'W tym obszarze widać, gdzie ucieka budżet: które kampanie są ograniczone, a które wydają pieniądze bez wyniku.',
+                    },
+                    { bullet: 'budżet jest rozłożony według rentowności kampanii, a nie po równo' },
+                    { bullet: 'kampanie z dobrym wynikiem nie tracą wyświetleń z powodu budżetu' },
+                    { bullet: 'strategia ustalania stawek pasuje do liczby konwersji – docelowy CPA lub ROAS potrzebuje stabilnych danych' },
+                    { bullet: 'cele CPA i ROAS wynikają z marży i wartości klienta, a nie są ustawione „na oko”' },
+                    { bullet: 'harmonogram reklam i wykluczenia urządzeń wynikają z danych o konwersjach, a nie z przyzwyczajeń' },
+                    { bullet: 'duże zmiany budżetów i celów nie przerywają co kilka dni okresu nauki strategii' },
+                    { h3: 'Reklamy i landing page' },
+                    { p: 'Nawet dobrze kierowany ruch nie skonwertuje, jeśli reklama obiecuje co innego niż strona docelowa.' },
+                    { bullet: 'każda grupa reklam ma elastyczną reklamę w wyszukiwarce ze skutecznością co najmniej „Dobra”' },
+                    { bullet: 'nagłówki zawierają frazę z zapytania i konkretną korzyść zamiast ogólników' },
+                    { bullet: 'komponenty – linki do podstron, objaśnienia, rozszerzenia informacji – są uzupełnione i aktualne' },
+                    { bullet: 'landing page odpowiada obietnicy reklamy i intencji zapytania' },
+                    { bullet: 'strona szybko ładuje się na telefonie i przechodzi Core Web Vitals' },
+                    { bullet: 'formularz działa na telefonie, nie ma zbędnych pól, a jego wysłanie rejestruje konwersję' },
+                ],
+            },
+            {
+                beforeHeading: 'Polecane kolejne kroki',
+                blocks: [
+                    { h2: 'Ile trwa i ile kosztuje audyt Google Ads?' },
+                    {
+                        p: 'Czas i cena audytu zależą od wielkości konta: liczby kampanii, typów konwersji i tego, czy w grę wchodzą Performance Max, Merchant Center i remarketing. Przegląd kilku kampanii w sieci wyszukiwania to inna praca niż audyt rozbudowanego e-commerce, dlatego wycena powinna wynikać z zakresu, a nie ze stałego cennika. Najwięcej czasu zajmuje zwykle weryfikacja trackingu, bo wymaga porównania danych z Google Ads, GA4 i CRM.',
+                    },
+                    {
+                        p: [
+                            'Co wpływa na cenę i kiedy audyt się zwraca, opisujemy w artykule ',
+                            { text: 'ile kosztuje audyt Google Ads', href: '/blog/ile-kosztuje-audyt-google-ads' },
+                            '.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'ile-kosztuje-audyt-google-ads': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Ile może kosztować audyt',
+                blocks: [
+                    {
+                        p: [
+                            'Wszystkie te obszary punkt po punkcie rozpisuje nasza ',
+                            { text: 'checklista audytu Google Ads', href: '/blog/audyt-konta-google-ads-checklista' },
+                            ': 30 rzeczy do sprawdzenia, zanim zlecisz audyt albo zrobisz go samodzielnie.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'google-ads-dla-b2b-jak-zbierac-leady': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Jak mierzyć efekt?',
+                blocks: [
+                    {
+                        p: [
+                            'Gdy kampania B2B już działa, ale leady nie przechodzą do sprzedaży, nie zwiększaj budżetu na ślepo. Najpierw zrób ',
+                            { text: 'audyt konta Google Ads', href: '/blog/audyt-konta-google-ads-checklista' },
+                            ': sprawdź konwersje, wyszukiwane hasła i wykluczenia.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
     'ile-kosztuje-strona-internetowa-dla-firmy': {
         links: [
             {
