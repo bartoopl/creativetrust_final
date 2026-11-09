@@ -54,16 +54,18 @@ The blog article `/blog/ssl-co-to-jest-i-czy-jest-potrzebne-4-powody-dla-ktorych
 
 ## Progress
 
+PR: #24
+
 > Convention: `- [ ]` pending, `- [x]` done. Append ` — <commit sha>` when a step lands. Do not rename step titles.
 
 ### Phase 1: Article
 
-- [ ] 1.1 Add full-body replacement to blog-seo.ts and the SSL article title, meta, H1 and body with tests
+- [x] 1.1 Add full-body replacement to blog-seo.ts and the SSL article title, meta, H1 and body with tests — 004a883
 
 ### Phase 2: Knowledge base
 
-- [ ] 2.1 Add the ssl glossary override with H2s and the link to the article with tests
+- [x] 2.1 Add the ssl glossary override with H2s and the link to the article with tests — 465099d
 
 ### Phase 3: Verification
 
-- [ ] 3.1 Run the validation gate and check the rendered HTML of both pages
+- [x] 3.1 Run the validation gate and check the rendered HTML of both pages — 465099d
