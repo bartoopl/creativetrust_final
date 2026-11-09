@@ -50,6 +50,12 @@ export const seoLandings: Landing[] = [
         service: 'marketing-automation',
     },
     {
+        href: '/uslugi/audyt-google-ads',
+        title: 'Audyt Google Ads',
+        description: 'Błędy w koncie, pomiarze i budżecie z planem naprawy.',
+        service: 'strony-www',
+    },
+    {
         href: '/uslugi/landing-page-google-ads',
         title: 'Landing page Google Ads',
         description: 'Strony pod kampanie i reklamy płatne.',
@@ -108,7 +114,8 @@ export function servicesFor(locale: 'pl' | 'en'): Service[] {
 }
 
 export function landingsFor(locale: 'pl' | 'en'): Landing[] {
-    return locale === 'en' ? seoLandings.map((l) => ({ ...l, ...landingsEn[l.href] })) : seoLandings;
+    // Polish-only landings (no English twin, e.g. the Google Ads audit) stay out of the English menu.
+    return locale === 'en' ? seoLandings.filter((l) => l.href in landingsEn).map((l) => ({ ...l, ...landingsEn[l.href] })) : seoLandings;
 }
 
 /**

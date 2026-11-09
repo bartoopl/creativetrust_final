@@ -30,6 +30,7 @@ export const markdownPages: MarkdownPage[] = [
     { route: '/uslugi/migracja-woocommerce-do-headless', section: 'landings' },
     { route: '/uslugi/headless-woocommerce', section: 'landings' },
     { route: '/uslugi/wdrozenie-salesmanago', section: 'landings' },
+    { route: '/uslugi/audyt-google-ads', section: 'landings' },
     { route: '/uslugi/landing-page-google-ads', section: 'landings', optional: true },
     { route: '/uslugi/landing-page-pod-reklamy', section: 'landings', optional: true },
 ];

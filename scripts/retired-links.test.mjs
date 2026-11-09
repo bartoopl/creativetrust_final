@@ -85,3 +85,11 @@ test('import scripts no longer write links to retired service pages', () => {
         }
     }
 });
+
+test('the audit landing is listed in Polish and kept out of the English menu', async () => {
+    const { seoLandings, landingsFor } = await import('../src/lib/site-services.ts');
+    assert.ok(seoLandings.some(({ href }) => href === '/uslugi/audyt-google-ads'));
+    const en = landingsFor('en');
+    assert.ok(en.every(({ href }) => href.startsWith('/en/')), 'English menu links only to English pages');
+    assert.equal(en.length, seoLandings.length - 1);
+});
