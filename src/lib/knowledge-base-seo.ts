@@ -23,6 +23,7 @@ type Draft = { style: string; listItem?: 'bullet' | 'number'; parts: Inline[] };
 type KnowledgeBaseOverride = {
     headline: string;
     shortDescription?: string;
+    seoTitle?: string;
     seoDescription?: string;
     content: Block[];
 };
@@ -165,6 +166,39 @@ const overrides: Record<string, KnowledgeBaseOverride> = {
             numbered('Zadbaj o atrakcyjną ofertę i wysoki współczynnik konwersji.'),
             numbered('Mierz i analizuj dokładnie ścieżki zakupowe.'),
             numbered('Ustal realistyczny, ale motywujący poziom prowizji.'),
+        ]),
+    },
+    // WEW-18: a short dictionary entry. The full answer to „co to jest ssl” is the blog article it links to.
+    ssl: {
+        headline: 'SSL (Secure Sockets Layer) – definicja',
+        seoTitle: 'SSL (Secure Sockets Layer) – definicja | Baza wiedzy',
+        seoDescription:
+            'SSL – definicja w słowniku: protokół i certyfikat szyfrujący połączenie przeglądarki ze stroną (https i kłódka). Do czego służy i czym różni się od TLS.',
+        content: portableText([
+            p(
+                'SSL (Secure Sockets Layer) to protokół kryptograficzny i certyfikat, które szyfrują połączenie między przeglądarką a serwerem. Strona z aktywnym certyfikatem SSL ma adres zaczynający się od https://.',
+            ),
+
+            h2('Do czego służy SSL'),
+            bullet({ text: 'Szyfrowanie danych', strong: true }, ' – hasła, dane z formularzy i płatności nie mogą zostać odczytane ani zmienione po drodze.'),
+            bullet({ text: 'Potwierdzenie tożsamości strony', strong: true }, ' – certyfikat wystawia zaufany urząd certyfikacji (CA) dla konkretnej domeny.'),
+            bullet(
+                { text: 'Zaufanie i widoczność', strong: true },
+                ' – przeglądarki oznaczają strony bez SSL jako „Niezabezpieczona”, a Google traktuje HTTPS jako sygnał rankingowy.',
+            ),
+
+            h2('SSL a TLS'),
+            p(
+                'Połączenia HTTPS korzystają dziś z TLS (Transport Layer Security), następcy SSL. Wszystkie wersje SSL są wyłączone w przeglądarkach, ale nazwa „certyfikat SSL” pozostała w użyciu.',
+            ),
+
+            h2('Więcej o SSL'),
+            p(
+                'Więcej: ',
+                { text: 'co to jest SSL i czy jest potrzebny', href: '/blog/ssl-co-to-jest-i-czy-jest-potrzebne-4-powody-dla-ktorych-powinienes-go-wlaczyc' },
+                ' – jak działa, rodzaje certyfikatów (DV, OV, EV), wpływ na SEO i FAQ.',
+            ),
+            p('Powiązane hasła: ', { text: 'domena', href: '/baza-wiedzy/domena' }, ', ', { text: 'indeksowanie', href: '/baza-wiedzy/indeksowanie' }, '.'),
         ]),
     },
 };
