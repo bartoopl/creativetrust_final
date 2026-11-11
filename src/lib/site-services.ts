@@ -60,7 +60,8 @@ export const seoLandings: Landing[] = [
         href: '/uslugi/audyt-google-ads',
         title: 'Audyt kampanii Google Ads',
         description: 'Błędy w koncie, pomiarze i budżecie z planem naprawy.',
-        service: 'strony-www',
+        // A narrower, single-channel audit: grouped with the e-commerce audit, not with website builds.
+        service: 'audyt-e-commerce',
     },
     {
         href: '/uslugi/landing-page-google-ads',
