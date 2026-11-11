@@ -1,10 +1,10 @@
 ---
-title: "Marketing Automation dla Firm — CreativeTrust | AI, SALESmanago, lejki, CRM"
-description: "Automatyzacja marketingu oparta na danych i AI. Wdrażamy SALESmanago, budujemy lejki, integrujemy CRM i ustawiamy kampanie, które działają bez Twojej obecności."
-date: "2026-10-27"
+title: "Marketing Automation dla e-commerce i firm — CreativeTrust | SALESmanago, scenariusze, CRM"
+description: "Wdrażamy SALESmanago i scenariusze, które pracują na bazie klientów: odzyskiwanie porzuconych zakupów, rekomendacje, reaktywacja, lead nurturing. Mierzone przychodem, nie liczbą wysyłek."
+date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/uslugi/marketing-automation"
 lang: "pl-PL"
-ai_summary: "CreativeTrust wdraża marketing automation oparte na danych i AI: SALESmanago, lead nurturing, personalizację w czasie rzeczywistym, AI w kampaniach, integracje CRM (Pipedrive, HubSpot, Salesforce) i raportowanie. Zastosowania: e-commerce, B2B/SaaS, usługi lokalne, edukacja. Proces: audyt, architektura, wdrożenie, optymalizacja."
+ai_summary: "CreativeTrust, partner SALESmanago od 2024 roku, wdraża marketing automation dla e-commerce i firm: wdrożenie SALESmanago, scenariusze e-commerce (porzucony koszyk, rekomendacje, reaktywacja), lead nurturing, segmentację i personalizację, integracje CRM (Pipedrive, HubSpot, Salesforce) i raportowanie przychodu z automatyzacji. Kanały: e-mail, SMS, web push. Proces: audyt, architektura, wdrożenie, optymalizacja."
 target_audience:
   - "Firmy B2B z długim procesem sprzedaży"
   - "Sklepy e-commerce, które chcą odzyskiwać koszyki i zwiększać cross-sell"
@@ -23,23 +23,23 @@ semantic_keywords:
 
 # Marketing automation w CreativeTrust
 
-CreativeTrust wdraża SALESmanago i buduje automatyzacje oparte na danych i AI: lejki, lead nurturing, personalizację i integracje CRM, które działają bez udziału zespołu klienta.
+CreativeTrust wdraża SALESmanago i scenariusze, które pracują na klientach, których firma już ma: porzucone koszyki, rekomendacje, reaktywacja, lead nurturing. Efekt jest mierzony przychodem, a nie liczbą wysłanych wiadomości.
 
 ## Zakres marketing automation w CreativeTrust
 
-1. **Wdrożenie SALESmanago** — konfiguracja platformy, integracje, segmentacja i pierwsze automatyzacje gotowe do działania.
-2. **Lead nurturing** — lejki, sekwencje e-mail i scoring leadów; kontakty dojrzewają do zakupu bez ręcznej pracy.
-3. **Personalizacja w czasie rzeczywistym** — treści na stronie i w e-mailach dopasowane do zachowań i segmentu odbiorcy.
-4. **AI w kampaniach** — optymalizacja czasu wysyłki, predykcyjny scoring i generowanie treści wspomagane AI.
+1. **Wdrożenie SALESmanago** — konfiguracja platformy, tracking, integracja ze sklepem i CRM, segmenty i pierwsze scenariusze.
+2. **Scenariusze e-commerce** — porzucony koszyk, porzucone przeglądanie, rekomendacje, cross-sell i reaktywacja klientów, którzy przestali kupować.
+3. **Lead nurturing** — sekwencje i scoring dla sprzedaży B2B i usług; kontakt trafia do handlowca, gdy jest gotowy na rozmowę.
+4. **Segmentacja i personalizacja** — treści na stronie i w wiadomościach dopasowane do zachowań, historii zakupów i wartości klienta.
 5. **Integracje CRM** — Pipedrive, HubSpot, Salesforce: dane marketingowe trafiają tam, gdzie pracuje sprzedaż.
-6. **Analityka i reporting** — dashboardy z metrykami, które mają znaczenie, nie tylko otwarcia i kliknięcia.
+6. **Analityka i raportowanie** — przychód z automatyzacji, a nie tylko otwarcia i kliknięcia.
 
-## Marketing automation CreativeTrust w liczbach
+## Jak CreativeTrust podchodzi do automatyzacji
 
-- **3,2×** średni wzrost konwersji po wdrożeniu automatyzacji
-- **40%** leadów, które nie byłyby obsłużone ręcznie
-- **24/7** kampanie działają bez udziału klienta
-- **15+** lat doświadczenia w marketingu B2B i B2C
+- **Platforma:** partner SALESmanago od 2024 roku.
+- **Kanały:** e-mail, SMS, web push.
+- **Punkt wyjścia:** dane, zgody i segmenty.
+- **Miara sukcesu:** przychód z bazy klientów.
 
 ## Dla kogo CreativeTrust wdraża marketing automation
 

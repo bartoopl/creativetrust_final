@@ -103,6 +103,11 @@ const faqs = [
         answer:
             'Nie. Plan naprawy zostaje u Was i możecie wdrożyć go samodzielnie lub z obecną agencją. Jeśli chcecie, pomożemy we wdrożeniu poprawek.',
     },
+    {
+        question: 'Czym audyt Google Ads różni się od audytu e-commerce?',
+        answer:
+            'Audyt Google Ads dotyczy jednego kanału: konta reklamowego, pomiaru konwersji i budżetu. Audyt e-commerce obejmuje cały sklep: sprzedaż, marżę, technologię i pracę zespołu, w tym koszty wszystkich kanałów. Jeśli problem nie kończy się na reklamach, zacznij od audytu e-commerce.',
+    },
 ];
 
 export default function GoogleAdsAuditPage() {

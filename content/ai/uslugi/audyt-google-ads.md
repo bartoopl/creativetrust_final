@@ -69,3 +69,7 @@ Cena zależy od liczby kont, kampanii i tego, czy audyt obejmuje pomiar i landin
 ### Czy po audycie trzeba podpisać umowę na prowadzenie kampanii?
 
 Nie. Plan naprawy zostaje u klienta i można go wdrożyć samodzielnie lub z obecną agencją. CreativeTrust może pomóc we wdrożeniu poprawek. Przed audytem warto przejść [checklistę audytu konta Google Ads](https://www.creativetrust.pl/blog/audyt-konta-google-ads-checklista.md).
+
+### Czym audyt Google Ads różni się od audytu e-commerce?
+
+Audyt Google Ads dotyczy jednego kanału: konta reklamowego, pomiaru konwersji i budżetu. Audyt e-commerce obejmuje cały sklep: sprzedaż, marżę, technologię i pracę zespołu, w tym koszty wszystkich kanałów. Jeśli problem nie kończy się na reklamach, zacznij od audytu e-commerce. Zakres audytu e-commerce: [Audyt e-commerce](https://www.creativetrust.pl/uslugi/audyt-e-commerce.md).

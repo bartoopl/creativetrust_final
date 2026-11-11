@@ -166,7 +166,7 @@ test('one company description and founding year across JSON-LD, llms.txt and the
     const org = organizationSchema['@graph'].find((node) => node['@type'] === 'Organization');
     assert.equal(org.description, COMPANY_DESCRIPTION);
     assert.equal(SUMMARY, COMPANY_DESCRIPTION, 'llms.txt summary matches the Organization description');
-    assert.match(COMPANY_DESCRIPTION, /AI-native partner produktowy/);
+    assert.match(COMPANY_DESCRIPTION, /audytuje sklepy internetowe i zarządza e-commerce/);
     assert.doesNotMatch(COMPANY_DESCRIPTION, /agencja marketingowa|performance marketing/i);
     assert.equal(org.foundingDate, FOUNDING_YEAR);
     assert.ok(org.logo?.url?.startsWith(SITE_URL), 'Organization has a logo');

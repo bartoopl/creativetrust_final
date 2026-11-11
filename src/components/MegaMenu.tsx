@@ -10,18 +10,20 @@ const copy = {
     pl: {
         close: 'Zamknij menu',
         eyebrow: 'Zakres usług',
-        lead: 'Wybierasz obszar, my spinamy strategię, wykonanie i rozwój.',
-        body: 'Najczęściej wchodzimy od jednego problemu, ale układamy całość tak, żeby oferta, treść i sprzedaż pracowały razem.',
+        lead: 'Audytujemy, prowadzimy i budujemy e-commerce.',
+        body: 'Audyt pokazuje, co hamuje sprzedaż i marżę. Sklepy i strony internetowe budujemy także jako osobne projekty.',
         all: { href: '/uslugi', label: 'Wszystkie usługi →' },
-        contact: { href: '/kontakt', label: 'Kontakt →' },
+        contact: { href: '/uslugi/audyt-e-commerce#formularz', label: 'Zamów audyt →' },
+        landings: 'Konkretne potrzeby',
     },
     en: {
         close: 'Close menu',
         eyebrow: 'What we do',
-        lead: 'You pick the area; we tie together strategy, delivery and growth.',
-        body: 'We usually start from a single problem, then shape the whole so your offer, content and sales work together.',
+        lead: 'We audit, run and build e-commerce.',
+        body: 'The audit shows what is holding back sales and margin. We also build online stores and websites as standalone projects.',
         all: { href: '/en/services', label: 'All services →' },
-        contact: { href: '/en/contact', label: 'Contact →' },
+        contact: { href: '/en/services/e-commerce-audit#form', label: 'Order an audit →' },
+        landings: 'Landing pages',
     },
 };
 
@@ -104,7 +106,7 @@ export default function MegaMenu({ id, locale, isOpen, onClose, panelRef, onPoin
                             </div>
 
                             <div className="flex flex-col gap-3 py-8 lg:pl-8" style={{ background: 'var(--panel)' }}>
-                                <span className="ct-eyebrow" style={{ color: 'var(--muted)' }}>Landing pages</span>
+                                <span className="ct-eyebrow" style={{ color: 'var(--muted)' }}>{t.landings}</span>
                                 <div className="flex flex-col">
                                     {seoLandings.map((item) => (
                                         <Link

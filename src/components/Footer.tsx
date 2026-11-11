@@ -14,15 +14,16 @@ const copy: Record<Locale, {
     pl: {
         home: '/',
         homeLabel: 'CreativeTrust — strona główna',
-        lead: 'Strony www, ecommerce headless, marketing automation i social media — z tempem AI.',
+        lead: 'Audytujemy i prowadzimy e-commerce z zewnątrz. Projektujemy i budujemy sklepy oraz strony internetowe.',
         servicesTitle: 'Usługi',
         companyTitle: 'Firma',
         services: [
-            { href: '/uslugi/strony-www', label: 'Strony www' },
-            { href: '/uslugi/e-commerce', label: 'Ecommerce headless' },
+            { href: '/uslugi/audyt-e-commerce', label: 'Audyt e-commerce' },
+            { href: '/uslugi/zarzadzanie-e-commerce', label: 'Zarządzanie e-commerce' },
+            { href: '/uslugi/e-commerce', label: 'Sklepy internetowe' },
+            { href: '/uslugi/strony-www', label: 'Strony internetowe' },
             { href: '/uslugi/marketing-automation', label: 'Marketing automation' },
             { href: '/uslugi/social-media', label: 'Social media' },
-            { href: '/uslugi/konsulting-e-commerce', label: 'Konsulting e-commerce' },
         ],
         company: [
             { href: '/o-nas', label: 'O nas' },
@@ -38,15 +39,16 @@ const copy: Record<Locale, {
     en: {
         home: '/en',
         homeLabel: 'CreativeTrust — home',
-        lead: 'Websites, headless e-commerce, marketing automation and social media — at AI speed.',
+        lead: 'We audit and manage e-commerce from the outside. We also design and build online stores and websites.',
         servicesTitle: 'Services',
         companyTitle: 'Company',
         services: [
+            { href: '/en/services/e-commerce-audit', label: 'E-commerce audit' },
+            { href: '/en/services/e-commerce-management', label: 'E-commerce management' },
+            { href: '/en/services/e-commerce', label: 'Online stores' },
             { href: '/en/services/websites', label: 'Websites' },
-            { href: '/en/services/e-commerce', label: 'Headless e-commerce' },
             { href: '/en/services/marketing-automation', label: 'Marketing automation' },
             { href: '/en/services/social-media', label: 'Social media' },
-            { href: '/en/services/e-commerce-consulting', label: 'E-commerce consulting' },
         ],
         company: [
             { href: '/en/about', label: 'About' },

@@ -5,12 +5,12 @@ import { pageAlternates } from '@/lib/i18n';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
-    title: 'Contact | Book an AI-native consultation',
-    description: 'Let’s talk about your project. A 30-minute consultation — we will show you where AI can genuinely save time and improve results. Strategy, design, development, automation.',
+    title: 'Contact | Book a conversation about your e-commerce',
+    description: 'Let’s talk about your e-commerce. A short, no-obligation call: a store audit, outsourced e-commerce management or a specific build.',
     alternates: pageAlternates('/kontakt', 'en', SITE_URL),
     openGraph: {
-        title: 'Contact | Book an AI-native consultation | CreativeTrust',
-        description: 'Let’s talk about your project. A 30-minute consultation — we will show you where AI can genuinely save time and improve results.',
+        title: 'Contact | Book a conversation about your e-commerce | CreativeTrust',
+        description: 'Let’s talk about your e-commerce. A short, no-obligation call: a store audit, outsourced e-commerce management or a specific build.',
         url: `${SITE_URL}/en/contact`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',
     },
 };
@@ -31,7 +31,7 @@ export default function ContactPage() {
                             Let’s start with a conversation.
                         </h1>
                         <p className="ct-lead" style={{ maxWidth: '48ch', margin: '0 0 36px' }}>
-                            A 30-minute, no-obligation consultation. We will show you where AI can genuinely save you time and improve your results — specifically, with no marketing fluff.
+                            A short, no-obligation call. You tell us what is holding back your sales or margin today, and we tell you whether to start with an audit, e-commerce management or a specific build.
                         </p>
 
                         <div className="ct-grid-lines grid-cols-1 sm:grid-cols-2" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
@@ -56,7 +56,7 @@ export default function ContactPage() {
                         <div className="ct-panel" style={{ marginTop: 24, padding: 22, background: 'var(--panel)' }}>
                             <div className="ct-eyebrow" style={{ marginBottom: 6 }}>What you can describe in the form</div>
                             <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-                                {['What you want to improve: brand, website, online shop, automation', 'Project scale and timeframe', 'Indicative budget (optional)'].map((item, i) => (
+                                {['What you want to improve: sales, margin, team workflow, the store', 'Sales volume and store platform', 'Indicative budget (optional)'].map((item, i) => (
                                     <li key={item} className="flex items-center gap-3" style={{ padding: '10px 0', borderTop: i === 0 ? 'none' : '1px solid var(--line)', fontSize: 14, color: 'var(--text-2)', lineHeight: 1.5 }}>
                                         <span className="ct-bullet" />
                                         {item}

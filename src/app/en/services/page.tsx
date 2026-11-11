@@ -8,17 +8,21 @@ import { SITE_URL, buildFaqSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: 'Services | Websites, e-commerce, AI and automation',
-    description: 'Web design, e-commerce, marketing automation and AI — in one team. We work from diagnosis through to launch and growth. Results, not promises.',
+    title: 'Services | E-commerce audit and management, online stores and websites',
+    description: 'E-commerce audit, outsourced e-commerce management, and the design and build of online stores and websites. Plus marketing automation and social media — in one team.',
     alternates: pageAlternates('/uslugi', 'en', SITE_URL),
 };
 
+const leadServices = [
+    { num: '01', title: 'E-commerce audit', href: '/en/services/e-commerce-audit', description: 'Sales, margin, technology and team workflow. A report and roadmap in 5–7 working days, for a fixed fee.', tags: ['Report', 'Roadmap', '5–7 working days'] },
+    { num: '02', title: 'E-commerce management', href: '/en/services/e-commerce-management', description: 'We run e-commerce for you as an external team: sales plan, margin, team, suppliers and performance reporting.', tags: ['Monthly retainer', 'Plan and margin', 'One team'] },
+];
+
 const services = [
-    { num: '01', title: 'Websites', href: '/en/services/websites', description: 'Websites and landing pages designed for conversion, SEO and speed.', tags: ['Company websites', 'Landing pages', 'Next.js'] },
-    { num: '02', title: 'E-commerce', href: '/en/services/e-commerce', description: 'Headless stores and migrations that sell and scale without the pain.', tags: ['Headless', 'Migrations', 'Integrations'] },
-    { num: '03', title: 'Social Media', href: '/en/services/social-media', description: 'Communication built for reach, consistency and sales — not just for publishing.', tags: ['Strategy', 'Content', 'Analytics'] },
-    { num: '04', title: 'Marketing Automation', href: '/en/services/marketing-automation', description: 'Funnels, CRM and campaigns driven by data and AI. They work while you sleep.', tags: ['SALESmanago', 'Lead nurturing', 'AI'] },
-    { num: '05', title: 'E-commerce consulting', href: '/en/services/e-commerce-consulting', description: 'Sales, margin and store architecture. We start with a paid Bottleneck Diagnosis.', tags: ['Diagnosis', 'Margins', 'Dashboards'] },
+    { num: '03', title: 'Online stores', href: '/en/services/e-commerce', description: 'We design and build stores: headless, WooCommerce, Shopify, migrations and ERP integrations.', tags: ['Headless', 'Migrations', 'Integrations'] },
+    { num: '04', title: 'Websites', href: '/en/services/websites', description: 'Company websites, landing pages and portals with a clear role in sales. Fast and ready for SEO.', tags: ['Company websites', 'Landing pages', 'Next.js'] },
+    { num: '05', title: 'Marketing Automation', href: '/en/services/marketing-automation', description: 'SALESmanago and scenarios that earn from your customer base: abandoned carts, recommendations, reactivation.', tags: ['SALESmanago', 'Scenarios', 'CRM'] },
+    { num: '06', title: 'Social Media', href: '/en/services/social-media', description: 'Content, campaigns and community tied to your sales calendar and offer.', tags: ['Strategy', 'Content', 'Campaigns'] },
 ];
 
 const landingPages = [
@@ -50,17 +54,17 @@ const landingPages = [
 ];
 
 const process = [
-    { num: '01', title: 'Diagnosis', description: 'Audit, data, goals. AI speeds up research and competitor analysis.' },
-    { num: '02', title: 'Design', description: 'Strategy and design. We generate and test variants faster than ever.' },
-    { num: '03', title: 'Implementation', description: 'AI-assisted development. Shorter time-to-market, fewer bugs.' },
-    { num: '04', title: 'Growth', description: 'Optimisation in a loop. Models learn from your data and results.', featured: true },
+    { num: '01', title: 'Introductory call', description: '15 minutes. We check whether an audit makes business sense in your case.' },
+    { num: '02', title: 'Audit', description: 'Interview, data and back-end analysis. A report and roadmap in 5–7 working days.' },
+    { num: '03', title: 'Management', description: 'We run e-commerce for you as an external team on a monthly retainer: plan, margin, team, suppliers.' },
+    { num: '04', title: 'Build and delivery', description: 'Stores, websites and roadmap changes are delivered by the same team. AI shortens research and production.', featured: true },
 ];
 
 const faq = [
-    { q: 'Where is the best place to start?', a: 'Most often with a diagnosis: brand, website, store or automation. The choice depends on where you are losing the most potential today.' },
-    { q: 'Do you combine several services in one project?', a: 'Yes. It is usually a better model than commissioning websites, e-commerce and communication separately from different suppliers.' },
+    { q: 'Where is the best place to start?', a: 'With an e-commerce audit. In 5–7 working days it shows where the store is losing sales, margin and team time, and sets out priorities for what comes next.' },
+    { q: 'Do we have to order management to get an audit?', a: 'No. The roadmap stays with you and you can implement it yourselves. If you decide on an ongoing engagement, we deduct the cost of the audit in the first month.' },
+    { q: 'Can we order just a store or a website, without an audit?', a: 'Yes. We also design and build online stores and websites as standalone projects. The same goes for marketing automation and social media.' },
     { q: 'What role does AI play in projects?', a: 'AI speeds up research, variant generation, development and optimisation. Decisions stay with people — we know when and where AI genuinely helps.' },
-    { q: 'Can you start with an audit?', a: 'Yes. An audit is a good starting point if you need to decide what to do next and in what order. For online stores we offer the Bottleneck and eCommerce Architecture Diagnosis as part of e-commerce consulting.' },
 ];
 
 export default function ServicesPage() {
@@ -71,13 +75,13 @@ export default function ServicesPage() {
             <SchemaScript schema={faqSchema} />
             <PageHero
                 eyebrow="Services"
-                title="One team. Full range."
-                description="Strategy, design, development and AI automation in one process — no handing the baton between agencies."
-                cta={{ label: 'Book a consultation', href: '/en/contact' }}
-                ctaSecondary={{ label: 'See what we offer', href: '#zakres' }}
+                title="We audit, run and build e‑commerce."
+                description="We audit online stores and run brands' e-commerce as an external team. We also design and build online stores and websites — as standalone projects or as delivery of the roadmap from an audit."
+                cta={{ label: 'Order an e-commerce audit', href: '/en/services/e-commerce-audit#form' }}
+                ctaSecondary={{ label: 'See our services', href: '#zakres' }}
                 right={
                     <div className="ct-grid-lines grid-cols-2" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-                        {[['Priority', 'A clear message and a smooth process'], ['Outcome', 'Less friction, more results'], ['Model', 'Strategy + delivery'], ['Scope', 'Brand, web, commerce, AI']].map(([label, val]) => (
+                        {[['First step', 'E-commerce audit in 5–7 working days'], ['Ongoing work', 'External e-commerce management'], ['Build', 'Online stores and websites'], ['Experience', '5.10.15, Quiosque, Monnari Capital Group']].map(([label, val]) => (
                             <div key={label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
                                 <span className="ct-meta">{label}</span>
                                 <span style={{ fontSize: 15, fontWeight: 500, lineHeight: 1.5 }}>{val}</span>
@@ -87,7 +91,25 @@ export default function ServicesPage() {
                 }
             />
 
-            <Section id="zakres" eyebrow="Our services" title="Modules you can launch separately or combine." border={false}>
+            <Section id="zakres" eyebrow="Audit and management" title="Two services that most engagements start with." border={false}>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    {leadServices.map((s) => (
+                        <Link key={s.href} href={s.href} className="ct-card-hover flex flex-col gap-6 no-underline" style={{ padding: 'clamp(24px, 3vw, 36px)', background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', color: 'var(--text)' }}>
+                            <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--accent)' }}>{s.num}</span>
+                            <div className="flex flex-col gap-3">
+                                <h3 style={{ margin: 0, fontSize: 'clamp(24px, 2.6vw, 32px)', fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.15 }}>{s.title}</h3>
+                                <p className="ct-body" style={{ fontSize: 16, maxWidth: '48ch' }}>{s.description}</p>
+                            </div>
+                            <div className="mt-auto flex flex-wrap items-center gap-2">
+                                {s.tags.map(t => <span key={t} className="ct-pill">{t}</span>)}
+                                <span className="ct-mono ml-auto" style={{ fontSize: 18, color: 'var(--accent)' }} aria-hidden="true">→</span>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </Section>
+
+            <Section id="wdrozenia" eyebrow="We design and build" title="Online stores and websites — also as standalone projects." className="scroll-mt-20">
                 <div className="flex flex-col" style={{ border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {services.map((s, i) => (
                         <Link
@@ -112,7 +134,7 @@ export default function ServicesPage() {
                 </div>
             </Section>
 
-            <Section tint eyebrow="SEO landing pages" title="Pages for specific search phrases and buying intent.">
+            <Section tint eyebrow="Specific needs" title="The stores and websites people ask about most.">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     {landingPages.map((page) => (
                         <Link key={page.href} href={page.href} className="ct-card-hover flex items-start justify-between gap-6 no-underline" style={{ padding: 24, background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', color: 'var(--text)' }}>
@@ -127,7 +149,7 @@ export default function ServicesPage() {
             </Section>
 
             {/* Process */}
-            <Section eyebrow="How we work" title="A process powered by AI.">
+            <Section eyebrow="How we work" title="From a first conversation to ongoing collaboration.">
                 <ol className="ct-grid-lines grid-cols-1 sm:grid-cols-2 xl:grid-cols-4" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                     {process.map((step) => (
                         <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>

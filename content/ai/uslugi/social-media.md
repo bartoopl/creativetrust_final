@@ -1,10 +1,10 @@
 ---
-title: "Social Media Marketing — CreativeTrust | Strategia, content, wyniki"
-description: "Budujemy obecność w Social Media, która sprzedaje — nie tylko buduje zasięg. Strategia, content plan, community management i analityka w jednym procesie."
-date: "2026-10-27"
+title: "Social Media dla marek — CreativeTrust | Strategia, content, kampanie"
+description: "Prowadzimy social media marek tak, żeby pracowały na sprzedaż: strategia, content, kampanie i społeczność zaplanowane razem z kalendarzem sprzedaży i ofertą."
+date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/uslugi/social-media"
 lang: "pl-PL"
-ai_summary: "CreativeTrust prowadzi social media jako kanał sprzedaży i budowania marki: strategia, content plan i produkcja, community management, płatne kampanie (Meta Ads, LinkedIn Ads), analityka i AI w produkcji contentu. Platformy: Instagram, Facebook, LinkedIn, TikTok, YouTube, X, Pinterest, Threads."
+ai_summary: "CreativeTrust prowadzi social media marek jako kanał sprzedaży spięty z e-commerce: strategia, content plan i produkcja, community management, płatne kampanie (Meta Ads, LinkedIn Ads), cotygodniowy raport ze sprzedażą i kosztem oraz AI w produkcji contentu. Platformy: Instagram, Facebook, LinkedIn, TikTok, YouTube, X, Pinterest, Threads."
 target_audience:
   - "Firmy, które chcą, żeby social media sprzedawały, a nie tylko budowały zasięg"
   - "Marki potrzebujące systemowego content planu i kampanii płatnych"
@@ -20,23 +20,23 @@ semantic_keywords:
 
 # Social media w CreativeTrust
 
-CreativeTrust buduje obecność w mediach społecznościowych jako kanał sprzedaży i budowania marki, a nie tylko obowiązek. Strategia, content, kampanie i analityka działają w jednym procesie.
+CreativeTrust prowadzi komunikację marek tak, żeby pracowała na sklep i sprzedaż: content, kampanie i społeczność są planowane razem z kalendarzem sprzedaży, ofertą i bazą klientów.
 
 ## Zakres współpracy social media w CreativeTrust
 
-1. **Strategia social media** — audyt, pozycjonowanie, harmonogram i cele, zanim pojawi się pierwszy post.
-2. **Content plan i produkcja** — grafiki, wideo, copywriting i reels tworzone systemowo, nie ad hoc.
+1. **Strategia social media** — audyt, pozycjonowanie, harmonogram i cele, spięte z kalendarzem sprzedaży.
+2. **Content plan i produkcja** — grafiki, wideo, copywriting i reels tworzone systemowo, pod premiery, sezon i promocje.
 3. **Community management** — odpowiadanie, angażowanie i budowanie relacji z odbiorcami marki.
-4. **Płatne kampanie** — Meta Ads i LinkedIn Ads: targetowanie, kreacje i optymalizacja pod wynik.
-5. **Analityka i raportowanie** — co tydzień wiadomo, co działa; decyzje oparte na danych, nie intuicji.
-6. **AI w produkcji contentu** — szybciej, więcej wariantów, lepsza personalizacja; AI jako narzędzie, nie zamiennik kreacji.
+4. **Płatne kampanie** — Meta Ads i LinkedIn Ads: targetowanie, kreacje i optymalizacja pod sprzedaż i koszt pozyskania.
+5. **Analityka i raportowanie** — co tydzień wiadomo, co działa; w raporcie jest sprzedaż i koszt, nie tylko zasięg.
+6. **AI w produkcji contentu** — szybciej i w większej liczbie wariantów; AI jako narzędzie, nie zamiennik kreacji.
 
-## Social media CreativeTrust w liczbach
+## Jak CreativeTrust podchodzi do social mediów
 
-- **2–5×** średni wzrost zasięgu organicznego po wdrożeniu strategii
-- **60%** wyższe zaangażowanie przy systemowym content planie
-- **30%** niższy koszt pozyskania klienta przez płatne kampanie
-- **15+** lat w budowaniu marek i ich komunikacji
+- **Cel:** sprzedaż i baza klientów, nie same zasięgi.
+- **Plan:** jeden kalendarz z ofertą i promocjami.
+- **Raport:** co tydzień — sprzedaż, koszt, zasięg.
+- **Zakres:** strategia, content, kampanie, społeczność.
 
 ## Platformy social media obsługiwane przez CreativeTrust
 
@@ -65,4 +65,4 @@ Tak. CreativeTrust produkuje grafiki, wideo, copywriting i reels w ramach system
 
 ### Jak często dostanę raport z wyników social media?
 
-Co tydzień. Analityka i raportowanie pokazują, co działa, żeby decyzje opierały się na danych.
+Co tydzień. Raport pokazuje sprzedaż, koszt i zasięg, żeby decyzje opierały się na danych.

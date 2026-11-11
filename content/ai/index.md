@@ -1,61 +1,76 @@
 ---
-title: "CreativeTrust — Projekty cyfrowe, które działają biznesowo"
-description: "Strony www, ecommerce headless, marketing automation i social media. Strategia, design i wdrożenie w jednym zespole."
-date: "2026-10-27"
+title: "CreativeTrust — Audyt, zarządzanie i budowa e-commerce"
+description: "Audytujemy i prowadzimy e-commerce marek z zewnątrz. Projektujemy i budujemy sklepy oraz strony internetowe. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari."
+date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/"
 lang: "pl-PL"
-ai_summary: "CreativeTrust to AI-native partner produktowy z Gorzowa Wielkopolskiego, działający od 2010 roku. W jednym zespole łączy strategię, design, development i automatyzację AI: projektuje i wdraża strony WWW, sklepy e-commerce (w tym headless), marketing automation (SALESmanago) i social media."
+ai_summary: "CreativeTrust z Gorzowa Wielkopolskiego, działający od 2010 roku, audytuje sklepy internetowe i zarządza e-commerce marek z zewnątrz, a także projektuje i buduje sklepy internetowe (w tym headless) oraz strony WWW. Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Wdraża też marketing automation (SALESmanago) i prowadzi social media."
 target_audience:
-  - "Firmy B2B i B2C planujące nową stronę WWW lub przebudowę obecnej"
-  - "Sklepy internetowe, które rosną ponad możliwości swojej platformy"
-  - "Zespoły marketingu i sprzedaży, które chcą automatyzować pracę z leadami"
+  - "Właściciele, zarządy i dyrektorzy e-commerce marek sprzedających online"
+  - "Sklepy internetowe, w których sprzedaż rośnie szybciej niż marża i procesy"
+  - "Firmy, które szukają e-commerce managera lub zespołu do prowadzenia e-commerce z zewnątrz"
 semantic_keywords:
-  - "agencja digital"
-  - "tworzenie stron www"
-  - "e-commerce headless"
+  - "audyt e-commerce"
+  - "zarządzanie e-commerce"
+  - "e-commerce manager z zewnątrz"
+  - "outsourcing e-commerce"
+  - "konsulting e-commerce"
+  - "marżowość sklepu internetowego"
+  - "sklepy internetowe"
+  - "tworzenie stron internetowych"
+  - "wdrożenia e-commerce"
   - "Medusa.js"
-  - "Next.js"
-  - "marketing automation"
   - "SALESmanago"
-  - "social media"
-  - "AI w projektach cyfrowych"
 ---
 
-# CreativeTrust — projekty cyfrowe, które działają biznesowo
+# CreativeTrust — audyt, zarządzanie i budowa e-commerce
 
-CreativeTrust projektuje i wdraża strony WWW, sklepy e-commerce headless, marketing automation i komunikację w social media. AI skraca research i produkcję, a zespół pilnuje decyzji, jakości i wyniku.
+CreativeTrust prowadzi e-commerce marek, które chcą rosnąć z zyskiem. Audytuje sklepy i zarządza e-commerce z zewnątrz, a także projektuje i buduje sklepy oraz strony internetowe — tak, jak sam chciałby nimi zarządzać.
+
+## Doświadczenie CreativeTrust
+
+Zespół CreativeTrust opiera pracę na doświadczeniu w zarządzaniu e-commerce i budowaniu rosnących marek na polskim rynku:
+
+- **5.10.15** — doświadczenie w zarządzaniu e-commerce ogólnopolskiej marki odzieży dziecięcej.
+- **Quiosque** — doświadczenie w zarządzaniu e-commerce ogólnopolskiej marki mody damskiej.
+- **Monnari** — praca przy rozwoju Grupy Kapitałowej Monnari.
+
+## CreativeTrust w liczbach
+
+- **15+** lat na rynku
+- **3** ogólnopolskie marki odzieżowe w doświadczeniu zespołu
+- **150+** zrealizowanych projektów
 
 ## Czym zajmuje się CreativeTrust
 
-CreativeTrust łączy strategię, design i wdrożenie w jednym zespole. Agencja prowadzi cztery obszary usług, które można uruchamiać osobno lub łączyć:
+Oferta CreativeTrust ma cztery główne części:
 
-- **Strony WWW** — projekty oparte o cel biznesowy, wdrożenie przyspieszone przez AI i UX, który konwertuje. Szczegóły: [Strony WWW](https://www.creativetrust.pl/uslugi/strony-www.md).
-- **E-commerce** — architektura headless i Medusa.js, pełna kontrola bez vendor lock-in, integracje z ERP, CRM i marketplace. Szczegóły: [E-commerce](https://www.creativetrust.pl/uslugi/e-commerce.md).
-- **Marketing automation** — sekwencje e-mail, SMS i push, segmentacja i lead scoring, raportowanie w czasie rzeczywistym. Szczegóły: [Marketing Automation](https://www.creativetrust.pl/uslugi/marketing-automation.md).
-- **Social media** — strategia i harmonogram contentowy, tworzenie treści i grafik, community management i reklamy. Szczegóły: [Social Media](https://www.creativetrust.pl/uslugi/social-media.md).
+- **Audyt e-commerce** — sprzedaż, marża, technologia i praca zespołu sklepu. Raport i roadmapa w 5–7 dni roboczych, za stałą kwotę znaną z góry. Szczegóły: [Audyt e-commerce](https://www.creativetrust.pl/uslugi/audyt-e-commerce.md).
+- **Zarządzanie e-commerce z zewnątrz** — plan sprzedaży, marża, zespół, dostawcy i raportowanie wyników w miesięcznym abonamencie. Szczegóły: [Zarządzanie e-commerce](https://www.creativetrust.pl/uslugi/zarzadzanie-e-commerce.md).
+- **Sklepy internetowe** — projekt i budowa sklepów: headless, WooCommerce, Shopify, migracje platform i integracje z ERP. Szczegóły: [Sklepy internetowe](https://www.creativetrust.pl/uslugi/e-commerce.md).
+- **Strony internetowe** — strony firmowe, landing pages i portale z konkretną rolą w sprzedaży; landing page od 3 500 zł netto. Szczegóły: [Strony internetowe](https://www.creativetrust.pl/uslugi/strony-www.md).
+
+Uzupełnieniem są [marketing automation](https://www.creativetrust.pl/uslugi/marketing-automation.md) i [social media](https://www.creativetrust.pl/uslugi/social-media.md).
 
 ## Dlaczego klienci wybierają CreativeTrust
 
-CreativeTrust nie jest agencją od „ładnych rzeczy”, tylko partnerem, który wdraża szybko:
+CreativeTrust patrzy na sklep jak zarząd, nie jak wykonawca:
 
-- **Biznes, nie tylko estetyka** — każda decyzja projektowa jest decyzją biznesową.
-- **Ludzka decyzja + tempo AI** — doświadczenie biznesowe i wdrożenia przyspieszone przez AI, bez utraty jakości.
-- **Kompleksowa obsługa** — strony, sklepy, marketing automation i social media pod jednym dachem.
-- **Open source i sprawdzone technologie** — Medusa.js, Next.js, React. Zero vendor lock-in i pełna kontrola nad kodem.
+- **Zarządzanie e-commerce znane z praktyki** — doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.
+- **Marża, nie tylko przychód** — zespół patrzy na zysk, zwroty, koszty kanałów i czas zespołu, a nie na sam ruch i obrót.
+- **Doradztwo i budowa** — ten sam zespół stawia diagnozę, projektuje i wdraża sklepy oraz strony.
+- **Brak sprzedaży platformy** — open source i sprawdzone technologie (Medusa.js, Next.js, React); zmianę systemu CreativeTrust rekomenduje tylko wtedy, gdy się opłaca.
 
-## Jak wygląda proces CreativeTrust
+## Jak wygląda współpraca z CreativeTrust
 
-Proces CreativeTrust ma pięć kroków, a AI wspiera każdy z nich:
-
-1. **Brief** (1–2 dni) — rozmowa o biznesie, celach i KPI.
-2. **AI Strategia** (2–3 dni) — AI analizuje rynek i dane, zespół projektuje plan.
-3. **Design** (3–5 dni) — prototypy i UI/UX w godzinach, nie tygodniach.
-4. **Wdrożenie** (1–4 tygodnie) — AI przyspiesza kodowanie, według CreativeTrust nawet 3× względem standardowego procesu.
-5. **Launch i wzrost** (praca ciągła) — start, monitoring i optymalizacja od pierwszego dnia.
+1. **Rozmowa wstępna** (15 minut) — sprawdzenie, czy audyt ma sens biznesowy. Bez zobowiązań.
+2. **Audyt e-commerce** (5–7 dni roboczych) — wywiad, analiza danych i zaplecza sklepu, za stałą kwotę znaną z góry.
+3. **Roadmapa** (na koniec audytu) — priorytety w kolejności wpływu na zysk i czas zespołu, z wyceną ich realizacji.
+4. **Zarządzanie i wdrożenia** (miesięczny abonament) — CreativeTrust prowadzi e-commerce z zewnątrz i wdraża zmiany. Koszt audytu jest odliczany w pierwszym miesiącu.
 
 ## Klienci i opinie o CreativeTrust
 
-Wśród marek, z którymi pracuje CreativeTrust, są: Monnari, Quiosque, 5.10.15, Kliniki Ziemlewski, Katarzyna Batkowska, Sulphur Busko Zdrój, ZIPH, Selfia i Kaskat.
+Wśród klientów CreativeTrust są: Kliniki Ziemlewski, Katarzyna Batkowska, Sulphur Busko Zdrój, ZIPH, Selfia i Kaskat.
 
 Wybrane opinie klientów ze strony głównej:
 
@@ -67,22 +82,26 @@ Wybrane opinie klientów ze strony głównej:
 
 ## Najczęstsze pytania o CreativeTrust
 
-### Czy CreativeTrust robi strony internetowe i sklepy w jednym zespole?
+### Od czego zaczyna się współpraca z CreativeTrust?
 
-Tak. CreativeTrust prowadzi strony WWW, sklepy e-commerce, marketing automation i social media pod jednym dachem, więc nie trzeba koordynować kilku wykonawców.
+Od 15-minutowej rozmowy wstępnej, a potem od audytu e-commerce. Audyt trwa 5–7 dni roboczych i kończy się raportem oraz roadmapą z priorytetami.
 
-### Na jakich technologiach pracuje CreativeTrust?
+### Czy CreativeTrust może poprowadzić e-commerce zamiast wewnętrznego działu?
 
-CreativeTrust stawia na open source i sprawdzone technologie: Next.js, React i Medusa.js. Dzięki temu klient ma pełną kontrolę nad kodem i nie jest uzależniony od jednej platformy (zero vendor lock-in).
+Tak. CreativeTrust przejmuje rolę e-commerce managera tam, gdzie jej brakuje, albo wzmacnia istniejący zespół o zarządzanie, analitykę i wdrożenia. Zakres jest ustalany po audycie.
 
-### Jak CreativeTrust wykorzystuje AI w projektach?
+### Jakie doświadczenie w e-commerce ma CreativeTrust?
 
-AI skraca research, analizę rynku, projektowanie prototypów i kodowanie. Decyzje, jakość i odpowiedzialność za wynik zostają po stronie zespołu.
+Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Firma działa od 2010 roku.
 
-### Ile trwa wdrożenie projektu w CreativeTrust?
+### Czy CreativeTrust tworzy sklepy i strony internetowe?
 
-Etap wdrożenia trwa zwykle od 1 do 4 tygodni. Wcześniej są brief (1–2 dni), strategia (2–3 dni) i design (3–5 dni), a po starcie — ciągła optymalizacja.
+Tak. CreativeTrust projektuje i buduje sklepy internetowe (w tym headless na Medusa.js) oraz strony WWW — także jako osobne projekty, bez audytu. To samo dotyczy marketing automation i social mediów.
 
-### Jak umówić konsultację z CreativeTrust?
+### Ile kosztuje audyt e-commerce w CreativeTrust?
 
-Przez formularz na stronie [Kontakt](https://www.creativetrust.pl/kontakt.md), mailowo (office@creativetrust.pl) lub telefonicznie (+48 570 526 421). Pierwsza konsultacja jest bezpłatna.
+Audyt ma stałą kwotę ustalaną z góry na rozmowie wstępnej. Przy stałej współpracy jest ona odliczana w pierwszym miesiącu.
+
+### Jak umówić rozmowę z CreativeTrust?
+
+Przez formularz na stronie [Kontakt](https://www.creativetrust.pl/kontakt.md), mailowo (office@creativetrust.pl) lub telefonicznie (+48 570 526 421). Pierwsza rozmowa jest bezpłatna.

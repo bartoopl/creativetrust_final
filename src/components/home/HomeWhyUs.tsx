@@ -17,7 +17,7 @@ export default function HomeWhyUs({ locale }: { locale: Locale }) {
                         return (
                             <li
                                 key={reason.title}
-                                className={`${dark ? 'ct-bento' : 'ct-tile'} flex flex-col justify-between gap-10 ${i === 0 || i === 3 ? 'md:col-span-3' : 'md:col-span-2'}`}
+                                className={`${dark ? 'ct-bento' : 'ct-tile'} flex flex-col justify-between gap-10 ${dark ? 'md:col-span-3' : 'md:col-span-2'}`}
                                 style={{ padding: 'clamp(24px, 3vw, 36px)', minHeight: 240 }}
                             >
                                 <span className="ct-mono" style={{ fontSize: 13, color: dark ? '#9a9a9a' : 'var(--muted-2)' }}>
