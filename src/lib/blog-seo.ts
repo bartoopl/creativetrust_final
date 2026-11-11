@@ -20,6 +20,12 @@ type InlineLink = {
     after: string;
 };
 
+/** Text with optional links: `['Zobacz ', { text: 'cennik', href: '/cennik' }, '.']`. */
+type Rich = string | Array<string | { text: string; href: string }>;
+
+/** A body written in code. `toPortableText` turns it into the blocks Sanity would send. */
+type AuthoredBlock = { h2: string } | { h3: string } | { p: Rich } | { bullet: Rich } | { number: Rich };
+
 type ParagraphFix = {
     /** Paragraph text as stored in Sanity. Once an editor changes it, the fix stops applying. */
     from: string;
@@ -47,6 +53,8 @@ type BlogSeoConfig = {
     heading?: string;
     headings?: HeadingFix[];
     inlineLink?: InlineLink;
+    /** Replaces the whole Sanity body; `headings`, `paragraphs`, `inlineLink` and `faq` are then ignored. */
+    body?: AuthoredBlock[];
     paragraphs?: ParagraphFix[];
     /** Rendered as H2 + H3 questions and emitted as FAQPage JSON-LD. */
     faq?: FaqSection;
@@ -129,6 +137,142 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
             anchor: 'projektowanie stron www',
             after: '.',
         },
+    },
+    // WEW-18: the page for „co to jest ssl”. /baza-wiedzy/ssl is the short glossary entry and links here.
+    'ssl-co-to-jest-i-czy-jest-potrzebne-4-powody-dla-ktorych-powinienes-go-wlaczyc': {
+        title: 'Co to jest SSL? Jak działa certyfikat SSL i czy jest potrzebny | CreativeTrust',
+        description:
+            'SSL to certyfikat szyfrujący połączenie ze stroną (kłódka i https). Wyjaśniamy prosto, jak działa, jakie są rodzaje SSL i jak wpływa na SEO.',
+        links: [],
+        heading: 'Co to jest SSL i czy jest potrzebny? 4 powody, by go włączyć',
+        body: [
+            {
+                p: 'SSL to certyfikat szyfrujący połączenie między przeglądarką a stroną internetową – dzięki niemu adres zaczyna się od https, a w pasku przeglądarki widać kłódkę.',
+            },
+            {
+                p: [
+                    'Szyfrowanie chroni hasła, dane z formularzy i płatności przed przechwyceniem, a certyfikat potwierdza, że łączysz się z prawdziwą stroną, a nie z podróbką. Poniżej wyjaśniamy prosto, jak działa SSL, jakie są rodzaje certyfikatów, jak SSL wpływa na SEO i dlaczego warto go włączyć. Krótką definicję znajdziesz też w słowniku: ',
+                    { text: 'SSL w bazie wiedzy', href: '/baza-wiedzy/ssl' },
+                    '.',
+                ],
+            },
+
+            { h2: 'Co to jest SSL?' },
+            {
+                p: 'SSL (Secure Sockets Layer) to protokół kryptograficzny, który zabezpiecza transmisję danych między serwerem a klientem, na przykład przeglądarką internetową. Odpowiada za trzy rzeczy: poufność (nikt postronny nie odczyta danych), integralność (nikt nie zmieni ich po drodze) i autentyczność (łączysz się z właściwym serwerem).',
+            },
+            {
+                p: 'Pierwotny protokół SSL od lat zastępuje jego następca, TLS (Transport Layer Security), a wszystkie wersje SSL są dziś uznane za niebezpieczne i wyłączone w przeglądarkach. Nazwa jednak została: „certyfikat SSL” to w praktyce certyfikat używany przez TLS. Na stronie widać go jako https:// na początku adresu.',
+            },
+
+            { h2: 'Jak działa SSL?' },
+            {
+                p: 'Gdy otwierasz stronę przez HTTPS, przeglądarka i serwer najpierw uzgadniają bezpieczne połączenie (tzw. SSL/TLS handshake):',
+            },
+            { number: 'Przeglądarka łączy się z serwerem i podaje, jakie metody szyfrowania obsługuje.' },
+            { number: 'Serwer odsyła swój certyfikat SSL z kluczem publicznym.' },
+            {
+                number: 'Przeglądarka sprawdza, czy certyfikat jest ważny, wystawiony dla tej domeny i podpisany przez zaufany urząd certyfikacji (CA).',
+            },
+            { number: 'Obie strony ustalają wspólny klucz sesji, którym szyfrują dalszą komunikację.' },
+            {
+                p: 'Przy uzgadnianiu połączenia używana jest kryptografia asymetryczna, czyli para kluczy: publiczny, dostępny dla każdego, i prywatny, który nigdy nie opuszcza serwera. Same dane szyfrowane są już szybszym szyfrowaniem symetrycznym, kluczem sesji. Nawet jeśli ktoś przechwyci taki ruch, na przykład w publicznej sieci Wi-Fi, zobaczy tylko nieczytelny ciąg znaków.',
+            },
+
+            { h2: 'Rodzaje certyfikatów SSL (DV, OV, EV)' },
+            {
+                p: 'Certyfikaty wydają urzędy certyfikacji (Certificate Authority, CA). Każdy rodzaj szyfruje tak samo – różnią się tym, co CA sprawdza przed wydaniem certyfikatu:',
+            },
+            {
+                bullet: 'DV (Domain Validation) – potwierdza tylko, że kontrolujesz domenę. Wydawany automatycznie w kilka minut, często za darmo (np. Let’s Encrypt). Wystarcza większości stron firmowych i blogów.',
+            },
+            {
+                bullet: 'OV (Organization Validation) – urząd certyfikacji sprawdza też, że firma istnieje, a jej dane trafiają do certyfikatu. Dobry wybór, gdy chcesz pokazać, kto stoi za stroną.',
+            },
+            {
+                bullet: 'EV (Extended Validation) – najdokładniejsza weryfikacja firmy. Przeglądarki już go nie wyróżniają w pasku adresu, więc jego przewaga nad OV jest dziś głównie formalna.',
+            },
+            {
+                p: 'Niezależnie od poziomu weryfikacji certyfikat może obejmować jedną domenę, domenę ze wszystkimi subdomenami (wildcard, np. *.firma.pl) albo kilka różnych domen (multi-domain). Każdy ma ograniczony czas ważności i trzeba go odnawiać – najlepiej automatycznie.',
+            },
+
+            { h2: 'Czy SSL jest potrzebny? 4 powody, by go włączyć' },
+            { p: 'Tak. SSL to dziś standard, a nie dodatek – także na stronach, które niczego nie sprzedają. Oto 4 powody:' },
+            { h3: '1. Bezpieczeństwo danych' },
+            {
+                p: 'SSL szyfruje wszystko, co użytkownik wysyła na stronę: hasła, dane z formularza kontaktowego, dane do płatności. Bez niego te informacje płyną otwartym tekstem i można je podejrzeć albo podmienić po drodze.',
+            },
+            { h3: '2. Zaufanie użytkowników' },
+            {
+                p: 'HTTPS w adresie to sygnał, że dbasz o prywatność odwiedzających. Brak SSL działa odwrotnie: przeglądarki oznaczają takie strony jako „Niezabezpieczona”, a przy formularzach pokazują dodatkowe ostrzeżenia. Wielu użytkowników zamyka wtedy kartę.',
+            },
+            { h3: '3. Lepsza widoczność w Google' },
+            { p: 'Od 2014 roku Google traktuje HTTPS jako jeden z sygnałów rankingowych. Szczegóły opisujemy niżej, w części „SSL a SEO”.' },
+            { h3: '4. Zgodność z przepisami' },
+            {
+                p: 'Jeśli strona zbiera dane osobowe, choćby przez formularz kontaktowy, RODO wymaga ich odpowiedniego zabezpieczenia, a szyfrowanie transmisji jest tu podstawowym środkiem. Sklepy, które przyjmują płatności kartą, muszą dodatkowo spełnić wymagania standardu PCI DSS.',
+            },
+            {
+                p: 'Pamiętaj jednak, że SSL chroni dane w drodze, a nie całą stronę. Aktualizacje, bezpieczny serwer, kopie zapasowe i ochrona przed atakami DDoS to osobne zadania.',
+            },
+
+            { h2: 'SSL a SEO' },
+            {
+                p: 'Google ogłosił HTTPS sygnałem rankingowym w 2014 roku. To sygnał lekki: sam certyfikat nie wypchnie strony na pierwsze miejsce, ale strona bez SSL traci na tle konkurencji, która go ma. Ważniejsze są skutki pośrednie:',
+            },
+            { bullet: 'ostrzeżenie „Niezabezpieczona” zwiększa liczbę porzuconych wizyt i obniża konwersję,' },
+            {
+                bullet: 'przeglądarki obsługują szybsze protokoły HTTP/2 i HTTP/3 tylko przez szyfrowane połączenie, a szybkość strony wpływa na Core Web Vitals,',
+            },
+            {
+                bullet: 'przejście z HTTP na HTTPS wymaga przekierowań 301 i poprawy linków wewnętrznych – zrobione niestarannie obniża ruch z Google.',
+            },
+            {
+                p: [
+                    'Bezpieczeństwo, szybkość i SEO planujemy razem już na etapie projektu – zobacz, jak wygląda nasze ',
+                    { text: 'tworzenie stron www', href: '/uslugi/strony-www' },
+                    '.',
+                ],
+            },
+
+            { h2: 'Jak włączyć SSL na stronie?' },
+            {
+                number: 'Sprawdź panel hostingu – większość firm hostingowych oferuje darmowy certyfikat Let’s Encrypt, który włącza się jednym kliknięciem i odnawia automatycznie.',
+            },
+            { number: 'Jeśli potrzebujesz certyfikatu OV lub EV, kup go u dostawcy i zainstaluj na serwerze.' },
+            { number: 'Ustaw przekierowanie 301 z http:// na https://, żeby każda wersja adresu prowadziła do bezpiecznej strony.' },
+            {
+                number: 'Popraw zasoby wczytywane przez http (obrazy, skrypty), żeby uniknąć ostrzeżeń o treści mieszanej (mixed content).',
+            },
+            { number: 'Zaktualizuj adres strony w Google Search Console, Google Analytics i mapie witryny.' },
+
+            { h2: 'FAQ' },
+            { h3: 'Co oznacza skrót SSL?' },
+            {
+                p: 'Secure Sockets Layer, czyli warstwa bezpiecznych gniazd. To protokół szyfrujący połączenie w internecie. Dziś jego rolę pełni następca, TLS, ale nazwa SSL przyjęła się dla certyfikatów.',
+            },
+            { h3: 'Czy certyfikat SSL jest darmowy?' },
+            {
+                p: 'Może być. Certyfikaty DV wydaje bezpłatnie m.in. Let’s Encrypt, a większość hostingów instaluje je automatycznie. Płatne są zwykle certyfikaty OV i EV.',
+            },
+            { h3: 'Jak sprawdzić, czy strona ma SSL?' },
+            {
+                p: 'Spójrz na pasek adresu: adres zaczyna się od https://, a obok widać kłódkę lub ikonę ustawień połączenia. Po jej kliknięciu zobaczysz, dla jakiej domeny i przez kogo wystawiono certyfikat oraz do kiedy jest ważny.',
+            },
+            { h3: 'Co się stanie, gdy certyfikat SSL wygaśnie?' },
+            {
+                p: 'Przeglądarka wyświetli pełnoekranowe ostrzeżenie, że połączenie nie jest prywatne, i większość odwiedzających nie wejdzie na stronę. Dlatego warto włączyć automatyczne odnawianie i pilnować daty ważności.',
+            },
+            { h3: 'Czym różni się SSL od TLS?' },
+            {
+                p: 'TLS to nowsza, bezpieczniejsza wersja protokołu SSL. Wszystkie wersje SSL są dziś wyłączone w przeglądarkach, a połączenia HTTPS korzystają z TLS 1.2 lub 1.3. Potocznie wciąż jednak mówi się „certyfikat SSL”.',
+            },
+
+            { h2: 'Podsumowanie' },
+            {
+                p: 'SSL szyfruje połączenie ze stroną, potwierdza jej tożsamość i jest dziś standardem: chroni dane, buduje zaufanie, pomaga w SEO i ułatwia spełnienie wymogów RODO. Większości stron wystarczy darmowy certyfikat DV z automatycznym odnawianiem. To jednak tylko jeden z elementów bezpieczeństwa – obok aktualizacji, bezpiecznego serwera i kopii zapasowych.',
+            },
+        ],
     },
     'google-ads-dla-b2b-jak-zbierac-leady': {
         title: 'Google Ads dla B2B: jak pozyskać leady sprzedażowe? Poradnik 2026 | CreativeTrust',
@@ -244,6 +388,24 @@ function insertInlineLink(content: PortableBlock[], link: InlineLink): PortableB
     return [...content.slice(0, index), linkParagraph(link), ...content.slice(index)];
 }
 
+const styles = { h2: 'h2', h3: 'h3', p: 'normal', bullet: 'normal', number: 'normal' } as const;
+
+/** Portable Text needs stable keys; the position in the body is enough for static content. */
+function toPortableText(body: AuthoredBlock[]): PortableBlock[] {
+    return body.map((authored, index) => {
+        const [kind, value] = Object.entries(authored)[0] as [keyof typeof styles, Rich];
+        const markDefs: Array<{ _type: 'link'; _key: string; href: string }> = [];
+        const children = (typeof value === 'string' ? [value] : value).map((part, spanIndex) => {
+            const key = `seo-${index}-${spanIndex}`;
+            if (typeof part === 'string') return { _type: 'span', _key: key, text: part, marks: [] };
+            markDefs.push({ _type: 'link', _key: `${key}-link`, href: part.href });
+            return { _type: 'span', _key: key, text: part.text, marks: [`${key}-link`] };
+        });
+        const list = kind === 'bullet' || kind === 'number' ? { listItem: kind, level: 1 } : {};
+        return { _type: 'block', _key: `seo-${index}`, style: styles[kind], ...list, markDefs, children };
+    });
+}
+
 function fixParagraph(block: PortableBlock, fixes: ParagraphFix[]): PortableBlock {
     const plain = block._type === 'block' && !isHeading(block) && block.children?.length === 1;
     const fix = plain ? fixes.find(({ from }) => from === blockText(block)) : undefined;
@@ -284,7 +446,7 @@ export function applyBlogPostFixes<T extends BlogPostFields>(slug: string, post:
     const config = blogSeoConfig[slug];
     if (!post || !config) return post;
 
-    const { title, description, heading, headings = [], paragraphs = [], inlineLink, faq } = config;
+    const { title, description, heading, headings = [], paragraphs = [], inlineLink, faq, body } = config;
     const linked = post.content && inlineLink ? insertInlineLink(post.content, inlineLink) : post.content;
     const withFaq = linked && faq ? insertFaq(linked, faq) : linked;
 
@@ -293,6 +455,6 @@ export function applyBlogPostFixes<T extends BlogPostFields>(slug: string, post:
         title: heading ?? post.title,
         seoTitle: title ?? post.seoTitle,
         seoDescription: description ?? post.seoDescription,
-        content: withFaq?.map((block) => fixParagraph(fixHeading(block, headings), paragraphs)),
+        content: body ? toPortableText(body) : withFaq?.map((block) => fixParagraph(fixHeading(block, headings), paragraphs)),
     };
 }
