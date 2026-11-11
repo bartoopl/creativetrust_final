@@ -2,38 +2,48 @@ import { Metadata } from 'next';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import CTASection from '@/components/CTASection';
+import { NumberedGrid } from '@/components/LandingBlocks';
 import { SITE_URL } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: 'About us | AI-native product partner',
-    description: 'CreativeTrust is an AI-native product partner. We combine strategy, design, development and AI automation in a single process. 15 years of experience, 150+ projects.',
+    title: 'About us | A team built on e-commerce audit and management',
+    description: 'CreativeTrust audits online stores and runs brands’ e-commerce as an external team. Experience managing e-commerce for 5.10.15 and Quiosque, and working on the development of the Monnari capital group. In the market since 2010.',
     alternates: pageAlternates('/o-nas', 'en', SITE_URL),
     openGraph: {
-        title: 'About us | AI-native product partner | CreativeTrust',
-        description: 'CreativeTrust is an AI-native product partner. We combine strategy, design, development and AI automation in a single process.',
+        title: 'About us | A team built on e-commerce audit and management | CreativeTrust',
+        description: 'CreativeTrust audits online stores and runs brands’ e-commerce as an external team. In the market since 2010.',
         url: `${SITE_URL}/en/about`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',
     },
 };
 
+const experience = [
+    { brand: '5.10.15', text: 'Experience managing e-commerce for a nationwide Polish childrenswear brand.' },
+    { brand: 'Quiosque', text: 'Experience managing e-commerce for a nationwide Polish womenswear brand.' },
+    { brand: 'Monnari', text: 'Work on the development of the Monnari capital group.' },
+];
+
+const EXPERIENCE_SENTENCE = 'Experience managing e-commerce for the 5.10.15 and Quiosque brands and working on the development of the Monnari capital group.';
+
 const values = [
-    { title: 'Effectiveness', description: 'Every action should support a business result, not just improve how things look.' },
-    { title: 'Transparency', description: 'We agree scope, priorities and responsibilities at the very start of the collaboration.' },
-    { title: 'Partnership', description: 'We work as part of the client’s team, not as a detached subcontractor.' },
+    { title: 'Results before scope', description: 'We start with sales, margin and team time. We choose technology and actions to fit what needs to improve.' },
+    { title: 'Numbers on the table', description: 'We agree goals, priorities and responsibilities at the start. We report what changed the result — not a list of completed tasks.' },
+    { title: 'Part of the client’s team', description: 'We work like an e-commerce department on your side, not like a detached subcontractor.' },
 ];
 
 const milestones = [
     { year: '2010', title: 'Agency launch', description: 'We built our first campaigns and communications for brands that needed a simpler path to the customer.' },
-    { year: '2016', title: 'Web & e-commerce', description: 'We added website and online shop design so we could control the whole funnel, not just a fragment of it.' },
+    { year: '2016', title: 'Web & e-commerce', description: 'We added website and online store design so we could control the whole funnel, not just a fragment of it.' },
     { year: '2024', title: 'SALESmanago partner', description: 'We strengthened our automation practice and our work with marketing data.' },
-    { year: '2025', title: 'AI-native', description: 'AI woven into every stage of the work — from research to development. Shorter time-to-market, better results.' },
+    { year: '2025', title: 'AI in the process', description: 'AI woven into research, analytics and development. A shorter time from diagnosis to delivery.' },
+    { year: '2026', title: 'E-commerce audit and management', description: 'Alongside building stores and websites, we now offer store audits and outsourced e-commerce management — in the same team.' },
 ];
 
 const stats = [
-    ['15+', 'years of experience'],
-    ['150+', 'projects'],
-    ['3.2×', 'average conversion uplift'],
-    ['40%', 'faster thanks to AI'],
+    ['15+', 'years in the market'],
+    ['3', 'nationwide Polish clothing brands in the team’s experience'],
+    ['150+', 'projects delivered'],
+    ['5–7', 'working days for an e-commerce audit'],
 ];
 
 export default function AboutPage() {
@@ -41,8 +51,8 @@ export default function AboutPage() {
         <main style={{ minHeight: '100vh' }}>
             <PageHero
                 eyebrow="ABOUT US"
-                title="An AI-native product partner."
-                description="We combine brand strategy, design, development and AI automation in a single process. We work as a partner, not a subcontractor — from diagnosis to results."
+                title="A team that knows e-commerce from the management side."
+                description="We audit online stores and run brands’ e-commerce as an external team. We also design and build online stores and websites. We draw on experience building growing brands in the Polish market."
                 cta={{ label: 'Let’s talk', href: '/en/contact' }}
                 ctaSecondary={{ label: 'See our services', href: '/en/services' }}
             />
@@ -62,7 +72,16 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            <Section eyebrow="WHAT GUIDES US" title="The principles that keep a project on track." border={false}>
+            <Section
+                eyebrow="EXPERIENCE"
+                title="Growing brands in the Polish market."
+                description={EXPERIENCE_SENTENCE}
+                border={false}
+            >
+                <NumberedGrid cols={3} numbered={false} items={experience.map((item) => ({ title: item.brand, text: item.text }))} />
+            </Section>
+
+            <Section eyebrow="WHAT GUIDES US" title="The principles that keep a collaboration on track." tint>
                 <div className="ct-grid-lines grid-cols-1 md:grid-cols-3" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {values.map((v, i) => (
                         <div key={v.title} className="flex flex-col gap-3" style={{ padding: 28 }}>
@@ -74,8 +93,8 @@ export default function AboutPage() {
                 </div>
             </Section>
 
-            <Section eyebrow="OUR JOURNEY" title="We built expertise where the market was growing." tint>
-                <div className="ct-grid-lines grid-cols-1 sm:grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+            <Section eyebrow="OUR JOURNEY" title="We built expertise where the market was growing.">
+                <div className="ct-grid-lines grid-cols-1 sm:grid-cols-2 lg:grid-cols-5" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {milestones.map((m) => (
                         <div key={m.year} className="flex flex-col gap-3" style={{ padding: '24px 22px' }}>
                             <span className="ct-meta" style={{ color: 'var(--accent)' }}>{m.year}</span>
