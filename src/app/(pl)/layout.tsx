@@ -5,17 +5,17 @@ import { SITE_URL } from '@/lib/schema';
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
     title: {
-        default: 'CreativeTrust — AI-native partner produktowy | Web, E-commerce',
+        default: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce',
         template: '%s | CreativeTrust',
     },
-    description: 'Strategia, design, development i automatyzacja AI w jednym zespole. 150+ projektów, 15 lat doświadczenia. Tworzymy produkty cyfrowe w tempie AI — wyniki, nie obietnice.',
-    keywords: ['agencja AI', 'strony internetowe', 'e-commerce', 'marketing automation', 'UX design', 'automatyzacja AI', 'partner produktowy'],
+    description: 'Audytujemy i prowadzimy e-commerce marek z zewnątrz, projektujemy i budujemy sklepy oraz strony internetowe. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.',
+    keywords: ['audyt e-commerce', 'zarządzanie e-commerce', 'e-commerce manager z zewnątrz', 'konsulting e-commerce', 'sklepy internetowe', 'wdrożenia e-commerce', 'strony internetowe', 'marketing automation'],
     alternates: {
         canonical: '/',
     },
     openGraph: {
-        title: 'CreativeTrust — AI-native partner produktowy',
-        description: 'Strategia, design, development i automatyzacja AI w jednym zespole. Tworzymy produkty cyfrowe w tempie AI.',
+        title: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce',
+        description: 'Audyt sklepu, zarządzanie e-commerce z zewnątrz oraz budowa sklepów i stron internetowych w jednym zespole.',
         url: SITE_URL,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'CreativeTrust — AI-native partner produktowy',
-        description: 'Strategia, design, development i automatyzacja AI w jednym zespole. Tworzymy produkty cyfrowe w tempie AI.',
+        title: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce',
+        description: 'Audyt sklepu, zarządzanie e-commerce z zewnątrz oraz budowa sklepów i stron internetowych w jednym zespole.',
     },
     robots: {
         index: true,

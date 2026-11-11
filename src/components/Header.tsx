@@ -18,15 +18,23 @@ const copy = {
             { href: '/blog', label: 'Blog' },
             { href: '/o-nas', label: 'O nas' },
         ],
+        // The two lead offers sit in the bar itself; the rest of the catalogue is under „Usługi”.
+        lead: [
+            { href: '/uslugi/audyt-e-commerce', label: 'Audyt', long: 'Audyt e-commerce' },
+            { href: '/uslugi/zarzadzanie-e-commerce', label: 'Zarządzanie', long: 'Zarządzanie e-commerce' },
+        ],
         services: { href: '/uslugi', label: 'Usługi' },
+        allServices: { href: '/uslugi', label: 'Wszystkie usługi' },
         contact: { href: '/kontakt', label: 'Kontakt' },
         home: '/',
         processHref: '/#proces',
-        stripLead: 'AI-native partner produktowy — zobacz',
-        stripLink: 'jak działamy →',
+        stripLead: 'Audyt, zarządzanie i budowa e-commerce — zobacz,',
+        stripLink: 'jak pracujemy →',
         homeLabel: 'CreativeTrust — strona główna',
         navLabel: 'Główna nawigacja',
-        cta: 'Umów konsultację',
+        auditHref: '/uslugi/audyt-e-commerce#formularz',
+        cta: 'Zamów audyt',
+        mobileCta: 'Zamów audyt e-commerce',
         openMenu: 'Otwórz menu',
         closeMenu: 'Zamknij menu',
     },
@@ -37,15 +45,22 @@ const copy = {
             { href: '/blog', label: 'Blog (PL)', hrefLang: 'pl' },
             { href: '/en/about', label: 'About' },
         ],
+        lead: [
+            { href: '/en/services/e-commerce-audit', label: 'Audit', long: 'E-commerce audit' },
+            { href: '/en/services/e-commerce-management', label: 'Management', long: 'E-commerce management' },
+        ],
         services: { href: '/en/services', label: 'Services' },
+        allServices: { href: '/en/services', label: 'All services' },
         contact: { href: '/en/contact', label: 'Contact' },
         home: '/en',
         processHref: '/en#proces',
-        stripLead: 'AI-native product partner — see',
+        stripLead: 'E-commerce audits, management and builds — see',
         stripLink: 'how we work →',
         homeLabel: 'CreativeTrust — home',
         navLabel: 'Main navigation',
-        cta: 'Book a consultation',
+        auditHref: '/en/services/e-commerce-audit#form',
+        cta: 'Order an audit',
+        mobileCta: 'Order an e-commerce audit',
         openMenu: 'Open menu',
         closeMenu: 'Close menu',
     },
@@ -226,7 +241,12 @@ export default function Header({ locale }: { locale: Locale }) {
                         <Wordmark />
                     </Link>
 
-                    <nav className="hidden items-center gap-8 md:flex" aria-label={t.navLabel}>
+                    <nav className="hidden items-center gap-5 md:flex lg:gap-8" aria-label={t.navLabel}>
+                        {t.lead.map((item) => (
+                            <Link key={item.href} href={item.href} className="ct-nav-link">
+                                {item.label}
+                            </Link>
+                        ))}
                         <button
                             ref={servicesTriggerRef}
                             type="button"
@@ -255,7 +275,7 @@ export default function Header({ locale }: { locale: Locale }) {
 
                     <div className="hidden items-center gap-5 md:flex">
                         <LanguageSwitch locale={locale} />
-                        <NotchedButton href={t.contact.href} variant="outline" size="sm">
+                        <NotchedButton href={t.auditHref} variant="outline" size="sm" className="hidden lg:inline-flex">
                             {t.cta}
                         </NotchedButton>
                     </div>
@@ -300,7 +320,12 @@ export default function Header({ locale }: { locale: Locale }) {
                         style={{ position: 'fixed', top: sheetTop, bottom: 0, left: 0, right: 0, background: '#fff', zIndex: 130, padding: '8px var(--pad-x) 32px', overflowY: 'auto', overscrollBehavior: 'contain', borderTop: '1px solid var(--line)' }}
                         className="flex flex-col md:hidden"
                     >
-                        {[t.services, ...navItems, t.contact].map((item) => (
+                        {[
+                            ...t.lead.map(({ href, long }) => ({ href, label: long })),
+                            t.allServices,
+                            ...navItems,
+                            t.contact,
+                        ].map((item) => (
                             <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="flex items-center justify-between" style={{ fontSize: 18, fontWeight: 500, color: 'var(--text)', padding: '16px 0', borderBottom: '1px solid var(--line)' }}>
                                 {item.label}
                                 <span className="ct-mono" style={{ color: 'var(--muted-2)', fontSize: 13 }}>→</span>
@@ -308,8 +333,8 @@ export default function Header({ locale }: { locale: Locale }) {
                         ))}
                         <LanguageSwitch locale={locale} mobile />
                         <div style={{ paddingTop: 24 }}>
-                            <NotchedButton href={t.contact.href} onClick={() => setMobileOpen(false)}>
-                                {t.cta}
+                            <NotchedButton href={t.auditHref} onClick={() => setMobileOpen(false)}>
+                                {t.mobileCta}
                             </NotchedButton>
                         </div>
                     </motion.div>

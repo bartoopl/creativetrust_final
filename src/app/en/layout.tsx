@@ -5,17 +5,17 @@ import { SITE_URL } from '@/lib/schema';
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
     title: {
-        default: 'CreativeTrust — AI-native product partner | Web, E-commerce',
+        default: 'CreativeTrust — E-commerce audit, management and build',
         template: '%s | CreativeTrust',
     },
-    description: 'Strategy, design, development and AI automation in one team. 150+ projects, 15 years of experience. We build digital products at AI speed — results, not promises.',
-    keywords: ['AI agency', 'websites', 'e-commerce', 'marketing automation', 'UX design', 'AI automation', 'product partner'],
+    description: 'We audit and run brands’ e-commerce as an external team, and we design and build online stores and websites. Experience managing e-commerce for 5.10.15 and Quiosque, and working on the development of the Monnari capital group.',
+    keywords: ['e-commerce audit', 'e-commerce management', 'outsourced e-commerce manager', 'e-commerce consulting', 'online stores', 'e-commerce implementation', 'websites', 'marketing automation'],
     alternates: {
         canonical: '/en',
     },
     openGraph: {
-        title: 'CreativeTrust — AI-native product partner',
-        description: 'Strategy, design, development and AI automation in one team. We build digital products at AI speed.',
+        title: 'CreativeTrust — E-commerce audit, management and build',
+        description: 'A store audit, outsourced e-commerce management, and the build of online stores and websites — in one team.',
         url: `${SITE_URL}/en`,
         siteName: 'CreativeTrust',
         locale: 'en_GB',
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'CreativeTrust — AI-native product partner',
-        description: 'Strategy, design, development and AI automation in one team. We build digital products at AI speed.',
+        title: 'CreativeTrust — E-commerce audit, management and build',
+        description: 'A store audit, outsourced e-commerce management, and the build of online stores and websites — in one team.',
     },
     robots: {
         index: true,

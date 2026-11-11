@@ -1,7 +1,6 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from 'react';
-import { ArrowDown } from 'lucide-react';
 import { MAX_QUESTION_LENGTH, type OfferAnswer } from '@/lib/offer-assistant';
 import AnswerPanel from './AnswerPanel';
 import type { Locale } from '@/lib/i18n';
@@ -11,29 +10,27 @@ const copy = {
         thinking: ['sprawdzamy ofertę', 'sprawdzamy cennik', 'przygotowujemy odpowiedź'],
         failed: 'Nie udało się przygotować odpowiedzi. Spróbuj ponownie albo napisz do nas.',
         offline: 'Brak połączenia. Spróbuj ponownie albo napisz do nas.',
-        kicker: 'CreativeTrust · strony WWW, e-commerce, marketing automation',
-        title: ['Sprawdź, jak zrealizujemy ', 'Twój projekt.'],
-        sub: 'Opisz w 1–2 zdaniach, czego potrzebujesz — od razu zobaczysz, czy to robimy, jak do tego podejdziemy i orientacyjną cenę z naszego cennika.',
-        label: 'Czego potrzebujesz?',
-        placeholder: 'Np. sklep internetowy zintegrowany z naszym ERP albo landing page pod kampanię Google Ads',
+        kicker: 'Nie wiesz, od czego zacząć?',
+        title: ['Opisz sytuację. ', 'Powiemy, jak możemy pomóc.'],
+        sub: 'Napisz w 1–2 zdaniach, z czym mierzy się Twój e-commerce — od razu zobaczysz, czy to robimy i jak do tego podejdziemy.',
+        label: 'Co dziś najbardziej hamuje sprzedaż?',
+        placeholder: 'Np. sprzedaż rośnie, ale marża spada — albo: szukamy kogoś, kto poprowadzi nasz sklep z zewnątrz',
         submit: 'Sprawdź',
         stepsLabel: 'Jak to działa',
-        steps: ['Opisujesz potrzebę', 'Widzisz zakres i orientacyjną cenę', 'Szczegóły ustalasz z zespołem'],
-        scroll: 'Przewiń do dalszej części strony',
+        steps: ['Opisujesz sytuację', 'Widzisz, jak możemy pomóc', 'Szczegóły ustalasz z zespołem'],
     },
     en: {
         thinking: ['checking our services', 'checking our price list', 'preparing your answer'],
         failed: "We couldn't prepare an answer. Please try again or write to us.",
         offline: 'No connection. Please try again or write to us.',
-        kicker: 'CreativeTrust · websites, e-commerce, marketing automation',
-        title: ['See how we would deliver ', 'your project.'],
-        sub: "Describe what you need in 1–2 sentences — you'll instantly see whether we do it, how we'd approach it and an indicative price from our price list.",
-        label: 'What do you need?',
-        placeholder: 'E.g. an online store integrated with our ERP, or a landing page for a Google Ads campaign',
+        kicker: 'Not sure where to start?',
+        title: ['Describe your situation. ', "We'll tell you how we can help."],
+        sub: "Tell us in 1–2 sentences what your e-commerce is up against — you'll instantly see whether we do it and how we'd approach it.",
+        label: 'What is holding back your sales right now?',
+        placeholder: "E.g. sales are growing but margin is falling — or: we're looking for someone to run our store from the outside",
         submit: 'Check',
         stepsLabel: 'How it works',
-        steps: ['You describe the need', 'You see the scope and an indicative price', 'You agree the details with our team'],
-        scroll: 'Scroll to the rest of the page',
+        steps: ['You describe the situation', 'You see how we can help', 'You agree the details with our team'],
     },
 };
 
@@ -44,26 +41,16 @@ export type AskState =
     | { kind: 'error'; question: string; error: string };
 
 /**
- * Full-viewport homepage hero: a centered statement and one question box. The visitor describes
- * what they need; /api/offer-assistant answers from the service catalogue only.
+ * Homepage offer assistant: a centered statement and one question box, further down the page after
+ * HomeHero. The visitor describes their situation; /api/offer-assistant answers from the service
+ * catalogue only.
  */
 export default function AskHero({ locale }: { locale: Locale }) {
     const t = copy[locale];
-    const sectionRef = useRef<HTMLElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const [question, setQuestion] = useState('');
     const [state, setState] = useState<AskState>({ kind: 'idle' });
     const [honeypot, setHoneypot] = useState('');
-
-    // The hero fills what is left of the first screen under the announcement strip and the header.
-    useLayoutEffect(() => {
-        const el = sectionRef.current;
-        if (!el) return;
-        const measure = () => el.style.setProperty('--ask-offset', `${el.getBoundingClientRect().top + window.scrollY}px`);
-        measure();
-        window.addEventListener('resize', measure);
-        return () => window.removeEventListener('resize', measure);
-    }, []);
 
     // Grow with the text, up to a few lines.
     useLayoutEffect(() => {
@@ -101,13 +88,13 @@ export default function AskHero({ locale }: { locale: Locale }) {
     const loading = state.kind === 'loading';
 
     return (
-        <section ref={sectionRef} className="ct-ask-hero" aria-labelledby="ask-hero-title">
+        <section id="zapytaj" className="ct-ask-hero ct-ask-section" aria-labelledby="ask-hero-title" style={{ scrollMarginTop: 80 }}>
             <div className="ct-ask-inner">
                 <p className="ct-ask-kicker">{t.kicker}</p>
 
-                <h1 id="ask-hero-title" className="ct-ask-title">
+                <h2 id="ask-hero-title" className="ct-ask-title">
                     {t.title[0]}<span className="ct-electric">{t.title[1]}</span>
-                </h1>
+                </h2>
 
                 <p className="ct-ask-sub">
                     {t.sub}
@@ -169,9 +156,6 @@ export default function AskHero({ locale }: { locale: Locale }) {
                 </div>
             </div>
 
-            <a href="#dalej" className="ct-scroll-cue" aria-label={t.scroll}>
-                <ArrowDown size={18} strokeWidth={1.25} aria-hidden="true" />
-            </a>
         </section>
     );
 }

@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
+import { InlineCTA } from '@/components/LandingBlocks';
 import PageHero from '@/components/ui/PageHero';
 import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
@@ -8,53 +9,53 @@ import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: 'E-commerce | Headless stores, migrations, WooCommerce, Shopify',
-    description: 'We design and build online stores that sell and scale without the pain. Headless e-commerce, platform migrations, ERP integrations and AI-assisted development.',
+    title: 'Online stores | Design, build, migrations and ERP integrations',
+    description: 'We design and build online stores: headless, WooCommerce, Shopify, platform migrations and ERP integrations. From the perspective of a team that manages e-commerce — built for sales, margin and the way your team works.',
     alternates: pageAlternates('/uslugi/e-commerce', 'en', SITE_URL),
     openGraph: {
-        title: 'E-commerce and online stores | CreativeTrust',
-        description: 'Headless stores and platform migrations. WooCommerce, Shopify, Next.js Commerce — one team from design to launch.',
+        title: 'Online stores and e-commerce builds | CreativeTrust',
+        description: 'Headless stores, platform migrations and ERP integrations. Built by a team that knows e-commerce from the management side.',
         url: `${SITE_URL}/en/services/e-commerce`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',
     },
 };
 
 const services = [
-    { num: '01', title: 'Headless stores', description: 'We separate the frontend from the backend. Faster, more flexible, more scalable — with no platform limits.', tags: ['Next.js Commerce', 'API-first', 'CMS'] },
-    { num: '02', title: 'WooCommerce', description: 'We build and extend WooCommerce stores with custom checkout, integrations and plugins.', tags: ['WooCommerce', 'WordPress', 'PHP'] },
-    { num: '03', title: 'Shopify', description: 'Shopify Plus stores with custom themes, Liquid and integrations with ERP and warehouse systems.', tags: ['Shopify Plus', 'Liquid', 'Apps'] },
-    { num: '04', title: 'Platform migrations', description: 'A safe migration from any platform — preserving your data, SEO and order history.', tags: ['Data migration', 'SEO redirects', 'Zero downtime'] },
-    { num: '05', title: 'ERP / CRM integrations', description: 'Synchronisation of stock, orders and customers with Subiekt, Comarch, SAP and other systems.', tags: ['Subiekt', 'Comarch', 'API'] },
-    { num: '06', title: 'Conversion optimisation', description: 'CRO, A/B tests and UX improvements based on GA4 and heatmap data.', tags: ['CRO', 'A/B tests', 'GA4'] },
+    { num: '01', title: 'Headless stores', description: 'A storefront separated from the back end. Changes to the offer, promotions and content go live quickly, without waiting for a release of the whole platform.', tags: ['Medusa.js', 'Next.js', 'API-first'] },
+    { num: '02', title: 'WooCommerce', description: 'We build and extend WooCommerce stores: custom checkout, integrations and plugins. A good choice when time to launch and running costs matter.', tags: ['WooCommerce', 'WordPress', 'PHP'] },
+    { num: '03', title: 'Shopify', description: 'Shopify Plus stores with a custom theme and integrations with ERP and warehouse systems.', tags: ['Shopify Plus', 'Liquid', 'Apps'] },
+    { num: '04', title: 'Platform migrations', description: 'We move your store while preserving data, SEO and order history. A redirect plan and a sales test are done before the switch.', tags: ['Data migration', 'SEO redirects', 'Zero downtime'] },
+    { num: '05', title: 'ERP / CRM integrations', description: 'Stock, prices, orders and customers synchronised with Subiekt, Comarch, SAP and other systems. No more copying data by hand.', tags: ['Subiekt', 'Comarch', 'API'] },
+    { num: '06', title: 'Conversion optimisation', description: 'Tests and fixes to the purchase journey based on data: product page, basket, checkout, payments.', tags: ['CRO', 'A/B tests', 'GA4'] },
 ];
 
-const stats = [
-    { value: '150+', label: 'e-commerce and website projects' },
-    { value: '3,2×', label: 'average conversion uplift after a redesign' },
-    { value: '90+', label: 'PageSpeed score in every project' },
-    { value: '40%', label: 'faster delivery thanks to AI' },
+const facts = [
+    { label: 'Starting point', value: 'sales goal and margin, not a feature list' },
+    { label: 'Technology', value: 'open source, no vendor lock-in' },
+    { label: 'Migrations', value: 'preserving SEO, data and order history' },
+    { label: 'After launch', value: 'store development or e-commerce management' },
 ];
 
 const platforms = ['Next.js Commerce', 'WooCommerce', 'Shopify', 'Shopify Plus', 'Medusa.js', 'Saleor', 'Subiekt GT', 'Comarch ERP', 'BaseLinker'];
 
 const features = [
-    { title: 'Performance above 90', description: 'PageSpeed score > 90 on mobile and desktop. A fast store means higher rankings and a lower bounce rate.' },
-    { title: 'E-commerce SEO', description: 'Category architecture, Product schema, breadcrumbs, canonicals, sitemap and AMP — all from the start.' },
+    { title: 'Performance above 90', description: 'PageSpeed score > 90 on mobile and desktop. A fast store means higher rankings and fewer abandoned sessions.' },
+    { title: 'E-commerce SEO', description: 'Category architecture, Product schema, breadcrumbs, canonicals and sitemap — set up from the start, not after launch.' },
     { title: 'Frictionless checkout', description: 'Streamlined checkout, one-click, Apple Pay, BLIK, Klarna — fewer steps, fewer abandoned baskets.' },
-    { title: 'Mobile-first', description: 'We design from the smallest screen up. Mobile shopping accounts for over 60% of transactions — you cannot ignore it.' },
-    { title: 'AI personalisation', description: 'Product recommendations, dynamic banners and email automation based on customer behaviour.' },
+    { title: 'Mobile-first', description: 'We design from the smallest screen up, because that is where most shopping happens.' },
+    { title: 'Back end for your team', description: 'A panel where your team changes the offer, promotions and content itself. No ticket to a developer for every campaign.' },
     { title: 'Security', description: 'SSL, admin 2FA, backups, monitoring and updates included in the support package.' },
 ];
 
 const process = [
-    { num: '01', title: 'Analysis', description: 'Current state, data, purchase funnel. AI speeds up diagnosis and prioritisation.' },
-    { num: '02', title: 'UX & Design', description: 'Wireframes and UI in Figma. The customer journey from category page to order confirmation.' },
+    { num: '01', title: 'Analysis', description: 'Numbers, purchase funnel and back end. We agree what needs to improve before we choose the technology.' },
+    { num: '02', title: 'UX & design', description: 'Wireframes and UI in Figma. The customer journey from category page to order confirmation.' },
     { num: '03', title: 'Development', description: 'We build or migrate. Integrations, testing and performance optimisation.' },
-    { num: '04', title: 'Growth', description: 'CRO, advertising, automation. We optimise based on data.', featured: true },
+    { num: '04', title: 'Growth', description: 'After launch we optimise conversion and develop the store based on data.', featured: true },
 ];
 
 export default function EcommercePage() {
     const serviceSchema = buildServiceSchema({
-        name: 'E-commerce',
+        name: 'Online stores and e-commerce builds',
         description:
             'Headless stores, platform migrations, ERP integrations and conversion optimisation for e-commerce.',
         url: `${SITE_URL}/en/services/e-commerce`,
@@ -66,25 +67,26 @@ export default function EcommercePage() {
         <main style={{ minHeight: '100vh' }}>
             <SchemaScript schema={serviceSchema} />
             <PageHero
-                eyebrow="E-commerce"
-                title={<>Stores that sell and <span style={{ color: 'var(--accent)' }}>scale.</span></>}
-                description="We design and build data- and AI-driven e-commerce stores. New builds, platform migrations, ERP integrations — faster and with better results than a traditional process."
-                cta={{ label: 'Discuss your project', href: '/en/contact' }}
+                eyebrow="Online stores"
+                title={<>We build stores the way we would want to <span style={{ color: 'var(--accent)' }}>manage them.</span></>}
+                description="We design and build online stores, migrations and integrations. The work is done by a team that knows e-commerce from the management side — so what matters is how much the store earns, how quickly your team can make changes and whether data between systems adds up."
+                cta={{ label: 'Discuss your store project', href: '/en/contact' }}
+                ctaSecondary={{ label: 'See our work', href: '/en/portfolio' }}
                 right={<SceneWithLegend id="ecommerce-layers" label="Headless store layers" locale="en" />}
             />
 
             <Section border={false}>
                 <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-                    {stats.map(s => (
-                        <div key={s.value} className="flex flex-col gap-2.5" style={{ padding: '24px 24px 28px' }}>
-                            <span style={{ fontSize: 'clamp(28px, 3.1vw, 40px)', fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1 }}>{s.value}</span>
-                            <span className="ct-body" style={{ fontSize: 13 }}>{s.label}</span>
+                    {facts.map(f => (
+                        <div key={f.label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
+                            <span className="ct-meta">{f.label}</span>
+                            <span style={{ fontSize: 16, fontWeight: 500, lineHeight: 1.4 }}>{f.value}</span>
                         </div>
                     ))}
                 </div>
             </Section>
 
-            <Section id="oferta" eyebrow="Scope" title="Types of e-commerce projects.">
+            <Section id="oferta" eyebrow="Scope" title="What we design and build.">
                 <div className="ct-grid-lines grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {services.map(s => (
                         <div key={s.num} className="flex flex-col gap-2.5" style={{ padding: 28 }}>
@@ -121,7 +123,7 @@ export default function EcommercePage() {
                 </div>
             </Section>
 
-            <Section eyebrow="Process" title="From concept to a store that sells.">
+            <Section eyebrow="Process" title="From numbers to a store that sells.">
                 <ol className="ct-grid-lines grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                     {process.map(step => (
                         <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>
@@ -131,6 +133,14 @@ export default function EcommercePage() {
                         </li>
                     ))}
                 </ol>
+            </Section>
+
+            <Section tint>
+                <InlineCTA
+                    title="Not sure whether to change platform?"
+                    text="An e-commerce audit in 5–7 working days shows whether a new store or a migration is the right investment — or whether working on your current system will give a better result."
+                    cta={{ label: 'See the e-commerce audit', href: '/en/services/e-commerce-audit' }}
+                />
             </Section>
 
             <CTASection locale="en" />

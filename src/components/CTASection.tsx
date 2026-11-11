@@ -3,16 +3,16 @@ import type { Locale } from '@/lib/i18n';
 
 const defaults = {
     pl: {
-        eyebrow: 'Łączymy myślenie biznesowe z prędkością AI',
-        title: 'Zacznij budować digitalnie.',
-        description: 'Senior specjaliści i narzędzia AI — realizujemy projekty szybciej bez obniżania poprzeczki.',
-        cta: { label: 'Umów bezpłatną konsultację', href: '/kontakt' },
+        eyebrow: 'Pierwszy krok',
+        title: 'Zacznij od rozmowy o swoim e-commerce.',
+        description: '15 minut wystarczy, żeby sprawdzić, czy audyt albo zarządzanie e-commerce z zewnątrz ma w Twoim przypadku sens.',
+        cta: { label: 'Umów rozmowę', href: '/kontakt' },
     },
     en: {
-        eyebrow: 'Business thinking at the speed of AI',
-        title: 'Start building digitally.',
-        description: 'Senior specialists and AI tools — we deliver projects faster without lowering the bar.',
-        cta: { label: 'Book a free consultation', href: '/en/contact' },
+        eyebrow: 'The first step',
+        title: 'Start with a conversation about your e-commerce.',
+        description: '15 minutes is enough to check whether an audit or outsourced e-commerce management makes sense in your case.',
+        cta: { label: 'Book a call', href: '/en/contact' },
     },
 };
 

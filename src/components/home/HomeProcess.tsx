@@ -1,7 +1,7 @@
 import type { Locale } from '@/lib/i18n';
 import { homeCopy } from './home-copy';
 
-/** The process as a flat timeline frame: step, what happens, how long — durations in mono. */
+/** The engagement model as a flat timeline frame: step, what happens, how long — durations in mono. */
 export default function HomeProcess({ locale }: { locale: Locale }) {
     const { process: t, steps } = homeCopy[locale];
     return (
@@ -11,7 +11,7 @@ export default function HomeProcess({ locale }: { locale: Locale }) {
                     <span className="ct-eyebrow">{t.eyebrow}</span>
                     <h2 className="ct-h2 ct-statement">{t.title[0]}<span className="ct-electric">{t.title[1]}</span>{t.title[2]}</h2>
                 </div>
-                <ol className="ct-frame grid w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-5" style={{ listStyle: 'none', margin: 0, padding: 0, gap: 1, background: 'var(--line)' }}>
+                <ol className={`ct-frame grid w-full grid-cols-1 sm:grid-cols-2 ${steps.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-5'}`} style={{ listStyle: 'none', margin: 0, padding: 0, gap: 1, background: 'var(--line)' }}>
                     {steps.map((step) => (
                         <li key={step.num} className="flex flex-col gap-3" style={{ padding: 24, minHeight: 200, background: 'var(--panel)' }}>
                             <span className="ct-mono" style={{ fontSize: 13, color: 'var(--accent)' }}>{step.num}</span>
