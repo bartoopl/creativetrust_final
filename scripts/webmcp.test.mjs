@@ -53,11 +53,20 @@ test('get_pricing returns only published prices, or says the service is quoted i
     assert.equal((await tools().get_pricing.execute({})).isError, true);
 });
 
-test('e-commerce consulting (and its Diagnoza) is quoted individually, never with a published price', async () => {
-    const consulting = parse(await tools().get_pricing.execute({ service: 'konsulting-e-commerce' }));
-    assert.deepEqual(consulting.prices, []);
-    assert.match(consulting.note, /quoted individually/);
-    for (const rel of ['../src/app/(pl)/uslugi/konsulting-e-commerce/page.tsx', '../content/ai/uslugi/konsulting-e-commerce.md']) {
+test('the e-commerce audit and outsourced management are quoted individually, never with a published price', async () => {
+    for (const service of ['audyt-e-commerce', 'zarzadzanie-e-commerce']) {
+        const quoted = parse(await tools().get_pricing.execute({ service }));
+        assert.deepEqual(quoted.prices, []);
+        assert.match(quoted.note, /quoted individually/);
+    }
+    for (const rel of [
+        '../src/app/(pl)/uslugi/audyt-e-commerce/page.tsx',
+        '../content/ai/uslugi/audyt-e-commerce.md',
+        '../src/app/(pl)/uslugi/zarzadzanie-e-commerce/page.tsx',
+        '../content/ai/uslugi/zarzadzanie-e-commerce.md',
+        '../src/app/en/services/e-commerce-audit/page.tsx',
+        '../src/app/en/services/e-commerce-management/page.tsx',
+    ]) {
         const text = readFileSync(new URL(rel, import.meta.url), 'utf8');
         // Our prices are always net; the lead form's budget brackets (visitor's budget) are not.
         assert.doesNotMatch(text, /\d[\d\s]*zł netto/, `${rel} must not publish a price`);

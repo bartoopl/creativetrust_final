@@ -1,7 +1,7 @@
 export const stats = [
-    { value: '50+', label: 'Zrealizowanych projektów' },
-    { value: '3×', label: 'Szybciej z AI w procesie' },
-    { value: '100%', label: 'Projektów z mierzalnym celem' },
+    { value: '15+', label: 'lat na rynku' },
+    { value: '3', label: 'ogólnopolskie marki odzieżowe w doświadczeniu zespołu' },
+    { value: '150+', label: 'zrealizowanych projektów' },
 ];
 
 export default function StatsSection() {

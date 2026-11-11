@@ -1,10 +1,10 @@
 ---
-title: "E-commerce — CreativeTrust | Sklepy headless, migracje, WooCommerce, Shopify"
-description: "Projektujemy i wdrażamy sklepy internetowe, które sprzedają i skalują się bez bólu. Headless e-commerce, migracje platform, integracje ERP i AI-assisted development."
-date: "2026-10-27"
+title: "Sklepy internetowe — CreativeTrust | Projekt, wdrożenie, migracje i integracje ERP"
+description: "Projektujemy i budujemy sklepy internetowe: headless, WooCommerce, Shopify, migracje platform i integracje ERP. Z perspektywy zespołu, który zarządza e-commerce — pod sprzedaż, marżę i pracę zespołu."
+date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/uslugi/e-commerce"
 lang: "pl-PL"
-ai_summary: "CreativeTrust projektuje i wdraża sklepy e-commerce: headless (Next.js Commerce, Medusa.js, Saleor), WooCommerce, Shopify i Shopify Plus, migracje platform z zachowaniem danych i SEO, integracje z ERP/CRM (Subiekt, Comarch, SAP, BaseLinker) oraz optymalizację konwersji. Standard to PageSpeed powyżej 90, SEO e-commerce, checkout z BLIK, Apple Pay i Klarna, mobile-first."
+ai_summary: "CreativeTrust projektuje i buduje sklepy internetowe z perspektywy zespołu, który zarządza e-commerce: headless (Medusa.js, Next.js Commerce, Saleor), WooCommerce, Shopify i Shopify Plus, migracje platform z zachowaniem danych i SEO, integracje z ERP/CRM (Subiekt, Comarch, SAP, BaseLinker) oraz optymalizację konwersji. Standard to PageSpeed powyżej 90, SEO e-commerce, checkout z BLIK, Apple Pay i Klarna, mobile-first i zaplecze, w którym zespół sam zmienia ofertę."
 target_audience:
   - "Sklepy internetowe, które chcą przyspieszyć lub przebudować sprzedaż online"
   - "Firmy planujące migrację platformy e-commerce"
@@ -20,33 +20,33 @@ semantic_keywords:
   - "optymalizacja konwersji"
 ---
 
-# Sklepy e-commerce w CreativeTrust
+# Sklepy internetowe w CreativeTrust
 
-CreativeTrust projektuje i wdraża sklepy e-commerce oparte na danych i AI: nowe wdrożenia, migracje platform i integracje ERP — szybciej i z lepszym wynikiem niż w tradycyjnym procesie.
+CreativeTrust projektuje i wdraża sklepy internetowe, migracje i integracje. Robi to zespół, który zna e-commerce od strony zarządzania — dlatego liczy się to, ile sklep zarabia, jak szybko zespół wprowadza zmiany i czy dane między systemami się zgadzają.
 
-## Typy projektów e-commerce w CreativeTrust
+## Co CreativeTrust projektuje i wdraża
 
-1. **Sklepy headless** — frontend oddzielony od backendu: szybciej, elastyczniej i bez limitów platformy (Next.js Commerce, API-first, CMS).
-2. **WooCommerce** — budowa i rozbudowa sklepów z niestandardowym checkoutem, integracjami i wtyczkami.
+1. **Sklepy headless** — storefront oddzielony od zaplecza; zmiany w ofercie, promocjach i treściach wchodzą szybko (Medusa.js, Next.js, API-first).
+2. **WooCommerce** — budowa i rozbudowa sklepów z własnym checkoutem, integracjami i wtyczkami; dobry wybór, gdy liczy się czas startu i koszt utrzymania.
 3. **Shopify** — sklepy na Shopify Plus z własnym motywem (Liquid) i integracjami z ERP i systemami magazynowymi.
-4. **Migracje platform** — bezpieczna migracja z dowolnej platformy z zachowaniem danych, SEO i historii zamówień.
-5. **Integracje ERP / CRM** — synchronizacja stanów, zamówień i klientów z Subiektem, Comarch, SAP i innymi systemami.
-6. **Optymalizacja konwersji** — CRO, testy A/B i usprawnienia UX na podstawie danych z GA4 i heatmap.
+4. **Migracje platform** — przeniesienie sklepu z zachowaniem danych, SEO i historii zamówień; plan przekierowań i test sprzedaży powstają przed przełączeniem.
+5. **Integracje ERP / CRM** — synchronizacja stanów, cen, zamówień i klientów z Subiektem, Comarch, SAP i innymi systemami.
+6. **Optymalizacja konwersji** — testy i poprawki ścieżki zakupowej na podstawie danych: karta produktu, koszyk, checkout, płatności.
 
-## CreativeTrust e-commerce w liczbach
+## Jak CreativeTrust podchodzi do budowy sklepu
 
-- **150+** projektów e-commerce i stron WWW
-- **3,2×** średni wzrost konwersji po redesignie
-- **90+** PageSpeed Score w każdym projekcie
-- **40%** szybszy czas realizacji dzięki AI
+- **Punkt wyjścia:** cel sprzedażowy i marża, nie lista funkcji.
+- **Technologia:** open source, bez vendor lock-in.
+- **Migracje:** z zachowaniem SEO, danych i historii zamówień.
+- **Po starcie:** rozwój sklepu albo [zarządzanie e-commerce](https://www.creativetrust.pl/uslugi/zarzadzanie-e-commerce.md).
 
 ## Standard każdego sklepu od CreativeTrust
 
-- **Wydajność powyżej 90** — PageSpeed Score > 90 na mobile i desktop; szybki sklep to wyższe pozycje i niższy bounce rate.
-- **SEO e-commerce** — architektura kategorii, schema Product, breadcrumb, canonical, sitemap i AMP od początku.
+- **Wydajność powyżej 90** — PageSpeed Score > 90 na mobile i desktop; szybki sklep to wyższe pozycje i mniej porzuconych sesji.
+- **SEO e-commerce** — architektura kategorii, schema Product, breadcrumb, canonical i sitemap od początku.
 - **Checkout bez tarcia** — uproszczony checkout, one-click, Apple Pay, BLIK i Klarna: mniej kroków, mniej porzuceń.
-- **Mobile-first** — projekt od najmniejszego ekranu, bo zakupy mobilne to ponad 60% transakcji.
-- **Personalizacja z AI** — rekomendacje produktów, dynamiczne banery i e-mail automation oparte na zachowaniu klienta.
+- **Mobile-first** — projekt od najmniejszego ekranu, bo tam odbywa się większość zakupów.
+- **Zaplecze dla zespołu** — panel, w którym zespół sam zmienia ofertę, promocje i treści.
 - **Bezpieczeństwo** — SSL, 2FA dla administratora, backup, monitoring i aktualizacje w pakiecie wsparcia.
 
 ## Platformy i integracje e-commerce obsługiwane przez CreativeTrust
@@ -55,16 +55,18 @@ Next.js Commerce, WooCommerce, Shopify, Shopify Plus, Medusa.js, Saleor, Subiekt
 
 ## Proces budowy sklepu w CreativeTrust
 
-1. **Analiza** — obecny stan, dane i lejek zakupowy; AI przyspiesza diagnozę i priorytetyzację.
-2. **UX i design** — wireframes i UI w Figmie, customer journey od kategorii po potwierdzenie zamówienia.
+1. **Analiza** — liczby, lejek zakupowy i zaplecze; ustalenie, co ma się poprawić, zanim zostanie wybrana technologia.
+2. **UX i design** — makiety i UI w Figmie, ścieżka klienta od kategorii po potwierdzenie zamówienia.
 3. **Development** — budowa lub migracja sklepu, integracje, testy i optymalizacja wydajności.
-4. **Wzrost** — CRO, reklamy i automatyzacja, optymalizowane na podstawie danych.
+4. **Rozwój** — po starcie optymalizacja konwersji i rozwój sklepu na podstawie danych.
+
+Jeśli nie wiadomo, czy zmiana platformy się opłaca, pierwszym krokiem jest [audyt e-commerce](https://www.creativetrust.pl/uslugi/audyt-e-commerce.md).
 
 ## Najczęstsze pytania o sklepy e-commerce
 
 ### Czy robicie sklepy headless?
 
-Tak. Sklepy headless to pierwszy z typów projektów e-commerce w CreativeTrust — na Next.js Commerce, Medusa.js lub Saleor, z frontendem oddzielonym od backendu.
+Tak. CreativeTrust buduje sklepy headless na Medusa.js, Next.js Commerce lub Saleor, ze storefrontem oddzielonym od zaplecza.
 
 ### Czy przeniesiecie mój sklep na inną platformę bez utraty SEO?
 

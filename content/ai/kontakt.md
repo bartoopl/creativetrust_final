@@ -1,12 +1,13 @@
 ---
-title: "Kontakt — CreativeTrust | Umów konsultację AI-native"
-description: "Porozmawiajmy o Twoim projekcie. 30-minutowa konsultacja — pokażemy, gdzie AI realnie skróci czas i podniesie wynik. Strategia, design, development, automatyzacja."
-date: "2026-10-27"
+title: "Kontakt — CreativeTrust | Umów rozmowę o swoim e-commerce"
+description: "Porozmawiajmy o Twoim e-commerce. Krótka rozmowa bez zobowiązań: audyt sklepu, zarządzanie e-commerce z zewnątrz albo wdrożenie."
+date: "2026-11-10"
 canonical: "https://www.creativetrust.pl/kontakt"
 lang: "pl-PL"
-ai_summary: "Dane kontaktowe CreativeTrust: e-mail office@creativetrust.pl, telefon +48 570 526 421, adres M34 Business Center, ul. Kombatantów 34/500, 66-400 Gorzów Wielkopolski. Biuro pracuje od poniedziałku do piątku w godzinach 9:00–17:00. Pierwszy krok to 30-minutowa konsultacja bez zobowiązań."
+ai_summary: "Dane kontaktowe CreativeTrust: e-mail office@creativetrust.pl, telefon +48 570 526 421, adres M34 Business Center, ul. Kombatantów 34/500, 66-400 Gorzów Wielkopolski. Biuro pracuje od poniedziałku do piątku w godzinach 9:00–17:00. Pierwszy krok to krótka rozmowa bez zobowiązań."
 target_audience:
-  - "Osoby, które chcą zamówić stronę, sklep, automatyzację lub social media"
+  - "Osoby, które chcą zamówić audyt e-commerce lub zarządzanie e-commerce z zewnątrz"
+  - "Osoby, które chcą zamówić sklep, stronę, automatyzację lub social media"
   - "Firmy, które chcą umówić konsultację lub poprosić o wycenę"
 semantic_keywords:
   - "kontakt CreativeTrust"
@@ -17,7 +18,7 @@ semantic_keywords:
 
 # Kontakt z CreativeTrust
 
-Współpraca z CreativeTrust zaczyna się od rozmowy: 30-minutowej konsultacji bez zobowiązań. Zespół pokazuje na niej, gdzie AI realnie skróci czas i podniesie wynik — konkretnie, bez marketingowego szumu.
+Współpraca z CreativeTrust zaczyna się od krótkiej rozmowy bez zobowiązań. Klient mówi, co dziś hamuje sprzedaż lub marżę, a zespół wskazuje, czy zacząć od audytu, zarządzania e-commerce czy konkretnego wdrożenia.
 
 ## Dane kontaktowe CreativeTrust
 
@@ -32,15 +33,15 @@ Współpraca z CreativeTrust zaczyna się od rozmowy: 30-minutowej konsultacji b
 
 Formularz kontaktowy CreativeTrust najlepiej wypełnić, podając:
 
-- co chcesz poprawić: markę, stronę, sklep albo automatyzację,
-- skalę projektu i horyzont czasowy,
+- co chcesz poprawić: sprzedaż, marżę, pracę zespołu albo sklep,
+- skalę sprzedaży i platformę sklepu,
 - orientacyjny budżet (opcjonalnie).
 
 ## Najczęstsze pytania o kontakt z CreativeTrust
 
 ### Czy konsultacja z CreativeTrust jest płatna?
 
-Nie. Pierwsza, 30-minutowa konsultacja jest bezpłatna i bez zobowiązań.
+Nie. Pierwsza rozmowa jest bezpłatna i bez zobowiązań. Płatny jest dopiero audyt e-commerce, za stałą kwotę ustalaną z góry.
 
 ### Jak najszybciej skontaktować się z CreativeTrust?
 

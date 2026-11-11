@@ -26,6 +26,24 @@ type Rich = string | Array<string | { text: string; href: string }>;
 /** A body written in code. `toPortableText` turns it into the blocks Sanity would send. */
 type AuthoredBlock = { h2: string } | { h3: string } | { p: Rich } | { bullet: Rich } | { number: Rich };
 
+type ParagraphFix = {
+    /** Paragraph text as stored in Sanity. Once an editor changes it, the fix stops applying. */
+    from: string;
+    to: string;
+};
+
+export type FaqItem = {
+    question: string;
+    answer: string;
+};
+
+type FaqSection = {
+    heading: string;
+    /** The section goes right before the heading with this Sanity text, or at the end when it is gone. */
+    beforeHeading?: string;
+    items: FaqItem[];
+};
+
 type BlogSeoConfig = {
     /** Rendered as is, without the site-wide `| CreativeTrust` suffix. */
     title?: string;
@@ -35,8 +53,11 @@ type BlogSeoConfig = {
     heading?: string;
     headings?: HeadingFix[];
     inlineLink?: InlineLink;
-    /** Replaces the whole Sanity body; `headings` and `inlineLink` are then ignored. */
+    /** Replaces the whole Sanity body; `headings`, `paragraphs`, `inlineLink` and `faq` are then ignored. */
     body?: AuthoredBlock[];
+    paragraphs?: ParagraphFix[];
+    /** Rendered as H2 + H3 questions and emitted as FAQPage JSON-LD. */
+    faq?: FaqSection;
 };
 
 type PortableBlock = {
@@ -253,6 +274,40 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
             },
         ],
     },
+    'google-ads-dla-b2b-jak-zbierac-leady': {
+        title: 'Google Ads dla B2B: jak pozyskać leady sprzedażowe? Poradnik 2026 | CreativeTrust',
+        description:
+            'Kampanie Google Ads dla firm B2B krok po kroku: dobór słów kluczowych, formularze, CRM i kwalifikacja leadów. Sprawdź, jak obniżyć koszt pozyskania klienta.',
+        links: [],
+        paragraphs: [
+            {
+                from: 'Google Ads dla B2B działa najlepiej, gdy kampanie są budowane wokół intencji zakupowej, a nie samego wolumenu wyszukiwań. Najważniejsze są dobrze rozdzielone słowa kluczowe, precyzyjne wykluczenia, landing page odpowiadający na obiekcje decydenta oraz pomiar jakości leadów w CRM. Bez informacji, które zapytania stają się realnymi rozmowami sprzedażowymi, kampania będzie optymalizować się pod ilość formularzy, a nie pod przychód.',
+                to: 'Google Ads dla usług B2B działa najlepiej, gdy kampanie są budowane wokół intencji zakupowej, a nie samego wolumenu wyszukiwań. Dotyczy to także kampanii, które wiele firm wciąż nazywa AdWords B2B: zmieniła się nazwa narzędzia, nie zasady. Najważniejsze są dobrze rozdzielone słowa kluczowe, precyzyjne wykluczenia, landing page odpowiadający na obiekcje decydenta oraz pomiar jakości leadów w CRM. Bez informacji, które zapytania stają się realnymi rozmowami sprzedażowymi, kampania będzie optymalizować się pod ilość formularzy, a nie pod przychód.',
+            },
+        ],
+        faq: {
+            heading: 'FAQ: Google Ads w B2B',
+            beforeHeading: 'Polecane kolejne kroki',
+            items: [
+                {
+                    question: 'Ile kosztuje Google Ads dla B2B?',
+                    answer: 'Na koszt składają się budżet mediowy, czyli opłaty za kliknięcia, oraz obsługa kampanii. Stawki za kliknięcie w B2B bywają wyższe niż w e-commerce, bo fraz zakupowych jest mniej, a klient jest wart więcej. Dlatego budżet warto planować od kosztu kwalifikowanej rozmowy handlowej i wartości klienta, a nie od ceny kliknięcia.',
+                },
+                {
+                    question: 'Czy Google Ads działa w B2B?',
+                    answer: 'Tak, jeśli Twoi klienci szukają rozwiązania w Google. Kampania w B2B musi jednak celować w frazy zakupowe, wykluczać zapytania edukacyjne i rekrutacyjne, kierować ruch na dedykowany landing page i oceniać wynik po jakości leadów w CRM, a nie po liczbie formularzy.',
+                },
+                {
+                    question: 'Czym Google Ads różni się od AdWords?',
+                    answer: 'To ta sama usługa: w 2018 roku Google AdWords zmieniło nazwę na Google Ads. Porady o AdWords B2B nadal dotyczą tych samych kampanii w wyszukiwarce, choć panel i automatyczne strategie stawek od tego czasu mocno się zmieniły.',
+                },
+                {
+                    question: 'Jak mierzyć skuteczność Google Ads w B2B?',
+                    answer: 'Liczba leadów to za mało. Mierz koszt kwalifikowanego leada, odsetek leadów, które przechodzą w spotkanie, i pipeline przypisany do kampanii. Oznaczaj jakość leadów w CRM i importuj wartościowe konwersje z powrotem do Google Ads, żeby kampania uczyła się na sprzedaży, a nie na formularzach.',
+                },
+            ],
+        },
+    },
     'ile-kosztuje-strona-internetowa-dla-firmy': {
         links: [
             {
@@ -351,19 +406,55 @@ function toPortableText(body: AuthoredBlock[]): PortableBlock[] {
     });
 }
 
+function fixParagraph(block: PortableBlock, fixes: ParagraphFix[]): PortableBlock {
+    const plain = block._type === 'block' && !isHeading(block) && block.children?.length === 1;
+    const fix = plain ? fixes.find(({ from }) => from === blockText(block)) : undefined;
+    if (!fix) return block;
+
+    const [first] = block.children ?? [];
+    return { ...block, children: [{ ...first, text: fix.to, marks: [] }] };
+}
+
+function faqBlocks({ heading, items }: FaqSection): PortableBlock[] {
+    const block = (key: string, style: string, text: string): PortableBlock => ({
+        _type: 'block',
+        _key: key,
+        style,
+        markDefs: [],
+        children: [{ _type: 'span', _key: `${key}-span`, text, marks: [] }],
+    });
+
+    return [
+        block('seo-faq', 'h2', heading),
+        ...items.flatMap(({ question, answer }, index) => [
+            block(`seo-faq-${index}-q`, 'h3', question),
+            block(`seo-faq-${index}-a`, 'normal', answer),
+        ]),
+    ];
+}
+
+function insertFaq(content: PortableBlock[], faq: FaqSection): PortableBlock[] {
+    if (content.some((block) => isHeading(block) && blockText(block) === faq.heading)) return content;
+
+    const index = content.findIndex((block) => isHeading(block) && blockText(block) === faq.beforeHeading);
+    const at = index < 0 ? content.length : index;
+    return [...content.slice(0, at), ...faqBlocks(faq), ...content.slice(at)];
+}
+
 /** Overlays the `blog-seo.ts` fixes on a post fetched from Sanity. */
 export function applyBlogPostFixes<T extends BlogPostFields>(slug: string, post: T): T {
     const config = blogSeoConfig[slug];
     if (!post || !config) return post;
 
-    const { title, description, heading, headings = [], inlineLink, body } = config;
+    const { title, description, heading, headings = [], paragraphs = [], inlineLink, faq, body } = config;
     const linked = post.content && inlineLink ? insertInlineLink(post.content, inlineLink) : post.content;
+    const withFaq = linked && faq ? insertFaq(linked, faq) : linked;
 
     return {
         ...post,
         title: heading ?? post.title,
         seoTitle: title ?? post.seoTitle,
         seoDescription: description ?? post.seoDescription,
-        content: body ? toPortableText(body) : linked?.map((block) => fixHeading(block, headings)),
+        content: body ? toPortableText(body) : withFaq?.map((block) => fixParagraph(fixHeading(block, headings), paragraphs)),
     };
 }

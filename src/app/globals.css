@@ -344,6 +344,11 @@ body:has(.ct-v2) .ct-marquee-track span { font-family: var(--font-sans), sans-se
   min-height: calc(100svh - var(--ask-offset, 112px));
   padding: 72px var(--pad-x) 120px;
 }
+.ct-ask-hero.ct-ask-section { min-height: 0; padding: clamp(64px, 9vw, 120px) var(--pad-x); }
+.ct-home-hero { padding: clamp(56px, 8vw, 112px) var(--pad-x) clamp(32px, 4vw, 56px); }
+.ct-home-hero .ct-home-hero-title { margin: 0; max-width: 17ch; text-wrap: balance; }
+.ct-home-hero-link { margin-left: 10px; color: var(--text); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.ct-home-hero-link:hover { color: var(--accent); }
 .ct-ask-inner { width: 100%; max-width: 680px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .ct-ask-title {
   margin: 0; max-width: 20ch; text-align: center; text-wrap: balance; color: var(--text);

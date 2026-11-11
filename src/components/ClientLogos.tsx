@@ -1,7 +1,5 @@
+/** Clients of the agency. 5.10.15, Quiosque and Monnari are described in src/lib/experience.ts instead. */
 export const clients = [
-    'Monnari',
-    'Quiosque',
-    '5.10.15',
     'Kliniki Ziemlewski',
     'Katarzyna Batkowska',
     'Sulphur Busko Zdrój',
