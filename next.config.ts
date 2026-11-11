@@ -16,6 +16,8 @@ const nextConfig: NextConfig = {
     },
     transpilePackages: ["@sanity"],
     productionBrowserSourceMaps: false,
+    // Two root layouts ((pl) and en): unmatched URLs render src/app/global-not-found.tsx.
+    experimental: { globalNotFound: true },
     async redirects() {
         return [
             {

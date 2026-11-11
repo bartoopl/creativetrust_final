@@ -7,11 +7,13 @@ export interface CaseCard {
     title: string;
     description: string;
     image?: string;
+    hrefLang?: string;
+    noImageLabel?: string;
 }
 
 export default function CaseStudyCard({ card }: { card: CaseCard }) {
     return (
-        <Link href={card.href} className="ct-card-hover block overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.1)', borderRadius: 16, color: 'inherit' }}>
+        <Link href={card.href} hrefLang={card.hrefLang} className="ct-card-hover block overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.1)', borderRadius: 16, color: 'inherit' }}>
             {card.image ? (
                 <div style={{ height: 220, overflow: 'hidden', background: 'var(--panel2)', borderBottom: '1px solid var(--line)' }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -19,7 +21,7 @@ export default function CaseStudyCard({ card }: { card: CaseCard }) {
                 </div>
             ) : (
                 <div className="ct-placeholder" style={{ height: 180 }}>
-                    <span className="ct-mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--muted)' }}>BRAK ZDJĘCIA</span>
+                    <span className="ct-mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--muted)' }}>{card.noImageLabel ?? 'BRAK ZDJĘCIA'}</span>
                 </div>
             )}
             <div className="flex flex-col gap-2" style={{ padding: 22 }}>

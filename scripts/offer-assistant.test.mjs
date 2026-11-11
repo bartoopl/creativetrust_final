@@ -2,11 +2,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
     MAX_QUESTION_LENGTH, TOOL_NAME, validateQuestion, buildSystemPrompt, buildAnswerTool,
-    buildMessagesRequest, extractToolInput, normalizeAnswer, formatLeadMessage, answerFromCatalogue, fold,
+    buildMessagesRequest, extractToolInput, normalizeAnswer, formatLeadMessage, answerFromCatalogue, fold, assistantLocale,
 } from '../src/lib/offer-assistant.ts';
-import { services, seoLandings, publishedPrices } from '../src/lib/site-services.ts';
+import { services, seoLandings, publishedPrices, servicesFor, landingsFor, pricesFor } from '../src/lib/site-services.ts';
 
 const catalogue = { services, landings: seoLandings, prices: publishedPrices };
+const catalogueEn = { services: servicesFor('en'), landings: landingsFor('en'), prices: pricesFor('en') };
 
 // ---------- validateQuestion ----------
 
@@ -150,4 +151,56 @@ test('catalogue fallback says no to things outside the offer', () => {
 
 test('catalogue fallback is unclear for off-topic questions and does not trip on substrings', () => {
     assert.equal(answerFromCatalogue('Jaka będzie pogoda wiosną?', catalogue).verdict, 'unclear');
+});
+
+// ---------- English version ----------
+
+test('assistantLocale accepts only "en" and defaults to Polish', () => {
+    assert.equal(assistantLocale('en'), 'en');
+    assert.equal(assistantLocale('pl'), 'pl');
+    assert.equal(assistantLocale('de'), 'pl');
+    assert.equal(assistantLocale(undefined), 'pl');
+});
+
+test('English catalogue keeps slugs and amounts, swaps copy and links', () => {
+    assert.deepEqual(catalogueEn.services.map((s) => s.slug), services.map((s) => s.slug));
+    for (const s of catalogueEn.services) assert.match(s.href, /^\/en\/services\//);
+    for (const l of catalogueEn.landings) assert.match(l.href, /^\/en\/services\//);
+    assert.deepEqual(catalogueEn.prices.map((p) => p.service), publishedPrices.map((p) => p.service));
+    for (const p of catalogueEn.prices) assert.match(p.source, /^\/en\/services\//);
+});
+
+test('English questions get English validation errors and an English answer instruction', () => {
+    assert.equal(validateQuestion('a', 'en').error, 'Please write a little more about what you need.');
+    assert.match(buildSystemPrompt(catalogueEn, 'en'), /po angielsku/);
+    assert.doesNotMatch(buildSystemPrompt(catalogue), /po angielsku/);
+    assert.equal(buildMessagesRequest('x', catalogueEn, 'm', 'en').system, buildSystemPrompt(catalogueEn, 'en'));
+});
+
+test('English catalogue fallback answers in English with English price names', () => {
+    const a = answerFromCatalogue('How much does a landing page for a Google Ads campaign cost?', catalogueEn, 'en');
+    assert.equal(a.verdict, 'yes');
+    assert.match(a.answer, /^Yes — /);
+    assert.deepEqual(a.prices.map((p) => p.name), ['Landing page']);
+    const shop = answerFromCatalogue('We need an online store integrated with our ERP', catalogueEn, 'en');
+    assert.deepEqual(shop.services.map((s) => s.slug), ['e-commerce']);
+    assert.equal(shop.services[0].href, '/en/services/e-commerce');
+    const site = answerFromCatalogue('What does a company website cost?', catalogueEn, 'en');
+    assert.ok(site.prices.length > 0 && site.prices.every((p) => p.name !== 'Extended website'));
+    assert.equal(answerFromCatalogue('Can you build a mobile app for iPhone?', catalogueEn, 'en').verdict, 'no');
+    assert.match(answerFromCatalogue('What will the weather be?', catalogueEn, 'en').answer, /^I'm not sure/);
+});
+
+test('formatLeadMessage uses English labels for leads from the English page', () => {
+    const text = formatLeadMessage('Q', null, ' May ', 'en');
+    assert.match(text, /^Question from the offer assistant on the English homepage:\nQ/);
+    assert.match(text, /Additional message:\nMay$/);
+    assert.doesNotMatch(text, /[ąęłśżźćńó]/i);
+});
+
+test('English fallback matches whole words and priced deliverables by phrase', () => {
+    assert.equal(answerFromCatalogue('Can you restore old photographs?', catalogueEn, 'en').verdict, 'unclear');
+    const landing = answerFromCatalogue('A landing page for my company — what does it cost?', catalogueEn, 'en');
+    assert.deepEqual(landing.prices.map((p) => p.name), ['Landing page']);
+    assert.deepEqual(answerFromCatalogue('We need an online store.', catalogueEn, 'en').services.map((s) => s.slug), ['e-commerce']);
 });

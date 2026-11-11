@@ -1,18 +1,15 @@
-const reasons = [
-    { title: 'Znamy e-commerce od strony zarządzania', text: 'Doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.' },
-    { title: 'Liczymy marżę, nie tylko przychód', text: 'Patrzymy na zysk, zwroty, koszty kanałów i czas zespołu — nie na sam ruch i obrót.' },
-    { title: 'Doradzamy i budujemy', text: 'Ten sam zespół stawia diagnozę, projektuje i wdraża sklepy oraz strony. Raport nie trafia do szuflady.' },
-    { title: 'Nie sprzedajemy platformy', text: 'Open source i sprawdzone technologie: Medusa.js, Next.js, React. Zmianę systemu rekomendujemy tylko wtedy, gdy się opłaca.' },
-];
+import type { Locale } from '@/lib/i18n';
+import { homeCopy } from './home-copy';
 
 /** Why-us as a bento: Graphite feature cards punctuate the pale page, Tile Gray cards fill the rest. */
-export default function HomeWhyUs() {
+export default function HomeWhyUs({ locale }: { locale: Locale }) {
+    const { whyUs: t, reasons } = homeCopy[locale];
     return (
         <section className="ct-section">
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-12">
                 <div className="flex flex-col items-center gap-3 text-center">
-                    <span className="ct-eyebrow">Dlaczego CreativeTrust</span>
-                    <h2 className="ct-h2 ct-statement">Patrzymy na sklep jak <span className="ct-electric">zarząd</span>, nie jak wykonawca.</h2>
+                    <span className="ct-eyebrow">{t.eyebrow}</span>
+                    <h2 className="ct-h2 ct-statement">{t.title[0]}<span className="ct-electric">{t.title[1]}</span>{t.title[2]}</h2>
                 </div>
                 <ul className="grid w-full grid-cols-1 gap-1 md:grid-cols-5" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                     {reasons.map((reason, i) => {

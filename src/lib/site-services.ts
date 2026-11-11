@@ -88,6 +88,37 @@ export const seoLandings: Landing[] = [
     },
 ];
 
+type Copy = Pick<Service, 'href' | 'title' | 'description' | 'accent'>;
+
+/** English copy of the catalogue (pages under /en/services), keyed by service slug. */
+const servicesEn: Record<Service['slug'], Copy> = {
+    'audyt-e-commerce': { href: '/en/services/e-commerce-audit', title: 'E-commerce audit', description: 'Sales, margin, technology and how the store team works. A report and roadmap in 5–7 working days.', accent: 'Diagnosis' },
+    'zarzadzanie-e-commerce': { href: '/en/services/e-commerce-management', title: 'E-commerce management', description: 'Running your e-commerce from the outside: plan, margin, team, suppliers and results.', accent: 'Results' },
+    'e-commerce': { href: '/en/services/e-commerce', title: 'Online stores', description: 'Designing and building stores: headless, migrations and system integrations.', accent: 'Scale' },
+    'strony-www': { href: '/en/services/websites', title: 'Websites', description: 'Company websites, landing pages and portals: UX, SEO and performance.', accent: 'Conversion' },
+    'marketing-automation': { href: '/en/services/marketing-automation', title: 'Marketing Automation', description: 'SALESmanago, funnels, CRM and personalisation.', accent: 'Automation' },
+    'social-media': { href: '/en/services/social-media', title: 'Social Media', description: 'Strategy, content, campaigns and reporting.', accent: 'Visibility' },
+};
+
+const landingsEn: Record<Landing['href'], Pick<Landing, 'href' | 'title' | 'description'>> = {
+    '/uslugi/migracja-woocommerce-do-headless': { href: '/en/services/woocommerce-to-headless-migration', title: 'WooCommerce to headless migration', description: 'For stores that have outgrown the monolith.' },
+    '/uslugi/wdrozenie-salesmanago': { href: '/en/services/salesmanago-implementation', title: 'SALESmanago implementation', description: 'Partner-led setup and rollout.' },
+    '/uslugi/landing-page-google-ads': { href: '/en/services/google-ads-landing-page', title: 'Google Ads landing page', description: 'Pages built for paid campaigns.' },
+    '/uslugi/tworzenie-stron-www-cennik': { href: '/en/services/website-pricing', title: 'Website pricing', description: 'Quote, scope and indicative budget.' },
+    '/uslugi/strona-firmowa-cena': { href: '/en/services/company-website-cost', title: 'Company website cost', description: 'What a company website costs and includes.' },
+    '/uslugi/landing-page-pod-reklamy': { href: '/en/services/ad-landing-page', title: 'Landing page for ads', description: 'Pages for campaigns and lead generation.' },
+    '/uslugi/headless-woocommerce': { href: '/en/services/headless-woocommerce', title: 'Headless WooCommerce', description: 'A new storefront for a growing store.' },
+};
+
+/** The catalogue in the visitor's language; slugs stay Polish so both lists join on them. */
+export function servicesFor(locale: 'pl' | 'en'): Service[] {
+    return locale === 'en' ? services.map((s) => ({ ...s, ...servicesEn[s.slug] })) : services;
+}
+
+export function landingsFor(locale: 'pl' | 'en'): Landing[] {
+    return locale === 'en' ? seoLandings.map((l) => ({ ...l, ...landingsEn[l.href] })) : seoLandings;
+}
+
 /**
  * Prices published on the pricing pages. A test checks each string still
  * appears in its source page, so this list cannot silently drift.
@@ -98,3 +129,15 @@ export const publishedPrices: PublishedPrice[] = [
     { service: 'strony-www', name: 'Strona firmowa z CMS', price: 'od 10 000 zł netto', source: '/uslugi/strona-firmowa-cena' },
     { service: 'strony-www', name: 'Serwis rozbudowany', price: 'wycena indywidualna', source: '/uslugi/tworzenie-stron-www-cennik' },
 ];
+
+/** English labels of the published prices; amounts unchanged (net, PLN), source is the English pricing page. */
+const pricesEn: Record<PublishedPrice['name'], Pick<PublishedPrice, 'name' | 'price' | 'source'>> = {
+    'Landing page': { name: 'Landing page', price: 'from PLN 3,500 net', source: '/en/services/website-pricing' },
+    'Strona firmowa': { name: 'Company website', price: 'from PLN 7,500 net', source: '/en/services/website-pricing' },
+    'Strona firmowa z CMS': { name: 'Company website with CMS', price: 'from PLN 10,000 net', source: '/en/services/company-website-cost' },
+    'Serwis rozbudowany': { name: 'Extended website', price: 'individual quote', source: '/en/services/website-pricing' },
+};
+
+export function pricesFor(locale: 'pl' | 'en'): PublishedPrice[] {
+    return locale === 'en' ? publishedPrices.map((p) => ({ ...p, ...pricesEn[p.name] })) : publishedPrices;
+}

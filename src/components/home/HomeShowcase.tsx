@@ -1,29 +1,29 @@
 import NotchedButton from '../ui/NotchedButton';
 import Scene3D from '../scene3d/Scene3D';
-import { pipeline } from '../Hero';
+import type { Locale } from '@/lib/i18n';
+import { homeCopy } from './home-copy';
 
 /** Implementation pillar: a centered statement resolved by a product-workspace frame of how a build runs. */
-export default function HomeShowcase() {
+export default function HomeShowcase({ locale }: { locale: Locale }) {
+    const { showcase: t, pipeline, contactHref } = homeCopy[locale];
+    // The Polish homepage opens with HomeHero, so the showcase needs hero spacing only in English.
     return (
-        <section className="ct-section" >
+        <section className="ct-section" style={locale === 'en' ? { paddingTop: 'var(--pad-y-xl)' } : undefined}>
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-6 text-center">
-                <span className="ct-eyebrow">Sklepy i strony internetowe</span>
+                <span className="ct-eyebrow">{t.eyebrow}</span>
                 <h2 className="ct-h2 ct-statement">
-                    Projektujemy i <span className="ct-electric">budujemy</span> sklepy oraz strony.
+                    {t.title[0]}<span className="ct-electric">{t.title[1]}</span>{t.title[2]}
                 </h2>
-                <p className="ct-lead" style={{ maxWidth: '52ch' }}>
-                    Od celu biznesowego po start i rozwój — jako osobny projekt albo wykonanie roadmapy z audytu.
-                    AI skraca research i produkcję, ludzie pilnują decyzji, jakości i wyniku.
-                </p>
+                {t.lead && <p className="ct-lead" style={{ maxWidth: '52ch' }}>{t.lead}</p>}
                 <div className="flex flex-wrap justify-center gap-2 pt-2">
-                    <NotchedButton href="/uslugi/e-commerce">Sklepy internetowe</NotchedButton>
-                    <NotchedButton href="/uslugi/strony-www" variant="ghost">Strony internetowe</NotchedButton>
+                    <NotchedButton href={t.ctaHref ?? contactHref}>{t.cta}</NotchedButton>
+                    <NotchedButton href={t.secondaryHref} variant="ghost">{t.secondary}</NotchedButton>
                 </div>
 
-                <div className="ct-frame mt-10 w-full text-left" aria-label="Przykładowy przebieg wdrożenia">
+                <div className="ct-frame mt-10 w-full text-left" aria-label={t.frameLabel}>
                     <div className="flex items-center justify-between gap-4" style={{ padding: '10px 16px', borderBottom: '1px solid var(--line)' }}>
-                        <span className="ct-mono" style={{ fontSize: 12, color: 'var(--muted)' }}>creativetrust / wdrożenie</span>
-                        <span className="ct-mono" style={{ fontSize: 12, color: 'var(--accent)' }}>● AI w procesie</span>
+                        <span className="ct-mono" style={{ fontSize: 12, color: 'var(--muted)' }}>{t.frameTitle}</span>
+                        <span className="ct-mono" style={{ fontSize: 12, color: 'var(--accent)' }}>{t.frameBadge}</span>
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
                         <ol className="flex flex-col" style={{ listStyle: 'none', margin: 0, padding: 8 }}>

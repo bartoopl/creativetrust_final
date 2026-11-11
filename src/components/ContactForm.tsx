@@ -4,6 +4,60 @@ import React, { useState, useEffect, useRef } from 'react';
 import { HONEYPOT_FIELD_NAME } from '@/lib/antispam';
 import { trackLead } from '@/lib/analytics';
 import NotchedButton from './ui/NotchedButton';
+import type { Locale } from '@/lib/i18n';
+
+const copy = {
+    pl: {
+        failed: 'Wystąpił błąd podczas wysyłania formularza',
+        agentFailed: 'Nie udało się wysłać wiadomości.',
+        error: 'Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.',
+        sentEyebrow: 'Wysłano',
+        sentTitle: 'Dziękujemy za wiadomość!',
+        sentBody: 'Twoja wiadomość została wysłana. Skontaktujemy się z Tobą najszybciej jak to możliwe.',
+        again: 'Wyślij nową wiadomość',
+        eyebrow: 'Formularz',
+        title: 'Napisz do nas',
+        name: 'Imię i nazwisko *',
+        namePlaceholder: 'Twoje imię i nazwisko',
+        email: 'Email *',
+        emailPlaceholder: 'Twój adres email',
+        subject: 'Temat *',
+        chooseSubject: 'Wybierz temat',
+        subjects: { general: 'Zapytanie ogólne', cooperation: 'Współpraca', project: 'Wycena projektu', support: 'Wsparcie techniczne', other: 'Inny' },
+        message: 'Wiadomość *',
+        messagePlaceholder: 'Twoja wiadomość...',
+        messageTool: 'The message, preferably in Polish: what the visitor needs, scope, timeline and budget if known.',
+        sending: 'Wysyłanie...',
+        submit: 'Wyślij wiadomość',
+        consent: 'Wysyłając ten formularz, zgadzasz się na przetwarzanie Twoich danych osobowych zgodnie z naszą',
+        policy: { href: '/polityka-prywatnosci', label: 'polityką prywatności' },
+    },
+    en: {
+        failed: 'Something went wrong while sending the form',
+        agentFailed: 'The message could not be sent.',
+        error: 'Something went wrong while sending your message. Please try again later.',
+        sentEyebrow: 'Sent',
+        sentTitle: 'Thank you for your message!',
+        sentBody: 'Your message has been sent. We will get back to you as soon as possible.',
+        again: 'Send another message',
+        eyebrow: 'Form',
+        title: 'Write to us',
+        name: 'Full name *',
+        namePlaceholder: 'Your full name',
+        email: 'Email *',
+        emailPlaceholder: 'Your email address',
+        subject: 'Subject *',
+        chooseSubject: 'Choose a subject',
+        subjects: { general: 'General enquiry', cooperation: 'Partnership', project: 'Project quote', support: 'Technical support', other: 'Other' },
+        message: 'Message *',
+        messagePlaceholder: 'Your message...',
+        messageTool: 'The message, in English or Polish: what the visitor needs, scope, timeline and budget if known.',
+        sending: 'Sending...',
+        submit: 'Send message',
+        consent: 'By sending this form, you agree to the processing of your personal data in line with our',
+        policy: { href: '/en/privacy-policy', label: 'privacy policy' },
+    },
+};
 
 /** WebMCP's SubmitEvent additions for a submission an in-browser AI agent triggered. */
 type AgentSubmitEvent = SubmitEvent & {
@@ -11,7 +65,8 @@ type AgentSubmitEvent = SubmitEvent & {
     respondWith?: (response: Promise<unknown>) => void;
 };
 
-export default function ContactForm() {
+export default function ContactForm({ locale = 'pl' }: { locale?: Locale }) {
+    const t = copy[locale];
     const formStartTime = useRef<number>(Date.now());
     const honeypotRef = useRef<HTMLInputElement>(null);
 
@@ -37,6 +92,7 @@ export default function ContactForm() {
                 email: fields.get('email') ?? '',
                 subject: fields.get('subject') ?? '',
                 message: fields.get('message') ?? '',
+                locale,
                 [HONEYPOT_FIELD_NAME]: honeypotRef.current?.value ?? '',
                 formTimestamp: formStartTime.current,
             }),
@@ -45,7 +101,7 @@ export default function ContactForm() {
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error(data.message || 'Wystąpił błąd podczas wysyłania formularza');
+            throw new Error(data.message || t.failed);
         }
         return data.message;
     };
@@ -63,7 +119,7 @@ export default function ContactForm() {
         if (nativeEvent.agentInvoked && typeof nativeEvent.respondWith === 'function') {
             nativeEvent.respondWith(submission.then(
                 (message) => ({ sent: true, message }),
-                (err: unknown) => ({ sent: false, message: err instanceof Error ? err.message : 'Nie udało się wysłać wiadomości.' }),
+                (err: unknown) => ({ sent: false, message: err instanceof Error ? err.message : t.agentFailed }),
             ));
         }
 
@@ -78,7 +134,7 @@ export default function ContactForm() {
             if (err instanceof Error) {
                 setError(err.message);
             } else {
-                setError('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie później.');
+                setError(t.error);
             }
         } finally {
             setSubmitting(false);
@@ -89,16 +145,16 @@ export default function ContactForm() {
         return (
             <div className="ct-panel" style={{ padding: 'clamp(24px, 4vw, 40px)' }}>
                 <div className="flex flex-col gap-3" style={{ borderLeft: '2px solid var(--accent)', paddingLeft: 20 }}>
-                    <span className="ct-eyebrow">Wysłano</span>
+                    <span className="ct-eyebrow">{t.sentEyebrow}</span>
                     <h3 style={{ fontWeight: 500, fontSize: 22, letterSpacing: '-0.5px', color: 'var(--text)', margin: 0 }}>
-                        Dziękujemy za wiadomość!
+                        {t.sentTitle}
                     </h3>
                     <p className="ct-body" style={{ fontSize: 15, margin: '0 0 8px' }}>
-                        {success || 'Twoja wiadomość została wysłana. Skontaktujemy się z Tobą najszybciej jak to możliwe.'}
+                        {success || t.sentBody}
                     </p>
                     <div>
                         <NotchedButton variant="ghost" onClick={() => setSubmitted(false)}>
-                            Wyślij nową wiadomość
+                            {t.again}
                         </NotchedButton>
                     </div>
                 </div>
@@ -108,9 +164,9 @@ export default function ContactForm() {
 
     return (
         <div className="ct-panel" style={{ padding: 'clamp(24px, 4vw, 40px)' }}>
-            <span className="ct-eyebrow">Formularz</span>
+            <span className="ct-eyebrow">{t.eyebrow}</span>
             <h2 style={{ fontWeight: 500, fontSize: 22, letterSpacing: '-0.5px', color: 'var(--text)', margin: '8px 0 24px' }}>
-                Napisz do nas
+                {t.title}
             </h2>
 
             {/* Honeypot field - hidden from users but visible to bots. Kept outside the <form> so the
@@ -142,33 +198,33 @@ export default function ContactForm() {
                 tooldescription="Prepares a message to CreativeTrust, a Polish digital agency (websites, headless e-commerce, marketing automation, social media). Fills the contact form for the visitor to review and send; the agency replies by email."
             >
                 <div>
-                    <label htmlFor="name" className="ct-label">Imię i nazwisko *</label>
+                    <label htmlFor="name" className="ct-label">{t.name}</label>
                     <input
                         type="text"
                         id="name"
                         name="name"
                         required
                         className="ct-input"
-                        placeholder="Twoje imię i nazwisko"
+                        placeholder={t.namePlaceholder}
                         toolparamdescription="Visitor's full name."
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="email" className="ct-label">Email *</label>
+                    <label htmlFor="email" className="ct-label">{t.email}</label>
                     <input
                         type="email"
                         id="email"
                         name="email"
                         required
                         className="ct-input"
-                        placeholder="Twój adres email"
+                        placeholder={t.emailPlaceholder}
                         toolparamdescription="Visitor's email address for the reply."
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="subject" className="ct-label">Temat *</label>
+                    <label htmlFor="subject" className="ct-label">{t.subject}</label>
                     <select
                         id="subject"
                         name="subject"
@@ -177,17 +233,15 @@ export default function ContactForm() {
                         className="ct-input"
                         toolparamdescription="general = general question, cooperation = partnership, project = project quote, support = technical support, other = anything else."
                     >
-                        <option value="" disabled>Wybierz temat</option>
-                        <option value="general">Zapytanie ogólne</option>
-                        <option value="cooperation">Współpraca</option>
-                        <option value="project">Wycena projektu</option>
-                        <option value="support">Wsparcie techniczne</option>
-                        <option value="other">Inny</option>
+                        <option value="" disabled>{t.chooseSubject}</option>
+                        {Object.entries(t.subjects).map(([value, label]) => (
+                            <option key={value} value={value}>{label}</option>
+                        ))}
                     </select>
                 </div>
 
                 <div>
-                    <label htmlFor="message" className="ct-label">Wiadomość *</label>
+                    <label htmlFor="message" className="ct-label">{t.message}</label>
                     <textarea
                         id="message"
                         name="message"
@@ -195,8 +249,8 @@ export default function ContactForm() {
                         rows={6}
                         className="ct-input"
                         style={{ resize: 'vertical' }}
-                        placeholder="Twoja wiadomość..."
-                        toolparamdescription="The message, preferably in Polish: what the visitor needs, scope, timeline and budget if known."
+                        placeholder={t.messagePlaceholder}
+                        toolparamdescription={t.messageTool}
                     />
                 </div>
 
@@ -207,12 +261,12 @@ export default function ContactForm() {
                 )}
 
                 <NotchedButton type="submit" variant="primary" disabled={submitting} className="self-start">
-                    {submitting ? 'Wysyłanie...' : 'Wyślij wiadomość'}
+                    {submitting ? t.sending : t.submit}
                 </NotchedButton>
 
                 <p style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.6, margin: 0 }}>
-                    Wysyłając ten formularz, zgadzasz się na przetwarzanie Twoich danych osobowych zgodnie z naszą{' '}
-                    <a href="/polityka-prywatnosci" style={{ color: 'var(--muted)', textDecoration: 'underline' }}>polityką prywatności</a>.
+                    {t.consent}{' '}
+                    <a href={t.policy.href} style={{ color: 'var(--muted)', textDecoration: 'underline' }}>{t.policy.label}</a>.
                 </p>
             </form>
         </div>

@@ -9,6 +9,8 @@ export interface SceneTarget {
     node: string;
     /** Label shown next to the scene (panel step or chip) that mirrors the hover. */
     label: string;
+    /** English label when it differs from `label`. */
+    labelEn?: string;
 }
 
 export interface SceneConfig {
@@ -33,11 +35,11 @@ export const scenes = {
         scroll: 'scroll_progress',
         idle: ['idle_token'],
         targets: [
-            { node: 'module_goal', label: 'Cel biznesowy' },
-            { node: 'module_research', label: 'Research z AI' },
-            { node: 'module_prototype', label: 'Prototyp' },
-            { node: 'module_deploy', label: 'Wdrożenie' },
-            { node: 'module_optimize', label: 'Optymalizacja' },
+            { node: 'module_goal', label: 'Cel biznesowy', labelEn: 'Business goal' },
+            { node: 'module_research', label: 'Research z AI', labelEn: 'AI research' },
+            { node: 'module_prototype', label: 'Prototyp', labelEn: 'Prototype' },
+            { node: 'module_deploy', label: 'Wdrożenie', labelEn: 'Build' },
+            { node: 'module_optimize', label: 'Optymalizacja', labelEn: 'Optimisation' },
         ],
     },
     'ecommerce-layers': {
@@ -52,7 +54,7 @@ export const scenes = {
             { node: 'layer_api', label: 'API' },
             { node: 'layer_commerce', label: 'Commerce core' },
             { node: 'channel_web', label: 'Web' },
-            { node: 'channel_app', label: 'Aplikacja' },
+            { node: 'channel_app', label: 'Aplikacja', labelEn: 'App' },
             { node: 'channel_marketplace', label: 'Marketplace' },
         ],
     },

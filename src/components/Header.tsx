@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
@@ -8,20 +9,93 @@ import NotchedButton from './ui/NotchedButton';
 import MegaMenu from './MegaMenu';
 import Wordmark from './ui/Wordmark';
 import { createHoverIntent, type HoverIntent } from '@/lib/hover-intent';
+import { alternatePathFor, type Locale } from '@/lib/i18n';
 
-/** The two lead offers sit in the bar itself; the rest of the catalogue is under „Usługi”. */
-const leadItems = [
-    { href: '/uslugi/audyt-e-commerce', label: 'Audyt' },
-    { href: '/uslugi/zarzadzanie-e-commerce', label: 'Zarządzanie' },
-];
+const copy = {
+    pl: {
+        nav: [
+            { href: '/portfolio', label: 'Case Studies' },
+            { href: '/blog', label: 'Blog' },
+            { href: '/o-nas', label: 'O nas' },
+        ],
+        // The two lead offers sit in the bar itself; the rest of the catalogue is under „Usługi”.
+        lead: [
+            { href: '/uslugi/audyt-e-commerce', label: 'Audyt', long: 'Audyt e-commerce' },
+            { href: '/uslugi/zarzadzanie-e-commerce', label: 'Zarządzanie', long: 'Zarządzanie e-commerce' },
+        ],
+        services: { href: '/uslugi', label: 'Usługi' },
+        allServices: { href: '/uslugi', label: 'Wszystkie usługi' },
+        contact: { href: '/kontakt', label: 'Kontakt' },
+        home: '/',
+        processHref: '/#proces',
+        stripLead: 'Audyt, zarządzanie i budowa e-commerce — zobacz,',
+        stripLink: 'jak pracujemy →',
+        homeLabel: 'CreativeTrust — strona główna',
+        navLabel: 'Główna nawigacja',
+        auditHref: '/uslugi/audyt-e-commerce#formularz',
+        cta: 'Zamów audyt',
+        mobileCta: 'Zamów audyt e-commerce',
+        openMenu: 'Otwórz menu',
+        closeMenu: 'Zamknij menu',
+    },
+    en: {
+        // Blog articles are Polish only (Sanity content), so the link says so.
+        nav: [
+            { href: '/en/portfolio', label: 'Case Studies' },
+            { href: '/blog', label: 'Blog (PL)', hrefLang: 'pl' },
+            { href: '/en/about', label: 'About' },
+        ],
+        lead: [
+            { href: '/en/services/e-commerce-audit', label: 'Audit', long: 'E-commerce audit' },
+            { href: '/en/services/e-commerce-management', label: 'Management', long: 'E-commerce management' },
+        ],
+        services: { href: '/en/services', label: 'Services' },
+        allServices: { href: '/en/services', label: 'All services' },
+        contact: { href: '/en/contact', label: 'Contact' },
+        home: '/en',
+        processHref: '/en#proces',
+        stripLead: 'E-commerce audits, management and builds — see',
+        stripLink: 'how we work →',
+        homeLabel: 'CreativeTrust — home',
+        navLabel: 'Main navigation',
+        auditHref: '/en/services/e-commerce-audit#form',
+        cta: 'Order an audit',
+        mobileCta: 'Order an e-commerce audit',
+        openMenu: 'Open menu',
+        closeMenu: 'Close menu',
+    },
+};
 
-const navItems = [
-    { href: '/portfolio', label: 'Case Studies' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/o-nas', label: 'O nas' },
-];
+const switchLabel = {
+    pl: { code: 'EN', name: 'English', aria: 'Switch to English' },
+    en: { code: 'PL', name: 'Polski', aria: 'Przełącz na polski' },
+};
 
-export default function Header() {
+/** Link to the same page in the other language (full reload: each language has its own root layout). */
+function LanguageSwitch({ locale, mobile = false }: { locale: Locale; mobile?: boolean }) {
+    const pathname = usePathname() ?? '/';
+    const target: Locale = locale === 'pl' ? 'en' : 'pl';
+    const label = switchLabel[locale];
+    return (
+        <a
+            href={alternatePathFor(pathname, target)}
+            hrefLang={target}
+            lang={target}
+            aria-label={label.aria}
+            className={mobile ? 'flex items-center justify-between' : 'ct-nav-link ct-mono'}
+            style={mobile
+                ? { fontSize: 18, fontWeight: 500, color: 'var(--text)', padding: '16px 0', borderBottom: '1px solid var(--line)' }
+                : { fontSize: 12, fontWeight: 500, letterSpacing: '0.04em' }}
+        >
+            {mobile ? label.name : label.code}
+            {mobile && <span className="ct-mono" style={{ color: 'var(--muted-2)', fontSize: 13 }}>{label.code}</span>}
+        </a>
+    );
+}
+
+export default function Header({ locale }: { locale: Locale }) {
+    const t = copy[locale];
+    const navItems = t.nav;
     const [mobileOpen, setMobileOpen] = useState(false);
     const [sheetTop, setSheetTop] = useState(0);
     const [scrolled, setScrolled] = useState(false);
@@ -155,20 +229,20 @@ export default function Header() {
         <>
             <div ref={stripRef} className="ct-strip" style={{ borderBottom: '1px solid var(--line)', padding: '9px var(--pad-x)', display: 'flex', justifyContent: 'center', background: 'var(--panel)', textAlign: 'center' }}>
                 <span className="ct-mono" style={{ fontWeight: 500, fontSize: 12, color: 'var(--muted)', letterSpacing: '-0.1px' }}>
-                    Audyt, zarządzanie i budowa e-commerce — zobacz,{' '}
-                    <Link href="/#proces" style={{ fontWeight: 500 }}>jak pracujemy →</Link>
+                    {t.stripLead}{' '}
+                    <Link href={t.processHref} style={{ fontWeight: 500 }}>{t.stripLink}</Link>
                 </span>
             </div>
 
             <header ref={headerRef} className="ct-header" data-scrolled={scrolled}>
                 {/* Sits above the MegaMenu scrim so the trigger stays hoverable while the menu is open. */}
                 <div className="ct-header-shell relative z-[60] mx-auto flex max-w-[1440px] items-center justify-between gap-4">
-                    <Link href="/" aria-label="CreativeTrust — strona główna" style={{ display: 'flex', alignItems: 'center', flex: 'none' }}>
+                    <Link href={t.home} aria-label={t.homeLabel} style={{ display: 'flex', alignItems: 'center', flex: 'none' }}>
                         <Wordmark />
                     </Link>
 
-                    <nav className="hidden items-center gap-5 md:flex lg:gap-8" aria-label="Główna nawigacja">
-                        {leadItems.map((item) => (
+                    <nav className="hidden items-center gap-5 md:flex lg:gap-8" aria-label={t.navLabel}>
+                        {t.lead.map((item) => (
                             <Link key={item.href} href={item.href} className="ct-nav-link">
                                 {item.label}
                             </Link>
@@ -189,19 +263,22 @@ export default function Header() {
                             className="ct-nav-link"
                             style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit', color: servicesOpen ? 'var(--accent)' : undefined }}
                         >
-                            Usługi
+                            {t.services.label}
                             <ChevronDown size={14} style={{ transform: servicesOpen ? 'rotate(180deg)' : 'none', transition: 'transform .15s ease' }} />
                         </button>
                         {navItems.map((item) => (
-                            <Link key={item.href} href={item.href} className="ct-nav-link">
+                            <Link key={item.href} href={item.href} hrefLang={'hrefLang' in item ? item.hrefLang : undefined} className="ct-nav-link">
                                 {item.label}
                             </Link>
                         ))}
                     </nav>
 
-                    <NotchedButton href="/uslugi/audyt-e-commerce#formularz" variant="outline" size="sm" className="hidden lg:inline-flex">
-                        Zamów audyt
-                    </NotchedButton>
+                    <div className="hidden items-center gap-5 md:flex">
+                        <LanguageSwitch locale={locale} />
+                        <NotchedButton href={t.auditHref} variant="outline" size="sm" className="hidden lg:inline-flex">
+                            {t.cta}
+                        </NotchedButton>
+                    </div>
 
                     <button
                         ref={mobileToggleRef}
@@ -209,7 +286,7 @@ export default function Header() {
                         className="ct-menu-toggle inline-flex items-center justify-center md:hidden"
                         onClick={toggleMobile}
                         aria-controls="mobile-menu"
-                        aria-label={mobileOpen ? 'Zamknij menu' : 'Otwórz menu'}
+                        aria-label={mobileOpen ? t.closeMenu : t.openMenu}
                         aria-expanded={mobileOpen}
                         style={{ background: '#fff', border: '1px solid var(--line-strong)', borderRadius: 999, width: 40, height: 40, color: 'var(--text)', cursor: 'pointer', flex: 'none', padding: 0, touchAction: 'manipulation' }}
                     >
@@ -219,6 +296,7 @@ export default function Header() {
 
                 <MegaMenu
                     id="services-menu"
+                    locale={locale}
                     isOpen={servicesOpen}
                     onClose={closeServices}
                     panelRef={servicesPanelRef}
@@ -243,20 +321,20 @@ export default function Header() {
                         className="flex flex-col md:hidden"
                     >
                         {[
-                            { href: '/uslugi/audyt-e-commerce', label: 'Audyt e-commerce' },
-                            { href: '/uslugi/zarzadzanie-e-commerce', label: 'Zarządzanie e-commerce' },
-                            { href: '/uslugi', label: 'Wszystkie usługi' },
+                            ...t.lead.map(({ href, long }) => ({ href, label: long })),
+                            t.allServices,
                             ...navItems,
-                            { href: '/kontakt', label: 'Kontakt' },
+                            t.contact,
                         ].map((item) => (
                             <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="flex items-center justify-between" style={{ fontSize: 18, fontWeight: 500, color: 'var(--text)', padding: '16px 0', borderBottom: '1px solid var(--line)' }}>
                                 {item.label}
                                 <span className="ct-mono" style={{ color: 'var(--muted-2)', fontSize: 13 }}>→</span>
                             </Link>
                         ))}
+                        <LanguageSwitch locale={locale} mobile />
                         <div style={{ paddingTop: 24 }}>
-                            <NotchedButton href="/uslugi/audyt-e-commerce#formularz" onClick={() => setMobileOpen(false)}>
-                                Zamów audyt e-commerce
+                            <NotchedButton href={t.auditHref} onClick={() => setMobileOpen(false)}>
+                                {t.mobileCta}
                             </NotchedButton>
                         </div>
                     </motion.div>

@@ -1,10 +1,12 @@
 import { clients } from '../ClientLogos';
-import { stats } from '../StatsSection';
+import type { Locale } from '@/lib/i18n';
+import { homeCopy } from './home-copy';
 
 /** The numbers as quiet display figures, then client names in a band of pale tiles. */
-export default function HomeProof() {
+export default function HomeProof({ locale }: { locale: Locale }) {
+    const { proof: t, stats } = homeCopy[locale];
     return (
-        <section className="ct-section" aria-label="CreativeTrust w liczbach i klienci">
+        <section className="ct-section" aria-label={t.label}>
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-12">
                 <dl className="grid w-full grid-cols-1 gap-8 sm:grid-cols-3" style={{ margin: 0 }}>
                     {stats.map((stat) => (
@@ -17,7 +19,7 @@ export default function HomeProof() {
                     ))}
                 </dl>
                 <div className="flex w-full flex-col items-center gap-6">
-                    <span className="ct-eyebrow text-center">Zaufali nam m.in.</span>
+                    <span className="ct-eyebrow text-center">{t.eyebrow}</span>
                     <ul className="grid w-full grid-cols-2 gap-1 sm:grid-cols-3" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                         {clients.map((client) => (
                             <li key={client} className="ct-tile flex items-center justify-center text-center" style={{ minHeight: 88, padding: '4px 12px' }}>
