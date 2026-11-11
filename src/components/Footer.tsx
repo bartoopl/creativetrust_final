@@ -39,15 +39,16 @@ const copy: Record<Locale, {
     en: {
         home: '/en',
         homeLabel: 'CreativeTrust — home',
-        lead: 'Websites, headless e-commerce, marketing automation and social media — at AI speed.',
+        lead: 'We audit and manage e-commerce from the outside. We also design and build online stores and websites.',
         servicesTitle: 'Services',
         companyTitle: 'Company',
         services: [
+            { href: '/en/services/e-commerce-audit', label: 'E-commerce audit' },
+            { href: '/en/services/e-commerce-management', label: 'E-commerce management' },
+            { href: '/en/services/e-commerce', label: 'Online stores' },
             { href: '/en/services/websites', label: 'Websites' },
-            { href: '/en/services/e-commerce', label: 'Headless e-commerce' },
             { href: '/en/services/marketing-automation', label: 'Marketing automation' },
             { href: '/en/services/social-media', label: 'Social media' },
-            { href: '/en/services/e-commerce-consulting', label: 'E-commerce consulting' },
         ],
         company: [
             { href: '/en/about', label: 'About' },

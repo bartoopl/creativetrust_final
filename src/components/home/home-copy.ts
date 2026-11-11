@@ -2,7 +2,7 @@ import type { Locale } from '@/lib/i18n';
 import { pipeline as pipelinePl } from '../Hero';
 import { testimonials as testimonialsPl } from '../TestimonialSection';
 import { stats as statsPl } from '../StatsSection';
-import { AUDIT_FORM_HREF } from '@/lib/experience';
+import { AUDIT_FORM_HREF, AUDIT_FORM_HREF_EN } from '@/lib/experience';
 
 /** Homepage copy per language; the Polish lists stay where the legacy sections define them. */
 export const homeCopy = {
@@ -41,7 +41,6 @@ export const homeCopy = {
         services: {
             eyebrow: 'Co robimy',
             title: ['Diagnozujemy, prowadzimy i ', 'budujemy', ' e‑commerce.'],
-            details: {} as Record<string, string[]>,
         },
         whyUs: {
             eyebrow: 'Dlaczego CreativeTrust',
@@ -82,17 +81,16 @@ export const homeCopy = {
             { num: '05', title: 'Optimisation', text: 'Monitoring and iterations from launch day.', status: 'growth', module: 'module_optimize' },
         ],
         steps: [
-            { num: '01', title: 'Brief', description: 'We talk about your business, goals and KPIs.', duration: '1–2 days' },
-            { num: '02', title: 'AI strategy', description: 'AI analyses the market and data. We design the plan.', duration: '2–3 days' },
-            { num: '03', title: 'Design', description: 'Prototypes and UI/UX in hours, not weeks.', duration: '3–5 days' },
-            { num: '04', title: 'AI×3 build', description: 'AI speeds up coding — 3× faster than the usual pace.', duration: '1–4 weeks' },
-            { num: '05', title: 'Launch & growth', description: 'Launch, monitoring and optimisation from day one.', duration: 'Ongoing' },
+            { num: '01', title: 'Intro call', description: 'We check whether an audit makes business sense in your case. No commitment.', duration: '15 minutes' },
+            { num: '02', title: 'E-commerce audit', description: 'Interviews, data analysis and a look behind the scenes of your store. A fixed fee, agreed upfront.', duration: '5–7 working days' },
+            { num: '03', title: 'Roadmap', description: 'Priorities ranked by their impact on profit and team time, with a quote for delivering them.', duration: 'at the end of the audit' },
+            { num: '04', title: 'Management and delivery', description: 'We run your e-commerce from the outside and deliver the changes. The audit fee is credited in the first month.', duration: 'monthly retainer' },
         ],
         reasons: [
-            { title: 'We are in business, not just next to it', text: 'Every design decision is a business decision for us, not an aesthetic one.' },
-            { title: 'Human judgement + AI speed', text: 'Business experience and delivery accelerated by AI — without losing quality.' },
-            { title: 'End-to-end service', text: 'Websites, online stores, marketing automation and social media under one roof.' },
-            { title: 'Open source, proven technology', text: 'Medusa.js, Next.js, React. Zero vendor lock-in, full control over the code.' },
+            { title: 'We know e-commerce from the management side', text: 'Experience managing e-commerce for the 5.10.15 and Quiosque brands and working on the development of the Monnari capital group.' },
+            { title: 'We count margin, not just revenue', text: 'We look at profit, returns, channel costs and team time — not just traffic and turnover.' },
+            { title: 'We advise and we build', text: 'The same team diagnoses, designs and builds stores and websites. The report does not end up in a drawer.' },
+            { title: "We don't sell a platform", text: 'Open source and proven technology: Medusa.js, Next.js, React. We recommend changing systems only when it pays off.' },
         ],
         testimonials: [
             { name: 'Anna', text: 'CreativeTrust doesn’t just do what’s in the brief. They actively suggest what to change to get better results.' },
@@ -101,43 +99,37 @@ export const homeCopy = {
             { name: 'Tomasz', text: 'Honest and direct — they know what they’re talking about and say it plainly.' },
         ],
         stats: [
-            { value: '50+', label: 'Projects delivered' },
-            { value: '3×', label: 'Faster with AI in the process' },
-            { value: '100%', label: 'Projects with a measurable goal' },
+            { value: '15+', label: 'years in the market' },
+            { value: '3', label: 'nationwide Polish fashion brands in the team’s experience' },
+            { value: '150+', label: 'projects delivered' },
         ],
         contactHref: '/en/contact',
         portfolioHref: '/en/portfolio',
         dateLocale: 'en-GB',
         showcase: {
-            eyebrow: 'AI-native product partner',
-            title: ['AI shortens research and production. ', 'Our team', ' owns the decisions, the quality and the result.'],
-            lead: undefined,
-            cta: 'Book a consultation',
-            ctaHref: undefined,
-            secondary: 'See services',
-            secondaryHref: '#uslugi',
-            frameLabel: 'A sample project timeline',
+            eyebrow: 'Online stores and websites',
+            title: ['We design and ', 'build', ' online stores and websites.'],
+            lead: 'From the business goal to launch and growth — as a standalone project or as delivery of the audit roadmap. AI shortens research and production; people own the decisions, the quality and the result.',
+            cta: 'Online stores',
+            ctaHref: '/en/services/e-commerce',
+            secondary: 'Websites',
+            secondaryHref: '/en/services/websites',
+            frameLabel: 'A sample build timeline',
             frameTitle: 'creativetrust / delivery',
             frameBadge: '● AI in the process',
         },
-        proof: { label: 'Our clients and numbers', eyebrow: 'Trusted by, among others' },
+        proof: { label: 'CreativeTrust in numbers and clients', eyebrow: 'Trusted by, among others' },
         services: {
-            eyebrow: 'From project to results',
-            title: ['Everything you need to ', 'grow', ' in digital.'],
-            details: {
-                'strony-www': ['Designed for a business goal', 'UX that converts', 'Next.js and performance'],
-                'e-commerce': ['Headless / Medusa.js', 'Migrations without losing SEO', 'ERP, CRM and marketplace integrations'],
-                'marketing-automation': ['SALESmanago implementations', 'Funnels, scoring, segmentation', 'E-mail, SMS, push'],
-                'social-media': ['Strategy and schedule', 'Content and campaigns', 'Performance reporting'],
-            } as Record<string, string[]>,
+            eyebrow: 'What we do',
+            title: ['We diagnose, run and ', 'build', ' e‑commerce.'],
         },
         whyUs: {
             eyebrow: 'Why CreativeTrust',
-            title: ['Not an agency for pretty things. ', 'A partner', ' that ships fast.'],
+            title: ['We look at a store like ', 'the board', ', not like a contractor.'],
         },
         process: {
             eyebrow: 'How we work',
-            title: ['Our process. ', 'AI', ' in every step.'],
+            title: ['Low risk at the start. ', 'A concrete plan', ' for what comes next.'],
         },
         cases: {
             eyebrow: 'What it looks like in practice',
@@ -152,13 +144,13 @@ export const homeCopy = {
             all: 'All articles',
         },
         closing: {
-            eyebrow: 'Business thinking at the speed of AI',
-            title: ['Start building ', 'digitally.', ''],
-            lead: 'Senior specialists and AI tools — we deliver projects faster without lowering the bar.',
-            cta: 'Book a free consultation',
-            ctaHref: undefined,
-            secondary: 'Ask us a question',
-            secondaryHref: '#ask-hero-title',
+            eyebrow: 'The first step',
+            title: ['Start with ', 'an audit.', ''],
+            lead: 'In 5–7 working days you know where your store is losing sales, margin and team time — and what to fix first.',
+            cta: 'Order an e-commerce audit',
+            ctaHref: AUDIT_FORM_HREF_EN as string | undefined,
+            secondary: 'Book a 15-minute call',
+            secondaryHref: '/en/contact',
         },
     },
 } satisfies Record<Locale, unknown>;

@@ -6,9 +6,8 @@ import { homeCopy } from './home-copy';
 /** Implementation pillar: a centered statement resolved by a product-workspace frame of how a build runs. */
 export default function HomeShowcase({ locale }: { locale: Locale }) {
     const { showcase: t, pipeline, contactHref } = homeCopy[locale];
-    // The Polish homepage opens with HomeHero, so the showcase needs hero spacing only in English.
     return (
-        <section className="ct-section" style={locale === 'en' ? { paddingTop: 'var(--pad-y-xl)' } : undefined}>
+        <section className="ct-section">
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-6 text-center">
                 <span className="ct-eyebrow">{t.eyebrow}</span>
                 <h2 className="ct-h2 ct-statement">

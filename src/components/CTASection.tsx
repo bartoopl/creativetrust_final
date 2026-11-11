@@ -9,10 +9,10 @@ const defaults = {
         cta: { label: 'Umów rozmowę', href: '/kontakt' },
     },
     en: {
-        eyebrow: 'Business thinking at the speed of AI',
-        title: 'Start building digitally.',
-        description: 'Senior specialists and AI tools — we deliver projects faster without lowering the bar.',
-        cta: { label: 'Book a free consultation', href: '/en/contact' },
+        eyebrow: 'The first step',
+        title: 'Start with a conversation about your e-commerce.',
+        description: '15 minutes is enough to check whether an audit or outsourced e-commerce management makes sense in your case.',
+        cta: { label: 'Book a call', href: '/en/contact' },
     },
 };
 

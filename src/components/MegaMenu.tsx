@@ -19,10 +19,10 @@ const copy = {
     en: {
         close: 'Close menu',
         eyebrow: 'What we do',
-        lead: 'You pick the area; we tie together strategy, delivery and growth.',
-        body: 'We usually start from a single problem, then shape the whole so your offer, content and sales work together.',
+        lead: 'We audit, run and build e-commerce.',
+        body: 'The audit shows what is holding back sales and margin. We also build online stores and websites as standalone projects.',
         all: { href: '/en/services', label: 'All services →' },
-        contact: { href: '/en/contact', label: 'Contact →' },
+        contact: { href: '/en/services/e-commerce-audit#form', label: 'Order an audit →' },
         landings: 'Landing pages',
     },
 };

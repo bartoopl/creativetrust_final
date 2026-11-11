@@ -34,3 +34,29 @@ export const EXPERIENCE_SENTENCE =
 export const AUDIT_HREF = '/uslugi/audyt-e-commerce';
 export const MANAGEMENT_HREF = '/uslugi/zarzadzanie-e-commerce';
 export const AUDIT_FORM_HREF = `${AUDIT_HREF}#formularz`;
+
+/** English counterparts for the pages under /en; same tense-neutral rule. */
+export const experienceEn: ExperienceItem[] = [
+    {
+        brand: '5.10.15',
+        role: 'E-commerce management',
+        text: 'Experience managing e-commerce for a nationwide Polish childrenswear brand.',
+    },
+    {
+        brand: 'Quiosque',
+        role: 'E-commerce management',
+        text: 'Experience managing e-commerce for a nationwide Polish womenswear brand.',
+    },
+    {
+        brand: 'Monnari',
+        role: 'Group development',
+        text: 'Work on the development of the Monnari capital group.',
+    },
+];
+
+export const EXPERIENCE_SENTENCE_EN =
+    'Experience managing e-commerce for the 5.10.15 and Quiosque brands and working on the development of the Monnari capital group.';
+
+export const AUDIT_HREF_EN = '/en/services/e-commerce-audit';
+export const MANAGEMENT_HREF_EN = '/en/services/e-commerce-management';
+export const AUDIT_FORM_HREF_EN = `${AUDIT_HREF_EN}#form`;
