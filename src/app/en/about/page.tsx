@@ -5,6 +5,7 @@ import CTASection from '@/components/CTASection';
 import { NumberedGrid } from '@/components/LandingBlocks';
 import { SITE_URL } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
+import { EXPERIENCE_SENTENCE_EN, experienceEn } from '@/lib/experience';
 
 export const metadata: Metadata = {
     title: 'About us | A team built on e-commerce audit and management',
@@ -17,13 +18,6 @@ export const metadata: Metadata = {
     },
 };
 
-const experience = [
-    { brand: '5.10.15', text: 'Experience managing e-commerce for a nationwide Polish childrenswear brand.' },
-    { brand: 'Quiosque', text: 'Experience managing e-commerce for a nationwide Polish womenswear brand.' },
-    { brand: 'Monnari', text: 'Work on the development of the Monnari capital group.' },
-];
-
-const EXPERIENCE_SENTENCE = 'Experience managing e-commerce for the 5.10.15 and Quiosque brands and working on the development of the Monnari capital group.';
 
 const values = [
     { title: 'Results before scope', description: 'We start with sales, margin and team time. We choose technology and actions to fit what needs to improve.' },
@@ -75,10 +69,10 @@ export default function AboutPage() {
             <Section
                 eyebrow="EXPERIENCE"
                 title="Growing brands in the Polish market."
-                description={EXPERIENCE_SENTENCE}
+                description={EXPERIENCE_SENTENCE_EN}
                 border={false}
             >
-                <NumberedGrid cols={3} numbered={false} items={experience.map((item) => ({ title: item.brand, text: item.text }))} />
+                <NumberedGrid cols={3} numbered={false} items={experienceEn.map((item) => ({ title: item.brand, text: item.text }))} />
             </Section>
 
             <Section eyebrow="WHAT GUIDES US" title="The principles that keep a collaboration on track." tint>
