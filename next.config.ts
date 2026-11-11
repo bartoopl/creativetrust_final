@@ -38,6 +38,17 @@ const nextConfig: NextConfig = {
                 destination: '/uslugi',
                 permanent: true,
             },
+            // „Konsulting e-commerce” became the e-commerce audit (HTML and Markdown twin).
+            {
+                source: '/uslugi/konsulting-e-commerce',
+                destination: '/uslugi/audyt-e-commerce',
+                permanent: true,
+            },
+            {
+                source: '/uslugi/konsulting-e-commerce.md',
+                destination: '/uslugi/audyt-e-commerce.md',
+                permanent: true,
+            },
             // Retired posts (e.g. outdated 2023 prices) → the current page, HTML and Markdown twin.
             ...Object.entries(retiredBlogPosts as Record<string, string>).flatMap(([slug, destination]) => [
                 { source: `/blog/${slug}`, destination, permanent: true },

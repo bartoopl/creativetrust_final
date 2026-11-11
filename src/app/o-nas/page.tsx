@@ -2,32 +2,35 @@ import { Metadata } from 'next';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import CTASection from '@/components/CTASection';
+import { NumberedGrid } from '@/components/LandingBlocks';
+import { EXPERIENCE_SENTENCE, experience } from '@/lib/experience';
 import { SITE_URL } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'O nas | AI-native partner produktowy',
-    description: 'CreativeTrust to AI-native partner produktowy. Łączymy strategię, design, development i automatyzację AI w jednym procesie. 15 lat doświadczenia, 150+ projektów.',
+    title: 'O nas | Zespół od audytu i zarządzania e-commerce',
+    description: 'CreativeTrust audytuje sklepy internetowe i prowadzi e-commerce marek z zewnątrz. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Na rynku od 2010 roku.',
     alternates: { canonical: `${SITE_URL}/o-nas` },
 };
 
 const values = [
-    { title: 'Skuteczność', description: 'Każde działanie ma wspierać wynik biznesowy, nie tylko poprawiać wygląd.' },
-    { title: 'Transparentność', description: 'Ustalamy zakres, priorytety i odpowiedzialność na początku współpracy.' },
-    { title: 'Partnerstwo', description: 'Pracujemy jak część zespołu klienta, a nie jak odłączony podwykonawca.' },
+    { title: 'Wynik przed zakresem', description: 'Zaczynamy od sprzedaży, marży i czasu zespołu. Technologię i działania dobieramy do tego, co ma się poprawić.' },
+    { title: 'Liczby na stole', description: 'Ustalamy cele, priorytety i odpowiedzialność na początku. Raportujemy to, co zmieniło wynik — nie listę wykonanych zadań.' },
+    { title: 'Część zespołu klienta', description: 'Pracujemy jak dział e-commerce po Waszej stronie, a nie jak odłączony podwykonawca.' },
 ];
 
 const milestones = [
     { year: '2010', title: 'Start agencji', description: 'Budowaliśmy pierwsze kampanie i komunikację dla marek, które potrzebowały prostszej ścieżki do klienta.' },
     { year: '2016', title: 'Web & e-commerce', description: 'Dołożyliśmy projektowanie stron i sklepów, żeby kontrolować cały lejek, a nie tylko fragment.' },
     { year: '2024', title: 'SALESmanago partner', description: 'Wzmocniliśmy obszar automatyzacji i pracy z danymi marketingowymi.' },
-    { year: '2025', title: 'AI-native', description: 'AI wplecione w każdy etap pracy — od researchu po development. Krótszy time-to-market, wyższy wynik.' },
+    { year: '2025', title: 'AI w procesie', description: 'AI wplecione w research, analitykę i development. Krótszy czas od diagnozy do wdrożenia.' },
+    { year: '2026', title: 'Audyt i zarządzanie e-commerce', description: 'Główną ofertą stają się audyt sklepu i prowadzenie e-commerce z zewnątrz. Wdrożenia zostają w tym samym zespole.' },
 ];
 
 const stats = [
-    ['15+', 'lat doświadczenia'],
-    ['150+', 'projektów'],
-    ['3,2×', 'średni wzrost konwersji'],
-    ['40%', 'szybciej dzięki AI'],
+    ['15+', 'lat na rynku'],
+    ['3', 'ogólnopolskie marki odzieżowe w doświadczeniu zespołu'],
+    ['150+', 'zrealizowanych projektów'],
+    ['5–7', 'dni roboczych na audyt e-commerce'],
 ];
 
 export default function AboutPage() {
@@ -35,8 +38,8 @@ export default function AboutPage() {
         <main style={{ minHeight: '100vh' }}>
             <PageHero
                 eyebrow="O NAS"
-                title="AI-native partner produktowy."
-                description="Łączymy strategię marki, design, development i automatyzację AI w jednym procesie. Pracujemy jak partner, nie podwykonawca — od diagnozy po wynik."
+                title="Zespół, który zna e-commerce od strony zarządzania."
+                description="Audytujemy sklepy internetowe, prowadzimy e-commerce marek z zewnątrz i wdrażamy to, co rekomendujemy. Opieramy się na doświadczeniu w budowaniu rosnących marek na polskim rynku."
                 cta={{ label: 'Porozmawiajmy', href: '/kontakt' }}
                 ctaSecondary={{ label: 'Zobacz usługi', href: '/uslugi' }}
             />
@@ -56,7 +59,16 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            <Section eyebrow="CO NAS PROWADZI" title="Zasady, które trzymają projekt w ryzach." border={false}>
+            <Section
+                eyebrow="DOŚWIADCZENIE"
+                title="Rosnące marki na polskim rynku."
+                description={EXPERIENCE_SENTENCE}
+                border={false}
+            >
+                <NumberedGrid cols={3} numbered={false} items={experience.map((item) => ({ title: item.brand, text: item.text }))} />
+            </Section>
+
+            <Section eyebrow="CO NAS PROWADZI" title="Zasady, które trzymają współpracę w ryzach." tint>
                 <div className="ct-grid-lines grid-cols-1 md:grid-cols-3" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {values.map((v, i) => (
                         <div key={v.title} className="flex flex-col gap-3" style={{ padding: 28 }}>
@@ -68,8 +80,8 @@ export default function AboutPage() {
                 </div>
             </Section>
 
-            <Section eyebrow="NASZA DROGA" title="Budowaliśmy kompetencje tam, gdzie rósł rynek." tint>
-                <div className="ct-grid-lines grid-cols-1 sm:grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+            <Section eyebrow="NASZA DROGA" title="Budowaliśmy kompetencje tam, gdzie rósł rynek.">
+                <div className="ct-grid-lines grid-cols-1 sm:grid-cols-2 lg:grid-cols-5" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {milestones.map((m) => (
                         <div key={m.year} className="flex flex-col gap-3" style={{ padding: '24px 22px' }}>
                             <span className="ct-meta" style={{ color: 'var(--accent)' }}>{m.year}</span>

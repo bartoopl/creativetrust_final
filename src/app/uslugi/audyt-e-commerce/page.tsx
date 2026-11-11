@@ -5,24 +5,25 @@ import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
+import { EXPERIENCE_SENTENCE, MANAGEMENT_HREF, experience } from '@/lib/experience';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
-const canonicalUrl = `${SITE_URL}/uslugi/konsulting-e-commerce`;
+const canonicalUrl = `${SITE_URL}/uslugi/audyt-e-commerce`;
 
-/** The Diagnoza fee is quoted on the intro call, never published (see webmcp.test.mjs). */
-const DIAGNOSIS_NAME = 'Diagnoza Wąskich Gardeł i Architektury eCommerce';
+/** The audit fee is quoted on the intro call, never published (see webmcp.test.mjs). */
+const AUDIT_NAME = 'Audyt e-commerce';
 
 export const metadata: Metadata = {
-    title: 'Konsulting e-commerce | Sprzedaż, marża i architektura sklepu',
+    title: 'Audyt e-commerce | Sprzedaż, marża i technologia sklepu',
     description:
-        'Konsulting e-commerce dla sklepów, które rosną szybciej niż ich procesy. Zaczynamy od płatnej Diagnozy Wąskich Gardeł i Architektury eCommerce: 5–7 dni roboczych, stała kwota znana z góry, koszt odliczany od współpracy.',
+        'Audyt e-commerce dla sklepów, które rosną szybciej niż ich procesy. W 5–7 dni roboczych pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry, koszt odliczany od dalszej współpracy.',
     alternates: {
         canonical: canonicalUrl,
     },
     openGraph: {
-        title: 'Konsulting e-commerce | CreativeTrust',
+        title: 'Audyt e-commerce | CreativeTrust',
         description:
-            'Budowa sprzedaży, sterowanie marżą i architektura danych w e-commerce. Pierwszy krok: Diagnoza Wąskich Gardeł w 5–7 dni.',
+            'Sprzedaż, marża, technologia i praca zespołu sklepu. Raport i roadmapa w 5–7 dni roboczych, za stałą kwotę.',
         url: canonicalUrl,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -30,45 +31,45 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Konsulting e-commerce | CreativeTrust',
+        title: 'Audyt e-commerce | CreativeTrust',
         description:
-            'Know-how z dużych e-commerce\'ów: sprzedaż, marża, dashboardy i architektura. Zaczynamy od Diagnozy, nie od abonamentu w ciemno.',
+            'Audyt z perspektywy zarządzania e-commerce: sprzedaż, marża, dashboardy i architektura. Raport i roadmapa w 5–7 dni roboczych.',
     },
 };
 
 const heroFacts = [
-    { label: 'Pierwszy krok', value: 'Diagnoza wąskich gardeł' },
+    { label: 'Wynik', value: 'raport i roadmapa z priorytetami' },
     { label: 'Rozliczenie', value: 'stała kwota, znana z góry' },
     { label: 'Czas realizacji', value: '5–7 dni roboczych' },
     { label: 'Twój czas', value: '2 godziny wywiadu' },
 ];
 
-const expertise = [
+const areas = [
     {
-        title: 'Budowa sprzedaży',
-        text: 'Lejek, oferta, kanały i ścieżka zakupowa. Wiemy, które dźwignie realnie podnoszą przychód sklepu, a które tylko generują ruch.',
+        title: 'Sprzedaż i oferta',
+        text: 'Lejek, oferta, kanały i ścieżka zakupowa. Wskazujemy dźwignie, które realnie podnoszą przychód sklepu, a nie tylko generują ruch.',
     },
     {
-        title: 'Sterowanie marżą',
-        text: 'Marżowość na poziomie produktu, kategorii i kanału, liczona na bieżąco — nie w arkuszu raz w miesiącu.',
+        title: 'Marża',
+        text: 'Marżowość na poziomie produktu, kategorii i kanału. Sprawdzamy, czy jest liczona na bieżąco, czy w arkuszu raz w miesiącu.',
     },
     {
-        title: 'Architektura danych i IT',
-        text: 'Platforma, integracje, ERP i analityka ułożone tak, żeby sklep mógł rosnąć bez dokładania ludzi do ręcznej pracy.',
+        title: 'Technologia i dane',
+        text: 'Platforma, integracje, ERP i analityka. Szukamy długu technologicznego, który spowalnia rozwój sklepu i obniża konwersję.',
     },
     {
         title: 'Operacje i czas zespołu',
-        text: 'Automatyzacje, dashboardy operacyjne i bezpieczne procedury wdrażania zmian, także w szczycie sezonu.',
+        text: 'Ręczna praca, raportowanie, procedury wdrażania zmian. Liczymy, ile roboczogodzin ucieka na to, co da się zautomatyzować.',
     },
 ];
 
 const symptoms = [
+    'sprzedaż rośnie, a marża stoi w miejscu albo spada',
     'marżowość raportujecie ręcznie, w arkuszach, z opóźnieniem',
     'zespół e-commerce traci godziny tygodniowo na powtarzalną pracę',
     'nie ma jednego dashboardu operacyjnego, każdy patrzy na inne liczby',
-    'rozważacie zmianę platformy jako lekarstwo na spadającą marżę',
+    'rozważacie zmianę platformy jako lekarstwo na wyniki',
     'każde wdrożenie zmian w sklepie to ryzyko dla sprzedaży',
-    'sprzedaż rośnie szybciej niż infrastruktura i procesy',
 ];
 
 const deliverables = [
@@ -86,7 +87,7 @@ const deliverables = [
     },
 ];
 
-const diagnosisFacts = [
+const auditFacts = [
     { label: 'Rozliczenie', value: 'stała kwota, odliczana od abonamentu' },
     { label: 'Czas realizacji', value: '5–7 dni roboczych' },
     { label: 'Zaangażowanie zespołu', value: '2 godziny wywiadu' },
@@ -96,31 +97,31 @@ const diagnosisFacts = [
 const steps = [
     {
         title: 'Rozmowa wstępna',
-        text: '15 minut z naszym głównym architektem. Sprawdzamy, czy Diagnoza ma w Waszym przypadku sens biznesowy. Bez zobowiązań.',
+        text: '15 minut z naszym głównym architektem. Sprawdzamy, czy audyt ma w Waszym przypadku sens biznesowy. Bez zobowiązań.',
     },
     {
-        title: 'Diagnoza',
+        title: 'Audyt',
         text: 'Wywiad, analiza danych i zaplecza, raport i roadmapa w 5–7 dni roboczych. Za stałą, znaną z góry kwotę.',
     },
     {
-        title: 'Stała współpraca',
-        text: 'Naprawiamy wskazane punkty i rozwijamy sklep w miesięcznym abonamencie. Koszt Diagnozy odliczamy w pierwszym miesiącu.',
+        title: 'Zarządzanie i wdrożenia',
+        text: 'Realizujemy roadmapę i prowadzimy e-commerce z zewnątrz w miesięcznym abonamencie. Koszt audytu odliczamy w pierwszym miesiącu.',
     },
 ];
 
 const faqs = [
     {
-        question: 'Czym różni się konsulting e-commerce od zlecenia dla software house\'u?',
+        question: 'Czym ten audyt różni się od audytu UX albo SEO?',
         answer:
-            'Zaczynamy od wyniku biznesowego, nie od listy funkcji. Patrzymy na sprzedaż, marżę i czas pracy zespołu, a technologię dobieramy dopiero do tego, co ma się poprawić. Te same osoby doradzają i wdrażają.',
+            'Patrzymy na sklep z perspektywy zarządzania: sprzedaży, marży i czasu pracy zespołu. UX, SEO i technologia są w nim środkiem do wyniku, a nie osobną listą uwag. Dostajesz priorytety ułożone według wpływu na zysk.',
     },
     {
-        question: 'Dlaczego Diagnoza jest płatna?',
+        question: 'Dlaczego audyt jest płatny?',
         answer:
-            `To konkretna praca analityczna z konkretnym wynikiem: mapą straconego czasu, audytem długu technologicznego i roadmapą. Kwotę ustalamy z góry na rozmowie wstępnej — zwykle mieści się w budżecie operacyjnym dyrektora e-commerce i nie wymaga akceptacji zarządu.`,
+            'To konkretna praca analityczna z konkretnym wynikiem: mapą straconego czasu, audytem długu technologicznego i roadmapą. Kwotę ustalamy z góry na rozmowie wstępnej — zwykle mieści się w budżecie operacyjnym dyrektora e-commerce i nie wymaga akceptacji zarządu.',
     },
     {
-        question: 'Co się dzieje z kosztem Diagnozy, jeśli zdecydujemy się na współpracę?',
+        question: 'Co się dzieje z kosztem audytu, jeśli zdecydujemy się na współpracę?',
         answer:
             'Odliczamy go w pierwszym miesiącu stałej współpracy. Jeśli zdecydujecie się wdrażać rekomendacje samodzielnie, roadmapa zostaje u Was i możecie z niej korzystać bez nas.',
     },
@@ -130,29 +131,29 @@ const faqs = [
             'Około 2 godzin wywiadu oraz nadanie dostępu read-only do analityki i zaplecza sklepu na 3 dni. Resztę pracy wykonujemy po naszej stronie.',
     },
     {
-        question: 'Dla jakich sklepów jest ta usługa?',
+        question: 'Dla jakich sklepów jest audyt e-commerce?',
         answer:
-            'Dla marek, które sprzedają już na dużą skalę i czują, że procesy oraz infrastruktura nie nadążają za wzrostem — najczęściej z branży beauty, dom i ogród oraz retail.',
+            'Dla marek, które sprzedają już na dużą skalę i czują, że procesy oraz infrastruktura nie nadążają za wzrostem — najczęściej z branży fashion, beauty, dom i ogród oraz retail.',
     },
     {
-        question: 'Czy musimy zmieniać platformę sklepu?',
+        question: 'Czy po audycie musimy zmieniać platformę sklepu?',
         answer:
-            'Zwykle nie. Sama zmiana platformy rzadko ratuje marżę; częściej robi to dobra architektura danych, integracje i dashboardy. Jeśli migracja ma sens, Diagnoza to pokaże.',
+            'Zwykle nie. Sama zmiana platformy rzadko ratuje marżę; częściej robi to dobra architektura danych, integracje i dashboardy. Jeśli migracja ma sens, audyt to pokaże.',
     },
 ];
 
-export default function EcommerceConsultingPage() {
+export default function EcommerceAuditPage() {
     const breadcrumbSchema = buildBreadcrumbSchema([
         { name: 'Strona główna', url: SITE_URL },
         { name: 'Usługi', url: `${SITE_URL}/uslugi` },
-        { name: 'Konsulting e-commerce', url: canonicalUrl },
+        { name: AUDIT_NAME, url: canonicalUrl },
     ]);
     const serviceSchema = buildServiceSchema({
-        name: 'Konsulting e-commerce',
+        name: AUDIT_NAME,
         description:
-            `Konsulting e-commerce: budowa sprzedaży, sterowanie marżą, architektura danych i operacje sklepu. Pierwszy krok: ${DIAGNOSIS_NAME} (5–7 dni roboczych).`,
+            'Audyt e-commerce: sprzedaż, marża, technologia i dane oraz operacje sklepu. Raport i roadmapa w 5–7 dni roboczych, za stałą kwotę ustalaną z góry.',
         url: canonicalUrl,
-        serviceType: 'Konsulting e-commerce',
+        serviceType: 'Audyt e-commerce',
     });
     const faqSchema = buildFaqSchema(faqs);
 
@@ -163,11 +164,11 @@ export default function EcommerceConsultingPage() {
             <SchemaScript schema={faqSchema} />
 
             <PageHero
-                eyebrow="Konsulting e-commerce"
-                title={<>Sprzedaż i marża w e-commerce <span style={{ color: 'var(--accent)' }}>pod kontrolą.</span></>}
-                description="Wiemy, jak budować sprzedaż i sterować marżą, bo przez lata pracowaliśmy w dużych e-commerce'ach. Zaczynamy od płatnej Diagnozy: w tydzień pokazujemy, gdzie Wasz sklep traci pieniądze i czas zespołu — zanim zaproponujemy stałą współpracę."
-                cta={{ label: 'Zamów Diagnozę', href: '#formularz' }}
-                ctaSecondary={{ label: 'Co obejmuje Diagnoza', href: '#diagnoza' }}
+                eyebrow="Audyt e-commerce"
+                title={<>Zobacz, gdzie sklep traci sprzedaż, marżę i <span style={{ color: 'var(--accent)' }}>czas zespołu.</span></>}
+                description="Audytujemy e-commerce z perspektywy zarządzania, nie pojedynczej specjalizacji. W 5–7 dni roboczych dostajesz raport i roadmapę: co naprawić najpierw, ile to da i ile kosztuje."
+                cta={{ label: 'Zamów audyt', href: '#formularz' }}
+                ctaSecondary={{ label: 'Co obejmuje audyt', href: '#zakres' }}
                 right={
                     <div className="ct-grid-lines grid-cols-2" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                         {heroFacts.map(({ label, value }) => (
@@ -182,28 +183,39 @@ export default function EcommerceConsultingPage() {
 
             <Section
                 border={false}
-                eyebrow="Na czym się znamy"
-                title="Doradzamy z perspektywy zysku, strat i czasu pracy managerów"
+                eyebrow="Skąd to wiemy"
+                title="Audytujemy z doświadczeniem w zarządzaniu e-commerce"
+                description={EXPERIENCE_SENTENCE}
             >
-                <NumberedGrid cols={4} items={expertise} />
+                <NumberedGrid cols={3} numbered={false} items={experience.map((item) => ({ title: item.brand, text: item.text }))} />
             </Section>
 
-            <Section tint>
-                <SplitLayout eyebrow="Kiedy warto porozmawiać" title="Sklep rośnie, a zespół coraz więcej czasu spędza na gaszeniu pożarów">
+            <Section
+                id="zakres"
+                tint
+                eyebrow="Co sprawdzamy"
+                title="Cztery obszary, które decydują o zysku sklepu"
+            >
+                <NumberedGrid cols={4} items={areas} />
+            </Section>
+
+            <Section>
+                <SplitLayout eyebrow="Kiedy warto zamówić audyt" title="Sklep rośnie, a zespół coraz więcej czasu spędza na gaszeniu pożarów">
                     <BulletColumns items={symptoms} />
                 </SplitLayout>
             </Section>
 
             <Section
-                id="diagnoza"
-                eyebrow="Pierwszy krok"
-                title={DIAGNOSIS_NAME}
-                description="Zamiast sprzedawać stałą obsługę w ciemno, najpierw udowadniamy wartość. Diagnoza mapuje problemy, które potem rozwiązujemy w ramach stałej współpracy — albo Wy z naszą roadmapą."
+                id="wynik"
+                tint
+                eyebrow="Co dostajesz"
+                title="Trzy dokumenty, z którymi można od razu pracować"
+                description="Zamiast sprzedawać stałą obsługę w ciemno, najpierw udowadniamy wartość. Audyt mapuje problemy, które potem rozwiązujemy w ramach stałej współpracy — albo Wy z naszą roadmapą."
             >
                 <div className="flex flex-col gap-8">
                     <NumberedGrid cols={3} items={deliverables} />
                     <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-                        {diagnosisFacts.map(({ label, value }) => (
+                        {auditFacts.map(({ label, value }) => (
                             <div key={label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
                                 <span className="ct-meta">{label}</span>
                                 <span style={{ fontSize: 17, fontWeight: 500, lineHeight: 1.4 }}>{value}</span>
@@ -213,34 +225,34 @@ export default function EcommerceConsultingPage() {
                 </div>
             </Section>
 
-            <Section tint eyebrow="Model współpracy" title="Małe ryzyko na starcie, konkretny plan na dalej">
+            <Section eyebrow="Model współpracy" title="Małe ryzyko na starcie, konkretny plan na dalej">
                 <NumberedGrid cols={3} items={steps} />
                 <div className="mt-10">
                     <InlineCTA
-                        title="Koszt Diagnozy odliczamy w pierwszym miesiącu współpracy"
+                        title="Po audycie możemy poprowadzić e-commerce z zewnątrz"
                         text="Roadmapa kończy się konkretną propozycją: które punkty naprawiamy, jakie dashboardy wdrażamy i ile kosztuje to miesięcznie w stałym abonamencie."
-                        cta={{ label: 'Umów 15-minutową rozmowę', href: '#formularz' }}
+                        cta={{ label: 'Zarządzanie e-commerce', href: MANAGEMENT_HREF }}
                     />
                 </div>
             </Section>
 
-            <Section eyebrow="FAQ" title="Pytania o konsulting e-commerce i Diagnozę" maxWidth={1100}>
+            <Section tint eyebrow="FAQ" title="Pytania o audyt e-commerce" maxWidth={1100}>
                 <FAQAccordion items={faqs} />
             </Section>
 
-            <Section id="formularz" tint maxWidth={1100}>
+            <Section id="formularz" maxWidth={1100}>
                 <LandingLeadForm
-                    formTitle="Zamów Diagnozę lub rozmowę wstępną"
-                    formSubtitle="Opisz sklep, skalę sprzedaży i to, co dziś najbardziej spowalnia zespół. Odezwiemy się, żeby umówić 15-minutową rozmowę z głównym architektem."
-                    subjectPrefix="Konsulting e-commerce"
+                    formTitle="Zamów audyt lub rozmowę wstępną"
+                    formSubtitle="Opisz sklep, skalę sprzedaży i to, co dziś najbardziej hamuje wynik. Odezwiemy się, żeby umówić 15-minutową rozmowę z głównym architektem."
+                    subjectPrefix="Audyt e-commerce"
                     serviceOptions={[
-                        DIAGNOSIS_NAME,
+                        AUDIT_NAME,
                         'rozmowa wstępna (15 min)',
-                        'stała współpraca konsultingowo-wdrożeniowa',
+                        'zarządzanie e-commerce z zewnątrz',
                         'nie wiem, potrzebuję rekomendacji',
                     ]}
                     budgetOptions={[
-                        'na start tylko Diagnoza',
+                        'na start tylko audyt',
                         'do 10 000 zł miesięcznie',
                         '10 000 - 20 000 zł miesięcznie',
                         'powyżej 20 000 zł miesięcznie',

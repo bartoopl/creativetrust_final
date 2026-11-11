@@ -1,4 +1,9 @@
-import { reasons } from '../WhyUsSection';
+const reasons = [
+    { title: 'Znamy e-commerce od strony zarządzania', text: 'Doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.' },
+    { title: 'Liczymy marżę, nie tylko przychód', text: 'Patrzymy na zysk, zwroty, koszty kanałów i czas zespołu — nie na sam ruch i obrót.' },
+    { title: 'Doradzamy i wdrażamy', text: 'Te same osoby stawiają diagnozę i odpowiadają za jej wykonanie. Raport nie trafia do szuflady.' },
+    { title: 'Nie sprzedajemy platformy', text: 'Open source i sprawdzone technologie: Medusa.js, Next.js, React. Zmianę systemu rekomendujemy tylko wtedy, gdy się opłaca.' },
+];
 
 /** Why-us as a bento: Graphite feature cards punctuate the pale page, Tile Gray cards fill the rest. */
 export default function HomeWhyUs() {
@@ -7,7 +12,7 @@ export default function HomeWhyUs() {
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-12">
                 <div className="flex flex-col items-center gap-3 text-center">
                     <span className="ct-eyebrow">Dlaczego CreativeTrust</span>
-                    <h2 className="ct-h2 ct-statement">Nie agencja od ładnych rzeczy. <span className="ct-electric">Partner</span>, który wdraża szybko.</h2>
+                    <h2 className="ct-h2 ct-statement">Patrzymy na sklep jak <span className="ct-electric">zarząd</span>, nie jak wykonawca.</h2>
                 </div>
                 <ul className="grid w-full grid-cols-1 gap-1 md:grid-cols-5" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                     {reasons.map((reason, i) => {
@@ -15,7 +20,7 @@ export default function HomeWhyUs() {
                         return (
                             <li
                                 key={reason.title}
-                                className={`${dark ? 'ct-bento' : 'ct-tile'} flex flex-col justify-between gap-10 ${i === 0 || i === 3 ? 'md:col-span-3' : 'md:col-span-2'}`}
+                                className={`${dark ? 'ct-bento' : 'ct-tile'} flex flex-col justify-between gap-10 ${dark ? 'md:col-span-3' : 'md:col-span-2'}`}
                                 style={{ padding: 'clamp(24px, 3vw, 36px)', minHeight: 240 }}
                             >
                                 <span className="ct-mono" style={{ fontSize: 13, color: dark ? '#9a9a9a' : 'var(--muted-2)' }}>

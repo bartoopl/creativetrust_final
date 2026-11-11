@@ -47,7 +47,7 @@ export function buildSystemPrompt({ services, landings, prices }: Catalogue): st
     const priceLines = prices.map((p) => `- "${p.name}" [${p.service}]: ${p.price}`);
 
     return [
-        'Jesteś asystentem oferty CreativeTrust — polskiej agencji, która łączy strategię, design, development i automatyzację, z AI w każdym etapie procesu (research, prototypy, wdrożenie).',
+        'Jesteś asystentem oferty CreativeTrust — polskiego zespołu, który audytuje sklepy internetowe, zarządza e-commerce marek z zewnątrz i wdraża rekomendacje (sklepy, strony, marketing automation, social media).',
         'Odwiedzający opisuje, czego potrzebuje. Odpowiedz, czy to robimy, jak to robimy i ile to kosztuje — wyłącznie na podstawie katalogu poniżej.',
         '',
         'Usługi (slug: nazwa — opis):',
@@ -59,7 +59,7 @@ export function buildSystemPrompt({ services, landings, prices }: Catalogue): st
         'Opublikowane ceny (jedyne ceny, jakie wolno podać):',
         ...priceLines,
         '',
-        'Jak pracujemy: cel biznesowy i KPI → research wspierany przez AI → prototyp UX/UI → wdrożenie (Next.js, Medusa.js, SALESmanago, integracje) → optymalizacja po starcie. Senior zespół, open source, bez vendor lock-in.',
+        'Jak pracujemy: rozmowa wstępna (15 minut) → audyt e-commerce (5–7 dni roboczych, stała kwota ustalana na rozmowie, nigdy niepublikowana) → roadmapa → stałe zarządzanie e-commerce w miesięcznym abonamencie i wdrożenia (Next.js, Medusa.js, SALESmanago, integracje). Senior zespół, open source, bez vendor lock-in.',
         '',
         'Zasady:',
         '- verdict: "yes" gdy potrzeba mieści się w usługach, "partly" gdy tylko częściowo, "no" gdy tego nie robimy, "unclear" gdy pytanie jest zbyt ogólne lub nie dotyczy oferty.',
@@ -138,6 +138,8 @@ export const fold = (text: string) =>
     text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
 
 const SERVICE_STEMS: Record<string, string[]> = {
+    'audyt-e-commerce': ['audyt', 'diagnoz', 'analiz sklep', 'analiza sklep', 'przeglad sklep', 'marzow', ' marza ', ' marze ', ' marzy ', 'waskie gardl', 'dlug technolog', 'konsulting', 'doradztw'],
+    'zarzadzanie-e-commerce': ['zarzadzan', 'prowadzeni', 'e-commerce manager', 'ecommerce manager', 'dyrektor e-commerce', 'head of e-commerce', 'interim', 'outsourcing e-commerce', 'z zewnatrz', 'obslug sklep', 'obsluga sklep'],
     'strony-www': ['stron', 'www', 'witryn', 'landing', 'wordpress', 'next.js', 'nextjs', 'cms', 'serwis', 'ux', 'ui ', 'portal', 'wizytowk'],
     'e-commerce': ['sklep', 'commerce', 'medusa', 'woocommerce', 'shopify', 'headless', 'koszyk', 'marketplace', 'allegro', 'erp', 'b2b', 'b2c', 'magento', 'prestashop'],
     'marketing-automation': ['salesmanago', 'automatyz', 'automation', 'crm', 'lead', 'mailing', 'newsletter', 'e-mail', 'email', 'sms', 'lejk', 'lejek', 'scoring', 'segmentac', 'personalizac'],
@@ -153,6 +155,8 @@ const NOT_OFFERED: { stems: string[]; label: string; nearest?: string }[] = [
 
 /** How we approach each service, in visitor-facing words (landing descriptions are internal SEO notes). */
 const HOW: Record<string, string> = {
+    'audyt-e-commerce': 'Audyt e-commerce trwa 5–7 dni roboczych: sprawdzamy sprzedaż, marżę, technologię i pracę zespołu, a na koniec dostajesz raport i roadmapę z priorytetami.',
+    'zarzadzanie-e-commerce': 'Zarządzanie e-commerce prowadzimy z zewnątrz, w stałej miesięcznej współpracy: plan sprzedaży, marża, zespół, dostawcy i raportowanie wyników. Zaczynamy od audytu.',
     'strony-www': 'Projektujemy stronę pod konkretny cel (leady, sprzedaż, wizerunek), prototypujemy UX i wdrażamy ją w Next.js z dbałością o szybkość i SEO.',
     'e-commerce': 'Budujemy sklepy headless (m.in. na Medusa.js), migrujemy z monolitów jak WooCommerce bez utraty SEO i integrujemy je z ERP, CRM i marketplace.',
     'marketing-automation': 'Wdrażamy SALESmanago i podobne narzędzia: lejki, segmentację, lead scoring i komunikację e-mail/SMS połączoną z CRM.',
@@ -181,7 +185,7 @@ export function answerFromCatalogue(question: string, { services, prices }: Cata
     if (notOffered) {
         return {
             verdict: 'no',
-            answer: `Nie tworzymy ${notOffered.label}.${notOffered.nearest ? ' Możemy za to zaprojektować i wdrożyć szybką stronę lub aplikację webową, która działa na telefonach.' : ' Jeśli potrzebujesz strony, sklepu, automatyzacji marketingu albo social mediów — w tym możemy pomóc.'}`,
+            answer: `Nie tworzymy ${notOffered.label}.${notOffered.nearest ? ' Możemy za to zaprojektować i wdrożyć szybką stronę lub aplikację webową, która działa na telefonach.' : ' Jeśli potrzebujesz audytu lub prowadzenia e-commerce, sklepu, strony, automatyzacji marketingu albo social mediów — w tym możemy pomóc.'}`,
             services: pick(notOffered.nearest ? [notOffered.nearest] : []),
             prices: [],
             source: 'catalogue',
@@ -192,7 +196,7 @@ export function answerFromCatalogue(question: string, { services, prices }: Cata
     if (!matched.length) {
         return {
             verdict: 'unclear',
-            answer: 'Nie jestem pewien, czego dokładnie potrzebujesz. Robimy strony www, sklepy e-commerce (także headless), marketing automation i social media — napisz, o który obszar chodzi, albo poproś o kontakt, a doprecyzujemy to w rozmowie.',
+            answer: 'Nie jestem pewien, czego dokładnie potrzebujesz. Audytujemy sklepy internetowe, zarządzamy e-commerce z zewnątrz i wdrażamy sklepy, strony www, marketing automation oraz social media — napisz, o który obszar chodzi, albo poproś o kontakt, a doprecyzujemy to w rozmowie.',
             services: pick(services.map((s) => s.slug)),
             prices: [],
             source: 'catalogue',

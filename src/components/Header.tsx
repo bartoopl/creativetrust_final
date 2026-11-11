@@ -9,6 +9,12 @@ import MegaMenu from './MegaMenu';
 import Wordmark from './ui/Wordmark';
 import { createHoverIntent, type HoverIntent } from '@/lib/hover-intent';
 
+/** The two lead offers sit in the bar itself; the rest of the catalogue is under „Usługi”. */
+const leadItems = [
+    { href: '/uslugi/audyt-e-commerce', label: 'Audyt' },
+    { href: '/uslugi/zarzadzanie-e-commerce', label: 'Zarządzanie' },
+];
+
 const navItems = [
     { href: '/portfolio', label: 'Case Studies' },
     { href: '/blog', label: 'Blog' },
@@ -149,8 +155,8 @@ export default function Header() {
         <>
             <div ref={stripRef} className="ct-strip" style={{ borderBottom: '1px solid var(--line)', padding: '9px var(--pad-x)', display: 'flex', justifyContent: 'center', background: 'var(--panel)', textAlign: 'center' }}>
                 <span className="ct-mono" style={{ fontWeight: 500, fontSize: 12, color: 'var(--muted)', letterSpacing: '-0.1px' }}>
-                    AI-native partner produktowy — zobacz{' '}
-                    <Link href="/#proces" style={{ fontWeight: 500 }}>jak działamy →</Link>
+                    Audyt i zarządzanie e-commerce z zewnątrz — zobacz,{' '}
+                    <Link href="/#proces" style={{ fontWeight: 500 }}>jak pracujemy →</Link>
                 </span>
             </div>
 
@@ -161,7 +167,12 @@ export default function Header() {
                         <Wordmark />
                     </Link>
 
-                    <nav className="hidden items-center gap-8 md:flex" aria-label="Główna nawigacja">
+                    <nav className="hidden items-center gap-5 md:flex lg:gap-8" aria-label="Główna nawigacja">
+                        {leadItems.map((item) => (
+                            <Link key={item.href} href={item.href} className="ct-nav-link">
+                                {item.label}
+                            </Link>
+                        ))}
                         <button
                             ref={servicesTriggerRef}
                             type="button"
@@ -188,8 +199,8 @@ export default function Header() {
                         ))}
                     </nav>
 
-                    <NotchedButton href="/kontakt" variant="outline" size="sm" className="hidden md:inline-flex">
-                        Umów konsultację
+                    <NotchedButton href="/uslugi/audyt-e-commerce#formularz" variant="outline" size="sm" className="hidden lg:inline-flex">
+                        Zamów audyt
                     </NotchedButton>
 
                     <button
@@ -231,15 +242,21 @@ export default function Header() {
                         style={{ position: 'fixed', top: sheetTop, bottom: 0, left: 0, right: 0, background: '#fff', zIndex: 130, padding: '8px var(--pad-x) 32px', overflowY: 'auto', overscrollBehavior: 'contain', borderTop: '1px solid var(--line)' }}
                         className="flex flex-col md:hidden"
                     >
-                        {[{ href: '/uslugi', label: 'Usługi' }, ...navItems, { href: '/kontakt', label: 'Kontakt' }].map((item) => (
+                        {[
+                            { href: '/uslugi/audyt-e-commerce', label: 'Audyt e-commerce' },
+                            { href: '/uslugi/zarzadzanie-e-commerce', label: 'Zarządzanie e-commerce' },
+                            { href: '/uslugi', label: 'Wszystkie usługi' },
+                            ...navItems,
+                            { href: '/kontakt', label: 'Kontakt' },
+                        ].map((item) => (
                             <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="flex items-center justify-between" style={{ fontSize: 18, fontWeight: 500, color: 'var(--text)', padding: '16px 0', borderBottom: '1px solid var(--line)' }}>
                                 {item.label}
                                 <span className="ct-mono" style={{ color: 'var(--muted-2)', fontSize: 13 }}>→</span>
                             </Link>
                         ))}
                         <div style={{ paddingTop: 24 }}>
-                            <NotchedButton href="/kontakt" onClick={() => setMobileOpen(false)}>
-                                Umów konsultację
+                            <NotchedButton href="/uslugi/audyt-e-commerce#formularz" onClick={() => setMobileOpen(false)}>
+                                Zamów audyt e-commerce
                             </NotchedButton>
                         </div>
                     </motion.div>

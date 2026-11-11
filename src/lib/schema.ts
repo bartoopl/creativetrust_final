@@ -6,7 +6,7 @@ const SITE_URL = 'https://www.creativetrust.pl';
  * a company from these signals, so they must not disagree.
  */
 export const COMPANY_DESCRIPTION =
-    'CreativeTrust to AI-native partner produktowy z Gorzowa Wielkopolskiego, działający od 2010 roku. W jednym zespole łączy strategię, design, development i automatyzację AI: projektuje i wdraża strony WWW, sklepy e-commerce (w tym headless), marketing automation (SALESmanago) i social media.';
+    'CreativeTrust z Gorzowa Wielkopolskiego, działający od 2010 roku, audytuje sklepy internetowe i zarządza e-commerce marek z zewnątrz. Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Rekomendacje wdraża ten sam zespół: sklepy e-commerce (w tym headless), strony WWW, marketing automation (SALESmanago) i social media.';
 export const FOUNDING_YEAR = '2010';
 
 /** Legal identity, as published in the privacy policy (operator of the site). */

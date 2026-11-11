@@ -2,18 +2,21 @@ import NotchedButton from '../ui/NotchedButton';
 import Scene3D from '../scene3d/Scene3D';
 import { pipeline } from '../Hero';
 
-/** Centered statement + action pair, resolved by a broad product-workspace frame of how a project runs. */
+/** Implementation pillar: a centered statement resolved by a product-workspace frame of how a build runs. */
 export default function HomeShowcase() {
     return (
-        <section className="ct-section" style={{ paddingTop: 'var(--pad-y-xl)' }}>
+        <section className="ct-section" >
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-6 text-center">
-                <span className="ct-eyebrow">AI-native partner produktowy</span>
+                <span className="ct-eyebrow">Wdrożenia</span>
                 <h2 className="ct-h2 ct-statement">
-                    AI skraca research i produkcję. <span className="ct-electric">Zespół</span> pilnuje decyzji, jakości i wyniku.
+                    Od rekomendacji do <span className="ct-electric">działającego</span> sklepu.
                 </h2>
+                <p className="ct-lead" style={{ maxWidth: '52ch' }}>
+                    Sklepy, strony, automatyzacje i integracje wdraża ten sam zespół, który stawia diagnozę.
+                    AI skraca research i produkcję, ludzie pilnują decyzji, jakości i wyniku.
+                </p>
                 <div className="flex flex-wrap justify-center gap-2 pt-2">
-                    <NotchedButton href="/kontakt">Umów konsultację</NotchedButton>
-                    <NotchedButton href="#uslugi" variant="ghost">Zobacz usługi</NotchedButton>
+                    <NotchedButton href="/uslugi#wdrozenia" variant="ghost">Zobacz zakres wdrożeń</NotchedButton>
                 </div>
 
                 <div className="ct-frame mt-10 w-full text-left" aria-label="Przykładowy przebieg wdrożenia">

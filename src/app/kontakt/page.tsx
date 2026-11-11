@@ -4,8 +4,8 @@ import { SITE_URL } from '@/lib/schema';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
-    title: 'Kontakt | Umów konsultację AI-native',
-    description: 'Porozmawiajmy o Twoim projekcie. 30-minutowa konsultacja — pokażemy, gdzie AI realnie skróci czas i podniesie wynik. Strategia, design, development, automatyzacja.',
+    title: 'Kontakt | Umów rozmowę o swoim e-commerce',
+    description: 'Porozmawiajmy o Twoim e-commerce. Krótka rozmowa bez zobowiązań: audyt sklepu, zarządzanie e-commerce z zewnątrz albo wdrożenie.',
     alternates: { canonical: `${SITE_URL}/kontakt` },
 };
 
@@ -25,7 +25,7 @@ export default function ContactPage() {
                             Zacznijmy od rozmowy.
                         </h1>
                         <p className="ct-lead" style={{ maxWidth: '48ch', margin: '0 0 36px' }}>
-                            30-minutowa konsultacja bez zobowiązań. Pokażemy, gdzie AI realnie skróci Twój czas i podniesie wynik — konkretnie, bez marketingowego szumu.
+                            Krótka rozmowa bez zobowiązań. Powiesz, co dziś hamuje sprzedaż lub marżę, a my — czy zacząć od audytu, zarządzania e-commerce czy konkretnego wdrożenia.
                         </p>
 
                         <div className="ct-grid-lines grid-cols-1 sm:grid-cols-2" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
@@ -50,7 +50,7 @@ export default function ContactPage() {
                         <div className="ct-panel" style={{ marginTop: 24, padding: 22, background: 'var(--panel)' }}>
                             <div className="ct-eyebrow" style={{ marginBottom: 6 }}>Co możesz opisać w formularzu</div>
                             <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-                                {['Co chcesz poprawić: markę, stronę, sklep, automatyzację', 'Skala projektu i horyzont czasowy', 'Budżet orientacyjny (opcjonalnie)'].map((item, i) => (
+                                {['Co chcesz poprawić: sprzedaż, marżę, pracę zespołu, sklep', 'Skala sprzedaży i platforma sklepu', 'Budżet orientacyjny (opcjonalnie)'].map((item, i) => (
                                     <li key={item} className="flex items-center gap-3" style={{ padding: '10px 0', borderTop: i === 0 ? 'none' : '1px solid var(--line)', fontSize: 14, color: 'var(--text-2)', lineHeight: 1.5 }}>
                                         <span className="ct-bullet" />
                                         {item}

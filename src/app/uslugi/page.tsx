@@ -7,59 +7,63 @@ import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildFaqSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Usługi | WWW, e-commerce, AI i automatyzacja',
-    description: 'Web design, e-commerce, marketing automation i AI — w jednym zespole. Pracujemy od diagnozy po wdrożenie i rozwój. Wyniki, nie obietnice.',
+    title: 'Usługi | Audyt, zarządzanie i wdrożenia e-commerce',
+    description: 'Audyt e-commerce, zarządzanie e-commerce z zewnątrz i wdrożenia: sklepy, strony WWW, marketing automation, social media. Diagnoza, odpowiedzialność za wynik i wykonanie w jednym zespole.',
     alternates: { canonical: `${SITE_URL}/uslugi` },
 };
 
+const leadServices = [
+    { num: '01', title: 'Audyt e-commerce', href: '/uslugi/audyt-e-commerce', description: 'Sprzedaż, marża, technologia i praca zespołu. Raport i roadmapa w 5–7 dni roboczych, za stałą kwotę.', tags: ['Raport', 'Roadmapa', '5–7 dni roboczych'] },
+    { num: '02', title: 'Zarządzanie e-commerce', href: '/uslugi/zarzadzanie-e-commerce', description: 'Prowadzimy e-commerce z zewnątrz: plan sprzedaży, marża, zespół, dostawcy i raportowanie wyników.', tags: ['Abonament', 'Plan i marża', 'Jeden zespół'] },
+];
+
 const services = [
-    { num: '01', title: 'Strony WWW', href: '/uslugi/strony-www', description: 'Strony i landing pages zaprojektowane pod konwersję, SEO i szybkość.', tags: ['Strony firmowe', 'Landing pages', 'Next.js'] },
-    { num: '02', title: 'E-commerce', href: '/uslugi/e-commerce', description: 'Sklepy headless i migracje, które sprzedają i skalują się bez bólu.', tags: ['Headless', 'Migracje', 'Integracje'] },
-    { num: '03', title: 'Social Media', href: '/uslugi/social-media', description: 'Komunikacja pod zasięg, spójność i sprzedaż — nie tylko pod publikacje.', tags: ['Strategia', 'Content', 'Analityka'] },
-    { num: '04', title: 'Marketing Automation', href: '/uslugi/marketing-automation', description: 'Lejki, CRM i kampanie sterowane danymi i AI. Działają, kiedy śpisz.', tags: ['SALESmanago', 'Lead nurturing', 'AI'] },
-    { num: '05', title: 'Konsulting e-commerce', href: '/uslugi/konsulting-e-commerce', description: 'Sprzedaż, marża i architektura sklepu. Zaczynamy od płatnej Diagnozy wąskich gardeł.', tags: ['Diagnoza', 'Marżowość', 'Dashboardy'] },
+    { num: '03', title: 'Wdrożenia e-commerce', href: '/uslugi/e-commerce', description: 'Sklepy headless i migracje, które sprzedają i skalują się bez bólu.', tags: ['Headless', 'Migracje', 'Integracje'] },
+    { num: '04', title: 'Strony WWW', href: '/uslugi/strony-www', description: 'Strony i landing pages zaprojektowane pod konwersję, SEO i szybkość.', tags: ['Strony firmowe', 'Landing pages', 'Next.js'] },
+    { num: '05', title: 'Marketing Automation', href: '/uslugi/marketing-automation', description: 'Lejki, CRM i kampanie sterowane danymi i AI. Działają, kiedy śpisz.', tags: ['SALESmanago', 'Lead nurturing', 'AI'] },
+    { num: '06', title: 'Social Media', href: '/uslugi/social-media', description: 'Komunikacja pod zasięg, spójność i sprzedaż — nie tylko pod publikacje.', tags: ['Strategia', 'Content', 'Analityka'] },
 ];
 
 const landingPages = [
     {
         title: 'Migracja WooCommerce do headless',
         href: '/uslugi/migracja-woocommerce-do-headless',
-        description: 'Fraza dla sklepów, które potrzebują wydajności, elastyczności i lepszej kontroli nad UX.',
+        description: 'Dla sklepów, które potrzebują wydajności, elastyczności i lepszej kontroli nad UX.',
     },
     {
         title: 'Wdrożenie SALESmanago',
         href: '/uslugi/wdrozenie-salesmanago',
-        description: 'Landing pod zapytania o partnera i implementację marketing automation.',
+        description: 'Zakres wdrożenia marketing automation z partnerem SALESmanago.',
     },
     {
         title: 'Tworzenie stron WWW cennik',
         href: '/uslugi/tworzenie-stron-www-cennik',
-        description: 'Wycena strony WWW dla osób szukających orientacyjnego budżetu i zakresu.',
+        description: 'Orientacyjny budżet i zakres strony WWW.',
     },
     {
         title: 'Strona firmowa cena',
         href: '/uslugi/strona-firmowa-cena',
-        description: 'Landing pod zapytania o koszt i zakres strony firmowej.',
+        description: 'Koszt i zakres strony firmowej.',
     },
     {
         title: 'Headless WooCommerce',
         href: '/uslugi/headless-woocommerce',
-        description: 'Landing pod frazy związane z przebudową sklepu WooCommerce.',
+        description: 'Przebudowa sklepu WooCommerce na nowy storefront.',
     },
 ];
 
 const process = [
-    { num: '01', title: 'Diagnoza', description: 'Audyt, dane, cele. AI przyspiesza research i analizę konkurencji.' },
-    { num: '02', title: 'Projekt', description: 'Strategia i design. Warianty generujemy i testujemy szybciej niż kiedykolwiek.' },
-    { num: '03', title: 'Wdrożenie', description: 'Development z asystą AI. Krótszy time-to-market, mniej błędów.' },
-    { num: '04', title: 'Rozwój', description: 'Optymalizacja w pętli. Modele uczą się na Twoich danych i wynikach.', featured: true },
+    { num: '01', title: 'Rozmowa wstępna', description: '15 minut. Sprawdzamy, czy audyt ma w Twoim przypadku sens biznesowy.' },
+    { num: '02', title: 'Audyt', description: 'Wywiad, analiza danych i zaplecza. Raport i roadmapa w 5–7 dni roboczych.' },
+    { num: '03', title: 'Zarządzanie', description: 'Prowadzimy e-commerce z zewnątrz w miesięcznym abonamencie: plan, marża, zespół, dostawcy.' },
+    { num: '04', title: 'Wdrożenia', description: 'Zmiany z roadmapy wdraża ten sam zespół. AI skraca research i produkcję.', featured: true },
 ];
 
 const faq = [
-    { q: 'Od czego najlepiej zacząć?', a: 'Najczęściej od diagnozy: marka, strona, sklep albo automatyzacja. Wybór zależy od tego, gdzie dziś tracisz najwięcej potencjału.' },
-    { q: 'Czy łączycie kilka usług w jednym projekcie?', a: 'Tak. To zwykle lepszy model niż oddzielne zamawianie WWW, e-commerce i komunikacji u różnych wykonawców.' },
+    { q: 'Od czego najlepiej zacząć?', a: 'Od audytu e-commerce. W 5–7 dni roboczych pokazuje, gdzie sklep traci sprzedaż, marżę i czas zespołu, i układa priorytety na dalej.' },
+    { q: 'Czy musimy zamawiać zarządzanie, żeby zrobić audyt?', a: 'Nie. Roadmapa zostaje u Was i możecie wdrażać ją samodzielnie. Jeśli zdecydujecie się na stałą współpracę, koszt audytu odliczamy w pierwszym miesiącu.' },
+    { q: 'Czy można zamówić samo wdrożenie, bez audytu?', a: 'Tak. Sklep, stronę, marketing automation czy social media realizujemy także jako osobne projekty.' },
     { q: 'Jak wygląda rola AI w projektach?', a: 'AI przyspiesza research, generowanie wariantów, development i optymalizację. Decyzje zostają po stronie ludzi — wiemy, kiedy i gdzie AI realnie pomaga.' },
-    { q: 'Czy możecie zacząć od audytu?', a: 'Tak. Audyt jest dobrym punktem startowym, jeśli potrzebujesz decyzji, co robić dalej i w jakiej kolejności. Dla sklepów internetowych mamy Diagnozę Wąskich Gardeł i Architektury eCommerce w ramach konsultingu e-commerce.' },
 ];
 
 export default function ServicesPage() {
@@ -70,13 +74,13 @@ export default function ServicesPage() {
             <SchemaScript schema={faqSchema} />
             <PageHero
                 eyebrow="Usługi"
-                title="Jeden zespół. Pełen zakres."
-                description="Strategia, design, development i automatyzacja AI w jednym procesie — bez przekazywania pałeczki między agencjami."
-                cta={{ label: 'Umów konsultację', href: '/kontakt' }}
+                title="Diagnoza, zarządzanie, wdrożenie."
+                description="Audytujemy sklepy internetowe, prowadzimy e-commerce marek z zewnątrz i wdrażamy to, co rekomendujemy — bez przekazywania pałeczki między agencjami."
+                cta={{ label: 'Zamów audyt e-commerce', href: '/uslugi/audyt-e-commerce#formularz' }}
                 ctaSecondary={{ label: 'Zobacz zakres usług', href: '#zakres' }}
                 right={
                     <div className="ct-grid-lines grid-cols-2" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-                        {[['Priorytet', 'Jasny przekaz i sprawny proces'], ['Efekt', 'Mniej tarcia, więcej wyniku'], ['Model', 'Strategia + wdrożenie'], ['Zakres', 'Brand, web, commerce, AI']].map(([label, val]) => (
+                        {[['Pierwszy krok', 'Audyt e-commerce w 5–7 dni roboczych'], ['Stała współpraca', 'Zarządzanie e-commerce z zewnątrz'], ['Wykonanie', 'Wdrożenia tym samym zespołem'], ['Doświadczenie', '5.10.15, Quiosque, Grupa Kapitałowa Monnari']].map(([label, val]) => (
                             <div key={label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
                                 <span className="ct-meta">{label}</span>
                                 <span style={{ fontSize: 15, fontWeight: 500, lineHeight: 1.5 }}>{val}</span>
@@ -86,7 +90,25 @@ export default function ServicesPage() {
                 }
             />
 
-            <Section id="zakres" eyebrow="Zakres usług" title="Moduły, które można uruchamiać osobno lub łączyć." border={false}>
+            <Section id="zakres" eyebrow="Audyt i zarządzanie" title="Dwie usługi, od których zaczyna się większość współprac." border={false}>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    {leadServices.map((s) => (
+                        <Link key={s.href} href={s.href} className="ct-card-hover flex flex-col gap-6 no-underline" style={{ padding: 'clamp(24px, 3vw, 36px)', background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', color: 'var(--text)' }}>
+                            <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--accent)' }}>{s.num}</span>
+                            <div className="flex flex-col gap-3">
+                                <h3 style={{ margin: 0, fontSize: 'clamp(24px, 2.6vw, 32px)', fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.15 }}>{s.title}</h3>
+                                <p className="ct-body" style={{ fontSize: 16, maxWidth: '48ch' }}>{s.description}</p>
+                            </div>
+                            <div className="mt-auto flex flex-wrap items-center gap-2">
+                                {s.tags.map(t => <span key={t} className="ct-pill">{t}</span>)}
+                                <span className="ct-mono ml-auto" style={{ fontSize: 18, color: 'var(--accent)' }} aria-hidden="true">→</span>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </Section>
+
+            <Section id="wdrozenia" eyebrow="Wdrożenia" title="Rekomendacje wdraża ten sam zespół. Każdy moduł działa też osobno." className="scroll-mt-20">
                 <div className="flex flex-col" style={{ border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {services.map((s, i) => (
                         <Link
@@ -111,7 +133,7 @@ export default function ServicesPage() {
                 </div>
             </Section>
 
-            <Section tint eyebrow="Landing pages SEO" title="Strony pod konkretne frazy i intencje zakupowe.">
+            <Section tint eyebrow="Konkretne potrzeby" title="Wdrożenia, o które pytacie najczęściej.">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     {landingPages.map((page) => (
                         <Link key={page.href} href={page.href} className="ct-card-hover flex items-start justify-between gap-6 no-underline" style={{ padding: 24, background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', color: 'var(--text)' }}>
@@ -126,7 +148,7 @@ export default function ServicesPage() {
             </Section>
 
             {/* Process */}
-            <Section eyebrow="Jak pracujemy" title="Proces napędzany przez AI.">
+            <Section eyebrow="Jak pracujemy" title="Od rozmowy do stałej współpracy.">
                 <ol className="ct-grid-lines grid-cols-1 sm:grid-cols-2 xl:grid-cols-4" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                     {process.map((step) => (
                         <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>

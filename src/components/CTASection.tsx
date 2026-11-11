@@ -8,10 +8,10 @@ interface CTASectionProps {
 }
 
 export default function CTASection({
-    eyebrow = 'Łączymy myślenie biznesowe z prędkością AI',
-    title = 'Zacznij budować digitalnie.',
-    description = 'Senior specjaliści i narzędzia AI — realizujemy projekty szybciej bez obniżania poprzeczki.',
-    cta = { label: 'Umów bezpłatną konsultację', href: '/kontakt' },
+    eyebrow = 'Pierwszy krok',
+    title = 'Zacznij od rozmowy o swoim e-commerce.',
+    description = '15 minut wystarczy, żeby sprawdzić, czy audyt albo zarządzanie e-commerce z zewnątrz ma w Twoim przypadku sens.',
+    cta = { label: 'Umów rozmowę', href: '/kontakt' },
 }: CTASectionProps) {
     return (
         <section id="kontakt" style={{ padding: 'var(--pad-y-xl) var(--pad-x)', textAlign: 'center', borderTop: '1px solid var(--line)' }}>
