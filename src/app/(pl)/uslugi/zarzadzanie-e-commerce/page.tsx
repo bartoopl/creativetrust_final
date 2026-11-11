@@ -7,6 +7,7 @@ import Section from '@/components/ui/Section';
 import { BulletColumns, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { AUDIT_HREF, EXPERIENCE_SENTENCE, experience } from '@/lib/experience';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { pageAlternates } from '@/lib/i18n';
 
 const canonicalUrl = `${SITE_URL}/uslugi/zarzadzanie-e-commerce`;
 
@@ -17,9 +18,7 @@ export const metadata: Metadata = {
     title: 'Zarządzanie e-commerce z zewnątrz | E-commerce manager na abonament',
     description:
         'Prowadzimy e-commerce marek z zewnątrz: plan sprzedaży, marża, zespół, dostawcy i raportowanie wyników. Start od audytu, stała miesięczna współpraca, jeden odpowiedzialny zespół.',
-    alternates: {
-        canonical: canonicalUrl,
-    },
+    alternates: pageAlternates('/uslugi/zarzadzanie-e-commerce', 'pl', SITE_URL),
     openGraph: {
         title: 'Zarządzanie e-commerce z zewnątrz | CreativeTrust',
         description:

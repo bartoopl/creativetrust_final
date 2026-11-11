@@ -64,6 +64,8 @@ test('the e-commerce audit and outsourced management are quoted individually, ne
         '../content/ai/uslugi/audyt-e-commerce.md',
         '../src/app/(pl)/uslugi/zarzadzanie-e-commerce/page.tsx',
         '../content/ai/uslugi/zarzadzanie-e-commerce.md',
+        '../src/app/en/services/e-commerce-audit/page.tsx',
+        '../src/app/en/services/e-commerce-management/page.tsx',
     ]) {
         const text = readFileSync(new URL(rel, import.meta.url), 'utf8');
         // Our prices are always net; the lead form's budget brackets (visitor's budget) are not.

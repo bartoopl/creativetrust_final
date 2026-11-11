@@ -51,6 +51,12 @@ const nextConfig: NextConfig = {
                 destination: '/uslugi/audyt-e-commerce.md',
                 permanent: true,
             },
+            // The English consulting page became the e-commerce audit.
+            {
+                source: '/en/services/e-commerce-consulting',
+                destination: '/en/services/e-commerce-audit',
+                permanent: true,
+            },
             // Retired posts (e.g. outdated 2023 prices) → the current page, HTML and Markdown twin.
             ...Object.entries(retiredBlogPosts as Record<string, string>).flatMap(([slug, destination]) => [
                 { source: `/blog/${slug}`, destination, permanent: true },
