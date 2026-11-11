@@ -52,7 +52,7 @@ export function buildTools({ origin, services, landings, prices, searchArticles 
             name: 'list_services',
             title: 'Usługi CreativeTrust',
             description:
-                'Lists the services CreativeTrust (a Polish e-commerce consultancy and digital team) offers: e-commerce audits, outsourced e-commerce management, and implementation (e-commerce builds, websites, marketing automation, social media), each with its dedicated landing pages. Use it to find which offer fits a request and which page to open.',
+                'Lists the services CreativeTrust (a Polish e-commerce consultancy and digital team) offers: e-commerce audits, outsourced e-commerce management, designing and building online stores and websites, plus marketing automation and social media, each with its dedicated landing pages. Use it to find which offer fits a request and which page to open.',
             inputSchema: {
                 type: 'object',
                 properties: {

@@ -23,7 +23,7 @@ const milestones = [
     { year: '2016', title: 'Web & e-commerce', description: 'Dołożyliśmy projektowanie stron i sklepów, żeby kontrolować cały lejek, a nie tylko fragment.' },
     { year: '2024', title: 'SALESmanago partner', description: 'Wzmocniliśmy obszar automatyzacji i pracy z danymi marketingowymi.' },
     { year: '2025', title: 'AI w procesie', description: 'AI wplecione w research, analitykę i development. Krótszy czas od diagnozy do wdrożenia.' },
-    { year: '2026', title: 'Audyt i zarządzanie e-commerce', description: 'Główną ofertą stają się audyt sklepu i prowadzenie e-commerce z zewnątrz. Wdrożenia zostają w tym samym zespole.' },
+    { year: '2026', title: 'Audyt i zarządzanie e-commerce', description: 'Do budowy sklepów i stron dochodzą audyt sklepu i prowadzenie e-commerce z zewnątrz — w tym samym zespole.' },
 ];
 
 const stats = [
@@ -39,7 +39,7 @@ export default function AboutPage() {
             <PageHero
                 eyebrow="O NAS"
                 title="Zespół, który zna e-commerce od strony zarządzania."
-                description="Audytujemy sklepy internetowe, prowadzimy e-commerce marek z zewnątrz i wdrażamy to, co rekomendujemy. Opieramy się na doświadczeniu w budowaniu rosnących marek na polskim rynku."
+                description="Audytujemy sklepy internetowe i prowadzimy e-commerce marek z zewnątrz. Projektujemy też i budujemy sklepy oraz strony internetowe. Opieramy się na doświadczeniu w budowaniu rosnących marek na polskim rynku."
                 cta={{ label: 'Porozmawiajmy', href: '/kontakt' }}
                 ctaSecondary={{ label: 'Zobacz usługi', href: '/uslugi' }}
             />

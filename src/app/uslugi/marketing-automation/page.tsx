@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
+import { InlineCTA } from '@/components/LandingBlocks';
 import FAQAccordion from '@/components/FAQAccordion';
 import Card from '@/components/ui/Card';
 import PageHero from '@/components/ui/PageHero';
@@ -9,30 +10,30 @@ import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Marketing Automation dla Firm | AI, SALESmanago, lejki, CRM',
-    description: 'Automatyzacja marketingu oparta na danych i AI. Wdrażamy SALESmanago, budujemy lejki, integrujemy CRM i ustawiamy kampanie, które działają bez Twojej obecności.',
+    title: 'Marketing Automation dla e-commerce i firm | SALESmanago, scenariusze, CRM',
+    description: 'Wdrażamy SALESmanago i scenariusze, które pracują na bazie klientów: odzyskiwanie porzuconych zakupów, rekomendacje, reaktywacja, lead nurturing. Mierzone przychodem, nie liczbą wysyłek.',
     alternates: { canonical: `${SITE_URL}/uslugi/marketing-automation` },
     openGraph: {
-        title: 'Marketing Automation dla Firm | CreativeTrust',
-        description: 'SALESmanago, lejki, lead nurturing, automatyczne kampanie. Działają, kiedy śpisz.',
+        title: 'Marketing Automation dla e-commerce i firm | CreativeTrust',
+        description: 'SALESmanago, scenariusze sprzedażowe, segmentacja i integracje CRM. Automatyzacja mierzona przychodem.',
         url: `${SITE_URL}/uslugi/marketing-automation`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
     },
 };
 
 const services = [
-    { num: '01', title: 'Wdrożenie SALESmanago', description: 'Konfiguracja platformy, integracje, segmentacja i pierwsze automatyzacje gotowe do działania.' },
-    { num: '02', title: 'Lead nurturing', description: 'Lejki, sekwencje e-mail i scoring leadów — kontakty dojrzewają do zakupu bez Twojej obecności.' },
-    { num: '03', title: 'Personalizacja w czasie rzeczywistym', description: 'Treści na stronie i w e-mailach dopasowane do zachowań i segmentu odbiorcy.' },
-    { num: '04', title: 'AI w kampaniach', description: 'Optymalizacja czasu wysyłki, predykcyjny scoring i generowanie treści wspomagane AI.' },
+    { num: '01', title: 'Wdrożenie SALESmanago', description: 'Konfiguracja platformy, tracking, integracja ze sklepem i CRM, segmenty i pierwsze scenariusze gotowe do działania.' },
+    { num: '02', title: 'Scenariusze e-commerce', description: 'Porzucony koszyk, porzucone przeglądanie, rekomendacje, cross-sell i reaktywacja klientów, którzy przestali kupować.' },
+    { num: '03', title: 'Lead nurturing', description: 'Sekwencje i scoring dla sprzedaży B2B i usług: kontakt trafia do handlowca wtedy, gdy jest gotowy na rozmowę.' },
+    { num: '04', title: 'Segmentacja i personalizacja', description: 'Treści na stronie i w wiadomościach dopasowane do zachowań, historii zakupów i wartości klienta.' },
     { num: '05', title: 'Integracje CRM', description: 'Pipedrive, HubSpot, Salesforce — dane marketingowe trafiają tam, gdzie pracuje sprzedaż.' },
-    { num: '06', title: 'Analityka i reporting', description: 'Dashboardy z metrykami, które mają znaczenie — nie tylko otwarcia i kliknięcia.' },
+    { num: '06', title: 'Analityka i raportowanie', description: 'Przychód z automatyzacji, a nie tylko otwarcia i kliknięcia.' },
 ];
 
-const stats = [
-    { value: '3,2×', label: 'średni wzrost konwersji po wdrożeniu automatyzacji' },
-    { value: '40%', label: 'leadów, które nie byłyby obsłużone ręcznie' },
-    { value: '24/7', label: 'kampanie działają bez Twojego udziału' },
-    { value: '15+', label: 'lat doświadczenia w marketingu B2B i B2C' },
+const facts = [
+    { label: 'Platforma', value: 'partner SALESmanago od 2024 roku' },
+    { label: 'Kanały', value: 'e-mail, SMS, web push' },
+    { label: 'Punkt wyjścia', value: 'dane, zgody i segmenty' },
+    { label: 'Miara sukcesu', value: 'przychód z bazy klientów' },
 ];
 
 const usecases = [
@@ -81,9 +82,9 @@ export default function MarketingAutomationPage() {
             {/* Hero */}
             <PageHero
                 eyebrow="Marketing Automation"
-                title={<>Kampanie, które działają <span style={{ color: 'var(--accent)' }}>kiedy śpisz.</span></>}
-                description="Wdrażamy SALESmanago i budujemy automatyzacje oparte na danych i AI. Lejki, lead nurturing, personalizacja, integracje CRM — działają bez Twojego udziału."
-                cta={{ label: 'Omów projekt', href: '/kontakt' }}
+                title={<>Automatyzacja, która zarabia na <span style={{ color: 'var(--accent)' }}>bazie klientów.</span></>}
+                description="Wdrażamy SALESmanago i scenariusze, które pracują na klientach, których już masz: porzucone koszyki, rekomendacje, reaktywacja, lead nurturing. Mierzymy je przychodem, a nie liczbą wysłanych wiadomości."
+                cta={{ label: 'Omów wdrożenie', href: '/kontakt' }}
                 right={
                     <>
                     <SceneWithLegend id="automation-flow" label="Automatyzacje w procesie" />
@@ -106,10 +107,10 @@ export default function MarketingAutomationPage() {
             {/* Stats */}
             <Section border={false}>
                 <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-                    {stats.map(s => (
-                        <div key={s.value} className="flex flex-col gap-2.5" style={{ padding: '24px 24px 28px' }}>
-                            <span style={{ fontSize: 'clamp(28px, 3.1vw, 40px)', fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1 }}>{s.value}</span>
-                            <span className="ct-body" style={{ fontSize: 13 }}>{s.label}</span>
+                    {facts.map(f => (
+                        <div key={f.label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
+                            <span className="ct-meta">{f.label}</span>
+                            <span style={{ fontSize: 16, fontWeight: 500, lineHeight: 1.4 }}>{f.value}</span>
                         </div>
                     ))}
                 </div>
@@ -175,6 +176,14 @@ export default function MarketingAutomationPage() {
                 <div style={{ maxWidth: 840 }}>
                     <FAQAccordion items={faqs} />
                 </div>
+            </Section>
+
+            <Section tint>
+                <InlineCTA
+                    title="Automatyzacja to jeden z elementów wyniku sklepu"
+                    text="Audyt e-commerce pokazuje, ile sprzedaży i marży ucieka w całym lejku — i czy marketing automation jest pierwszą rzeczą do zrobienia."
+                    cta={{ label: 'Zobacz audyt e-commerce', href: '/uslugi/audyt-e-commerce' }}
+                />
             </Section>
 
             <CTASection />

@@ -17,12 +17,12 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
     // Already branded: absolute, so the root template does not add a second „| CreativeTrust”.
-    title: { absolute: 'CreativeTrust — Audyt i zarządzanie e-commerce z zewnątrz' },
-    description: 'Audytujemy sklepy internetowe i prowadzimy e-commerce marek z zewnątrz. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.',
+    title: { absolute: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce' },
+    description: 'Audytujemy i prowadzimy e-commerce marek z zewnątrz. Projektujemy i budujemy sklepy oraz strony internetowe. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.',
     alternates: { canonical: '/' },
     openGraph: {
-        title: 'CreativeTrust — Audyt i zarządzanie e-commerce z zewnątrz',
-        description: 'Audyt sklepu w 5–7 dni roboczych, zarządzanie e-commerce z zewnątrz i wdrożenia w jednym zespole.',
+        title: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce',
+        description: 'Audyt sklepu w 5–7 dni roboczych, zarządzanie e-commerce z zewnątrz oraz budowa sklepów i stron internetowych.',
         url: SITE_URL,
         type: 'website',
     },

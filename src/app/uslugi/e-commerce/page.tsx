@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
+import { InlineCTA } from '@/components/LandingBlocks';
 import PageHero from '@/components/ui/PageHero';
 import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
@@ -7,53 +8,53 @@ import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'E-commerce | Sklepy headless, migracje, WooCommerce, Shopify',
-    description: 'Projektujemy i wdrażamy sklepy internetowe, które sprzedają i skalują się bez bólu. Headless e-commerce, migracje platform, integracje ERP i AI-assisted development.',
+    title: 'Sklepy internetowe | Projekt, wdrożenie, migracje i integracje ERP',
+    description: 'Projektujemy i budujemy sklepy internetowe: headless, WooCommerce, Shopify, migracje platform i integracje ERP. Z perspektywy zespołu, który zarządza e-commerce — pod sprzedaż, marżę i pracę zespołu.',
     alternates: { canonical: `${SITE_URL}/uslugi/e-commerce` },
     openGraph: {
-        title: 'E-commerce i sklepy internetowe | CreativeTrust',
-        description: 'Sklepy headless i migracje platform. WooCommerce, Shopify, Next.js Commerce — jeden zespół od projektu po wdrożenie.',
+        title: 'Sklepy internetowe i wdrożenia e-commerce | CreativeTrust',
+        description: 'Sklepy headless, migracje platform i integracje ERP. Buduje je zespół, który zna e-commerce od strony zarządzania.',
         url: `${SITE_URL}/uslugi/e-commerce`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
     },
 };
 
 const services = [
-    { num: '01', title: 'Sklepy headless', description: 'Oddzielamy frontend od backendu. Szybciej, elastyczniej, skalowalniej — bez limitów platformy.', tags: ['Next.js Commerce', 'API-first', 'CMS'] },
-    { num: '02', title: 'WooCommerce', description: 'Budujemy i rozbudowujemy sklepy na WooCommerce z Custom checkout, integracjami i pluginami.', tags: ['WooCommerce', 'WordPress', 'PHP'] },
-    { num: '03', title: 'Shopify', description: 'Sklepy na Shopify Plus z custom theme, liquid i integracjami z ERP i systemami magazynowymi.', tags: ['Shopify Plus', 'Liquid', 'Apps'] },
-    { num: '04', title: 'Migracje platform', description: 'Bezpieczna migracja z dowolnej platformy — z zachowaniem danych, SEO i historii zamówień.', tags: ['Migracja danych', 'SEO redirect', 'Zero downtime'] },
-    { num: '05', title: 'Integracje ERP / CRM', description: 'Synchronizacja stanów, zamówień i klientów z Subiektem, Comarch, SAP i innymi systemami.', tags: ['Subiekt', 'Comarch', 'API'] },
-    { num: '06', title: 'Optymalizacja konwersji', description: 'CRO, A/B testy i UX improvements na podstawie danych z GA4 i heatmap.', tags: ['CRO', 'A/B tests', 'GA4'] },
+    { num: '01', title: 'Sklepy headless', description: 'Storefront oddzielony od zaplecza. Zmiany w ofercie, promocjach i treściach wchodzą szybko, bez czekania na wydanie całej platformy.', tags: ['Medusa.js', 'Next.js', 'API-first'] },
+    { num: '02', title: 'WooCommerce', description: 'Budujemy i rozbudowujemy sklepy na WooCommerce: własny checkout, integracje i wtyczki. Dobry wybór, gdy liczy się czas startu i koszt utrzymania.', tags: ['WooCommerce', 'WordPress', 'PHP'] },
+    { num: '03', title: 'Shopify', description: 'Sklepy na Shopify Plus z własnym motywem i integracjami z ERP oraz systemami magazynowymi.', tags: ['Shopify Plus', 'Liquid', 'Apps'] },
+    { num: '04', title: 'Migracje platform', description: 'Przenosimy sklep z zachowaniem danych, SEO i historii zamówień. Plan przekierowań i test sprzedaży powstają przed przełączeniem.', tags: ['Migracja danych', 'Przekierowania SEO', 'Bez przestoju'] },
+    { num: '05', title: 'Integracje ERP / CRM', description: 'Stany, ceny, zamówienia i klienci zsynchronizowani z Subiektem, Comarch, SAP i innymi systemami. Koniec z przeklejaniem danych.', tags: ['Subiekt', 'Comarch', 'API'] },
+    { num: '06', title: 'Optymalizacja konwersji', description: 'Testy i poprawki ścieżki zakupowej na podstawie danych: karta produktu, koszyk, checkout, płatności.', tags: ['CRO', 'Testy A/B', 'GA4'] },
 ];
 
-const stats = [
-    { value: '150+', label: 'projektów e-commerce i stron www' },
-    { value: '3,2×', label: 'średni wzrost konwersji po redesignie' },
-    { value: '90+', label: 'PageSpeed Score w każdym projekcie' },
-    { value: '40%', label: 'szybszy czas realizacji dzięki AI' },
+const facts = [
+    { label: 'Punkt wyjścia', value: 'cel sprzedażowy i marża, nie lista funkcji' },
+    { label: 'Technologia', value: 'open source, bez vendor lock-in' },
+    { label: 'Migracje', value: 'z zachowaniem SEO, danych i historii zamówień' },
+    { label: 'Po starcie', value: 'rozwój sklepu albo zarządzanie e-commerce' },
 ];
 
 const platforms = ['Next.js Commerce', 'WooCommerce', 'Shopify', 'Shopify Plus', 'Medusa.js', 'Saleor', 'Subiekt GT', 'Comarch ERP', 'BaseLinker'];
 
 const features = [
-    { title: 'Wydajność powyżej 90', description: 'PageSpeed Score > 90 na mobile i desktop. Szybki sklep to wyższe pozycje i niższy bounce rate.' },
-    { title: 'SEO e-commerce', description: 'Architektura kategorii, schema Product, breadcrumb, canonical, sitemap i AMP — wszystko od początku.' },
+    { title: 'Wydajność powyżej 90', description: 'PageSpeed Score > 90 na mobile i desktop. Szybki sklep to wyższe pozycje i mniej porzuconych sesji.' },
+    { title: 'SEO e-commerce', description: 'Architektura kategorii, schema Product, breadcrumb, canonical i sitemap — ustawione od początku, nie po starcie.' },
     { title: 'Checkout bez tarcia', description: 'Uproszczony checkout, one-click, Apple Pay, BLIK, Klarna — mniej kroków, mniej porzuceń.' },
-    { title: 'Mobile-first', description: 'Projektujemy od smallest screen up. Zakupy mobilne to ponad 60% transakcji — nie możesz tego ignorować.' },
-    { title: 'Personalizacja z AI', description: 'Rekomendacje produktów, dynamiczne banery i e-mail automation oparte na zachowaniu klienta.' },
+    { title: 'Mobile-first', description: 'Projektujemy od najmniejszego ekranu, bo tam odbywa się większość zakupów.' },
+    { title: 'Zaplecze dla zespołu', description: 'Panel, w którym zespół sam zmienia ofertę, promocje i treści. Bez zgłoszenia do developera przy każdej kampanii.' },
     { title: 'Bezpieczeństwo', description: 'SSL, 2FA dla admina, backup, monitoring i aktualizacje w pakiecie wsparcia.' },
 ];
 
 const process = [
-    { num: '01', title: 'Analiza', description: 'Obecny stan, dane, lejek zakupowy. AI przyspiesza diagnozę i priorytetyzację.' },
-    { num: '02', title: 'UX & Design', description: 'Wireframes i UI w Figma. Customer journey od kategorii po potwierdzenie zamówienia.' },
+    { num: '01', title: 'Analiza', description: 'Liczby, lejek zakupowy i zaplecze. Ustalamy, co ma się poprawić, zanim wybierzemy technologię.' },
+    { num: '02', title: 'UX i design', description: 'Makiety i UI w Figmie. Ścieżka klienta od kategorii po potwierdzenie zamówienia.' },
     { num: '03', title: 'Development', description: 'Budujemy lub migrujemy. Integracje, testy i optymalizacja wydajności.' },
-    { num: '04', title: 'Wzrost', description: 'CRO, reklamy, automatyzacja. Optymalizujemy na podstawie danych.', featured: true },
+    { num: '04', title: 'Rozwój', description: 'Po starcie optymalizujemy konwersję i rozwijamy sklep na podstawie danych.', featured: true },
 ];
 
 export default function EcommercePage() {
     const serviceSchema = buildServiceSchema({
-        name: 'E-commerce',
+        name: 'Sklepy internetowe i wdrożenia e-commerce',
         description:
             'Sklepy headless, migracje platform, integracje ERP i optymalizacja konwersji dla e-commerce.',
         url: `${SITE_URL}/uslugi/e-commerce`,
@@ -64,25 +65,26 @@ export default function EcommercePage() {
         <main style={{ minHeight: '100vh' }}>
             <SchemaScript schema={serviceSchema} />
             <PageHero
-                eyebrow="E-commerce"
-                title={<>Sklepy, które sprzedają i <span style={{ color: 'var(--accent)' }}>skalują się.</span></>}
-                description="Projektujemy i wdrażamy sklepy e-commerce oparte na danych i AI. Nowe wdrożenia, migracje platform, integracje ERP — szybciej i z lepszym wynikiem niż tradycyjny proces."
-                cta={{ label: 'Omów projekt', href: '/kontakt' }}
+                eyebrow="Sklepy internetowe"
+                title={<>Budujemy sklepy tak, jak sami chcielibyśmy nimi <span style={{ color: 'var(--accent)' }}>zarządzać.</span></>}
+                description="Projektujemy i wdrażamy sklepy internetowe, migracje i integracje. Robi to zespół, który zna e-commerce od strony zarządzania — dlatego liczy się to, ile sklep zarabia, jak szybko zespół wprowadza zmiany i czy dane między systemami się zgadzają."
+                cta={{ label: 'Omów projekt sklepu', href: '/kontakt' }}
+                ctaSecondary={{ label: 'Zobacz realizacje', href: '/portfolio' }}
                 right={<SceneWithLegend id="ecommerce-layers" label="Warstwy sklepu headless" />}
             />
 
             <Section border={false}>
                 <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-                    {stats.map(s => (
-                        <div key={s.value} className="flex flex-col gap-2.5" style={{ padding: '24px 24px 28px' }}>
-                            <span style={{ fontSize: 'clamp(28px, 3.1vw, 40px)', fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1 }}>{s.value}</span>
-                            <span className="ct-body" style={{ fontSize: 13 }}>{s.label}</span>
+                    {facts.map(f => (
+                        <div key={f.label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
+                            <span className="ct-meta">{f.label}</span>
+                            <span style={{ fontSize: 16, fontWeight: 500, lineHeight: 1.4 }}>{f.value}</span>
                         </div>
                     ))}
                 </div>
             </Section>
 
-            <Section id="oferta" eyebrow="Zakres" title="Typy projektów e-commerce.">
+            <Section id="oferta" eyebrow="Zakres" title="Co projektujemy i wdrażamy.">
                 <div className="ct-grid-lines grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {services.map(s => (
                         <div key={s.num} className="flex flex-col gap-2.5" style={{ padding: 28 }}>
@@ -119,7 +121,7 @@ export default function EcommercePage() {
                 </div>
             </Section>
 
-            <Section eyebrow="Proces" title="Od konceptu do sprzedającego sklepu.">
+            <Section eyebrow="Proces" title="Od liczb do sprzedającego sklepu.">
                 <ol className="ct-grid-lines grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                     {process.map(step => (
                         <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>
@@ -129,6 +131,14 @@ export default function EcommercePage() {
                         </li>
                     ))}
                 </ol>
+            </Section>
+
+            <Section tint>
+                <InlineCTA
+                    title="Nie wiesz, czy zmieniać platformę?"
+                    text="Audyt e-commerce w 5–7 dni roboczych pokazuje, czy nowy sklep lub migracja to właściwa inwestycja — czy lepszy wynik da praca na obecnym systemie."
+                    cta={{ label: 'Zobacz audyt e-commerce', href: '/uslugi/audyt-e-commerce' }}
+                />
             </Section>
 
             <CTASection />

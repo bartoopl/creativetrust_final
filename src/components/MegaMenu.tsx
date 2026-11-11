@@ -50,11 +50,11 @@ export default function MegaMenu({ id, isOpen, onClose, panelRef, onPointerEnter
                             <div className="flex flex-col gap-4 py-8 lg:pr-8" style={{ borderRight: '1px solid var(--line)' }}>
                                 <span className="ct-eyebrow">Zakres usług</span>
                                 <p style={{ margin: 0, fontSize: 20, fontWeight: 500, letterSpacing: '-0.5px', lineHeight: 1.25, color: 'var(--text)' }}>
-                                    Zaczynamy od audytu. Potem prowadzimy i wdrażamy.
+                                    Audytujemy, prowadzimy i budujemy e-commerce.
                                 </p>
                                 <p className="ct-body">
-                                    Audyt pokazuje, co hamuje sprzedaż i marżę. Zarządzanie i wdrożenia to wykonanie
-                                    roadmapy — z nami albo po Waszej stronie.
+                                    Audyt pokazuje, co hamuje sprzedaż i marżę. Sklepy i strony internetowe budujemy
+                                    także jako osobne projekty.
                                 </p>
                                 <div className="mt-2 flex flex-wrap gap-3">
                                     <Link href="/uslugi" onClick={onClose} className="ct-link">Wszystkie usługi →</Link>
@@ -83,7 +83,7 @@ export default function MegaMenu({ id, isOpen, onClose, panelRef, onPointerEnter
                             </div>
 
                             <div className="flex flex-col gap-3 py-8 lg:pl-8" style={{ background: 'var(--panel)' }}>
-                                <span className="ct-eyebrow" style={{ color: 'var(--muted)' }}>Wdrożenia: konkretne potrzeby</span>
+                                <span className="ct-eyebrow" style={{ color: 'var(--muted)' }}>Sklepy i strony: konkretne potrzeby</span>
                                 <div className="flex flex-col">
                                     {seoLandings.map((item) => (
                                         <Link

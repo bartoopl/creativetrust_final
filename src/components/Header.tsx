@@ -155,7 +155,7 @@ export default function Header() {
         <>
             <div ref={stripRef} className="ct-strip" style={{ borderBottom: '1px solid var(--line)', padding: '9px var(--pad-x)', display: 'flex', justifyContent: 'center', background: 'var(--panel)', textAlign: 'center' }}>
                 <span className="ct-mono" style={{ fontWeight: 500, fontSize: 12, color: 'var(--muted)', letterSpacing: '-0.1px' }}>
-                    Audyt i zarządzanie e-commerce z zewnątrz — zobacz,{' '}
+                    Audyt, zarządzanie i budowa e-commerce — zobacz,{' '}
                     <Link href="/#proces" style={{ fontWeight: 500 }}>jak pracujemy →</Link>
                 </span>
             </div>

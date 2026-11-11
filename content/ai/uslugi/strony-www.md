@@ -1,10 +1,10 @@
 ---
-title: "Tworzenie stron internetowych — CreativeTrust | Szybkie, skuteczne, AI-assisted"
-description: "Projektujemy i wdrażamy strony WWW, które generują leady i sprzedają. Headless, Next.js, performance. Krótszy time-to-market dzięki AI. Sprawdź zakres."
-date: "2026-10-27"
+title: "Strony internetowe dla marek i firm — CreativeTrust | Projekt i wdrożenie"
+description: "Projektujemy i wdrażamy strony internetowe: firmowe, produktowe, landing pages i portale. Zaprojektowane pod konkretną rolę w sprzedaży, szybkie i łatwe w edycji. Sprawdź zakres i cennik."
+date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/uslugi/strony-www"
 lang: "pl-PL"
-ai_summary: "CreativeTrust projektuje i wdraża strony WWW oparte na danych: strony firmowe, landing pages, portale i strony produktowe. Standard to PageSpeed powyżej 90, SEO on-page, headless CMS (Sanity, Contentful, Strapi), WCAG 2.1 AA i wsparcie po wdrożeniu. AI skraca czas realizacji o 30–40%. Landing page kosztuje od 3 500 zł netto, strona firmowa od 7 500 zł netto."
+ai_summary: "CreativeTrust projektuje i wdraża strony internetowe dla marek i firm: strony firmowe, landing pages, strony marek przy sklepie oraz portale. Standard to PageSpeed powyżej 90, SEO on-page, headless CMS (Sanity, Contentful, Strapi), WCAG 2.1 AA, pomiar od pierwszego dnia i wsparcie po wdrożeniu. Landing page kosztuje od 3 500 zł netto, strona firmowa od 7 500 zł netto."
 target_audience:
   - "Firmy, które potrzebują nowej strony firmowej lub przebudowy obecnej"
   - "Marketerzy potrzebujący landing page pod kampanię"
@@ -21,16 +21,16 @@ semantic_keywords:
   - "WCAG 2.1"
 ---
 
-# Tworzenie stron WWW w CreativeTrust
+# Strony internetowe w CreativeTrust
 
-CreativeTrust projektuje i wdraża strony WWW oparte na danych — od landing page po rozbudowany portal. Strony są headless, szybkie i gotowe pod SEO, a czas realizacji jest krótszy o 30–40% dzięki AI.
+CreativeTrust projektuje i wdraża strony dla marek i firm — od landing page po rozbudowany portal. Każda ma jasne zadanie: zbierać zapytania, wspierać sklep albo otwierać nowy rynek. Strony są szybkie, gotowe pod SEO i łatwe w edycji.
 
 ## Jakie strony buduje CreativeTrust
 
-1. **Strony firmowe** — wizytówka marki zaprojektowana pod konwersję i SEO, pracująca przez całą dobę (headless CMS, Next.js, Sanity).
-2. **Landing pages** — strony pod kampanie, produkty i eventy; czas do wdrożenia liczony w tygodniach, nie miesiącach (wysoka konwersja, gotowe pod testy A/B).
-3. **Portale i platformy** — rozbudowane serwisy z autentykacją, dashboardem i logiką biznesową (SaaS, dashboard, API).
-4. **Strony produktowe** — showcase produktu lub usługi, który sprzedaje: storytelling, wideo i CTA.
+1. **Strony firmowe** — serwis marki z jasną ofertą i ścieżką do kontaktu, projektowany pod zapytania i SEO (headless CMS, Next.js, Sanity).
+2. **Landing pages** — strony pod kampanie, produkty i wydarzenia, spięte z analityką i formularzem; wdrożenie liczone w tygodniach.
+3. **Strony marek przy sklepie** — serwis korporacyjny, B2B albo inwestorski obok e-commerce, spójny z marką i sklepem.
+4. **Portale i platformy** — rozbudowane serwisy z logowaniem, panelem i logiką biznesową.
 
 ## Standard każdej strony WWW od CreativeTrust
 
@@ -38,7 +38,7 @@ CreativeTrust projektuje i wdraża strony WWW oparte na danych — od landing pa
 - **SEO on-page** — architektura semantyczna, meta tagi, dane strukturalne schema.org, sitemap i canonicale od pierwszego dnia.
 - **Headless CMS** — Sanity, Contentful lub Strapi; treści edytuje się bez dotykania kodu.
 - **Responsywność i dostępność** — poprawne wyświetlanie na każdym urządzeniu, zgodność z WCAG 2.1 AA.
-- **AI-assisted development** — komponenty powstają i są testowane szybciej; time-to-market krótszy o 30–40% względem tradycyjnego procesu.
+- **Pomiar od pierwszego dnia** — zdarzenia, formularze i źródła zapytań w analityce.
 - **Wsparcie po wdrożeniu** — aktualizacje, optymalizacje i rozbudowa strony po starcie.
 
 ## Technologie stron WWW w CreativeTrust
@@ -47,10 +47,10 @@ Next.js, React, Sanity CMS, TypeScript, Tailwind CSS, Vercel / Netlify, Figma i 
 
 ## Proces tworzenia strony WWW w CreativeTrust
 
-1. **Discovery** — analiza celów, grupy docelowej i konkurencji; AI przyspiesza research.
-2. **Design** — wireframes i UI w Figmie; prototyp jest klikalny, zanim powstanie linia kodu.
-3. **Development** — headless, wydajnie i pod SEO; kodowanie wspierane przez AI, szybciej i z mniejszą liczbą błędów.
-4. **Launch i wzrost** — wdrożenie, testy i monitoring, a po starcie optymalizacja na podstawie danych.
+1. **Cel i rola strony** — co strona ma dawać sprzedaży i komu; analiza oferty, odbiorców i konkurencji.
+2. **Design** — makiety i UI w Figmie; prototyp jest klikalny, zanim powstanie linia kodu.
+3. **Development** — headless, wydajnie i pod SEO; AI skraca produkcję, ludzie pilnują jakości.
+4. **Start i rozwój** — wdrożenie, testy i monitoring, a po starcie optymalizacja na podstawie danych.
 
 ## Najczęstsze pytania o tworzenie stron WWW
 
@@ -68,7 +68,7 @@ Celem jest PageSpeed Score powyżej 90 i dobre Core Web Vitals. CreativeTrust bu
 
 ### Czy robicie landing page pod kampanie reklamowe?
 
-Tak. Landing pages pod kampanie, produkty i eventy to jeden z czterech typów projektów — więcej na stronie [Landing page Google Ads](https://www.creativetrust.pl/uslugi/landing-page-google-ads.md).
+Tak. Landing pages pod kampanie, produkty i wydarzenia to jeden z czterech typów projektów — więcej na stronie [Landing page Google Ads](https://www.creativetrust.pl/uslugi/landing-page-google-ads.md).
 
 ### Czy opiekujecie się stroną po wdrożeniu?
 

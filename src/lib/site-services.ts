@@ -31,14 +31,17 @@ export interface PublishedPrice {
 export const services: Service[] = [
     { slug: 'audyt-e-commerce', href: '/uslugi/audyt-e-commerce', title: 'Audyt e-commerce', description: 'Sprzedaż, marża, technologia i praca zespołu sklepu. Raport i roadmapa w 5–7 dni roboczych.', accent: 'Diagnoza' },
     { slug: 'zarzadzanie-e-commerce', href: '/uslugi/zarzadzanie-e-commerce', title: 'Zarządzanie e-commerce', description: 'Prowadzenie e-commerce z zewnątrz: plan, marża, zespół, dostawcy i wyniki.', accent: 'Wynik' },
-    { slug: 'e-commerce', href: '/uslugi/e-commerce', title: 'Wdrożenia e-commerce', description: 'Headless commerce, migracje i integracje systemów.', accent: 'Skalowanie' },
-    { slug: 'strony-www', href: '/uslugi/strony-www', title: 'Strony WWW', description: 'Strony firmowe, landing pages, UX i performance.', accent: 'Konwersja' },
+    { slug: 'e-commerce', href: '/uslugi/e-commerce', title: 'Sklepy internetowe', description: 'Projekt i budowa sklepów: headless, migracje i integracje systemów.', accent: 'Skalowanie' },
+    { slug: 'strony-www', href: '/uslugi/strony-www', title: 'Strony internetowe', description: 'Strony firmowe, landing pages i portale: UX, SEO i wydajność.', accent: 'Konwersja' },
     { slug: 'marketing-automation', href: '/uslugi/marketing-automation', title: 'Marketing Automation', description: 'SALESmanago, lejki, CRM i personalizacja.', accent: 'Automatyzacja' },
     { slug: 'social-media', href: '/uslugi/social-media', title: 'Social Media', description: 'Strategia, content, kampanie i raportowanie.', accent: 'Widoczność' },
 ];
 
 /** The two lead offers; the rest of the catalogue is implementation work. */
 export const LEAD_SERVICE_SLUGS = ['audyt-e-commerce', 'zarzadzanie-e-commerce'];
+
+/** What we design and build; shown as its own pair of tiles next to the lead offers. */
+export const BUILD_SERVICE_SLUGS = ['e-commerce', 'strony-www'];
 
 export const seoLandings: Landing[] = [
     {

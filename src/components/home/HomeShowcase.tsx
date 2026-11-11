@@ -7,16 +7,17 @@ export default function HomeShowcase() {
     return (
         <section className="ct-section" >
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-6 text-center">
-                <span className="ct-eyebrow">Wdrożenia</span>
+                <span className="ct-eyebrow">Sklepy i strony internetowe</span>
                 <h2 className="ct-h2 ct-statement">
-                    Od rekomendacji do <span className="ct-electric">działającego</span> sklepu.
+                    Projektujemy i <span className="ct-electric">budujemy</span> sklepy oraz strony.
                 </h2>
                 <p className="ct-lead" style={{ maxWidth: '52ch' }}>
-                    Sklepy, strony, automatyzacje i integracje wdraża ten sam zespół, który stawia diagnozę.
+                    Od celu biznesowego po start i rozwój — jako osobny projekt albo wykonanie roadmapy z audytu.
                     AI skraca research i produkcję, ludzie pilnują decyzji, jakości i wyniku.
                 </p>
                 <div className="flex flex-wrap justify-center gap-2 pt-2">
-                    <NotchedButton href="/uslugi#wdrozenia" variant="ghost">Zobacz zakres wdrożeń</NotchedButton>
+                    <NotchedButton href="/uslugi/e-commerce">Sklepy internetowe</NotchedButton>
+                    <NotchedButton href="/uslugi/strony-www" variant="ghost">Strony internetowe</NotchedButton>
                 </div>
 
                 <div className="ct-frame mt-10 w-full text-left" aria-label="Przykładowy przebieg wdrożenia">

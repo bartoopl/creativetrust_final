@@ -1,7 +1,7 @@
 const reasons = [
     { title: 'Znamy e-commerce od strony zarządzania', text: 'Doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.' },
     { title: 'Liczymy marżę, nie tylko przychód', text: 'Patrzymy na zysk, zwroty, koszty kanałów i czas zespołu — nie na sam ruch i obrót.' },
-    { title: 'Doradzamy i wdrażamy', text: 'Te same osoby stawiają diagnozę i odpowiadają za jej wykonanie. Raport nie trafia do szuflady.' },
+    { title: 'Doradzamy i budujemy', text: 'Ten sam zespół stawia diagnozę, projektuje i wdraża sklepy oraz strony. Raport nie trafia do szuflady.' },
     { title: 'Nie sprzedajemy platformy', text: 'Open source i sprawdzone technologie: Medusa.js, Next.js, React. Zmianę systemu rekomendujemy tylko wtedy, gdy się opłaca.' },
 ];
 

@@ -36,17 +36,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
     title: {
-        default: 'CreativeTrust — Audyt i zarządzanie e-commerce',
+        default: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce',
         template: '%s | CreativeTrust',
     },
-    description: 'Audytujemy sklepy internetowe i zarządzamy e-commerce marek z zewnątrz. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.',
-    keywords: ['audyt e-commerce', 'zarządzanie e-commerce', 'e-commerce manager z zewnątrz', 'konsulting e-commerce', 'wdrożenia e-commerce', 'marketing automation', 'strony internetowe'],
+    description: 'Audytujemy i prowadzimy e-commerce marek z zewnątrz, projektujemy i budujemy sklepy oraz strony internetowe. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.',
+    keywords: ['audyt e-commerce', 'zarządzanie e-commerce', 'e-commerce manager z zewnątrz', 'konsulting e-commerce', 'sklepy internetowe', 'wdrożenia e-commerce', 'strony internetowe', 'marketing automation'],
     alternates: {
         canonical: '/',
     },
     openGraph: {
-        title: 'CreativeTrust — Audyt i zarządzanie e-commerce',
-        description: 'Audyt sklepu, zarządzanie e-commerce z zewnątrz i wdrożenia w jednym zespole.',
+        title: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce',
+        description: 'Audyt sklepu, zarządzanie e-commerce z zewnątrz oraz budowa sklepów i stron internetowych w jednym zespole.',
         url: SITE_URL,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -54,8 +54,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'CreativeTrust — Audyt i zarządzanie e-commerce',
-        description: 'Audyt sklepu, zarządzanie e-commerce z zewnątrz i wdrożenia w jednym zespole.',
+        title: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce',
+        description: 'Audyt sklepu, zarządzanie e-commerce z zewnątrz oraz budowa sklepów i stron internetowych w jednym zespole.',
     },
     robots: {
         index: true,

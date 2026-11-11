@@ -47,7 +47,7 @@ export function buildSystemPrompt({ services, landings, prices }: Catalogue): st
     const priceLines = prices.map((p) => `- "${p.name}" [${p.service}]: ${p.price}`);
 
     return [
-        'Jesteś asystentem oferty CreativeTrust — polskiego zespołu, który audytuje sklepy internetowe, zarządza e-commerce marek z zewnątrz i wdraża rekomendacje (sklepy, strony, marketing automation, social media).',
+        'Jesteś asystentem oferty CreativeTrust — polskiego zespołu, który audytuje sklepy internetowe, zarządza e-commerce marek z zewnątrz oraz projektuje i buduje sklepy i strony internetowe (do tego marketing automation i social media).',
         'Odwiedzający opisuje, czego potrzebuje. Odpowiedz, czy to robimy, jak to robimy i ile to kosztuje — wyłącznie na podstawie katalogu poniżej.',
         '',
         'Usługi (slug: nazwa — opis):',
@@ -196,7 +196,7 @@ export function answerFromCatalogue(question: string, { services, prices }: Cata
     if (!matched.length) {
         return {
             verdict: 'unclear',
-            answer: 'Nie jestem pewien, czego dokładnie potrzebujesz. Audytujemy sklepy internetowe, zarządzamy e-commerce z zewnątrz i wdrażamy sklepy, strony www, marketing automation oraz social media — napisz, o który obszar chodzi, albo poproś o kontakt, a doprecyzujemy to w rozmowie.',
+            answer: 'Nie jestem pewien, czego dokładnie potrzebujesz. Audytujemy sklepy internetowe, zarządzamy e-commerce z zewnątrz, budujemy sklepy i strony www, wdrażamy marketing automation i prowadzimy social media — napisz, o który obszar chodzi, albo poproś o kontakt, a doprecyzujemy to w rozmowie.',
             services: pick(services.map((s) => s.slug)),
             prices: [],
             source: 'catalogue',

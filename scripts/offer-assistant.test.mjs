@@ -69,7 +69,7 @@ test('normalizeAnswer resolves known slugs and prices to catalogue entries', () 
     }, catalogue);
     assert.equal(result.verdict, 'yes');
     assert.equal(result.answer, 'Tak, robimy landing pages.');
-    assert.deepEqual(result.services, [{ slug: 'strony-www', title: 'Strony WWW', href: '/uslugi/strony-www' }]);
+    assert.deepEqual(result.services, [{ slug: 'strony-www', title: 'Strony internetowe', href: '/uslugi/strony-www' }]);
     assert.deepEqual(result.prices, [publishedPrices.find((p) => p.name === 'Landing page')]);
 });
 
@@ -104,7 +104,7 @@ test('normalizeAnswer rejects empty or malformed input and caps long answers', (
 test('formatLeadMessage includes the question, answer, services, prices and note', () => {
     const answer = normalizeAnswer({ verdict: 'yes', answer: 'Tak.', service_slugs: ['strony-www'], price_names: ['Landing page'] }, catalogue);
     const text = formatLeadMessage('Potrzebuję landing page', answer, ' Termin: maj ');
-    for (const part of ['Potrzebuję landing page', 'Tak.', 'Strony WWW', 'od 3 500 zł netto', 'Termin: maj']) {
+    for (const part of ['Potrzebuję landing page', 'Tak.', 'Strony internetowe', 'od 3 500 zł netto', 'Termin: maj']) {
         assert.ok(text.includes(part), part);
     }
     assert.equal(formatLeadMessage('Q', null, ''), 'Pytanie z asystenta oferty na stronie głównej:\nQ');

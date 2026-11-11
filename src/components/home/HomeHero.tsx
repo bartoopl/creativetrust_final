@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import NotchedButton from '../ui/NotchedButton';
 import { AUDIT_FORM_HREF, MANAGEMENT_HREF, experience } from '@/lib/experience';
 
@@ -6,18 +7,23 @@ export default function HomeHero() {
     return (
         <section className="ct-home-hero" aria-labelledby="home-hero-title">
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-6 text-center">
-                <p className="ct-eyebrow" style={{ margin: 0 }}>Audyt i zarządzanie e-commerce z zewnątrz</p>
+                <p className="ct-eyebrow" style={{ margin: 0 }}>Audyt, zarządzanie i budowa e-commerce</p>
                 <h1 id="home-hero-title" className="ct-h1 ct-home-hero-title">
                     Prowadzimy e‑commerce marek, które chcą rosnąć <span className="ct-electric">z zyskiem.</span>
                 </h1>
                 <p className="ct-lead" style={{ maxWidth: '56ch' }}>
-                    Zaczynamy od audytu: w 5–7 dni roboczych pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu.
-                    Potem prowadzimy e-commerce z zewnątrz i wdrażamy to, co zarekomendowaliśmy.
+                    Audytujemy sklepy i prowadzimy e-commerce z zewnątrz. Projektujemy też i budujemy sklepy oraz strony
+                    internetowe — tak, jak sami chcielibyśmy nimi zarządzać.
                 </p>
                 <div className="flex flex-wrap justify-center gap-2 pt-2">
                     <NotchedButton href={AUDIT_FORM_HREF}>Zamów audyt e-commerce</NotchedButton>
                     <NotchedButton href={MANAGEMENT_HREF} variant="ghost">Jak zarządzamy e-commerce</NotchedButton>
                 </div>
+                <p style={{ margin: 0, fontSize: 15, color: 'var(--muted)' }}>
+                    Budujemy też:{' '}
+                    <Link href="/uslugi/e-commerce" className="ct-home-hero-link">sklepy internetowe →</Link>{' '}
+                    <Link href="/uslugi/strony-www" className="ct-home-hero-link">strony internetowe →</Link>
+                </p>
 
                 <div className="mt-10 flex w-full flex-col gap-4">
                     <p style={{ margin: 0, fontSize: 14, color: 'var(--muted-2)' }}>Doświadczenie, na którym opieramy pracę</p>

@@ -6,8 +6,8 @@ import { LEGAL_NAME, POSTAL_CITY, STREET_ADDRESS, TAX_ID } from '@/lib/schema';
 const services = [
     { href: '/uslugi/audyt-e-commerce', label: 'Audyt e-commerce' },
     { href: '/uslugi/zarzadzanie-e-commerce', label: 'Zarządzanie e-commerce' },
-    { href: '/uslugi/e-commerce', label: 'Wdrożenia e-commerce' },
-    { href: '/uslugi/strony-www', label: 'Strony www' },
+    { href: '/uslugi/e-commerce', label: 'Sklepy internetowe' },
+    { href: '/uslugi/strony-www', label: 'Strony internetowe' },
     { href: '/uslugi/marketing-automation', label: 'Marketing automation' },
     { href: '/uslugi/social-media', label: 'Social media' },
 ];
@@ -42,7 +42,7 @@ export default function Footer() {
                     <div className="flex flex-col gap-3" style={{ maxWidth: 320 }}>
                         <Link href="/" aria-label="CreativeTrust — strona główna"><Wordmark /></Link>
                         <p className="ct-body ct-footer-lead" style={{ fontSize: 13 }}>
-                            Audyt i zarządzanie e-commerce z zewnątrz. Rekomendacje wdraża ten sam zespół.
+                            Audytujemy i prowadzimy e-commerce z zewnątrz. Projektujemy i budujemy sklepy oraz strony internetowe.
                         </p>
                         <TrustpilotReviewCollector />
                     </div>

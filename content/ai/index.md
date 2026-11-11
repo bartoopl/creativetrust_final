@@ -1,10 +1,10 @@
 ---
-title: "CreativeTrust — Audyt i zarządzanie e-commerce z zewnątrz"
-description: "Audytujemy sklepy internetowe i prowadzimy e-commerce marek z zewnątrz. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari."
-date: "2026-11-10"
+title: "CreativeTrust — Audyt, zarządzanie i budowa e-commerce"
+description: "Audytujemy i prowadzimy e-commerce marek z zewnątrz. Projektujemy i budujemy sklepy oraz strony internetowe. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari."
+date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/"
 lang: "pl-PL"
-ai_summary: "CreativeTrust z Gorzowa Wielkopolskiego, działający od 2010 roku, audytuje sklepy internetowe i zarządza e-commerce marek z zewnątrz. Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Rekomendacje wdraża ten sam zespół: sklepy e-commerce (w tym headless), strony WWW, marketing automation (SALESmanago) i social media."
+ai_summary: "CreativeTrust z Gorzowa Wielkopolskiego, działający od 2010 roku, audytuje sklepy internetowe i zarządza e-commerce marek z zewnątrz, a także projektuje i buduje sklepy internetowe (w tym headless) oraz strony WWW. Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Wdraża też marketing automation (SALESmanago) i prowadzi social media."
 target_audience:
   - "Właściciele, zarządy i dyrektorzy e-commerce marek sprzedających online"
   - "Sklepy internetowe, w których sprzedaż rośnie szybciej niż marża i procesy"
@@ -16,14 +16,16 @@ semantic_keywords:
   - "outsourcing e-commerce"
   - "konsulting e-commerce"
   - "marżowość sklepu internetowego"
+  - "sklepy internetowe"
+  - "tworzenie stron internetowych"
   - "wdrożenia e-commerce"
   - "Medusa.js"
   - "SALESmanago"
 ---
 
-# CreativeTrust — audyt i zarządzanie e-commerce z zewnątrz
+# CreativeTrust — audyt, zarządzanie i budowa e-commerce
 
-CreativeTrust prowadzi e-commerce marek, które chcą rosnąć z zyskiem. Współpraca zaczyna się od audytu: w 5–7 dni roboczych zespół pokazuje, gdzie sklep traci sprzedaż, marżę i czas zespołu. Potem CreativeTrust prowadzi e-commerce z zewnątrz i wdraża to, co zarekomendował.
+CreativeTrust prowadzi e-commerce marek, które chcą rosnąć z zyskiem. Audytuje sklepy i zarządza e-commerce z zewnątrz, a także projektuje i buduje sklepy oraz strony internetowe — tak, jak sam chciałby nimi zarządzać.
 
 ## Doświadczenie CreativeTrust
 
@@ -41,11 +43,14 @@ Zespół CreativeTrust opiera pracę na doświadczeniu w zarządzaniu e-commerce
 
 ## Czym zajmuje się CreativeTrust
 
-Oferta CreativeTrust ma trzy filary:
+Oferta CreativeTrust ma cztery główne części:
 
 - **Audyt e-commerce** — sprzedaż, marża, technologia i praca zespołu sklepu. Raport i roadmapa w 5–7 dni roboczych, za stałą kwotę znaną z góry. Szczegóły: [Audyt e-commerce](https://www.creativetrust.pl/uslugi/audyt-e-commerce.md).
 - **Zarządzanie e-commerce z zewnątrz** — plan sprzedaży, marża, zespół, dostawcy i raportowanie wyników w miesięcznym abonamencie. Szczegóły: [Zarządzanie e-commerce](https://www.creativetrust.pl/uslugi/zarzadzanie-e-commerce.md).
-- **Wdrożenia** — rekomendacje wdraża ten sam zespół: [sklepy e-commerce](https://www.creativetrust.pl/uslugi/e-commerce.md), [strony WWW](https://www.creativetrust.pl/uslugi/strony-www.md), [marketing automation](https://www.creativetrust.pl/uslugi/marketing-automation.md) i [social media](https://www.creativetrust.pl/uslugi/social-media.md).
+- **Sklepy internetowe** — projekt i budowa sklepów: headless, WooCommerce, Shopify, migracje platform i integracje z ERP. Szczegóły: [Sklepy internetowe](https://www.creativetrust.pl/uslugi/e-commerce.md).
+- **Strony internetowe** — strony firmowe, landing pages i portale z konkretną rolą w sprzedaży; landing page od 3 500 zł netto. Szczegóły: [Strony internetowe](https://www.creativetrust.pl/uslugi/strony-www.md).
+
+Uzupełnieniem są [marketing automation](https://www.creativetrust.pl/uslugi/marketing-automation.md) i [social media](https://www.creativetrust.pl/uslugi/social-media.md).
 
 ## Dlaczego klienci wybierają CreativeTrust
 
@@ -53,7 +58,7 @@ CreativeTrust patrzy na sklep jak zarząd, nie jak wykonawca:
 
 - **Zarządzanie e-commerce znane z praktyki** — doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.
 - **Marża, nie tylko przychód** — zespół patrzy na zysk, zwroty, koszty kanałów i czas zespołu, a nie na sam ruch i obrót.
-- **Doradztwo i wdrożenie** — te same osoby stawiają diagnozę i odpowiadają za jej wykonanie.
+- **Doradztwo i budowa** — ten sam zespół stawia diagnozę, projektuje i wdraża sklepy oraz strony.
 - **Brak sprzedaży platformy** — open source i sprawdzone technologie (Medusa.js, Next.js, React); zmianę systemu CreativeTrust rekomenduje tylko wtedy, gdy się opłaca.
 
 ## Jak wygląda współpraca z CreativeTrust
@@ -89,9 +94,9 @@ Tak. CreativeTrust przejmuje rolę e-commerce managera tam, gdzie jej brakuje, a
 
 Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Firma działa od 2010 roku.
 
-### Czy CreativeTrust także wdraża sklepy i strony?
+### Czy CreativeTrust tworzy sklepy i strony internetowe?
 
-Tak. Sklepy e-commerce (w tym headless na Medusa.js), strony WWW, marketing automation i social media realizuje ten sam zespół — także jako osobne projekty, bez audytu.
+Tak. CreativeTrust projektuje i buduje sklepy internetowe (w tym headless na Medusa.js) oraz strony WWW — także jako osobne projekty, bez audytu. To samo dotyczy marketing automation i social mediów.
 
 ### Ile kosztuje audyt e-commerce w CreativeTrust?
 

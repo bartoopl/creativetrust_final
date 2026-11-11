@@ -7,8 +7,8 @@ import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildFaqSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Usługi | Audyt, zarządzanie i wdrożenia e-commerce',
-    description: 'Audyt e-commerce, zarządzanie e-commerce z zewnątrz i wdrożenia: sklepy, strony WWW, marketing automation, social media. Diagnoza, odpowiedzialność za wynik i wykonanie w jednym zespole.',
+    title: 'Usługi | Audyt i zarządzanie e-commerce, sklepy i strony internetowe',
+    description: 'Audyt e-commerce, zarządzanie e-commerce z zewnątrz oraz projekt i budowa sklepów i stron internetowych. Do tego marketing automation i social media — w jednym zespole.',
     alternates: { canonical: `${SITE_URL}/uslugi` },
 };
 
@@ -18,10 +18,10 @@ const leadServices = [
 ];
 
 const services = [
-    { num: '03', title: 'Wdrożenia e-commerce', href: '/uslugi/e-commerce', description: 'Sklepy headless i migracje, które sprzedają i skalują się bez bólu.', tags: ['Headless', 'Migracje', 'Integracje'] },
-    { num: '04', title: 'Strony WWW', href: '/uslugi/strony-www', description: 'Strony i landing pages zaprojektowane pod konwersję, SEO i szybkość.', tags: ['Strony firmowe', 'Landing pages', 'Next.js'] },
-    { num: '05', title: 'Marketing Automation', href: '/uslugi/marketing-automation', description: 'Lejki, CRM i kampanie sterowane danymi i AI. Działają, kiedy śpisz.', tags: ['SALESmanago', 'Lead nurturing', 'AI'] },
-    { num: '06', title: 'Social Media', href: '/uslugi/social-media', description: 'Komunikacja pod zasięg, spójność i sprzedaż — nie tylko pod publikacje.', tags: ['Strategia', 'Content', 'Analityka'] },
+    { num: '03', title: 'Sklepy internetowe', href: '/uslugi/e-commerce', description: 'Projektujemy i budujemy sklepy: headless, WooCommerce, Shopify, migracje i integracje z ERP.', tags: ['Headless', 'Migracje', 'Integracje'] },
+    { num: '04', title: 'Strony internetowe', href: '/uslugi/strony-www', description: 'Strony firmowe, landing pages i portale z konkretną rolą w sprzedaży. Szybkie i gotowe pod SEO.', tags: ['Strony firmowe', 'Landing pages', 'Next.js'] },
+    { num: '05', title: 'Marketing Automation', href: '/uslugi/marketing-automation', description: 'SALESmanago i scenariusze, które zarabiają na bazie klientów: koszyki, rekomendacje, reaktywacja.', tags: ['SALESmanago', 'Scenariusze', 'CRM'] },
+    { num: '06', title: 'Social Media', href: '/uslugi/social-media', description: 'Content, kampanie i społeczność spięte z kalendarzem sprzedaży i ofertą.', tags: ['Strategia', 'Content', 'Kampanie'] },
 ];
 
 const landingPages = [
@@ -56,13 +56,13 @@ const process = [
     { num: '01', title: 'Rozmowa wstępna', description: '15 minut. Sprawdzamy, czy audyt ma w Twoim przypadku sens biznesowy.' },
     { num: '02', title: 'Audyt', description: 'Wywiad, analiza danych i zaplecza. Raport i roadmapa w 5–7 dni roboczych.' },
     { num: '03', title: 'Zarządzanie', description: 'Prowadzimy e-commerce z zewnątrz w miesięcznym abonamencie: plan, marża, zespół, dostawcy.' },
-    { num: '04', title: 'Wdrożenia', description: 'Zmiany z roadmapy wdraża ten sam zespół. AI skraca research i produkcję.', featured: true },
+    { num: '04', title: 'Budowa i wdrożenia', description: 'Sklepy, strony i zmiany z roadmapy realizuje ten sam zespół. AI skraca research i produkcję.', featured: true },
 ];
 
 const faq = [
     { q: 'Od czego najlepiej zacząć?', a: 'Od audytu e-commerce. W 5–7 dni roboczych pokazuje, gdzie sklep traci sprzedaż, marżę i czas zespołu, i układa priorytety na dalej.' },
     { q: 'Czy musimy zamawiać zarządzanie, żeby zrobić audyt?', a: 'Nie. Roadmapa zostaje u Was i możecie wdrażać ją samodzielnie. Jeśli zdecydujecie się na stałą współpracę, koszt audytu odliczamy w pierwszym miesiącu.' },
-    { q: 'Czy można zamówić samo wdrożenie, bez audytu?', a: 'Tak. Sklep, stronę, marketing automation czy social media realizujemy także jako osobne projekty.' },
+    { q: 'Czy można zamówić sam sklep albo stronę, bez audytu?', a: 'Tak. Sklepy i strony internetowe projektujemy i budujemy także jako osobne projekty. To samo dotyczy marketing automation i social mediów.' },
     { q: 'Jak wygląda rola AI w projektach?', a: 'AI przyspiesza research, generowanie wariantów, development i optymalizację. Decyzje zostają po stronie ludzi — wiemy, kiedy i gdzie AI realnie pomaga.' },
 ];
 
@@ -74,13 +74,13 @@ export default function ServicesPage() {
             <SchemaScript schema={faqSchema} />
             <PageHero
                 eyebrow="Usługi"
-                title="Diagnoza, zarządzanie, wdrożenie."
-                description="Audytujemy sklepy internetowe, prowadzimy e-commerce marek z zewnątrz i wdrażamy to, co rekomendujemy — bez przekazywania pałeczki między agencjami."
+                title="Audytujemy, prowadzimy i budujemy e‑commerce."
+                description="Audytujemy sklepy internetowe i prowadzimy e-commerce marek z zewnątrz. Projektujemy też i budujemy sklepy oraz strony internetowe — jako osobne projekty albo wykonanie roadmapy z audytu."
                 cta={{ label: 'Zamów audyt e-commerce', href: '/uslugi/audyt-e-commerce#formularz' }}
                 ctaSecondary={{ label: 'Zobacz zakres usług', href: '#zakres' }}
                 right={
                     <div className="ct-grid-lines grid-cols-2" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-                        {[['Pierwszy krok', 'Audyt e-commerce w 5–7 dni roboczych'], ['Stała współpraca', 'Zarządzanie e-commerce z zewnątrz'], ['Wykonanie', 'Wdrożenia tym samym zespołem'], ['Doświadczenie', '5.10.15, Quiosque, Grupa Kapitałowa Monnari']].map(([label, val]) => (
+                        {[['Pierwszy krok', 'Audyt e-commerce w 5–7 dni roboczych'], ['Stała współpraca', 'Zarządzanie e-commerce z zewnątrz'], ['Budowa', 'Sklepy i strony internetowe'], ['Doświadczenie', '5.10.15, Quiosque, Grupa Kapitałowa Monnari']].map(([label, val]) => (
                             <div key={label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
                                 <span className="ct-meta">{label}</span>
                                 <span style={{ fontSize: 15, fontWeight: 500, lineHeight: 1.5 }}>{val}</span>
@@ -108,7 +108,7 @@ export default function ServicesPage() {
                 </div>
             </Section>
 
-            <Section id="wdrozenia" eyebrow="Wdrożenia" title="Rekomendacje wdraża ten sam zespół. Każdy moduł działa też osobno." className="scroll-mt-20">
+            <Section id="wdrozenia" eyebrow="Projektujemy i budujemy" title="Sklepy i strony internetowe — także jako osobne projekty." className="scroll-mt-20">
                 <div className="flex flex-col" style={{ border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {services.map((s, i) => (
                         <Link
@@ -133,7 +133,7 @@ export default function ServicesPage() {
                 </div>
             </Section>
 
-            <Section tint eyebrow="Konkretne potrzeby" title="Wdrożenia, o które pytacie najczęściej.">
+            <Section tint eyebrow="Konkretne potrzeby" title="Sklepy i strony, o które pytacie najczęściej.">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     {landingPages.map((page) => (
                         <Link key={page.href} href={page.href} className="ct-card-hover flex items-start justify-between gap-6 no-underline" style={{ padding: 24, background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', color: 'var(--text)' }}>

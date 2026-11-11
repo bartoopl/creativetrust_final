@@ -1,37 +1,38 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
+import { InlineCTA } from '@/components/LandingBlocks';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 
 export const metadata: Metadata = {
-    title: 'Social Media Marketing | Strategia, content, wyniki',
-    description: 'Budujemy obecność w Social Media, która sprzedaje — nie tylko buduje zasięg. Strategia, content plan, community management i analityka w jednym procesie.',
+    title: 'Social Media dla marek | Strategia, content, kampanie',
+    description: 'Prowadzimy social media marek tak, żeby pracowały na sprzedaż: strategia, content, kampanie i społeczność zaplanowane razem z kalendarzem sprzedaży i ofertą.',
     alternates: { canonical: `${SITE_URL}/uslugi/social-media` },
     openGraph: {
-        title: 'Social Media Marketing | CreativeTrust',
-        description: 'Strategia, content, analityka i wyniki. Social media jako kanał sprzedaży — nie tylko prestiżu.',
+        title: 'Social Media dla marek | CreativeTrust',
+        description: 'Strategia, content, kampanie i analityka. Social media spięte ze sprzedażą online.',
         url: `${SITE_URL}/uslugi/social-media`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
     },
 };
 
 const services = [
-    { num: '01', title: 'Strategia social media', description: 'Audyt, pozycjonowanie, harmonogram i cele — zanim pojawi się pierwszy post.' },
-    { num: '02', title: 'Content plan i produkcja', description: 'Grafiki, wideo, copywriting i reels tworzone systemowo, nie ad hoc.' },
-    { num: '03', title: 'Community management', description: 'Odpowiadamy, angażujemy i budujemy relacje z odbiorcami marki.' },
-    { num: '04', title: 'Płatne kampanie', description: 'Meta Ads, LinkedIn Ads — targetowanie, kreacje i optymalizacja pod wynik.' },
-    { num: '05', title: 'Analityka i raportowanie', description: 'Co tydzień wiesz, co działa. Decyzje oparte na danych, nie intuicji.' },
-    { num: '06', title: 'AI w produkcji contentu', description: 'Szybciej, więcej wariantów, lepsza personalizacja. AI jako narzędzie, nie zamiennik kreacji.' },
+    { num: '01', title: 'Strategia social media', description: 'Audyt, pozycjonowanie, harmonogram i cele — spięte z kalendarzem sprzedaży, zanim pojawi się pierwszy post.' },
+    { num: '02', title: 'Content plan i produkcja', description: 'Grafiki, wideo, copywriting i reels tworzone systemowo, pod premiery, sezon i promocje.' },
+    { num: '03', title: 'Community management', description: 'Odpowiadamy, angażujemy i budujemy relacje z odbiorcami marki. Pytania o produkt nie zostają bez odpowiedzi.' },
+    { num: '04', title: 'Płatne kampanie', description: 'Meta Ads, LinkedIn Ads — targetowanie, kreacje i optymalizacja pod sprzedaż i koszt pozyskania.' },
+    { num: '05', title: 'Analityka i raportowanie', description: 'Co tydzień wiesz, co działa. W raporcie jest sprzedaż i koszt, nie tylko zasięg.' },
+    { num: '06', title: 'AI w produkcji contentu', description: 'Szybciej i w większej liczbie wariantów. AI jako narzędzie, nie zamiennik kreacji.' },
 ];
 
 const platforms = ['Instagram', 'Facebook', 'LinkedIn', 'TikTok', 'YouTube', 'X (Twitter)', 'Pinterest', 'Threads'];
 
-const results = [
-    { value: '2–5×', label: 'średni wzrost zasięgu organicznego po wdrożeniu strategii' },
-    { value: '60%', label: 'wyższe zaangażowanie przy systemowym content planie' },
-    { value: '30%', label: 'niższy koszt pozyskania klienta przez płatne kampanie' },
-    { value: '15+', label: 'lat w budowaniu marek i ich komunikacji' },
+const facts = [
+    { label: 'Cel', value: 'sprzedaż i baza klientów, nie same zasięgi' },
+    { label: 'Plan', value: 'jeden kalendarz z ofertą i promocjami' },
+    { label: 'Raport', value: 'co tydzień: sprzedaż, koszt, zasięg' },
+    { label: 'Zakres', value: 'strategia, content, kampanie, społeczność' },
 ];
 
 const process = [
@@ -57,18 +58,18 @@ export default function SocialMediaPage() {
             {/* Hero */}
             <PageHero
                 eyebrow="Social Media"
-                title={<>Social media, które <span style={{ color: 'var(--accent)' }}>sprzedają.</span></>}
-                description="Budujemy obecność w mediach społecznościowych jako kanał sprzedaży i budowania marki — nie tylko jako obowiązek. Strategia, content, kampanie i analityka w jednym procesie."
-                cta={{ label: 'Umów konsultację', href: '/kontakt' }}
+                title={<>Social media spięte ze <span style={{ color: 'var(--accent)' }}>sprzedażą online.</span></>}
+                description="Prowadzimy komunikację marek tak, żeby pracowała na sklep i sprzedaż: content, kampanie i społeczność zaplanowane razem z kalendarzem sprzedaży, ofertą i bazą klientów."
+                cta={{ label: 'Umów rozmowę', href: '/kontakt' }}
             />
 
             {/* Results */}
             <Section border={false}>
                 <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-                    {results.map(r => (
-                        <div key={r.value} className="flex flex-col gap-2.5" style={{ padding: '24px 24px 28px' }}>
-                            <span style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1 }}>{r.value}</span>
-                            <span className="ct-body" style={{ fontSize: 13 }}>{r.label}</span>
+                    {facts.map(f => (
+                        <div key={f.label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
+                            <span className="ct-meta">{f.label}</span>
+                            <span style={{ fontSize: 16, fontWeight: 500, lineHeight: 1.4 }}>{f.value}</span>
                         </div>
                     ))}
                 </div>
@@ -107,6 +108,14 @@ export default function SocialMediaPage() {
                         </li>
                     ))}
                 </ol>
+            </Section>
+
+            <Section tint>
+                <InlineCTA
+                    title="Social media to jeden z kanałów sprzedaży"
+                    text="Audyt e-commerce pokazuje, które kanały realnie zarabiają i gdzie dołożenie budżetu da największy efekt."
+                    cta={{ label: 'Zobacz audyt e-commerce', href: '/uslugi/audyt-e-commerce' }}
+                />
             </Section>
 
             <CTASection />

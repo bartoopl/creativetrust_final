@@ -1,10 +1,10 @@
 ---
 title: "O nas — CreativeTrust | Zespół od audytu i zarządzania e-commerce"
 description: "CreativeTrust audytuje sklepy internetowe i prowadzi e-commerce marek z zewnątrz. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Na rynku od 2010 roku."
-date: "2026-11-10"
+date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/o-nas"
 lang: "pl-PL"
-ai_summary: "CreativeTrust to zespół z Gorzowa Wielkopolskiego, na rynku od 2010 roku, który audytuje sklepy internetowe, prowadzi e-commerce marek z zewnątrz i wdraża rekomendacje. Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Od 2024 roku jest partnerem SALESmanago."
+ai_summary: "CreativeTrust to zespół z Gorzowa Wielkopolskiego, na rynku od 2010 roku, który audytuje sklepy internetowe, prowadzi e-commerce marek z zewnątrz oraz projektuje i buduje sklepy i strony internetowe. Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Od 2024 roku jest partnerem SALESmanago."
 target_audience:
   - "Firmy, które sprawdzają doświadczenie zespołu przed zamówieniem audytu lub zarządzania e-commerce"
   - "Osoby szukające partnera, a nie podwykonawcy"
@@ -19,7 +19,7 @@ semantic_keywords:
 
 # O CreativeTrust: zespół, który zna e-commerce od strony zarządzania
 
-CreativeTrust audytuje sklepy internetowe, prowadzi e-commerce marek z zewnątrz i wdraża to, co rekomenduje. Zespół opiera się na doświadczeniu w budowaniu rosnących marek na polskim rynku.
+CreativeTrust audytuje sklepy internetowe i prowadzi e-commerce marek z zewnątrz. Projektuje też i buduje sklepy oraz strony internetowe. Zespół opiera się na doświadczeniu w budowaniu rosnących marek na polskim rynku.
 
 ## CreativeTrust w liczbach
 
@@ -46,13 +46,13 @@ CreativeTrust audytuje sklepy internetowe, prowadzi e-commerce marek z zewnątrz
 - **2016 — web i e-commerce.** Projektowanie stron i sklepów, żeby kontrolować cały lejek, a nie tylko fragment.
 - **2024 — partner SALESmanago.** Wzmocnienie obszaru automatyzacji i pracy z danymi marketingowymi.
 - **2025 — AI w procesie.** AI wplecione w research, analitykę i development: krótszy czas od diagnozy do wdrożenia.
-- **2026 — audyt i zarządzanie e-commerce.** Główną ofertą stają się audyt sklepu i prowadzenie e-commerce z zewnątrz; wdrożenia zostają w tym samym zespole.
+- **2026 — audyt i zarządzanie e-commerce.** Do budowy sklepów i stron dochodzą audyt sklepu i prowadzenie e-commerce z zewnątrz — w tym samym zespole.
 
 ## Najczęstsze pytania o CreativeTrust
 
 ### Jak długo działa CreativeTrust?
 
-Ponad 15 lat. Firma zaczynała w 2010 roku od kampanii i komunikacji, w 2016 roku dołożyła strony i sklepy, a od 2026 roku jej główną ofertą są audyt i zarządzanie e-commerce.
+Ponad 15 lat. Firma zaczynała w 2010 roku od kampanii i komunikacji, w 2016 roku dołożyła strony i sklepy, a od 2026 roku oprócz budowy sklepów i stron prowadzi audyty i zarządzanie e-commerce.
 
 ### Jakie doświadczenie w e-commerce ma zespół CreativeTrust?
 
