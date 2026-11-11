@@ -11,20 +11,19 @@ type HeadingFix = {
     style?: 'h2' | 'h3' | 'h4';
 };
 
-type InlineLink = {
-    /** The paragraph goes right before the heading with this Sanity text. */
-    beforeHeading: string;
-    href: string;
-    before: string;
-    anchor: string;
-    after: string;
-};
-
 /** Text with optional links: `['Zobacz ', { text: 'cennik', href: '/cennik' }, '.']`. */
-type Rich = string | Array<string | { text: string; href: string }>;
+type RichText = string | Array<string | { text: string; href: string }>;
 
-/** A body written in code. `toPortableText` turns it into the blocks Sanity would send. */
-type AuthoredBlock = { h2: string } | { h3: string } | { p: Rich } | { bullet: Rich } | { number: Rich };
+/** Content authored in code, turned into Portable Text by `toPortableText`. */
+type AuthoredBlock = { h2: string } | { h3: string } | { p: RichText } | { bullet: RichText } | { number: RichText };
+
+type SectionFix = {
+    /** Replaces this Sanity heading and everything up to the next heading of the same or higher rank. */
+    replace?: string;
+    /** Inserts the blocks right before the heading with this Sanity text. */
+    beforeHeading?: string;
+    blocks: AuthoredBlock[];
+};
 
 type ParagraphFix = {
     /** Paragraph text as stored in Sanity. Once an editor changes it, the fix stops applying. */
@@ -52,8 +51,13 @@ type BlogSeoConfig = {
     /** H1, when it differs from the Sanity title. */
     heading?: string;
     headings?: HeadingFix[];
-    inlineLink?: InlineLink;
-    /** Replaces the whole Sanity body; `headings`, `paragraphs`, `inlineLink` and `faq` are then ignored. */
+    /**
+     * Applied to the Sanity content, matched on its current heading text: once an editor
+     * renames the heading, the fix stops applying. An insert whose link already exists
+     * in Sanity is skipped, so it never doubles.
+     */
+    sections?: SectionFix[];
+    /** Replaces the whole Sanity body; `headings`, `sections`, `paragraphs` and `faq` are then ignored. */
     body?: AuthoredBlock[];
     paragraphs?: ParagraphFix[];
     /** Rendered as H2 + H3 questions and emitted as FAQPage JSON-LD. */
@@ -130,13 +134,118 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                 to: 'Krok 6: Testowanie i wdrożenie – uruchomienie Twojej nowej strony',
             },
         ],
-        inlineLink: {
-            beforeHeading: 'Krok 4: Optymalizacja SEO – Bądź Widoczny w Wyszukiwarkach',
-            href: '/uslugi/strony-www',
-            before: 'Chcesz przejść ten etap z zespołem? Zobacz, jak wygląda nasze ',
-            anchor: 'projektowanie stron www',
-            after: '.',
-        },
+        sections: [
+            {
+                beforeHeading: 'Krok 4: Optymalizacja SEO – Bądź Widoczny w Wyszukiwarkach',
+                blocks: [
+                    {
+                        p: [
+                            'Chcesz przejść ten etap z zespołem? Zobacz, jak wygląda nasze ',
+                            { text: 'projektowanie stron www', href: '/uslugi/strony-www' },
+                            '.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'audyt-konta-google-ads-checklista': {
+        // Keep the number in sync with the bullets of the checklist section (enforced by a test).
+        title: 'Audyt Google Ads: checklista 30 punktów krok po kroku (2026) | CreativeTrust',
+        description:
+            'Darmowa checklista audytu konta Google Ads: konwersje i tracking, struktura kampanii, wyszukiwane hasła, budżet i landing page. Sprawdź, gdzie ucieka budżet.',
+        links: [],
+        heading: 'Audyt Google Ads: checklista, która pokazuje, gdzie ucieka budżet',
+        sections: [
+            {
+                replace: 'Jak podejść do tematu krok po kroku?',
+                blocks: [
+                    { h2: 'Checklista audytu Google Ads: 30 punktów w 5 obszarach' },
+                    {
+                        p: 'Przejdź obszary w tej kolejności: najpierw dane, potem struktura, a dopiero na końcu skalowanie. Jeśli tracking jest błędny, każda kolejna rekomendacja opiera się na złych liczbach. Przy każdym punkcie zanotuj stan – OK, do poprawy albo krytyczne – żeby na końcu ułożyć priorytety według wpływu na wynik.',
+                    },
+                    { h3: 'Audyt konwersji i trackingu' },
+                    {
+                        p: 'To fundament audytu: sprawdzasz, czy algorytm Google Ads uczy się na zdarzeniach, które mają wartość dla biznesu.',
+                    },
+                    { bullet: 'konwersje primary to tylko zdarzenia biznesowe (lead, zakup), a mikrokonwersje są ustawione jako secondary' },
+                    { bullet: 'żadna konwersja nie jest liczona podwójnie, np. przez tag Google Ads i import z GA4 tego samego zdarzenia' },
+                    { bullet: 'tag działa na wszystkich formularzach i stronach podziękowania, także po ostatnich zmianach w GTM' },
+                    { bullet: 'Consent Mode v2 jest wdrożony, a konwersje rozszerzone są włączone' },
+                    { bullet: 'wartości konwersji odpowiadają realnej wartości zamówienia lub leada' },
+                    { bullet: 'liczba konwersji w Google Ads, GA4 i CRM różni się w zakresie, który umiesz wyjaśnić' },
+                    { h3: 'Struktura konta i kampanii' },
+                    { p: 'Struktura powinna odzwierciedlać intencje klientów i marże, a nie historię konta.' },
+                    { bullet: 'kampanie są podzielone według intencji: brand, produkty lub usługi, konkurencja, remarketing' },
+                    { bullet: 'ruch brandowy jest oddzielony od pozyskiwania nowych klientów, także w Performance Max' },
+                    { bullet: 'grupy reklam mają spójne tematycznie słowa kluczowe zamiast kilkudziesięciu luźnych fraz' },
+                    { bullet: 'kierowanie na lokalizację obejmuje osoby przebywające w danym obszarze, a nie tylko nim zainteresowane' },
+                    { bullet: 'kampanie w sieci wyszukiwania nie mają włączonej sieci reklamowej bez świadomej decyzji' },
+                    { bullet: 'kampanie nie konkurują ze sobą o te same zapytania' },
+                    { h3: 'Słowa kluczowe i wyszukiwane hasła' },
+                    {
+                        p: 'Raport wyszukiwanych haseł pokazuje, za co naprawdę płacisz. Często są to zupełnie inne zapytania niż słowa kluczowe na koncie.',
+                    },
+                    { bullet: 'wyszukiwane hasła z ostatnich 30–90 dni są przejrzane pod kątem przypadkowych zapytań' },
+                    { bullet: 'listy wykluczających słów kluczowych są aktualne i przypisane do właściwych kampanii' },
+                    { bullet: 'dopasowanie przybliżone działa tylko tam, gdzie są inteligentne stawki i poprawne konwersje' },
+                    { bullet: 'frazy informacyjne, rekrutacyjne i „za darmo” nie zabierają budżetu frazom zakupowym' },
+                    { bullet: 'słowa bez wyświetleń lub z niskim wynikiem jakości mają decyzję: poprawić, przenieść albo usunąć' },
+                    { bullet: 'zapytania, które konwertują, mają własne słowa kluczowe i dopasowaną reklamę' },
+                    { h3: 'Budżet i stawki' },
+                    {
+                        p: 'W tym obszarze widać, gdzie ucieka budżet: które kampanie są ograniczone, a które wydają pieniądze bez wyniku.',
+                    },
+                    { bullet: 'budżet jest rozłożony według rentowności kampanii, a nie po równo' },
+                    { bullet: 'kampanie z dobrym wynikiem nie tracą wyświetleń z powodu budżetu' },
+                    { bullet: 'strategia ustalania stawek pasuje do liczby konwersji – docelowy CPA lub ROAS potrzebuje stabilnych danych' },
+                    { bullet: 'cele CPA i ROAS wynikają z marży i wartości klienta, a nie są ustawione „na oko”' },
+                    { bullet: 'harmonogram reklam i wykluczenia urządzeń wynikają z danych o konwersjach, a nie z przyzwyczajeń' },
+                    { bullet: 'duże zmiany budżetów i celów nie przerywają co kilka dni okresu nauki strategii' },
+                    { h3: 'Reklamy i landing page' },
+                    { p: 'Nawet dobrze kierowany ruch nie skonwertuje, jeśli reklama obiecuje co innego niż strona docelowa.' },
+                    { bullet: 'każda grupa reklam ma elastyczną reklamę w wyszukiwarce ze skutecznością co najmniej „Dobra”' },
+                    { bullet: 'nagłówki zawierają frazę z zapytania i konkretną korzyść zamiast ogólników' },
+                    { bullet: 'komponenty – linki do podstron, objaśnienia, rozszerzenia informacji – są uzupełnione i aktualne' },
+                    { bullet: 'landing page odpowiada obietnicy reklamy i intencji zapytania' },
+                    { bullet: 'strona szybko ładuje się na telefonie i przechodzi Core Web Vitals' },
+                    { bullet: 'formularz działa na telefonie, nie ma zbędnych pól, a jego wysłanie rejestruje konwersję' },
+                ],
+            },
+            {
+                beforeHeading: 'Polecane kolejne kroki',
+                blocks: [
+                    { h2: 'Ile trwa i ile kosztuje audyt Google Ads?' },
+                    {
+                        p: 'Czas i cena audytu zależą od wielkości konta: liczby kampanii, typów konwersji i tego, czy w grę wchodzą Performance Max, Merchant Center i remarketing. Przegląd kilku kampanii w sieci wyszukiwania to inna praca niż audyt rozbudowanego e-commerce, dlatego wycena powinna wynikać z zakresu, a nie ze stałego cennika. Najwięcej czasu zajmuje zwykle weryfikacja trackingu, bo wymaga porównania danych z Google Ads, GA4 i CRM.',
+                    },
+                    {
+                        p: [
+                            'Co wpływa na cenę i kiedy audyt się zwraca, opisujemy w artykule ',
+                            { text: 'ile kosztuje audyt Google Ads', href: '/blog/ile-kosztuje-audyt-google-ads' },
+                            '.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'ile-kosztuje-audyt-google-ads': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Ile może kosztować audyt',
+                blocks: [
+                    {
+                        p: [
+                            'Wszystkie te obszary punkt po punkcie rozpisuje nasza ',
+                            { text: 'checklista audytu Google Ads', href: '/blog/audyt-konta-google-ads-checklista' },
+                            ': 30 rzeczy do sprawdzenia, zanim zlecisz audyt albo zrobisz go samodzielnie.',
+                        ],
+                    },
+                ],
+            },
+        ],
     },
     // WEW-18: the page for „co to jest ssl”. /baza-wiedzy/ssl is the short glossary entry and links here.
     'ssl-co-to-jest-i-czy-jest-potrzebne-4-powody-dla-ktorych-powinienes-go-wlaczyc': {
@@ -279,6 +388,21 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
         description:
             'Kampanie Google Ads dla firm B2B krok po kroku: dobór słów kluczowych, formularze, CRM i kwalifikacja leadów. Sprawdź, jak obniżyć koszt pozyskania klienta.',
         links: [],
+        // WEW-15: link back to the checklist.
+        sections: [
+            {
+                beforeHeading: 'Jak mierzyć efekt?',
+                blocks: [
+                    {
+                        p: [
+                            'Gdy kampania B2B już działa, ale leady nie przechodzą do sprzedaży, nie zwiększaj budżetu na ślepo. Najpierw zrób ',
+                            { text: 'audyt konta Google Ads', href: '/blog/audyt-konta-google-ads-checklista' },
+                            ': sprawdź konwersje, wyszukiwane hasła i wykluczenia.',
+                        ],
+                    },
+                ],
+            },
+        ],
         paragraphs: [
             {
                 from: 'Google Ads dla B2B działa najlepiej, gdy kampanie są budowane wokół intencji zakupowej, a nie samego wolumenu wyszukiwań. Najważniejsze są dobrze rozdzielone słowa kluczowe, precyzyjne wykluczenia, landing page odpowiadający na obiekcje decydenta oraz pomiar jakości leadów w CRM. Bez informacji, które zapytania stają się realnymi rozmowami sprzedażowymi, kampania będzie optymalizować się pod ilość formularzy, a nie pod przychód.',
@@ -368,42 +492,43 @@ function fixHeading(block: PortableBlock, fixes: HeadingFix[]): PortableBlock {
     return { ...block, style: fix.style ?? block.style, children: [{ ...first, text: fix.to, marks: [] }] };
 }
 
-function linkParagraph({ href, before, anchor, after }: InlineLink): PortableBlock {
-    const span = (key: string, text: string, marks: string[] = []) => ({ _type: 'span', _key: key, text, marks });
+const headingRank = (block: PortableBlock) => Number(block.style?.slice(1));
 
-    return {
-        _type: 'block',
-        _key: 'seo-inline-link',
-        style: 'normal',
-        markDefs: [{ _type: 'link', _key: 'seo-inline-link-mark', href }],
-        children: [span('seo-inline-link-0', before), span('seo-inline-link-1', anchor, ['seo-inline-link-mark']), span('seo-inline-link-2', after)],
-    };
-}
-
-function insertInlineLink(content: PortableBlock[], link: InlineLink): PortableBlock[] {
-    const alreadyLinked = content.some((block) => block.markDefs?.some(({ href }) => href === link.href));
-    const index = content.findIndex((block) => isHeading(block) && blockText(block) === link.beforeHeading);
-    if (alreadyLinked || index < 0) return content;
-
-    return [...content.slice(0, index), linkParagraph(link), ...content.slice(index)];
-}
-
-const styles = { h2: 'h2', h3: 'h3', p: 'normal', bullet: 'normal', number: 'normal' } as const;
-
-/** Portable Text needs stable keys; the position in the body is enough for static content. */
-function toPortableText(body: AuthoredBlock[]): PortableBlock[] {
-    return body.map((authored, index) => {
-        const [kind, value] = Object.entries(authored)[0] as [keyof typeof styles, Rich];
-        const markDefs: Array<{ _type: 'link'; _key: string; href: string }> = [];
-        const children = (typeof value === 'string' ? [value] : value).map((part, spanIndex) => {
-            const key = `seo-${index}-${spanIndex}`;
-            if (typeof part === 'string') return { _type: 'span', _key: key, text: part, marks: [] };
-            markDefs.push({ _type: 'link', _key: `${key}-link`, href: part.href });
-            return { _type: 'span', _key: key, text: part.text, marks: [`${key}-link`] };
+function toPortableText(blocks: AuthoredBlock[], keyPrefix: string): PortableBlock[] {
+    return blocks.map((authored, index) => {
+        const key = `${keyPrefix}-${index}`;
+        const [style, value] = Object.entries(authored)[0] as ['h2' | 'h3' | 'p' | 'bullet' | 'number', RichText];
+        const parts = typeof value === 'string' ? [value] : value;
+        const markDefs: Array<{ _type: string; _key: string; href: string }> = [];
+        const children = parts.map((part, partIndex) => {
+            const spanKey = `${key}-${partIndex}`;
+            if (typeof part === 'string') return { _type: 'span', _key: spanKey, text: part, marks: [] };
+            markDefs.push({ _type: 'link', _key: `${spanKey}-link`, href: part.href });
+            return { _type: 'span', _key: spanKey, text: part.text, marks: [`${spanKey}-link`] };
         });
-        const list = kind === 'bullet' || kind === 'number' ? { listItem: kind, level: 1 } : {};
-        return { _type: 'block', _key: `seo-${index}`, style: styles[kind], ...list, markDefs, children };
+        const list = style === 'bullet' || style === 'number' ? { listItem: style, level: 1 } : {};
+
+        return { _type: 'block', _key: key, style: style === 'h2' || style === 'h3' ? style : 'normal', ...list, markDefs, children };
     });
+}
+
+const linkedHrefs = (blocks: PortableBlock[]) => new Set(blocks.flatMap((block) => block.markDefs?.map(({ href }) => href) ?? []));
+
+function applySection(content: PortableBlock[], fix: SectionFix, keyPrefix: string): PortableBlock[] {
+    const anchorText = fix.replace ?? fix.beforeHeading;
+    const start = content.findIndex((block) => isHeading(block) && blockText(block) === anchorText);
+    if (start < 0) return content;
+
+    const blocks = toPortableText(fix.blocks, keyPrefix);
+    if (fix.replace) {
+        const rank = headingRank(content[start]);
+        const next = content.findIndex((block, index) => index > start && isHeading(block) && headingRank(block) <= rank);
+        return [...content.slice(0, start), ...blocks, ...content.slice(next < 0 ? content.length : next)];
+    }
+
+    const existing = linkedHrefs(content);
+    if ([...linkedHrefs(blocks)].some((href) => existing.has(href))) return content;
+    return [...content.slice(0, start), ...blocks, ...content.slice(start)];
 }
 
 function fixParagraph(block: PortableBlock, fixes: ParagraphFix[]): PortableBlock {
@@ -446,15 +571,17 @@ export function applyBlogPostFixes<T extends BlogPostFields>(slug: string, post:
     const config = blogSeoConfig[slug];
     if (!post || !config) return post;
 
-    const { title, description, heading, headings = [], paragraphs = [], inlineLink, faq, body } = config;
-    const linked = post.content && inlineLink ? insertInlineLink(post.content, inlineLink) : post.content;
-    const withFaq = linked && faq ? insertFaq(linked, faq) : linked;
+    const { title, description, heading, headings = [], sections = [], paragraphs = [], faq, body } = config;
+    const fixed = post.content
+        ? sections.reduce((content, fix, index) => applySection(content, fix, `seo-${index}`), post.content)
+        : post.content;
+    const withFaq = fixed && faq ? insertFaq(fixed, faq) : fixed;
 
     return {
         ...post,
         title: heading ?? post.title,
         seoTitle: title ?? post.seoTitle,
         seoDescription: description ?? post.seoDescription,
-        content: body ? toPortableText(body) : withFaq?.map((block) => fixParagraph(fixHeading(block, headings), paragraphs)),
+        content: body ? toPortableText(body, 'seo') : withFaq?.map((block) => fixParagraph(fixHeading(block, headings), paragraphs)),
     };
 }
