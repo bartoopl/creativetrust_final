@@ -2,6 +2,7 @@ import { createClient } from 'next-sanity';
 import { createImageUrlBuilder } from '@sanity/image-url';
 import { applyBlogPostFixes } from './blog-seo';
 import { applyKnowledgeBaseSeo } from './knowledge-base-seo';
+import { rewriteRetiredLinks } from './retired-links';
 
 export const client = createClient({
     projectId: '8mtbrwl1', // Zastąp ID projektu z sanity.json
@@ -265,7 +266,9 @@ export async function getBlogPost(slug: string) {
     }
   `, { slug });
 
-    return applyBlogPostFixes(slug, post);
+    // Bodies imported by scripts/import-*.cjs link to retired service pages; point them at the live ones.
+    const linked = post?.content ? { ...post, content: rewriteRetiredLinks(post.content) } : post;
+    return applyBlogPostFixes(slug, linked);
 }
 
 // Funkcja pobierająca wpisy bloga według kategorii

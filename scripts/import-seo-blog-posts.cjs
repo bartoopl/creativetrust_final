@@ -47,8 +47,8 @@ const articles = [
     ],
     links: [
       ['audyt Google Ads', '/uslugi/audyt-google-ads'],
-      ['prowadzenie kampanii Google Ads', '/uslugi/performance-marketing/google-ads'],
-      ['performance marketing', '/uslugi/performance-marketing'],
+      ['prowadzenie kampanii Google Ads', '/uslugi/audyt-google-ads'],
+      ['performance marketing', '/uslugi'],
     ],
   },
   {
@@ -75,7 +75,7 @@ const articles = [
     ],
     links: [
       ['audyt konta Google Ads', '/uslugi/audyt-google-ads'],
-      ['kampanie Google Ads', '/uslugi/performance-marketing/google-ads'],
+      ['kampanie Google Ads', '/uslugi/audyt-google-ads'],
       ['landing page pod kampanie', '/uslugi/tworzenie-stron-www-cennik'],
     ],
   },
@@ -103,7 +103,7 @@ const articles = [
     ],
     links: [
       ['audyt Google Ads', '/uslugi/audyt-google-ads'],
-      ['performance marketing', '/uslugi/performance-marketing'],
+      ['performance marketing', '/uslugi'],
       ['e-commerce', '/uslugi/e-commerce'],
     ],
   },
@@ -131,7 +131,7 @@ const articles = [
     ],
     links: [
       ['audyt Google Ads', '/uslugi/audyt-google-ads'],
-      ['kampanie Google Ads', '/uslugi/performance-marketing/google-ads'],
+      ['kampanie Google Ads', '/uslugi/audyt-google-ads'],
       ['formularz na landing page', '/uslugi/tworzenie-stron-www-cennik'],
     ],
   },
@@ -188,7 +188,7 @@ const articles = [
     links: [
       ['tworzenie stron WWW', '/uslugi/strony-www'],
       ['cennik stron WWW', '/uslugi/tworzenie-stron-www-cennik'],
-      ['performance marketing', '/uslugi/performance-marketing'],
+      ['performance marketing', '/uslugi'],
     ],
   },
   {
@@ -215,7 +215,7 @@ const articles = [
     ],
     links: [
       ['audyt Google Ads', '/uslugi/audyt-google-ads'],
-      ['kampanie Google Ads', '/uslugi/performance-marketing/google-ads'],
+      ['kampanie Google Ads', '/uslugi/audyt-google-ads'],
       ['tworzenie stron internetowych', '/uslugi/strony-www'],
     ],
   },

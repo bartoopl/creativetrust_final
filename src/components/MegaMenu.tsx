@@ -14,7 +14,7 @@ const copy = {
         body: 'Audyt pokazuje, co hamuje sprzedaż i marżę. Sklepy i strony internetowe budujemy także jako osobne projekty.',
         all: { href: '/uslugi', label: 'Wszystkie usługi →' },
         contact: { href: '/uslugi/audyt-e-commerce#formularz', label: 'Zamów audyt →' },
-        landings: 'Sklepy i strony: konkretne potrzeby',
+        landings: 'Konkretne potrzeby',
     },
     en: {
         close: 'Close menu',

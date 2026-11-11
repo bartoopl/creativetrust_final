@@ -2,6 +2,7 @@ import type { NextConfig } from 'next';
 // Blog posts replaced by a current page (301 here, left out of llms.txt and the
 // sitemap): AI answers quote outdated 2023 prices and trends.
 import retiredBlogPosts from './retired-blog-posts.json';
+import { RETIRED_SERVICE_PAGES } from './src/lib/retired-links';
 
 const nextConfig: NextConfig = {
     poweredByHeader: false,
@@ -20,26 +21,8 @@ const nextConfig: NextConfig = {
     experimental: { globalNotFound: true },
     async redirects() {
         return [
-            {
-                source: '/uslugi/performance-marketing',
-                destination: '/uslugi',
-                permanent: true,
-            },
-            {
-                source: '/uslugi/performance-marketing/google-ads',
-                destination: '/uslugi',
-                permanent: true,
-            },
-            {
-                source: '/uslugi/performance-marketing/meta-ads',
-                destination: '/uslugi',
-                permanent: true,
-            },
-            {
-                source: '/uslugi/audyt-google-ads',
-                destination: '/uslugi',
-                permanent: true,
-            },
+            // Retired service pages → the closest live page (the same map rewrites post bodies).
+            ...Object.entries(RETIRED_SERVICE_PAGES).map(([source, destination]) => ({ source, destination, permanent: true })),
             // „Konsulting e-commerce” became the e-commerce audit (HTML and Markdown twin).
             {
                 source: '/uslugi/konsulting-e-commerce',
