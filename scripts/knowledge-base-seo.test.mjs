@@ -32,7 +32,7 @@ test('cps carries the H1, H2s, links and meta description from WEW-12', () => {
 });
 
 test('overridden copy respects the 160-character limits of the Sanity schema', () => {
-    for (const slug of ['sales-manago', 'cps']) {
+    for (const slug of ['sales-manago', 'cps', 'ssl']) {
         const entry = applyKnowledgeBaseSeo(slug, sanityEntry);
         assert.ok(entry.seoDescription.length <= 160, `${slug} seoDescription: ${entry.seoDescription.length}`);
         assert.ok(entry.shortDescription.length <= 160, `${slug} shortDescription: ${entry.shortDescription.length}`);
@@ -54,7 +54,7 @@ test('other slugs and missing entries pass through untouched', () => {
 });
 
 test('override content is valid Portable Text for the Markdown twin', () => {
-    for (const slug of ['sales-manago', 'cps']) {
+    for (const slug of ['sales-manago', 'cps', 'ssl']) {
         const { content } = applyKnowledgeBaseSeo(slug, sanityEntry);
         assert.equal(new Set(content.map((block) => block._key)).size, content.length);
         for (const block of content) {
@@ -66,4 +66,27 @@ test('override content is valid Portable Text for the Markdown twin', () => {
         assert.match(markdown, /^## /m);
         assert.match(markdown, /\]\(\//);
     }
+});
+
+test('ssl is a short glossary entry with H2s and a link to the WEW-18 article', () => {
+    const entry = applyKnowledgeBaseSeo('ssl', sanityEntry);
+    assert.equal(entry.title, 'Nazwa', 'the A–Z list keeps the Sanity name');
+    assert.equal(entry.headline, 'SSL (Secure Sockets Layer) – definicja');
+    assert.deepEqual(headings(entry, 'h2'), ['Do czego służy SSL', 'SSL a TLS', 'Więcej o SSL']);
+    assert.match(text(entry.content[0]), /^SSL \(Secure Sockets Layer\) to /);
+
+    const more = entry.content.find((block) => text(block).startsWith('Więcej: co to jest SSL i czy jest potrzebny'));
+    assert.ok(more, 'the „Więcej: …” link paragraph');
+    assert.deepEqual(
+        more.markDefs.map((def) => def.href),
+        ['/blog/ssl-co-to-jest-i-czy-jest-potrzebne-4-powody-dla-ktorych-powinienes-go-wlaczyc'],
+    );
+});
+
+test('ssl stops competing with the article for „co to jest ssl”', () => {
+    const entry = applyKnowledgeBaseSeo('ssl', sanityEntry);
+    assert.doesNotMatch(entry.seoTitle, /co to jest/i);
+    assert.ok(entry.seoTitle.length + ' | CreativeTrust'.length <= 70, entry.seoTitle);
+    const words = entry.content.flatMap((block) => text(block).split(/\s+/)).length;
+    assert.ok(words < 200, `a glossary definition, not a second article: ${words} words`);
 });

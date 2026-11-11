@@ -228,3 +228,143 @@ test('section fixes yield to CMS edits', () => {
     linked.content[2].markDefs = [{ _type: 'link', _key: 'm', href: '/blog/audyt-konta-google-ads-checklista' }];
     assert.equal(applyBlogPostFixes(COST, linked).content.length, linked.content.length, 'no doubled back-link');
 });
+
+// WEW-18. H2s of the article as it stands in Sanity (blogPost db20f2fc-91f1-400f-a94f-e151a9b96d1a).
+const SSL = 'ssl-co-to-jest-i-czy-jest-potrzebne-4-powody-dla-ktorych-powinienes-go-wlaczyc';
+const SANITY_SSL_H2 = ['Wstęp', 'Definicja SSL', 'Jak działa SSL?', 'Certyfikaty SSL', 'Korzyści z zastosowania SSL', 'Czy SSL jest potrzebne?', 'Podsumowanie'];
+const sanitySsl = () => ({
+    title: 'SSL – co to jest i czy jest potrzebne? 4 powody dla których powinieneś go włączyć.',
+    seoTitle: 'SSL – co to jest i dlaczego jest niezbędny dla bezpieczeństwa strony?',
+    seoDescription: 'SSL to kluczowy protokół szyfrowania chroniący dane przesyłane w Internecie.',
+    content: SANITY_SSL_H2.flatMap((heading) => [block('h2', heading), block('normal', `Treść: ${heading}`)]),
+});
+
+test('the SSL article carries the WEW-18 title, meta description and H1', () => {
+    const post = applyBlogPostFixes(SSL, sanitySsl());
+    assert.equal(post.seoTitle, 'Co to jest SSL? Jak działa certyfikat SSL i czy jest potrzebny | CreativeTrust');
+    assert.equal(
+        post.seoDescription,
+        'SSL to certyfikat szyfrujący połączenie ze stroną (kłódka i https). Wyjaśniamy prosto, jak działa, jakie są rodzaje SSL i jak wpływa na SEO.',
+    );
+    assert.equal(post.title, 'Co to jest SSL i czy jest potrzebny? 4 powody, by go włączyć');
+    assert.equal(getBlogSeoConfig(SSL).title, post.seoTitle, 'rendered as absolute, without a second suffix');
+});
+
+test('the SSL article opens with a „SSL to…” definition', () => {
+    const [first] = applyBlogPostFixes(SSL, sanitySsl()).content;
+    assert.equal(first.style, 'normal');
+    assert.match(text(first), /^SSL to [^.]{20,200}\.$/);
+});
+
+test('the SSL article adds the four H2s from the ticket and keeps „Jak działa SSL?”', () => {
+    const h2 = headings(applyBlogPostFixes(SSL, sanitySsl()).content, 'h2');
+    for (const heading of ['Jak działa SSL?', 'Rodzaje certyfikatów SSL (DV, OV, EV)', 'SSL a SEO', 'FAQ']) {
+        assert.ok(h2.includes(heading), heading);
+    }
+    const added = h2.filter((heading) => !SANITY_SSL_H2.includes(heading));
+    assert.ok(added.length >= 4, added.join(' | '));
+});
+
+test('the four reasons and the FAQ questions are H3s', () => {
+    const h3 = headings(applyBlogPostFixes(SSL, sanitySsl()).content, 'h3');
+    assert.deepEqual(h3.filter((heading) => /^\d\. /.test(heading)).map((heading) => heading[0]), ['1', '2', '3', '4']);
+    assert.ok(h3.filter((heading) => heading.endsWith('?')).length >= 4);
+});
+
+test('the SSL article links to the glossary entry and replaces the Sanity body', () => {
+    const { content } = applyBlogPostFixes(SSL, sanitySsl());
+    const markdown = portableTextToMarkdown(content);
+    assert.match(markdown, /\]\(\/baza-wiedzy\/ssl\)/);
+    assert.match(markdown, /^## FAQ$/m);
+    assert.match(markdown, /^1\. /m);
+    assert.ok(!content.some((b) => text(b).startsWith('Treść: ')), 'no Sanity paragraph is left over');
+    assert.equal(new Set(content.map((b) => b._key)).size, content.length);
+    for (const b of content) {
+        assert.deepEqual(b.children.flatMap((child) => child.marks).sort(), b.markDefs.map((def) => def._key).sort());
+    }
+});
+
+const B2B_SHORT_ANSWER =
+    'Google Ads dla B2B działa najlepiej, gdy kampanie są budowane wokół intencji zakupowej, a nie samego wolumenu wyszukiwań. Najważniejsze są dobrze rozdzielone słowa kluczowe, precyzyjne wykluczenia, landing page odpowiadający na obiekcje decydenta oraz pomiar jakości leadów w CRM. Bez informacji, które zapytania stają się realnymi rozmowami sprzedażowymi, kampania będzie optymalizować się pod ilość formularzy, a nie pod przychód.';
+
+// Structure as imported by scripts/import-geo-seo-blog-posts-2026.cjs.
+const sanityB2b = () => ({
+    title: 'Google Ads dla B2B: jak zbierać leady, które mają szansę przejść do sprzedaży?',
+    seoTitle: 'Google Ads dla B2B: leady, tracking i kwalifikacja',
+    seoDescription: 'Jak prowadzić Google Ads dla B2B: intencja słów kluczowych, formularze, CRM, kwalifikacja leadów i optymalizacja kampanii.',
+    content: [
+        block('h2', 'Krótka odpowiedź'),
+        block('normal', B2B_SHORT_ANSWER),
+        block('h2', 'Checklist przed wdrożeniem'),
+        block('h2', 'Polecane kolejne kroki'),
+        block('normal', 'Jeśli chcesz przejść od strategii do wdrożenia, zobacz: ...'),
+    ],
+});
+
+test('the B2B post uses the WEW-14 title and description verbatim', () => {
+    const post = applyBlogPostFixes(B2B, sanityB2b());
+    assert.equal(post.seoTitle, 'Google Ads dla B2B: jak pozyskać leady sprzedażowe? Poradnik 2026 | CreativeTrust');
+    assert.equal(
+        post.seoDescription,
+        'Kampanie Google Ads dla firm B2B krok po kroku: dobór słów kluczowych, formularze, CRM i kwalifikacja leadów. Sprawdź, jak obniżyć koszt pozyskania klienta.',
+    );
+    assert.ok([...post.seoDescription].length <= 160);
+    assert.equal(post.title, sanityB2b().title, 'H1 stays as in Sanity');
+});
+
+test('the short answer names Google Ads dla usług B2B and AdWords B2B', () => {
+    const { content } = applyBlogPostFixes(B2B, sanityB2b());
+    const answer = text(content[1]);
+    assert.ok(answer.startsWith('Google Ads dla usług B2B'), answer);
+    assert.match(answer, /AdWords B2B/);
+    assert.ok(answer.endsWith('a nie pod przychód.'));
+});
+
+test('the FAQ is an H2 with H3 questions right before the closing links', () => {
+    const { content } = applyBlogPostFixes(B2B, sanityB2b());
+    const faq = content.findIndex((b) => text(b) === 'FAQ: Google Ads w B2B');
+    assert.equal(content[faq].style, 'h2');
+    const questions = getBlogSeoConfig(B2B).faq.items;
+    assert.ok(questions.length >= 3 && questions.length <= 4);
+    questions.forEach(({ question, answer }, i) => {
+        assert.equal(content[faq + 1 + i * 2].style, 'h3');
+        assert.equal(text(content[faq + 1 + i * 2]), question);
+        assert.equal(text(content[faq + 2 + i * 2]), answer);
+    });
+    assert.equal(text(content[faq + 1 + questions.length * 2]), 'Polecane kolejne kroki');
+    assert.ok(questions.some(({ question }) => question === 'Ile kosztuje Google Ads dla B2B?'));
+    assert.ok(questions.some(({ question }) => question === 'Czy Google Ads działa w B2B?'));
+    const keys = content.map((b) => b._key);
+    assert.equal(new Set(keys).size, keys.length, 'unique block keys');
+    assert.match(portableTextToMarkdown(content), /## FAQ: Google Ads w B2B\n\n### Ile kosztuje Google Ads dla B2B\?/);
+});
+
+test('the FAQ is appended when the closing heading is gone, and never doubled', () => {
+    const post = sanityB2b();
+    post.content = post.content.slice(0, 3);
+    const appended = applyBlogPostFixes(B2B, post).content;
+    assert.equal(text(appended[3]), 'FAQ: Google Ads w B2B');
+
+    const withFaq = sanityB2b();
+    withFaq.content.push(block('h2', 'FAQ: Google Ads w B2B'));
+    const { content } = applyBlogPostFixes(B2B, withFaq);
+    assert.equal(content.filter((b) => text(b) === 'FAQ: Google Ads w B2B').length, 1);
+});
+
+test('the short answer rewrite yields to CMS edits', () => {
+    const post = sanityB2b();
+    post.content[1] = block('normal', 'Nowa krótka odpowiedź od redakcji.');
+    assert.equal(text(applyBlogPostFixes(B2B, post).content[1]), 'Nowa krótka odpowiedź od redakcji.');
+});
+
+test('the B2B FAQPage JSON-LD mirrors the rendered questions and answers', async () => {
+    const { buildFaqSchema } = await import('../src/lib/schema.ts');
+    const { content } = applyBlogPostFixes(B2B, sanityB2b());
+    const schema = buildFaqSchema(getBlogSeoConfig(B2B).faq.items);
+    assert.equal(schema['@type'], 'FAQPage');
+    for (const { name, acceptedAnswer } of schema.mainEntity) {
+        const q = content.findIndex((b) => b.style === 'h3' && text(b) === name);
+        assert.ok(q > 0, name);
+        assert.equal(text(content[q + 1]), acceptedAnswer.text);
+    }
+});

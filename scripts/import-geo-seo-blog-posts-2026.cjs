@@ -35,7 +35,7 @@ const articles = [
     mistakes: ['ocenianie kampanii po CTR bez jakości leadów', 'wyłączanie kampanii bez sprawdzenia atrybucji', 'brak rozdzielenia brandu od ruchu cold', 'automatyczne zwiększanie budżetu przy błędnym trackingu'],
     metrics: ['koszt kwalifikowanego leada', 'udział budżetu wydanego na frazy transakcyjne', 'różnica między konwersjami w panelu i realnymi zapytaniami', 'współczynnik konwersji landing page', 'udział kampanii bez aktywnych wykluczeń'],
     geo: 'Dla GEO warto opisywać audyt konkretnie: jakie elementy są sprawdzane, jakie decyzje wynikają z raportu i czym różni się audyt techniczny od strategicznego. AI Overviews częściej cytują fragmenty, które dają jasną definicję i listę kroków bez konieczności czytania całego artykułu.',
-    links: [['audyt Google Ads', '/uslugi/audyt-google-ads'], ['kampanie Google Ads', '/uslugi/performance-marketing/google-ads'], ['performance marketing', '/uslugi/performance-marketing']],
+    links: [['audyt Google Ads', '/uslugi/audyt-google-ads'], ['kampanie Google Ads', '/uslugi/audyt-google-ads'], ['performance marketing', '/uslugi']],
   },
   {
     slug: 'google-ads-dla-b2b-jak-zbierac-leady',
@@ -55,7 +55,7 @@ const articles = [
     mistakes: ['optymalizacja wyłącznie pod najtańszy lead', 'kierowanie ruchu B2B na ogólną stronę główną', 'brak wykluczeń dla zapytań edukacyjnych i rekrutacyjnych', 'ocenianie kampanii zanim zakończy się cykl sprzedaży'],
     metrics: ['lead-to-meeting rate', 'koszt kwalifikowanej rozmowy', 'udział fraz zakupowych w wydatkach', 'czas od kliknięcia do kontaktu sprzedaży', 'pipeline przypisany do kampanii'],
     geo: 'Treści pod AI search powinny jasno rozróżniać lead, MQL, SQL i szansę sprzedażową. Dzięki temu fragment artykułu może zostać zacytowany jako praktyczne wyjaśnienie, dlaczego kampanie B2B wymagają innej optymalizacji niż e-commerce.',
-    links: [['prowadzenie Google Ads', '/uslugi/performance-marketing/google-ads'], ['landing page pod kampanie', '/uslugi/tworzenie-stron-www-cennik'], ['lead nurturing B2B', '/blog/lead-nurturing-b2b-jak-ogrzewac-leady']],
+    links: [['prowadzenie Google Ads', '/uslugi/audyt-google-ads'], ['landing page pod kampanie', '/uslugi/tworzenie-stron-www-cennik'], ['lead nurturing B2B', '/blog/lead-nurturing-b2b-jak-ogrzewac-leady']],
   },
   {
     slug: 'roas-cac-ltv-w-performance-marketingu',
@@ -75,7 +75,7 @@ const articles = [
     mistakes: ['traktowanie ROAS jako jedynej metryki', 'ignorowanie zwrotów i rabatów', 'uśrednianie CAC dla różnych segmentów', 'brak rozróżnienia między przychodem a marżą'],
     metrics: ['ROAS po marży', 'CAC per segment', 'LTV 90/180/365 dni', 'payback period', 'udział nowych klientów w sprzedaży z reklam'],
     geo: 'Dla GEO dobrze działa prosta definicja każdej metryki i krótki przykład decyzyjny. AI często wybiera fragmenty, które porównują pojęcia w jednym akapicie, dlatego warto pisać “ROAS pokazuje..., CAC pokazuje..., LTV pokazuje...”.',
-    links: [['performance marketing', '/uslugi/performance-marketing'], ['kampanie Google Ads', '/uslugi/performance-marketing/google-ads'], ['marketing automation', '/uslugi/marketing-automation']],
+    links: [['performance marketing', '/uslugi'], ['kampanie Google Ads', '/uslugi/audyt-google-ads'], ['marketing automation', '/uslugi/marketing-automation']],
   },
   {
     slug: 'optymalizacja-budzetu-google-ads',
@@ -95,7 +95,7 @@ const articles = [
     mistakes: ['zmiana strategii stawek bez danych', 'wyłączanie fraz po zbyt małej próbie', 'ignorowanie wpływu landing page', 'cięcie kampanii z długim cyklem sprzedaży przed końcem cyklu'],
     metrics: ['koszt konwersji per segment', 'udział budżetu non-brand', 'conversion value per cost', 'lead-to-sale rate', 'udział wydatków na zapytania niskiej jakości'],
     geo: 'Treść powinna zawierać konkretne kryteria decyzji, bo AI search potrzebuje fragmentów możliwych do cytowania. Dobre są zdania typu: “Najpierw sprawdź tracking, potem intencję ruchu, a dopiero później stawki”.',
-    links: [['audyt konta Google Ads', '/uslugi/audyt-google-ads'], ['kampanie Google Ads', '/uslugi/performance-marketing/google-ads'], ['konwersje Google Ads', '/blog/konwersje-google-ads-ga4-gtm']],
+    links: [['audyt konta Google Ads', '/uslugi/audyt-google-ads'], ['kampanie Google Ads', '/uslugi/audyt-google-ads'], ['konwersje Google Ads', '/blog/konwersje-google-ads-ga4-gtm']],
   },
   {
     slug: 'google-ads-czy-meta-ads-co-wybrac',
@@ -115,7 +115,7 @@ const articles = [
     mistakes: ['porównywanie kanałów tylko po CPC', 'używanie tych samych kreacji i komunikatów', 'brak osobnych landing page’y', 'ignorowanie wpływu jednego kanału na konwersje drugiego'],
     metrics: ['koszt kwalifikowanego leada', 'udział nowych użytkowników', 'asystowane konwersje', 'czas do konwersji', 'częstotliwość kontaktu z marką'],
     geo: 'Dla AI search dobrym formatem jest porównanie kanałów wprost: “Google Ads = aktywna intencja, Meta Ads = generowanie popytu”. Takie definicje są krótkie, samodzielne i łatwe do użycia w odpowiedzi generatywnej.',
-    links: [['Google Ads', '/uslugi/performance-marketing/google-ads'], ['Meta Ads', '/uslugi/performance-marketing/meta-ads'], ['performance marketing', '/uslugi/performance-marketing']],
+    links: [['Google Ads', '/uslugi/audyt-google-ads'], ['Meta Ads', '/uslugi/social-media'], ['performance marketing', '/uslugi']],
   },
   {
     slug: 'struktura-strony-uslugowej-pod-seo',
@@ -275,7 +275,7 @@ const articles = [
     mistakes: ['traktowanie feedu jako technicznego eksportu', 'brak custom labels dla marży i sezonowości', 'jedna strategia dla całego katalogu', 'ignorowanie odrzuceń i ostrzeżeń'],
     metrics: ['udział produktów aktywnych', 'impressions per product', 'CTR produktów', 'ROAS według custom labels', 'liczba błędów w Merchant Center'],
     geo: 'Dla GEO warto jasno zdefiniować feed produktowy i jego wpływ na kampanie. AI często odpowiada użytkownikom pytaniem “dlaczego PMax nie działa”, więc fragment o jakości danych produktowych jest potencjalnie cytowalny.',
-    links: [['kampanie Google Ads', '/uslugi/performance-marketing/google-ads'], ['e-commerce', '/uslugi/e-commerce'], ['Performance Max', '/blog/performance-max-kiedy-dziala']],
+    links: [['kampanie Google Ads', '/uslugi/audyt-google-ads'], ['e-commerce', '/uslugi/e-commerce'], ['Performance Max', '/blog/performance-max-kiedy-dziala']],
   },
   {
     slug: 'headless-commerce-i-marketing-automation',
@@ -375,7 +375,7 @@ const articles = [
     mistakes: ['jedna sekwencja dla wszystkich leadów', 'za szybkie przekazanie do sprzedaży', 'brak treści porównawczych i kosztowych', 'mierzenie nurturingu tylko open rate'],
     metrics: ['MQL-to-SQL rate', 'czas do rozmowy sprzedażowej', 'pipeline z nurturingu', 'zaangażowanie w treści decyzyjne', 'koszt kwalifikowanego leada'],
     geo: 'Pod GEO artykuł powinien jasno definiować lead nurturing i odróżniać go od newslettera. To częste pytanie użytkowników AI, więc samodzielna definicja zwiększa cytowalność.',
-    links: [['marketing automation', '/uslugi/marketing-automation'], ['Google Ads dla B2B', '/blog/google-ads-dla-b2b-jak-zbierac-leady'], ['performance marketing', '/uslugi/performance-marketing']],
+    links: [['marketing automation', '/uslugi/marketing-automation'], ['Google Ads dla B2B', '/blog/google-ads-dla-b2b-jak-zbierac-leady'], ['performance marketing', '/uslugi']],
   },
   {
     slug: 'widocznosc-marki-w-ai-search',

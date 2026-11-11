@@ -3,19 +3,20 @@ import Scene3D from '../scene3d/Scene3D';
 import type { Locale } from '@/lib/i18n';
 import { homeCopy } from './home-copy';
 
-/** Centered statement + action pair, resolved by a broad product-workspace frame of how a project runs. */
+/** Implementation pillar: a centered statement resolved by a product-workspace frame of how a build runs. */
 export default function HomeShowcase({ locale }: { locale: Locale }) {
     const { showcase: t, pipeline, contactHref } = homeCopy[locale];
     return (
-        <section className="ct-section" style={{ paddingTop: 'var(--pad-y-xl)' }}>
+        <section className="ct-section">
             <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-6 text-center">
                 <span className="ct-eyebrow">{t.eyebrow}</span>
                 <h2 className="ct-h2 ct-statement">
                     {t.title[0]}<span className="ct-electric">{t.title[1]}</span>{t.title[2]}
                 </h2>
+                {t.lead && <p className="ct-lead" style={{ maxWidth: '52ch' }}>{t.lead}</p>}
                 <div className="flex flex-wrap justify-center gap-2 pt-2">
-                    <NotchedButton href={contactHref}>{t.cta}</NotchedButton>
-                    <NotchedButton href="#uslugi" variant="ghost">{t.secondary}</NotchedButton>
+                    <NotchedButton href={t.ctaHref ?? contactHref}>{t.cta}</NotchedButton>
+                    <NotchedButton href={t.secondaryHref} variant="ghost">{t.secondary}</NotchedButton>
                 </div>
 
                 <div className="ct-frame mt-10 w-full text-left" aria-label={t.frameLabel}>

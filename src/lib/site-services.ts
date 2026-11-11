@@ -29,12 +29,19 @@ export interface PublishedPrice {
 }
 
 export const services: Service[] = [
-    { slug: 'strony-www', href: '/uslugi/strony-www', title: 'Strony WWW', description: 'Strony firmowe, landing pages, UX i performance.', accent: 'Konwersja' },
-    { slug: 'e-commerce', href: '/uslugi/e-commerce', title: 'E-commerce', description: 'Headless commerce, migracje i integracje systemów.', accent: 'Skalowanie' },
+    { slug: 'audyt-e-commerce', href: '/uslugi/audyt-e-commerce', title: 'Audyt e-commerce', description: 'Sprzedaż, marża, technologia i praca zespołu sklepu. Raport i roadmapa w 5–7 dni roboczych.', accent: 'Diagnoza' },
+    { slug: 'zarzadzanie-e-commerce', href: '/uslugi/zarzadzanie-e-commerce', title: 'Zarządzanie e-commerce', description: 'Prowadzenie e-commerce z zewnątrz: plan, marża, zespół, dostawcy i wyniki.', accent: 'Wynik' },
+    { slug: 'e-commerce', href: '/uslugi/e-commerce', title: 'Sklepy internetowe', description: 'Projekt i budowa sklepów: headless, migracje i integracje systemów.', accent: 'Skalowanie' },
+    { slug: 'strony-www', href: '/uslugi/strony-www', title: 'Strony internetowe', description: 'Strony firmowe, landing pages i portale: UX, SEO i wydajność.', accent: 'Konwersja' },
     { slug: 'marketing-automation', href: '/uslugi/marketing-automation', title: 'Marketing Automation', description: 'SALESmanago, lejki, CRM i personalizacja.', accent: 'Automatyzacja' },
     { slug: 'social-media', href: '/uslugi/social-media', title: 'Social Media', description: 'Strategia, content, kampanie i raportowanie.', accent: 'Widoczność' },
-    { slug: 'konsulting-e-commerce', href: '/uslugi/konsulting-e-commerce', title: 'Konsulting e-commerce', description: 'Sprzedaż, marża i architektura sklepu. Start od płatnej Diagnozy.', accent: 'Marża' },
 ];
+
+/** The two lead offers; the rest of the catalogue is implementation work. */
+export const LEAD_SERVICE_SLUGS = ['audyt-e-commerce', 'zarzadzanie-e-commerce'];
+
+/** What we design and build; shown as its own pair of tiles next to the lead offers. */
+export const BUILD_SERVICE_SLUGS = ['e-commerce', 'strony-www'];
 
 export const seoLandings: Landing[] = [
     {
@@ -48,6 +55,13 @@ export const seoLandings: Landing[] = [
         title: 'Wdrożenie SALESmanago',
         description: 'Landing pod zapytania o partnera i implementację.',
         service: 'marketing-automation',
+    },
+    {
+        href: '/uslugi/audyt-google-ads',
+        title: 'Audyt kampanii Google Ads',
+        description: 'Błędy w koncie, pomiarze i budżecie z planem naprawy.',
+        // A narrower, single-channel audit: grouped with the e-commerce audit, not with website builds.
+        service: 'audyt-e-commerce',
     },
     {
         href: '/uslugi/landing-page-google-ads',
@@ -85,11 +99,12 @@ type Copy = Pick<Service, 'href' | 'title' | 'description' | 'accent'>;
 
 /** English copy of the catalogue (pages under /en/services), keyed by service slug. */
 const servicesEn: Record<Service['slug'], Copy> = {
-    'strony-www': { href: '/en/services/websites', title: 'Websites', description: 'Company websites, landing pages, UX and performance.', accent: 'Conversion' },
-    'e-commerce': { href: '/en/services/e-commerce', title: 'E-commerce', description: 'Headless commerce, migrations and system integrations.', accent: 'Scale' },
+    'audyt-e-commerce': { href: '/en/services/e-commerce-audit', title: 'E-commerce audit', description: 'Sales, margin, technology and how the store team works. A report and roadmap in 5–7 working days.', accent: 'Diagnosis' },
+    'zarzadzanie-e-commerce': { href: '/en/services/e-commerce-management', title: 'E-commerce management', description: 'Running your e-commerce from the outside: plan, margin, team, suppliers and results.', accent: 'Results' },
+    'e-commerce': { href: '/en/services/e-commerce', title: 'Online stores', description: 'Designing and building stores: headless, migrations and system integrations.', accent: 'Scale' },
+    'strony-www': { href: '/en/services/websites', title: 'Websites', description: 'Company websites, landing pages and portals: UX, SEO and performance.', accent: 'Conversion' },
     'marketing-automation': { href: '/en/services/marketing-automation', title: 'Marketing Automation', description: 'SALESmanago, funnels, CRM and personalisation.', accent: 'Automation' },
     'social-media': { href: '/en/services/social-media', title: 'Social Media', description: 'Strategy, content, campaigns and reporting.', accent: 'Visibility' },
-    'konsulting-e-commerce': { href: '/en/services/e-commerce-consulting', title: 'E-commerce consulting', description: 'Sales, margin and store architecture. Starts with a paid Diagnosis.', accent: 'Margin' },
 };
 
 const landingsEn: Record<Landing['href'], Pick<Landing, 'href' | 'title' | 'description'>> = {
@@ -108,7 +123,8 @@ export function servicesFor(locale: 'pl' | 'en'): Service[] {
 }
 
 export function landingsFor(locale: 'pl' | 'en'): Landing[] {
-    return locale === 'en' ? seoLandings.map((l) => ({ ...l, ...landingsEn[l.href] })) : seoLandings;
+    // Polish-only landings (no English twin, e.g. the Google Ads audit) stay out of the English menu.
+    return locale === 'en' ? seoLandings.filter((l) => l.href in landingsEn).map((l) => ({ ...l, ...landingsEn[l.href] })) : seoLandings;
 }
 
 /**
