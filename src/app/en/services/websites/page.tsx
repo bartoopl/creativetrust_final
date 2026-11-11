@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import CTASection from '@/components/CTASection';
+import { InlineCTA } from '@/components/LandingBlocks';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
@@ -7,46 +8,46 @@ import { SITE_URL, buildServiceSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: 'Website design and development | Fast, effective, AI-assisted',
-    description: 'We design and build websites that generate leads and sell. Headless, Next.js, performance. Shorter time-to-market thanks to AI. See what is included.',
+    title: 'Websites for brands and companies | Design and build',
+    description: 'We design and build websites: company sites, product sites, landing pages and portals. Designed for a specific role in sales, fast and easy to edit. See the scope and pricing.',
     alternates: pageAlternates('/uslugi/strony-www', 'en', SITE_URL),
     openGraph: {
-        title: 'Website design and development for companies | CreativeTrust',
-        description: 'Websites designed for conversion, SEO and performance. Headless, Next.js, UX — one team from concept to launch.',
+        title: 'Websites for brands and companies | CreativeTrust',
+        description: 'Websites designed for sales, SEO and performance. Next.js, headless CMS — one team from design to launch.',
         url: `${SITE_URL}/en/services/websites`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',
     },
 };
 
 const types = [
-    { num: '01', title: 'Company websites', description: 'A brand showcase designed for conversion and SEO. It works around the clock.', tags: ['Headless CMS', 'Next.js', 'Sanity'] },
-    { num: '02', title: 'Landing pages', description: 'Pages for campaigns, products and events. Time to launch: weeks, not months.', tags: ['High conversion', 'A/B ready', 'Fast'] },
-    { num: '03', title: 'Portals and platforms', description: 'Extensive websites with authentication, dashboards and business logic.', tags: ['SaaS', 'Dashboard', 'API'] },
-    { num: '04', title: 'Product pages', description: 'A product or service showcase that sells — storytelling + CTA.', tags: ['Storytelling', 'Video', 'CTA'] },
+    { num: '01', title: 'Company websites', description: 'A brand site with a clear offer and a path to contact. Designed for enquiries and SEO, not just for looks.', tags: ['Headless CMS', 'Next.js', 'Sanity'] },
+    { num: '02', title: 'Landing pages', description: 'Pages for campaigns, products and events, tied to analytics and a form. Delivery measured in weeks.', tags: ['Campaigns', 'A/B tests', 'Fast launch'] },
+    { num: '03', title: 'Brand sites alongside a store', description: 'A corporate, B2B or investor site next to your e-commerce — consistent with the brand and the store.', tags: ['Brand', 'B2B', 'Investor relations'] },
+    { num: '04', title: 'Portals and platforms', description: 'Extensive sites with authentication, a dashboard and business logic.', tags: ['Customer panel', 'Dashboard', 'API'] },
 ];
 
 const features = [
     { title: 'Performance above 90', description: 'Core Web Vitals and a PageSpeed score > 90. Speed means SEO and conversion — we build for results from the ground up.' },
-    { title: 'On-page SEO', description: 'Semantic architecture, meta tags, organisation schema, sitemap and canonicals set up from day one.' },
-    { title: 'Headless CMS', description: 'Sanity, Contentful or Strapi — you edit content without touching the code. We separate logic from design.' },
-    { title: 'Responsive & accessible', description: 'Looks great on every device. WCAG 2.1 AA. Accessibility is not optional.' },
-    { title: 'AI-assisted development', description: 'We generate and test components faster. Time-to-market cut by 30–40% compared with a traditional process.' },
+    { title: 'On-page SEO', description: 'Semantic architecture, meta tags, structured data, sitemap and canonicals set up from day one.' },
+    { title: 'Headless CMS', description: 'Sanity, Contentful or Strapi — you edit content without touching the code and without waiting for a developer.' },
+    { title: 'Responsive & accessible', description: 'Works properly on every device, in line with WCAG 2.1 AA.' },
+    { title: 'Measurement from day one', description: 'Events, forms and enquiry sources in analytics. You know what the site delivers for sales.' },
     { title: 'Post-launch support', description: 'We look after the site after launch. Updates, optimisation and new features.' },
 ];
 
 const tech = ['Next.js', 'React', 'Sanity CMS', 'TypeScript', 'Tailwind CSS', 'Vercel / Netlify', 'Figma', 'GTM'];
 
 const process = [
-    { num: '01', title: 'Discovery', description: 'Analysis of goals, audience and competitors. AI speeds up the research.' },
-    { num: '02', title: 'Design', description: 'Wireframes and UI in Figma. We click through the prototype before writing a line of code.' },
-    { num: '03', title: 'Development', description: 'Headless, performant, SEO-ready. AI-assisted coding — faster and with fewer bugs.' },
-    { num: '04', title: 'Launch & growth', description: 'Launch, testing, monitoring. We optimise after launch based on data.', featured: true },
+    { num: '01', title: 'Goal and role of the site', description: 'What the site should deliver for sales, and for whom. Analysis of the offer, audience and competitors.' },
+    { num: '02', title: 'Design', description: 'Wireframes and UI in Figma. We click through the prototype before a line of code is written.' },
+    { num: '03', title: 'Development', description: 'Headless, performant and SEO-ready. AI shortens production; people watch the quality.' },
+    { num: '04', title: 'Launch & growth', description: 'Launch, testing, monitoring. After launch we optimise based on data.', featured: true },
 ];
 
 export default function WebsitesPage() {
     const serviceSchema = buildServiceSchema({
         name: 'Websites',
         description:
-            'Websites, landing pages and web platforms designed for conversion, SEO and performance.',
+            'Websites, landing pages and web portals designed for conversion, SEO and performance.',
         url: `${SITE_URL}/en/services/websites`,
         serviceType: 'Website design and development',
         inLanguage: 'en',
@@ -59,12 +60,13 @@ export default function WebsitesPage() {
             {/* Hero */}
             <PageHero
                 eyebrow="Websites"
-                title={<>Websites that attract customers and <span style={{ color: 'var(--accent)' }}>convert.</span></>}
-                description="We design and build data-driven websites — from a landing page to an extensive portal. Headless, fast, SEO-ready. Delivery time cut by 30–40% thanks to AI."
+                title={<>Websites with a specific role <span style={{ color: 'var(--accent)' }}>in sales.</span></>}
+                description="We design and build websites for brands and companies — from a landing page to an extensive portal. Each has a clear job: collect enquiries, support the store or open a new market. Fast, SEO-ready and easy to edit."
                 cta={{ label: 'Get a project quote', href: '/en/contact' }}
+                ctaSecondary={{ label: 'See pricing', href: '/en/services/website-pricing' }}
             >
                 <div className="ct-grid-lines grid-cols-2 sm:grid-cols-4" style={{ marginTop: 16, borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-                    {[['150+', 'websites'], ['15', 'years'], ['90+', 'PageSpeed'], ['30-40%', 'faster']].map(([val, label]) => (
+                    {[['150+', 'projects'], ['15+', 'years in business'], ['90+', 'PageSpeed'], ['from PLN 3,500', 'landing page, net']].map(([val, label]) => (
                         <div key={label} className="flex flex-col gap-1.5" style={{ padding: '18px 20px' }}>
                             <span style={{ fontSize: 28, fontWeight: 500, letterSpacing: '-1px', lineHeight: 1 }}>{val}</span>
                             <span className="ct-meta">{label}</span>
@@ -124,6 +126,14 @@ export default function WebsitesPage() {
                         </li>
                     ))}
                 </ol>
+            </Section>
+
+            <Section tint>
+                <InlineCTA
+                    title="Is the website part of a larger e-commerce operation?"
+                    text="If a store runs alongside the site, start with an e-commerce audit: it shows what will improve sales and margin first."
+                    cta={{ label: 'See the e-commerce audit', href: '/en/services/e-commerce-audit' }}
+                />
             </Section>
 
             <CTASection locale="en" />
