@@ -67,4 +67,4 @@ Strona główna ma już nowy język wizualny v2 („electric ink on drafting pap
 ### Phase 4: Testy i weryfikacja
 
 - [x] 4.1 Test regresji wzorca v2 — 1a7d348
-- [ ] 4.2 Pełna bramka walidacji i zrzuty
+- [x] 4.2 Pełna bramka walidacji i zrzuty — gate green (typecheck, 208 tests, check:design, build); screenshots skipped: local CMS database offline
