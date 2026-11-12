@@ -69,8 +69,6 @@ export default async function BlogCategoryPage({
         }).format(date);
     };
 
-    const activePill = { borderColor: 'var(--accent)', color: 'var(--accent)', background: 'var(--accent-soft)' };
-
     return (
         <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
             <PageHero
@@ -79,37 +77,28 @@ export default async function BlogCategoryPage({
                 description={category.description}
             />
 
-            <div style={{ borderBottom: '1px solid var(--line)', background: 'var(--panel)' }}>
-                <div className="ct-shell-sm mx-auto flex max-w-[1280px] flex-wrap items-center gap-2" style={{ boxSizing: 'content-box' }}>
-                    <Link href="/blog" className="ct-meta ct-contact-link" style={{ marginRight: 10 }}>
-                        ← Wróć do bloga
-                    </Link>
-                    <Link href="/blog" className="ct-pill ct-card-hover">
-                        Wszystkie
-                    </Link>
-                    {categories.map((cat) => (
-                        <Link
-                            key={cat._id}
-                            href={`/blog/kategoria/${cat.slug.current}`}
-                            className="ct-pill ct-card-hover"
-                            style={cat.slug.current === slug ? activePill : undefined}
-                        >
-                            {cat.title}{cat.count > 0 && <span style={{ marginLeft: 6, color: 'var(--muted-2)' }}>({cat.count})</span>}
-                        </Link>
-                    ))}
-                </div>
-            </div>
+            <section className="ct-section" style={{ paddingTop: 'clamp(32px, 4vw, 48px)' }}>
+                <div className="mx-auto flex max-w-[1280px] flex-col gap-8">
+                    <nav aria-label="Kategorie bloga" className="flex flex-wrap items-center gap-1.5">
+                        <span style={{ minWidth: 92, marginRight: 6, fontSize: 14, color: 'var(--muted-2)' }}>Kategorie</span>
+                        <Link href="/blog" className="ct-chip">Wszystkie</Link>
+                        {categories.map((cat) => (
+                            <Link
+                                key={cat._id}
+                                href={`/blog/kategoria/${cat.slug.current}`}
+                                aria-current={cat.slug.current === slug ? 'page' : undefined}
+                                className="ct-chip"
+                            >
+                                {cat.title}{cat.count > 0 && <span style={{ marginLeft: 6, opacity: 0.6 }}>{cat.count}</span>}
+                            </Link>
+                        ))}
+                    </nav>
 
-            <section className="ct-section">
-                <div className="mx-auto flex max-w-[1280px] flex-col gap-6">
-                    {/* Lista postów */}
                     {posts.length > 0 ? (
-                        <>
-                            <span className="ct-eyebrow">Kategoria: {category.title}</span>
-                            <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))' }}>
-                                {posts.map((post) => (
+                        <ul className="grid grid-cols-1 gap-1 md:grid-cols-2 xl:grid-cols-3" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                            {posts.map((post) => (
+                                <li key={post._id}>
                                     <BlogPostCard
-                                        key={post._id}
                                         href={`/blog/${post.slug.current}`}
                                         title={post.title}
                                         image={post.mainImage ? urlFor(post.mainImage).width(800).url() : undefined}
@@ -117,12 +106,11 @@ export default async function BlogCategoryPage({
                                         excerpt={post.excerpt}
                                         footer={[formatDate(post.publishedAt), post.estimatedReadingTime && `${post.estimatedReadingTime} min czytania`].filter(Boolean).join(' · ')}
                                     />
-                                ))}
-                            </div>
-                        </>
+                                </li>
+                            ))}
+                        </ul>
                     ) : (
-                        <div className="ct-panel flex flex-col items-center gap-4 text-center" style={{ padding: 'clamp(32px, 6vw, 64px) 24px', background: 'var(--panel)' }}>
-                            <span className="ct-meta">// brak wyników</span>
+                        <div className="ct-tile flex flex-col items-center gap-4 text-center" style={{ padding: 'clamp(40px, 8vw, 80px) 24px' }}>
                             <h3 style={{ margin: 0, fontSize: 22, fontWeight: 500 }}>Brak artykułów w tej kategorii</h3>
                             <p className="ct-body" style={{ fontSize: 15 }}>
                                 Nie znaleziono żadnych artykułów w kategorii {category.title}.
