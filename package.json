@@ -20,6 +20,7 @@
   "dependencies": {
     "@payloadcms/db-postgres": "3.93.0",
     "@payloadcms/next": "3.93.0",
+    "@payloadcms/plugin-mcp": "3.93.0",
     "@payloadcms/richtext-lexical": "3.93.0",
     "@portabletext/react": "^3.2.1",
     "@react-three/fiber": "^9.8.1",
@@ -35,7 +36,8 @@
     "react-dom": "^19.2.3",
     "recharts": "^2.15.1",
     "sharp": "^0.34.5",
-    "three": "^0.186.1"
+    "three": "^0.186.1",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
