@@ -117,7 +117,16 @@ przekierowań z produkcją. Lokalnie wynik to 400/401. Jedyna różnica to
    proxy (szara chmurka) albo użyj *Origin Certificate* z Cloudflare.
 5. Cloudflare → Caching → Cache Rules:
    - `/api/media/file/*`: *Eligible for cache* (pliki mają `s-maxage` na 30 dni),
-   - `/admin*` i `/api/*` poza mediami: *Bypass cache*.
+   - `/admin*` i `/api/*` poza mediami: *Bypass cache*,
+   - audio i wideo z mediów: *Bypass cache*, **reguła niżej (później) niż ta dla
+     `/api/media/file/*`**: przy kilku pasujących regułach wygrywają ustawienia późniejszej.
+     Odpowiedź na plik audio ma wtedy `cf-cache-status: DYNAMIC` albo `BYPASS`, nie `HIT`/`MISS`.
+     Wyrażenie: `starts_with(http.request.uri.path, "/api/media/file/") and
+     http.request.uri.path.extension in {"mp3" "m4a" "mp4" "aac" "wav" "ogg" "oga" "webm"}`.
+     Odtwarzacze pobierają te pliki żądaniami Range. Next.js gubi `Content-Length`, więc
+     Cloudflare z cache odpowiada na Range całym plikiem (200 zamiast 206): Safari nie odtwarza
+     wtedy `.m4a`, a żadna przeglądarka nie przewija nagrania. Payload obsługuje Range sam.
+     Po dodaniu reguły: *Caching → Purge Cache → Custom* dla adresów plików audio.
 6. Po kilku godzinach bez błędów:
    - **Ustaw dataset Sanity jako prywatny albo go usuń.** Dziś jest publiczny i można z niego
      bez logowania pobrać dane klientów (e-maile, NIP-y) i faktury.
