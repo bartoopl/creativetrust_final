@@ -5,8 +5,8 @@ import CaseStudyCard, { type CaseCard } from '@/components/CaseStudyCard';
 import type { Locale } from '@/lib/i18n';
 
 const copy = {
-    pl: { filter: 'Filtruj', technology: 'Technologia', all: 'Wszystkie', none: '// brak wyników', empty: 'Brak projektów dla wybranych filtrów.' },
-    en: { filter: 'Filter', technology: 'Technology', all: 'All', none: '// no results', empty: 'No projects match the selected filters.' },
+    pl: { filter: 'Rodzaj', technology: 'Technologia', all: 'Wszystkie', empty: 'Brak projektów dla wybranych filtrów.', reset: 'Pokaż wszystkie', count: (n: number) => `${n} ${n === 1 ? 'projekt' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'projekty' : 'projektów'}` },
+    en: { filter: 'Type', technology: 'Technology', all: 'All', empty: 'No projects match the selected filters.', reset: 'Show all', count: (n: number) => `${n} ${n === 1 ? 'project' : 'projects'}` },
 };
 
 export interface PortfolioGridItem extends CaseCard {
@@ -22,25 +22,13 @@ export interface PortfolioFilter {
 
 function FilterRow({ label, allLabel, options, selected, onSelect }: { label: string; allLabel: string; options: PortfolioFilter[]; selected: string; onSelect: (slug: string) => void }) {
     return (
-        <div className="flex flex-wrap items-center gap-2">
-            <span className="ct-meta" style={{ marginRight: 6, color: 'var(--muted-2)' }}>{label}</span>
-            {[{ id: 'all', title: allLabel, slug: 'all' }, ...options].map((option) => {
-                const active = selected === option.slug;
-                return (
-                    <button
-                        key={option.id}
-                        onClick={() => onSelect(option.slug)}
-                        aria-pressed={active}
-                        className="ct-pill ct-card-hover"
-                        style={{
-                            cursor: 'pointer',
-                            borderColor: active ? 'var(--accent)' : undefined,
-                            color: active ? 'var(--accent)' : undefined,
-                            background: active ? 'var(--accent-soft)' : undefined,
-                        }}
-                    >{option.title}</button>
-                );
-            })}
+        <div role="group" aria-label={label} className="flex flex-wrap items-center gap-1.5">
+            <span style={{ minWidth: 92, marginRight: 6, fontSize: 14, color: 'var(--muted-2)' }}>{label}</span>
+            {[{ id: 'all', title: allLabel, slug: 'all' }, ...options].map((option) => (
+                <button key={option.id} type="button" onClick={() => onSelect(option.slug)} aria-pressed={selected === option.slug} className="ct-chip">
+                    {option.title}
+                </button>
+            ))}
         </div>
     );
 }
@@ -71,34 +59,39 @@ export default function PortfolioGrid({
             (technology === 'all' || (item.technologySlugs ?? []).includes(technology)),
     );
 
+    const filtering = selected !== 'all' || technology !== 'all';
+    const reset = () => {
+        setSelected('all');
+        setTechnology('all');
+    };
+
     return (
-        <>
-            {(categories.length > 0 || technologies.length > 0) && (
-                <div style={{ borderBottom: '1px solid var(--line)', background: 'var(--panel)' }}>
-                    <div className="ct-shell-sm mx-auto flex max-w-[1280px] flex-col gap-3" style={{ boxSizing: 'content-box' }}>
+        <section className="ct-section" style={{ paddingTop: 'clamp(32px, 4vw, 48px)' }}>
+            <div className="mx-auto flex max-w-[1280px] flex-col gap-8">
+                {(categories.length > 0 || technologies.length > 0) && (
+                    <div className="flex flex-col gap-3">
                         {categories.length > 0 && <FilterRow label={t.filter} allLabel={t.all} options={categories} selected={selected} onSelect={setSelected} />}
                         {technologies.length > 0 && <FilterRow label={t.technology} allLabel={t.all} options={technologies} selected={technology} onSelect={setTechnology} />}
                     </div>
-                </div>
-            )}
+                )}
 
-            {/* Grid */}
-            <section className="ct-section">
-                <div className="mx-auto max-w-[1280px]">
-                    {filtered.length > 0 ? (
-                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            {filtered.map(item => (
-                                <CaseStudyCard key={item.key} card={item} />
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="ct-panel flex flex-col items-center gap-3 text-center" style={{ padding: 'clamp(40px, 8vw, 80px) 24px', background: 'var(--panel)' }}>
-                            <div className="ct-meta">{t.none}</div>
-                            <p className="ct-body" style={{ fontSize: 15 }}>{t.empty}</p>
-                        </div>
-                    )}
-                </div>
-            </section>
-        </>
+                <p aria-live="polite" style={{ margin: 0, fontSize: 14, color: 'var(--muted-2)' }}>{t.count(filtered.length)}</p>
+
+                {filtered.length > 0 ? (
+                    <ul key={`${selected}:${technology}`} className="ct-fade grid grid-cols-1 gap-1 md:grid-cols-2 xl:grid-cols-3" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                        {filtered.map((item, index) => (
+                            <li key={item.key}>
+                                <CaseStudyCard card={item} priority={index < 3} />
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <div className="ct-tile flex flex-col items-center gap-4 text-center" style={{ padding: 'clamp(40px, 8vw, 80px) 24px' }}>
+                        <p style={{ margin: 0, fontSize: 17, color: 'var(--muted)' }}>{t.empty}</p>
+                        {filtering && <button type="button" onClick={reset} className="ct-ghost">{t.reset}</button>}
+                    </div>
+                )}
+            </div>
+        </section>
     );
 }
