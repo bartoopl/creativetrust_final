@@ -10,23 +10,21 @@ interface BlogPostCardProps {
     as?: 'h2' | 'h3' | 'h4';
 }
 
-/** Blog listing card — same pattern as the homepage BlogSection / CaseStudyCard. */
+/** Blog listing card — the same flat Tile Gray card as the homepage blog section. */
 export default function BlogPostCard({ href, title, image, meta, excerpt, footer, as: Tag = 'h3' }: BlogPostCardProps) {
     return (
-        <Link href={href} className="ct-card-hover flex flex-col overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.1)', borderRadius: 16, color: 'inherit', background: '#fff' }}>
-            <div className={image ? '' : 'ct-placeholder'} style={{ aspectRatio: '16/9', overflow: 'hidden', background: image ? 'var(--panel2)' : undefined, borderBottom: '1px solid var(--line)' }}>
+        <Link href={href} className="ct-tile ct-v2-card flex h-full flex-col gap-4" style={{ padding: 12, color: 'inherit' }}>
+            <div className="ct-v2-media" style={{ aspectRatio: '16/9' }}>
                 {image ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={image} alt={title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                ) : (
-                    <span className="ct-mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--muted)' }}>BRAK ZDJĘCIA</span>
-                )}
+                    <img src={image} alt={title} loading="lazy" />
+                ) : null}
             </div>
-            <div className="flex flex-1 flex-col gap-2" style={{ padding: 22 }}>
-                {meta && <span className="ct-meta" style={{ color: 'var(--accent)' }}>{meta}</span>}
-                <Tag style={{ margin: 0, fontSize: 17, fontWeight: 500, lineHeight: 1.3, color: 'var(--text)' }}>{title}</Tag>
-                {excerpt && <p className="ct-body line-clamp-3" style={{ fontSize: 13.5 }}>{excerpt}</p>}
-                {footer && <span className="ct-meta" style={{ marginTop: 'auto', paddingTop: 10, color: 'var(--muted-2)' }}>{footer}</span>}
+            <div className="flex flex-1 flex-col gap-2" style={{ padding: '4px 12px 14px' }}>
+                {meta && <span style={{ fontSize: 14, color: 'var(--accent)' }}>{meta}</span>}
+                <Tag className="ct-card-title" style={{ margin: 0, fontSize: 19, fontWeight: 500, lineHeight: 1.3, letterSpacing: '-0.01em', color: 'var(--text)' }}>{title}</Tag>
+                {excerpt && <p className="line-clamp-3" style={{ margin: 0, fontSize: 15, lineHeight: 1.5, color: 'var(--muted)' }}>{excerpt}</p>}
+                {footer && <span style={{ marginTop: 'auto', paddingTop: 8, fontSize: 14, color: 'var(--muted-2)' }}>{footer}</span>}
             </div>
         </Link>
     );
