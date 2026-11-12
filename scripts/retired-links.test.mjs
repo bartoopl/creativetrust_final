@@ -83,14 +83,28 @@ test('every old WordPress address points at a live route, never at a redirect', 
     }
 });
 
+test('Google Analytics and SSL pages point at the long slugs that are live', () => {
+    assert.equal(
+        RETIRED_CONTENT_PAGES['/jakie-dane-z-google-analytics-warto-analizowac'],
+        '/blog/jakie-dane-z-google-analytics-warto-analizowac-w-celu-poprawienia-konwersji-na-stronie',
+    );
+    assert.equal(
+        RETIRED_CONTENT_PAGES['/ssl-co-to-jest-i-czy-jest-potrzebne'],
+        '/blog/ssl-co-to-jest-i-czy-jest-potrzebne-4-powody-dla-ktorych-powinienes-go-wlaczyc',
+    );
+    // The short slugs return 404 in production; never map to them again.
+    assert.ok(!Object.values(RETIRED_CONTENT_PAGES).includes('/blog/jakie-dane-z-google-analytics-warto-analizowac'));
+    assert.ok(!Object.values(RETIRED_CONTENT_PAGES).includes('/blog/ssl-co-to-jest-i-czy-jest-potrzebne'));
+});
+
 test('rewriteRetiredHref maps every old WordPress address, with or without a trailing slash', () => {
     const expected = {
         '/e-commerce/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec': '/blog/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec',
         '/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec': '/blog/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec',
         '/budowanie-profesjonalnego-marketingu-firmy-strategia-ktora-nadaje-marce-skrzydel': '/blog/budowanie-profesjonalnego-marketingu-firmy-strategia-ktora-nadaje-marce-skrzydel',
-        '/jakie-dane-z-google-analytics-warto-analizowac': '/blog/jakie-dane-z-google-analytics-warto-analizowac',
+        '/jakie-dane-z-google-analytics-warto-analizowac': '/blog/jakie-dane-z-google-analytics-warto-analizowac-w-celu-poprawienia-konwersji-na-stronie',
         '/kiedy-mega-menu-jest-fajne-a-kiedy-nie': '/blog/kiedy-mega-menu-jest-fajne-a-kiedy-nie',
-        '/ssl-co-to-jest-i-czy-jest-potrzebne': '/blog/ssl-co-to-jest-i-czy-jest-potrzebne',
+        '/ssl-co-to-jest-i-czy-jest-potrzebne': '/blog/ssl-co-to-jest-i-czy-jest-potrzebne-4-powody-dla-ktorych-powinienes-go-wlaczyc',
         '/zwiekszenie-sprzedazy-w-sklepie-internetowym-6-sposobow-na-ulepszenie-strategii-kuponow': '/blog/zwiekszenie-sprzedazy-w-sklepie-internetowym-6-sposobow-na-ulepszenie-strategii-kuponow',
         '/ile-kosztuje-strona-internetowa-w-2023-roku': '/uslugi/tworzenie-stron-www-cennik',
         '/portfolio/item/artcakes': '/portfolio/artcakes-pl',
