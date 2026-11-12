@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -96,9 +97,9 @@ async function loadMoreProjects(slug: string, count = 3): Promise<ProjectCard[]>
     return rest.slice(0, count);
 }
 
-function Fact({ label, children }: { label: string; children: React.ReactNode }) {
+function Fact({ label, children }: { label: string; children: ReactNode }) {
     return (
-        <div className="flex flex-col gap-1.5" style={{ padding: '14px 0', borderTop: '1px solid var(--line)' }}>
+        <div className="flex flex-col gap-1.5 border-t first:border-t-0" style={{ padding: '14px 0', borderColor: 'var(--line)' }}>
             <dt style={{ fontSize: 14, color: 'var(--muted-2)' }}>{label}</dt>
             <dd style={{ margin: 0, fontSize: 15, lineHeight: 1.45, color: 'var(--text)' }}>{children}</dd>
         </div>
