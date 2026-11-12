@@ -20,7 +20,7 @@ semantic_keywords:
 
 # Usługi CreativeTrust: audyt, zarządzanie i budowa e-commerce
 
-CreativeTrust audytuje sklepy internetowe i prowadzi e-commerce marek z zewnątrz. Projektuje też i buduje sklepy oraz strony internetowe — jako osobne projekty albo wykonanie roadmapy z audytu. Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.
+CreativeTrust audytuje sklepy internetowe i prowadzi e-commerce marek z zewnątrz. Projektuje też i buduje sklepy oraz strony internetowe — jako osobne projekty albo wykonanie roadmapy z audytu. Zespół ma doświadczenie w e-commerce marek z wielu branż (moda, automotive, kosmetologia, farmacja, telefony), m.in. w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.
 
 ## Audyt i zarządzanie e-commerce
 

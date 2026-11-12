@@ -81,7 +81,7 @@ export default function ServicesPage() {
                 ctaSecondary={{ label: 'See our services', href: '#zakres' }}
                 right={
                     <div className="ct-grid-lines grid-cols-2" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-                        {[['First step', 'E-commerce audit in 5–7 working days'], ['Ongoing work', 'External e-commerce management'], ['Build', 'Online stores and websites'], ['Experience', '5.10.15, Quiosque, Monnari Capital Group']].map(([label, val]) => (
+                        {[['First step', 'E-commerce audit in 5–7 working days'], ['Ongoing work', 'External e-commerce management'], ['Build', 'Online stores and websites'], ['Experience', 'Many industries, incl. 5.10.15, Quiosque, Monnari Capital Group']].map(([label, val]) => (
                             <div key={label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
                                 <span className="ct-meta">{label}</span>
                                 <span style={{ fontSize: 15, fontWeight: 500, lineHeight: 1.5 }}>{val}</span>

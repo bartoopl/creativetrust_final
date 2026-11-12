@@ -8,7 +8,7 @@ export const metadata: Metadata = {
         default: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce',
         template: '%s | CreativeTrust',
     },
-    description: 'Audytujemy i prowadzimy e-commerce marek z zewnątrz, projektujemy i budujemy sklepy oraz strony internetowe. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.',
+    description: 'Audytujemy i prowadzimy e-commerce marek z zewnątrz, projektujemy i budujemy sklepy oraz strony internetowe. Doświadczenie w e-commerce marek z wielu branż, m.in. 5.10.15, Quiosque i Grupy Kapitałowej Monnari.',
     keywords: ['audyt e-commerce', 'zarządzanie e-commerce', 'e-commerce manager z zewnątrz', 'konsulting e-commerce', 'sklepy internetowe', 'wdrożenia e-commerce', 'strony internetowe', 'marketing automation'],
     alternates: {
         canonical: '/',

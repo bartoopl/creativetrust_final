@@ -8,7 +8,7 @@ export const metadata: Metadata = {
         default: 'CreativeTrust — E-commerce audit, management and build',
         template: '%s | CreativeTrust',
     },
-    description: 'We audit and run brands’ e-commerce as an external team, and we design and build online stores and websites. Experience managing e-commerce for 5.10.15 and Quiosque, and working on the development of the Monnari capital group.',
+    description: 'We audit and run brands’ e-commerce as an external team, and we design and build online stores and websites. E-commerce experience across many industries, including 5.10.15, Quiosque and the Monnari capital group.',
     keywords: ['e-commerce audit', 'e-commerce management', 'outsourced e-commerce manager', 'e-commerce consulting', 'online stores', 'e-commerce implementation', 'websites', 'marketing automation'],
     alternates: {
         canonical: '/en',

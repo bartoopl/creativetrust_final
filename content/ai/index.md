@@ -1,10 +1,10 @@
 ---
 title: "CreativeTrust — Audyt, zarządzanie i budowa e-commerce"
-description: "Audytujemy i prowadzimy e-commerce marek z zewnątrz. Projektujemy i budujemy sklepy oraz strony internetowe. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari."
+description: "Audytujemy i prowadzimy e-commerce marek z zewnątrz. Projektujemy i budujemy sklepy oraz strony internetowe. Doświadczenie w e-commerce marek z wielu branż, m.in. 5.10.15, Quiosque i Grupy Kapitałowej Monnari."
 date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/"
 lang: "pl-PL"
-ai_summary: "CreativeTrust z Gorzowa Wielkopolskiego, działający od 2010 roku, audytuje sklepy internetowe i zarządza e-commerce marek z zewnątrz, a także projektuje i buduje sklepy internetowe (w tym headless) oraz strony WWW. Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Wdraża też marketing automation (SALESmanago) i prowadzi social media."
+ai_summary: "CreativeTrust z Gorzowa Wielkopolskiego, działający od 2010 roku, audytuje sklepy internetowe i zarządza e-commerce marek z zewnątrz, a także projektuje i buduje sklepy internetowe (w tym headless) oraz strony WWW. Zespół ma doświadczenie w e-commerce marek z wielu branż (moda, automotive, kosmetologia, farmacja, telefony), m.in. w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Wdraża też marketing automation (SALESmanago) i prowadzi social media."
 target_audience:
   - "Właściciele, zarządy i dyrektorzy e-commerce marek sprzedających online"
   - "Sklepy internetowe, w których sprzedaż rośnie szybciej niż marża i procesy"
@@ -29,7 +29,7 @@ CreativeTrust prowadzi e-commerce marek, które chcą rosnąć z zyskiem. Audytu
 
 ## Doświadczenie CreativeTrust
 
-Zespół CreativeTrust opiera pracę na doświadczeniu w zarządzaniu e-commerce i budowaniu rosnących marek na polskim rynku:
+Zespół CreativeTrust ma doświadczenie w e-commerce marek z wielu branż: moda, automotive, kosmetologia, farmacja, telefony. Wybrane marki:
 
 - **5.10.15** — doświadczenie w zarządzaniu e-commerce ogólnopolskiej marki odzieży dziecięcej.
 - **Quiosque** — doświadczenie w zarządzaniu e-commerce ogólnopolskiej marki mody damskiej.
@@ -56,7 +56,7 @@ Uzupełnieniem są [marketing automation](https://www.creativetrust.pl/uslugi/ma
 
 CreativeTrust patrzy na sklep jak zarząd, nie jak wykonawca:
 
-- **Zarządzanie e-commerce znane z praktyki** — doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.
+- **Zarządzanie e-commerce znane z praktyki** — doświadczenie w e-commerce marek z wielu branż (moda, automotive, kosmetologia, farmacja, telefony), m.in. w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.
 - **Marża, nie tylko przychód** — zespół patrzy na zysk, zwroty, koszty kanałów i czas zespołu, a nie na sam ruch i obrót.
 - **Doradztwo i budowa** — ten sam zespół stawia diagnozę, projektuje i wdraża sklepy oraz strony.
 - **Brak sprzedaży platformy** — open source i sprawdzone technologie (Medusa.js, Next.js, React); zmianę systemu CreativeTrust rekomenduje tylko wtedy, gdy się opłaca.
@@ -92,7 +92,7 @@ Tak. CreativeTrust przejmuje rolę e-commerce managera tam, gdzie jej brakuje, a
 
 ### Jakie doświadczenie w e-commerce ma CreativeTrust?
 
-Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Firma działa od 2010 roku.
+Zespół ma doświadczenie w e-commerce marek z wielu branż (moda, automotive, kosmetologia, farmacja, telefony), m.in. w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Firma działa od 2010 roku.
 
 ### Czy CreativeTrust tworzy sklepy i strony internetowe?
 

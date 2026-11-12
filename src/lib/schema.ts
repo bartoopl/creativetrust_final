@@ -6,7 +6,7 @@ const SITE_URL = 'https://www.creativetrust.pl';
  * a company from these signals, so they must not disagree.
  */
 export const COMPANY_DESCRIPTION =
-    'CreativeTrust z Gorzowa Wielkopolskiego, działający od 2010 roku, audytuje sklepy internetowe i zarządza e-commerce marek z zewnątrz, a także projektuje i buduje sklepy internetowe (w tym headless) oraz strony WWW. Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Wdraża też marketing automation (SALESmanago) i prowadzi social media.';
+    'CreativeTrust z Gorzowa Wielkopolskiego, działający od 2010 roku, audytuje sklepy internetowe i zarządza e-commerce marek z zewnątrz, a także projektuje i buduje sklepy internetowe (w tym headless) oraz strony WWW. Zespół ma doświadczenie w e-commerce marek z wielu branż (moda, automotive, kosmetologia, farmacja, telefony), m.in. w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Wdraża też marketing automation (SALESmanago) i prowadzi social media.';
 export const FOUNDING_YEAR = '2010';
 
 /** Legal identity, as published in the privacy policy (operator of the site). */

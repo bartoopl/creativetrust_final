@@ -1,5 +1,5 @@
 /**
- * Experience the team may name publicly. Wording is deliberately tense-neutral
+ * Experience the team may name publicly (a selection, see INDUSTRIES). Wording is deliberately tense-neutral
  * (noun phrases, no "prowadziliśmy" / "prowadzimy"): the site states the
  * experience, not whether an engagement is past or current. Plain data, no imports.
  */
@@ -27,9 +27,17 @@ export const experience: ExperienceItem[] = [
     },
 ];
 
-/** One sentence for leads, meta descriptions and Markdown twins. */
+/**
+ * The brands above are the ones we name, not the only ones: the team's
+ * e-commerce experience spans many brands and industries. Copy leads with the
+ * breadth and introduces the brands with „m.in.” / "including".
+ */
+export const INDUSTRIES = ['moda', 'automotive', 'kosmetologia', 'farmacja', 'telefony'] as const;
+export const INDUSTRIES_EN = ['fashion', 'automotive', 'cosmetology', 'pharmaceuticals', 'mobile phones'] as const;
+
+/** One sentence for leads and section descriptions. */
 export const EXPERIENCE_SENTENCE =
-    'Doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.';
+    'Doświadczenie w e-commerce marek z wielu branż — moda, automotive, kosmetologia, farmacja, telefony — m.in. w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.';
 
 export const AUDIT_HREF = '/uslugi/audyt-e-commerce';
 export const MANAGEMENT_HREF = '/uslugi/zarzadzanie-e-commerce';
@@ -55,7 +63,7 @@ export const experienceEn: ExperienceItem[] = [
 ];
 
 export const EXPERIENCE_SENTENCE_EN =
-    'Experience managing e-commerce for the 5.10.15 and Quiosque brands and working on the development of the Monnari capital group.';
+    'E-commerce experience across brands in many industries — fashion, automotive, cosmetology, pharmaceuticals, mobile phones — including managing e-commerce for 5.10.15 and Quiosque and working on the development of the Monnari capital group.';
 
 export const AUDIT_HREF_EN = '/en/services/e-commerce-audit';
 export const MANAGEMENT_HREF_EN = '/en/services/e-commerce-management';
