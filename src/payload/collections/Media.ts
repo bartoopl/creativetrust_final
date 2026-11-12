@@ -1,6 +1,15 @@
 import type { CollectionConfig } from 'payload';
 import { anyone, editorsOnly } from '../access';
 import { revalidateHooks } from '../revalidate';
+import { slugify } from '../slugify';
+
+export function safeFilename(name: string): string {
+    const dot = name.lastIndexOf('.');
+    const base = dot > 0 ? name.slice(0, dot) : name;
+    const ext = dot > 0 ? name.slice(dot + 1).toLowerCase().replace(/[^a-z0-9]/g, '') : '';
+    const slug = slugify(base, 80) || 'plik';
+    return ext ? `${slug}.${ext}` : slug;
+}
 
 /**
  * Images and audio. Files live on the server's media volume (MEDIA_DIR). Each
@@ -12,10 +21,20 @@ export const Media: CollectionConfig = {
     labels: { singular: 'Plik', plural: 'Media' },
     admin: { group: 'Treści', useAsTitle: 'filename', defaultColumns: ['filename', 'alt', 'updatedAt'] },
     access: { read: anyone, create: editorsOnly, update: editorsOnly, delete: editorsOnly },
-    hooks: revalidateHooks,
+    hooks: {
+        ...revalidateHooks,
+        // "Zdjęcie główne – Łódź.PNG" → "zdjecie-glowne-lodz.png": plain URLs, no encoding.
+        beforeOperation: [
+            ({ req, args }) => {
+                if (req.file?.name) req.file.name = safeFilename(req.file.name);
+                return args;
+            },
+        ],
+    },
     upload: {
         staticDir: process.env.MEDIA_DIR || 'media',
-        mimeTypes: ['image/*', 'audio/*'],
+        // Blog audio was uploaded to Sanity partly as .mp4 / .m4a.
+        mimeTypes: ['image/*', 'audio/*', 'video/mp4'],
         focalPoint: true,
         imageSizes: [
             { name: 'thumbnail', width: 400, formatOptions: { format: 'webp', options: { quality: 80 } } },

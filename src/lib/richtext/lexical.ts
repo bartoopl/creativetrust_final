@@ -232,7 +232,11 @@ function collectInline(nodes: LexicalNode[] | undefined, state: InlineState, opt
         if (node.type === 'text') {
             state.children.push({ _type: 'span', text: String(node.text ?? ''), marks: [...marksOf(node.format), ...extraMarks] });
         } else if (node.type === 'linebreak') {
-            state.children.push({ _type: 'span', text: '\n', marks: [...extraMarks] });
+            // A break inside formatted text (e.g. a code snippet) keeps that formatting,
+            // as it was one span in Portable Text.
+            const previous = state.children[state.children.length - 1];
+            const inherit = previous && extraMarks.every((mark) => previous.marks?.includes(mark));
+            state.children.push({ _type: 'span', text: '\n', marks: inherit ? [...(previous.marks ?? [])] : [...extraMarks] });
         } else if (node.type === 'link' || node.type === 'autolink') {
             const fields = (node.fields ?? {}) as Record<string, unknown>;
             const href = linkHref(fields, options);
