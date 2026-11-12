@@ -141,6 +141,31 @@ docker exec -i <kontener-db> pg_restore -U creativetrust -d creativetrust --clea
 docker run --rm -v <nazwa-uslugi>_media:/m -v $PWD:/b alpine tar -xzf /b/media_<data>.tar.gz -C /m
 ```
 
+## Zapomniane hasło do /admin
+
+Najpierw `/admin/forgot`. Strona nie ma skonfigurowanej wysyłki maili z Payload, więc
+mail z linkiem resetu nie wychodzi, tylko trafia do logów aplikacji (Dokploy → usługa →
+*Logs*): szukaj linku `/admin/reset/<token>` i otwórz go w przeglądarce.
+
+Bez logów hasło ustawia skrypt `scripts/set-admin-password.ts` (obraz `:tools`, ta sama sieć
+co przy imporcie z punktu 3). Bez `ADMIN_EMAIL` tylko wypisuje konta:
+
+```sh
+# na serwerze (SSH); hasło wpisujesz niewidocznie, nie trafia do historii powłoki
+read -s ADMIN_PASSWORD && export ADMIN_PASSWORD
+docker run --rm \
+  --network <nazwa-uslugi> \
+  -e DATABASE_URL=postgres://creativetrust:<POSTGRES_PASSWORD>@db:5432/creativetrust \
+  -e PAYLOAD_SECRET=<PAYLOAD_SECRET> \
+  -e ADMIN_EMAIL=<e-mail konta> -e ADMIN_PASSWORD \
+  ghcr.io/bartoopl/creativetrust_final:tools \
+  npm run payload -- run scripts/set-admin-password.ts
+unset ADMIN_PASSWORD
+```
+
+Hasło musi mieć co najmniej 12 znaków. Skrypt zdejmuje też blokadę konta po nieudanych
+logowaniach. Oczekiwany koniec: `Password changed for … the account is unlocked.`
+
 ## Praca lokalna
 
 Wymagany Node 22 (Payload nie działa jeszcze na Node 26) i Postgres.
