@@ -67,17 +67,6 @@ const nextConfig: NextConfig = {
                 source: '/api/media/file/:path*',
                 headers: [{ key: 'Cache-Control', value: 'public, max-age=86400, s-maxage=2592000, stale-while-revalidate=86400' }],
             },
-            // Audio and video must not be cached at the edge. Players fetch them with
-            // Range requests (Safari will not play .m4a/.mp4 without a 206, and no
-            // browser can seek without one). Next.js drops Content-Length from route
-            // handler responses, so Cloudflare stores the file chunked and then answers
-            // every Range request with the whole file as a 200. Payload itself answers
-            // Range correctly, so the edge has to pass these requests through
-            // (DEPLOY.md: Cloudflare cache rule bypassing audio and video).
-            {
-                source: '/api/media/file/:file(.+\\.(?:mp3|m4a|mp4|aac|wav|ogg|oga|webm))',
-                headers: [{ key: 'Cache-Control', value: 'private, max-age=86400' }],
-            },
             {
                 source: '/(.*)',
                 headers: [
