@@ -1,5 +1,4 @@
 import HomeHero from './HomeHero';
-import AskHero from './AskHero';
 import HomeShowcase from './HomeShowcase';
 import HomeProof from './HomeProof';
 import HomeServices from './HomeServices';
@@ -13,7 +12,7 @@ import type { Locale } from '@/lib/i18n';
 
 /**
  * Homepage trial redesign: everything inside .ct-v2 uses the "electric ink on drafting paper" theme.
- * Leads with the audit and management offer; the offer assistant sits further down.
+ * Leads with the audit and management offer.
  */
 export default function HomePage({ locale }: { locale: Locale }) {
     return (
@@ -26,7 +25,6 @@ export default function HomePage({ locale }: { locale: Locale }) {
             <HomeShowcase locale={locale} />
             <HomeCases locale={locale} />
             <HomeVoices locale={locale} />
-            <AskHero locale={locale} />
             <HomeBlog locale={locale} />
             <HomeClosing locale={locale} />
         </div>

@@ -38,7 +38,7 @@ się co godzinę. Migracje bazy wykonują się same przy starcie kontenera
 > Stan na 12.11.2026: w Dokploy jest już projekt **CreativeTrust** z usługą compose
 > `creativetrust` (źródło *Raw*, Isolated Deployments włączone, auto-deploy wyłączony),
 > wygenerowanymi `POSTGRES_PASSWORD` / `PAYLOAD_SECRET` i domeną testową
-> `creativetrust.91.98.140.18.sslip.io`. Do uzupełnienia: zmienne `EMAIL_*` i `ANTHROPIC_*`.
+> `creativetrust.91.98.140.18.sslip.io`. Zmienne `EMAIL_*` uzupełnione.
 > Plik compose w Dokploy to kopia z repozytorium; po zmianie `docker-compose.yml` wklej go
 > ponownie (*General → Compose file*).
 
@@ -54,8 +54,7 @@ się co godzinę. Migracje bazy wykonują się same przy starcie kontenera
    |---|---|
    | `POSTGRES_PASSWORD` | długie losowe hasło (`openssl rand -hex 24`) |
    | `PAYLOAD_SECRET` | losowy ciąg (`openssl rand -hex 32`); **nie zmieniaj go później**, bo wyloguje wszystkich |
-   | `EMAIL_SERVER`, `EMAIL_PORT`, `EMAIL_SECURE`, `EMAIL_USER`, `EMAIL_PASSWORD`, `EMAIL_FROM`, `EMAIL_CONTACT`, `EMAIL_AUTOMATION` | jak dotąd w Netlify |
-   | `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`, `ASSISTANT_QUOTA_SALT` | jak dotąd w Netlify |
+   | `EMAIL_SERVER`, `EMAIL_PORT`, `EMAIL_SECURE`, `EMAIL_USER`, `EMAIL_PASSWORD`, `EMAIL_FROM`, `EMAIL_CONTACT` (adres, na który przychodzą zgłoszenia z formularzy) | jak dotąd w Netlify |
 
 4. Zakładka *Domains*: `www.creativetrust.pl` i `creativetrust.pl`, usługa `app`, port `3000`,
    HTTPS włączone (Let's Encrypt). Na czas testów dodaj też `nowa.creativetrust.pl`.

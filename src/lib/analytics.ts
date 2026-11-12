@@ -65,7 +65,7 @@ gtag('consent', 'default', {
 })();
 `;
 
-export type LeadSource = 'contact_form' | 'landing_form' | 'assistant_form' | 'email_click' | 'phone_click';
+export type LeadSource = 'contact_form' | 'landing_form' | 'email_click' | 'phone_click';
 
 /** GA4 `generate_lead`, forwarded by GTM. Never pass form values here: they would end up in GA4. */
 export function trackLead(leadSource: LeadSource): void {
