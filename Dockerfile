@@ -36,6 +36,8 @@ RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Audio/video uploads with Content-Length and Range (see the file's header).
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/serve-media.cjs ./serve-media.cjs
 # Uploads and the Next.js data cache live on volumes (docker-compose.yml).
 RUN mkdir -p /app/media /app/.next/cache && chown -R nextjs:nodejs /app/media /app/.next
 
@@ -43,4 +45,4 @@ USER nextjs
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
     CMD wget -qO- http://127.0.0.1:3000/robots.txt >/dev/null || exit 1
-CMD ["node", "server.js"]
+CMD ["node", "-r", "./serve-media.cjs", "server.js"]
