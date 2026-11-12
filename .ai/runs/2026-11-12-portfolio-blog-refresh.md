@@ -60,9 +60,9 @@ Strona główna ma już nowy język wizualny v2 („electric ink on drafting pap
 
 ### Phase 3: Podstrony
 
-- [ ] 3.1 Pozycja portfolio: nowy układ i Zobacz też
-- [ ] 3.2 Wpis bloga: nagłówek, okładka, autor, powiązane
-- [ ] 3.3 PortableTextContent: typografia czytania
+- [x] 3.1 Pozycja portfolio: nowy układ i Zobacz też — 730d4e7
+- [x] 3.2 Wpis bloga: nagłówek, okładka, autor, powiązane — 7709c8c
+- [x] 3.3 PortableTextContent: typografia czytania — 279cb09
 
 ### Phase 4: Testy i weryfikacja
 
