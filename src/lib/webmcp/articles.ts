@@ -8,7 +8,7 @@ export const MAX_LIMIT = 10;
 export type ArticleQuery = { ok: true; query: string; limit: number } | { ok: false; error: string };
 
 export function parseArticleQuery(params: URLSearchParams): ArticleQuery {
-    // Collapse whitespace and drop GROQ match wildcards the caller might send.
+    // Collapse whitespace and drop wildcards the caller might send.
     const query = (params.get('q') ?? '').replace(/[*\s]+/g, ' ').trim();
     if (query.length < 2 || query.length > 100) return { ok: false, error: 'q must be 2–100 characters' };
     const raw = Number(params.get('limit') ?? 5);
@@ -16,19 +16,9 @@ export function parseArticleQuery(params: URLSearchParams): ArticleQuery {
     return { ok: true, query, limit };
 }
 
-/** Published blog posts and knowledge-base entries only; drafts are excluded because the server client holds a token. */
-export function articleSearchGroq(limit: number): string {
-    const end = Math.min(MAX_LIMIT, Math.max(1, Math.floor(limit)));
-    return `*[_type in ["blogPost", "knowledgeBase"] && defined(slug.current) && !(_id in path("drafts.**"))
-        && [title, excerpt, shortDescription] match $terms]
-        | order(publishedAt desc)[0...${end}] {
-            _type, title, "slug": slug.current, "summary": coalesce(excerpt, shortDescription), publishedAt
-        }`;
-}
-
-/** Every word must match, each as a prefix (so "migrac" finds "migracja"). */
+/** Every word must appear in the title or summary (case-insensitive contains, so "migrac" finds "migracja"). */
 export function matchTerms(query: string): string[] {
-    return query.split(' ').filter(Boolean).map((word) => `${word}*`);
+    return query.split(' ').filter(Boolean);
 }
 
 export interface ArticleDoc {

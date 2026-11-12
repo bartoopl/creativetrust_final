@@ -4,42 +4,21 @@ import { readFileSync } from 'node:fs';
 
 const CANONICAL = 'https://www.creativetrust.pl';
 
-/** `[[redirects]]` tables from netlify.toml: flat `key = value` pairs only. */
-function netlifyRedirects() {
-    const toml = readFileSync(new URL('../netlify.toml', import.meta.url), 'utf8');
-    return toml
-        .split(/^\[\[redirects\]\]\s*$/m)
-        .slice(1)
-        .map((chunk) => {
-            const rule = {};
-            for (const line of chunk.split('\n')) {
-                if (/^\s*\[/.test(line)) break;
-                const m = line.match(/^\s*(\w+)\s*=\s*(.+?)\s*$/);
-                if (m) rule[m[1]] = JSON.parse(m[2]);
-            }
-            return rule;
-        });
-}
-
-test('apex on http and https goes to https://www in one 301, path kept', () => {
-    const rules = netlifyRedirects();
-    for (const from of ['http://creativetrust.pl/*', 'https://creativetrust.pl/*']) {
-        const rule = rules.find((r) => r.from === from);
-        assert.ok(rule, `missing rule for ${from}`);
-        assert.equal(rule.to, `${CANONICAL}/:splat`);
-        assert.equal(rule.status, 301);
-        assert.equal(rule.force, true);
-    }
+test('bare domain goes to https://www in one 301, path kept', async () => {
+    const { apexRedirect } = await import('../src/lib/host-redirects.ts');
+    assert.deepEqual(apexRedirect.has, [{ type: 'host', value: 'creativetrust.pl' }]);
+    assert.equal(apexRedirect.source, '/:path*');
+    assert.equal(apexRedirect.destination, `${CANONICAL}/:path*`);
+    assert.equal(apexRedirect.statusCode, 301);
+    const config = readFileSync(new URL('../next.config.ts', import.meta.url), 'utf8');
+    assert.match(config, /^\s*apexRedirect,$/m, 'next.config.ts applies it');
 });
 
-test('no domain-level redirect targets its own host (no loop)', () => {
-    for (const rule of netlifyRedirects()) {
-        if (!/^https?:\/\//.test(rule.from)) continue;
-        const from = new URL(rule.from.replace('*', 'x'));
-        const to = new URL(rule.to.replace(':splat', 'x'));
-        assert.notEqual(from.host, to.host, `${rule.from} → ${rule.to} stays on the same host`);
-        assert.equal(to.origin, CANONICAL);
-    }
+test('the domain redirect targets another host (no loop)', async () => {
+    const { apexRedirect } = await import('../src/lib/host-redirects.ts');
+    const to = new URL(apexRedirect.destination.replace(':path*', 'x'));
+    assert.notEqual(to.host, apexRedirect.has[0].value);
+    assert.equal(to.origin, CANONICAL);
 });
 
 test('HSTS stays on every response', () => {

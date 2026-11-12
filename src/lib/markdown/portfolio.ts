@@ -11,6 +11,7 @@ export interface PortfolioProjectDocument {
     projectUrl?: string | null;
     scopeOfWork?: string[] | null;
     categories?: Array<{ title?: string | null } | null> | null;
+    technologies?: Array<{ title?: string | null } | null> | null;
     publishedAt?: string | null;
     _updatedAt?: string | null;
 }
@@ -21,6 +22,10 @@ const isoDate = (value?: string | null) => (value && !Number.isNaN(Date.parse(va
 
 export function projectCategories(doc: PortfolioProjectDocument): string[] {
     return (doc.categories ?? []).map((c) => clean(c?.title)).filter((c): c is string => Boolean(c));
+}
+
+export function projectTechnologies(doc: PortfolioProjectDocument): string[] {
+    return (doc.technologies ?? []).map((t) => clean(t?.title)).filter((t): t is string => Boolean(t));
 }
 
 export function projectScope(doc: PortfolioProjectDocument): string[] {
@@ -53,7 +58,7 @@ export function portfolioFrontmatter(doc: PortfolioProjectDocument, canonical: s
     const title = clean(doc.title) ?? '';
     const client = clean(doc.client);
     const categories = projectCategories(doc);
-    const keywords = client ? [...categories, client] : categories;
+    const keywords = [...categories, ...projectTechnologies(doc), ...(client ? [client] : [])];
     return {
         title: `${title} — realizacja CreativeTrust`,
         description: summary,
@@ -104,6 +109,7 @@ export function portfolioMarkdown({ doc, canonical, frontmatter, descriptionMark
     const client = clean(doc.client);
     const categories = projectCategories(doc);
     const scope = projectScope(doc);
+    const technologies = projectTechnologies(doc);
     const date = isoDate(doc.publishedAt);
     const projectUrl = clean(doc.projectUrl);
 
@@ -111,6 +117,7 @@ export function portfolioMarkdown({ doc, canonical, frontmatter, descriptionMark
         client ? `- **Klient:** ${client}` : '',
         date ? `- **Data realizacji:** ${date}` : '',
         categories.length ? `- **Kategorie:** ${categories.join(', ')}` : '',
+        technologies.length ? `- **Technologie:** ${technologies.join(', ')}` : '',
         projectUrl ? `- **Link do projektu:** ${projectUrl}` : '',
         '- **Wykonawca:** CreativeTrust (https://www.creativetrust.pl)',
     ].filter(Boolean);

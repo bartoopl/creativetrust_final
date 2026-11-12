@@ -180,8 +180,6 @@ test('one company description and founding year across JSON-LD, llms.txt and the
 
 test('retired blog posts redirect to a live page and never reach the sitemap', async () => {
     const { readFileSync } = await import('node:fs');
-    const { createRequire } = await import('node:module');
-    const Module = (await import('node:module')).default;
     const { markdownPages, markdownTargetFor } = await import('../src/lib/markdown/pages.ts');
     const retired = JSON.parse(readFileSync(new URL('../retired-blog-posts.json', import.meta.url), 'utf8'));
     const slugs = Object.keys(retired);
@@ -193,36 +191,22 @@ test('retired blog posts redirect to a live page and never reach the sitemap', a
         assert.ok(!slugs.some((slug) => destination === `/blog/${slug}`), 'no redirect chains');
     }
 
-    // Run the real additionalPaths with a fake Sanity client that returns the retired posts.
-    const originalLoad = Module._load;
-    Module._load = function (request, ...rest) {
-        if (request === 'next-sanity') {
-            return {
-                createClient: () => ({
-                    fetch: async (query) =>
-                        query.includes('"blogPost"') ? [...slugs, 'aktualny-wpis'].map((slug) => ({ slug, _updatedAt: '2026-01-01' })) : [],
-                }),
-            };
-        }
-        return originalLoad.call(this, request, ...rest);
-    };
-    try {
-        const config = createRequire(import.meta.url)('../next-sitemap.config.js');
-        const paths = (await config.additionalPaths({})).map((p) => p.loc);
-        assert.ok(paths.includes('/blog/aktualny-wpis'));
-        for (const slug of slugs) assert.ok(!paths.includes(`/blog/${slug}`), `${slug} left out of the sitemap`);
-    } finally {
-        Module._load = originalLoad;
-    }
+    const { sitemapEntries } = await import('../src/lib/sitemap.ts');
+    const doc = (slug) => ({ slug, updatedAt: '2026-01-01' });
+    const paths = sitemapEntries(
+        { posts: [...slugs, 'aktualny-wpis'].map(doc), projects: [], knowledgeBase: [], blogCategories: [], authors: [] },
+        retired,
+    ).map((entry) => entry.loc);
+    assert.ok(paths.includes('/blog/aktualny-wpis'));
+    for (const slug of slugs) assert.ok(!paths.includes(`/blog/${slug}`), `${slug} left out of the sitemap`);
 });
 
-test('robots.txt transform drops the Host line and keeps Content-Signal', async () => {
-    const { createRequire } = await import('node:module');
-    const config = createRequire(import.meta.url)('../next-sitemap.config.js');
-    const generated = '# *\nUser-agent: *\nAllow: /\n\n# Host\nHost: https://www.creativetrust.pl\n\n# Sitemaps\nSitemap: https://www.creativetrust.pl/sitemap.xml\n';
-    const robots = await config.robotsTxtOptions.transformRobotsTxt({}, generated);
+test('robots.txt has no Host line, keeps Content-Signal and points to the sitemap', async () => {
+    const { readFileSync } = await import('node:fs');
+    const robots = readFileSync(new URL('../public/robots.txt', import.meta.url), 'utf8');
     assert.ok(!robots.includes('Host:'));
     assert.match(robots, /Content-Signal: search=yes,ai-input=yes,ai-train=no\n\n# Sitemaps/);
+    assert.match(robots, /Sitemap: https:\/\/www\.creativetrust\.pl\/sitemap\.xml/);
 });
 
 test('portfolio index and author Markdown twins', async () => {

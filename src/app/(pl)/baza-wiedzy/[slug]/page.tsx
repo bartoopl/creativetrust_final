@@ -1,4 +1,4 @@
-import { getKnowledgeBaseEntry } from '@/lib/sanity';
+import { getKnowledgeBaseEntry } from '@/lib/cms';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -6,9 +6,8 @@ import PortableTextContent from '@/components/PortableTextContent';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildBreadcrumbSchema, buildDefinedTermSchema } from '@/lib/schema';
 
-// Regenerated hourly so Sanity edits (and dateModified) reach the site
-// without a deploy; without it the CDN kept the first render for a year.
-export const revalidate = 3600;
+// Rendered on request from cached CMS data (src/lib/cms.ts); saving in the
+// admin refreshes it immediately, otherwise it is re-read hourly.
 
 // Define the params type as a Promise as required in Next.js v15
 type Params = Promise<{ slug: string }>;
@@ -48,10 +47,6 @@ export async function generateMetadata({
             description: entry.seoDescription || entry.shortDescription,
         },
     };
-}
-
-export async function generateStaticParams() {
-    return [];
 }
 
 // Update the page component to also handle Promise params

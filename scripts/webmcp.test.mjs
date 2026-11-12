@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { buildTools } from '../src/lib/webmcp/tools.ts';
 import { findModelContext, registerTools } from '../src/lib/webmcp/register.ts';
-import { parseArticleQuery, articleSearchGroq, matchTerms, toHit } from '../src/lib/webmcp/articles.ts';
+import { parseArticleQuery, matchTerms, toHit } from '../src/lib/webmcp/articles.ts';
 import { services, seoLandings, publishedPrices, pricesFor } from '../src/lib/site-services.ts';
 
 const ORIGIN = 'https://www.creativetrust.pl';
@@ -133,13 +133,8 @@ test('parseArticleQuery trims, strips wildcards and clamps the limit', () => {
     assert.equal(parseArticleQuery(new URLSearchParams(`q=${'a'.repeat(101)}`)).ok, false);
 });
 
-test('article search GROQ excludes drafts and uses a literal, bounded slice', () => {
-    const groq = articleSearchGroq(7);
-    assert.match(groq, /!\(_id in path\("drafts\.\*\*"\)\)/);
-    assert.match(groq, /\[0\.\.\.7\]/);
-    assert.match(articleSearchGroq(1000), /\[0\.\.\.10\]/);
-    assert.doesNotMatch(groq, /\$\{/);
-    assert.deepEqual(matchTerms('migracja woo'), ['migracja*', 'woo*']);
+test('article search splits the query into words that must all match', () => {
+    assert.deepEqual(matchTerms('migracja woo'), ['migracja', 'woo']);
 });
 
 test('toHit maps blog and knowledge-base documents to public URLs', () => {

@@ -2,25 +2,24 @@ import type { CSSProperties } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getPortfolioProject, getPortfolioSlugs, urlFor } from '@/lib/sanity';
+import { getPortfolioProject, urlFor } from '@/lib/cms';
 import PortableTextContent from '@/components/PortableTextContent';
 import SchemaScript from '@/components/SchemaScript';
 import { GalleryTrigger, ProjectGallery } from '@/components/ProjectGallery';
-import { Project, Category, ImageWithCaption } from '@/types';
+import { Project, Category, ImageWithCaption, Technology } from '@/types';
 import { SITE_URL, buildBreadcrumbSchema, buildCreativeWorkSchema } from '@/lib/schema';
 import { portableTextToPlainText, type PortableTextBlock } from '@/lib/markdown/portable-text';
-import { projectCategories, projectSummary } from '@/lib/markdown/portfolio';
+import { projectCategories, projectSummary, projectTechnologies } from '@/lib/markdown/portfolio';
 
-// Server-rendered so crawlers and AI agents that do not run JavaScript see the
-// case study; regenerated hourly when the project changes in Sanity.
-export const revalidate = 3600;
+// Rendered on request from cached CMS data (src/lib/cms.ts); saving in the
+// admin refreshes it immediately, otherwise it is re-read hourly.
 
 type Params = Promise<{ slug: string }>;
 
 type ProjectDocument = Project & { _updatedAt?: string };
 
-// Sanity errors are thrown, not turned into a 404: on revalidation Next then
-// keeps serving the last good page instead of caching "not found" for an hour.
+// CMS errors are thrown, not turned into a 404 (a database hiccup must not
+// tell Google the case study is gone).
 async function loadProject(slug: string): Promise<ProjectDocument | null> {
     return (await getPortfolioProject(slug)) ?? null;
 }
@@ -29,16 +28,6 @@ const hasAsset = (image: unknown): boolean => Boolean((image as { asset?: unknow
 
 function summaryOf(project: ProjectDocument, maxLength = 160) {
     return projectSummary(project, portableTextToPlainText(project.description as unknown as PortableTextBlock[] | string, maxLength));
-}
-
-export async function generateStaticParams() {
-    try {
-        const slugs = await getPortfolioSlugs();
-        return slugs.map((slug) => ({ slug }));
-    } catch {
-        // Sanity unreachable at build time: pages render on first request instead.
-        return [];
-    }
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
@@ -109,7 +98,6 @@ export default async function ProjectPage({ params }: { params: Params }) {
     if (!project) notFound();
 
     const url = `${SITE_URL}/portfolio/${slug}`;
-    // Sanity allows image entries without an uploaded file; they have no URL.
     const mainImage = hasAsset(project.mainImage) ? project.mainImage : null;
     const galleryImages: ImageWithCaption[] = (project.galleryImages ?? []).filter(hasAsset);
     // Lightbox order: main image first, then the gallery.
@@ -124,7 +112,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
             clientName: project.client,
             dateCreated: project.publishedAt,
             image: lightboxImages.slice(0, 4).map((image) => urlFor(image).width(1200).fit('max').url()),
-            keywords: projectCategories(project),
+            keywords: [...projectCategories(project), ...projectTechnologies(project)],
             sameAs: project.projectUrl,
         }),
         buildBreadcrumbSchema([
@@ -201,6 +189,19 @@ export default async function ProjectPage({ params }: { params: Params }) {
                                                     </span>
                                                 ))}
                                             </div>
+                                        </div>
+                                    )}
+
+                                    {project.technologies && project.technologies.length > 0 && (
+                                        <div className="flex flex-col gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
+                                            <h3 className="ct-meta" style={{ margin: 0 }}>Technologie</h3>
+                                            <ul className="flex flex-wrap gap-2" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                                                {project.technologies.map((technology: Technology) => (
+                                                    <li key={technology._id} className="ct-pill">
+                                                        {technology.title}
+                                                    </li>
+                                                ))}
+                                            </ul>
                                         </div>
                                     )}
 

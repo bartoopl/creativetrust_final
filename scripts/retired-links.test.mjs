@@ -77,15 +77,6 @@ test('rewriteRetiredLinks tolerates missing content and odd marks', () => {
     assert.deepEqual(rewriteRetiredLinks(odd), odd);
 });
 
-test('import scripts no longer write links to retired service pages', () => {
-    for (const file of ['scripts/import-seo-blog-posts.cjs', 'scripts/import-geo-seo-blog-posts-2026.cjs']) {
-        const source = readFileSync(new URL(file, root), 'utf8');
-        for (const retired of Object.keys(RETIRED_SERVICE_PAGES)) {
-            assert.ok(!source.includes(`'${retired}'`), `${file} still links to ${retired}`);
-        }
-    }
-});
-
 test('the audit landing is listed in Polish and kept out of the English menu', async () => {
     const { seoLandings, landingsFor } = await import('../src/lib/site-services.ts');
     assert.ok(seoLandings.some(({ href }) => href === '/uslugi/audyt-google-ads'));

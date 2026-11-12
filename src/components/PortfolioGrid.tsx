@@ -5,12 +5,13 @@ import CaseStudyCard, { type CaseCard } from '@/components/CaseStudyCard';
 import type { Locale } from '@/lib/i18n';
 
 const copy = {
-    pl: { filter: 'Filtruj', all: 'Wszystkie', none: '// brak wyników', empty: 'Brak projektów dla tej kategorii.' },
-    en: { filter: 'Filter', all: 'All', none: '// no results', empty: 'No projects in this category.' },
+    pl: { filter: 'Filtruj', technology: 'Technologia', all: 'Wszystkie', none: '// brak wyników', empty: 'Brak projektów dla wybranych filtrów.' },
+    en: { filter: 'Filter', technology: 'Technology', all: 'All', none: '// no results', empty: 'No projects match the selected filters.' },
 };
 
 export interface PortfolioGridItem extends CaseCard {
     categorySlugs: string[];
+    technologySlugs?: string[];
 }
 
 export interface PortfolioFilter {
@@ -19,39 +20,64 @@ export interface PortfolioFilter {
     slug: string;
 }
 
+function FilterRow({ label, allLabel, options, selected, onSelect }: { label: string; allLabel: string; options: PortfolioFilter[]; selected: string; onSelect: (slug: string) => void }) {
+    return (
+        <div className="flex flex-wrap items-center gap-2">
+            <span className="ct-meta" style={{ marginRight: 6, color: 'var(--muted-2)' }}>{label}</span>
+            {[{ id: 'all', title: allLabel, slug: 'all' }, ...options].map((option) => {
+                const active = selected === option.slug;
+                return (
+                    <button
+                        key={option.id}
+                        onClick={() => onSelect(option.slug)}
+                        aria-pressed={active}
+                        className="ct-pill ct-card-hover"
+                        style={{
+                            cursor: 'pointer',
+                            borderColor: active ? 'var(--accent)' : undefined,
+                            color: active ? 'var(--accent)' : undefined,
+                            background: active ? 'var(--accent-soft)' : undefined,
+                        }}
+                    >{option.title}</button>
+                );
+            })}
+        </div>
+    );
+}
+
 /**
- * Category filter over a server-rendered project list: every card is in the
- * HTML (crawlers see all case studies), the filter only hides the others.
+ * Category and technology filters over a server-rendered project list: every
+ * card is in the HTML (crawlers see all case studies), the filters only hide
+ * the others. The technology row appears once a project has a technology.
  */
-export default function PortfolioGrid({ items, categories, locale = 'pl' }: { items: PortfolioGridItem[]; categories: PortfolioFilter[]; locale?: Locale }) {
+export default function PortfolioGrid({
+    items,
+    categories,
+    technologies = [],
+    locale = 'pl',
+}: {
+    items: PortfolioGridItem[];
+    categories: PortfolioFilter[];
+    technologies?: PortfolioFilter[];
+    locale?: Locale;
+}) {
     const t = copy[locale];
     const [selected, setSelected] = useState<string>('all');
+    const [technology, setTechnology] = useState<string>('all');
 
-    const filtered = selected === 'all' ? items : items.filter((item) => item.categorySlugs.includes(selected));
+    const filtered = items.filter(
+        (item) =>
+            (selected === 'all' || item.categorySlugs.includes(selected)) &&
+            (technology === 'all' || (item.technologySlugs ?? []).includes(technology)),
+    );
 
     return (
         <>
-            {categories.length > 0 && (
+            {(categories.length > 0 || technologies.length > 0) && (
                 <div style={{ borderBottom: '1px solid var(--line)', background: 'var(--panel)' }}>
-                    <div className="ct-shell-sm mx-auto flex max-w-[1280px] flex-wrap items-center gap-2" style={{ boxSizing: 'content-box' }}>
-                        <span className="ct-meta" style={{ marginRight: 6, color: 'var(--muted-2)' }}>{t.filter}</span>
-                        {[{ id: 'all', title: t.all, slug: 'all' }, ...categories].map(cat => {
-                            const active = selected === cat.slug;
-                            return (
-                                <button
-                                    key={cat.id}
-                                    onClick={() => setSelected(cat.slug)}
-                                    aria-pressed={active}
-                                    className="ct-pill ct-card-hover"
-                                    style={{
-                                        cursor: 'pointer',
-                                        borderColor: active ? 'var(--accent)' : undefined,
-                                        color: active ? 'var(--accent)' : undefined,
-                                        background: active ? 'var(--accent-soft)' : undefined,
-                                    }}
-                                >{cat.title}</button>
-                            );
-                        })}
+                    <div className="ct-shell-sm mx-auto flex max-w-[1280px] flex-col gap-3" style={{ boxSizing: 'content-box' }}>
+                        {categories.length > 0 && <FilterRow label={t.filter} allLabel={t.all} options={categories} selected={selected} onSelect={setSelected} />}
+                        {technologies.length > 0 && <FilterRow label={t.technology} allLabel={t.all} options={technologies} selected={technology} onSelect={setTechnology} />}
                     </div>
                 </div>
             )}

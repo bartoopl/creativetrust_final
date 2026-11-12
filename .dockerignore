@@ -1,0 +1,14 @@
+.git
+.github
+.next
+node_modules
+media
+.env*
+*.tsbuildinfo
+.idea
+.ai
+blender
+design_handoff_medusa_redesign
+*.md
+!content/**/*.md
+npm-debug.log*

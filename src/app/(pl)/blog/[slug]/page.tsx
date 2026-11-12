@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { getBlogPost } from '@/lib/sanity';
-import { urlFor } from '@/lib/sanity';
+import { getBlogPost } from '@/lib/cms';
+import { urlFor } from '@/lib/cms';
 import PortableTextContent from '@/components/PortableTextContent';
 import AudioPlayer from '@/components/AudioPlayer';
 import BlogServiceLinks from '@/components/BlogServiceLinks';
@@ -14,9 +14,8 @@ import { getBlogSeoConfig } from '@/lib/blog-seo';
 import { SITE_URL, buildBlogPostingSchema, buildBreadcrumbSchema, buildFaqSchema } from '@/lib/schema';
 import { resolveAuthor } from '@/lib/authors';
 
-// Regenerated hourly so Sanity edits (and dateModified) reach the site
-// without a deploy; without it the CDN kept the first render for a year.
-export const revalidate = 3600;
+// Rendered on request from cached CMS data (src/lib/cms.ts); saving in the
+// admin refreshes it immediately, otherwise it is re-read hourly.
 
 // Define the params type as a Promise as required in Next.js v15
 type Params = Promise<{ slug: string }>;
@@ -58,10 +57,6 @@ export async function generateMetadata({
             description: seoConfig?.description || post.seoDescription || post.excerpt || '',
         },
     };
-}
-
-export async function generateStaticParams() {
-    return [];
 }
 
 export default async function BlogPostPage({

@@ -1,3 +1,5 @@
+import type { PortableTextBlock } from '@/lib/markdown/portable-text';
+
 // Typy dla portfolio
 export interface Project {
     _id: string;
@@ -9,8 +11,19 @@ export interface Project {
     projectUrl?: string;
     scopeOfWork: string[];
     categories: Category[];
-    description: string;
+    technologies?: Technology[];
+    /** Portable Text (converted from the CMS rich text); plain text in a few old entries. */
+    description: PortableTextBlock[] | string;
     publishedAt: string;
+}
+
+export interface Technology {
+    _id: string;
+    title: string;
+    slug: { current: string };
+    group?: string | null;
+    website?: string | null;
+    logo?: unknown;
 }
 
 export interface Category {

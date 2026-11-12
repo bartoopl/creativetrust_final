@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { client } from '@/lib/sanity';
+import { searchArticles } from '@/lib/cms';
 import { SITE_URL } from '@/lib/schema';
-import { articleSearchGroq, matchTerms, parseArticleQuery, toHit, type ArticleDoc } from '@/lib/webmcp/articles';
+import { matchTerms, parseArticleQuery, toHit } from '@/lib/webmcp/articles';
 
 /** Read-only article search backing the `search_articles` WebMCP tool. */
 export async function GET(request: Request) {
@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     }
 
     try {
-        const docs = await client.fetch<ArticleDoc[]>(articleSearchGroq(parsed.limit), { terms: matchTerms(parsed.query) });
+        const docs = await searchArticles(matchTerms(parsed.query), parsed.limit);
         return NextResponse.json(
             { results: docs.map((doc) => toHit(doc, SITE_URL)) },
             { headers: { 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=3600' } },

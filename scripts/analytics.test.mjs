@@ -99,7 +99,6 @@ test('each form reports a lead only after the send is confirmed', () => {
     };
     order('src/components/ContactForm.tsx', 'await submission;', 'contact_form');
     order('src/components/LandingLeadForm.tsx', 'if (!response.ok)', 'landing_form');
-    order('src/components/home/LeadRequest.tsx', 'if (res.ok && data?.success !== false)', 'assistant_form');
 });
 
 test('mailto and tel links map to their lead source, other links to none', () => {

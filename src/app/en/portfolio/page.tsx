@@ -1,7 +1,8 @@
 import PageHero from '@/components/ui/PageHero';
 import PortfolioGrid, { type PortfolioFilter, type PortfolioGridItem } from '@/components/PortfolioGrid';
 import SchemaScript from '@/components/SchemaScript';
-import { getPortfolioProjects, getServiceCategories, urlFor } from '@/lib/sanity';
+import { getPortfolioProjects, getServiceCategories, urlFor } from '@/lib/cms';
+import { technologyFilters } from '@/lib/portfolio-technologies';
 import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
 
 // Sanity category titles are Polish; known ones get an English label, the rest fall back to the original.
@@ -30,9 +31,8 @@ const CATEGORY_LABELS: Record<string, string> = {
 }
 const categoryLabel = (title: string) => CATEGORY_LABELS[title] ?? title;
 
-// Server-rendered list of every case study (visible without JavaScript),
-// regenerated hourly.
-export const revalidate = 3600;
+// Rendered on request from cached CMS data (src/lib/cms.ts); saving in the
+// admin refreshes it immediately, otherwise it is re-read hourly.
 
 interface Project {
     _id: string;
@@ -41,6 +41,7 @@ interface Project {
     client: string;
     mainImage: any;
     categories: Category[] | null;
+    technologies?: Category[] | null;
 }
 
 interface Category {
@@ -49,8 +50,7 @@ interface Category {
     slug: { current: string };
 }
 
-// Sanity errors are thrown, not rendered as an empty list: on revalidation Next
-// then keeps serving the last good page.
+// CMS errors are thrown, not rendered as an empty list.
 async function loadPortfolio(): Promise<{ projects: Project[]; categories: Category[] }> {
     const [projects, categories] = await Promise.all([getPortfolioProjects(), getServiceCategories()]);
     return { projects: projects ?? [], categories: categories ?? [] };
@@ -71,6 +71,7 @@ export default async function PortfolioPage() {
             description: project.categories?.map(c => categoryLabel(c.title)).join(' · ') || '',
             image: project.mainImage?.asset ? urlFor(project.mainImage).width(900).url() : undefined,
             categorySlugs: project.categories?.map(c => c.slug.current) ?? [],
+            technologySlugs: project.technologies?.map((t) => t.slug.current) ?? [],
         }));
     const filters: PortfolioFilter[] = categories.map((c) => ({ id: c._id, title: categoryLabel(c.title), slug: c.slug.current }));
 
@@ -107,7 +108,7 @@ export default async function PortfolioPage() {
                 title="150+ projects. Every one different."
                 description="Brand, website, online shop or automation. Seeing the results is the best way to understand how we work."
             />
-            <PortfolioGrid items={items} categories={filters} locale="en" />
+            <PortfolioGrid items={items} categories={filters} technologies={technologyFilters(projects)} locale="en" />
         </main>
     );
 }

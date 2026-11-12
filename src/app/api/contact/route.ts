@@ -92,10 +92,7 @@ export async function POST(request: Request) {
 
         console.log('Formularz przeszedł walidację');
 
-        // Ustal adresata w zależności od typu formularza
-        const recipient = type === 'automation'
-            ? process.env.EMAIL_AUTOMATION || 'automation@creativetrust.pl'
-            : process.env.EMAIL_CONTACT || 'office@creativetrust.pl';
+        const recipient = process.env.EMAIL_CONTACT || 'office@creativetrust.pl';
 
         // Czytelne etykiety tematów z formularza kontaktowego
         const subjectLabels: Record<string, string> = {
@@ -107,9 +104,7 @@ export async function POST(request: Request) {
         };
 
         // Przygotuj temat e-maila
-        const emailSubject = (locale === 'en' ? '[EN] ' : '') + (type === 'automation'
-            ? `[Marketing Automation] Nowe zapytanie od ${name}`
-            : `[Formularz kontaktowy] ${subjectLabels[subject] || subject || 'Nowa wiadomość'}`);
+        const emailSubject = (locale === 'en' ? '[EN] ' : '') + `[Formularz kontaktowy] ${subjectLabels[subject] || subject || 'Nowa wiadomość'}`;
 
         console.log('Przygotowanie do wysłania email do:', recipient);
         console.log('Temat:', emailSubject);

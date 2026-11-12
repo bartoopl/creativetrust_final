@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { PortableText } from '@portabletext/react';
-import { urlFor } from '@/lib/sanity';
+import { urlFor } from '@/lib/media';
 import { canonicalHref } from '@/lib/markdown/portable-text';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,14 +19,14 @@ const PortableTextContent: React.FC<PortableTextContentProps> = ({ content, comp
     const components = {
         types: {
             image: ({ value }: any) => {
-                if (!value?.asset?._ref) {
+                if (!value?.asset?.url) {
                     return null;
                 }
                 return (
                     <figure style={{ margin: '32px 0' }}>
                         <div style={{ border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', overflow: 'hidden', background: 'var(--panel)' }}>
                             <Image
-                                src={urlFor(value).url()}
+                                src={urlFor(value).width(1200).url()}
                                 alt={value.alt || 'Obraz w treści'}
                                 width={800}
                                 height={500}

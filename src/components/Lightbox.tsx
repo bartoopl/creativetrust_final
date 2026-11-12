@@ -3,7 +3,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, animate, useMotionValue, useReducedMotion, useTransform } from 'framer-motion';
-import { urlFor } from '@/lib/sanity';
+import { urlFor } from '@/lib/media';
 import { ImageWithCaption } from '@/types'
 import { VelocityTracker, pickSwipeTarget, resistEdges, rubberband, shouldDismiss } from '@/lib/gesture';
 
