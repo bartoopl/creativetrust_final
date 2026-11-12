@@ -5,7 +5,7 @@ import PageHero from '@/components/ui/PageHero';
 import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
@@ -54,6 +54,11 @@ const process = [
 ];
 
 export default function EcommercePage() {
+    const breadcrumbSchema = buildBreadcrumbSchema([
+        { name: 'Home', url: `${SITE_URL}/en` },
+        { name: 'Services', url: `${SITE_URL}/en/services` },
+        { name: 'E-commerce', url: `${SITE_URL}/en/services/e-commerce` },
+    ]);
     const serviceSchema = buildServiceSchema({
         name: 'Online stores and e-commerce builds',
         description:
@@ -65,7 +70,7 @@ export default function EcommercePage() {
 
     return (
         <main style={{ minHeight: '100vh' }}>
-            <SchemaScript schema={serviceSchema} />
+            <SchemaScript schema={[breadcrumbSchema, serviceSchema]} />
             <PageHero
                 eyebrow="Online stores"
                 title={<>We build stores the way we would want to <span style={{ color: 'var(--accent)' }}>manage them.</span></>}

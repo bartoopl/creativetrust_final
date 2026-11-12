@@ -3,7 +3,7 @@ import { withPayload } from '@payloadcms/next/withPayload';
 // Blog posts replaced by a current page (301 here, left out of llms.txt and the
 // sitemap): AI answers quote outdated 2023 prices and trends.
 import retiredBlogPosts from './retired-blog-posts.json';
-import { RETIRED_SERVICE_PAGES } from './src/lib/retired-links';
+import { RETIRED_CONTENT_PAGES, RETIRED_SERVICE_PAGES } from './src/lib/retired-links';
 import { apexRedirect } from './src/lib/host-redirects';
 
 const nextConfig: NextConfig = {
@@ -23,6 +23,12 @@ const nextConfig: NextConfig = {
             apexRedirect,
             // Retired service pages → the closest live page (the same map rewrites post bodies).
             ...Object.entries(RETIRED_SERVICE_PAGES).map(([source, destination]) => ({ source, destination, permanent: true })),
+            // Old WordPress addresses: one 301 for each, with and without the trailing
+            // slash, since old Google results and external links use both.
+            ...Object.entries(RETIRED_CONTENT_PAGES).flatMap(([source, destination]) => [
+                { source, destination, statusCode: 301 },
+                { source: `${source}/`, destination, statusCode: 301 },
+            ]),
             // „Konsulting e-commerce” became the e-commerce audit (HTML and Markdown twin).
             {
                 source: '/uslugi/konsulting-e-commerce',

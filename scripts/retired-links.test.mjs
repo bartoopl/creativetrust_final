@@ -1,10 +1,24 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { RETIRED_SERVICE_PAGES, rewriteRetiredHref, rewriteRetiredLinks } from '../src/lib/retired-links.ts';
+import {
+    RETIRED_CONTENT_PAGES,
+    RETIRED_PATHS,
+    RETIRED_SERVICE_PAGES,
+    rewriteRetiredHref,
+    rewriteRetiredLinks,
+} from '../src/lib/retired-links.ts';
 
 const root = new URL('../', import.meta.url);
 const pageFile = (route) => new URL(`src/app/(pl)${route}/page.tsx`, root);
+const retiredBlogPosts = JSON.parse(readFileSync(new URL('retired-blog-posts.json', root), 'utf8'));
+
+// A static page, or a single slug under a section with a dynamic [slug] route.
+const isLiveRoute = (route) => {
+    if (existsSync(pageFile(route))) return true;
+    const dynamic = route.match(/^\/(blog|portfolio)\/[^/]+$/);
+    return Boolean(dynamic) && existsSync(pageFile(`/${dynamic[1]}/[slug]`));
+};
 
 const linkBlock = (...hrefs) => ({
     _type: 'block',
@@ -50,6 +64,85 @@ test('rewriteRetiredHref leaves live, external and look-alike links alone', () =
     ]) {
         assert.equal(rewriteRetiredHref(href), href);
     }
+});
+
+test('RETIRED_PATHS merges both maps without overlap', () => {
+    assert.equal(Object.keys(RETIRED_PATHS).length, Object.keys(RETIRED_SERVICE_PAGES).length + Object.keys(RETIRED_CONTENT_PAGES).length);
+    for (const [source, target] of Object.entries({ ...RETIRED_SERVICE_PAGES, ...RETIRED_CONTENT_PAGES })) {
+        assert.equal(RETIRED_PATHS[source], target);
+    }
+});
+
+test('every old WordPress address points at a live route, never at a redirect', () => {
+    for (const [source, target] of Object.entries(RETIRED_CONTENT_PAGES)) {
+        assert.ok(!existsSync(pageFile(source)), `${source} must not be a live route`);
+        assert.ok(isLiveRoute(target), `${target} must be a live route`);
+        assert.ok(!(target in RETIRED_PATHS), `${target} is retired itself`);
+        const slug = target.match(/^\/blog\/(.+)$/)?.[1];
+        assert.ok(!slug || !(slug in retiredBlogPosts), `${target} is a retired blog post`);
+    }
+});
+
+test('rewriteRetiredHref maps every old WordPress address, with or without a trailing slash', () => {
+    const expected = {
+        '/e-commerce/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec': '/blog/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec',
+        '/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec': '/blog/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec',
+        '/budowanie-profesjonalnego-marketingu-firmy-strategia-ktora-nadaje-marce-skrzydel': '/blog/budowanie-profesjonalnego-marketingu-firmy-strategia-ktora-nadaje-marce-skrzydel',
+        '/jakie-dane-z-google-analytics-warto-analizowac': '/blog/jakie-dane-z-google-analytics-warto-analizowac',
+        '/kiedy-mega-menu-jest-fajne-a-kiedy-nie': '/blog/kiedy-mega-menu-jest-fajne-a-kiedy-nie',
+        '/ssl-co-to-jest-i-czy-jest-potrzebne': '/blog/ssl-co-to-jest-i-czy-jest-potrzebne',
+        '/zwiekszenie-sprzedazy-w-sklepie-internetowym-6-sposobow-na-ulepszenie-strategii-kuponow': '/blog/zwiekszenie-sprzedazy-w-sklepie-internetowym-6-sposobow-na-ulepszenie-strategii-kuponow',
+        '/ile-kosztuje-strona-internetowa-w-2023-roku': '/uslugi/tworzenie-stron-www-cennik',
+        '/portfolio/item/artcakes': '/portfolio/artcakes-pl',
+        '/portfolio/item/sklep-sulphur': '/portfolio/sklep-sulphur-com-pl',
+    };
+    assert.deepEqual(RETIRED_CONTENT_PAGES, expected);
+    for (const [source, target] of Object.entries(expected)) {
+        assert.equal(rewriteRetiredHref(source), target);
+        assert.equal(rewriteRetiredHref(`${source}/`), target);
+        assert.equal(rewriteRetiredHref(`https://www.creativetrust.pl${source}/?utm=x#h`), `${target}?utm=x#h`);
+    }
+});
+
+test('rewriteRetiredHref drops the trailing slash of internal paths, keeping query and hash', () => {
+    assert.equal(rewriteRetiredHref('/baza-wiedzy/buyer-persona/'), '/baza-wiedzy/buyer-persona');
+    assert.equal(rewriteRetiredHref('/baza-wiedzy/buyer-persona//'), '/baza-wiedzy/buyer-persona');
+    assert.equal(rewriteRetiredHref('/blog/?page=2'), '/blog?page=2');
+    assert.equal(rewriteRetiredHref('/baza-wiedzy/buyer-persona/#definicja'), '/baza-wiedzy/buyer-persona#definicja');
+    assert.equal(rewriteRetiredHref('/uslugi/strony-www/?a=1#b'), '/uslugi/strony-www?a=1#b');
+    assert.equal(rewriteRetiredHref('https://www.creativetrust.pl/blog/'), 'https://www.creativetrust.pl/blog');
+});
+
+test('rewriteRetiredHref leaves the root, external and non-path links alone', () => {
+    for (const href of [
+        '/',
+        '/?a=1',
+        '/#proces',
+        'https://www.creativetrust.pl/',
+        'https://example.com/foo/',
+        'https://example.com/portfolio/item/artcakes/',
+        '//example.com/foo/',
+        'mailto:kontakt@creativetrust.pl',
+        'tel:+48123456789',
+        '#sekcja',
+        '?a=1',
+        'relative/path/',
+        '',
+        // Missing knowledge base entries are not mapped to other entries.
+        '/baza-wiedzy/cpm',
+        '/baza-wiedzy/ctr',
+        // Post content in the CMS, not a route in this repo.
+        '/wp-admin/post.php?post=879&action=edit',
+    ]) {
+        assert.equal(rewriteRetiredHref(href), href);
+    }
+});
+
+test('rewriteRetiredLinks rewrites old WordPress links and trailing slashes in post bodies', () => {
+    const out = rewriteRetiredLinks([
+        linkBlock('/portfolio/item/artcakes/', '/baza-wiedzy/buyer-persona/', 'https://example.com/foo/'),
+    ]);
+    assert.deepEqual(out[0].markDefs.map(({ href }) => href), ['/portfolio/artcakes-pl', '/baza-wiedzy/buyer-persona', 'https://example.com/foo/']);
 });
 
 test('rewriteRetiredLinks rewrites link marks and keeps untouched blocks by reference', () => {

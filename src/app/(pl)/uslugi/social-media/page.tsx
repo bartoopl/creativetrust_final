@@ -4,7 +4,7 @@ import { InlineCTA } from '@/components/LandingBlocks';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
@@ -44,6 +44,11 @@ const process = [
 ];
 
 export default function SocialMediaPage() {
+    const breadcrumbSchema = buildBreadcrumbSchema([
+        { name: 'Strona główna', url: SITE_URL },
+        { name: 'Usługi', url: `${SITE_URL}/uslugi` },
+        { name: 'Social media', url: `${SITE_URL}/uslugi/social-media` },
+    ]);
     const serviceSchema = buildServiceSchema({
         name: 'Social Media',
         description:
@@ -54,7 +59,7 @@ export default function SocialMediaPage() {
 
     return (
         <main style={{ minHeight: '100vh' }}>
-            <SchemaScript schema={serviceSchema} />
+            <SchemaScript schema={[breadcrumbSchema, serviceSchema]} />
 
             {/* Hero */}
             <PageHero
