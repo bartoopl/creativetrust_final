@@ -9,7 +9,7 @@ import { EXPERIENCE_SENTENCE_EN, experienceEn } from '@/lib/experience';
 
 export const metadata: Metadata = {
     title: 'About us | A team built on e-commerce audit and management',
-    description: 'CreativeTrust audits online stores and runs brands’ e-commerce as an external team. Experience managing e-commerce for 5.10.15 and Quiosque, and working on the development of the Monnari capital group. In the market since 2010.',
+    description: 'CreativeTrust audits online stores and runs brands’ e-commerce as an external team. E-commerce experience across many industries, including 5.10.15, Quiosque and the Monnari capital group. In the market since 2010.',
     alternates: pageAlternates('/o-nas', 'en', SITE_URL),
     openGraph: {
         title: 'About us | A team built on e-commerce audit and management | CreativeTrust',

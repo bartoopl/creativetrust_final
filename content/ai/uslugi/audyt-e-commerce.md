@@ -4,7 +4,7 @@ description: "Audyt e-commerce dla sklepów, które rosną szybciej niż ich pro
 date: "2026-11-10"
 canonical: "https://www.creativetrust.pl/uslugi/audyt-e-commerce"
 lang: "pl-PL"
-ai_summary: "CreativeTrust prowadzi audyt e-commerce z perspektywy zarządzania sklepem: sprzedaż i oferta, marża, technologia i dane, operacje i czas zespołu. Audyt trwa 5–7 dni roboczych, kosztuje stałą kwotę ustalaną z góry na rozmowie wstępnej, wymaga 2 godzin wywiadu i dostępu read-only na 3 dni. Kończy się mapą straconego czasu, audytem długu technologicznego i roadmapą. Koszt audytu jest odliczany w pierwszym miesiącu stałej współpracy. Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari."
+ai_summary: "CreativeTrust prowadzi audyt e-commerce z perspektywy zarządzania sklepem: sprzedaż i oferta, marża, technologia i dane, operacje i czas zespołu. Audyt trwa 5–7 dni roboczych, kosztuje stałą kwotę ustalaną z góry na rozmowie wstępnej, wymaga 2 godzin wywiadu i dostępu read-only na 3 dni. Kończy się mapą straconego czasu, audytem długu technologicznego i roadmapą. Koszt audytu jest odliczany w pierwszym miesiącu stałej współpracy. Zespół ma doświadczenie w e-commerce marek z wielu branż (moda, automotive, kosmetologia, farmacja, telefony), m.in. w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari."
 target_audience:
   - "Dyrektorzy i managerowie e-commerce w rosnących sklepach internetowych"
   - "Marki fashion, beauty, dom i ogród oraz retail, które sprzedają online na dużą skalę"
@@ -26,7 +26,7 @@ CreativeTrust audytuje e-commerce z perspektywy zarządzania, a nie pojedynczej 
 
 ## Doświadczenie, na którym opiera się audyt
 
-Zespół CreativeTrust ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.
+Zespół CreativeTrust ma doświadczenie w e-commerce marek z wielu branż (moda, automotive, kosmetologia, farmacja, telefony), m.in. w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.
 
 ## Co sprawdza audyt e-commerce
 

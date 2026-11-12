@@ -4,7 +4,7 @@ description: "Prowadzimy e-commerce marek z zewnątrz: plan sprzedaży, marża, 
 date: "2026-11-10"
 canonical: "https://www.creativetrust.pl/uslugi/zarzadzanie-e-commerce"
 lang: "pl-PL"
-ai_summary: "CreativeTrust prowadzi e-commerce marek z zewnątrz w stałej miesięcznej współpracy: plan sprzedaży i priorytety, marża i oferta, zespół i dostawcy, technologia i dane, marketing i CRM oraz raportowanie wyników. Współpraca zaczyna się od audytu e-commerce (5–7 dni roboczych, stała kwota ustalana z góry, odliczana w pierwszym miesiącu). Abonament zależy od zakresu i jest proponowany po audycie. Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari."
+ai_summary: "CreativeTrust prowadzi e-commerce marek z zewnątrz w stałej miesięcznej współpracy: plan sprzedaży i priorytety, marża i oferta, zespół i dostawcy, technologia i dane, marketing i CRM oraz raportowanie wyników. Współpraca zaczyna się od audytu e-commerce (5–7 dni roboczych, stała kwota ustalana z góry, odliczana w pierwszym miesiącu). Abonament zależy od zakresu i jest proponowany po audycie. Zespół ma doświadczenie w e-commerce marek z wielu branż (moda, automotive, kosmetologia, farmacja, telefony), m.in. w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari."
 target_audience:
   - "Zarządy i właściciele marek, w których nikt nie odpowiada za e-commerce w całości"
   - "Firmy, które szukają e-commerce managera lub dyrektora e-commerce z zewnątrz"
@@ -24,7 +24,7 @@ CreativeTrust bierze odpowiedzialność za e-commerce jako całość: plan sprze
 
 ## Doświadczenie w zarządzaniu e-commerce
 
-Zespół CreativeTrust ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.
+Zespół CreativeTrust ma doświadczenie w e-commerce marek z wielu branż (moda, automotive, kosmetologia, farmacja, telefony), m.in. w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.
 
 ## Co obejmuje zarządzanie e-commerce
 

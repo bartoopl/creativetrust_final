@@ -20,7 +20,7 @@ const copy = {
         buildsLead: 'Budujemy też:',
         stores: { href: '/uslugi/e-commerce', label: 'sklepy internetowe →' },
         websites: { href: '/uslugi/strony-www', label: 'strony internetowe →' },
-        experienceLabel: 'Doświadczenie, na którym opieramy pracę',
+        experienceLabel: 'Wybrane marki z naszego doświadczenia',
         experience,
     },
     en: {
@@ -32,7 +32,7 @@ const copy = {
         buildsLead: 'We also build:',
         stores: { href: '/en/services/e-commerce', label: 'online stores →' },
         websites: { href: '/en/services/websites', label: 'websites →' },
-        experienceLabel: 'The experience our work rests on',
+        experienceLabel: 'Selected brands from our experience',
         experience: experienceEn,
     },
 };

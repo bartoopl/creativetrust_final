@@ -9,7 +9,7 @@ import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: 'O nas | Zespół od audytu i zarządzania e-commerce',
-    description: 'CreativeTrust audytuje sklepy internetowe i prowadzi e-commerce marek z zewnątrz. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Na rynku od 2010 roku.',
+    description: 'CreativeTrust audytuje sklepy internetowe i prowadzi e-commerce marek z zewnątrz. Doświadczenie w e-commerce marek z wielu branż, m.in. 5.10.15, Quiosque i Grupy Kapitałowej Monnari. Na rynku od 2010 roku.',
     alternates: pageAlternates('/o-nas', 'pl', SITE_URL),
 };
 

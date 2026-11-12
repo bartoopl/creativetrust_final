@@ -37,7 +37,7 @@ const SECTION_TITLES: Record<LlmsPage['section'], string> = {
 
 /** Same text as COMPANY_DESCRIPTION in src/lib/schema.ts (kept import-free; a test keeps them equal). */
 export const SUMMARY =
-    'CreativeTrust z Gorzowa Wielkopolskiego, działający od 2010 roku, audytuje sklepy internetowe i zarządza e-commerce marek z zewnątrz, a także projektuje i buduje sklepy internetowe (w tym headless) oraz strony WWW. Zespół ma doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Wdraża też marketing automation (SALESmanago) i prowadzi social media.';
+    'CreativeTrust z Gorzowa Wielkopolskiego, działający od 2010 roku, audytuje sklepy internetowe i zarządza e-commerce marek z zewnątrz, a także projektuje i buduje sklepy internetowe (w tym headless) oraz strony WWW. Zespół ma doświadczenie w e-commerce marek z wielu branż (moda, automotive, kosmetologia, farmacja, telefony), m.in. w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari. Wdraża też marketing automation (SALESmanago) i prowadzi social media.';
 
 const oneLine = (text?: string | null) => (text ?? '').replace(/\s+/g, ' ').trim();
 

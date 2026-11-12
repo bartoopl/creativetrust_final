@@ -9,7 +9,7 @@ import { pageAlternates } from '@/lib/i18n';
 export const metadata: Metadata = {
     // Already branded: absolute, so the root template does not add a second „| CreativeTrust”.
     title: { absolute: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce' },
-    description: 'Audytujemy i prowadzimy e-commerce marek z zewnątrz. Projektujemy i budujemy sklepy oraz strony internetowe. Doświadczenie w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.',
+    description: 'Audytujemy i prowadzimy e-commerce marek z zewnątrz. Projektujemy i budujemy sklepy oraz strony internetowe. Doświadczenie w e-commerce marek z wielu branż, m.in. 5.10.15, Quiosque i Grupy Kapitałowej Monnari.',
     alternates: pageAlternates('/', 'pl', SITE_URL),
     openGraph: {
         title: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce',

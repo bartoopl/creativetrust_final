@@ -15,7 +15,7 @@ export const homeCopy = {
             { num: '04', title: 'Zarządzanie i wdrożenia', description: 'Prowadzimy e-commerce z zewnątrz i wdrażamy zmiany. Koszt audytu odliczamy w pierwszym miesiącu.', duration: 'miesięczny abonament' },
         ],
         reasons: [
-            { title: 'Znamy e-commerce od strony zarządzania', text: 'Doświadczenie w zarządzaniu e-commerce marek 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.' },
+            { title: 'Znamy e-commerce od strony zarządzania', text: 'Doświadczenie w e-commerce marek z wielu branż — moda, automotive, kosmetologia, farmacja, telefony — m.in. w zarządzaniu e-commerce 5.10.15 i Quiosque oraz w pracy przy rozwoju Grupy Kapitałowej Monnari.' },
             { title: 'Liczymy marżę, nie tylko przychód', text: 'Patrzymy na zysk, zwroty, koszty kanałów i czas zespołu — nie na sam ruch i obrót.' },
             { title: 'Doradzamy i budujemy', text: 'Ten sam zespół stawia diagnozę, projektuje i wdraża sklepy oraz strony. Raport nie trafia do szuflady.' },
             { title: 'Nie sprzedajemy platformy', text: 'Open source i sprawdzone technologie: Medusa.js, Next.js, React. Zmianę systemu rekomendujemy tylko wtedy, gdy się opłaca.' },
@@ -87,7 +87,7 @@ export const homeCopy = {
             { num: '04', title: 'Management and delivery', description: 'We run your e-commerce from the outside and deliver the changes. The audit fee is credited in the first month.', duration: 'monthly retainer' },
         ],
         reasons: [
-            { title: 'We know e-commerce from the management side', text: 'Experience managing e-commerce for the 5.10.15 and Quiosque brands and working on the development of the Monnari capital group.' },
+            { title: 'We know e-commerce from the management side', text: 'E-commerce experience across brands in many industries — fashion, automotive, cosmetology, pharmaceuticals, mobile phones — including managing e-commerce for 5.10.15 and Quiosque and working on the development of the Monnari capital group.' },
             { title: 'We count margin, not just revenue', text: 'We look at profit, returns, channel costs and team time — not just traffic and turnover.' },
             { title: 'We advise and we build', text: 'The same team diagnoses, designs and builds stores and websites. The report does not end up in a drawer.' },
             { title: "We don't sell a platform", text: 'Open source and proven technology: Medusa.js, Next.js, React. We recommend changing systems only when it pays off.' },
@@ -100,7 +100,7 @@ export const homeCopy = {
         ],
         stats: [
             { value: '15+', label: 'years in the market' },
-            { value: '3', label: 'nationwide Polish fashion brands in the team’s experience' },
+            { value: '5+', label: 'industries in the team’s e-commerce experience' },
             { value: '150+', label: 'projects delivered' },
         ],
         contactHref: '/en/contact',

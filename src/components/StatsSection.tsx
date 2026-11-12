@@ -1,6 +1,6 @@
 export const stats = [
     { value: '15+', label: 'lat na rynku' },
-    { value: '3', label: 'ogólnopolskie marki odzieżowe w doświadczeniu zespołu' },
+    { value: '5+', label: 'branż w doświadczeniu zespołu w e-commerce' },
     { value: '150+', label: 'zrealizowanych projektów' },
 ];
 
