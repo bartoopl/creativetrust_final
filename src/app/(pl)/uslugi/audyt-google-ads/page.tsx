@@ -5,21 +5,23 @@ import LandingLeadForm from '@/components/LandingLeadForm';
 import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
-import { BulletColumns, HeroMedia, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
+import { HeroMedia } from '@/components/LandingBlocks';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/audyt-google-ads`;
 
+const pageTitle = 'Audyt Google Ads - audyt konta i kampanii | CreativeTrust';
+const pageDescription =
+    'Sprawdzamy pomiar konwersji, strukturę kampanii, słowa kluczowe i landing page. Dostajesz listę błędów z priorytetami i plan naprawy.';
+
 export const metadata: Metadata = {
-    title: 'Audyt Google Ads – audyt konta i kampanii',
-    description:
-        'Audyt konta Google Ads: konwersje, struktura kampanii, słowa kluczowe, budżet i landing page. Dostajesz listę błędów z priorytetami i plan naprawy.',
+    title: { absolute: pageTitle },
+    description: pageDescription,
     // Polish only (no English twin), so no hreflang pair.
     alternates: { canonical: canonicalUrl },
     openGraph: {
-        title: 'Audyt Google Ads | CreativeTrust',
-        description:
-            'Sprawdzamy konto Google Ads od pomiaru konwersji po landing page i pokazujemy, gdzie budżet pracuje, a gdzie ucieka.',
+        title: pageTitle,
+        description: pageDescription,
         url: canonicalUrl,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -27,9 +29,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Audyt Google Ads | CreativeTrust',
-        description:
-            'Audyt konta Google Ads: lista błędów z priorytetami, szacunek wpływu i plan naprawy zamiast ogólnych rekomendacji.',
+        title: pageTitle,
+        description: pageDescription,
     },
 };
 
@@ -41,46 +42,8 @@ const symptoms = [
     'konto prowadzi agencja, a Ty chcesz niezależnej oceny',
 ];
 
-const scope = [
-    {
-        title: 'Pomiar konwersji',
-        text: 'GA4, Google Tag Manager, consent mode i import konwersji. Sprawdzamy, czy kampania uczy się na leadach i sprzedaży, a nie na przypadkowych kliknięciach.',
-    },
-    {
-        title: 'Struktura kampanii',
-        text: 'Podział kampanii i grup reklam, strategie stawek, Performance Max, Merchant Center i nakładanie się kampanii na siebie.',
-    },
-    {
-        title: 'Słowa kluczowe i wykluczenia',
-        text: 'Raport wyszukiwanych haseł, dopasowania, listy wykluczeń i frazy, które kosztują, ale nie sprzedają.',
-    },
-    {
-        title: 'Budżet, reklamy i landing page',
-        text: 'Rozkład budżetu, komunikaty i zasoby reklam oraz strona docelowa: czy odpowiada na intencję zapytania i nie gubi konwersji.',
-    },
-];
-
-const deliverables = [
-    {
-        title: 'Lista błędów z priorytetami',
-        text: 'Każdy problem z opisem, wpływem na koszt i wynik oraz pilnością. Najpierw to, co najszybciej odzyskuje budżet.',
-    },
-    {
-        title: 'Plan naprawy',
-        text: 'Konkretne zmiany w koncie, pomiarze i stronie docelowej, w kolejności wdrażania. Możesz wdrożyć je samodzielnie lub z nami.',
-    },
-    {
-        title: 'Omówienie wyników',
-        text: 'Rozmowa, na której przechodzimy przez raport i odpowiadamy na pytania Twojego zespołu lub obecnej agencji.',
-    },
-];
-
-const audience = [
-    'firmy B2B, które płacą za leady słabej jakości',
-    'sklepy e-commerce z kampaniami produktowymi i Performance Max',
-    'firmy usługowe, którym rośnie koszt pozyskania klienta',
-    'zespoły przed zmianą agencji lub przejęciem konta in-house',
-];
+const proseStyle = { maxWidth: 860 };
+const linkStyle = { color: 'var(--accent)', textDecoration: 'underline' };
 
 const faqs = [
     {
@@ -89,24 +52,29 @@ const faqs = [
             'Pomiar konwersji (GA4, GTM, consent mode), strukturę kampanii i strategie stawek, słowa kluczowe i wykluczenia, rozkład budżetu, reklamy oraz stronę docelową. Przy e-commerce dochodzą Merchant Center i Performance Max.',
     },
     {
-        question: 'Czego potrzebujecie, żeby zrobić audyt konta Google Ads?',
+        question: 'Ile kosztuje audyt konta Google Ads?',
         answer:
-            'Dostępu do odczytu do konta Google Ads oraz GA4, a jeśli to możliwe także do Google Tag Managera i Merchant Center. Do tego krótkiej rozmowy o celach, marżach i tym, co uznajecie za wartościowego leada lub sprzedaż.',
+            'Cena zależy od liczby kont, kampanii i tego, czy audyt obejmuje pomiar i landing page. Wycenę podajemy po krótkiej rozmowie, przed rozpoczęciem pracy, więc znasz kwotę zanim cokolwiek ruszy.',
     },
     {
-        question: 'Ile kosztuje audyt Google Ads?',
+        question: 'Czy po audycie trzeba podpisać umowę na prowadzenie kampanii?',
         answer:
-            'Cena zależy od liczby kont, kampanii i tego, czy audyt obejmuje pomiar i landing page. Wycenę podajemy po krótkiej rozmowie, przed rozpoczęciem pracy. Od czego zależy koszt audytu, opisujemy w artykule o kosztach audytu Google Ads.',
+            'Nie. Plan naprawy zostaje u Ciebie i możesz go wdrożyć samodzielnie lub z obecną agencją. Możemy pomóc we wdrożeniu, ale nie jest to warunek audytu.',
     },
     {
-        question: 'Czy po audycie musimy podpisać umowę na prowadzenie kampanii?',
+        question: 'Jakie dostępy są potrzebne?',
         answer:
-            'Nie. Plan naprawy zostaje u Was i możecie wdrożyć go samodzielnie lub z obecną agencją. Jeśli chcecie, pomożemy we wdrożeniu poprawek.',
+            'Dostęp do odczytu do konta Google Ads i GA4, a jeśli to możliwe także do Google Tag Managera i Merchant Center. Do tego krótka rozmowa o celach, marżach i definicji wartościowego leada.',
     },
     {
-        question: 'Czym audyt Google Ads różni się od audytu e-commerce?',
+        question: 'Ile trwa audyt?',
         answer:
-            'Audyt Google Ads dotyczy jednego kanału: konta reklamowego, pomiaru konwersji i budżetu. Audyt e-commerce obejmuje cały sklep: sprzedaż, marżę, technologię i pracę zespołu, w tym koszty wszystkich kanałów. Jeśli problem nie kończy się na reklamach, zacznij od audytu e-commerce.',
+            'Termin ustalamy przed startem, bo zależy od liczby kont i kampanii oraz od tego, czy w zakresie jest pomiar i strona docelowa. Dostajesz konkretną datę, nie widełki „do dwóch tygodni”.',
+    },
+    {
+        question: 'Czy audyt obejmuje Performance Max?',
+        answer:
+            'Tak. Sprawdzamy, co kampania faktycznie kupuje, jakie sygnały dostaje i czy nie zabiera ruchu kampaniom markowym. Przy e-commerce dochodzi Merchant Center, bo błędy w feedzie psują wyniki niezależnie od budżetu.',
     },
 ];
 
@@ -133,7 +101,7 @@ export default function GoogleAdsAuditPage() {
 
             <PageHero
                 eyebrow="Audyt Google Ads"
-                title="Audyt Google Ads, który pokazuje, gdzie ucieka budżet"
+                title="Audyt Google Ads: sprawdzamy, gdzie ucieka budżet"
                 description="Sprawdzamy konto Google Ads od pomiaru konwersji, przez strukturę kampanii i słowa kluczowe, po stronę docelową. Dostajesz listę błędów z priorytetami i plan naprawy, a nie ogólne rekomendacje."
                 cta={{ label: 'Zamów audyt Google Ads', href: '#formularz' }}
                 ctaSecondary={{ label: 'Co sprawdzamy', href: '#zakres' }}
@@ -147,31 +115,94 @@ export default function GoogleAdsAuditPage() {
                 }
             />
 
-            <Section
-                id="zakres"
-                border={false}
-                eyebrow="Zakres audytu"
-                title="Audyt konta Google Ads: od pomiaru po stronę docelową"
-            >
-                <NumberedGrid cols={4} items={scope} />
+            <Section id="zakres" border={false} title="Co sprawdza audyt konta Google Ads">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Zaczynamy od pomiaru konwersji, bo bez niego reszta liczb jest zgadywaniem. Sprawdzamy GA4, Google Tag Manager, consent mode i import konwersji: czy kampania uczy się na leadach i sprzedaży, czy na kliknięciach, które nic nie znaczą. Dopiero potem patrzymy na strukturę konta: podział kampanii i grup reklam, strategie stawek, Performance Max, Merchant Center i to, czy kampanie nie nakładają się na siebie.
+                    </p>
+                    <p className="ct-body">
+                        Trzeci blok to słowa kluczowe. Raport wyszukiwanych haseł pokazuje, za co płacisz naprawdę, a lista wykluczeń - ile z tego nigdy nie miało szansy sprzedać. Na końcu budżet, komunikaty reklam i strona docelowa, bo najdroższy błąd w Google Ads często leży poza kontem.
+                    </p>
+                </div>
             </Section>
 
-            <Section tint eyebrow="Co dostajesz" title="Wynik audytu, z którym da się od razu pracować">
-                <NumberedGrid cols={3} items={deliverables} />
+            <Section tint title="Jak wygląda raport z audytu">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Dostajesz listę błędów, nie prezentację ogólników. Każdy punkt ma opis problemu, wpływ na koszt i wynik oraz priorytet: od rzeczy, które zatrzymują sprzedaż dziś, po porządki, które mogą poczekać. Do tego plan naprawy w kolejności wdrażania, żeby było jasne, co robić najpierw, a co dopiero po poprawieniu pomiaru.
+                    </p>
+                    <p className="ct-body">
+                        Raport czyta osoba, która będzie wdrażać zmiany, nie tylko ta, która zamawiała audyt. Jeśli kampanie prowadzi agencja, to lista argumentów do rozmowy o konkretach, a nie o wrażeniach.
+                    </p>
+                </div>
             </Section>
 
-            <Section>
-                <SplitLayout eyebrow="Dla kogo" title="Dla firm, które wydają na Google Ads i chcą wiedzieć, co z tego mają">
-                    <BulletColumns items={audience} />
-                </SplitLayout>
+            <Section title="Ile trwa audyt i czego potrzebujemy na start">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Termin ustalamy przed startem i zależy on od liczby kont, kampanii oraz tego, czy audyt obejmuje pomiar i stronę docelową. Do pracy potrzebujemy dostępu do odczytu do konta Google Ads i GA4, a jeśli to możliwe także do Google Tag Managera i Merchant Center. Reszta to krótka rozmowa o celach, marżach i o tym, co w Twojej firmie jest wartościowym leadem albo sprzedażą.
+                    </p>
+                    <p className="ct-body">
+                        Nie potrzebujemy dostępu do zapisu. Audyt nie zmienia niczego w koncie bez Twojej decyzji.
+                    </p>
+                </div>
             </Section>
 
-            <Section tint eyebrow="Zanim zamówisz" title="Chcesz najpierw sprawdzić konto samodzielnie?">
-                <InlineCTA
-                    title="Checklista audytu konta Google Ads"
-                    text="Opisaliśmy krok po kroku, co sprawdzić w koncie przed audytem. Jeśli lista pokaże więcej problemów, niż macie czas naprawić, zrobimy to razem."
-                    cta={{ label: 'Otwórz checklistę', href: '/blog/audyt-konta-google-ads-checklista' }}
-                />
+            <Section tint title="Co dostajesz po audycie">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Trzy rzeczy: listę błędów z priorytetami, plan naprawy i omówienie wyników. Omówienie jest częścią pracy, nie dodatkiem - przechodzimy przez raport i odpowiadamy na pytania zespołu, który będzie wdrażał poprawki. Po rozmowie wiesz, które zmiany zrobić w tym tygodniu, a które po sezonie.
+                    </p>
+                    <p className="ct-body">
+                        Plan zostaje u Ciebie. Możesz go wdrożyć samodzielnie, z obecną agencją albo z nami - decyzja nie jest częścią audytu.
+                    </p>
+                </div>
+            </Section>
+
+            <Section title="Kiedy audyt ma sens, a kiedy wystarczy optymalizacja">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Audyt ma sens, gdy rosną koszty pozyskania, a nikt nie umie wskazać przyczyny. Gdy konwersje w Google Ads nie zgadzają się z CRM lub sklepem, gdy Performance Max działa jak czarna skrzynka albo gdy firma chce niezależnej oceny przed zmianą agencji lub przejęciem konta do środka.
+                    </p>
+                    <p className="ct-body">
+                        Jeśli problem jest wąski i znany, na przykład jedna kampania przepala budżet na frazy bez intencji zakupowej, wystarczy krótsza analiza wskazanego obszaru. Warto to powiedzieć na starcie: audyt całego konta nie jest odpowiedzią na każde pytanie.
+                    </p>
+                </div>
+            </Section>
+
+            <Section tint title="Dla kogo jest ten audyt">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Dla firm B2B, które płacą za leady słabej jakości, sklepów e-commerce z kampaniami produktowymi i Performance Max, firm usługowych, którym rośnie koszt klienta, i zespołów przechodzących zmianę. Wspólnym mianownikiem nie jest branża, a sytuacja: płacisz, ale nie wiesz dokładnie, za co.
+                    </p>
+                    <p className="ct-body">
+                        Jeśli podejrzewasz, że problem zaczyna się wcześniej - w samym sklepie, marży albo koszcie wszystkich kanałów - zacznij od{' '}
+                        <Link href="/uslugi/audyt-e-commerce" style={linkStyle}>
+                            audytu e-commerce
+                        </Link>
+                        . Reklamy to często ostatnie ogniwo, nie pierwsze.
+                    </p>
+                </div>
+            </Section>
+
+            <Section title="Co dalej">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Po audycie najczęściej wchodzi jedno z dwóch: wdrożenie poprawek i dalsze prowadzenie kampanii w ramach{' '}
+                        <Link href="/uslugi/marketing-automation" style={linkStyle}>
+                            marketing automation
+                        </Link>{' '}
+                        i pracy na bazie klientów albo porządkowanie pomiaru, żeby każdy kolejny kanał był rozliczalny. Podstawy pojęć, których używamy w raporcie, znajdziesz w bazie wiedzy:{' '}
+                        <Link href="/baza-wiedzy/google-ads" style={linkStyle}>
+                            Google Ads
+                        </Link>
+                        . Wyniki projektów, w tym kont reklamowych, opisujemy w{' '}
+                        <Link href="/portfolio" style={linkStyle}>
+                            portfolio
+                        </Link>
+                        .
+                    </p>
+                </div>
             </Section>
 
             <Section eyebrow="FAQ" title="Pytania o audyt Google Ads" maxWidth={1100}>

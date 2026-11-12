@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import CTASection from '@/components/CTASection';
 import { InlineCTA } from '@/components/LandingBlocks';
 import FAQAccordion from '@/components/FAQAccordion';
-import Card from '@/components/ui/Card';
 import PageHero from '@/components/ui/PageHero';
 import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
@@ -10,25 +10,20 @@ import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
+const pageTitle = 'Marketing automation dla e-commerce | SALESmanago';
+const pageDescription =
+    'Wdrażamy SALESmanago: porzucone koszyki, rekomendacje, reaktywacja i lead nurturing. Efekt mierzymy przychodem, nie liczbą wysyłek.';
+
 export const metadata: Metadata = {
-    title: 'Marketing Automation dla e-commerce i firm | SALESmanago, scenariusze, CRM',
-    description: 'Wdrażamy SALESmanago i scenariusze, które pracują na bazie klientów: odzyskiwanie porzuconych zakupów, rekomendacje, reaktywacja, lead nurturing. Mierzone przychodem, nie liczbą wysyłek.',
+    title: { absolute: pageTitle },
+    description: pageDescription,
     alternates: pageAlternates('/uslugi/marketing-automation', 'pl', SITE_URL),
     openGraph: {
-        title: 'Marketing Automation dla e-commerce i firm | CreativeTrust',
-        description: 'SALESmanago, scenariusze sprzedażowe, segmentacja i integracje CRM. Automatyzacja mierzona przychodem.',
+        title: pageTitle,
+        description: pageDescription,
         url: `${SITE_URL}/uslugi/marketing-automation`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
     },
 };
-
-const services = [
-    { num: '01', title: 'Wdrożenie SALESmanago', description: 'Konfiguracja platformy, tracking, integracja ze sklepem i CRM, segmenty i pierwsze scenariusze gotowe do działania.' },
-    { num: '02', title: 'Scenariusze e-commerce', description: 'Porzucony koszyk, porzucone przeglądanie, rekomendacje, cross-sell i reaktywacja klientów, którzy przestali kupować.' },
-    { num: '03', title: 'Lead nurturing', description: 'Sekwencje i scoring dla sprzedaży B2B i usług: kontakt trafia do handlowca wtedy, gdy jest gotowy na rozmowę.' },
-    { num: '04', title: 'Segmentacja i personalizacja', description: 'Treści na stronie i w wiadomościach dopasowane do zachowań, historii zakupów i wartości klienta.' },
-    { num: '05', title: 'Integracje CRM', description: 'Pipedrive, HubSpot, Salesforce — dane marketingowe trafiają tam, gdzie pracuje sprzedaż.' },
-    { num: '06', title: 'Analityka i raportowanie', description: 'Przychód z automatyzacji, a nie tylko otwarcia i kliknięcia.' },
-];
 
 const facts = [
     { label: 'Platforma', value: 'partner SALESmanago od 2024 roku' },
@@ -37,32 +32,33 @@ const facts = [
     { label: 'Miara sukcesu', value: 'przychód z bazy klientów' },
 ];
 
-const usecases = [
-    { title: 'E-commerce', description: 'Koszyk porzucony, rekomendacje produktowe, reaktywacja klientów i cross-sell.' },
-    { title: 'B2B / SaaS', description: 'Lead scoring, nurturing przed rozmową handlową, onboarding i retencja.' },
-    { title: 'Usługi lokalne', description: 'Przypomnienia, upsell po wizycie, zbieranie opinii i kampanie sezonowe.' },
-    { title: 'Edukacja i szkolenia', description: 'Automatyczny onboarding kursantów, przypomnienia i kampanie upsell.' },
-];
-
-const process = [
-    { num: '01', title: 'Audyt', description: 'Mapujemy obecny stack, dane, lejki i punkty styku. Identyfikujemy największe straty.' },
-    { num: '02', title: 'Architektura', description: 'Projektujemy lejki, segmentację i logikę automatyzacji — zanim ktokolwiek kliknie "uruchom".' },
-    { num: '03', title: 'Wdrożenie', description: 'Konfigurujemy platformę, integrujemy CRM i uruchamiamy pierwsze automatyzacje.' },
-    { num: '04', title: 'Optymalizacja', description: 'Testujemy, mierzymy i rozbudowujemy. Pętla danych → decyzja → wynik.', featured: true },
-];
+const proseStyle = { maxWidth: 860 };
+const linkStyle = { color: 'var(--accent)', textDecoration: 'underline' };
 
 const faqs = [
     {
         question: 'Od czego zacząć wdrożenie marketing automation?',
-        answer: 'Od audytu danych, źródeł leadów, zgód i procesu sprzedaży. Dopiero potem wybieramy scenariusze oraz konfigurację platformy.',
+        answer: 'Od audytu danych, źródeł leadów, zgód i procesu sprzedaży. Dopiero potem wybieramy scenariusze i konfigurację platformy. Start od kampanii kończy się wysyłką do bazy, której nikt nie zweryfikował.',
     },
     {
         question: 'Czy marketing automation ma sens w B2B?',
-        answer: 'Tak, szczególnie przy dłuższym procesie sprzedaży. Pomaga segmentować zapytania, prowadzić lead nurturing i przekazywać sprzedaży lepiej przygotowane kontakty.',
+        answer: 'Tak, zwłaszcza przy dłuższym procesie sprzedaży. Pomaga segmentować zapytania, prowadzić nurturing i przekazywać handlowcom kontakty z kontekstem. Warunek jest jeden: CRM musi być źródłem prawdy o etapie sprzedaży.',
     },
     {
-        question: 'Czy możecie wdrożyć SALESmanago?',
-        answer: 'Tak. Wdrażamy tracking, segmentację, scenariusze, integracje CRM oraz raportowanie, a następnie rozwijamy automatyzacje na podstawie danych.',
+        question: 'Czy wdrażacie SALESmanago?',
+        answer: 'Tak, jesteśmy partnerem SALESmanago od 2024 roku. Wdrażamy tracking, segmentację, scenariusze, integracje CRM i raportowanie, a potem rozwijamy automatyzacje na podstawie danych.',
+    },
+    {
+        question: 'Z jakimi CRM integrujecie automatyzację?',
+        answer: 'Z Pipedrive, HubSpot i Salesforce. Zakres integracji zależy od tego, które dane marketingowe mają trafiać do sprzedaży i kto ma je czytać.',
+    },
+    {
+        question: 'Ile kosztuje wdrożenie marketing automation?',
+        answer: 'Koszt zależy od platformy, liczby integracji i liczby scenariuszy na start. Wycenę podajemy po audycie, gdy wiadomo, na jakich danych pracujemy.',
+    },
+    {
+        question: 'Czy automatyzacja zastąpi pracę zespołu?',
+        answer: 'Nie. Przejmuje powtarzalne wysyłki i porządkowanie kontaktów, ale treść, oferta i decyzje zostają po stronie ludzi. Źle zaprojektowany scenariusz szkodzi szybciej niż brak scenariusza.',
     },
 ];
 
@@ -83,7 +79,7 @@ export default function MarketingAutomationPage() {
             {/* Hero */}
             <PageHero
                 eyebrow="Marketing Automation"
-                title={<>Automatyzacja, która zarabia na <span style={{ color: 'var(--accent)' }}>bazie klientów.</span></>}
+                title="Marketing automation, który pracuje na klientach, których już masz"
                 description="Wdrażamy SALESmanago i scenariusze, które pracują na klientach, których już masz: porzucone koszyki, rekomendacje, reaktywacja, lead nurturing. Mierzymy je przychodem, a nie liczbą wysłanych wiadomości."
                 cta={{ label: 'Omów wdrożenie', href: '/kontakt' }}
                 right={
@@ -117,59 +113,85 @@ export default function MarketingAutomationPage() {
                 </div>
             </Section>
 
-            {/* Services */}
-            <Section id="oferta" eyebrow="Co robimy" title="Zakres automatyzacji.">
-                <div className="ct-grid-lines grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    {services.map(s => (
-                        <div key={s.num} className="flex flex-col gap-2.5" style={{ padding: 28 }}>
-                            <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--muted)', marginBottom: 12 }}>{s.num}</span>
-                            <h3 style={{ margin: 0, fontSize: 17, fontWeight: 500 }}>{s.title}</h3>
-                            <p className="ct-body">{s.description}</p>
-                        </div>
-                    ))}
+            <Section id="oferta" title="Co wchodzi w zakres wdrożenia">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Wdrażamy SALESmanago: konfigurację platformy, tracking, integrację ze sklepem i CRM, segmenty oraz pierwsze scenariusze. Kanały to e-mail, SMS i web push, bo klient nie czyta tylko poczty. Zakres zależy od tego, co masz dziś: inną platformę, arkusz z bazą czy CRM bez historii zakupowej.
+                    </p>
+                    <p className="ct-body">
+                        Punktem wyjścia są dane, zgody i segmenty, nie lista pomysłów na kampanie. Jeśli baza jest nieposprzątana, pierwszy miesiąc idzie na porządek, bo automatyzacja na złych danych po prostu szybciej wysyła złe wiadomości.
+                    </p>
                 </div>
             </Section>
 
-            {/* Use cases */}
-            <Section tint eyebrow="Zastosowania" title="Dla kogo to działa.">
-                <div className="grid grid-cols-1 gap-x-10 md:grid-cols-2">
-                    {usecases.map(u => (
-                        <div key={u.title} className="flex flex-col gap-2" style={{ padding: '20px 0', borderTop: '1px solid var(--line-strong)' }}>
-                            <div className="flex items-center gap-2.5">
-                                <span className="ct-bullet" aria-hidden="true" />
-                                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 500 }}>{u.title}</h3>
-                            </div>
-                            <p className="ct-body" style={{ fontSize: 15 }}>{u.description}</p>
-                        </div>
-                    ))}
+            <Section tint title="Jakie scenariusze działają w e-commerce">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Najczęściej wdrażane: porzucony koszyk i porzucone przeglądanie, rekomendacje produktowe, cross-sell po zakupie i reaktywacja klientów, którzy przestali kupować. Każdy scenariusz ma własną logikę wyjścia, żeby klient nie dostawał trzech maili o tym samym w ciągu doby.
+                    </p>
+                    <p className="ct-body">
+                        Scenariusze projektujemy pod marżę, nie pod liczbę wiadomości. Rabat w porzuconym koszyku bywa najdroższą literą w całym lejku, jeśli wysyła się go także tym, którzy i tak by kupili.
+                    </p>
                 </div>
             </Section>
 
-            {/* Process */}
-            <Section eyebrow="Proces" title="Od audytu do automatyzacji.">
-                <ol className="ct-grid-lines grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-                    {process.map(step => (
-                        <li key={step.num} className="flex flex-col gap-2.5" style={{ padding: '28px 24px', background: step.featured ? 'var(--panel)' : undefined }}>
-                            <span className="ct-mono" style={{ fontSize: 13, fontWeight: 500, color: 'var(--accent)', marginBottom: 24 }}>{step.num}</span>
-                            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 500 }}>{step.title}</h3>
-                            <p className="ct-body">{step.description}</p>
-                        </li>
-                    ))}
-                </ol>
+            <Section title="Lead nurturing i scoring w B2B">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Przy dłuższym procesie sprzedaży automatyzacja robi dwie rzeczy: prowadzi kontakt do momentu, w którym rozmowa ma sens, i porządkuje go tak, żeby handlowiec nie dzwonił do osób, które tylko pobrały checklistę. Scoring opieramy na zachowaniu: jakie treści czyta, ile razy wraca, jaka jest jego rola w firmie.
+                    </p>
+                    <p className="ct-body">
+                        Efekt jest taki, że sprzedaż dostaje kontakt z kontekstem, a nie sam numer telefonu. To skraca pierwszą rozmowę i zmniejsza liczbę leadów, które i tak by nie kupiły.
+                    </p>
+                </div>
             </Section>
 
-            <Section tint eyebrow="Wiedza i wdrożenie" title="Zobacz, jak połączyć automation z procesem sprzedaży.">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <Card
-                        href="/blog/wdrozenie-marketing-automation-krok-po-kroku"
-                        title="Wdrożenie marketing automation krok po kroku"
-                        description="Przeczytaj, jak uporządkować dane, zgody, segmenty i pierwsze scenariusze."
-                    />
-                    <Card
-                        href="/uslugi/wdrozenie-salesmanago"
-                        title="Wdrożenie SALESmanago"
-                        description="Poznaj zakres wdrożenia — od trackingu i integracji po lead nurturing."
-                    />
+            <Section tint title="Integracje z CRM">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Integrujemy Pipedrive, HubSpot i Salesforce, żeby dane marketingowe trafiały tam, gdzie pracuje sprzedaż. Bez tego automatyzacja żyje w osobnym świecie: wie, kto kliknął, ale nie wie, kto kupił, więc nie potrafi policzyć przychodu.
+                    </p>
+                    <p className="ct-body">
+                        Integracja to też ustalenie, które pole jest źródłem prawdy. Jeśli sklep mówi jedno, a CRM drugie, raport zawsze wyjdzie tak, jak ktoś chce go przeczytać.
+                    </p>
+                </div>
+            </Section>
+
+            <Section title="Jak wygląda wdrożenie krok po kroku">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Cztery etapy. Audyt: mapa obecnego stacku, danych, lejków i punktów styku, czyli miejsc, w których dziś tracimy klienta. Architektura: projekt lejków, segmentacji i logiki automatyzacji, zanim ktokolwiek kliknie „uruchom”. Wdrożenie: konfiguracja platformy, integracja CRM i start pierwszych scenariuszy. Optymalizacja: testy i rozbudowa w pętli dane, decyzja, wynik.
+                    </p>
+                    <p className="ct-body">
+                        Kolejność jest istotna. Scenariusz uruchomiony bez architektury działa, ale zwykle wysyła do wszystkich wszystko i po miesiącu nikt nie wie, który element zarabia.
+                    </p>
+                </div>
+            </Section>
+
+            <Section tint title="Jak mierzymy efekt automatyzacji">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Przychodem z automatyzacji, a nie liczbą wysłanych wiadomości. Otwarcia i kliknięcia są wskaźnikami pomocniczymi: pokazują, czy komunikat jest czytany, ale nie mówią, czy klient kupił. Dlatego raportujemy przychód, koszt kontaktu i udział bazy w sprzedaży.
+                    </p>
+                    <p className="ct-body">
+                        Jeśli automatyzacja ma być opłacalna, musi być wpięta w pomiar całego sklepu. Dlatego przy e-commerce zaczynamy od{' '}
+                        <Link href="/uslugi/audyt-e-commerce" style={linkStyle}>
+                            audytu e-commerce
+                        </Link>{' '}
+                        albo od razu łączymy wdrożenie z pracą nad{' '}
+                        <Link href="/uslugi/e-commerce" style={linkStyle}>
+                            e-commerce
+                        </Link>
+                        . Szczegóły platformy:{' '}
+                        <Link href="/uslugi/wdrozenie-salesmanago" style={linkStyle}>
+                            wdrożenie SALESmanago
+                        </Link>
+                        , podstawy pojęć:{' '}
+                        <Link href="/baza-wiedzy/marketing-automation" style={linkStyle}>
+                            marketing automation
+                        </Link>
+                        .
+                    </p>
                 </div>
             </Section>
 
