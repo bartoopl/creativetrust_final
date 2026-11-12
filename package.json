@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "check:design": "node scripts/check-design-system.mjs",
+    "check:redirects": "node scripts/check-redirects.mjs",
     "typecheck": "tsc --noEmit -p .",
     "test": "node --test scripts/*.test.mjs",
     "model:hero": "node scripts/build-model.mjs hero-pipeline",

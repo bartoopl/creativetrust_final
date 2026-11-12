@@ -23,9 +23,9 @@ export const RETIRED_CONTENT_PAGES: Readonly<Record<string, string>> = {
     '/e-commerce/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec': '/blog/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec',
     '/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec': '/blog/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec',
     '/budowanie-profesjonalnego-marketingu-firmy-strategia-ktora-nadaje-marce-skrzydel': '/blog/budowanie-profesjonalnego-marketingu-firmy-strategia-ktora-nadaje-marce-skrzydel',
-    '/jakie-dane-z-google-analytics-warto-analizowac': '/blog/jakie-dane-z-google-analytics-warto-analizowac',
+    '/jakie-dane-z-google-analytics-warto-analizowac': '/blog/jakie-dane-z-google-analytics-warto-analizowac-w-celu-poprawienia-konwersji-na-stronie',
     '/kiedy-mega-menu-jest-fajne-a-kiedy-nie': '/blog/kiedy-mega-menu-jest-fajne-a-kiedy-nie',
-    '/ssl-co-to-jest-i-czy-jest-potrzebne': '/blog/ssl-co-to-jest-i-czy-jest-potrzebne',
+    '/ssl-co-to-jest-i-czy-jest-potrzebne': '/blog/ssl-co-to-jest-i-czy-jest-potrzebne-4-powody-dla-ktorych-powinienes-go-wlaczyc',
     '/zwiekszenie-sprzedazy-w-sklepie-internetowym-6-sposobow-na-ulepszenie-strategii-kuponow': '/blog/zwiekszenie-sprzedazy-w-sklepie-internetowym-6-sposobow-na-ulepszenie-strategii-kuponow',
     // Outdated 2023 price article: the current pricing page.
     '/ile-kosztuje-strona-internetowa-w-2023-roku': '/uslugi/tworzenie-stron-www-cennik',
