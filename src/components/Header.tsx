@@ -16,6 +16,7 @@ const copy = {
         nav: [
             { href: '/portfolio', label: 'Case Studies' },
             { href: '/blog', label: 'Blog' },
+            { href: '/baza-wiedzy', label: 'Baza wiedzy' },
             { href: '/o-nas', label: 'O nas' },
         ],
         // The two lead offers sit in the bar itself; the rest of the catalogue is under „Usługi”.

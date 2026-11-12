@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { RETIRED_SERVICE_PAGES, rewriteRetiredHref, rewriteRetiredLinks } from '../src/lib/retired-links.ts';
+import { RETIRED_SERVICE_PAGES, LEGACY_PATHS, rewriteRetiredHref, rewriteRetiredLinks } from '../src/lib/retired-links.ts';
 
 const root = new URL('../', import.meta.url);
 const pageFile = (route) => new URL(`src/app/(pl)${route}/page.tsx`, root);
@@ -35,6 +35,39 @@ test('rewriteRetiredHref maps retired paths, keeping query and hash', () => {
     assert.equal(rewriteRetiredHref('/uslugi/performance-marketing/meta-ads#oferta'), '/uslugi/social-media#oferta');
     assert.equal(rewriteRetiredHref('https://www.creativetrust.pl/uslugi/performance-marketing/google-ads?x=1'), '/uslugi/audyt-google-ads?x=1');
     assert.equal(rewriteRetiredHref('https://creativetrust.pl/uslugi/performance-marketing'), '/uslugi');
+});
+
+test('LEGACY_PATHS targets are canonical (no trailing slash, not the source itself)', () => {
+    for (const [source, target] of Object.entries(LEGACY_PATHS)) {
+        assert.ok(target.startsWith('/'), `${source} target must be a root-relative path`);
+        assert.ok(!target.endsWith('/'), `${target} must not end with a slash`);
+        assert.notEqual(target, source);
+        assert.ok(!(target in LEGACY_PATHS), `${target} is a legacy path itself`);
+        assert.ok(!(target in RETIRED_SERVICE_PAGES), `${target} is a retired service page`);
+    }
+});
+
+test('rewriteRetiredHref maps legacy WordPress permalinks, with or without the trailing slash', () => {
+    const pairs = [
+        ['/ssl-co-to-jest-i-czy-jest-potrzebne/', '/blog/ssl-co-to-jest-i-czy-jest-potrzebne'],
+        ['/ssl-co-to-jest-i-czy-jest-potrzebne', '/blog/ssl-co-to-jest-i-czy-jest-potrzebne'],
+        ['/portfolio/item/artcakes/', '/portfolio/artcakes-pl'],
+        ['/ile-kosztuje-strona-internetowa-w-2023-roku/', '/uslugi/tworzenie-stron-www-cennik'],
+        ['/e-commerce/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec',
+            '/blog/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec'],
+    ];
+    for (const [href, expected] of pairs) assert.equal(rewriteRetiredHref(href), expected);
+
+    assert.equal(
+        rewriteRetiredHref('https://www.creativetrust.pl/ssl-co-to-jest-i-czy-jest-potrzebne/?utm=1#faq'),
+        '/blog/ssl-co-to-jest-i-czy-jest-potrzebne?utm=1#faq',
+    );
+});
+
+test('rewriteRetiredHref drops a redundant trailing slash on live paths', () => {
+    assert.equal(rewriteRetiredHref('/baza-wiedzy/buyer-persona/'), '/baza-wiedzy/buyer-persona');
+    assert.equal(rewriteRetiredHref('/baza-wiedzy/buyer-persona/#faq'), '/baza-wiedzy/buyer-persona#faq');
+    assert.equal(rewriteRetiredHref('/'), '/');
 });
 
 test('rewriteRetiredHref leaves live, external and look-alike links alone', () => {
