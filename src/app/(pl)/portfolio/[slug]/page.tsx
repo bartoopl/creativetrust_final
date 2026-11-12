@@ -1,12 +1,12 @@
-import type { CSSProperties } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getPortfolioProject, urlFor } from '@/lib/cms';
+import { getPortfolioProject, getPortfolioProjects, urlFor } from '@/lib/cms';
+import CaseStudyCard from '@/components/CaseStudyCard';
 import PortableTextContent from '@/components/PortableTextContent';
 import SchemaScript from '@/components/SchemaScript';
 import { GalleryTrigger, ProjectGallery } from '@/components/ProjectGallery';
-import { Project, Category, ImageWithCaption, Technology } from '@/types';
+import { Project, ImageWithCaption, Technology } from '@/types';
 import { SITE_URL, buildBreadcrumbSchema, buildCreativeWorkSchema } from '@/lib/schema';
 import { portableTextToPlainText, type PortableTextBlock } from '@/lib/markdown/portable-text';
 import { projectCategories, projectSummary, projectTechnologies } from '@/lib/markdown/portfolio';
@@ -78,19 +78,32 @@ const formatDate = (dateString: string) => {
     }).format(new Date(dateString));
 };
 
-const zoomIcon = (
-    <span
-        className="absolute flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-        style={{ top: 12, right: 12, width: 36, height: 36, borderRadius: 'var(--radius-pill)', background: '#fff', border: '1px solid var(--line-strong)', color: 'var(--accent)' }}
-        aria-hidden="true"
-    >
-        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-        </svg>
-    </span>
-);
+interface ProjectCard {
+    _id: string;
+    title: string;
+    slug: { current: string } | null;
+    client?: string;
+    mainImage?: unknown;
+    categories?: { title: string }[];
+}
 
-const imagePanel: CSSProperties = { background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', overflow: 'hidden', cursor: 'pointer' };
+/** The next projects in portfolio order (wrapping around), so every case study links onward. */
+async function loadMoreProjects(slug: string, count = 3): Promise<ProjectCard[]> {
+    const all = ((await getPortfolioProjects()) ?? []) as ProjectCard[];
+    const others = all.filter((project) => project.slug?.current);
+    const index = others.findIndex((project) => project.slug?.current === slug);
+    const rest = index === -1 ? others : [...others.slice(index + 1), ...others.slice(0, index)];
+    return rest.slice(0, count);
+}
+
+function Fact({ label, children }: { label: string; children: React.ReactNode }) {
+    return (
+        <div className="flex flex-col gap-1.5" style={{ padding: '14px 0', borderTop: '1px solid var(--line)' }}>
+            <dt style={{ fontSize: 14, color: 'var(--muted-2)' }}>{label}</dt>
+            <dd style={{ margin: 0, fontSize: 15, lineHeight: 1.45, color: 'var(--text)' }}>{children}</dd>
+        </div>
+    );
+}
 
 export default async function ProjectPage({ params }: { params: Params }) {
     const { slug } = await params;
@@ -122,171 +135,160 @@ export default async function ProjectPage({ params }: { params: Params }) {
         ]),
     ];
 
+    const moreProjects = await loadMoreProjects(slug);
+    const categoryNames = (project.categories ?? []).map((category) => category.title);
+    const year = project.publishedAt ? new Date(project.publishedAt).getFullYear() : null;
+
     return (
         <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
             <SchemaScript schema={schema} />
-            <section className="ct-dotgrid" style={{ padding: 'var(--pad-y) var(--pad-x)', borderBottom: '1px solid var(--line)' }}>
-                <div className="mx-auto flex max-w-[1280px] flex-col gap-6">
-                    <Link href="/portfolio" className="ct-meta ct-contact-link" style={{ alignSelf: 'flex-start' }}>
-                        ← Wróć do portfolio
+            <section style={{ padding: 'clamp(40px, 6vw, 80px) var(--pad-x) clamp(28px, 4vw, 48px)' }}>
+                <div className="mx-auto flex max-w-[1280px] flex-col gap-8">
+                    <Link href="/portfolio" className="ct-contact-link" style={{ alignSelf: 'flex-start', fontSize: 14, color: 'var(--muted)' }}>
+                        ← Portfolio
                     </Link>
-                    <span className="ct-eyebrow">Realizacje</span>
-                    <h1 className="ct-h1" style={{ maxWidth: '20ch' }}>
-                        {project.title}
-                    </h1>
-                    {project.categories && project.categories.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
-                            {project.categories.map((category: Category) => (
-                                <span key={category._id} className="ct-pill">{category.title}</span>
-                            ))}
+                    <div className="grid grid-cols-1 items-end gap-6 lg:grid-cols-[1fr_auto]">
+                        <div className="flex flex-col gap-4">
+                            <span style={{ fontSize: 'clamp(16px, 1.6vw, 20px)', color: 'var(--muted-2)' }}>
+                                {[project.client, year].filter(Boolean).join(' · ')}
+                            </span>
+                            <h1 className="ct-h1" style={{ maxWidth: '18ch' }}>{project.title}</h1>
+                            {categoryNames.length > 0 && (
+                                <ul className="flex flex-wrap gap-1.5" style={{ listStyle: 'none', margin: '4px 0 0', padding: 0 }}>
+                                    {categoryNames.map((name) => (
+                                        <li key={name} className="ct-chip" style={{ cursor: 'default' }}>{name}</li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
-                    )}
+                        {project.projectUrl && (
+                            <a href={project.projectUrl} target="_blank" rel="noopener noreferrer" className="ct-cta" style={{ alignSelf: 'flex-end' }}>
+                                Zobacz na żywo <span aria-hidden="true">↗</span>
+                            </a>
+                        )}
+                    </div>
                 </div>
             </section>
 
             <ProjectGallery images={lightboxImages}>
-                <section className="ct-section">
-                    <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-                        {/* Lewa kolumna - główne zdjęcie i informacje */}
-                        <div className="flex flex-col gap-8">
-                            {mainImage && (
-                                <GalleryTrigger index={0} label={`Powiększ zdjęcie projektu ${project.title}`} className="ct-card-hover group relative" style={{ ...imagePanel, padding: 16 }}>
-                                    <img
-                                        src={urlFor(mainImage).width(800).url()}
-                                        alt={project.title}
-                                        className="mx-auto h-auto max-h-[500px] w-full object-contain"
-                                    />
-                                    {zoomIcon}
-                                </GalleryTrigger>
-                            )}
-
-                            <div className="ct-panel" style={{ padding: 24 }}>
-                                <span className="ct-eyebrow">Projekt</span>
-                                <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 500 }}>Informacje o projekcie</h2>
-
-                                <div className="flex flex-col">
-                                    <div className="flex flex-wrap items-baseline justify-between gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
-                                        <h3 className="ct-meta" style={{ margin: 0 }}>Klient</h3>
-                                        <p style={{ margin: 0, fontSize: 14, fontWeight: 500 }}>{project.client}</p>
-                                    </div>
-
-                                    {project.publishedAt && (
-                                        <div className="flex flex-wrap items-baseline justify-between gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
-                                            <h3 className="ct-meta" style={{ margin: 0 }}>Data realizacji</h3>
-                                            <p style={{ margin: 0, fontSize: 14, fontWeight: 500 }}>
-                                                <time dateTime={project.publishedAt}>{formatDate(project.publishedAt)}</time>
-                                            </p>
-                                        </div>
-                                    )}
-
-                                    {project.categories && project.categories.length > 0 && (
-                                        <div className="flex flex-col gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
-                                            <h3 className="ct-meta" style={{ margin: 0 }}>Kategorie</h3>
-                                            <div className="flex flex-wrap gap-2">
-                                                {project.categories.map((category: Category) => (
-                                                    <span key={category._id} className="ct-pill">
-                                                        {category.title}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {project.technologies && project.technologies.length > 0 && (
-                                        <div className="flex flex-col gap-2" style={{ padding: '12px 0', borderTop: '1px solid var(--line)' }}>
-                                            <h3 className="ct-meta" style={{ margin: 0 }}>Technologie</h3>
-                                            <ul className="flex flex-wrap gap-2" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-                                                {project.technologies.map((technology: Technology) => (
-                                                    <li key={technology._id} className="ct-pill">
-                                                        {technology.title}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    )}
-
-                                    {project.projectUrl && (
-                                        <div className="flex flex-col gap-3" style={{ padding: '12px 0 0', borderTop: '1px solid var(--line)' }}>
-                                            <h3 className="ct-meta" style={{ margin: 0 }}>Link do projektu</h3>
-                                            <a
-                                                href={project.projectUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="ct-cta sm"
-                                                style={{ alignSelf: 'flex-start' }}
-                                            >
-                                                Zobacz realizację
-                                                <span className="ct-badge" aria-hidden="true">
-                                                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                                    </svg>
-                                                </span>
-                                            </a>
-                                        </div>
-                                    )}
-                                </div>
+                {mainImage && (
+                    <div style={{ padding: '0 var(--pad-x)' }}>
+                        <GalleryTrigger index={0} label={`Powiększ zdjęcie projektu ${project.title}`} className="ct-tile ct-v2-card mx-auto block max-w-[1280px]" style={{ padding: 12, cursor: 'zoom-in' }}>
+                            <div className="ct-v2-media ct-project-cover">
+                                <img src={urlFor(mainImage).width(1600).url()} alt={project.title} />
                             </div>
-                        </div>
+                        </GalleryTrigger>
+                    </div>
+                )}
 
-                        {/* Prawa kolumna - opis, zakres prac i galeria */}
-                        <div className="flex flex-col gap-12">
-                            <div>
+                <section className="ct-section">
+                    <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-20">
+                        <div className="flex min-w-0 flex-col gap-14">
+                            <div style={{ maxWidth: 720 }}>
                                 {typeof project.description === 'string' ? (
-                                    <p className="ct-lead whitespace-pre-line">{project.description}</p>
+                                    <p className="whitespace-pre-line" style={{ margin: 0, fontSize: 18, lineHeight: 1.65, color: 'var(--text-2)' }}>{project.description}</p>
                                 ) : (
                                     <PortableTextContent content={project.description} />
                                 )}
                             </div>
 
                             {project.scopeOfWork && project.scopeOfWork.length > 0 && (
-                                <div>
-                                    <span className="ct-eyebrow">Zakres</span>
-                                    <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 500 }}>Zakres prac</h2>
-                                    <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                                <div style={{ maxWidth: 720 }}>
+                                    <h2 style={{ margin: '0 0 16px', fontSize: 'clamp(22px, 2.4vw, 28px)', fontWeight: 500, letterSpacing: '-0.02em' }}>Zakres prac</h2>
+                                    <ol className="grid grid-cols-1 gap-1 sm:grid-cols-2" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                                         {project.scopeOfWork.map((item: string, index: number) => (
-                                            <li key={index} className="flex items-center gap-3" style={{ padding: '12px 0', borderTop: '1px solid var(--line)', fontSize: 14.5, color: 'var(--text-2)' }}>
-                                                <span className="ct-bullet" />
+                                            <li key={index} className="ct-tile flex items-baseline gap-3" style={{ padding: '14px 16px', fontSize: 15, lineHeight: 1.45, color: 'var(--text)' }}>
+                                                <span className="ct-mono" style={{ fontSize: 12, color: 'var(--muted-2)' }}>{String(index + 1).padStart(2, '0')}</span>
                                                 <span>{item}</span>
                                             </li>
                                         ))}
-                                    </ul>
-                                </div>
-                            )}
-
-                            {/* Galeria zdjęć z możliwością kliknięcia i otwarcia lighboxa */}
-                            {galleryImages.length > 0 && (
-                                <div>
-                                    <span className="ct-eyebrow">Galeria</span>
-                                    <h2 style={{ margin: '8px 0 16px', fontSize: 20, fontWeight: 500 }}>Galeria projektu</h2>
-                                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                        {galleryImages.map((image, index) => {
-                                            const alt = image.alt || `Zdjęcie ${index + 1} projektu ${project.title}`;
-                                            return (
-                                                <GalleryTrigger key={index} index={galleryOffset + index} label={`Powiększ: ${alt}`} className="ct-card-hover group relative" style={imagePanel}>
-                                                    <div style={{ padding: 12 }}>
-                                                        <img
-                                                            src={urlFor(image).width(600).url()}
-                                                            alt={alt}
-                                                            loading="lazy"
-                                                            className="mx-auto h-auto max-h-[300px] w-full object-contain"
-                                                        />
-                                                    </div>
-                                                    {zoomIcon}
-                                                    {image.caption && (
-                                                        <div className="ct-body" style={{ padding: '10px 14px', fontSize: 13, borderTop: '1px solid var(--line)', background: '#fff' }}>
-                                                            {image.caption}
-                                                        </div>
-                                                    )}
-                                                </GalleryTrigger>
-                                            );
-                                        })}
-                                    </div>
+                                    </ol>
                                 </div>
                             )}
                         </div>
+
+                        <aside className="order-first lg:order-none">
+                            <div className="ct-tile lg:sticky" style={{ top: 96, padding: '8px 20px 20px' }}>
+                                <dl style={{ margin: 0 }}>
+                                    {project.client && <Fact label="Klient">{project.client}</Fact>}
+                                    {project.publishedAt && (
+                                        <Fact label="Data realizacji">
+                                            <time dateTime={project.publishedAt}>{formatDate(project.publishedAt)}</time>
+                                        </Fact>
+                                    )}
+                                    {categoryNames.length > 0 && <Fact label="Rodzaj projektu">{categoryNames.join(', ')}</Fact>}
+                                    {project.technologies && project.technologies.length > 0 && (
+                                        <Fact label="Technologie">
+                                            <ul className="flex flex-wrap gap-1.5" style={{ listStyle: 'none', margin: '2px 0 0', padding: 0 }}>
+                                                {project.technologies.map((technology: Technology) => (
+                                                    <li key={technology._id} className="ct-chip" style={{ cursor: 'default', background: 'var(--bg)', minHeight: 30, padding: '4px 12px' }}>{technology.title}</li>
+                                                ))}
+                                            </ul>
+                                        </Fact>
+                                    )}
+                                </dl>
+                                {project.projectUrl && (
+                                    <a href={project.projectUrl} target="_blank" rel="noopener noreferrer" className="ct-ghost" style={{ marginTop: 8, width: '100%', justifyContent: 'center' }}>
+                                        Odwiedź stronę projektu <span aria-hidden="true">↗</span>
+                                    </a>
+                                )}
+                            </div>
+                        </aside>
                     </div>
                 </section>
+
+                {galleryImages.length > 0 && (
+                    <section className="ct-section" style={{ paddingTop: 0 }}>
+                        <div className="mx-auto flex max-w-[1280px] flex-col gap-6">
+                            <h2 style={{ margin: 0, fontSize: 'clamp(22px, 2.4vw, 28px)', fontWeight: 500, letterSpacing: '-0.02em' }}>Galeria projektu</h2>
+                            <ul className="columns-1 gap-1 sm:columns-2" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                                {galleryImages.map((image, index) => {
+                                    const alt = image.alt || `Zdjęcie ${index + 1} projektu ${project.title}`;
+                                    return (
+                                        <li key={index} className="break-inside-avoid" style={{ marginBottom: 4 }}>
+                                            <GalleryTrigger index={galleryOffset + index} label={`Powiększ: ${alt}`} className="ct-tile ct-v2-card block" style={{ padding: 8, cursor: 'zoom-in' }}>
+                                                <div className="ct-v2-media ct-gallery-media">
+                                                    <img src={urlFor(image).width(1000).url()} alt={alt} loading="lazy" />
+                                                </div>
+                                                {image.caption && (
+                                                    <p style={{ margin: 0, padding: '10px 8px 4px', fontSize: 14, lineHeight: 1.45, color: 'var(--muted)' }}>{image.caption}</p>
+                                                )}
+                                            </GalleryTrigger>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                    </section>
+                )}
             </ProjectGallery>
+
+            {moreProjects.length > 0 && (
+                <section className="ct-section">
+                    <div className="mx-auto flex max-w-[1280px] flex-col gap-8">
+                        <div className="flex flex-wrap items-end justify-between gap-4">
+                            <h2 className="ct-h2" style={{ margin: 0 }}>Więcej realizacji</h2>
+                            <Link href="/portfolio" className="ct-ghost">Wszystkie projekty</Link>
+                        </div>
+                        <ul className="grid grid-cols-1 gap-1 md:grid-cols-2 xl:grid-cols-3" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                            {moreProjects.map((item) => (
+                                <li key={item._id}>
+                                    <CaseStudyCard
+                                        card={{
+                                            key: item._id,
+                                            href: `/portfolio/${item.slug?.current}`,
+                                            meta: item.client ?? '',
+                                            title: item.title,
+                                            description: item.categories?.map((category) => category.title).join(' · ') ?? '',
+                                            image: hasAsset(item.mainImage) ? urlFor(item.mainImage).width(900).url() : undefined,
+                                        }}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </section>
+            )}
         </main>
     );
 }
