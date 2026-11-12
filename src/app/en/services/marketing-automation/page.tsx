@@ -7,7 +7,7 @@ import PageHero from '@/components/ui/PageHero';
 import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
@@ -67,6 +67,11 @@ const faqs = [
 ];
 
 export default function MarketingAutomationPage() {
+    const breadcrumbSchema = buildBreadcrumbSchema([
+        { name: 'Home', url: `${SITE_URL}/en` },
+        { name: 'Services', url: `${SITE_URL}/en/services` },
+        { name: 'Marketing automation', url: `${SITE_URL}/en/services/marketing-automation` },
+    ]);
     const serviceSchema = buildServiceSchema({
         name: 'Marketing Automation',
         description:
@@ -79,7 +84,7 @@ export default function MarketingAutomationPage() {
 
     return (
         <main style={{ minHeight: '100vh' }}>
-            <SchemaScript schema={[serviceSchema, faqSchema]} />
+            <SchemaScript schema={[breadcrumbSchema, serviceSchema, faqSchema]} />
 
             {/* Hero */}
             <PageHero
