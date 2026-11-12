@@ -55,8 +55,8 @@ Strona główna ma już nowy język wizualny v2 („electric ink on drafting pap
 
 ### Phase 2: Siatki
 
-- [ ] 2.1 PortfolioGrid: chipy, licznik, kafle
-- [ ] 2.2 Blog: chipy, wyróżniony kafel, siatka
+- [x] 2.1 PortfolioGrid: chipy, licznik, kafle — 1a321c0
+- [x] 2.2 Blog: chipy, wyróżniony kafel, siatka — d051f1d
 
 ### Phase 3: Podstrony
 
