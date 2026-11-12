@@ -80,6 +80,7 @@ docker run --rm \
   --network <nazwa-uslugi> \
   -e DATABASE_URL=postgres://creativetrust:<POSTGRES_PASSWORD>@db:5432/creativetrust \
   -e PAYLOAD_SECRET=<PAYLOAD_SECRET> \
+  -e REVALIDATE_URL=http://app:3000/api/revalidate \
   -v <nazwa-uslugi>_media:/app/media \
   ghcr.io/bartoopl/creativetrust_final:tools \
   npm run payload -- run scripts/import-from-sanity.ts
@@ -88,7 +89,8 @@ docker run --rm \
 docker run --rm -v <nazwa-uslugi>_media:/m alpine chown -R 1001:1001 /m
 ```
 
-Oczekiwany koniec: `Checked 185 documents. All content matches Sanity.`
+Oczekiwany koniec: `Checked 185 documents. All content matches Sanity.` oraz `Site cache cleared.`
+(bez czyszczenia cache strona przez godzinę pokazywałaby stan sprzed importu).
 (Liczba dokumentów wzrośnie, jeśli w międzyczasie dojdą nowe treści.)
 
 ## 4. Sprawdzenie przed przełączeniem DNS

@@ -7,8 +7,9 @@
  *   npm run payload -- run scripts/import-from-sanity.ts            import + verify
  *   npm run payload -- run scripts/import-from-sanity.ts --verify   verify only
  *
- * Env: DATABASE_URL, PAYLOAD_SECRET, MEDIA_DIR (as for the app). SANITY_TOKEN is
- * only needed once the Sanity dataset is made private.
+ * Env: DATABASE_URL, PAYLOAD_SECRET, MEDIA_DIR (as for the app); REVALIDATE_URL to
+ * clear the running site's cache afterwards. SANITY_TOKEN is only needed once the
+ * Sanity dataset is made private.
  *
  * Verification converts every stored rich-text field back to Portable Text and
  * compares it with the Sanity original (text, marks, links, headings, lists,
@@ -199,6 +200,23 @@ function normalize(blocks: PortableTextBlock[] | string | null | undefined, medi
             };
         })
         .filter(Boolean);
+}
+
+// ------------------------------------------------------------------ cache
+
+/**
+ * The running site caches CMS reads; writes made here bypass it, so pages cached
+ * before the import (an empty blog, 404 category pages) would stay for an hour.
+ * REVALIDATE_URL: the app's /api/revalidate, e.g. http://app:3000/api/revalidate.
+ */
+async function revalidateSite() {
+    const url = process.env.REVALIDATE_URL;
+    if (!url) {
+        console.log('REVALIDATE_URL not set: the site cache refreshes within an hour (or POST /api/revalidate).');
+        return;
+    }
+    const response = await fetch(url, { method: 'POST', headers: { 'x-revalidate-secret': process.env.PAYLOAD_SECRET ?? '' } });
+    console.log(response.ok ? 'Site cache cleared.' : `Cache clear failed: ${response.status} ${await response.text()}`);
 }
 
 // ------------------------------------------------------------------ main
@@ -441,6 +459,7 @@ async function main() {
         process.exit(1);
     }
     console.log('All content matches Sanity.');
+    await revalidateSite();
     process.exit(0);
 }
 
