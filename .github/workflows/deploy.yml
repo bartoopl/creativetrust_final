@@ -1,10 +1,10 @@
-# Test, build the Docker image, push it to GHCR and tell the server's panel to
-# redeploy. Pull requests run the checks and the image build without pushing.
+# Test, build the Docker image, push it to GHCR and tell Dokploy to redeploy.
+# Pull requests run the checks and the image build without pushing.
 #
 # Repository secrets (Settings → Secrets and variables → Actions):
-#   DEPLOY_WEBHOOK_URL    the panel's deploy webhook (Coolify: Webhooks → Deploy;
-#                         Dokploy: application → Deployments → Webhook URL)
-#   DEPLOY_WEBHOOK_TOKEN  optional bearer token (Coolify API token); leave unset for Dokploy
+#   DOKPLOY_URL         panel address, e.g. https://panel.example.com
+#   DOKPLOY_API_KEY     Dokploy → Settings → API Keys
+#   DOKPLOY_COMPOSE_ID  id of the compose service (GET /api/project.all, or the URL in the panel)
 name: deploy
 
 on:
@@ -76,14 +76,15 @@ jobs:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger the panel
+      - name: Trigger Dokploy
         env:
-          URL: ${{ secrets.DEPLOY_WEBHOOK_URL }}
-          TOKEN: ${{ secrets.DEPLOY_WEBHOOK_TOKEN }}
+          DOKPLOY_URL: ${{ secrets.DOKPLOY_URL }}
+          DOKPLOY_API_KEY: ${{ secrets.DOKPLOY_API_KEY }}
+          DOKPLOY_COMPOSE_ID: ${{ secrets.DOKPLOY_COMPOSE_ID }}
         run: |
-          if [ -z "$URL" ]; then echo "DEPLOY_WEBHOOK_URL not set — image pushed, deploy skipped."; exit 0; fi
-          if [ -n "$TOKEN" ]; then
-            curl --fail-with-body -sS -X GET "$URL" -H "Authorization: Bearer $TOKEN"
-          else
-            curl --fail-with-body -sS -X POST "$URL"
+          if [ -z "$DOKPLOY_URL" ] || [ -z "$DOKPLOY_API_KEY" ] || [ -z "$DOKPLOY_COMPOSE_ID" ]; then
+            echo "Dokploy secrets not set — image pushed, deploy skipped."; exit 0
           fi
+          body=$(jq -n --arg id "$DOKPLOY_COMPOSE_ID" --arg title "GitHub ${GITHUB_SHA::7}" '{composeId: $id, title: $title}')
+          curl --fail-with-body -sS -X POST "${DOKPLOY_URL%/}/api/compose.deploy" \
+            -H "x-api-key: $DOKPLOY_API_KEY" -H 'Content-Type: application/json' -d "$body"

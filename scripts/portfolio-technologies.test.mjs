@@ -21,3 +21,13 @@ test('case-study Markdown and frontmatter name the technologies', () => {
     assert.match(md, /- \*\*Technologie:\*\* WooCommerce, Next\.js/);
     assert.ok(portfolioFrontmatter(doc, 'x', 's').semantic_keywords.includes('WooCommerce'));
 });
+
+test('technologies are detected from how project descriptions name them', async () => {
+    const { detectTechnologies } = await import('../src/payload/technology-detection.ts');
+    const names = (...texts) => detectTechnologies(...texts).map((t) => t.title);
+    assert.deepEqual(names('Technologia: WordPress / WooCommerce'), ['WordPress', 'WooCommerce']);
+    assert.deepEqual(names('Strona została wdrożona w technologii Next.js, co zapewnia:'), ['Next.js']);
+    assert.deepEqual(names('Projekt i wdrożenie sklepu (WordPress + WooCommerce)'), ['WordPress', 'WooCommerce']);
+    assert.deepEqual(names('wdrożenie SALESmanago', null), ['SALESmanago']);
+    assert.deepEqual(names('Strona wizytówka, projekt graficzny'), []);
+});

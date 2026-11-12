@@ -17,7 +17,8 @@
 import config from '@payload-config';
 import { getPayload, type Payload } from 'payload';
 import { lexicalToPortableText, plainTextToPortableText, portableTextToLexical, type LexicalState } from '../src/lib/richtext/lexical';
-import type { PortableTextBlock } from '../src/lib/markdown/portable-text';
+import { portableTextToPlainText, type PortableTextBlock } from '../src/lib/markdown/portable-text';
+import { detectTechnologies } from '../src/payload/technology-detection';
 
 process.env.PAYLOAD_SKIP_REVALIDATE = '1';
 
@@ -335,6 +336,44 @@ async function main() {
     });
 
     if (!VERIFY_ONLY) console.log(`  media: ${media.created} uploaded, ${media.reused} reused`);
+
+    // Technologies named in the descriptions ("Technologia: WordPress / WooCommerce").
+    // Added to whatever editors attached already, never removed.
+    if (!VERIFY_ONLY) {
+        const technologyIds = new Map<string, number | string>();
+        let attached = 0;
+        for (const project of projects) {
+            const found = detectTechnologies(
+                typeof project.description === 'string' ? project.description : portableTextToPlainText(project.description, 100_000),
+                ...(project.scopeOfWork ?? []),
+            );
+            const id = ids.get(project._id);
+            if (!found.length || id == null) continue;
+            const wanted: Array<number | string> = [];
+            for (const technology of found) {
+                if (!technologyIds.has(technology.slug)) {
+                    const existing = await payload.find({ collection: 'technologies', where: { slug: { equals: technology.slug } }, limit: 1, depth: 0 });
+                    const doc =
+                        existing.docs[0] ??
+                        (await payload.create({
+                            collection: 'technologies',
+                            data: { title: technology.title, slug: technology.slug, group: technology.group, website: technology.website },
+                            depth: 0,
+                        }));
+                    technologyIds.set(technology.slug, doc.id);
+                }
+                wanted.push(technologyIds.get(technology.slug)!);
+            }
+            const stored = (await payload.findByID({ collection: 'portfolio-projects', id, depth: 0, draft: false })) as { technologies?: Array<number | string> | null };
+            const current = stored.technologies ?? [];
+            const merged = [...new Set([...current, ...wanted])];
+            if (merged.length === current.length) continue;
+            await payload.update({ collection: 'portfolio-projects', id, data: { technologies: merged } as any, depth: 0, draft: false });
+            await keepDates(payload, 'portfolio_projects', id, project);
+            attached += 1;
+        }
+        console.log(`  technologies: ${technologyIds.size} found, ${attached} project(s) updated`);
+    }
 
     // ---------------------------------------------------------- verify
     console.log('Verifying…');

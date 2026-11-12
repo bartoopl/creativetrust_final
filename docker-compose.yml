@@ -1,13 +1,16 @@
-# Production stack for a Docker panel (Coolify / Dokploy) or plain `docker compose`.
-# The app image is built by GitHub Actions and pulled from GHCR; see DEPLOY.md.
+# Production stack for Dokploy (Docker Compose service, Isolated Deployments on)
+# or plain `docker compose`. The app image is built by GitHub Actions and pulled
+# from GHCR; see DEPLOY.md.
 #
 # Required variables (set them in the panel, or in a .env next to this file):
 #   POSTGRES_PASSWORD, PAYLOAD_SECRET, EMAIL_* , ANTHROPIC_API_KEY
-# Cloudflare sits in front: point the panel's domain/proxy at app:3000.
+# Cloudflare sits in front; in Dokploy add the domain to service `app`, port 3000.
 
 services:
   app:
     image: ghcr.io/bartoopl/creativetrust_final:${APP_TAG:-latest}
+    # `up` alone would keep the cached :latest; every deploy pulls the new image.
+    pull_policy: always
     restart: unless-stopped
     depends_on:
       db:

@@ -4,9 +4,9 @@ Strona to jedna aplikacja Next.js z wbudowanym Payload CMS (panel: `/admin`).
 Treści są w Postgresie, pliki na wolumenie Dockera, a przed serwerem stoi Cloudflare.
 
 ```
-GitHub (push na main) ──► GitHub Actions: testy → obraz Dockera → ghcr.io ──► webhook panelu
+GitHub (push na main) ──► GitHub Actions: testy → obraz Dockera → ghcr.io ──► API Dokploy (compose.deploy)
                                                                                   │
-Cloudflare (CDN, SSL) ──► serwer: panel (Coolify/Dokploy) ── docker-compose.yml ──┘
+Cloudflare (CDN, SSL) ──► serwer: Dokploy ── usługa Docker Compose (docker-compose.yml) ──┘
                                      app (Next + Payload) · db (Postgres 17) · backup (cron)
 ```
 
@@ -21,17 +21,25 @@ się co godzinę. Migracje bazy wykonują się same przy starcie kontenera
 1. Workflow `.github/workflows/deploy.yml` publikuje obrazy:
    - `ghcr.io/bartoopl/creativetrust_final:latest` (strona),
    - `ghcr.io/bartoopl/creativetrust_final:tools` (narzędzia: import, komendy Payload).
-2. Pakiet w GHCR jest domyślnie prywatny. Serwer musi się zalogować:
-   `docker login ghcr.io -u bartoopl` z tokenem PAT, który ma tylko uprawnienie `read:packages`.
-   W Coolify robi się to w *Servers → Docker Registries*, w Dokploy w *Settings → Registry*.
+2. Pakiet w GHCR jest domyślnie prywatny, więc Dokploy musi się logować: *Settings → Registry →
+   Add Registry*, URL `ghcr.io`, użytkownik `bartoopl`, hasło: token *classic* z uprawnieniem
+   `read:packages` (do samego pobierania obrazów to wystarczy).
 3. Sekrety repozytorium (*Settings → Secrets and variables → Actions*):
-   - `DEPLOY_WEBHOOK_URL`: webhook wdrożenia z panelu,
-   - `DEPLOY_WEBHOOK_TOKEN`: tylko dla Coolify (token API); w Dokploy zostaw puste.
+   - `DOKPLOY_URL`: adres panelu, np. `https://panel.twojadomena.pl`,
+   - `DOKPLOY_API_KEY`: Dokploy → *Settings → API Keys*,
+   - `DOKPLOY_COMPOSE_ID`: ID usługi compose (z adresu w panelu albo z `GET /api/project.all`).
+
+   Bez tych sekretów workflow publikuje obraz, ale niczego nie wdraża.
 
 ## 2. Jednorazowo: serwer i panel
 
-1. W panelu utwórz zasób typu **Docker Compose** z pliku `docker-compose.yml` z repozytorium.
-2. Ustaw zmienne:
+1. W projekcie Dokploy dodaj usługę **Compose** (typ *Docker Compose*), źródło: to repozytorium
+   (gałąź `main`, plik `docker-compose.yml`) albo wklejony plik (*Raw*). **Auto Deploy wyłącz**,
+   bo wdrożenia wyzwala GitHub Actions dopiero po zbudowaniu obrazu.
+2. *Advanced → Utilities*: włącz **Isolated Deployments**. Wtedy wszystkie usługi (app, db,
+   backup) są w jednej sieci razem z Traefikiem. Bez tego Dokploy podłącza do Traefika tylko
+   usługę z domeną i aplikacja może stracić połączenie z bazą.
+3. Zakładka *Environment* (Dokploy zapisuje ją do `.env`, a compose czyta zmienne przez `${…}`):
 
    | Zmienna | Wartość |
    |---|---|
@@ -40,8 +48,9 @@ się co godzinę. Migracje bazy wykonują się same przy starcie kontenera
    | `EMAIL_SERVER`, `EMAIL_PORT`, `EMAIL_SECURE`, `EMAIL_USER`, `EMAIL_PASSWORD`, `EMAIL_FROM`, `EMAIL_CONTACT`, `EMAIL_AUTOMATION` | jak dotąd w Netlify |
    | `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`, `ASSISTANT_QUOTA_SALT` | jak dotąd w Netlify |
 
-3. Domena w panelu: `www.creativetrust.pl` (oraz `creativetrust.pl`), kierowana na usługę `app`, port `3000`.
-4. Pierwsze uruchomienie tworzy tabele (migracje). Wejdź na `https://<adres-serwera>/admin`
+4. Zakładka *Domains*: `www.creativetrust.pl` i `creativetrust.pl`, usługa `app`, port `3000`,
+   HTTPS włączone (Let's Encrypt). Na czas testów dodaj też `nowa.creativetrust.pl`.
+5. *Deploy*. Pierwsze uruchomienie tworzy tabele (migracje). Wejdź na `https://nowa.creativetrust.pl/admin`
    i załóż pierwsze konto administratora.
 
 Zasoby: aplikacja ma limit 1 GB RAM (w praktyce zużywa ok. 300–500 MB), Postgres 512 MB,
@@ -50,22 +59,24 @@ backup 256 MB. Na serwerze nic się nie buduje.
 ## 3. Przeniesienie treści z Sanity
 
 Skrypt `scripts/import-from-sanity.ts` kopiuje wszystkie wpisy, portfolio, bazę wiedzy,
-autorów, kategorie i pliki. Daty z Sanity zostają, więc `lastmod` w sitemapie się nie zmienia.
+autorów, kategorie i pliki. Do tego przypina projektom technologie wymienione w opisach
+(WordPress, WooCommerce, Next.js…), dokładając je do przypiętych ręcznie, nigdy nie usuwając. Daty z Sanity zostają, więc `lastmod` w sitemapie się nie zmienia.
 Na końcu skrypt porównuje każdą treść z oryginałem. Można go uruchamiać wielokrotnie:
 istniejące rekordy aktualizuje zamiast je dublować.
 
 ```sh
-# nazwy sieci i wolumenu z: docker network ls / docker volume ls (panel dodaje prefiks)
+# na serwerze (SSH); nazwy sieci i wolumenu: docker network ls / docker volume ls
+# (Dokploy nadaje im prefiks z nazwy usługi, np. creativetrust-abc123_media)
 docker run --rm \
-  --network <projekt>_default \
+  --network <nazwa-uslugi> \
   -e DATABASE_URL=postgres://creativetrust:<POSTGRES_PASSWORD>@db:5432/creativetrust \
   -e PAYLOAD_SECRET=<PAYLOAD_SECRET> \
-  -v <projekt>_media:/app/media \
+  -v <nazwa-uslugi>_media:/app/media \
   ghcr.io/bartoopl/creativetrust_final:tools \
   npm run payload -- run scripts/import-from-sanity.ts
 
 # pliki zapisane przez import mają należeć do użytkownika aplikacji
-docker run --rm -v <projekt>_media:/m alpine chown -R 1001:1001 /m
+docker run --rm -v <nazwa-uslugi>_media:/m alpine chown -R 1001:1001 /m
 ```
 
 Oczekiwany koniec: `Checked 185 documents. All content matches Sanity.`
@@ -73,8 +84,8 @@ Oczekiwany koniec: `Checked 185 documents. All content matches Sanity.`
 
 ## 4. Sprawdzenie przed przełączeniem DNS
 
-Wystaw stronę pod tymczasową subdomeną, np. `nowa.creativetrust.pl` (rekord w Cloudflare
-na IP serwera i ta sama domena w panelu), a potem z dowolnego komputera z repozytorium uruchom:
+Wystaw stronę pod tymczasową subdomeną `nowa.creativetrust.pl` (rekord A w Cloudflare na IP
+serwera, domena dodana w Dokploy), a potem z dowolnego komputera z repozytorium uruchom:
 
 ```sh
 node scripts/check-urls.mjs --candidate https://nowa.creativetrust.pl
@@ -91,8 +102,9 @@ przekierowań z produkcją. Lokalnie wynik to 400/401. Jedyna różnica to
 2. Uruchom import jeszcze raz (punkt 3), żeby dociągnąć ostatnie zmiany.
 3. Cloudflare → DNS: rekordy `www` i `@` jako **A na IP serwera, Proxied** (pomarańczowa chmurka);
    usuń rekordy Netlify.
-4. Cloudflare → SSL/TLS: tryb **Full (strict)**. Certyfikat na serwerze wystawia panel
-   (Let's Encrypt) albo użyj *Origin Certificate* z Cloudflare.
+4. Cloudflare → SSL/TLS: tryb **Full (strict)**. Certyfikat na serwerze wystawia Dokploy
+   (Let's Encrypt). Jeśli jego wystawienie przez proxy Cloudflare się nie uda, na chwilę wyłącz
+   proxy (szara chmurka) albo użyj *Origin Certificate* z Cloudflare.
 5. Cloudflare → Caching → Cache Rules:
    - `/api/media/file/*`: *Eligible for cache* (pliki mają `s-maxage` na 30 dni),
    - `/admin*` i `/api/*` poza mediami: *Bypass cache*.
@@ -108,14 +120,15 @@ Usługa `backup` co noc o 3:00 zapisuje do wolumenu `backups`:
 - `media_<data>.tar.gz`: wszystkie pliki.
 
 Przechowuje 14 dni. **Kopia tylko na tym samym serwerze nie chroni przed jego utratą.**
-Skopiuj wolumen na zewnątrz, np. przez `rclone sync` do Cloudflare R2, Backblaze B2 albo
-Hetzner Storage Box (cron na hoście lub funkcja backupów w panelu).
+Najprościej w Dokploy: *Volume Backups* dla wolumenów `backups` (albo bezpośrednio `pgdata`
+i `media`) do zewnętrznego S3, np. Cloudflare R2 lub Backblaze B2, ustawione w *Settings → S3 Destinations*.
+Alternatywa: `rclone sync` z crona na hoście.
 
 Odtworzenie:
 
 ```sh
-docker compose exec -T db pg_restore -U creativetrust -d creativetrust --clean < db_<data>.dump
-docker run --rm -v <projekt>_media:/m -v $PWD:/b alpine tar -xzf /b/media_<data>.tar.gz -C /m
+docker exec -i <kontener-db> pg_restore -U creativetrust -d creativetrust --clean < db_<data>.dump
+docker run --rm -v <nazwa-uslugi>_media:/m -v $PWD:/b alpine tar -xzf /b/media_<data>.tar.gz -C /m
 ```
 
 ## Praca lokalna
