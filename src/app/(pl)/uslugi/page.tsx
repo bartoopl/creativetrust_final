@@ -4,7 +4,7 @@ import CTASection from '@/components/CTASection';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildFaqSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
@@ -68,11 +68,15 @@ const faq = [
 ];
 
 export default function ServicesPage() {
+    const breadcrumbSchema = buildBreadcrumbSchema([
+        { name: 'Strona główna', url: SITE_URL },
+        { name: 'Usługi', url: `${SITE_URL}/uslugi` },
+    ]);
     const faqSchema = buildFaqSchema(faq.map(({ q, a }) => ({ question: q, answer: a })));
 
     return (
         <main style={{ minHeight: '100vh' }}>
-            <SchemaScript schema={faqSchema} />
+            <SchemaScript schema={[breadcrumbSchema, faqSchema]} />
             <PageHero
                 eyebrow="Usługi"
                 title="Audytujemy, prowadzimy i budujemy e‑commerce."
