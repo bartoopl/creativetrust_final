@@ -23,8 +23,8 @@ const PortableTextContent: React.FC<PortableTextContentProps> = ({ content, comp
                     return null;
                 }
                 return (
-                    <figure style={{ margin: '32px 0' }}>
-                        <div style={{ border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', overflow: 'hidden', background: 'var(--panel)' }}>
+                    <figure style={{ margin: '40px 0' }}>
+                        <div style={{ borderRadius: 12, overflow: 'hidden', background: 'var(--panel)' }}>
                             <Image
                                 src={urlFor(value).width(1200).url()}
                                 alt={value.alt || 'Obraz w treści'}
@@ -40,7 +40,7 @@ const PortableTextContent: React.FC<PortableTextContentProps> = ({ content, comp
                             />
                         </div>
                         {value.alt && (
-                            <figcaption className="ct-meta" style={{ marginTop: 10, color: 'var(--muted-2)', textTransform: 'none' }}>
+                            <figcaption style={{ marginTop: 10, fontSize: 14, lineHeight: 1.45, color: 'var(--muted-2)' }}>
                                 {value.alt}
                             </figcaption>
                         )}
@@ -48,7 +48,7 @@ const PortableTextContent: React.FC<PortableTextContentProps> = ({ content, comp
                 );
             },
             code: ({ value }: any) => (
-                <pre className="ct-mono" style={{ margin: '0 0 24px', padding: '16px 18px', fontSize: 13, lineHeight: 1.6, color: 'var(--text)', background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-sm)', overflowX: 'auto' }}>
+                <pre className="ct-mono" style={{ margin: '0 0 24px', padding: '16px 18px', fontSize: 13, lineHeight: 1.6, color: 'var(--text)', background: 'var(--panel)', borderRadius: 10, overflowX: 'auto' }}>
                     <code>{value?.code}</code>
                 </pre>
             ),
@@ -72,34 +72,34 @@ const PortableTextContent: React.FC<PortableTextContentProps> = ({ content, comp
                 <strong style={{ color: 'var(--text)', fontWeight: 500 }}>{children}</strong>
             ),
             code: ({ children }: any) => (
-                <code className="ct-mono" style={{ fontSize: '0.88em', color: 'var(--text)', background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 4, padding: '1px 5px' }}>{children}</code>
+                <code className="ct-mono" style={{ fontSize: '0.88em', color: 'var(--text)', background: 'var(--panel)', borderRadius: 5, padding: '1px 6px' }}>{children}</code>
             ),
         },
         block: {
             h2: ({ children }: any) => (
-                <h2 style={{ ...headingStyle, fontSize: 'clamp(22px, 2.4vw, 28px)', letterSpacing: '-0.021em', margin: '48px 0 16px' }}>{children}</h2>
+                <h2 style={{ ...headingStyle, fontSize: 'clamp(24px, 2.6vw, 32px)', letterSpacing: '-0.03em', lineHeight: 1.2, margin: '56px 0 16px', textWrap: 'balance' }}>{children}</h2>
             ),
             h3: ({ children }: any) => (
-                <h3 style={{ ...headingStyle, fontSize: 20, letterSpacing: '-0.3px', margin: '36px 0 12px' }}>{children}</h3>
+                <h3 style={{ ...headingStyle, fontSize: 21, letterSpacing: '-0.015em', margin: '40px 0 12px' }}>{children}</h3>
             ),
             h4: ({ children }: any) => (
                 <h4 style={{ ...headingStyle, fontSize: 17, margin: '28px 0 10px' }}>{children}</h4>
             ),
             normal: ({ children }: any) => (
-                <p style={{ margin: compact ? '0 0 8px' : '0 0 20px' }}>{children}</p>
+                <p style={{ margin: compact ? '0 0 8px' : '0 0 22px' }}>{children}</p>
             ),
             blockquote: ({ children }: any) => (
-                <blockquote style={{ margin: '28px 0', padding: '16px 20px', borderLeft: '2px solid var(--accent)', background: 'var(--panel)', borderTop: '1px solid var(--line)', borderRight: '1px solid var(--line)', borderBottom: '1px solid var(--line)', borderRadius: '0 var(--radius-sm) var(--radius-sm) 0', color: 'var(--text-2)' }}>
+                <blockquote style={{ margin: '36px 0', padding: '4px 0 4px 22px', borderLeft: '2px solid var(--accent)', fontSize: compact ? 15 : 20, lineHeight: 1.5, letterSpacing: '-0.01em', color: 'var(--text)' }}>
                     {children}
                 </blockquote>
             ),
         },
         list: {
             bullet: ({ children }: any) => (
-                <ul style={{ margin: '0 0 20px', paddingLeft: 22, listStyle: 'square' }} className="marker:text-[var(--accent)]">{children}</ul>
+                <ul style={{ margin: '0 0 22px', paddingLeft: 22, listStyle: 'disc' }} className="marker:text-[var(--accent)]">{children}</ul>
             ),
             number: ({ children }: any) => (
-                <ol style={{ margin: '0 0 20px', paddingLeft: 22, listStyle: 'decimal' }} className="marker:font-mono marker:text-[13px] marker:text-[var(--muted-2)]">{children}</ol>
+                <ol style={{ margin: '0 0 22px', paddingLeft: 22, listStyle: 'decimal' }} className="marker:font-mono marker:text-[13px] marker:text-[var(--muted-2)]">{children}</ol>
             ),
         },
         listItem: {
@@ -113,7 +113,7 @@ const PortableTextContent: React.FC<PortableTextContentProps> = ({ content, comp
     };
 
     return (
-        <div style={{ fontSize: compact ? 14 : 16, lineHeight: compact ? 1.6 : 1.7, color: 'var(--muted)' }}>
+        <div style={{ fontSize: compact ? 14 : 17, lineHeight: compact ? 1.6 : 1.75, color: compact ? 'var(--muted)' : 'var(--text-2)' }}>
             <PortableText value={content} components={components} />
         </div>
     );
