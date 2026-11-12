@@ -50,8 +50,8 @@ Strona główna ma już nowy język wizualny v2 („electric ink on drafting pap
 
 ### Phase 1: Karty
 
-- [ ] 1.1 CaseStudyCard jako kafel v2
-- [ ] 1.2 BlogPostCard jako kafel v2
+- [x] 1.1 CaseStudyCard jako kafel v2 — 0ca4af0
+- [x] 1.2 BlogPostCard jako kafel v2 — 9b246a8
 
 ### Phase 2: Siatki
 
