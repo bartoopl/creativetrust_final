@@ -35,8 +35,9 @@ export interface ImageSource {
 
 const WIDTH_VARIANTS = ['thumbnail', 'card', 'large', 'xlarge'] as const;
 
-function assetOf(source: ImageSource | MediaAsset | null | undefined): MediaAsset | null {
-    if (!source) return null;
+function assetOf(value: unknown): MediaAsset | null {
+    if (!value || typeof value !== 'object') return null;
+    const source = value as ImageSource;
     if (source.asset && typeof source.asset === 'object') return source.asset as MediaAsset;
     return typeof source.url === 'string' ? (source as MediaAsset) : null;
 }
@@ -50,8 +51,9 @@ export function absoluteMediaUrl(url: string, origin = SITE_ORIGIN): string {
  * URL of the best stored variant. With width and height close to 1200×630 the
  * cropped social-card variant is used; otherwise the smallest variant at least
  * `width` wide, falling back to the original (small uploads have no larger variants).
+ * `source` is an image as pages receive it (`{ asset }`) or a media document.
  */
-export function imageVariantUrl(source: ImageSource | MediaAsset | null | undefined, width?: number, height?: number): string | null {
+export function imageVariantUrl(source: unknown, width?: number, height?: number): string | null {
     const asset = assetOf(source);
     if (!asset?.url) return null;
     const sizes = asset.sizes ?? {};
@@ -77,7 +79,7 @@ export interface ImageUrlBuilder {
     url(): string;
 }
 
-export function urlFor(source: ImageSource | MediaAsset | null | undefined): ImageUrlBuilder {
+export function urlFor(source: unknown): ImageUrlBuilder {
     let width: number | undefined;
     let height: number | undefined;
     const builder: ImageUrlBuilder = {

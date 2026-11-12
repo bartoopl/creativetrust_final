@@ -54,13 +54,15 @@ const richText = (value: unknown): PortableTextBlock[] =>
         internalHref: (relationTo, doc) => (ARTICLE_BASE[relationTo] && doc.slug ? `${ARTICLE_BASE[relationTo]}/${doc.slug}` : null),
     });
 
-const slug = (doc: Doc | null | undefined) => (doc?.slug ? { current: String(doc.slug) } : undefined);
+const slug = (doc: Doc) => ({ current: String(doc.slug ?? '') });
+const optionalSlug = (doc: Doc | null | undefined) => (doc?.slug ? { current: String(doc.slug) } : undefined);
 
 /** Media document → the `{ asset, alt, caption }` object the pages read. */
-export function toImage(media: unknown, key?: string): (ImageSource & { _key?: string }) | null {
+export function toImage(media: unknown, key?: string): (ImageSource & { _type: 'image'; _key?: string }) | null {
     if (!media || typeof media !== 'object' || !(media as MediaDoc).url) return null;
     const doc = media as MediaDoc;
     return {
+        _type: 'image',
         ...(key ? { _key: key } : {}),
         asset: doc,
         ...(doc.alt ? { alt: doc.alt } : {}),
@@ -125,7 +127,7 @@ function postCard(doc: Doc) {
         audioFile: doc.audioFile?.url ? { url: doc.audioFile.url } : null,
         authorName: author?.name ?? null,
         authorImage: toImage(author?.image),
-        authorSlug: slug(author),
+        authorSlug: optionalSlug(author),
         categories: relations(doc.categories).map(category),
     };
 }
@@ -156,7 +158,7 @@ export const getPortfolioProject = cached('getPortfolioProject', async (projectS
         ...projectCard(doc),
         galleryImages: relations(doc.galleryImages)
             .map((media, index) => toImage(media, `g${index}`))
-            .filter(Boolean),
+            .filter((image): image is NonNullable<typeof image> => image !== null),
         projectUrl: doc.projectUrl ?? undefined,
         _updatedAt: doc.updatedAt,
     };
@@ -283,7 +285,7 @@ export const getBlogPost = cached('getBlogPost', async (postSlug: string) => {
         : [];
 
     const card = postCard(doc);
-    return applyBlogPostFixes(postSlug, {
+    const post = {
         _id: card._id,
         title: card.title,
         slug: card.slug,
@@ -306,7 +308,9 @@ export const getBlogPost = cached('getBlogPost', async (postSlug: string) => {
         })),
         seoTitle: doc.seoTitle ?? null,
         seoDescription: doc.seoDescription ?? null,
-    });
+    };
+    // blog-seo.ts types Portable Text loosely; the shape is the same.
+    return applyBlogPostFixes(postSlug, post as Parameters<typeof applyBlogPostFixes>[1] & typeof post);
 });
 
 export async function getBlogPostsByCategory(categorySlug: string) {
