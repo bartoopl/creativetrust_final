@@ -9,8 +9,7 @@ const nextConfig: NextConfig = {
     // Self-contained server for the Docker image (Dockerfile).
     output: 'standalone',
     images: {
-        // CMS uploads, served by Payload (relative in dev, absolute on the site).
-        localPatterns: [{ pathname: '/api/media/file/**' }],
+        // CMS uploads are served by Payload under /api/media/file (absolute URLs on the site).
         remotePatterns: [{ protocol: 'https', hostname: 'www.creativetrust.pl', pathname: '/api/media/file/**' }],
     },
     productionBrowserSourceMaps: false,
@@ -70,11 +69,7 @@ const nextConfig: NextConfig = {
     },
     async headers() {
         return [
-            // Moved from netlify.toml: Cloudflare caches what s-maxage allows.
-            {
-                source: '/_next/static/:path*',
-                headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
-            },
+            // Cloudflare caches what s-maxage allows (/_next/static is immutable by default).
             // Uploaded files keep their name until replaced; a day in browsers, a month at the edge.
             {
                 source: '/api/media/file/:path*',

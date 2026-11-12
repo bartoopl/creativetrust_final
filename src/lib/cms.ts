@@ -39,6 +39,9 @@ type Doc = Record<string, any>;
 
 const PUBLISHED: Where = { _status: { equals: 'published' } };
 
+/** Newest first; ties keep the order they had in Sanity (by document id). */
+const NEWEST_FIRST = ['-publishedAt', 'sanityId'];
+
 const payload = () => getPayload({ config });
 
 // ------------------------------------------------------------------ shaping
@@ -138,7 +141,7 @@ export const getPortfolioProjects = cached('getPortfolioProjects', async () => {
     const { docs } = await (await payload()).find({
         collection: 'portfolio-projects',
         where: PUBLISHED,
-        sort: '-publishedAt',
+        sort: NEWEST_FIRST,
         depth: 1,
         limit: 0,
     });
@@ -179,7 +182,7 @@ async function readGetLatestPortfolioProjects(limit = 2) {
     const { docs } = await (await payload()).find({
         collection: 'portfolio-projects',
         where: PUBLISHED,
-        sort: '-publishedAt',
+        sort: NEWEST_FIRST,
         depth: 1,
         limit,
     });
@@ -250,7 +253,7 @@ export async function getKnowledgeBaseLetters(): Promise<string[]> {
 // ------------------------------------------------------------------ blog
 
 async function readBlogPosts() {
-    const { docs } = await (await payload()).find({ collection: 'posts', where: PUBLISHED, sort: '-publishedAt', depth: 2, limit: 0 });
+    const { docs } = await (await payload()).find({ collection: 'posts', where: PUBLISHED, sort: NEWEST_FIRST, depth: 2, limit: 0 });
     return docs.map(postCard);
 }
 
@@ -277,7 +280,7 @@ export const getBlogPost = cached('getBlogPost', async (postSlug: string) => {
               await client.find({
                   collection: 'posts',
                   where: { and: [PUBLISHED, { slug: { not_equals: postSlug } }, { categories: { in: categoryIds } }] },
-                  sort: '-publishedAt',
+                  sort: NEWEST_FIRST,
                   depth: 1,
                   limit: 3,
               })
@@ -369,8 +372,8 @@ export interface ArticleIndexDoc {
 async function readGetArticleIndexDocs(): Promise<{ portfolio: ArticleIndexDoc[]; blog: ArticleIndexDoc[]; kb: ArticleIndexDoc[] }> {
     const client = await payload();
     const [portfolio, blog, kb] = await Promise.all([
-        client.find({ collection: 'portfolio-projects', where: PUBLISHED, sort: '-publishedAt', depth: 1, limit: 0 }),
-        client.find({ collection: 'posts', where: PUBLISHED, sort: '-publishedAt', depth: 0, limit: 0 }),
+        client.find({ collection: 'portfolio-projects', where: PUBLISHED, sort: NEWEST_FIRST, depth: 1, limit: 0 }),
+        client.find({ collection: 'posts', where: PUBLISHED, sort: NEWEST_FIRST, depth: 0, limit: 0 }),
         client.find({ collection: 'knowledge-base', where: PUBLISHED, sort: 'title', depth: 0, limit: 0 }),
     ]);
     return {
@@ -411,8 +414,8 @@ async function readSearchArticles(terms: string[], limit: number): Promise<Artic
         and: terms.map((term) => ({ or: fields.map((field) => ({ [field]: { like: term } })) })),
     });
     const [posts, entries] = await Promise.all([
-        client.find({ collection: 'posts', where: { and: [PUBLISHED, matching(['title', 'excerpt'])] }, sort: '-publishedAt', depth: 0, limit }),
-        client.find({ collection: 'knowledge-base', where: { and: [PUBLISHED, matching(['title', 'shortDescription'])] }, sort: '-publishedAt', depth: 0, limit }),
+        client.find({ collection: 'posts', where: { and: [PUBLISHED, matching(['title', 'excerpt'])] }, sort: NEWEST_FIRST, depth: 0, limit }),
+        client.find({ collection: 'knowledge-base', where: { and: [PUBLISHED, matching(['title', 'shortDescription'])] }, sort: NEWEST_FIRST, depth: 0, limit }),
     ]);
     return [
         ...posts.docs.map((doc): ArticleIndexDoc => ({ _type: 'blogPost', title: doc.title, slug: doc.slug, summary: doc.excerpt, publishedAt: doc.publishedAt })),
