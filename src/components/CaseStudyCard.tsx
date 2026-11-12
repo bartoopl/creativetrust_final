@@ -8,26 +8,25 @@ export interface CaseCard {
     description: string;
     image?: string;
     hrefLang?: string;
-    noImageLabel?: string;
 }
 
-export default function CaseStudyCard({ card }: { card: CaseCard }) {
+/**
+ * Case study as a flat Tile Gray card (v2): the image sits inset with its own
+ * radius, a quiet meta line, a large title and the categories underneath.
+ */
+export default function CaseStudyCard({ card, priority = false }: { card: CaseCard; priority?: boolean }) {
     return (
-        <Link href={card.href} hrefLang={card.hrefLang} className="ct-card-hover block overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.1)', borderRadius: 16, color: 'inherit' }}>
-            {card.image ? (
-                <div style={{ height: 220, overflow: 'hidden', background: 'var(--panel2)', borderBottom: '1px solid var(--line)' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={card.image} alt={card.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-            ) : (
-                <div className="ct-placeholder" style={{ height: 180 }}>
-                    <span className="ct-mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--muted)' }}>{card.noImageLabel ?? 'BRAK ZDJĘCIA'}</span>
-                </div>
-            )}
-            <div className="flex flex-col gap-2" style={{ padding: 22 }}>
-                <span className="ct-meta">{card.meta}</span>
-                <h3 style={{ margin: 0, fontSize: 18, fontWeight: 500 }}>{card.title}</h3>
-                <p className="ct-body" style={{ fontSize: 13 }}>{card.description}</p>
+        <Link href={card.href} hrefLang={card.hrefLang} className="ct-tile ct-v2-card flex h-full flex-col gap-4" style={{ padding: 12, color: 'inherit' }}>
+            <div className="ct-v2-media" style={{ aspectRatio: '16/10' }}>
+                {card.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={card.image} alt={card.title} loading={priority ? 'eager' : 'lazy'} />
+                ) : null}
+            </div>
+            <div className="flex flex-1 flex-col gap-2" style={{ padding: '4px 12px 14px' }}>
+                {card.meta && <span style={{ fontSize: 14, color: 'var(--muted-2)' }}>{card.meta}</span>}
+                <h3 className="ct-card-title" style={{ margin: 0, fontSize: 'clamp(20px, 1.9vw, 24px)', fontWeight: 500, lineHeight: 1.25, letterSpacing: '-0.02em' }}>{card.title}</h3>
+                {card.description && <p style={{ margin: 0, fontSize: 15, lineHeight: 1.5, color: 'var(--muted)' }}>{card.description}</p>}
             </div>
         </Link>
     );

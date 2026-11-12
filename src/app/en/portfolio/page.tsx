@@ -65,7 +65,6 @@ export default async function PortfolioPage() {
             key: project._id,
             href: `/portfolio/${project.slug.current}`,
             hrefLang: 'pl',
-            noImageLabel: 'NO IMAGE',
             meta: project.client,
             title: project.title,
             description: project.categories?.map(c => categoryLabel(c.title)).join(' · ') || '',
