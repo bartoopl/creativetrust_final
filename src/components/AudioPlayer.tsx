@@ -18,11 +18,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title }) => {
         const audio = audioRef.current;
         if (!audio) return;
 
-        console.log('Audio URL:', audioUrl); // Debug log
-
+        // Without a byte-range response the browser cannot tell the length
+        // (Safari reports Infinity); show 0:00 rather than NaN:NaN.
         const handleLoadedMetadata = () => {
-            console.log('Audio metadata loaded:', audio.duration);
-            setDuration(audio.duration);
+            setDuration(Number.isFinite(audio.duration) ? audio.duration : 0);
             setError(null);
         };
 
@@ -47,20 +46,20 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title }) => {
         };
 
         const handleCanPlay = () => {
-            console.log('Audio can play');
             setError(null);
         };
 
-        const handleLoadStart = () => {
-            console.log('Audio load started');
-        };
+        const handlePlay = () => setIsPlaying(true);
+        const handlePause = () => setIsPlaying(false);
 
         audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+        audio.addEventListener('durationchange', handleLoadedMetadata);
         audio.addEventListener('error', handleError);
         audio.addEventListener('timeupdate', handleTimeUpdate);
         audio.addEventListener('ended', handleEnded);
         audio.addEventListener('canplay', handleCanPlay);
-        audio.addEventListener('loadstart', handleLoadStart);
+        audio.addEventListener('play', handlePlay);
+        audio.addEventListener('pause', handlePause);
 
         // Set the audio source
         audio.src = audioUrl;
@@ -68,25 +67,28 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title }) => {
 
         return () => {
             audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+            audio.removeEventListener('durationchange', handleLoadedMetadata);
             audio.removeEventListener('error', handleError);
             audio.removeEventListener('timeupdate', handleTimeUpdate);
             audio.removeEventListener('ended', handleEnded);
             audio.removeEventListener('canplay', handleCanPlay);
-            audio.removeEventListener('loadstart', handleLoadStart);
+            audio.removeEventListener('play', handlePlay);
+            audio.removeEventListener('pause', handlePause);
         };
     }, [audioUrl]);
 
     const togglePlayPause = () => {
-        if (audioRef.current) {
-            if (isPlaying) {
-                audioRef.current.pause();
-            } else {
-                audioRef.current.play().catch(err => {
-                    console.error('Error playing audio:', err);
-                    setError('Wystąpił błąd podczas odtwarzania');
-                });
-            }
-            setIsPlaying(!isPlaying);
+        // isPlaying follows the element's play/pause events, so a rejected
+        // play() does not leave the button showing "pause".
+        const audio = audioRef.current;
+        if (!audio) return;
+        if (!audio.paused) {
+            audio.pause();
+        } else {
+            audio.play().catch(err => {
+                console.error('Error playing audio:', err);
+                setError('Wystąpił błąd podczas odtwarzania');
+            });
         }
     };
 
