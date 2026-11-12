@@ -42,74 +42,67 @@ export default async function BlogPage() {
                 description="Strategia, design, AI, e-commerce i automatyzacja. Piszemy o tym, co realnie zmienia wyniki."
             />
 
-            {categories.length > 0 && (
-                <div style={{ borderBottom: '1px solid var(--line)', background: 'var(--panel)' }}>
-                    <div className="ct-shell-sm mx-auto flex max-w-[1280px] flex-wrap items-center gap-2" style={{ boxSizing: 'content-box' }}>
-                        <span className="ct-meta" style={{ marginRight: 6, color: 'var(--muted-2)' }}>Kategorie</span>
-                        <Link href="/blog" className="ct-pill" style={{ borderColor: 'var(--accent)', color: 'var(--accent)', background: 'var(--accent-soft)' }}>Wszystkie</Link>
-                        {categories.map((cat: any) => (
-                            <Link key={cat._id} href={`/blog/kategoria/${cat.slug.current}`} className="ct-pill ct-card-hover">
-                                {cat.title}
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-            )}
+            <section className="ct-section" style={{ paddingTop: 'clamp(32px, 4vw, 48px)' }}>
+                <div className="mx-auto flex max-w-[1280px] flex-col gap-8">
+                    {categories.length > 0 && (
+                        <nav aria-label="Kategorie bloga" className="flex flex-wrap items-center gap-1.5">
+                            <span style={{ minWidth: 92, marginRight: 6, fontSize: 14, color: 'var(--muted-2)' }}>Kategorie</span>
+                            <Link href="/blog" aria-current="page" className="ct-chip">Wszystkie</Link>
+                            {categories.map((cat: any) => (
+                                <Link key={cat._id} href={`/blog/kategoria/${cat.slug.current}`} className="ct-chip">
+                                    {cat.title}
+                                </Link>
+                            ))}
+                        </nav>
+                    )}
 
-            {mainPost && (
-                <section className="ct-section">
-                    <div className="mx-auto flex max-w-[1280px] flex-col gap-6">
-                        <span className="ct-eyebrow">Wyróżniony artykuł</span>
-                        <Link href={`/blog/${mainPost.slug.current}`} className="ct-card-hover grid grid-cols-1 overflow-hidden lg:grid-cols-2" style={{ alignItems: 'stretch', borderRadius: 16, border: '1px solid rgba(0,0,0,0.1)', background: '#fff', color: 'inherit' }}>
-                            <div className={mainPost.mainImage ? '' : 'ct-placeholder'} style={{ background: mainPost.mainImage ? 'var(--panel2)' : undefined, overflow: 'hidden', minHeight: 320 }}>
+                    {mainPost && (
+                        <Link href={`/blog/${mainPost.slug.current}`} className="ct-tile ct-v2-card grid grid-cols-1 gap-4 lg:grid-cols-[1.35fr_1fr] lg:gap-10" style={{ padding: 12, color: 'inherit' }}>
+                            <div className="ct-v2-media" style={{ aspectRatio: '16/9' }}>
                                 {mainPost.mainImage ? (
-                                    <img src={urlFor(mainPost.mainImage).width(1000).url()} alt={mainPost.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                ) : (
-                                    <span className="ct-mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--muted)' }}>BRAK ZDJĘCIA</span>
-                                )}
+                                    // eslint-disable-next-line @next/next/no-img-element
+                                    <img src={urlFor(mainPost.mainImage).width(1400).url()} alt={mainPost.title} />
+                                ) : null}
                             </div>
-                            <div className="flex flex-col justify-center gap-3 border-t lg:border-t-0 lg:border-l" style={{ padding: 'clamp(24px, 4vw, 44px)', borderColor: 'var(--line)' }}>
-                                {mainPost.categories?.slice(0, 1).map((cat: any) => (
-                                    <span key={cat._id} className="ct-meta" style={{ color: 'var(--accent)' }}>{cat.title}</span>
-                                ))}
-                                <h2 className="ct-h2" style={{ margin: 0 }}>{mainPost.title}</h2>
-                                {mainPost.excerpt && <p className="ct-body" style={{ fontSize: 15 }}>{mainPost.excerpt}</p>}
-                                <div className="ct-meta flex items-center gap-2" style={{ marginTop: 8, color: 'var(--muted-2)' }}>
-                                    {mainPost.publishedAt && <span>{formatDate(mainPost.publishedAt)}</span>}
-                                    {mainPost.estimatedReadingTime && <span>· {mainPost.estimatedReadingTime} min</span>}
-                                </div>
+                            <div className="flex flex-col justify-center gap-4" style={{ padding: 'clamp(4px, 2vw, 24px) clamp(12px, 2vw, 24px) clamp(16px, 2vw, 24px) 12px' }}>
+                                <span style={{ fontSize: 14, color: 'var(--muted-2)' }}>
+                                    Wyróżniony{mainPost.categories?.[0] ? <> · <span style={{ color: 'var(--accent)' }}>{mainPost.categories[0].title}</span></> : null}
+                                </span>
+                                <h2 className="ct-card-title" style={{ margin: 0, fontSize: 'clamp(26px, 3vw, 40px)', fontWeight: 500, lineHeight: 1.12, letterSpacing: '-0.03em', textWrap: 'balance' }}>{mainPost.title}</h2>
+                                {mainPost.excerpt && <p className="line-clamp-4" style={{ margin: 0, fontSize: 16, lineHeight: 1.55, color: 'var(--muted)' }}>{mainPost.excerpt}</p>}
+                                <span style={{ fontSize: 14, color: 'var(--muted-2)' }}>
+                                    {[mainPost.publishedAt && formatDate(mainPost.publishedAt), mainPost.estimatedReadingTime && `${mainPost.estimatedReadingTime} min czytania`].filter(Boolean).join(' · ')}
+                                </span>
                             </div>
                         </Link>
-                    </div>
-                </section>
-            )}
+                    )}
 
-            {regularPosts.length > 0 && (
-                <section className="ct-section" style={{ borderTop: '1px solid var(--line)' }}>
-                    <div className="mx-auto flex max-w-[1280px] flex-col gap-6">
-                        <span className="ct-eyebrow">Wszystkie artykuły</span>
-                        <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))' }}>
-                            {regularPosts.map((post: any) => (
-                                <BlogPostCard
-                                    key={post._id}
-                                    href={`/blog/${post.slug.current}`}
-                                    title={post.title}
-                                    image={post.mainImage ? urlFor(post.mainImage).width(800).url() : undefined}
-                                    meta={post.categories?.[0]?.title}
-                                    excerpt={post.excerpt}
-                                    footer={[post.publishedAt && formatDate(post.publishedAt), post.estimatedReadingTime && `${post.estimatedReadingTime} min`].filter(Boolean).join(' · ')}
-                                />
-                            ))}
+                    {regularPosts.length > 0 && (
+                        <div className="flex flex-col gap-6" style={{ marginTop: 'clamp(24px, 4vw, 48px)' }}>
+                            <h2 style={{ margin: 0, fontSize: 'clamp(22px, 2.4vw, 28px)', fontWeight: 500, letterSpacing: '-0.02em' }}>Wszystkie artykuły</h2>
+                            <ul className="grid grid-cols-1 gap-1 md:grid-cols-2 xl:grid-cols-3" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                                {regularPosts.map((post: any) => (
+                                    <li key={post._id}>
+                                        <BlogPostCard
+                                            href={`/blog/${post.slug.current}`}
+                                            title={post.title}
+                                            image={post.mainImage ? urlFor(post.mainImage).width(800).url() : undefined}
+                                            meta={post.categories?.[0]?.title}
+                                            excerpt={post.excerpt}
+                                            footer={[post.publishedAt && formatDate(post.publishedAt), post.estimatedReadingTime && `${post.estimatedReadingTime} min`].filter(Boolean).join(' · ')}
+                                        />
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                    </div>
-                </section>
-            )}
+                    )}
+                </div>
+            </section>
 
             {allPosts.length === 0 && (
                 <section className="ct-section">
-                    <div className="mx-auto max-w-[1280px] text-center" style={{ padding: '48px 0' }}>
-                        <div className="ct-meta" style={{ marginBottom: 12 }}>// brak artykułów</div>
-                        <p className="ct-body" style={{ fontSize: 15 }}>Artykuły pojawią się wkrótce.</p>
+                    <div className="ct-tile mx-auto max-w-[1280px] text-center" style={{ padding: 'clamp(40px, 8vw, 80px) 24px' }}>
+                        <p style={{ margin: 0, fontSize: 17, color: 'var(--muted)' }}>Artykuły pojawią się wkrótce.</p>
                     </div>
                 </section>
             )}
