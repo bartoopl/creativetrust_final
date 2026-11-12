@@ -76,6 +76,11 @@ const faqs = [
         answer:
             'Tak. Sprawdzamy, co kampania faktycznie kupuje, jakie sygnały dostaje i czy nie zabiera ruchu kampaniom markowym. Przy e-commerce dochodzi Merchant Center, bo błędy w feedzie psują wyniki niezależnie od budżetu.',
     },
+    {
+        question: 'Czym audyt Google Ads różni się od audytu e-commerce?',
+        answer:
+            'Audyt Google Ads dotyczy jednego kanału: konta reklamowego, pomiaru konwersji i budżetu. Audyt e-commerce obejmuje cały sklep: sprzedaż, marżę, technologię i pracę zespołu, w tym koszty wszystkich kanałów. Jeśli problem nie kończy się na reklamach, zacznij od audytu e-commerce.',
+    },
 ];
 
 export default function GoogleAdsAuditPage() {
