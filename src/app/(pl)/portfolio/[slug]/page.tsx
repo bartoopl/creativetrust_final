@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getPortfolioProject, getPortfolioSlugs, urlFor } from '@/lib/sanity';
+import { getPortfolioProject, urlFor } from '@/lib/cms';
 import PortableTextContent from '@/components/PortableTextContent';
 import SchemaScript from '@/components/SchemaScript';
 import { GalleryTrigger, ProjectGallery } from '@/components/ProjectGallery';
@@ -11,9 +11,8 @@ import { SITE_URL, buildBreadcrumbSchema, buildCreativeWorkSchema } from '@/lib/
 import { portableTextToPlainText, type PortableTextBlock } from '@/lib/markdown/portable-text';
 import { projectCategories, projectSummary } from '@/lib/markdown/portfolio';
 
-// Server-rendered so crawlers and AI agents that do not run JavaScript see the
-// case study; regenerated hourly when the project changes in Sanity.
-export const revalidate = 3600;
+// Rendered on request from cached CMS data (src/lib/cms.ts); saving in the
+// admin refreshes it immediately, otherwise it is re-read hourly.
 
 type Params = Promise<{ slug: string }>;
 
@@ -29,16 +28,6 @@ const hasAsset = (image: unknown): boolean => Boolean((image as { asset?: unknow
 
 function summaryOf(project: ProjectDocument, maxLength = 160) {
     return projectSummary(project, portableTextToPlainText(project.description as unknown as PortableTextBlock[] | string, maxLength));
-}
-
-export async function generateStaticParams() {
-    try {
-        const slugs = await getPortfolioSlugs();
-        return slugs.map((slug) => ({ slug }));
-    } catch {
-        // Sanity unreachable at build time: pages render on first request instead.
-        return [];
-    }
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {

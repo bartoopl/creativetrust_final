@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getLatestPortfolioProjects, urlFor } from '@/lib/sanity';
+import { getLatestPortfolioProjects, urlFor } from '@/lib/cms';
 import type { Locale } from '@/lib/i18n';
 import { homeCopy } from './home-copy';
 

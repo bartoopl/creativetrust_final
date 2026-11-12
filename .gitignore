@@ -43,3 +43,6 @@ next-env.d.ts
 # Blender backups
 *.blend1
 __pycache__/
+
+# Payload uploads (local dev; on the server a Docker volume)
+/media/

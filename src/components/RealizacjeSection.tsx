@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getLatestPortfolioProjects, urlFor } from '@/lib/sanity';
+import { getLatestPortfolioProjects, urlFor } from '@/lib/cms';
 import SectionHeader from './ui/SectionHeader';
 import CaseStudyCard, { type CaseCard } from './CaseStudyCard';
 

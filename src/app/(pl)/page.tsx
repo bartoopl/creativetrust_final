@@ -3,8 +3,8 @@ import HomePage from '@/components/home/HomePage';
 import { SITE_URL } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
-// Latest case studies and posts come from Sanity: regenerated hourly.
-export const revalidate = 3600;
+// Rendered on request from cached CMS data (src/lib/cms.ts); saving in the
+// admin refreshes it immediately, otherwise it is re-read hourly.
 
 export const metadata: Metadata = {
     // Already branded: absolute, so the root template does not add a second „| CreativeTrust”.

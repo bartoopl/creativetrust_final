@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { getBlogPosts, getBlogCategories, getFeaturedBlogPosts, urlFor } from '@/lib/sanity';
+import { getBlogPosts, getBlogCategories, getFeaturedBlogPosts, urlFor } from '@/lib/cms';
 import { SITE_URL } from '@/lib/schema';
 import PageHero from '@/components/ui/PageHero';
 import BlogPostCard from '@/components/BlogPostCard';
 
-// Regenerated hourly so Sanity edits (and dateModified) reach the site
-// without a deploy; without it the CDN kept the first render for a year.
-export const revalidate = 3600;
+// Rendered on request from cached CMS data (src/lib/cms.ts); saving in the
+// admin refreshes it immediately, otherwise it is re-read hourly.
 
 export const metadata: Metadata = {
     title: 'Blog | Strategia, design, AI i automatyzacja',

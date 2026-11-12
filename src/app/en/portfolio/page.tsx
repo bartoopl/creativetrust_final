@@ -1,7 +1,7 @@
 import PageHero from '@/components/ui/PageHero';
 import PortfolioGrid, { type PortfolioFilter, type PortfolioGridItem } from '@/components/PortfolioGrid';
 import SchemaScript from '@/components/SchemaScript';
-import { getPortfolioProjects, getServiceCategories, urlFor } from '@/lib/sanity';
+import { getPortfolioProjects, getServiceCategories, urlFor } from '@/lib/cms';
 import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
 
 // Sanity category titles are Polish; known ones get an English label, the rest fall back to the original.
@@ -30,9 +30,8 @@ const CATEGORY_LABELS: Record<string, string> = {
 }
 const categoryLabel = (title: string) => CATEGORY_LABELS[title] ?? title;
 
-// Server-rendered list of every case study (visible without JavaScript),
-// regenerated hourly.
-export const revalidate = 3600;
+// Rendered on request from cached CMS data (src/lib/cms.ts); saving in the
+// admin refreshes it immediately, otherwise it is re-read hourly.
 
 interface Project {
     _id: string;

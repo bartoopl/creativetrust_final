@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getBlogPosts, urlFor } from '@/lib/sanity';
+import { getBlogPosts, urlFor } from '@/lib/cms';
 import SectionHeader from './ui/SectionHeader';
 import BlogPostCard from './BlogPostCard';
 

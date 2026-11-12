@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { client, getBlogAuthor, getBlogPost, getKnowledgeBaseEntry, getPortfolioProject, urlFor } from '@/lib/sanity';
+import { getArticleIndexDocs, getBlogAuthor, getBlogPost, getKnowledgeBaseEntry, getPortfolioProject, urlFor } from '@/lib/cms';
 import { authorMarkdown, portfolioIndexMarkdown } from './collections';
 import { SITE_URL } from '@/lib/schema';
 import { resolveAuthor, type SanityAuthor } from '@/lib/authors';
@@ -13,7 +13,7 @@ import { portableTextToMarkdown, portableTextToPlainText, type PortableTextBlock
 import { portfolioFrontmatter, portfolioMarkdown, projectSummary, type PortfolioProjectDocument } from './portfolio';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'ai');
-const SANITY_TIMEOUT_MS = 4000;
+const CMS_TIMEOUT_MS = 4000;
 
 export interface LoadedPage {
     page: MarkdownPage;
@@ -49,14 +49,14 @@ export function toLlmsPage(loaded: LoadedPage): LlmsPage {
     };
 }
 
-/** Resolves to the fallback when Sanity is slow, unreachable or unconfigured. */
+/** Resolves to the fallback when the CMS database is slow, unreachable or unconfigured. */
 async function failSoft<T>(work: () => Promise<T>, fallback: T): Promise<T> {
     let timer: ReturnType<typeof setTimeout> | undefined;
     try {
         return await Promise.race([
             work(),
             new Promise<T>((resolve) => {
-                timer = setTimeout(() => resolve(fallback), SANITY_TIMEOUT_MS);
+                timer = setTimeout(() => resolve(fallback), CMS_TIMEOUT_MS);
             }),
         ]);
     } catch {
@@ -73,8 +73,6 @@ interface ArticleListItem {
     summary?: string | null;
 }
 
-type PortfolioListItem = PortfolioProjectDocument & { slug?: string; description?: PortableTextBlock[] | string | null };
-
 const ARTICLE_KIND: Record<ArticleListItem['_type'], ArticleKind> = {
     blogPost: 'blog',
     knowledgeBase: 'knowledge-base',
@@ -83,26 +81,13 @@ const ARTICLE_KIND: Record<ArticleListItem['_type'], ArticleKind> = {
 
 /**
  * Every published case study, blog post and knowledge-base entry for llms.txt
- * (a partial list hides most of the evidence from AI agents); [] when Sanity fails.
+ * (a partial list hides most of the evidence from AI agents); [] when the CMS fails.
  */
 export async function getArticleIndex(): Promise<LlmsArticle[]> {
     const docs = await failSoft<ArticleListItem[]>(
         () =>
-            client.fetch(
-                `{
-                    "portfolio": *[_type == "portfolioProject" && defined(slug.current) && !(_id in path("drafts.**"))] | order(publishedAt desc) {
-                        title, client, scopeOfWork, "slug": slug.current, "categories": categories[]->{ title },
-                        "description": coalesce(pt::text(description), description)
-                    },
-                    "blog": *[_type == "blogPost" && defined(slug.current) && !(_id in path("drafts.**"))] | order(publishedAt desc) {
-                        _type, title, "slug": slug.current, "summary": excerpt
-                    },
-                    "kb": *[_type == "knowledgeBase" && defined(slug.current) && !(_id in path("drafts.**"))] | order(title asc) {
-                        _type, title, "slug": slug.current, "summary": shortDescription
-                    }
-                }`,
-            ).then((result: { portfolio?: PortfolioListItem[]; blog?: ArticleListItem[]; kb?: ArticleListItem[] }) => [
-                ...(result?.portfolio ?? []).map(
+            getArticleIndexDocs().then((result) => [
+                ...result.portfolio.map(
                     (project): ArticleListItem => ({
                         _type: 'portfolioProject',
                         title: project.title ?? undefined,
@@ -110,8 +95,8 @@ export async function getArticleIndex(): Promise<LlmsArticle[]> {
                         summary: projectSummary(project, portableTextToPlainText(project.description, 200)),
                     }),
                 ),
-                ...(result?.blog ?? []),
-                ...(result?.kb ?? []),
+                ...result.blog,
+                ...result.kb,
             ]),
         [],
     );
