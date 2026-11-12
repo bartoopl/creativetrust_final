@@ -19,6 +19,7 @@ export const STATIC_ROUTES = [
     '/regulamin',
     '/uslugi',
     '/uslugi/audyt-e-commerce',
+    '/uslugi/audyt-google-ads',
     '/uslugi/e-commerce',
     '/uslugi/headless-woocommerce',
     '/uslugi/marketing-automation',

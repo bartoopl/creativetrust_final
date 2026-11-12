@@ -1,10 +1,14 @@
 # Test, build the Docker image, push it to GHCR and tell Dokploy to redeploy.
 # Pull requests run the checks and the image build without pushing.
 #
+# The Dokploy panel is reachable only inside our NetBird network, so the deploy
+# job joins it as an ephemeral peer for the duration of the call.
+#
 # Repository secrets (Settings → Secrets and variables → Actions):
-#   DOKPLOY_URL         panel address, e.g. https://panel.example.com
+#   NETBIRD_SETUP_KEY   NetBird → Setup Keys: reusable + ephemeral, in a group allowed to reach the server
+#   DOKPLOY_URL         panel address inside NetBird, e.g. http://100.64.245.228:3000
 #   DOKPLOY_API_KEY     Dokploy → Settings → API Keys
-#   DOKPLOY_COMPOSE_ID  id of the compose service (GET /api/project.all, or the URL in the panel)
+#   DOKPLOY_COMPOSE_ID  id of the compose service (GET /api/project.all)
 name: deploy
 
 on:
@@ -76,15 +80,28 @@ jobs:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
+      - name: Join NetBird
+        env:
+          NETBIRD_SETUP_KEY: ${{ secrets.NETBIRD_SETUP_KEY }}
+        run: |
+          if [ -z "$NETBIRD_SETUP_KEY" ]; then echo "NETBIRD_SETUP_KEY not set — cannot reach Dokploy."; exit 1; fi
+          curl -fsSL https://pkgs.netbird.io/install.sh | sh
+          sudo netbird up --setup-key "$NETBIRD_SETUP_KEY" --hostname "gh-actions-${GITHUB_RUN_ID}"
       - name: Trigger Dokploy
         env:
           DOKPLOY_URL: ${{ secrets.DOKPLOY_URL }}
           DOKPLOY_API_KEY: ${{ secrets.DOKPLOY_API_KEY }}
           DOKPLOY_COMPOSE_ID: ${{ secrets.DOKPLOY_COMPOSE_ID }}
         run: |
-          if [ -z "$DOKPLOY_URL" ] || [ -z "$DOKPLOY_API_KEY" ] || [ -z "$DOKPLOY_COMPOSE_ID" ]; then
-            echo "Dokploy secrets not set — image pushed, deploy skipped."; exit 0
-          fi
+          base="${DOKPLOY_URL%/}/api"
+          # The tunnel needs a few seconds after `netbird up`.
+          for i in $(seq 1 30); do
+            curl -s -m 3 -o /dev/null "$base/settings.health" && break
+            sleep 2
+          done
           body=$(jq -n --arg id "$DOKPLOY_COMPOSE_ID" --arg title "GitHub ${GITHUB_SHA::7}" '{composeId: $id, title: $title}')
-          curl --fail-with-body -sS -X POST "${DOKPLOY_URL%/}/api/compose.deploy" \
+          curl --fail-with-body -sS -X POST "$base/compose.deploy" \
             -H "x-api-key: $DOKPLOY_API_KEY" -H 'Content-Type: application/json' -d "$body"
+      - name: Leave NetBird
+        if: always()
+        run: sudo netbird down || true

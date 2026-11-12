@@ -5,6 +5,7 @@ import config from '@payload-config';
 import { getPayload, type Where } from 'payload';
 import { applyBlogPostFixes } from './blog-seo';
 import { applyKnowledgeBaseSeo } from './knowledge-base-seo';
+import { rewriteRetiredLinks } from './retired-links';
 import { lexicalToPortableText, type LexicalState, type MediaDoc } from './richtext/lexical';
 import type { PortableTextBlock } from './markdown/portable-text';
 import { imageVariantUrl, type ImageSource } from './media';
@@ -294,7 +295,8 @@ export const getBlogPost = cached('getBlogPost', async (postSlug: string) => {
         slug: card.slug,
         excerpt: card.excerpt,
         mainImage: card.mainImage,
-        content: richText(doc.content),
+        // Old bodies link to retired service pages; point them at the live ones.
+        content: rewriteRetiredLinks(richText(doc.content)) ?? [],
         publishedAt: card.publishedAt,
         _updatedAt: card._updatedAt,
         estimatedReadingTime: card.estimatedReadingTime,
