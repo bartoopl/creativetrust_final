@@ -24,14 +24,23 @@ się co godzinę. Migracje bazy wykonują się same przy starcie kontenera
 2. Pakiet w GHCR jest domyślnie prywatny, więc Dokploy musi się logować: *Settings → Registry →
    Add Registry*, URL `ghcr.io`, użytkownik `bartoopl`, hasło: token *classic* z uprawnieniem
    `read:packages` (do samego pobierania obrazów to wystarczy).
-3. Sekrety repozytorium (*Settings → Secrets and variables → Actions*):
-   - `DOKPLOY_URL`: adres panelu, np. `https://panel.twojadomena.pl`,
-   - `DOKPLOY_API_KEY`: Dokploy → *Settings → API Keys*,
-   - `DOKPLOY_COMPOSE_ID`: ID usługi compose (z adresu w panelu albo z `GET /api/project.all`).
-
-   Bez tych sekretów workflow publikuje obraz, ale niczego nie wdraża.
+3. Sekrety repozytorium (*Settings → Secrets and variables → Actions*). Panel Dokploy jest
+   dostępny tylko w sieci NetBird, więc job `deploy` dołącza do niej na czas wywołania API:
+   - `NETBIRD_SETUP_KEY`: NetBird → *Setup Keys → Create*: **Reusable** i **Ephemeral peers**
+     włączone, grupa, której polityka *Access Control* pozwala łączyć się z serwerem Dokploy
+     (`100.64.245.228`, port 3000),
+   - `DOKPLOY_URL`: `http://100.64.245.228:3000` *(ustawione)*,
+   - `DOKPLOY_API_KEY`: Dokploy → *Settings → API Keys* *(ustawione)*,
+   - `DOKPLOY_COMPOSE_ID`: ID usługi compose `creativetrust` *(ustawione)*.
 
 ## 2. Jednorazowo: serwer i panel
+
+> Stan na 12.11.2026: w Dokploy jest już projekt **CreativeTrust** z usługą compose
+> `creativetrust` (źródło *Raw*, Isolated Deployments włączone, auto-deploy wyłączony),
+> wygenerowanymi `POSTGRES_PASSWORD` / `PAYLOAD_SECRET` i domeną testową
+> `creativetrust.91.98.140.18.sslip.io`. Do uzupełnienia: zmienne `EMAIL_*` i `ANTHROPIC_*`.
+> Plik compose w Dokploy to kopia z repozytorium; po zmianie `docker-compose.yml` wklej go
+> ponownie (*General → Compose file*).
 
 1. W projekcie Dokploy dodaj usługę **Compose** (typ *Docker Compose*), źródło: to repozytorium
    (gałąź `main`, plik `docker-compose.yml`) albo wklejony plik (*Raw*). **Auto Deploy wyłącz**,
