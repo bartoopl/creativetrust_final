@@ -1,6 +1,6 @@
 ---
-title: "Usługi — CreativeTrust | Audyt i zarządzanie e-commerce, sklepy i strony internetowe"
-description: "Audyt e-commerce, zarządzanie e-commerce z zewnątrz oraz projekt i budowa sklepów i stron internetowych. Do tego marketing automation i social media — w jednym zespole."
+title: "Audyt e-commerce, sklepy, strony internetowe | CreativeTrust"
+description: "Audyt i zarządzanie e-commerce, projekt i budowa sklepów oraz stron internetowych, marketing automation i social media - w jednym zespole."
 date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/uslugi"
 lang: "pl-PL"

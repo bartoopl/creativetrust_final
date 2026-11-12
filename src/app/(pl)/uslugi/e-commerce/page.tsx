@@ -9,12 +9,12 @@ import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schem
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: 'Sklepy internetowe | Projekt, wdrożenie, migracje i integracje ERP',
-    description: 'Projektujemy i budujemy sklepy internetowe: headless, WooCommerce, Shopify, migracje platform i integracje ERP. Z perspektywy zespołu, który zarządza e-commerce — pod sprzedaż, marżę i pracę zespołu.',
+    title: { absolute: 'Sklepy internetowe: projekt i wdrożenie | CreativeTrust' },
+    description: 'Budujemy sklepy internetowe: headless, WooCommerce, Shopify, migracje i integracje ERP. Pod sprzedaż, marżę i pracę zespołu.',
     alternates: pageAlternates('/uslugi/e-commerce', 'pl', SITE_URL),
     openGraph: {
-        title: 'Sklepy internetowe i wdrożenia e-commerce | CreativeTrust',
-        description: 'Sklepy headless, migracje platform i integracje ERP. Buduje je zespół, który zna e-commerce od strony zarządzania.',
+        title: 'Sklepy internetowe: projekt i wdrożenie | CreativeTrust',
+        description: 'Budujemy sklepy internetowe: headless, WooCommerce, Shopify, migracje i integracje ERP. Pod sprzedaż, marżę i pracę zespołu.',
         url: `${SITE_URL}/uslugi/e-commerce`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
     },
 };

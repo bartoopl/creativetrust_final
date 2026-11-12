@@ -15,14 +15,12 @@ const canonicalUrl = `${SITE_URL}/uslugi/audyt-e-commerce`;
 const AUDIT_NAME = 'Audyt e-commerce';
 
 export const metadata: Metadata = {
-    title: 'Audyt e-commerce | Sprzedaż, marża i technologia sklepu',
-    description:
-        'Audyt e-commerce dla sklepów, które rosną szybciej niż ich procesy. W 5–7 dni roboczych pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry, koszt odliczany od dalszej współpracy.',
+    title: { absolute: 'Audyt e-commerce: sprzedaż i marża | CreativeTrust' },
+    description: 'Audyt e-commerce w 5-7 dni roboczych: pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry.',
     alternates: pageAlternates('/uslugi/audyt-e-commerce', 'pl', SITE_URL),
     openGraph: {
-        title: 'Audyt e-commerce | CreativeTrust',
-        description:
-            'Sprzedaż, marża, technologia i praca zespołu sklepu. Raport i roadmapa w 5–7 dni roboczych, za stałą kwotę.',
+        title: 'Audyt e-commerce: sprzedaż i marża | CreativeTrust',
+        description: 'Audyt e-commerce w 5-7 dni roboczych: pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry.',
         url: canonicalUrl,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -30,9 +28,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Audyt e-commerce | CreativeTrust',
-        description:
-            'Audyt z perspektywy zarządzania e-commerce: sprzedaż, marża, dashboardy i architektura. Raport i roadmapa w 5–7 dni roboczych.',
+        title: 'Audyt e-commerce: sprzedaż i marża | CreativeTrust',
+        description: 'Audyt e-commerce w 5-7 dni roboczych: pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry.',
     },
 };
 

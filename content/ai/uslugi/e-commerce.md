@@ -1,6 +1,6 @@
 ---
-title: "Sklepy internetowe — CreativeTrust | Projekt, wdrożenie, migracje i integracje ERP"
-description: "Projektujemy i budujemy sklepy internetowe: headless, WooCommerce, Shopify, migracje platform i integracje ERP. Z perspektywy zespołu, który zarządza e-commerce — pod sprzedaż, marżę i pracę zespołu."
+title: "Sklepy internetowe: projekt i wdrożenie | CreativeTrust"
+description: "Budujemy sklepy internetowe: headless, WooCommerce, Shopify, migracje i integracje ERP. Pod sprzedaż, marżę i pracę zespołu."
 date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/uslugi/e-commerce"
 lang: "pl-PL"

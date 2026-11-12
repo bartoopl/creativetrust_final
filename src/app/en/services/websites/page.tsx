@@ -8,12 +8,12 @@ import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schem
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: 'Websites for brands and companies | Design and build',
-    description: 'We design and build websites: company sites, product sites, landing pages and portals. Designed for a specific role in sales, fast and easy to edit. See the scope and pricing.',
+    title: { absolute: 'Websites for brands and companies | CreativeTrust' },
+    description: 'Company sites, product sites, landing pages and portals: fast, easy to edit, built for a specific role in sales. See the scope and pricing.',
     alternates: pageAlternates('/uslugi/strony-www', 'en', SITE_URL),
     openGraph: {
         title: 'Websites for brands and companies | CreativeTrust',
-        description: 'Websites designed for sales, SEO and performance. Next.js, headless CMS — one team from design to launch.',
+        description: 'Company sites, product sites, landing pages and portals: fast, easy to edit, built for a specific role in sales. See the scope and pricing.',
         url: `${SITE_URL}/en/services/websites`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',
     },
 };

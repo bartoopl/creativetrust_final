@@ -10,14 +10,12 @@ import { SITE_URL, buildBreadcrumbSchema } from '@/lib/schema';
 const canonicalUrl = `${SITE_URL}/uslugi/wdrozenie-salesmanago`;
 
 export const metadata: Metadata = {
-    title: 'Wdrożenie SALESmanago | Marketing automation dla firm',
-    description:
-        'Wdrożenie SALESmanago, automatyzacje, segmentacja i lead nurturing. Landing page pod frazy: wdrożenie SALESmanago, partner SALESmanago, marketing automation.',
+    title: { absolute: 'Wdrożenie SALESmanago i automatyzacje | CreativeTrust' },
+    description: 'Wdrożenie SALESmanago: automatyzacje, segmentacja i lead nurturing. Dla firm, które chcą mierzyć przychód z marketing automation.',
     alternates: pageAlternates('/uslugi/wdrozenie-salesmanago', 'pl', SITE_URL),
     openGraph: {
-        title: 'Wdrożenie SALESmanago | CreativeTrust',
-        description:
-            'Projektujemy i wdrażamy SALESmanago: integracje CRM, scenariusze i personalizacja kampanii.',
+        title: 'Wdrożenie SALESmanago i automatyzacje | CreativeTrust',
+        description: 'Wdrożenie SALESmanago: automatyzacje, segmentacja i lead nurturing. Dla firm, które chcą mierzyć przychód z marketing automation.',
         url: canonicalUrl,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -25,9 +23,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Wdrożenie SALESmanago | CreativeTrust',
-        description:
-            'Lead nurturing, segmentacja i automatyzacje oparte na danych. SALESmanago wdrożone bez chaosu.',
+        title: 'Wdrożenie SALESmanago i automatyzacje | CreativeTrust',
+        description: 'Wdrożenie SALESmanago: automatyzacje, segmentacja i lead nurturing. Dla firm, które chcą mierzyć przychód z marketing automation.',
     },
 };
 

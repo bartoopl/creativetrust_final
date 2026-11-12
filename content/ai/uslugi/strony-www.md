@@ -1,6 +1,6 @@
 ---
-title: "Strony internetowe dla marek i firm — CreativeTrust | Projekt i wdrożenie"
-description: "Projektujemy i wdrażamy strony internetowe: firmowe, produktowe, landing pages i portale. Zaprojektowane pod konkretną rolę w sprzedaży, szybkie i łatwe w edycji. Sprawdź zakres i cennik."
+title: "Strony internetowe: projekt i wdrożenie | CreativeTrust"
+description: "Projektujemy strony firmowe, produktowe, landing pages i portale: szybkie, łatwe w edycji, pod konkretną rolę w sprzedaży. Zobacz cennik."
 date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/uslugi/strony-www"
 lang: "pl-PL"
