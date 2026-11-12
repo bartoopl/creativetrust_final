@@ -1,0 +1,94 @@
+# Production stack for a Docker panel (Coolify / Dokploy) or plain `docker compose`.
+# The app image is built by GitHub Actions and pulled from GHCR; see DEPLOY.md.
+#
+# Required variables (set them in the panel, or in a .env next to this file):
+#   POSTGRES_PASSWORD, PAYLOAD_SECRET, EMAIL_* , ANTHROPIC_API_KEY
+# Cloudflare sits in front: point the panel's domain/proxy at app:3000.
+
+services:
+  app:
+    image: ghcr.io/bartoopl/creativetrust_final:${APP_TAG:-latest}
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://creativetrust:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}@db:5432/creativetrust
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET:?set PAYLOAD_SECRET}
+      NEXT_PUBLIC_SITE_URL: https://www.creativetrust.pl
+      MEDIA_DIR: /app/media
+      EMAIL_SERVER: ${EMAIL_SERVER:-}
+      EMAIL_PORT: ${EMAIL_PORT:-587}
+      EMAIL_SECURE: ${EMAIL_SECURE:-false}
+      EMAIL_USER: ${EMAIL_USER:-}
+      EMAIL_PASSWORD: ${EMAIL_PASSWORD:-}
+      EMAIL_FROM: ${EMAIL_FROM:-}
+      EMAIL_CONTACT: ${EMAIL_CONTACT:-}
+      EMAIL_AUTOMATION: ${EMAIL_AUTOMATION:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-}
+      ASSISTANT_QUOTA_SALT: ${ASSISTANT_QUOTA_SALT:-}
+    volumes:
+      - media:/app/media
+      - next-cache:/app/.next/cache
+    expose:
+      - "3000"
+    # Without a panel proxy, publish the port instead (Caddy/nginx in front):
+    # ports: ["127.0.0.1:3000:3000"]
+    mem_limit: 1g
+
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: creativetrust
+      POSTGRES_USER: creativetrust
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U creativetrust -d creativetrust"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    mem_limit: 512m
+
+  # Nightly database dump (03:00) plus a tarball of the uploads, 14 daily copies
+  # kept in the `backups` volume. Copy that volume off the server (DEPLOY.md).
+  backup:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGHOST: db
+      PGUSER: creativetrust
+      PGDATABASE: creativetrust
+      PGPASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+      KEEP_DAYS: "14"
+    volumes:
+      - backups:/backups
+      - media:/media:ro
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        cat > /usr/local/bin/backup <<'EOF'
+        #!/bin/sh
+        set -e
+        stamp=$$(date +%Y-%m-%d_%H%M)
+        pg_dump --format=custom --file=/backups/db_$$stamp.dump
+        tar -czf /backups/media_$$stamp.tar.gz -C /media .
+        find /backups -type f -mtime +$${KEEP_DAYS} -delete
+        echo "backup $$stamp done"
+        EOF
+        chmod +x /usr/local/bin/backup
+        echo "0 3 * * * /usr/local/bin/backup" | crontab -
+        exec crond -f -l 8
+    mem_limit: 256m
+
+volumes:
+  pgdata:
+  media:
+  next-cache:
+  backups:
