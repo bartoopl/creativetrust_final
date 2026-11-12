@@ -66,5 +66,5 @@ Strona główna ma już nowy język wizualny v2 („electric ink on drafting pap
 
 ### Phase 4: Testy i weryfikacja
 
-- [ ] 4.1 Test regresji wzorca v2
+- [x] 4.1 Test regresji wzorca v2 — 1a7d348
 - [ ] 4.2 Pełna bramka walidacji i zrzuty
