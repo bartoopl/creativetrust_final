@@ -58,11 +58,60 @@ export const EXCLUDED_ROUTES = [
     '/en/services/ad-landing-page',
 ] as const;
 
+/**
+ * Last content change per static route, taken from the commit that last touched
+ * its page file. The production image has no `.git`, so the dates live here as
+ * data instead of being read at request time: every request returns the same
+ * value, and no date can be "now" or in the future.
+ *
+ * When a page changes, update its date. The sitemap test fails if a route has no
+ * date, so a new page cannot slip in without one.
+ */
+export const STATIC_LASTMOD: Readonly<Record<(typeof STATIC_ROUTES)[number], string>> = {
+    '/': '2026-11-12T14:15:55.000Z',
+    '/baza-wiedzy': '2026-11-12T08:55:59.000Z',
+    '/blog': '2026-11-12T15:22:12.000Z',
+    '/kontakt': '2026-11-11T19:05:25.000Z',
+    '/o-nas': '2026-11-12T14:15:55.000Z',
+    '/polityka-prywatnosci': '2026-11-07T23:45:58.000Z',
+    '/portfolio': '2026-11-12T09:14:42.000Z',
+    '/regulamin': '2026-11-07T23:45:58.000Z',
+    '/uslugi': '2026-11-12T22:44:50.000Z',
+    '/uslugi/audyt-e-commerce': '2026-11-12T22:44:50.000Z',
+    '/uslugi/audyt-google-ads': '2026-11-12T22:03:58.000Z',
+    '/uslugi/e-commerce': '2026-11-12T22:44:50.000Z',
+    '/uslugi/headless-woocommerce': '2026-11-07T23:43:55.000Z',
+    '/uslugi/marketing-automation': '2026-11-12T22:06:12.000Z',
+    '/uslugi/migracja-woocommerce-do-headless': '2026-11-07T23:43:55.000Z',
+    '/uslugi/social-media': '2026-11-12T22:44:50.000Z',
+    '/uslugi/strona-firmowa-cena': '2026-11-07T23:43:55.000Z',
+    '/uslugi/strony-www': '2026-11-12T22:44:50.000Z',
+    '/uslugi/tworzenie-stron-www-cennik': '2026-11-12T22:44:50.000Z',
+    '/uslugi/wdrozenie-salesmanago': '2026-11-12T22:44:50.000Z',
+    '/uslugi/zarzadzanie-e-commerce': '2026-11-11T19:09:32.000Z',
+    '/en': '2026-11-12T08:55:59.000Z',
+    '/en/about': '2026-11-12T14:15:55.000Z',
+    '/en/contact': '2026-11-11T19:13:17.000Z',
+    '/en/portfolio': '2026-11-12T15:21:06.000Z',
+    '/en/privacy-policy': '2026-11-07T23:49:28.000Z',
+    '/en/services': '2026-11-12T22:44:50.000Z',
+    '/en/services/company-website-cost': '2026-11-07T23:43:55.000Z',
+    '/en/services/e-commerce': '2026-11-12T22:44:50.000Z',
+    '/en/services/e-commerce-audit': '2026-11-11T19:09:32.000Z',
+    '/en/services/e-commerce-management': '2026-11-11T19:09:32.000Z',
+    '/en/services/headless-woocommerce': '2026-11-07T23:43:55.000Z',
+    '/en/services/marketing-automation': '2026-11-12T22:06:12.000Z',
+    '/en/services/salesmanago-implementation': '2026-11-07T23:43:55.000Z',
+    '/en/services/social-media': '2026-11-12T22:44:50.000Z',
+    '/en/services/website-pricing': '2026-11-07T23:43:55.000Z',
+    '/en/services/websites': '2026-11-12T22:44:50.000Z',
+    '/en/services/woocommerce-to-headless-migration': '2026-11-07T23:43:55.000Z',
+    '/en/terms': '2026-11-07T23:45:58.000Z',
+};
+
 export interface SitemapEntry {
     loc: string;
     lastmod?: string;
-    changefreq: 'daily' | 'weekly' | 'monthly';
-    priority: number;
 }
 
 export interface SitemapSource {
@@ -75,22 +124,22 @@ export interface SitemapSource {
 
 /**
  * Every URL to list. Retired posts answer with a 301 (next.config.ts), so they
- * are left out: the sitemap lists only 200s.
+ * are left out: the sitemap lists only 200s. CMS documents carry their own
+ * `updatedAt`; static pages use STATIC_LASTMOD, so repeated requests never
+ * invent a fresh date.
  */
-export function sitemapEntries(source: SitemapSource, retired: Record<string, string>, now = new Date().toISOString()): SitemapEntry[] {
-    const doc = (base: string, changefreq: SitemapEntry['changefreq'], priority: number) => (item: { slug: string; updatedAt: string }) => ({
+export function sitemapEntries(source: SitemapSource, retired: Record<string, string>): SitemapEntry[] {
+    const doc = (base: string) => (item: { slug: string; updatedAt: string }) => ({
         loc: `${base}/${item.slug}`,
         lastmod: item.updatedAt,
-        changefreq,
-        priority,
     });
     return [
-        ...STATIC_ROUTES.map((route): SitemapEntry => ({ loc: route, lastmod: now, changefreq: 'daily', priority: 0.7 })),
-        ...source.posts.filter((post) => !(post.slug in retired)).map(doc('/blog', 'weekly', 0.8)),
-        ...source.projects.map(doc('/portfolio', 'monthly', 0.7)),
-        ...source.blogCategories.map(doc('/blog/kategoria', 'weekly', 0.6)),
-        ...source.authors.map(doc('/blog/autor', 'monthly', 0.6)),
-        ...source.knowledgeBase.map(doc('/baza-wiedzy', 'monthly', 0.7)),
+        ...STATIC_ROUTES.map((route): SitemapEntry => ({ loc: route, lastmod: STATIC_LASTMOD[route] })),
+        ...source.posts.filter((post) => !(post.slug in retired)).map(doc('/blog')),
+        ...source.projects.map(doc('/portfolio')),
+        ...source.blogCategories.map(doc('/blog/kategoria')),
+        ...source.authors.map(doc('/blog/autor')),
+        ...source.knowledgeBase.map(doc('/baza-wiedzy')),
     ];
 }
 
@@ -101,8 +150,7 @@ const absolute = (loc: string) => (loc === '/' ? SITE : `${SITE}${loc}`);
 
 export function urlsetXml(entries: SitemapEntry[]): string {
     const urls = entries.map(
-        (entry) =>
-            `<url><loc>${escapeXml(absolute(entry.loc))}</loc>${entry.lastmod ? `<lastmod>${escapeXml(entry.lastmod)}</lastmod>` : ''}<changefreq>${entry.changefreq}</changefreq><priority>${entry.priority}</priority></url>`,
+        (entry) => `<url><loc>${escapeXml(absolute(entry.loc))}</loc>${entry.lastmod ? `<lastmod>${escapeXml(entry.lastmod)}</lastmod>` : ''}</url>`,
     );
     return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>`;
 }
