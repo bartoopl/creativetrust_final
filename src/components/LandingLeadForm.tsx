@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { HONEYPOT_FIELD_NAME } from '@/lib/antispam';
-import { trackLead } from '@/lib/analytics';
+import { trackFormLead } from '@/lib/analytics';
 import type { Locale } from '@/lib/i18n';
 
 const copy = {
@@ -154,7 +154,7 @@ ${t.message}: ${formData.message}`,
                 throw new Error(data.message || t.failed);
             }
 
-            trackLead('landing_form');
+            trackFormLead('landing_form', 'landing_form');
             setSubmitted(true);
             setFormData({
                 name: '',

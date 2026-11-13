@@ -40,7 +40,7 @@ export default function CTASection({
                 </h2>
                 <p className="ct-body" style={{ fontSize: 15 }}>{description}</p>
                 <div style={{ marginTop: 8 }}>
-                    <NotchedButton href={cta.href}>{cta.label}</NotchedButton>
+                    <NotchedButton href={cta.href} dataCtaLabel={cta.label}>{cta.label}</NotchedButton>
                 </div>
             </div>
         </section>
