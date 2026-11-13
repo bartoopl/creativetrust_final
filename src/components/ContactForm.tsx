@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { HONEYPOT_FIELD_NAME } from '@/lib/antispam';
-import { trackLead } from '@/lib/analytics';
+import { trackFormLead } from '@/lib/analytics';
 import NotchedButton from './ui/NotchedButton';
 import type { Locale } from '@/lib/i18n';
 
@@ -125,7 +125,7 @@ export default function ContactForm({ locale = 'pl' }: { locale?: Locale }) {
 
         try {
             const message = await submission;
-            trackLead('contact_form');
+            trackFormLead('contact_form', 'contact_form');
             setSuccess(message);
             // The thank-you view replaces the form and "Wyślij nową wiadomość" mounts a fresh one, so no
             // form.reset() — resetting would cancel the agent's pending tool call before it gets the response.

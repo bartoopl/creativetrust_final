@@ -45,6 +45,13 @@ const pages = [
         description: 'Audyt e-commerce w 5-7 dni roboczych: pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry.',
     },
     {
+        route: '/uslugi/zarzadzanie-e-commerce',
+        file: 'src/app/(pl)/uslugi/zarzadzanie-e-commerce/page.tsx',
+        md: 'content/ai/uslugi/zarzadzanie-e-commerce.md',
+        title: 'Agencja e-commerce i outsourcing sklepu | CreativeTrust',
+        description: 'Prowadzimy e-commerce marek z zewnątrz: sprzedaż, marżę, zespół, dostawców i raportowanie. Start od audytu w 5-7 dni roboczych, potem stały abonament.',
+    },
+    {
         route: '/uslugi/tworzenie-stron-www-cennik',
         file: 'src/app/(pl)/uslugi/tworzenie-stron-www-cennik/page.tsx',
         md: 'content/ai/uslugi/tworzenie-stron-www-cennik.md',
@@ -86,8 +93,8 @@ const pages = [
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8').replaceAll("\\'", "'");
 
-test('SERP limits: title <= 60 and description <= 155 on the eleven service pages', () => {
-    assert.equal(pages.length, 11);
+test('SERP limits: title <= 60 and description <= 155 on the twelve service pages', () => {
+    assert.equal(pages.length, 12);
     for (const page of pages) {
         assert.ok(page.title.length <= 60, `${page.route} title is ${page.title.length} chars`);
         assert.ok(page.description.length <= 155, `${page.route} description is ${page.description.length} chars`);

@@ -116,7 +116,7 @@ export function InlineCTA({ title, text, cta }: { title: string; text: string; c
                 <h2 style={{ margin: '0 0 10px', fontSize: 24, fontWeight: 500, letterSpacing: '-0.5px' }}>{title}</h2>
                 <p className="ct-body" style={{ fontSize: 15, maxWidth: '62ch' }}>{text}</p>
             </div>
-            <NotchedButton href={cta.href}>{cta.label}</NotchedButton>
+            <NotchedButton href={cta.href} dataCtaLabel={cta.label}>{cta.label}</NotchedButton>
         </div>
     );
 }

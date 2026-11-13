@@ -474,6 +474,145 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
             },
         ],
     },
+    // WEW-19: contextual links from the e-commerce posts to the three core service pages.
+    // One link per post, placed in the section that actually talks about it; `applySection`
+    // skips a post that already links the same page, so nothing doubles.
+    'dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Jakie strategie marketingowe pomagają zminimalizować porzucanie koszyków?',
+                blocks: [
+                    {
+                        p: [
+                            'Jeśli koszyk wciąż się rozsypuje, a nie wiesz, na którym kroku, sprawdź to na danych: ',
+                            { text: 'audyt e-commerce', href: '/uslugi/audyt-e-commerce' },
+                            ' pokazuje miejsca, w których klienci odpadają, w 5-7 dni roboczych.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'jak-uniknac-porzucania-koszykow-podczas-platnosci-online-6-sposobow-poprawiajacych-konwersje': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Personalizacja procesu zakupowego',
+                blocks: [
+                    {
+                        p: [
+                            'Gdy po tych zmianach konwersja nadal spada, ',
+                            { text: 'audyt e-commerce', href: '/uslugi/audyt-e-commerce' },
+                            ' pokazuje, na którym kroku płatności klienci rezygnują i ile to kosztuje.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'co-zrobic-kiedy-twoj-sklep-internetowy-nie-sprzedaje-6-praktycznych-porad-od-creative-trust': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: '2. Poprawa jakości zdjęć produktów',
+                blocks: [
+                    {
+                        p: [
+                            'Jeśli po tych sprawdzeniach nadal nie wiesz, gdzie sklep traci zamówienia, ',
+                            { text: 'audyt e-commerce', href: '/uslugi/audyt-e-commerce' },
+                            ' odpowiada na to w 5-7 dni roboczych, za stałą kwotę znaną z góry.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'google-ads-dla-sklepu-internetowego-od-czego-zaczac': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Podsumowanie',
+                blocks: [
+                    {
+                        p: [
+                            'Zanim zwiększysz budżet, sprawdź, czy sklep nie traci zamówień na ścieżce zakupowej: ',
+                            { text: 'audyt e-commerce', href: '/uslugi/audyt-e-commerce' },
+                            ' pokazuje to na danych, nie na wrażeniach.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'e-commerce-na-wordpressie-dlaczego-warto-rozwazyc-woocommerce': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Dlaczego WooCommerce to tak dobry wybór?',
+                blocks: [
+                    {
+                        p: [
+                            'Gdy WooCommerce zaczyna ograniczać rozwój sklepu, prowadzimy ',
+                            { text: 'wdrożenie i rozwój e-commerce', href: '/uslugi/e-commerce' },
+                            ' na architekturze, która znosi te ograniczenia.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'jak-stworzyc-skuteczny-sklep-internetowy-6-czynnikow-ktore-musisz-wziac-pod-uwage': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Podsumowanie',
+                blocks: [
+                    {
+                        p: [
+                            'Technologia i integracje z tej listy to nasza codzienna praca: zobacz, jak wygląda ',
+                            { text: 'budowa i rozwój sklepu', href: '/uslugi/e-commerce' },
+                            '.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'wzrost-czy-marza-ecommerce': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Trzy pytania przed każdą decyzją o budżecie',
+                blocks: [
+                    {
+                        p: [
+                            'Jeśli brakuje osoby, która pilnuje tych liczb na bieżąco, ',
+                            { text: 'zarządzanie e-commerce', href: '/uslugi/zarzadzanie-e-commerce' },
+                            ' obejmuje marżę, kanały i decyzje budżetowe.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    '7-najwazniejszych-metryk-email-marketingowych-dla-e-commerce': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Podsumowanie',
+                blocks: [
+                    {
+                        p: [
+                            'Metryki e-maila nabierają sensu dopiero razem z marżą i kosztem pozyskania zamówienia; taki obraz sklepu prowadzimy w ramach ',
+                            { text: 'zarządzania e-commerce', href: '/uslugi/zarzadzanie-e-commerce' },
+                            '.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
     // WEW-20: one contextual link per website-related post to /uslugi/strony-www.
     // Posts about shops or unrelated topics stay untouched.
     'jak-stworzyc-skuteczna-strone-internetowa-dla-twojego-biznesu': {
