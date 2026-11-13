@@ -67,14 +67,54 @@ gtag('consent', 'default', {
 
 export type LeadSource = 'contact_form' | 'landing_form' | 'email_click' | 'phone_click';
 
+export type ContactMethod = 'phone' | 'email';
+
+/** Current path without the query string; empty during a server render. */
+function pagePath(): string {
+    return typeof window !== 'undefined' && window.location ? window.location.pathname : '';
+}
+
 /** GA4 `generate_lead`, forwarded by GTM. Never pass form values here: they would end up in GA4. */
 export function trackLead(leadSource: LeadSource): void {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: 'generate_lead', lead_source: leadSource });
 }
 
+/**
+ * A lead confirmed by a form: same `generate_lead` event (the GTM lead trigger keeps working)
+ * with the extra `form_name` and `page_path` dimensions that separate the forms and pages.
+ */
+export function trackFormLead(leadSource: LeadSource, formName: string): void {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        event: 'generate_lead',
+        lead_source: leadSource,
+        form_name: formName,
+        page_path: pagePath(),
+    });
+}
+
+/** A click on a phone number or an e-mail address anywhere on the site. */
+export function trackContactClick(method: ContactMethod): void {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'click_contact', method });
+}
+
+/** A click on a primary CTA; `cta_label` is the visible label, so reports stay readable. */
+export function trackCtaClick(ctaLabel: string): void {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'cta_click', cta_label: ctaLabel });
+}
+
 export function leadSourceForHref(href: string): LeadSource | null {
     if (href.startsWith('mailto:')) return 'email_click';
     if (href.startsWith('tel:')) return 'phone_click';
+    return null;
+}
+
+/** `email`/`phone` for a contact link, `null` for every other href. */
+export function contactMethodForHref(href: string): ContactMethod | null {
+    if (href.startsWith('mailto:')) return 'email';
+    if (href.startsWith('tel:')) return 'phone';
     return null;
 }

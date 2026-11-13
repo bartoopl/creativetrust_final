@@ -29,13 +29,13 @@ export default function PageHero({ eyebrow, title, description, cta, ctaSecondar
                     {(cta || ctaSecondary) && (
                         <div className="flex flex-wrap gap-3.5 pt-2">
                             {cta && (
-                                <Link href={cta.href} className="ct-cta">
+                                <Link href={cta.href} data-cta-label={cta.label} className="ct-cta">
                                     {cta.label}
                                     <span className="ct-badge" aria-hidden="true"><span className="ct-arrows"><span>→</span><span>→</span></span></span>
                                 </Link>
                             )}
                             {ctaSecondary && (
-                                <Link href={ctaSecondary.href} className="ct-ghost">
+                                <Link href={ctaSecondary.href} data-cta-label={ctaSecondary.label} className="ct-ghost">
                                     {ctaSecondary.label}
                                 </Link>
                             )}

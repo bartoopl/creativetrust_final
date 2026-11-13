@@ -17,9 +17,11 @@ interface NotchedButtonProps {
     className?: string;
     type?: 'button' | 'submit';
     disabled?: boolean;
+    /** Marks the button as a CTA for GA4 `cta_click`; the value becomes `cta_label`. */
+    dataCtaLabel?: string;
 }
 
-export default function NotchedButton({ children, href, onClick, variant = 'primary', size = 'md', className = '', type = 'button', disabled = false }: NotchedButtonProps) {
+export default function NotchedButton({ children, href, onClick, variant = 'primary', size = 'md', className = '', type = 'button', disabled = false, dataCtaLabel }: NotchedButtonProps) {
     const kind = variant;
     const classes = [
         kind === 'ghost' ? 'ct-ghost' : 'ct-cta',
@@ -41,14 +43,14 @@ export default function NotchedButton({ children, href, onClick, variant = 'prim
 
     if (href) {
         return (
-            <Link href={href} onClick={onClick} className={classes}>
+            <Link href={href} onClick={onClick} data-cta-label={dataCtaLabel} className={classes}>
                 {content}
             </Link>
         );
     }
 
     return (
-        <button type={type} onClick={onClick} disabled={disabled} className={classes}>
+        <button type={type} onClick={onClick} disabled={disabled} data-cta-label={dataCtaLabel} className={classes}>
             {content}
         </button>
     );
