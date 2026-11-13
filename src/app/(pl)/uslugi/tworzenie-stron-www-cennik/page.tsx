@@ -12,11 +12,11 @@ const canonicalUrl = `${SITE_URL}/uslugi/tworzenie-stron-www-cennik`;
 
 export const metadata: Metadata = {
     title: { absolute: 'Ile kosztuje strona internetowa? Cennik | CreativeTrust' },
-    description: 'Ile kosztuje strona internetowa dla firmy? Orientacyjne zakresy: landing page, strona firmowa, serwis z CMS, SEO i integracje.',
+    description: 'Ile kosztuje strona internetowa? Realne zakresy: landing page od 3 500 zł netto, strona firmowa od 7 500 zł, serwis z CMS. Sprawdź, co wpływa na cenę.',
     alternates: pageAlternates('/uslugi/tworzenie-stron-www-cennik', 'pl', SITE_URL),
     openGraph: {
         title: 'Ile kosztuje strona internetowa? Cennik | CreativeTrust',
-        description: 'Ile kosztuje strona internetowa dla firmy? Orientacyjne zakresy: landing page, strona firmowa, serwis z CMS, SEO i integracje.',
+        description: 'Ile kosztuje strona internetowa? Realne zakresy: landing page od 3 500 zł netto, strona firmowa od 7 500 zł, serwis z CMS. Sprawdź, co wpływa na cenę.',
         url: canonicalUrl,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Ile kosztuje strona internetowa? Cennik | CreativeTrust',
-        description: 'Ile kosztuje strona internetowa dla firmy? Orientacyjne zakresy: landing page, strona firmowa, serwis z CMS, SEO i integracje.',
+        description: 'Ile kosztuje strona internetowa? Realne zakresy: landing page od 3 500 zł netto, strona firmowa od 7 500 zł, serwis z CMS. Sprawdź, co wpływa na cenę.',
     },
 };
 
@@ -110,7 +110,7 @@ export default function WebsitePricingPage() {
 
             <PageHero
                 eyebrow="Cennik stron internetowych"
-                title="Ile kosztuje strona internetowa dla firmy?"
+                title="Ile kosztuje strona internetowa?"
                 description="Cena strony WWW zależy od zakresu, treści, CMS, integracji i celu biznesowego. Poniżej pokazujemy realne zakresy projektów, które mają działać sprzedażowo, a nie tylko wyglądać jak wizytówka."
                 cta={{ label: 'Poproś o wycenę strony', href: '#formularz' }}
                 ctaSecondary={{ label: 'Zobacz ofertę WWW', href: '/uslugi/strony-www' }}

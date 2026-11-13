@@ -1,6 +1,6 @@
 ---
-title: "Strona firmowa cena | Ile kosztuje strona dla firmy"
-description: "Ile kosztuje strona firmowa? Zobacz realne zakresy, od czego zależy koszt strony firmowej i jak wygląda wycena strony dla firmy."
+title: "Strona www dla firmy i strona firmowa: cena | CreativeTrust"
+description: "Strona www dla firmy: ile kosztuje strona firmowa, co wpływa na cenę i jakie zakresy mają sens. Orientacyjne kwoty i lista decyzji przed startem."
 date: "2026-10-27"
 canonical: "https://www.creativetrust.pl/uslugi/strona-firmowa-cena"
 lang: "pl-PL"
@@ -16,7 +16,7 @@ semantic_keywords:
   - "ile kosztuje strona firmowa"
 ---
 
-# Strona firmowa cena: ile naprawdę kosztuje dobra strona dla firmy
+# Strona www dla firmy: ile kosztuje strona firmowa
 
 Cena strony firmowej w CreativeTrust zależy od tego, ile strona ma zrobić biznesowo, a nie od samej liczby podstron. Poniżej są orientacyjne zakresy, czynniki wpływające na koszt oraz to, gdzie warto dopłacić, a gdzie nie. Wszystkie ceny są cenami netto.
 

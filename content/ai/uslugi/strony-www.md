@@ -1,6 +1,6 @@
 ---
-title: "Strony internetowe: projekt i wdrożenie | CreativeTrust"
-description: "Projektujemy strony firmowe, produktowe, landing pages i portale: szybkie, łatwe w edycji, pod konkretną rolę w sprzedaży. Zobacz cennik."
+title: "Strony internetowe dla firm, które sprzedają | CreativeTrust"
+description: "Strony internetowe dla firm, które mają pracować na sprzedaż: projekt, wdrożenie i SEO. Strona internetowa dla firmy od briefu do startu."
 date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/uslugi/strony-www"
 lang: "pl-PL"
@@ -21,7 +21,7 @@ semantic_keywords:
   - "WCAG 2.1"
 ---
 
-# Strony internetowe w CreativeTrust
+# Strony internetowe dla firm, które pracują na sprzedaż.
 
 CreativeTrust projektuje i wdraża strony dla marek i firm — od landing page po rozbudowany portal. Każda ma jasne zadanie: zbierać zapytania, wspierać sklep albo otwierać nowy rynek. Strony są szybkie, gotowe pod SEO i łatwe w edycji.
 

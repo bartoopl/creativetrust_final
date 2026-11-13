@@ -1,6 +1,6 @@
 ---
 title: "Ile kosztuje strona internetowa? Cennik | CreativeTrust"
-description: "Ile kosztuje strona internetowa dla firmy? Orientacyjne zakresy: landing page, strona firmowa, serwis z CMS, SEO i integracje."
+description: "Ile kosztuje strona internetowa? Realne zakresy: landing page od 3 500 zł netto, strona firmowa od 7 500 zł, serwis z CMS. Sprawdź, co wpływa na cenę."
 date: "2026-10-27"
 canonical: "https://www.creativetrust.pl/uslugi/tworzenie-stron-www-cennik"
 lang: "pl-PL"
@@ -17,7 +17,7 @@ semantic_keywords:
   - "wycena strony www"
 ---
 
-# Cennik stron WWW: ile kosztuje strona internetowa dla firmy
+# Ile kosztuje strona internetowa?
 
 Cena strony WWW w CreativeTrust zależy od zakresu, treści, CMS, integracji i celu biznesowego. Poniższe zakresy dotyczą projektów, które mają działać sprzedażowo, a nie tylko wyglądać jak wizytówka. Wszystkie ceny są cenami netto.
 
