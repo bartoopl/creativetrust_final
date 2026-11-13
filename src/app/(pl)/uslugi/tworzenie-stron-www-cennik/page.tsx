@@ -11,14 +11,12 @@ import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } f
 const canonicalUrl = `${SITE_URL}/uslugi/tworzenie-stron-www-cennik`;
 
 export const metadata: Metadata = {
-    title: 'Tworzenie strony internetowej cena | Cennik WWW',
-    description:
-        'Ile kosztuje strona internetowa dla firmy? Zobacz orientacyjne zakresy: landing page, strona firmowa, serwis z CMS, SEO i integracje.',
+    title: { absolute: 'Ile kosztuje strona internetowa? Cennik | CreativeTrust' },
+    description: 'Ile kosztuje strona internetowa dla firmy? Orientacyjne zakresy: landing page, strona firmowa, serwis z CMS, SEO i integracje.',
     alternates: pageAlternates('/uslugi/tworzenie-stron-www-cennik', 'pl', SITE_URL),
     openGraph: {
-        title: 'Tworzenie strony internetowej cena | CreativeTrust',
-        description:
-            'Orientacyjny cennik stron WWW: od landing page po rozbudowany serwis firmowy z CMS, SEO i integracjami.',
+        title: 'Ile kosztuje strona internetowa? Cennik | CreativeTrust',
+        description: 'Ile kosztuje strona internetowa dla firmy? Orientacyjne zakresy: landing page, strona firmowa, serwis z CMS, SEO i integracje.',
         url: canonicalUrl,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -26,9 +24,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Tworzenie strony internetowej cena | CreativeTrust',
-        description:
-            'Sprawdź, od czego zależy koszt strony internetowej i jaki zakres wybrać dla firmy.',
+        title: 'Ile kosztuje strona internetowa? Cennik | CreativeTrust',
+        description: 'Ile kosztuje strona internetowa dla firmy? Orientacyjne zakresy: landing page, strona firmowa, serwis z CMS, SEO i integracje.',
     },
 };
 

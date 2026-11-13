@@ -9,12 +9,12 @@ import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schem
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: 'Online stores | Design, build, migrations and ERP integrations',
-    description: 'We design and build online stores: headless, WooCommerce, Shopify, platform migrations and ERP integrations. From the perspective of a team that manages e-commerce — built for sales, margin and the way your team works.',
+    title: { absolute: 'Online stores: design, build, integrations | CreativeTrust' },
+    description: 'We design and build online stores: headless, WooCommerce, Shopify, migrations and ERP integrations - for sales, margin and the way your team works.',
     alternates: pageAlternates('/uslugi/e-commerce', 'en', SITE_URL),
     openGraph: {
-        title: 'Online stores and e-commerce builds | CreativeTrust',
-        description: 'Headless stores, platform migrations and ERP integrations. Built by a team that knows e-commerce from the management side.',
+        title: 'Online stores: design, build, integrations | CreativeTrust',
+        description: 'We design and build online stores: headless, WooCommerce, Shopify, migrations and ERP integrations - for sales, margin and the way your team works.',
         url: `${SITE_URL}/en/services/e-commerce`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',
     },
 };

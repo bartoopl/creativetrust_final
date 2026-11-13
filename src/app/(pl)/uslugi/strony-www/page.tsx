@@ -8,12 +8,12 @@ import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schem
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: 'Strony internetowe dla marek i firm | Projekt i wdrożenie',
-    description: 'Projektujemy i wdrażamy strony internetowe: firmowe, produktowe, landing pages i portale. Zaprojektowane pod konkretną rolę w sprzedaży, szybkie i łatwe w edycji. Sprawdź zakres i cennik.',
+    title: { absolute: 'Strony internetowe: projekt i wdrożenie | CreativeTrust' },
+    description: 'Projektujemy strony firmowe, produktowe, landing pages i portale: szybkie, łatwe w edycji, pod konkretną rolę w sprzedaży. Zobacz cennik.',
     alternates: pageAlternates('/uslugi/strony-www', 'pl', SITE_URL),
     openGraph: {
-        title: 'Strony internetowe dla marek i firm | CreativeTrust',
-        description: 'Strony WWW zaprojektowane pod sprzedaż, SEO i wydajność. Next.js, headless CMS — jeden zespół od projektu po wdrożenie.',
+        title: 'Strony internetowe: projekt i wdrożenie | CreativeTrust',
+        description: 'Projektujemy strony firmowe, produktowe, landing pages i portale: szybkie, łatwe w edycji, pod konkretną rolę w sprzedaży. Zobacz cennik.',
         url: `${SITE_URL}/uslugi/strony-www`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
     },
 };

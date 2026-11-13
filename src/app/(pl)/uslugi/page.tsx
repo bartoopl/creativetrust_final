@@ -8,8 +8,8 @@ import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: 'Usługi | Audyt i zarządzanie e-commerce, sklepy i strony internetowe',
-    description: 'Audyt e-commerce, zarządzanie e-commerce z zewnątrz oraz projekt i budowa sklepów i stron internetowych. Do tego marketing automation i social media — w jednym zespole.',
+    title: { absolute: 'Audyt e-commerce, sklepy, strony internetowe | CreativeTrust' },
+    description: 'Audyt i zarządzanie e-commerce, projekt i budowa sklepów oraz stron internetowych, marketing automation i social media - w jednym zespole.',
     alternates: pageAlternates('/uslugi', 'pl', SITE_URL),
 };
 

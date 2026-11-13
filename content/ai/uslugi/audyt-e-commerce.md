@@ -1,6 +1,6 @@
 ---
-title: "Audyt e-commerce | Sprzedaż, marża i technologia sklepu"
-description: "Audyt e-commerce dla sklepów, które rosną szybciej niż ich procesy. W 5–7 dni roboczych pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry, koszt odliczany od dalszej współpracy."
+title: "Audyt e-commerce: sprzedaż i marża | CreativeTrust"
+description: "Audyt e-commerce w 5-7 dni roboczych: pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry."
 date: "2026-11-10"
 canonical: "https://www.creativetrust.pl/uslugi/audyt-e-commerce"
 lang: "pl-PL"

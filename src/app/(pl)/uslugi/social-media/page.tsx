@@ -8,12 +8,12 @@ import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schem
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: 'Social Media dla marek | Strategia, content, kampanie',
-    description: 'Prowadzimy social media marek tak, żeby pracowały na sprzedaż: strategia, content, kampanie i społeczność zaplanowane razem z kalendarzem sprzedaży i ofertą.',
+    title: { absolute: 'Social media dla marek: strategia i kampanie | CreativeTrust' },
+    description: 'Prowadzimy social media marek pod sprzedaż: strategia, content, kampanie i społeczność planowane z kalendarzem sprzedaży.',
     alternates: pageAlternates('/uslugi/social-media', 'pl', SITE_URL),
     openGraph: {
-        title: 'Social Media dla marek | CreativeTrust',
-        description: 'Strategia, content, kampanie i analityka. Social media spięte ze sprzedażą online.',
+        title: 'Social media dla marek: strategia i kampanie | CreativeTrust',
+        description: 'Prowadzimy social media marek pod sprzedaż: strategia, content, kampanie i społeczność planowane z kalendarzem sprzedaży.',
         url: `${SITE_URL}/uslugi/social-media`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
     },
 };

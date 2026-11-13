@@ -8,12 +8,12 @@ import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schem
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: 'Social Media for brands | Strategy, content, campaigns',
-    description: 'We run brands\' social media so that it works for sales: strategy, content, campaigns and community planned together with your sales calendar and offer.',
+    title: { absolute: 'Social media for brands: strategy, campaigns | CreativeTrust' },
+    description: 'We run brands\' social media for sales: strategy, content, campaigns and community planned with your sales calendar and offer.',
     alternates: pageAlternates('/uslugi/social-media', 'en', SITE_URL),
     openGraph: {
-        title: 'Social Media for brands | CreativeTrust',
-        description: 'Strategy, content, campaigns and analytics. Social media tied to online sales.',
+        title: 'Social media for brands: strategy, campaigns | CreativeTrust',
+        description: 'We run brands\' social media for sales: strategy, content, campaigns and community planned with your sales calendar and offer.',
         url: `${SITE_URL}/en/services/social-media`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',
     },
 };

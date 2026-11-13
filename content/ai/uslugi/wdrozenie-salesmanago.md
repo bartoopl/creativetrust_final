@@ -1,6 +1,6 @@
 ---
-title: "Wdrożenie SALESmanago | Marketing automation dla firm"
-description: "Wdrożenie SALESmanago, automatyzacje, segmentacja i lead nurturing. Partner SALESmanago: integracje CRM, scenariusze i personalizacja kampanii."
+title: "Wdrożenie SALESmanago i automatyzacje | CreativeTrust"
+description: "Wdrożenie SALESmanago: automatyzacje, segmentacja i lead nurturing. Dla firm, które chcą mierzyć przychód z marketing automation."
 date: "2026-10-27"
 canonical: "https://www.creativetrust.pl/uslugi/wdrozenie-salesmanago"
 lang: "pl-PL"

@@ -1,6 +1,6 @@
 ---
-title: "Tworzenie strony internetowej cena | Cennik WWW"
-description: "Ile kosztuje strona internetowa dla firmy? Zobacz orientacyjne zakresy: landing page, strona firmowa, serwis z CMS, SEO i integracje."
+title: "Ile kosztuje strona internetowa? Cennik | CreativeTrust"
+description: "Ile kosztuje strona internetowa dla firmy? Orientacyjne zakresy: landing page, strona firmowa, serwis z CMS, SEO i integracje."
 date: "2026-10-27"
 canonical: "https://www.creativetrust.pl/uslugi/tworzenie-stron-www-cennik"
 lang: "pl-PL"

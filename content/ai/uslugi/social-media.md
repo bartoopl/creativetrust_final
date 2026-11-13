@@ -1,6 +1,6 @@
 ---
-title: "Social Media dla marek — CreativeTrust | Strategia, content, kampanie"
-description: "Prowadzimy social media marek tak, żeby pracowały na sprzedaż: strategia, content, kampanie i społeczność zaplanowane razem z kalendarzem sprzedaży i ofertą."
+title: "Social media dla marek: strategia i kampanie | CreativeTrust"
+description: "Prowadzimy social media marek pod sprzedaż: strategia, content, kampanie i społeczność planowane z kalendarzem sprzedaży."
 date: "2026-11-11"
 canonical: "https://www.creativetrust.pl/uslugi/social-media"
 lang: "pl-PL"

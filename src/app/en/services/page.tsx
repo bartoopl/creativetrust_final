@@ -8,8 +8,8 @@ import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: 'Services | E-commerce audit and management, online stores and websites',
-    description: 'E-commerce audit, outsourced e-commerce management, and the design and build of online stores and websites. Plus marketing automation and social media — in one team.',
+    title: { absolute: 'Services: e-commerce audit, stores, websites | CreativeTrust' },
+    description: 'E-commerce audit, outsourced e-commerce management, online stores and websites, marketing automation and social media - one team.',
     alternates: pageAlternates('/uslugi', 'en', SITE_URL),
 };
 
