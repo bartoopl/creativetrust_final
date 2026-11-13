@@ -7,7 +7,6 @@ const CORE = ['/uslugi/audyt-e-commerce', '/uslugi/e-commerce', '/uslugi/zarzadz
 /** Posts that link a core service page from inside their body (WEW-19). */
 const LINKED_POSTS = [
     'dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec',
-    'jak-uniknac-porzucania-koszykow-podczas-platnosci-online-6-sposobow-poprawiajacych-konwersje',
     'co-zrobic-kiedy-twoj-sklep-internetowy-nie-sprzedaje-6-praktycznych-porad-od-creative-trust',
     'google-ads-dla-sklepu-internetowego-od-czego-zaczac',
     'e-commerce-na-wordpressie-dlaczego-warto-rozwazyc-woocommerce',

@@ -64,3 +64,19 @@ Osiem wpisów dubluje intencję pięciu dłuższych tekstów. Etap 1 to same 301
 ### Phase 3: Bramka
 
 - [x] 3.1 Testy, typy, build; `curl -I` na lokalnym buildzie — f38a235
+
+## Etap 2, część kodowa: pogodzenie overlays z nową treścią
+
+Nowe H2 pięciu wpisów są w `/data/OpenBot/Shared/seo/2026-11-13-konsolidacja-tresci.md`. Overlays w `blog-seo.ts` dopasowują się do tekstu H2; po przepisaniu wpisu dopasowanie po cichu znika, więc plik trzeba było przewiązać z nową treścią.
+
+- `tworzenie-stron-internetowych-przewodnik…`: usunięta cała konfiguracja (stary title/description reklamujący WordPress, H1, mapowanie starych nagłówków, sekcja pod nieistniejącym „Krok 4”). Nowy tekst sam linkuje `/uslugi/strony-www` i audyt inline, a metadata idzie z CMS.
+- `dlaczego-klienci-porzucaja-koszyki…`: `beforeHeading` przeniesione na istniejące H2 „Co mierzyć i w jakiej kolejności naprawiać”.
+- `ile-kosztuje-strona-internetowa-dla-firmy`: w `links` zostaje tylko `/uslugi/strony-www`; cennik jest linkowany w treści dwa razy.
+- Usunięte konfiguracje czterech wpisów z `retired-blog-posts.json`: `jak-uniknac-porzucania-koszykow…`, `jak-stworzyc-skuteczna-strone…`, `kompleksowa-usluga-budowy…`, `jaka-powinna-byc-i-ile-kosztuje…`.
+- `headless-woocommerce-next-js` i `core-web-vitals-w-ecommerce` nie miały i nie mają konfiguracji.
+- Testy: `blog-seo.test.mjs` (brak overlays dla pięciu slugów i brak konfiguracji dla przekierowanych), `website-links.test.mjs` (5 wpisów, 5 różnych anchorów), `service-links.test.mjs` (bez przekierowanego wpisu).
+
+### Phase 4: Overlays po nowej treści
+
+- [ ] 4.1 `blog-seo.ts` bez martwych overlays
+- [ ] 4.2 Testy, typy, build
