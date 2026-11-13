@@ -47,14 +47,14 @@ Wdrożyć zatwierdzoną treść (Obi-Wan, 13.11.2026) na `/uslugi/zarzadzanie-e-
 
 ### Phase 1: Strony
 
-- [ ] 1.1 Zarządzanie e-commerce: meta, H1, sekcje, FAQ, CTA
-- [ ] 1.2 Audyt e-commerce: sekcje, cena, 9 FAQ, CTA
+- [x] 1.1 Zarządzanie e-commerce: meta, H1, sekcje, FAQ, CTA — 4e26841
+- [x] 1.2 Audyt e-commerce: sekcje, cena, 9 FAQ, CTA — 4e26841
 
 ### Phase 2: Bliźniaki i dane
 
-- [ ] 2.1 `content/ai` dla obu stron
-- [ ] 2.2 Cena audytu w `publishedPrices`
+- [x] 2.1 `content/ai` dla obu stron — 4e26841
+- [x] 2.2 Cena audytu w `publishedPrices` — dc09782
 
 ### Phase 3: Bramka
 
-- [ ] 3.1 Testy i build
+- [x] 3.1 Testy i build
