@@ -48,13 +48,13 @@ Trzy strony www mają różne frazy główne i różne title/description, a wpis
 
 ### Phase 1: Frazy i meta
 
-- [ ] 1.1 Trzy strony: title, description, H1
-- [ ] 1.2 Bliźniaki `content/ai`
+- [x] 1.1 Trzy strony: title, description, H1 — d1bd33b
+- [x] 1.2 Bliźniaki `content/ai` — d1bd33b
 
 ### Phase 2: Linki z bloga
 
-- [ ] 2.1 Konfiguracje `blog-seo.ts` dla 8 wpisów
+- [x] 2.1 Konfiguracje `blog-seo.ts` dla 8 wpisów — b50caed
 
 ### Phase 3: Bramka
 
-- [ ] 3.1 Testy, typy i build
+- [x] 3.1 Testy, typy i build
