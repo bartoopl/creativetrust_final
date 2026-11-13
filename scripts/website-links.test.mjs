@@ -79,12 +79,18 @@ test('the link lands right before its heading and leaves the post body intact', 
     }
 });
 
-test('the website anchors rotate instead of repeating one phrase', () => {
+test('the website anchors rotate exactly as planned', () => {
     const anchors = LINKED_POSTS.map((slug) => linksOf(getBlogSeoConfig(slug))[0].text);
     const counts = anchors.reduce((map, anchor) => map.set(anchor, (map.get(anchor) ?? 0) + 1), new Map());
     assert.equal(anchors.length, 8);
-    assert.ok(counts.size >= 5, `only ${counts.size} distinct anchors: ${[...counts.keys()].join(' | ')}`);
-    assert.ok(Math.max(...counts.values()) <= 3, `one anchor repeats too often: ${[...counts.entries()].join(', ')}`);
+    assert.deepEqual(Object.fromEntries([...counts].sort()), {
+        'dobra strona firmowa': 1,
+        'projekt strony internetowej dla firmy': 1,
+        'strona internetowa dla firmy': 1,
+        'strony internetowe dla firm': 3,
+        'strony internetowe, które sprzedają': 1,
+        'tworzenie stron internetowych dla firm': 1,
+    });
     for (const anchor of counts.keys()) assert.ok(!/kliknij tutaj|tutaj|więcej/i.test(anchor), anchor);
 });
 
