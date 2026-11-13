@@ -136,6 +136,7 @@ export const publishedPrices: PublishedPrice[] = [
     { service: 'strony-www', name: 'Strona firmowa', price: 'od 7 500 zł netto', source: '/uslugi/tworzenie-stron-www-cennik' },
     { service: 'strony-www', name: 'Strona firmowa z CMS', price: 'od 10 000 zł netto', source: '/uslugi/strona-firmowa-cena' },
     { service: 'strony-www', name: 'Serwis rozbudowany', price: 'wycena indywidualna', source: '/uslugi/tworzenie-stron-www-cennik' },
+    { service: 'audyt-e-commerce', name: 'Audyt e-commerce', price: '3 000 zł netto', source: '/uslugi/audyt-e-commerce' },
 ];
 
 /** English labels of the published prices; amounts unchanged (net, PLN), source is the English pricing page. */
@@ -147,5 +148,8 @@ const pricesEn: Record<PublishedPrice['name'], Pick<PublishedPrice, 'name' | 'pr
 };
 
 export function pricesFor(locale: 'pl' | 'en'): PublishedPrice[] {
-    return locale === 'en' ? publishedPrices.map((p) => ({ ...p, ...pricesEn[p.name] })) : publishedPrices;
+    // A price is quoted in English only when the English page publishes it too.
+    return locale === 'en'
+        ? publishedPrices.filter((p) => p.name in pricesEn).map((p) => ({ ...p, ...pricesEn[p.name] }))
+        : publishedPrices;
 }
