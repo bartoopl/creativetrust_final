@@ -613,6 +613,144 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
             },
         ],
     },
+    // WEW-20: one contextual link per website-related post to /uslugi/strony-www.
+    // Posts about shops or unrelated topics stay untouched.
+    'jak-stworzyc-skuteczna-strone-internetowa-dla-twojego-biznesu': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: '2. Projektowanie UX/UI – Klucz do Sukcesu',
+                blocks: [
+                    {
+                        p: [
+                            'Etapy z tego tekstu pokrywa nasza usługa: ',
+                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
+                            ' od briefu, przez UX, po wdrożenie i SEO.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'strona-glowna-ktora-generuje-klikniecia-to-mozliwe-poznaj-7-praktycznych-rad': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: '3. Wyróżniaj elementy strony.',
+                blocks: [
+                    {
+                        p: [
+                            'Stronę główną zawsze projektujemy razem z całą witryną, żeby nawigacja i treść trzymały jeden plan: tak wyglądają nasze ',
+                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
+                            '.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    '10-najczesciej-popelnianych-bledow-podczas-tworzenia-strony-internetowej': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Ukryte ceny oraz opłaty.',
+                blocks: [
+                    {
+                        p: [
+                            'Większość z tych błędów wynika ze struktury i decyzji projektowych, a nie z technologii; tak budujemy ',
+                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
+                            ', żeby ich nie powtarzać.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'optymalne-strategie-pozycjonowania-stron-internetowych-jak-wyroznic-sie-w-sieci': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Wnioski: Dlaczego Pozycjonowanie Jest Kluczowe?',
+                blocks: [
+                    {
+                        p: [
+                            'Pozycjonowanie zaczyna się od strony technicznej: ',
+                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
+                            ' oddajemy z semantyczną strukturą, danymi i szybkością gotową pod SEO.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'kompleksowa-usluga-budowy-strony-www-klucz-do-sukcesu-twojej-firmy': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Korzyść 1: Profesjonalizm i Doświadczenie',
+                blocks: [
+                    {
+                        p: [
+                            'Cały ten zakres prowadzimy jako jedną usługę: ',
+                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
+                            ' od briefu do startu i rozwoju.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'dlaczego-oparcie-strony-internetowej-o-page-builder-to-nie-taki-zly-pomysl': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Koszty utworzenia',
+                blocks: [
+                    {
+                        p: [
+                            'Page builder nie zwalnia z myślenia o wydajności i strukturze: nasze ',
+                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
+                            ' projektujemy tak, żeby były szybkie i łatwe w edycji.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'kiedy-mega-menu-jest-fajne-a-kiedy-nie': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Kiedy nie używać mega menu.',
+                blocks: [
+                    {
+                        p: [
+                            'Nawigację projektujemy razem z architekturą treści, więc mega menu nie żyje własnym życiem: zobacz nasze ',
+                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
+                            '.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+    'jaka-powinna-byc-i-ile-kosztuje-strona-internetowa': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Zoptymalizowana pod kątem SEO',
+                blocks: [
+                    {
+                        p: [
+                            'Tak zbudowane strony projektujemy i wdrażamy jako ',
+                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
+                            '.',
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
 };
 
 export function getBlogSeoConfig(slug: string): BlogSeoConfig | undefined {

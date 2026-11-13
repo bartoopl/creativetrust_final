@@ -34,8 +34,8 @@ const pages = [
         route: '/uslugi/strony-www',
         file: 'src/app/(pl)/uslugi/strony-www/page.tsx',
         md: 'content/ai/uslugi/strony-www.md',
-        title: 'Strony internetowe: projekt i wdrożenie | CreativeTrust',
-        description: 'Projektujemy strony firmowe, produktowe, landing pages i portale: szybkie, łatwe w edycji, pod konkretną rolę w sprzedaży. Zobacz cennik.',
+        title: 'Strony internetowe dla firm, które sprzedają | CreativeTrust',
+        description: 'Strony internetowe dla firm, które mają pracować na sprzedaż: projekt, wdrożenie i SEO. Strona internetowa dla firmy od briefu do startu.',
     },
     {
         route: '/uslugi/audyt-e-commerce',
@@ -56,7 +56,7 @@ const pages = [
         file: 'src/app/(pl)/uslugi/tworzenie-stron-www-cennik/page.tsx',
         md: 'content/ai/uslugi/tworzenie-stron-www-cennik.md',
         title: 'Ile kosztuje strona internetowa? Cennik | CreativeTrust',
-        description: 'Ile kosztuje strona internetowa dla firmy? Orientacyjne zakresy: landing page, strona firmowa, serwis z CMS, SEO i integracje.',
+        description: 'Ile kosztuje strona internetowa? Realne zakresy: landing page od 3 500 zł netto, strona firmowa od 7 500 zł, serwis z CMS. Sprawdź, co wpływa na cenę.',
     },
     {
         route: '/uslugi/wdrozenie-salesmanago',

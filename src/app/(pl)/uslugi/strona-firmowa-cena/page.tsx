@@ -11,14 +11,14 @@ import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } f
 const canonicalUrl = `${SITE_URL}/uslugi/strona-firmowa-cena`;
 
 export const metadata: Metadata = {
-    title: 'Strona firmowa cena | Ile kosztuje strona dla firmy',
+    title: { absolute: 'Strona www dla firmy i strona firmowa: cena | CreativeTrust' },
     description:
-        'Ile kosztuje strona firmowa? Landing page pod frazę: strona firmowa cena, koszt strony firmowej, wycena strony dla firmy. Zobacz realne zakresy.',
+        'Strona www dla firmy: ile kosztuje strona firmowa, co wpływa na cenę i jakie zakresy mają sens. Orientacyjne kwoty i lista decyzji przed startem.',
     alternates: pageAlternates('/uslugi/strona-firmowa-cena', 'pl', SITE_URL),
     openGraph: {
-        title: 'Strona firmowa cena | CreativeTrust',
+        title: 'Strona www dla firmy i strona firmowa: cena | CreativeTrust',
         description:
-            'Wycena strony firmowej: od czego zależy koszt, jak wybrać zakres i co powinno się znaleźć w projekcie.',
+            'Strona www dla firmy: ile kosztuje strona firmowa, co wpływa na cenę i jakie zakresy mają sens. Orientacyjne kwoty i lista decyzji przed startem.',
         url: canonicalUrl,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Strona firmowa cena | CreativeTrust',
+        title: 'Strona www dla firmy i strona firmowa: cena | CreativeTrust',
         description:
-            'Poznaj orientacyjne zakresy i elementy wpływające na cenę strony firmowej.',
+            'Strona www dla firmy: ile kosztuje strona firmowa, co wpływa na cenę i jakie zakresy mają sens. Orientacyjne kwoty i lista decyzji przed startem.',
     },
 };
 
@@ -103,7 +103,7 @@ export default function CompanyWebsitePricingPage() {
 
             <PageHero
                 eyebrow="Strona firmowa"
-                title="Strona firmowa cena, czyli ile naprawdę kosztuje dobra strona dla firmy"
+                title="Strona www dla firmy: ile kosztuje strona firmowa"
                 description="To landing page dla osób, które szukają wyceny strony firmowej i chcą zrozumieć, od czego zależy koszt, jaki zakres ma sens i gdzie warto dopłacić, a gdzie nie."
                 cta={{ label: 'Poproś o wycenę', href: '#formularz' }}
                 ctaSecondary={{ label: 'Zobacz ofertę stron WWW', href: '/uslugi/strony-www' }}

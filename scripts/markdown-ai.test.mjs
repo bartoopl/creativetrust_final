@@ -280,7 +280,7 @@ test('llms-full.txt contains every page with a single H1', () => {
     const full = buildLlmsFullTxt({ origin: ORIGIN, documents, articles });
     assert.equal(proseLines(full).filter((l) => /^#\s/.test(l)).length, 1);
     for (const doc of documents) assert.ok(full.includes(`Źródło: ${doc.url}`));
-    assert.ok(full.includes('## Cennik stron WWW: ile kosztuje strona internetowa dla firmy'));
+    assert.ok(full.includes('## Ile kosztuje strona internetowa?'));
     assert.ok(full.includes('### Landing page — od 3 500 zł netto'));
     assert.ok(full.includes('/baza-wiedzy/crm.md'));
 });

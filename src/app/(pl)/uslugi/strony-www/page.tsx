@@ -8,13 +8,18 @@ import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schem
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
-    title: { absolute: 'Strony internetowe: projekt i wdrożenie | CreativeTrust' },
-    description: 'Projektujemy strony firmowe, produktowe, landing pages i portale: szybkie, łatwe w edycji, pod konkretną rolę w sprzedaży. Zobacz cennik.',
+    title: { absolute: 'Strony internetowe dla firm, które sprzedają | CreativeTrust' },
+    description: 'Strony internetowe dla firm, które mają pracować na sprzedaż: projekt, wdrożenie i SEO. Strona internetowa dla firmy od briefu do startu.',
     alternates: pageAlternates('/uslugi/strony-www', 'pl', SITE_URL),
     openGraph: {
-        title: 'Strony internetowe: projekt i wdrożenie | CreativeTrust',
-        description: 'Projektujemy strony firmowe, produktowe, landing pages i portale: szybkie, łatwe w edycji, pod konkretną rolę w sprzedaży. Zobacz cennik.',
+        title: 'Strony internetowe dla firm, które sprzedają | CreativeTrust',
+        description: 'Strony internetowe dla firm, które mają pracować na sprzedaż: projekt, wdrożenie i SEO. Strona internetowa dla firmy od briefu do startu.',
         url: `${SITE_URL}/uslugi/strony-www`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Strony internetowe dla firm, które sprzedają | CreativeTrust',
+        description: 'Strony internetowe dla firm, które mają pracować na sprzedaż: projekt, wdrożenie i SEO. Strona internetowa dla firmy od briefu do startu.',
     },
 };
 
@@ -64,7 +69,7 @@ export default function WebsitesPage() {
             {/* Hero */}
             <PageHero
                 eyebrow="Strony WWW"
-                title={<>Strony internetowe z konkretną rolą <span style={{ color: 'var(--accent)' }}>w sprzedaży.</span></>}
+                title={<>Strony internetowe dla firm, które pracują <span style={{ color: 'var(--accent)' }}>na sprzedaż.</span></>}
                 description="Projektujemy i wdrażamy strony dla marek i firm — od landing page po rozbudowany portal. Każda ma jasne zadanie: zbierać zapytania, wspierać sklep albo otwierać nowy rynek. Szybkie, gotowe pod SEO i łatwe w edycji."
                 cta={{ label: 'Wycena projektu', href: '/kontakt' }}
                 ctaSecondary={{ label: 'Zobacz cennik', href: '/uslugi/tworzenie-stron-www-cennik' }}
