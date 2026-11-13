@@ -78,5 +78,5 @@ Nowe H2 pięciu wpisów są w `/data/OpenBot/Shared/seo/2026-11-13-konsolidacja-
 
 ### Phase 4: Overlays po nowej treści
 
-- [ ] 4.1 `blog-seo.ts` bez martwych overlays
-- [ ] 4.2 Testy, typy, build
+- [x] 4.1 `blog-seo.ts` bez martwych overlays — 4aed164
+- [x] 4.2 Testy, typy, build — 4aed164
