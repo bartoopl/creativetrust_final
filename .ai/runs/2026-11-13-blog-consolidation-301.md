@@ -54,13 +54,13 @@ Osiem wpisów dubluje intencję pięciu dłuższych tekstów. Etap 1 to same 301
 
 ### Phase 1: Przekierowania
 
-- [x] 1.1 JSON + `next.config.ts` (301, HTML i `.md`)
+- [x] 1.1 JSON + `next.config.ts` (301, HTML i `.md`) — f38a235
 
 ### Phase 2: Linki i listy
 
-- [x] 2.1 `RETIRED_BLOG_POSTS` w `RETIRED_PATHS` (rewrite treści z CMS)
-- [x] 2.2 Filtr w `readBlogPosts` i w powiązanych
+- [x] 2.1 `RETIRED_BLOG_POSTS` w `RETIRED_PATHS` (rewrite treści z CMS) — f38a235
+- [x] 2.2 Filtr w `readBlogPosts` i w powiązanych — f38a235
 
 ### Phase 3: Bramka
 
-- [x] 3.1 Testy, typy, build; `curl -I` na lokalnym buildzie
+- [x] 3.1 Testy, typy, build; `curl -I` na lokalnym buildzie — f38a235
