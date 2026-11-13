@@ -72,3 +72,8 @@ Trzy strony www mają różne frazy główne i różne title/description, a wpis
 - [x] 4.2 Rozbudowa `/uslugi/strony-www` — 0dc61b3
 - [x] 4.3 Linki krzyżowe audytów — 3ee072a
 - [x] 4.4 `.md` zgodne z HTML, testy, typy, build
+
+### Korekta po review
+
+- [x] 4.5 Rotacja anchorów: 8 linków, 6 różnych anchorów (3× „strony internetowe dla firm”, po 1 wariancie); test sprawdza rotację.
+- [x] 4.6 H1 na `/uslugi/strony-www` wraca do „Strony internetowe dla firm, które pracują na sprzedaż.” (HTML i `.md`).

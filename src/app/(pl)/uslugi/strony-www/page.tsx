@@ -130,7 +130,7 @@ export default function WebsitesPage() {
 
             <PageHero
                 eyebrow="Strony WWW"
-                title={<>Strony internetowe z konkretną rolą <span style={{ color: 'var(--accent)' }}>w sprzedaży.</span></>}
+                title={<>Strony internetowe dla firm, które pracują <span style={{ color: 'var(--accent)' }}>na sprzedaż.</span></>}
                 description="Strona firmowa ma jedno zadanie: doprowadzić właściwą osobę do zapytania. Projektujemy i wdrażamy strony dla firm usługowych i producentów B2B, którzy potrzebują serwisu tłumaczącego ofertę, a nie kolejnej wizytówki. Każdy element ma powód: pierwszy ekran, kolejność sekcji, formularz i sposób pomiaru."
                 cta={{ label: 'Wycena projektu', href: '/kontakt' }}
                 ctaSecondary={{ label: 'Zobacz cennik', href: '/uslugi/tworzenie-stron-www-cennik' }}

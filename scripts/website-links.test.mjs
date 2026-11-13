@@ -79,6 +79,15 @@ test('the link lands right before its heading and leaves the post body intact', 
     }
 });
 
+test('the website anchors rotate instead of repeating one phrase', () => {
+    const anchors = LINKED_POSTS.map((slug) => linksOf(getBlogSeoConfig(slug))[0].text);
+    const counts = anchors.reduce((map, anchor) => map.set(anchor, (map.get(anchor) ?? 0) + 1), new Map());
+    assert.equal(anchors.length, 8);
+    assert.ok(counts.size >= 5, `only ${counts.size} distinct anchors: ${[...counts.keys()].join(' | ')}`);
+    assert.ok(Math.max(...counts.values()) <= 3, `one anchor repeats too often: ${[...counts.entries()].join(', ')}`);
+    for (const anchor of counts.keys()) assert.ok(!/kliknij tutaj|tutaj|więcej/i.test(anchor), anchor);
+});
+
 test('a post that already links the page, or lost its heading, is left alone', () => {
     for (const slug of LINKED_POSTS) {
         const [fix] = getBlogSeoConfig(slug).sections;

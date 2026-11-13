@@ -20,7 +20,7 @@ semantic_keywords:
   - "Core Web Vitals"
 ---
 
-# Strony internetowe z konkretną rolą w sprzedaży.
+# Strony internetowe dla firm, które pracują na sprzedaż.
 
 Strona firmowa ma jedno zadanie: doprowadzić właściwą osobę do zapytania. Projektujemy i wdrażamy strony dla firm usługowych i producentów B2B, którzy potrzebują serwisu tłumaczącego ofertę, a nie kolejnej wizytówki. Każdy element ma powód: pierwszy ekran, kolejność sekcji, formularz i sposób pomiaru.
 
