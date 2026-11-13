@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
-import { CONSENT_BOOTSTRAP_SCRIPT, GTM_ID, gtmLoaderScript, leadSourceForHref, trackLead } from '../src/lib/analytics.ts';
+import { CONSENT_BOOTSTRAP_SCRIPT, GTM_ID, contactMethodForHref, gtmLoaderScript, leadSourceForHref, trackContactClick, trackCtaClick, trackFormLead, trackLead } from '../src/lib/analytics.ts';
 import { canonicalHref, renderInline } from '../src/lib/markdown/portable-text.ts';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
@@ -94,11 +94,68 @@ test('trackLead pushes generate_lead with the source and nothing else', () => {
 test('each form reports a lead only after the send is confirmed', () => {
     const order = (path, confirmed, source) => {
         const code = read(path);
-        const tracked = code.indexOf(`trackLead('${source}')`);
+        const tracked = code.indexOf(`trackFormLead('${source}', '${source}')`);
         assert.ok(tracked > code.indexOf(confirmed) && code.indexOf(confirmed) > -1, path);
     };
     order('src/components/ContactForm.tsx', 'await submission;', 'contact_form');
     order('src/components/LandingLeadForm.tsx', 'if (!response.ok)', 'landing_form');
+});
+
+test('a form lead carries form_name and page_path next to the lead source', () => {
+    const previous = globalThis.window;
+    globalThis.window = { location: { pathname: '/uslugi/audyt-e-commerce' } };
+    try {
+        trackFormLead('landing_form', 'landing_form');
+        assert.deepEqual(window.dataLayer, [
+            {
+                event: 'generate_lead',
+                lead_source: 'landing_form',
+                form_name: 'landing_form',
+                page_path: '/uslugi/audyt-e-commerce',
+            },
+        ]);
+    } finally {
+        globalThis.window = previous;
+    }
+});
+
+test('contact clicks and CTA clicks push their own GA4 events', () => {
+    const previous = globalThis.window;
+    globalThis.window = {};
+    try {
+        trackContactClick('phone');
+        trackContactClick('email');
+        trackCtaClick('Zamów audyt');
+        assert.deepEqual(window.dataLayer, [
+            { event: 'click_contact', method: 'phone' },
+            { event: 'click_contact', method: 'email' },
+            { event: 'cta_click', cta_label: 'Zamów audyt' },
+        ]);
+    } finally {
+        globalThis.window = previous;
+    }
+});
+
+test('a contact href maps to phone or email, other hrefs to nothing', () => {
+    assert.equal(contactMethodForHref('tel:+48570526421'), 'phone');
+    assert.equal(contactMethodForHref('mailto:office@creativetrust.pl'), 'email');
+    assert.equal(contactMethodForHref('/kontakt'), null);
+    assert.equal(contactMethodForHref('#formularz'), null);
+});
+
+test('the site-wide listener reports contact and CTA clicks', () => {
+    const listener = read('src/components/LeadLinkTracking.tsx');
+    assert.match(listener, /import \{[^}]*trackContactClick[^}]*\} from '@\/lib\/analytics'/);
+    assert.match(listener, /trackContactClick\(method\)/);
+    assert.match(listener, /trackCtaClick\(ctaLabel\)/);
+    assert.match(listener, /data-cta-label/);
+});
+
+test('primary CTAs are marked for tracking', () => {
+    assert.match(read('src/components/ui/PageHero.tsx'), /data-cta-label=\{cta\.label\}/);
+    assert.match(read('src/components/LandingBlocks.tsx'), /dataCtaLabel=\{cta\.label\}/);
+    assert.match(read('src/components/CTASection.tsx'), /dataCtaLabel=\{cta\.label\}/);
+    assert.match(read('src/components/ui/NotchedButton.tsx'), /data-cta-label=\{dataCtaLabel\}/);
 });
 
 test('mailto and tel links map to their lead source, other links to none', () => {
