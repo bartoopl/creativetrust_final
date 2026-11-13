@@ -53,15 +53,17 @@ test('get_pricing returns only published prices, or says the service is quoted i
     assert.equal((await tools().get_pricing.execute({})).isError, true);
 });
 
-test('the e-commerce audit and outsourced management are quoted individually, never with a published price', async () => {
-    for (const service of ['audyt-e-commerce', 'zarzadzanie-e-commerce']) {
-        const quoted = parse(await tools().get_pricing.execute({ service }));
-        assert.deepEqual(quoted.prices, []);
-        assert.match(quoted.note, /quoted individually/);
-    }
+test('the e-commerce audit publishes its price, outsourced management stays quoted individually', async () => {
+    const audit = parse(await tools().get_pricing.execute({ service: 'audyt-e-commerce' }));
+    assert.deepEqual(audit.prices.map((p) => p.price), ['3 000 zł netto']);
+    assert.equal(audit.currency, 'PLN');
+    assert.equal(audit.net, true);
+
+    const management = parse(await tools().get_pricing.execute({ service: 'zarzadzanie-e-commerce' }));
+    assert.deepEqual(management.prices, []);
+    assert.match(management.note, /quoted individually/);
+
     for (const rel of [
-        '../src/app/(pl)/uslugi/audyt-e-commerce/page.tsx',
-        '../content/ai/uslugi/audyt-e-commerce.md',
         '../src/app/(pl)/uslugi/zarzadzanie-e-commerce/page.tsx',
         '../content/ai/uslugi/zarzadzanie-e-commerce.md',
         '../src/app/en/services/e-commerce-audit/page.tsx',
@@ -70,6 +72,10 @@ test('the e-commerce audit and outsourced management are quoted individually, ne
         const text = readFileSync(new URL(rel, import.meta.url), 'utf8');
         // Our prices are always net; the lead form's budget brackets (visitor's budget) are not.
         assert.doesNotMatch(text, /\d[\d\s]*zł netto/, `${rel} must not publish a price`);
+    }
+    for (const rel of ['../src/app/(pl)/uslugi/audyt-e-commerce/page.tsx', '../content/ai/uslugi/audyt-e-commerce.md']) {
+        const text = readFileSync(new URL(rel, import.meta.url), 'utf8');
+        assert.match(text, /3 000 zł netto/, `${rel} must publish the audit price`);
     }
 });
 
