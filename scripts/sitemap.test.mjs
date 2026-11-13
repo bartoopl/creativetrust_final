@@ -36,11 +36,11 @@ test('the sitemap lists every static page except the noindex landings', () => {
     assert.deepEqual(listed, pages, 'add new pages to STATIC_ROUTES (or EXCLUDED_ROUTES) in src/lib/sitemap.ts');
 });
 
-test('all 29 service routes are accounted for: listed, or noindex and excluded', () => {
+test('all 30 service routes are accounted for: listed, or noindex and excluded', () => {
     const serviceRoutes = [...STATIC_ROUTES, ...EXCLUDED_ROUTES].filter(
         (route) => route === '/uslugi' || route.startsWith('/uslugi/') || route === '/en/services' || route.startsWith('/en/services/'),
     );
-    assert.equal(serviceRoutes.length, 29);
+    assert.equal(serviceRoutes.length, 30);
     const entries = sitemapEntries(fixture, {});
     const locs = entries.map((entry) => entry.loc);
     for (const route of EXCLUDED_ROUTES) assert.ok(!locs.includes(route), `${route} is noindex and must stay out`);
