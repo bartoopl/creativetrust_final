@@ -33,6 +33,7 @@ export const services: Service[] = [
     { slug: 'zarzadzanie-e-commerce', href: '/uslugi/zarzadzanie-e-commerce', title: 'Zarządzanie e-commerce', description: 'Prowadzenie e-commerce z zewnątrz: plan, marża, zespół, dostawcy i wyniki.', accent: 'Wynik' },
     { slug: 'e-commerce', href: '/uslugi/e-commerce', title: 'Sklepy internetowe', description: 'Projekt i budowa sklepów: headless, migracje i integracje systemów.', accent: 'Skalowanie' },
     { slug: 'strony-www', href: '/uslugi/strony-www', title: 'Strony internetowe', description: 'Strony firmowe, landing pages i portale: UX, SEO i wydajność.', accent: 'Konwersja' },
+    { slug: 'audyt-strony-internetowej', href: '/uslugi/audyt-strony-internetowej', title: 'Audyt strony internetowej', description: 'Treść, konwersja, technika i SEO: raport z priorytetami i plan przebudowy.', accent: 'Diagnoza' },
     { slug: 'marketing-automation', href: '/uslugi/marketing-automation', title: 'Marketing Automation', description: 'SALESmanago, lejki, CRM i personalizacja.', accent: 'Automatyzacja' },
     { slug: 'social-media', href: '/uslugi/social-media', title: 'Social Media', description: 'Strategia, content, kampanie i raportowanie.', accent: 'Widoczność' },
 ];
@@ -98,7 +99,7 @@ export const seoLandings: Landing[] = [
 type Copy = Pick<Service, 'href' | 'title' | 'description' | 'accent'>;
 
 /** English copy of the catalogue (pages under /en/services), keyed by service slug. */
-const servicesEn: Record<Service['slug'], Copy> = {
+const servicesEn: Partial<Record<Service['slug'], Copy>> = {
     'audyt-e-commerce': { href: '/en/services/e-commerce-audit', title: 'E-commerce audit', description: 'Sales, margin, technology and how the store team works. A report and roadmap in 5–7 working days.', accent: 'Diagnosis' },
     'zarzadzanie-e-commerce': { href: '/en/services/e-commerce-management', title: 'E-commerce management', description: 'Running your e-commerce from the outside: plan, margin, team, suppliers and results.', accent: 'Results' },
     'e-commerce': { href: '/en/services/e-commerce', title: 'Online stores', description: 'Designing and building stores: headless, migrations and system integrations.', accent: 'Scale' },
@@ -119,7 +120,10 @@ const landingsEn: Record<Landing['href'], Pick<Landing, 'href' | 'title' | 'desc
 
 /** The catalogue in the visitor's language; slugs stay Polish so both lists join on them. */
 export function servicesFor(locale: 'pl' | 'en'): Service[] {
-    return locale === 'en' ? services.map((s) => ({ ...s, ...servicesEn[s.slug] })) : services;
+    // A service without English copy stays out of the English catalogue (its page is Polish-only).
+    return locale === 'en'
+        ? services.filter((s) => s.slug in servicesEn).map((s) => ({ ...s, ...servicesEn[s.slug] }))
+        : services;
 }
 
 export function landingsFor(locale: 'pl' | 'en'): Landing[] {
@@ -137,6 +141,7 @@ export const publishedPrices: PublishedPrice[] = [
     { service: 'strony-www', name: 'Strona firmowa z CMS', price: 'od 10 000 zł netto', source: '/uslugi/strona-firmowa-cena' },
     { service: 'strony-www', name: 'Serwis rozbudowany', price: 'wycena indywidualna', source: '/uslugi/tworzenie-stron-www-cennik' },
     { service: 'audyt-e-commerce', name: 'Audyt e-commerce', price: '3 000 zł netto', source: '/uslugi/audyt-e-commerce' },
+    { service: 'audyt-strony-internetowej', name: 'Audyt strony internetowej', price: '1 500 zł netto', source: '/uslugi/audyt-strony-internetowej' },
 ];
 
 /** English labels of the published prices; amounts unchanged (net, PLN), source is the English pricing page. */

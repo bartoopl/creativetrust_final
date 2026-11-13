@@ -218,7 +218,8 @@ export default function EcommerceAuditPage() {
                         Audyt e-commerce to analiza sklepu prowadzona z perspektywy osoby, która odpowiada za wynik, a nie za jeden kanał. Szukamy miejsc, w których sklep traci sprzedaż, marżę i czas zespołu, a potem układamy je w kolejności naprawy.
                     </p>
                     <p className="ct-body">
-                        Audyt nie jest listą błędów UX ani przeglądem SEO. Te elementy wchodzą do środka, ale jako środek do wyniku. Decyzja o tym, co robić najpierw, zapada na podstawie wpływu na zysk i kosztu wdrożenia.
+                        Audyt nie jest listą błędów UX ani przeglądem SEO. Te elementy wchodzą do środka, ale jako środek do wyniku. Decyzja o tym, co robić najpierw, zapada na podstawie wpływu na zysk i kosztu wdrożenia. Gdy zamiast sklepu pytanie dotyczy strony firmowej, właściwym krokiem jest{' '}
+                        <Link href="/uslugi/audyt-strony-internetowej" style={linkStyle}>audyt strony internetowej</Link>.
                     </p>
                 </div>
             </Section>

@@ -63,6 +63,9 @@ test('the e-commerce audit publishes its price, outsourced management stays quot
     assert.deepEqual(management.prices, []);
     assert.match(management.note, /quoted individually/);
 
+    const websiteAudit = parse(await tools().get_pricing.execute({ service: 'audyt-strony-internetowej' }));
+    assert.deepEqual(websiteAudit.prices.map((p) => p.price), ['1 500 zł netto']);
+
     for (const rel of [
         '../src/app/(pl)/uslugi/zarzadzanie-e-commerce/page.tsx',
         '../content/ai/uslugi/zarzadzanie-e-commerce.md',

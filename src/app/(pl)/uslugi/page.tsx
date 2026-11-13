@@ -15,14 +15,15 @@ export const metadata: Metadata = {
 
 const leadServices = [
     { num: '01', title: 'Audyt e-commerce', href: '/uslugi/audyt-e-commerce', description: 'Sprzedaż, marża, technologia i praca zespołu. Raport i roadmapa w 5–7 dni roboczych, za stałą kwotę.', tags: ['Raport', 'Roadmapa', '5–7 dni roboczych'] },
-    { num: '02', title: 'Zarządzanie e-commerce', href: '/uslugi/zarzadzanie-e-commerce', description: 'Prowadzimy e-commerce z zewnątrz: plan sprzedaży, marża, zespół, dostawcy i raportowanie wyników.', tags: ['Abonament', 'Plan i marża', 'Jeden zespół'] },
+    { num: '02', title: 'Audyt strony internetowej', href: '/uslugi/audyt-strony-internetowej', description: 'Sprawdzamy, czy strona pracuje na sprzedaż: treść, konwersja, technika i SEO. Raport z priorytetami i plan przebudowy w 5 dni roboczych.', tags: ['Raport', 'Plan przebudowy', '5 dni roboczych'] },
+    { num: '03', title: 'Zarządzanie e-commerce', href: '/uslugi/zarzadzanie-e-commerce', description: 'Prowadzimy e-commerce z zewnątrz: plan sprzedaży, marża, zespół, dostawcy i raportowanie wyników.', tags: ['Abonament', 'Plan i marża', 'Jeden zespół'] },
 ];
 
 const services = [
-    { num: '03', title: 'Sklepy internetowe', href: '/uslugi/e-commerce', description: 'Projektujemy i budujemy sklepy: headless, WooCommerce, Shopify, migracje i integracje z ERP.', tags: ['Headless', 'Migracje', 'Integracje'] },
-    { num: '04', title: 'Strony internetowe', href: '/uslugi/strony-www', description: 'Strony firmowe, landing pages i portale z konkretną rolą w sprzedaży. Szybkie i gotowe pod SEO.', tags: ['Strony firmowe', 'Landing pages', 'Next.js'] },
-    { num: '05', title: 'Marketing Automation', href: '/uslugi/marketing-automation', description: 'SALESmanago i scenariusze, które zarabiają na bazie klientów: koszyki, rekomendacje, reaktywacja.', tags: ['SALESmanago', 'Scenariusze', 'CRM'] },
-    { num: '06', title: 'Social Media', href: '/uslugi/social-media', description: 'Content, kampanie i społeczność spięte z kalendarzem sprzedaży i ofertą.', tags: ['Strategia', 'Content', 'Kampanie'] },
+    { num: '04', title: 'Sklepy internetowe', href: '/uslugi/e-commerce', description: 'Projektujemy i budujemy sklepy: headless, WooCommerce, Shopify, migracje i integracje z ERP.', tags: ['Headless', 'Migracje', 'Integracje'] },
+    { num: '05', title: 'Strony internetowe', href: '/uslugi/strony-www', description: 'Strony firmowe, landing pages i portale z konkretną rolą w sprzedaży. Szybkie i gotowe pod SEO.', tags: ['Strony firmowe', 'Landing pages', 'Next.js'] },
+    { num: '06', title: 'Marketing Automation', href: '/uslugi/marketing-automation', description: 'SALESmanago i scenariusze, które zarabiają na bazie klientów: koszyki, rekomendacje, reaktywacja.', tags: ['SALESmanago', 'Scenariusze', 'CRM'] },
+    { num: '07', title: 'Social Media', href: '/uslugi/social-media', description: 'Content, kampanie i społeczność spięte z kalendarzem sprzedaży i ofertą.', tags: ['Strategia', 'Content', 'Kampanie'] },
 ];
 
 const landingPages = [
@@ -95,8 +96,8 @@ export default function ServicesPage() {
                 }
             />
 
-            <Section id="zakres" eyebrow="Audyt i zarządzanie" title="Dwie usługi, od których zaczyna się większość współprac." border={false}>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <Section id="zakres" eyebrow="Audyt i zarządzanie" title="Trzy usługi, od których zaczyna się większość współprac." border={false}>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {leadServices.map((s) => (
                         <Link key={s.href} href={s.href} className="ct-card-hover flex flex-col gap-6 no-underline" style={{ padding: 'clamp(24px, 3vw, 36px)', background: 'var(--panel)', border: '1px solid var(--line-strong)', borderRadius: 'var(--radius-md)', color: 'var(--text)' }}>
                             <span className="ct-mono" style={{ fontSize: 12, fontWeight: 500, color: 'var(--accent)' }}>{s.num}</span>

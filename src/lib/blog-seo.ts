@@ -614,7 +614,7 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
         ],
     },
     // WEW-20: one contextual link per website-related post to /uslugi/strony-www.
-    // Posts about shops or unrelated topics stay untouched.
+    // Anchors rotate (three exact, five variants) so eight links do not repeat one phrase.
     'jak-stworzyc-skuteczna-strone-internetowa-dla-twojego-biznesu': {
         links: [],
         sections: [
@@ -640,9 +640,9 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                 blocks: [
                     {
                         p: [
-                            'Stronę główną zawsze projektujemy razem z całą witryną, żeby nawigacja i treść trzymały jeden plan: tak wyglądają nasze ',
-                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
-                            '.',
+                            'Stronę główną zawsze projektujemy razem z całą witryną, żeby nawigacja i treść trzymały jeden plan. Zobacz, jak wygląda ',
+                            { text: 'strona internetowa dla firmy', href: '/uslugi/strony-www' },
+                            ' w naszym wykonaniu.',
                         ],
                     },
                 ],
@@ -675,8 +675,8 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                     {
                         p: [
                             'Pozycjonowanie zaczyna się od strony technicznej: ',
-                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
-                            ' oddajemy z semantyczną strukturą, danymi i szybkością gotową pod SEO.',
+                            { text: 'projekt strony internetowej dla firmy', href: '/uslugi/strony-www' },
+                            ' powinien od początku uwzględniać strukturę, dane i szybkość.',
                         ],
                     },
                 ],
@@ -692,7 +692,7 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                     {
                         p: [
                             'Cały ten zakres prowadzimy jako jedną usługę: ',
-                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
+                            { text: 'tworzenie stron internetowych dla firm', href: '/uslugi/strony-www' },
                             ' od briefu do startu i rozwoju.',
                         ],
                     },
@@ -708,9 +708,9 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                 blocks: [
                     {
                         p: [
-                            'Page builder nie zwalnia z myślenia o wydajności i strukturze: nasze ',
-                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
-                            ' projektujemy tak, żeby były szybkie i łatwe w edycji.',
+                            'Page builder nie zwalnia z myślenia o wydajności i strukturze: ',
+                            { text: 'dobra strona firmowa', href: '/uslugi/strony-www' },
+                            ' to taka, która ładuje się szybko i daje się łatwo edytować.',
                         ],
                     },
                 ],
@@ -725,8 +725,8 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                 blocks: [
                     {
                         p: [
-                            'Nawigację projektujemy razem z architekturą treści, więc mega menu nie żyje własnym życiem: zobacz nasze ',
-                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
+                            'Nawigację projektujemy razem z architekturą treści, więc mega menu nie żyje własnym życiem. Zobacz ',
+                            { text: 'strony internetowe, które sprzedają', href: '/uslugi/strony-www' },
                             '.',
                         ],
                     },
