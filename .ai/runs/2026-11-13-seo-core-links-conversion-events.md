@@ -42,14 +42,14 @@ Blog generuje 87% wyświetleń w GSC, a strony oferty 579 z 12 571. Wpisy mają 
 
 ### Phase 1: Eventy GA4
 
-- [ ] 1.1 Funkcje eventów w `analytics.ts`
-- [ ] 1.2 Podpięcie formularzy, kliknięć kontaktowych i CTA
+- [x] 1.1 Funkcje eventów w `analytics.ts` — 3eac917
+- [x] 1.2 Podpięcie formularzy, kliknięć kontaktowych i CTA — 3eac917
 
 ### Phase 2: Linki z wpisów
 
-- [ ] 2.1 Konfiguracje `blog-seo.ts` dla 8 wpisów
+- [x] 2.1 Konfiguracje `blog-seo.ts` dla 8 wpisów — 3054427
 
 ### Phase 3: Testy i bramka
 
-- [ ] 3.1 Testy linków i eventów
-- [ ] 3.2 `npm test`, `tsc --noEmit`, `npm run build`
+- [x] 3.1 Testy linków i eventów — 25802b1
+- [x] 3.2 `npm test`, `tsc --noEmit`, `npm run build`
