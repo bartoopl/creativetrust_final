@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import {
+    RETIRED_BLOG_POSTS,
     RETIRED_CONTENT_PAGES,
     RETIRED_PATHS,
     RETIRED_SERVICE_PAGES,
@@ -66,10 +67,47 @@ test('rewriteRetiredHref leaves live, external and look-alike links alone', () =
     }
 });
 
-test('RETIRED_PATHS merges both maps without overlap', () => {
-    assert.equal(Object.keys(RETIRED_PATHS).length, Object.keys(RETIRED_SERVICE_PAGES).length + Object.keys(RETIRED_CONTENT_PAGES).length);
-    for (const [source, target] of Object.entries({ ...RETIRED_SERVICE_PAGES, ...RETIRED_CONTENT_PAGES })) {
+test('RETIRED_PATHS merges every map without overlap', () => {
+    assert.equal(
+        Object.keys(RETIRED_PATHS).length,
+        Object.keys(RETIRED_SERVICE_PAGES).length + Object.keys(RETIRED_CONTENT_PAGES).length + Object.keys(RETIRED_BLOG_POSTS).length,
+    );
+    for (const [source, target] of Object.entries({ ...RETIRED_SERVICE_PAGES, ...RETIRED_CONTENT_PAGES, ...RETIRED_BLOG_POSTS })) {
         assert.equal(RETIRED_PATHS[source], target);
+    }
+});
+
+test('consolidated blog posts map to the five live posts, never to another redirect', () => {
+    // Stage 1 of the blog consolidation (2026-11-13): eight posts with no search
+    // history of their own fold into a longer one, 301, no chains.
+    const consolidated = {
+        '/blog/jak-stworzyc-skuteczna-strone-internetowa-dla-twojego-biznesu':
+            '/blog/tworzenie-stron-internetowych-przewodnik-od-a-do-z-dla-kreatywnych-przedsiebiorcow',
+        '/blog/skuteczna-strona-internetowa-przyciagajaca-klientow-7-krokow-do-sukcesu-twojego-biznesu-online':
+            '/blog/tworzenie-stron-internetowych-przewodnik-od-a-do-z-dla-kreatywnych-przedsiebiorcow',
+        '/blog/kompleksowa-usluga-budowy-strony-www-klucz-do-sukcesu-twojej-firmy':
+            '/blog/tworzenie-stron-internetowych-przewodnik-od-a-do-z-dla-kreatywnych-przedsiebiorcow',
+        '/blog/jaka-powinna-byc-i-ile-kosztuje-strona-internetowa': '/blog/ile-kosztuje-strona-internetowa-dla-firmy',
+        '/blog/jak-uniknac-porzucania-koszykow-podczas-platnosci-online-6-sposobow-poprawiajacych-konwersje':
+            '/blog/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec',
+        '/blog/checkout-ux-bledy-ktore-obnizaja-konwersje': '/blog/dlaczego-klienci-porzucaja-koszyki-i-jak-temu-zapobiec',
+        '/blog/kiedy-woocommerce-headless-ma-sens': '/blog/headless-woocommerce-next-js',
+        '/blog/core-web-vitals-a-konwersja': '/blog/core-web-vitals-w-ecommerce',
+    };
+    assert.equal(Object.keys(consolidated).length, 8);
+    for (const [source, target] of Object.entries(consolidated)) {
+        assert.equal(RETIRED_BLOG_POSTS[source], target);
+    }
+    for (const [source, target] of Object.entries(RETIRED_BLOG_POSTS)) {
+        assert.ok(!(target in RETIRED_BLOG_POSTS), `${target} is a redirect itself (chain)`);
+        assert.ok(!(target in RETIRED_PATHS), `${target} is retired`);
+        assert.equal(rewriteRetiredHref(source), target);
+        assert.equal(rewriteRetiredHref(`${source}/`), target);
+        assert.equal(rewriteRetiredHref(`https://www.creativetrust.pl${source}?utm=x#h`), `${target}?utm=x#h`);
+    }
+    // The file next.config.ts and the sitemap/llms.txt filters read stays the single source.
+    for (const [source, target] of Object.entries(RETIRED_BLOG_POSTS)) {
+        assert.equal(retiredBlogPosts[source.replace('/blog/', '')], target);
     }
 });
 

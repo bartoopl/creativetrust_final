@@ -1,14 +1,17 @@
 /**
- * Retired URLs mapped to the closest live page, in two maps:
+ * Retired URLs mapped to the closest live page, in three maps:
  * - RETIRED_SERVICE_PAGES: service pages removed from the current offer;
  * - RETIRED_CONTENT_PAGES: old WordPress addresses (root-level post slugs,
  *   /e-commerce/ category paths, /portfolio/item/ projects) still linked from
- *   post bodies, external sites and old search results.
- * Both, merged as RETIRED_PATHS, drive the permanent redirects in next.config.ts
- * (external backlinks) and the href rewrite in CMS post bodies (internal links),
- * so an internal link never points at a redirect. Plain data, no imports, so
- * `node --test` can load it.
+ *   post bodies, external sites and old search results;
+ * - RETIRED_BLOG_POSTS: blog slugs consolidated into a longer post, derived from
+ *   retired-blog-posts.json (the same file next.config.ts redirects and the
+ *   sitemap/llms.txt filters read, so the maps cannot drift).
+ * All of them, merged as RETIRED_PATHS, drive the permanent redirects in
+ * next.config.ts (external backlinks) and the href rewrite in CMS post bodies
+ * (internal links), so an internal link never points at a redirect.
  */
+import retiredBlogPosts from '../../retired-blog-posts.json' with { type: 'json' };
 export const RETIRED_SERVICE_PAGES: Readonly<Record<string, string>> = {
     // Only Google Ads offer left on the site.
     '/uslugi/performance-marketing/google-ads': '/uslugi/audyt-google-ads',
@@ -34,10 +37,16 @@ export const RETIRED_CONTENT_PAGES: Readonly<Record<string, string>> = {
     '/portfolio/item/sklep-sulphur': '/portfolio/sklep-sulphur-com-pl',
 };
 
-/** Every retired path (service and content pages) → its live target. */
+/** Blog slugs consolidated into another post: `/blog/<old>` → the post that stays live. */
+export const RETIRED_BLOG_POSTS: Readonly<Record<string, string>> = Object.fromEntries(
+    Object.entries(retiredBlogPosts as Record<string, string>).map(([slug, destination]) => [`/blog/${slug}`, destination]),
+);
+
+/** Every retired path (service pages, content pages and consolidated posts) → its live target. */
 export const RETIRED_PATHS: Readonly<Record<string, string>> = {
     ...RETIRED_SERVICE_PAGES,
     ...RETIRED_CONTENT_PAGES,
+    ...RETIRED_BLOG_POSTS,
 };
 
 const SITE_ORIGIN = /^https?:\/\/(?:www\.)?creativetrust\.pl(?=\/)/i;

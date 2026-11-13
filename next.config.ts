@@ -52,10 +52,12 @@ const nextConfig: NextConfig = {
                 destination: '/blog/psychologia-kolorow-w-ui-ux-jakie-znaczenie-maja-kolory-na-stronie-internetowej',
                 permanent: true,
             },
-            // Retired posts (e.g. outdated 2023 prices) → the current page, HTML and Markdown twin.
+            // Retired posts (outdated 2023 prices, duplicates consolidated into a longer
+            // post) → the current page, HTML and Markdown twin. 301, not 308: search
+            // engines must transfer the history, and the permanent flag emits 308.
             ...Object.entries(retiredBlogPosts as Record<string, string>).flatMap(([slug, destination]) => [
-                { source: `/blog/${slug}`, destination, permanent: true },
-                { source: `/blog/${slug}.md`, destination: `${destination}.md`, permanent: true },
+                { source: `/blog/${slug}`, destination, statusCode: 301 },
+                { source: `/blog/${slug}.md`, destination: `${destination}.md`, statusCode: 301 },
             ]),
         ];
     },

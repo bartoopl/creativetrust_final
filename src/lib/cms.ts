@@ -5,7 +5,7 @@ import config from '@payload-config';
 import { getPayload, type Where } from 'payload';
 import { applyBlogPostFixes } from './blog-seo';
 import { applyKnowledgeBaseSeo } from './knowledge-base-seo';
-import { rewriteRetiredLinks } from './retired-links';
+import { RETIRED_BLOG_POSTS, rewriteRetiredLinks } from './retired-links';
 import { lexicalToPortableText, type LexicalState, type MediaDoc } from './richtext/lexical';
 import type { PortableTextBlock } from './markdown/portable-text';
 import { imageVariantUrl, type ImageSource } from './media';
@@ -255,7 +255,12 @@ export async function getKnowledgeBaseLetters(): Promise<string[]> {
 
 async function readBlogPosts() {
     const { docs } = await (await payload()).find({ collection: 'posts', where: PUBLISHED, sort: NEWEST_FIRST, depth: 2, limit: 0 });
-    return docs.map(postCard);
+    // Consolidated posts keep their document and answer 301 (next.config.ts); listing
+    // them would put a redirecting URL in the index, categories, author pages and
+    // "related" boxes, which the redirect is there to prevent.
+    return docs
+        .filter((doc) => !(`/blog/${doc.slug}` in RETIRED_BLOG_POSTS))
+        .map(postCard);
 }
 
 export const getBlogPosts = cached('getBlogPosts', readBlogPosts);
@@ -285,7 +290,7 @@ export const getBlogPost = cached('getBlogPost', async (postSlug: string) => {
                   depth: 1,
                   limit: 3,
               })
-          ).docs
+          ).docs.filter((relatedDoc) => !(`/blog/${relatedDoc.slug}` in RETIRED_BLOG_POSTS))
         : [];
 
     const card = postCard(doc);
