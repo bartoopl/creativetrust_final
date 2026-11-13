@@ -58,3 +58,17 @@ Trzy strony www mają różne frazy główne i różne title/description, a wpis
 ### Phase 3: Bramka
 
 - [x] 3.1 Testy, typy i build
+
+## Druga tura: copy www (2026-11-13)
+
+- Nowa strona `/uslugi/audyt-strony-internetowej`: część 1 copy, cena 1 500 zł netto, czas 5 dni roboczych, odliczenie od przebudowy, 6 FAQ, Service + BreadcrumbList + FAQPage, wpis w katalogu usług, sitemapie, `publishedPrices` i `.md`.
+- `/uslugi/strony-www`: rozbudowa wg części 2 (segment, różnica wobec wizytówki, Astro i Next.js, proces, standard, technologie, 6 FAQ), H1 wraca do „Strony internetowe z konkretną rolą w sprzedaży.”.
+- Linki krzyżowe: audyt e-commerce → audyt strony; audyt strony → audyt e-commerce i `/uslugi/strony-www`.
+- `.md`: H1 i treść zgodne z HTML dla czterech stron.
+
+### Phase 4: Copy www
+
+- [x] 4.1 Nowa strona audytu z ceną i schema — cd1dd55
+- [x] 4.2 Rozbudowa `/uslugi/strony-www` — 0dc61b3
+- [x] 4.3 Linki krzyżowe audytów — 3ee072a
+- [x] 4.4 `.md` zgodne z HTML, testy, typy, build
