@@ -8,8 +8,9 @@
  *   retired-blog-posts.json (the same file next.config.ts redirects and the
  *   sitemap/llms.txt filters read, so the maps cannot drift).
  * All of them, merged as RETIRED_PATHS, drive the permanent redirects in
- * next.config.ts (external backlinks) and the href rewrite in CMS post bodies
- * (internal links), so an internal link never points at a redirect.
+ * next.config.ts (external backlinks), the proxy's single-hop canonical redirect
+ * (host + trailing slash + alias at once) and the href rewrite in CMS post
+ * bodies (internal links), so an internal link never points at a redirect.
  */
 import retiredBlogPosts from '../../retired-blog-posts.json' with { type: 'json' };
 export const RETIRED_SERVICE_PAGES: Readonly<Record<string, string>> = {

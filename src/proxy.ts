@@ -1,4 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
+import { canonicalRedirectUrl } from '@/lib/canonical-redirects';
+import { RETIRED_PATHS } from '@/lib/retired-links';
 import { handlerPathFor, markdownTargetFor, markdownUrlFor, prefersMarkdown, routeFromMarkdownUrl } from '@/lib/markdown/pages';
 
 /**
@@ -9,6 +11,19 @@ import { handlerPathFor, markdownTargetFor, markdownUrlFor, prefersMarkdown, rou
  */
 export function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
+
+    // Host, trailing slash and legacy alias in one 301 (GSC 2026-11-14: the
+    // three separate fixes used to chain). Runs before the Markdown rewrites so a
+    // redirect never lands on a rewritten handler.
+    const canonical = canonicalRedirectUrl({
+        pathname,
+        search: request.nextUrl.search,
+        host: request.headers.get('host'),
+        forwardedProto: request.headers.get('x-forwarded-proto'),
+        protocol: request.nextUrl.protocol,
+        aliases: RETIRED_PATHS,
+    });
+    if (canonical) return NextResponse.redirect(canonical, 301);
 
     const mdRoute = routeFromMarkdownUrl(pathname);
     if (mdRoute) {

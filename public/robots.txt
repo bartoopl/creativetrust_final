@@ -2,6 +2,9 @@
 User-agent: *
 Allow: /
 
+# Cloudflare injects /cdn-cgi/ links (email protection) into the HTML; they 404.
+Disallow: /cdn-cgi/
+
 # AI access policy
 Content-Signal: search=yes,ai-input=yes,ai-train=no
 

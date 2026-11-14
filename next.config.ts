@@ -4,12 +4,23 @@ import { withPayload } from '@payloadcms/next/withPayload';
 // sitemap): AI answers quote outdated 2023 prices and trends.
 import retiredBlogPosts from './retired-blog-posts.json';
 import { RETIRED_CONTENT_PAGES, RETIRED_SERVICE_PAGES } from './src/lib/retired-links';
-import { apexRedirect } from './src/lib/host-redirects';
+import { CANONICAL_ORIGIN } from './src/lib/canonical-redirects';
+
+/**
+ * A redirect rule only rewrites the path it matched, so a relative destination
+ * would drop the visitor on whatever host asked. Absolute destinations make one
+ * rule finish the job even on the bare domain.
+ */
+const absolute = (destination: string) => `${CANONICAL_ORIGIN}${destination}`;
 
 const nextConfig: NextConfig = {
     poweredByHeader: false,
     // Self-contained server for the Docker image (Dockerfile).
     output: 'standalone',
+    // The proxy strips a trailing slash with a 301 (GSC counts a 308 as a separate
+    // redirect and reports chains). Next's own 308 would run before the proxy, so
+    // it is turned off; `/admin` and `/api` keep an explicit rule below.
+    skipTrailingSlashRedirect: true,
     images: {
         // CMS uploads are served by Payload under /api/media/file (absolute URLs on the site).
         remotePatterns: [{ protocol: 'https', hostname: 'www.creativetrust.pl', pathname: '/api/media/file/**' }],
@@ -18,47 +29,53 @@ const nextConfig: NextConfig = {
     // Two root layouts ((pl) and en): unmatched URLs render src/app/global-not-found.tsx.
     experimental: { globalNotFound: true },
     async redirects() {
+        // The bare domain, the trailing slash and legacy aliases are settled by the
+        // proxy in one 301 (src/lib/canonical-redirects.ts): rules here run first
+        // and would each add a hop to the chain.
         return [
-            // Bare domain → https://www in one 301 (WEW-17).
-            apexRedirect,
             // Retired service pages → the closest live page (the same map rewrites post bodies).
-            ...Object.entries(RETIRED_SERVICE_PAGES).map(([source, destination]) => ({ source, destination, permanent: true })),
+            ...Object.entries(RETIRED_SERVICE_PAGES).map(([source, destination]) => ({ source, destination: absolute(destination), permanent: true })),
             // Old WordPress addresses: one 301 for each, with and without the trailing
             // slash, since old Google results and external links use both.
             ...Object.entries(RETIRED_CONTENT_PAGES).flatMap(([source, destination]) => [
-                { source, destination, statusCode: 301 },
-                { source: `${source}/`, destination, statusCode: 301 },
+                { source, destination: absolute(destination), statusCode: 301 },
+                { source: `${source}/`, destination: absolute(destination), statusCode: 301 },
             ]),
             // „Konsulting e-commerce” became the e-commerce audit (HTML and Markdown twin).
             {
                 source: '/uslugi/konsulting-e-commerce',
-                destination: '/uslugi/audyt-e-commerce',
+                destination: absolute('/uslugi/audyt-e-commerce'),
                 permanent: true,
             },
             {
                 source: '/uslugi/konsulting-e-commerce.md',
-                destination: '/uslugi/audyt-e-commerce.md',
+                destination: absolute('/uslugi/audyt-e-commerce.md'),
                 permanent: true,
             },
             // The English consulting page became the e-commerce audit.
             {
                 source: '/en/services/e-commerce-consulting',
-                destination: '/en/services/e-commerce-audit',
+                destination: absolute('/en/services/e-commerce-audit'),
                 permanent: true,
             },
             // Managed as a redirect document in Sanity until the move to Payload.
             {
                 source: '/psychologia-kolorow-w-ui-ux-jakie-znaczenie-maja-kolory-na-stronie-internetowej',
-                destination: '/blog/psychologia-kolorow-w-ui-ux-jakie-znaczenie-maja-kolory-na-stronie-internetowej',
+                destination: absolute('/blog/psychologia-kolorow-w-ui-ux-jakie-znaczenie-maja-kolory-na-stronie-internetowej'),
                 permanent: true,
             },
             // Retired posts (outdated 2023 prices, duplicates consolidated into a longer
             // post) → the current page, HTML and Markdown twin. 301, not 308: search
             // engines must transfer the history, and the permanent flag emits 308.
             ...Object.entries(retiredBlogPosts as Record<string, string>).flatMap(([slug, destination]) => [
-                { source: `/blog/${slug}`, destination, statusCode: 301 },
-                { source: `/blog/${slug}.md`, destination: `${destination}.md`, statusCode: 301 },
+                { source: `/blog/${slug}`, destination: absolute(destination), statusCode: 301 },
+                { source: `/blog/${slug}.md`, destination: absolute(`${destination}.md`), statusCode: 301 },
             ]),
+            // The proxy handles the slash of pages; the admin panel and the API are
+            // outside its matcher, and an API redirect keeps its method with 308.
+            { source: '/admin/', destination: '/admin', statusCode: 301 },
+            { source: '/admin/:path*/', destination: '/admin/:path*', statusCode: 301 },
+            { source: '/api/:path*/', destination: '/api/:path*', statusCode: 308 },
         ];
     },
     async headers() {
