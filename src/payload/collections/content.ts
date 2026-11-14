@@ -129,6 +129,15 @@ export const PortfolioProjects: CollectionConfig = {
     defaultSort: '-publishedAt',
     fields: [
         { name: 'title', label: 'Nazwa projektu', type: 'text', required: true },
+        {
+            name: 'seoTitle',
+            label: 'Tytuł w Google',
+            type: 'text',
+            maxLength: 60,
+            admin: {
+                description: 'Opcjonalny. Bez marki i bez „| Portfolio” — system dokleja sam. Puste = tytuł składany z nazwy projektu i klienta.',
+            },
+        },
         slugField(),
         publishedAt(false),
         { name: 'client', label: 'Klient', type: 'text', required: true },

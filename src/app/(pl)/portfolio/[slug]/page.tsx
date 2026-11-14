@@ -11,6 +11,8 @@ import { Project, ImageWithCaption, Technology } from '@/types';
 import { SITE_URL, buildBreadcrumbSchema, buildCreativeWorkSchema } from '@/lib/schema';
 import { portableTextToPlainText, type PortableTextBlock } from '@/lib/markdown/portable-text';
 import { projectCategories, projectSummary, projectTechnologies } from '@/lib/markdown/portfolio';
+import { servicesForCategories } from '@/lib/portfolio-services';
+import { portfolioPageTitle } from '@/lib/portfolio-title';
 
 // Rendered on request from cached CMS data (src/lib/cms.ts); saving in the
 // admin refreshes it immediately, otherwise it is re-read hourly.
@@ -39,9 +41,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     }
 
     const url = `${SITE_URL}/portfolio/${slug}`;
-    const name = project.title.replace(/\s+/g, ' ').trim();
-    const client = project.client?.replace(/\s+/g, ' ').trim();
-    const title = client && client.toLowerCase() !== name.toLowerCase() ? `${name} — realizacja dla ${client}` : `${name} — realizacja`;
+    // `seoTitle` wins when an editor set one; otherwise the previous formula.
+    const title = portfolioPageTitle(project);
     const description = summaryOf(project);
     const image = hasAsset(project.mainImage) ? urlFor(project.mainImage).width(1200).height(630).fit('max').url() : undefined;
 
@@ -138,6 +139,8 @@ export default async function ProjectPage({ params }: { params: Params }) {
 
     const moreProjects = await loadMoreProjects(slug);
     const categoryNames = (project.categories ?? []).map((category) => category.title);
+    // One link per mapped service category, so the case study passes value to /uslugi.
+    const relatedServices = servicesForCategories((project.categories ?? []).map((category) => category.slug?.current));
     const year = project.publishedAt ? new Date(project.publishedAt).getFullYear() : null;
 
     return (
@@ -204,6 +207,21 @@ export default async function ProjectPage({ params }: { params: Params }) {
                                             </li>
                                         ))}
                                     </ol>
+                                </div>
+                            )}
+
+                            {relatedServices.length > 0 && (
+                                <div style={{ maxWidth: 720 }}>
+                                    <h2 style={{ margin: '0 0 16px', fontSize: 'clamp(22px, 2.4vw, 28px)', fontWeight: 500, letterSpacing: '-0.02em' }}>Powiązane usługi</h2>
+                                    <ul className="flex flex-col gap-1" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                                        {relatedServices.map((service) => (
+                                            <li key={service.href}>
+                                                <Link href={service.href} className="ct-contact-link" style={{ fontSize: 16 }}>
+                                                    {service.label}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
                             )}
                         </div>

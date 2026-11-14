@@ -400,6 +400,10 @@ export interface PortfolioProject {
   id: number;
   title: string;
   /**
+   * Opcjonalny. Bez marki i bez „| Portfolio” — system dokleja sam. Puste = tytuł składany z nazwy projektu i klienta.
+   */
+  seoTitle?: string | null;
+  /**
    * Część adresu strony. Zmiana slugu opublikowanej strony zmienia jej URL — dodaj wtedy przekierowanie.
    */
   slug: string;
@@ -773,6 +777,7 @@ export interface KnowledgeBaseSelect<T extends boolean = true> {
  */
 export interface PortfolioProjectsSelect<T extends boolean = true> {
   title?: T;
+  seoTitle?: T;
   slug?: T;
   publishedAt?: T;
   client?: T;

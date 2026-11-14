@@ -93,6 +93,7 @@ function projectCard(doc: Doc) {
     return {
         _id: String(doc.id),
         title: doc.title,
+        seoTitle: doc.seoTitle ?? null,
         slug: slug(doc),
         client: doc.client,
         mainImage: toImage(doc.mainImage),

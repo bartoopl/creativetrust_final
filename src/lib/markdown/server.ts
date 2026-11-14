@@ -10,7 +10,8 @@ import type { LlmsArticle, LlmsPage } from './llms';
 import { articleBase, contentFileFor, markdownPages, markdownUrlFor, type ArticleKind, type MarkdownPage } from './pages';
 import retiredBlogPosts from '../../../retired-blog-posts.json';
 import { portableTextToMarkdown, portableTextToPlainText, type PortableTextBlock } from './portable-text';
-import { portfolioFrontmatter, portfolioMarkdown, projectSummary, type PortfolioProjectDocument } from './portfolio';
+import { portfolioFrontmatter, portfolioMarkdown, projectCategorySlugs, projectSummary, type PortfolioProjectDocument } from './portfolio';
+import { servicesForCategories } from '@/lib/portfolio-services';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'ai');
 const CMS_TIMEOUT_MS = 4000;
@@ -134,6 +135,7 @@ export async function getPortfolioMarkdown(slug: string): Promise<string | null>
         frontmatter: serializeFrontmatter(portfolioFrontmatter(doc, canonical, summary)),
         descriptionMarkdown,
         mainImageUrl: doc.mainImage ? imageUrl(doc.mainImage) : null,
+        services: servicesForCategories(projectCategorySlugs(doc)),
     });
 }
 
