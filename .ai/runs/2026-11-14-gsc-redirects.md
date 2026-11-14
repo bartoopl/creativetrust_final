@@ -52,14 +52,14 @@ Next dokłada własną regułę ukośnika (`/:path+/` → `/:path+`, **308**, `p
 
 ### Phase 1: Canonicalization
 
-- [ ] 1.1 Moduł `canonical-redirects.ts` (host + ukośnik + alias w jednym)
-- [ ] 1.2 Proxy + `skipTrailingSlashRedirect`, absolutne cele w `next.config.ts`
-- [ ] 1.3 Legacy: `/home`, panel klienta, branding
+- [x] 1.1 — f0c406c Moduł `canonical-redirects.ts` (host + ukośnik + alias w jednym)
+- [x] 1.2 — f0c406c Proxy + `skipTrailingSlashRedirect`, absolutne cele w `next.config.ts`
+- [x] 1.3 — f0c406c Legacy: `/home`, panel klienta, branding
 
 ### Phase 2: robots.txt
 
-- [ ] 2.1 `Disallow: /cdn-cgi/`
+- [x] 2.1 — f0c406c `Disallow: /cdn-cgi/`
 
 ### Phase 3: Bramka
 
-- [ ] 3.1 Testy jednostkowe, `check-redirects.mjs`, curl -I na lokalnym buildzie
+- [x] 3.1 — f0c406c Testy jednostkowe, `check-redirects.mjs`, curl -I na lokalnym buildzie
