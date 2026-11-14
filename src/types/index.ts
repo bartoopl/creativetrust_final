@@ -4,6 +4,8 @@ import type { PortableTextBlock } from '@/lib/markdown/portable-text';
 export interface Project {
     _id: string;
     title: string;
+    /** Optional Google title, without the brand; set in the CMS. */
+    seoTitle?: string | null;
     slug: { current: string };
     client: string;
     mainImage: any;

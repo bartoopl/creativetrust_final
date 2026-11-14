@@ -10,7 +10,7 @@ export interface PortfolioProjectDocument {
     client?: string | null;
     projectUrl?: string | null;
     scopeOfWork?: string[] | null;
-    categories?: Array<{ title?: string | null } | null> | null;
+    categories?: Array<{ title?: string | null; slug?: { current?: string | null } | string | null } | null> | null;
     technologies?: Array<{ title?: string | null } | null> | null;
     publishedAt?: string | null;
     _updatedAt?: string | null;
@@ -22,6 +22,14 @@ const isoDate = (value?: string | null) => (value && !Number.isNaN(Date.parse(va
 
 export function projectCategories(doc: PortfolioProjectDocument): string[] {
     return (doc.categories ?? []).map((c) => clean(c?.title)).filter((c): c is string => Boolean(c));
+}
+
+/** Category slugs, for the related-services block (`category.slug.current` or a plain slug). */
+export function projectCategorySlugs(doc: PortfolioProjectDocument): string[] {
+    return (doc.categories ?? [])
+        .map((c) => (typeof c?.slug === 'string' ? c.slug : c?.slug?.current))
+        .map((slug) => clean(slug))
+        .filter((slug): slug is string => Boolean(slug));
 }
 
 export function projectTechnologies(doc: PortfolioProjectDocument): string[] {
@@ -88,6 +96,8 @@ export interface PortfolioMarkdownInput {
     descriptionMarkdown?: string;
     /** Absolute URL of the main image. */
     mainImageUrl?: string | null;
+    /** Related service pages, mapped from the categories by the caller. */
+    services?: Array<{ href: string; label: string }>;
 }
 
 /** Description headings are demoted below the document's `##` sections. */
@@ -104,7 +114,7 @@ function nestUnder(markdown: string, minLevel: number): string {
         .join('\n');
 }
 
-export function portfolioMarkdown({ doc, canonical, frontmatter, descriptionMarkdown, mainImageUrl }: PortfolioMarkdownInput): string {
+export function portfolioMarkdown({ doc, canonical, frontmatter, descriptionMarkdown, mainImageUrl, services = [] }: PortfolioMarkdownInput): string {
     const title = clean(doc.title) ?? 'Projekt';
     const client = clean(doc.client);
     const categories = projectCategories(doc);
@@ -130,6 +140,7 @@ export function portfolioMarkdown({ doc, canonical, frontmatter, descriptionMark
         `\n## Informacje o projekcie\n\n${facts.join('\n')}`,
         description ? `\n## Opis projektu\n\n${nestUnder(description, 3)}` : '',
         scope.length ? `\n## Zakres prac\n\n${scope.map((item) => `- ${item}`).join('\n')}` : '',
+        services.length ? `\n## Powiązane usługi\n\n${services.map((service) => `- [${service.label}](${service.href})`).join('\n')}` : '',
         `\n---\n\nWersja HTML: ${canonical}\nWszystkie realizacje: https://www.creativetrust.pl/llms.txt\n`,
     ];
     return sections.filter(Boolean).join('\n');
