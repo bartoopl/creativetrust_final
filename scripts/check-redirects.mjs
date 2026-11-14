@@ -1,26 +1,25 @@
 #!/usr/bin/env node
 /**
- * Post-deploy check for the retired URLs in RETIRED_PATHS.
+ * Post-deploy check for every redirect the site owns.
  *
- * For every pair it requests the source and the source with a trailing slash,
- * follows the redirect chain and asserts that the chain ends on the mapped
- * target with 200. Old WordPress addresses must answer with 301; retired
- * service pages use `permanent: true`, which Next.js emits as 308, so those
- * accept either permanent code. The site normalises a trailing slash with a
- * 308 before `redirects()` runs, hence the chain check instead of a single-hop
- * check on that variant.
+ * GSC (2026-11-14) reported chains and 404s, so this script now demands the
+ * opposite of a chain: for each source it tries four variants (canonical host
+ * and bare domain, with and without the trailing slash) and expects **exactly
+ * one** redirect, a 301, straight to the mapped target, then 200.
  *
  * Usage: node scripts/check-redirects.mjs
  *        BASE_URL=http://localhost:3000 node scripts/check-redirects.mjs
  * No tokens needed. Exits 1 on the first summary with any failed pair.
  */
-import { RETIRED_CONTENT_PAGES, RETIRED_PATHS } from '../src/lib/retired-links.ts';
+import { LEGACY_REDIRECTS } from '../src/lib/canonical-redirects.ts';
+import { RETIRED_PATHS } from '../src/lib/retired-links.ts';
 
 const BASE_URL = (process.env.BASE_URL ?? 'https://www.creativetrust.pl').replace(/\/+$/, '');
+const APEX_URL = BASE_URL.replace('://www.', '://');
 const MAX_HOPS = 5;
 const TIMEOUT_MS = 20_000;
 
-const absolute = (path) => new URL(path, `${BASE_URL}/`);
+const absolute = (base, path) => new URL(path, `${base}/`);
 
 async function hop(url) {
     const res = await fetch(url, {
@@ -29,17 +28,13 @@ async function hop(url) {
         headers: { 'user-agent': 'creativetrust-redirect-check/1.0' },
     });
     await res.body?.cancel();
-    return {
-        status: res.status,
-        location: res.headers.get('location'),
-        url: res.url || url,
-    };
+    return { status: res.status, location: res.headers.get('location'), url: res.url || url };
 }
 
 /** Follows redirects and returns every status plus the final URL. */
 async function trace(path) {
     const chain = [];
-    let url = absolute(path).toString();
+    let url = path.toString();
 
     for (let i = 0; i <= MAX_HOPS; i += 1) {
         const res = await hop(url);
@@ -51,47 +46,45 @@ async function trace(path) {
         return { chain, finalUrl: url, finalPath: new URL(url).pathname, finalStatus: res.status };
     }
 
-    return { chain, finalUrl: url, finalPath: new URL(url).pathname, finalStatus: chain.at(-1), tooManyHops: true };
+    return { chain, finalPath: new URL(url).pathname, finalStatus: chain.at(-1), tooManyHops: true };
 }
 
-function check(variant, traceResult, expectedTarget, requires301) {
-    const permanent = requires301 ? [301] : [301, 308];
+/** Exactly one 301, and it lands on the expected path. */
+function check(traceResult, expectedTarget) {
     const problems = [];
+    const redirects = traceResult.chain.filter((status) => status >= 300 && status < 400);
     if (traceResult.tooManyHops) problems.push(`more than ${MAX_HOPS} redirects`);
     if (traceResult.finalStatus !== 200) problems.push(`final status ${traceResult.finalStatus}`);
     if (traceResult.finalPath !== expectedTarget) problems.push(`ended at ${traceResult.finalPath}, expected ${expectedTarget}`);
-    if (!traceResult.chain.some((status) => permanent.includes(status))) {
-        problems.push(`no ${permanent.join('/')} in the chain`);
-    }
-    if (variant === '' && !permanent.includes(traceResult.chain[0])) {
-        problems.push(`first hop ${traceResult.chain[0]}, expected ${permanent.join(' or ')}`);
-    }
-    if (traceResult.chain.slice(0, -1).some((status) => status !== 301 && status !== 308)) {
-        problems.push(`unexpected redirect status in ${traceResult.chain.join(' → ')}`);
-    }
+    if (redirects.length !== 1) problems.push(`${redirects.length} redirects (${traceResult.chain.join(' → ')}), expected 1`);
+    if (redirects[0] !== 301) problems.push(`first hop ${redirects[0]}, expected 301`);
     return problems;
 }
 
 const rows = [];
-for (const [source, target] of Object.entries(RETIRED_PATHS)) {
-    for (const variant of ['', '/']) {
-        const path = `${source}${variant}`;
-        let problems;
-        let traceResult;
-        try {
-            traceResult = await trace(path);
-            problems = check(variant, traceResult, target, source in RETIRED_CONTENT_PAGES);
-        } catch (error) {
-            traceResult = { chain: ['ERR'], finalPath: '—', finalStatus: '—' };
-            problems = [error instanceof Error ? error.message : String(error)];
+for (const [source, target] of Object.entries({ ...RETIRED_PATHS, ...LEGACY_REDIRECTS })) {
+    for (const base of [BASE_URL, APEX_URL]) {
+        for (const variant of ['', '/']) {
+            const path = absolute(base, `${source}${variant}`);
+            const host = new URL(base).host;
+            const shown = `//${host}${source}${variant}`;
+            let problems;
+            let traceResult;
+            try {
+                traceResult = await trace(path);
+                problems = check(traceResult, target);
+            } catch (error) {
+                traceResult = { chain: ['ERR'], finalPath: '—', finalStatus: '—' };
+                problems = [error instanceof Error ? error.message : String(error)];
+            }
+            rows.push({
+                source: shown,
+                chain: traceResult.chain.join(' → '),
+                target: problems.length ? traceResult.finalPath : target,
+                ok: problems.length === 0,
+                problems,
+            });
         }
-        rows.push({
-            source: path,
-            chain: traceResult.chain.join(' → '),
-            target: problems.length ? traceResult.finalPath : target,
-            ok: problems.length === 0,
-            problems,
-        });
     }
 }
 
