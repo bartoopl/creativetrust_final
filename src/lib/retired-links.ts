@@ -36,6 +36,9 @@ export const RETIRED_CONTENT_PAGES: Readonly<Record<string, string>> = {
     // WordPress portfolio items → the current case studies.
     '/portfolio/item/artcakes': '/portfolio/artcakes-pl',
     '/portfolio/item/sklep-sulphur': '/portfolio/sklep-sulphur-com-pl',
+    // Two case studies described the same club; the newer one (published 2026-11)
+    // replaces the old site, and its document was unpublished (WEW-19).
+    '/portfolio/recznagorzow-pl': '/portfolio/aurumgorzow-pl',
 };
 
 /** Blog slugs consolidated into another post: `/blog/<old>` → the post that stays live. */
