@@ -81,74 +81,6 @@ type BlogPostFields = {
 };
 
 const blogSeoConfig: Record<string, BlogSeoConfig> = {
-    'tworzenie-stron-internetowych-przewodnik-od-a-do-z-dla-kreatywnych-przedsiebiorcow': {
-        title: 'Tworzenie stron internetowych krok po kroku: przewodnik 2026',
-        description:
-            'Jak stworzyć stronę internetową: od celu, przez wybór WordPressa lub Reacta, UX i SEO, po testy i wdrożenie. 6 kroków dla firm. Sprawdź przewodnik.',
-        links: [],
-        heading: 'Tworzenie stron internetowych: przewodnik od A do Z dla kreatywnych przedsiębiorców',
-        headings: [
-            {
-                from: 'Dlaczego Profesjonalna Strona Internetowa Jest Kluczowa dla Twojego Biznesu?',
-                to: 'Dlaczego profesjonalna strona internetowa jest kluczowa dla Twojego biznesu?',
-            },
-            {
-                from: 'Krok 1: Planowanie i Strategia Twojej Strony Internetowej',
-                to: 'Krok 1: Cel, grupa docelowa i zakres strony',
-                style: 'h2',
-            },
-            {
-                from: 'Krok 2: Wybór Technologii: React, WordPress, Elementor – Poznaj Ich Moc!',
-                to: 'Krok 2: Wybór technologii – WordPress czy React',
-                style: 'h2',
-            },
-            {
-                from: 'React: Dynamiczne i Interaktywne Aplikacje Webowe',
-                to: 'React: dynamiczne i interaktywne aplikacje webowe',
-                style: 'h3',
-            },
-            {
-                from: 'WordPress: Potęga Prostoty i Elastyczności',
-                to: 'WordPress: potęga prostoty i elastyczności',
-                style: 'h3',
-            },
-            {
-                from: 'Elementor: Wizualny Kreator Stron dla WordPressa',
-                to: 'Elementor: wizualny kreator stron dla WordPressa',
-                style: 'h3',
-            },
-            {
-                from: 'Krok 3: Projektowanie i UX – Strona Przyjazna Użytkownikowi',
-                to: 'Krok 3: Projektowanie i UX – strona przyjazna użytkownikowi',
-            },
-            {
-                from: 'Krok 4: Optymalizacja SEO – Bądź Widoczny w Wyszukiwarkach',
-                to: 'Krok 4: Optymalizacja SEO – bądź widoczny w wyszukiwarkach',
-            },
-            {
-                from: 'Krok 5: Integracja z Chatbotami AI – Nowoczesna Obsługa Klienta',
-                to: 'Krok 5: Integracja z chatbotami AI – nowoczesna obsługa klienta',
-            },
-            {
-                from: 'Krok 6: Testowanie i Wdrożenie – Uruchomienie Twojej Nowej Strony',
-                to: 'Krok 6: Testowanie i wdrożenie – uruchomienie Twojej nowej strony',
-            },
-        ],
-        sections: [
-            {
-                beforeHeading: 'Krok 4: Optymalizacja SEO – Bądź Widoczny w Wyszukiwarkach',
-                blocks: [
-                    {
-                        p: [
-                            'Chcesz przejść ten etap z zespołem? Zobacz, jak wygląda nasze ',
-                            { text: 'projektowanie stron www', href: '/uslugi/strony-www' },
-                            '.',
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
     'audyt-konta-google-ads-checklista': {
         // Keep the number in sync with the bullets of the checklist section (enforced by a test).
         title: 'Audyt Google Ads: checklista 30 punktów krok po kroku (2026) | CreativeTrust',
@@ -433,12 +365,9 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
         },
     },
     'ile-kosztuje-strona-internetowa-dla-firmy': {
+        // The body links the pricing page twice already; the card list adds only the
+        // service page, so the post does not carry three links to one URL.
         links: [
-            {
-                href: '/uslugi/tworzenie-stron-www-cennik',
-                title: 'Cennik tworzenia stron WWW',
-                description: 'Porównaj zakresy i wybierz model strony dopasowany do planowanego rozwoju firmy.',
-            },
             {
                 href: '/uslugi/strony-www',
                 title: 'Tworzenie stron WWW',
@@ -481,30 +410,13 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
         links: [],
         sections: [
             {
-                beforeHeading: 'Jakie strategie marketingowe pomagają zminimalizować porzucanie koszyków?',
+                beforeHeading: 'Co mierzyć i w jakiej kolejności naprawiać',
                 blocks: [
                     {
                         p: [
                             'Jeśli koszyk wciąż się rozsypuje, a nie wiesz, na którym kroku, sprawdź to na danych: ',
                             { text: 'audyt e-commerce', href: '/uslugi/audyt-e-commerce' },
                             ' pokazuje miejsca, w których klienci odpadają, w 5-7 dni roboczych.',
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
-    'jak-uniknac-porzucania-koszykow-podczas-platnosci-online-6-sposobow-poprawiajacych-konwersje': {
-        links: [],
-        sections: [
-            {
-                beforeHeading: 'Personalizacja procesu zakupowego',
-                blocks: [
-                    {
-                        p: [
-                            'Gdy po tych zmianach konwersja nadal spada, ',
-                            { text: 'audyt e-commerce', href: '/uslugi/audyt-e-commerce' },
-                            ' pokazuje, na którym kroku płatności klienci rezygnują i ile to kosztuje.',
                         ],
                     },
                 ],
@@ -614,24 +526,8 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
         ],
     },
     // WEW-20: one contextual link per website-related post to /uslugi/strony-www.
-    // Anchors rotate (three exact, five variants) so eight links do not repeat one phrase.
-    'jak-stworzyc-skuteczna-strone-internetowa-dla-twojego-biznesu': {
-        links: [],
-        sections: [
-            {
-                beforeHeading: '2. Projektowanie UX/UI – Klucz do Sukcesu',
-                blocks: [
-                    {
-                        p: [
-                            'Etapy z tego tekstu pokrywa nasza usługa: ',
-                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
-                            ' od briefu, przez UX, po wdrożenie i SEO.',
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
+    // Anchors differ per post, so the links do not repeat one phrase; the posts
+    // consolidated away in 2026-11 have no config here any more.
     'strona-glowna-ktora-generuje-klikniecia-to-mozliwe-poznaj-7-praktycznych-rad': {
         links: [],
         sections: [
@@ -683,23 +579,6 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
             },
         ],
     },
-    'kompleksowa-usluga-budowy-strony-www-klucz-do-sukcesu-twojej-firmy': {
-        links: [],
-        sections: [
-            {
-                beforeHeading: 'Korzyść 1: Profesjonalizm i Doświadczenie',
-                blocks: [
-                    {
-                        p: [
-                            'Cały ten zakres prowadzimy jako jedną usługę: ',
-                            { text: 'tworzenie stron internetowych dla firm', href: '/uslugi/strony-www' },
-                            ' od briefu do startu i rozwoju.',
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
     'dlaczego-oparcie-strony-internetowej-o-page-builder-to-nie-taki-zly-pomysl': {
         links: [],
         sections: [
@@ -727,23 +606,6 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                         p: [
                             'Nawigację projektujemy razem z architekturą treści, więc mega menu nie żyje własnym życiem. Zobacz ',
                             { text: 'strony internetowe, które sprzedają', href: '/uslugi/strony-www' },
-                            '.',
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
-    'jaka-powinna-byc-i-ile-kosztuje-strona-internetowa': {
-        links: [],
-        sections: [
-            {
-                beforeHeading: 'Zoptymalizowana pod kątem SEO',
-                blocks: [
-                    {
-                        p: [
-                            'Tak zbudowane strony projektujemy i wdrażamy jako ',
-                            { text: 'strony internetowe dla firm', href: '/uslugi/strony-www' },
                             '.',
                         ],
                     },

@@ -4,17 +4,16 @@ import { applyBlogPostFixes, getBlogSeoConfig } from '../src/lib/blog-seo.ts';
 
 /**
  * Website-related posts that link the website service page from inside their body (WEW-20).
- * Posts about shops or unrelated topics are deliberately absent.
+ * Posts about shops or unrelated topics are deliberately absent, and so are the
+ * posts consolidated into a longer one in 2026-11: they answer 301 now, so their
+ * overlays are gone and the new body carries its own links.
  */
 const LINKED_POSTS = [
-    'jak-stworzyc-skuteczna-strone-internetowa-dla-twojego-biznesu',
     'strona-glowna-ktora-generuje-klikniecia-to-mozliwe-poznaj-7-praktycznych-rad',
     '10-najczesciej-popelnianych-bledow-podczas-tworzenia-strony-internetowej',
     'optymalne-strategie-pozycjonowania-stron-internetowych-jak-wyroznic-sie-w-sieci',
-    'kompleksowa-usluga-budowy-strony-www-klucz-do-sukcesu-twojej-firmy',
     'dlaczego-oparcie-strony-internetowej-o-page-builder-to-nie-taki-zly-pomysl',
     'kiedy-mega-menu-jest-fajne-a-kiedy-nie',
-    'jaka-powinna-byc-i-ile-kosztuje-strona-internetowa',
 ];
 
 const TARGET = '/uslugi/strony-www';
@@ -82,14 +81,14 @@ test('the link lands right before its heading and leaves the post body intact', 
 test('the website anchors rotate exactly as planned', () => {
     const anchors = LINKED_POSTS.map((slug) => linksOf(getBlogSeoConfig(slug))[0].text);
     const counts = anchors.reduce((map, anchor) => map.set(anchor, (map.get(anchor) ?? 0) + 1), new Map());
-    assert.equal(anchors.length, 8);
+    assert.equal(anchors.length, 5);
+    assert.equal(new Set(anchors).size, anchors.length, 'every remaining post keeps its own anchor');
     assert.deepEqual(Object.fromEntries([...counts].sort()), {
         'dobra strona firmowa': 1,
         'projekt strony internetowej dla firmy': 1,
         'strona internetowa dla firmy': 1,
-        'strony internetowe dla firm': 3,
+        'strony internetowe dla firm': 1,
         'strony internetowe, które sprzedają': 1,
-        'tworzenie stron internetowych dla firm': 1,
     });
     for (const anchor of counts.keys()) assert.ok(!/kliknij tutaj|tutaj|więcej/i.test(anchor), anchor);
 });
