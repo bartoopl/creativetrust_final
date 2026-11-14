@@ -44,9 +44,13 @@ type AliasMap = Readonly<Record<string, string>>;
  * already resolved. `aliases` is `RETIRED_PATHS` at call sites.
  */
 export function canonicalPathFor(pathname: string, aliases: AliasMap = {}): { path: string; redirected: boolean } {
-    const path = withoutTrailingSlash(pathname || '/');
+    // A Markdown twin (`/portfolio/old.md`) follows the same map and keeps the suffix,
+    // so the alias never ends on a 404 while its HTML twin redirects.
+    const markdown = pathname.endsWith('.md');
+    const path = withoutTrailingSlash(markdown ? pathname.slice(0, -3) : pathname || '/');
     const target = aliases[path] ?? LEGACY_REDIRECTS[path] ?? path;
-    return { path: target, redirected: path !== pathname || target !== path };
+    const resolved = markdown ? (target === '/' ? '/index.md' : `${target}.md`) : target;
+    return { path: resolved, redirected: resolved !== pathname };
 }
 
 type CanonicalRequest = {

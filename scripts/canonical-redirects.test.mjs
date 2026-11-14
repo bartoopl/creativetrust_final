@@ -59,6 +59,18 @@ test('the legacy 404s and /home answer the canonical target in one hop', () => {
     assert.equal(canonical({ pathname: '/home', host: APEX_HOST, forwardedProto: 'http' }), `${SITE}/`);
 });
 
+test('the retired portfolio case study and its Markdown twin answer the new one', () => {
+    for (const host of [CANONICAL_HOST, APEX_HOST]) {
+        for (const slash of ['', '/']) {
+            assert.equal(canonical({ pathname: `/portfolio/recznagorzow-pl${slash}`, host }), `${SITE}/portfolio/aurumgorzow-pl`);
+        }
+        assert.equal(canonical({ pathname: '/portfolio/recznagorzow-pl.md', host }), `${SITE}/portfolio/aurumgorzow-pl.md`);
+    }
+    // The replacement stays untouched and the pair forms no chain.
+    assert.equal(canonical({ pathname: '/portfolio/aurumgorzow-pl', host: CANONICAL_HOST }), null);
+    assert.equal(canonicalPathFor('/portfolio/aurumgorzow-pl', RETIRED_PATHS).redirected, false);
+});
+
 test('a canonical request is left alone', () => {
     for (const pathname of ['/', '/blog', '/uslugi/strony-www', '/blog/core-web-vitals-w-ecommerce', '/kontakt']) {
         assert.equal(canonical({ pathname, host: CANONICAL_HOST, forwardedProto: 'https' }), null, pathname);

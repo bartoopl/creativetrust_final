@@ -147,6 +147,7 @@ test('rewriteRetiredHref maps every old WordPress address, with or without a tra
         '/ile-kosztuje-strona-internetowa-w-2023-roku': '/uslugi/tworzenie-stron-www-cennik',
         '/portfolio/item/artcakes': '/portfolio/artcakes-pl',
         '/portfolio/item/sklep-sulphur': '/portfolio/sklep-sulphur-com-pl',
+        '/portfolio/recznagorzow-pl': '/portfolio/aurumgorzow-pl',
     };
     assert.deepEqual(RETIRED_CONTENT_PAGES, expected);
     for (const [source, target] of Object.entries(expected)) {
