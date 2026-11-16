@@ -105,7 +105,7 @@ export default function SalesmanagoImplementationPage() {
             </Section>
 
             <Section tint>
-                <SplitLayout
+                <SplitLayout illustration={{ id: 'sm-profile', alt: 'Karta kontaktu w SALESmanago zasilana zdarzeniami: wizyta, koszyk, e-mail i zakup.' }}
                     eyebrow="Dla kogo"
                     title="Landing pod frazę wdrożenie SALESmanago ma przyciągać firmy, które chcą automatyzować sprzedaż"
                 >

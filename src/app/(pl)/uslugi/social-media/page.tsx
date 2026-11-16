@@ -3,6 +3,7 @@ import CTASection from '@/components/CTASection';
 import { InlineCTA } from '@/components/LandingBlocks';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
+import Illustration from '@/components/ui/Illustration';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
@@ -71,13 +72,18 @@ export default function SocialMediaPage() {
 
             {/* Results */}
             <Section border={false}>
-                <div className="ct-grid-lines grid-cols-2 md:grid-cols-4" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-                    {facts.map(f => (
-                        <div key={f.label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
-                            <span className="ct-meta">{f.label}</span>
-                            <span style={{ fontSize: 16, fontWeight: 500, lineHeight: 1.4 }}>{f.value}</span>
-                        </div>
-                    ))}
+                <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+                    <div className="ct-grid-lines grid-cols-2" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+                        {facts.map(f => (
+                            <div key={f.label} className="flex flex-col gap-2" style={{ padding: '20px 22px' }}>
+                                <span className="ct-meta">{f.label}</span>
+                                <span style={{ fontSize: 16, fontWeight: 500, lineHeight: 1.4 }}>{f.value}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <div style={{ maxWidth: 560, width: '100%', justifySelf: 'center' }}>
+                        <Illustration id="social-feed" alt="Telefon z feedem marki obok kalendarza publikacji; fioletem oznaczony post, który przynosi zamówienia." />
+                    </div>
                 </div>
             </Section>
 

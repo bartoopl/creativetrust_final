@@ -126,7 +126,7 @@ export default function CompanyWebsitePricingPage() {
             </Section>
 
             <Section tint>
-                <SplitLayout eyebrow="Dobra strona firmowa ma mieć" title="Zakres dopasowany do firmy, a nie zbyt mały projekt na start">
+                <SplitLayout illustration={{ id: 'pricing-blocks', alt: 'Strona firmowa złożona z modułów: strony, CMS, SEO, integracje i formularz; od zakresu zależy cena.' }} eyebrow="Dobra strona firmowa ma mieć" title="Zakres dopasowany do firmy, a nie zbyt mały projekt na start">
                     <BulletColumns items={checklist} />
                 </SplitLayout>
             </Section>

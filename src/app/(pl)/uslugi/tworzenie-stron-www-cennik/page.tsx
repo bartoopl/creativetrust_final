@@ -150,7 +150,7 @@ export default function WebsitePricingPage() {
             </Section>
 
             <Section tint>
-                <SplitLayout eyebrow="Od czego zależy cena?" title="Największy wpływ ma nie liczba pikseli, tylko zakres decyzji">
+                <SplitLayout illustration={{ id: 'price-tiers', alt: 'Trzy zakresy projektu: landing page, strona firmowa i strona z CMS, każdy o rozmiar większy.' }} eyebrow="Od czego zależy cena?" title="Największy wpływ ma nie liczba pikseli, tylko zakres decyzji">
                     <BulletColumns items={costDrivers} />
                 </SplitLayout>
             </Section>
