@@ -1,4 +1,24 @@
 {
+    "ads-funnel": {
+        "width": 1248,
+        "height": 1009
+    },
+    "ads-tree": {
+        "width": 1248,
+        "height": 848
+    },
+    "audit-days": {
+        "width": 1248,
+        "height": 927
+    },
+    "audit-report": {
+        "width": 1248,
+        "height": 848
+    },
+    "audit-scan": {
+        "width": 1248,
+        "height": 848
+    },
     "ecm-dashboard": {
         "width": 1248,
         "height": 848
@@ -10,6 +30,58 @@
     "ecm-roadmap": {
         "width": 1248,
         "height": 848
+    },
+    "lp-ad-to-page": {
+        "width": 1248,
+        "height": 798
+    },
+    "lp-channels": {
+        "width": 1248,
+        "height": 830
+    },
+    "ma-cart-recovery": {
+        "width": 1248,
+        "height": 846
+    },
+    "ma-crm-sync": {
+        "width": 1248,
+        "height": 848
+    },
+    "migration-move": {
+        "width": 1248,
+        "height": 850
+    },
+    "price-tiers": {
+        "width": 1248,
+        "height": 848
+    },
+    "pricing-blocks": {
+        "width": 1248,
+        "height": 848
+    },
+    "seo-redirects": {
+        "width": 1248,
+        "height": 811
+    },
+    "shop-storefront": {
+        "width": 1248,
+        "height": 849
+    },
+    "site-audit": {
+        "width": 1248,
+        "height": 848
+    },
+    "sm-profile": {
+        "width": 1248,
+        "height": 843
+    },
+    "social-feed": {
+        "width": 1248,
+        "height": 848
+    },
+    "woo-hybrid": {
+        "width": 1248,
+        "height": 890
     },
     "www-compare": {
         "width": 1248,
