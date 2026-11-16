@@ -16,7 +16,8 @@
     "model:ecommerce": "node scripts/build-model.mjs ecommerce-layers",
     "model:automation": "node scripts/build-model.mjs automation-flow",
     "model:all": "node scripts/build-model.mjs --all",
-    "payload": "payload --use-swc"
+    "payload": "payload --use-swc",
+    "illustrations": "node scripts/build-illustrations.mjs"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.93.0",

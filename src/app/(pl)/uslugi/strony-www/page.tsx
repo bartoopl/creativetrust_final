@@ -5,6 +5,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import { InlineCTA } from '@/components/LandingBlocks';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
+import Illustration, { ProseWithIllustration } from '@/components/ui/Illustration';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
@@ -134,6 +135,7 @@ export default function WebsitesPage() {
                 description="Strona firmowa ma jedno zadanie: doprowadzić właściwą osobę do zapytania. Projektujemy i wdrażamy strony dla firm usługowych i producentów B2B, którzy potrzebują serwisu tłumaczącego ofertę, a nie kolejnej wizytówki. Każdy element ma powód: pierwszy ekran, kolejność sekcji, formularz i sposób pomiaru."
                 cta={{ label: 'Wycena projektu', href: '/kontakt' }}
                 ctaSecondary={{ label: 'Zobacz cennik', href: '/uslugi/tworzenie-stron-www-cennik' }}
+                right={<Illustration id="www-path" preload alt="Izometryczny schemat strony: fioletowa ścieżka prowadzi przez kolejne sekcje do przycisku formularza kontaktowego." />}
             >
                 <div className="ct-grid-lines grid-cols-2 sm:grid-cols-4" style={{ marginTop: 16, borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
                     {[['150+', 'projektów'], ['15+', 'lat na rynku'], ['90+', 'PageSpeed'], ['od 3 500 zł', 'landing page, netto']].map(([val, label]) => (
@@ -188,7 +190,7 @@ export default function WebsitesPage() {
             </Section>
 
             <Section title="Czym różni się strona pod biznes od wizytówki">
-                <div className="flex flex-col gap-8" style={proseStyle}>
+                <ProseWithIllustration id="www-compare" alt="Porównanie: wizytówka z logo i adresem obok strony pod biznes z sekcjami oferty i formularzem kontaktowym.">
                     <p className="ct-body">
                         Wizytówka mówi, że firma istnieje. Strona pod biznes prowadzi rozmowę: odpowiada na pytania, które klient i tak zadałby w mailu, i usuwa powody, żeby napisać do kogoś innego.
                     </p>
@@ -200,11 +202,11 @@ export default function WebsitesPage() {
                             </li>
                         ))}
                     </ul>
-                </div>
+                </ProseWithIllustration>
             </Section>
 
             <Section tint title="Dlaczego Astro i Next.js, a nie kreator">
-                <div className="flex flex-col gap-8" style={proseStyle}>
+                <ProseWithIllustration id="www-headless" alt="Headless CMS: panel z treściami połączony przez API ze stroną internetową i aplikacją mobilną.">
                     <p className="ct-body">
                         Kreator jest dobry na start, gdy strona ma po prostu być. Problem pojawia się później: każda funkcja to wtyczka, każda wtyczka to obciążenie, a aktualizacje potrafią zepsuć układ. Po dwóch latach strona zwalnia, a koszt utrzymania rośnie.
                     </p>
@@ -216,7 +218,7 @@ export default function WebsitesPage() {
                             </li>
                         ))}
                     </ul>
-                </div>
+                </ProseWithIllustration>
             </Section>
 
             <Section eyebrow="Proces" title="Proces od briefu do wdrożenia">

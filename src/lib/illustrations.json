@@ -1,0 +1,26 @@
+{
+    "ecm-dashboard": {
+        "width": 1248,
+        "height": 848
+    },
+    "ecm-hub": {
+        "width": 1248,
+        "height": 840
+    },
+    "ecm-roadmap": {
+        "width": 1248,
+        "height": 848
+    },
+    "www-compare": {
+        "width": 1248,
+        "height": 848
+    },
+    "www-headless": {
+        "width": 1248,
+        "height": 847
+    },
+    "www-path": {
+        "width": 1248,
+        "height": 769
+    }
+}
