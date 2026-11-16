@@ -118,7 +118,7 @@ export default function LandingPageAdsPage() {
             </Section>
 
             <Section tint>
-                <SplitLayout
+                <SplitLayout illustration={{ id: 'lp-channels', alt: 'Ruch z wyszukiwarki, social mediów i display trafia na jedną stronę z jedną ofertą i fioletowym przyciskiem.' }}
                     eyebrow="Dla kogo"
                     title="Dla kampanii, które mają sprzedawać konkretną ofertę, a nie ogólny wizerunek"
                 >

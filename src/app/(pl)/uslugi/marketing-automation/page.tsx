@@ -6,6 +6,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import PageHero from '@/components/ui/PageHero';
 import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
+import { ProseWithIllustration } from '@/components/ui/Illustration';
 import SchemaScript from '@/components/SchemaScript';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
@@ -130,14 +131,14 @@ export default function MarketingAutomationPage() {
             </Section>
 
             <Section tint title="Jakie scenariusze działają w e-commerce">
-                <div className="flex flex-col gap-5" style={proseStyle}>
+                <ProseWithIllustration id="ma-cart-recovery" gap={20} alt="Scenariusz porzuconego koszyka: koszyk, automatyczny e-mail po dwóch godzinach i zamówienie.">
                     <p className="ct-body">
                         Najczęściej wdrażane: porzucony koszyk i porzucone przeglądanie, rekomendacje produktowe, cross-sell po zakupie i reaktywacja klientów, którzy przestali kupować. Każdy scenariusz ma własną logikę wyjścia, żeby klient nie dostawał trzech maili o tym samym w ciągu doby.
                     </p>
                     <p className="ct-body">
                         Scenariusze projektujemy pod marżę, nie pod liczbę wiadomości. Rabat w porzuconym koszyku bywa najdroższą literą w całym lejku, jeśli wysyła się go także tym, którzy i tak by kupili.
                     </p>
-                </div>
+                </ProseWithIllustration>
             </Section>
 
             <Section title="Lead nurturing i scoring w B2B">
@@ -152,14 +153,14 @@ export default function MarketingAutomationPage() {
             </Section>
 
             <Section tint title="Integracje z CRM">
-                <div className="flex flex-col gap-5" style={proseStyle}>
+                <ProseWithIllustration id="ma-crm-sync" gap={20} alt="CRM, sklep i platforma automatyzacji zsynchronizowane wokół jednego profilu klienta.">
                     <p className="ct-body">
                         Integrujemy Pipedrive, HubSpot i Salesforce, żeby dane marketingowe trafiały tam, gdzie pracuje sprzedaż. Bez tego automatyzacja żyje w osobnym świecie: wie, kto kliknął, ale nie wie, kto kupił, więc nie potrafi policzyć przychodu.
                     </p>
                     <p className="ct-body">
                         Integracja to też ustalenie, które pole jest źródłem prawdy. Jeśli sklep mówi jedno, a CRM drugie, raport zawsze wyjdzie tak, jak ktoś chce go przeczytać.
                     </p>
-                </div>
+                </ProseWithIllustration>
             </Section>
 
             <Section title="Jak wygląda wdrożenie krok po kroku">

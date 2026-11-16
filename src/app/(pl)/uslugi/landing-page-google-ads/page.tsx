@@ -148,7 +148,7 @@ export default function GoogleAdsLandingPage() {
             </Section>
 
             <Section tint>
-                <SplitLayout eyebrow="Dla kogo" title="Jedna strona pod reklamę, jedna oferta, jeden ruch użytkownika">
+                <SplitLayout illustration={{ id: 'lp-ad-to-page', alt: 'Reklama i landing page z tym samym nagłówkiem, jedną ofertą i fioletowym przyciskiem.' }} eyebrow="Dla kogo" title="Jedna strona pod reklamę, jedna oferta, jeden ruch użytkownika">
                     <BulletColumns items={useCases} />
                 </SplitLayout>
             </Section>

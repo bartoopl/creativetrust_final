@@ -5,6 +5,7 @@ import LandingLeadForm from '@/components/LandingLeadForm';
 import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
+import { ProseWithIllustration } from '@/components/ui/Illustration';
 import { HeroMedia } from '@/components/LandingBlocks';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
 
@@ -121,14 +122,14 @@ export default function GoogleAdsAuditPage() {
             />
 
             <Section id="zakres" border={false} title="Co sprawdza audyt konta Google Ads">
-                <div className="flex flex-col gap-5" style={proseStyle}>
+                <ProseWithIllustration id="ads-tree" gap={20} alt="Struktura konta Google Ads: konto, kampanie i grupy reklam; fioletem oznaczona gałąź, w której ucieka budżet.">
                     <p className="ct-body">
                         Zaczynamy od pomiaru konwersji, bo bez niego reszta liczb jest zgadywaniem. Sprawdzamy GA4, Google Tag Manager, consent mode i import konwersji: czy kampania uczy się na leadach i sprzedaży, czy na kliknięciach, które nic nie znaczą. Dopiero potem patrzymy na strukturę konta: podział kampanii i grup reklam, strategie stawek, Performance Max, Merchant Center i to, czy kampanie nie nakładają się na siebie.
                     </p>
                     <p className="ct-body">
                         Trzeci blok to słowa kluczowe. Raport wyszukiwanych haseł pokazuje, za co płacisz naprawdę, a lista wykluczeń - ile z tego nigdy nie miało szansy sprzedać. Na końcu budżet, komunikaty reklam i strona docelowa, bo najdroższy błąd w Google Ads często leży poza kontem.
                     </p>
-                </div>
+                </ProseWithIllustration>
             </Section>
 
             <Section tint title="Jak wygląda raport z audytu">
@@ -154,14 +155,14 @@ export default function GoogleAdsAuditPage() {
             </Section>
 
             <Section tint title="Co dostajesz po audycie">
-                <div className="flex flex-col gap-5" style={proseStyle}>
+                <ProseWithIllustration id="ads-funnel" gap={20} alt="Lejek od kliknięć do konwersji; fioletowa konwersja na dole to punkt odniesienia dla budżetu.">
                     <p className="ct-body">
                         Trzy rzeczy: listę błędów z priorytetami, plan naprawy i omówienie wyników. Omówienie jest częścią pracy, nie dodatkiem - przechodzimy przez raport i odpowiadamy na pytania zespołu, który będzie wdrażał poprawki. Po rozmowie wiesz, które zmiany zrobić w tym tygodniu, a które po sezonie.
                     </p>
                     <p className="ct-body">
                         Plan zostaje u Ciebie. Możesz go wdrożyć samodzielnie, z obecną agencją albo z nami - decyzja nie jest częścią audytu.
                     </p>
-                </div>
+                </ProseWithIllustration>
             </Section>
 
             <Section title="Kiedy audyt ma sens, a kiedy wystarczy optymalizacja">

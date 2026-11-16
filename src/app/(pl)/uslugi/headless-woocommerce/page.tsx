@@ -4,6 +4,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
+import Illustration from '@/components/ui/Illustration';
 import { HeroMedia, NumberedGrid } from '@/components/LandingBlocks';
 import { pageAlternates } from '@/lib/i18n';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
@@ -122,6 +123,9 @@ export default function HeadlessWooCommercePage() {
             </Section>
 
             <Section tint eyebrow="Modele wdrożenia" title="Nie każdy sklep musi migrować wszystko naraz">
+                <div className="mb-10" style={{ maxWidth: 560 }}>
+                    <Illustration id="woo-hybrid" alt="Migracja etapami: jeden backend WooCommerce obsługuje stary motyw i nowy headless storefront." />
+                </div>
                 <NumberedGrid cols={3} items={approaches} />
             </Section>
 
