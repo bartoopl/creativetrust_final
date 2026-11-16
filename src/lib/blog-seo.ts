@@ -160,6 +160,20 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                     },
                 ],
             },
+            // Core link (2026-11-16): the audit checklist brings traffic from ad-cost
+            // queries, so it passes value to the e-commerce audit inside the content.
+            {
+                beforeHeading: 'Polecane kolejne kroki',
+                blocks: [
+                    {
+                        p: [
+                            'Jeśli kampanie działają, a sprzedaż stoi, problem często leży po stronie sklepu: ',
+                            { text: 'audyt e-commerce', href: '/uslugi/audyt-e-commerce' },
+                            ' pokazuje, na którym kroku klienci odpadają i co naprawić najpierw.',
+                        ],
+                    },
+                ],
+            },
         ],
     },
     'ile-kosztuje-audyt-google-ads': {
@@ -334,6 +348,19 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                     },
                 ],
             },
+            // Core link (2026-11-16): leads close on the website, so the post points at it.
+            {
+                beforeHeading: 'Polecane kolejne kroki',
+                blocks: [
+                    {
+                        p: [
+                            'Sam pomiar nie wystarczy, jeśli ruch ląduje na stronie bez argumentów: ',
+                            { text: 'strona firmowa, która sprzedaje', href: '/uslugi/strony-www' },
+                            ' prowadzi decydenta od obiekcji do formularza.',
+                        ],
+                    },
+                ],
+            },
         ],
         paragraphs: [
             {
@@ -363,6 +390,25 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                 },
             ],
         },
+    },
+    // Core link (2026-11-16): an ad-cost article is where budget questions start,
+    // so it points at the audit that explains why the traffic does not convert.
+    'ile-kosztuje-reklama-na-facebooku-przewodnik-po-kosztach': {
+        links: [],
+        sections: [
+            {
+                beforeHeading: 'Czy reklama na Facebooku się opłaca?',
+                blocks: [
+                    {
+                        p: [
+                            'Koszt kliknięcia to tylko część rachunku, reszta zależy od strony, na którą trafia ruch. Zanim zwiększysz budżet, ',
+                            { text: 'audyt strony internetowej', href: '/uslugi/audyt-strony-internetowej' },
+                            ' pokazuje, czy strona zamienia wizyty w zapytania.',
+                        ],
+                    },
+                ],
+            },
+        ],
     },
     'ile-kosztuje-strona-internetowa-dla-firmy': {
         // The body links the pricing page twice already; the card list adds only the
