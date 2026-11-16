@@ -224,11 +224,21 @@ export default function EcommerceAuditPage() {
                 </div>
             </Section>
 
-            <Section id="zakres" tint title="Co obejmuje audyt e-commerce">
-                <NumberedGrid cols={4} items={areas} />
+            <Section id="zakres" tint title="Co zawiera audyt e-commerce?">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Audyt obejmuje cztery obszary: sprzedaż i ofertę, marżę, technologię i dane oraz operacje i czas zespołu. Każdy kończy się wnioskiem, który da się wdrożyć, a nie listą uwag do przepisania.
+                    </p>
+                    <p className="ct-body">
+                        Kolejność analizy wynika z jednego pytania: co dziś najbardziej boli, sprzedaż, marża czy czas zespołu. Odpowiedź decyduje, który obszar dostaje najwięcej miejsca w raporcie. Wszystkie cztery trafiają do jednego raportu i jednej roadmapy.
+                    </p>
+                </div>
+                <div className="mt-10">
+                    <NumberedGrid cols={4} items={areas} />
+                </div>
             </Section>
 
-            <Section title="Ile trwa audyt e-commerce">
+            <Section title="Ile trwa audyt sklepu?">
                 <div className="flex flex-col gap-5" style={proseStyle}>
                     <p className="ct-body">
                         Audyt trwa 5-7 dni roboczych od momentu, w którym dostajemy dostępy. Po stronie klienta oznacza to dwie godziny wywiadu oraz nadanie dostępu read-only do analityki i zaplecza sklepu na 3 dni.
@@ -239,7 +249,18 @@ export default function EcommerceAuditPage() {
                 </div>
             </Section>
 
-            <Section id="cena" tint title="Ile kosztuje audyt e-commerce">
+            <Section title="Czy audyt wymaga dostępu do GA4?">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Tak. Bez danych o ruchu i konwersjach audyt byłby opinią, a nie analizą. Dostęp do Google Analytics 4 potrzebujemy w trybie read-only, na 3 dni, razem z Google Search Console, panelem sklepu i panelem reklam.
+                    </p>
+                    <p className="ct-body">
+                        Nie prosimy o prawo zapisu ani o hasła do systemów finansowych. Po audycie dostępy można odebrać, a dane zostają u klienta. Po stronie zespołu zostaje jedna rzecz: dwie godziny wywiadu o sprzedaży, zamówieniach i raportowaniu.
+                    </p>
+                </div>
+            </Section>
+
+            <Section id="cena" tint title="Ile kosztuje audyt e-commerce?">
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-5" style={proseStyle}>
                         <p className="ct-body">
