@@ -5,6 +5,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
+import Illustration, { ProseWithIllustration } from '@/components/ui/Illustration';
 import { BulletColumns, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { AUDIT_HREF, experience } from '@/lib/experience';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
@@ -186,7 +187,7 @@ export default function EcommerceManagementPage() {
             </Section>
 
             <Section id="outsourcing" tint title="Czym jest outsourcing e-commerce">
-                <div className="flex flex-col gap-5" style={proseStyle}>
+                <ProseWithIllustration id="ecm-hub" gap={20} alt="Schemat outsourcingu e-commerce: zespół, IT, dostawcy, agencje, dane i sklep połączeni z jednym planem w centrum.">
                     <p className="ct-body">
                         Outsourcing e-commerce to przekazanie zewnętrznemu zespołowi odpowiedzialności za prowadzenie sklepu: cele sprzedażowe, marżę, koordynację zespołu i dostawców oraz raportowanie do zarządu. Firma nie kupuje pojedynczego zlecenia, tylko stałą funkcję zarządczą, którą trudno utrzymać w środku organizacji.
                     </p>
@@ -199,7 +200,7 @@ export default function EcommerceManagementPage() {
                     <p className="ct-body">
                         Outsourcing nie jest odpowiedzią na każdy problem. Jeśli sklep robi kilkanaście zamówień dziennie i wystarcza mu jedna osoba, taniej wyjdzie zatrudnienie specjalisty niż abonament. Jeśli problemem jest wyłącznie jakość kampanii, wystarczy zmiana agencji. Outsourcing ma sens wtedy, gdy problem jest systemowy: nikt nie widzi całości, decyzje zapadają w różnych miejscach, a marża nie jest liczona na bieżąco.
                     </p>
-                </div>
+                </ProseWithIllustration>
             </Section>
 
             <Section id="zakres" title="Co robimy jako agencja e-commerce">
@@ -220,11 +221,14 @@ export default function EcommerceManagementPage() {
 
             <Section id="wspolpraca" title="Jak wygląda współpraca">
                 <NumberedGrid cols={4} items={steps} />
-                <div className="mt-10">
+                <div className="mt-10 grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
                     <p className="ct-body" style={{ maxWidth: 860 }}>
                         Szczegóły pierwszego kroku opisuje strona{' '}
                         <Link href={AUDIT_HREF} style={linkStyle}>audytu e-commerce</Link>: zakres, czas i wynik, który zostaje u klienta.
                     </p>
+                    <div style={{ maxWidth: 480, width: '100%', justifySelf: 'center' }}>
+                        <Illustration id="ecm-roadmap" alt="Cztery kroki współpracy jako rosnące stopnie: audyt, plan, prowadzenie i przegląd wyników." />
+                    </div>
                 </div>
             </Section>
 
@@ -240,14 +244,14 @@ export default function EcommerceManagementPage() {
             </Section>
 
             <Section title="Co mierzymy">
-                <div className="flex flex-col gap-5" style={proseStyle}>
+                <ProseWithIllustration id="ecm-dashboard" gap={20} alt="Dashboard e-commerce: cztery wskaźniki i wykres kwartału, w którym fioletowy słupek oznacza marżę po zwrotach.">
                     <p className="ct-body">
                         Współpraca ma sens tylko wtedy, gdy da się ją rozliczyć. Dlatego na starcie ustalamy zestaw wskaźników widocznych w jednym dashboardzie: przychód i liczbę zamówień, średni koszyk, marżę po zwrotach, koszt pozyskania zamówienia dla nowego i powracającego klienta oraz udział zamówień od klientów, którzy kupili wcześniej.
                     </p>
                     <p className="ct-body">
                         Te liczby pokazują, czy wzrost przychodu nie dzieje się kosztem marży. Nie raportujemy liczby wdrożonych zadań, bo zadania nie są wynikiem. Przegląd odbywa się w stałym, miesięcznym rytmie, a między nimi decyzje operacyjne zapadają na bieżąco.
                     </p>
-                </div>
+                </ProseWithIllustration>
             </Section>
 
             <Section tint>

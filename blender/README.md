@@ -15,6 +15,22 @@ Isometric scenes shown beside page headlines, built in Blender entirely from cod
 - The site reads `public/models/<scene>.glb` and `<scene>-poster.webp`, configured in
   `src/lib/scenes3d.ts` and rendered by `src/components/scene3d/Scene3D.tsx`.
 
+## Static illustrations
+
+`illustrations/build.py` uses the same toolkit for still images beside body copy on service
+pages (no GLB, no clips): `npm run illustrations [id ...]` renders them, trims the margin and
+writes `public/illustrations/<id>.webp` plus their sizes to `src/lib/illustrations.json`.
+Pages show them with `src/components/ui/Illustration.tsx`.
+
+| Illustration | Page, section |
+| --- | --- |
+| `www-path` | `/uslugi/strony-www`, hero |
+| `www-compare` | `/uslugi/strony-www`, strona pod biznes vs wizytówka |
+| `www-headless` | `/uslugi/strony-www`, Astro i Next.js |
+| `ecm-hub` | `/uslugi/zarzadzanie-e-commerce`, czym jest outsourcing |
+| `ecm-roadmap` | `/uslugi/zarzadzanie-e-commerce`, współpraca |
+| `ecm-dashboard` | `/uslugi/zarzadzanie-e-commerce`, co mierzymy |
+
 ## Rebuild
 
 ```bash
