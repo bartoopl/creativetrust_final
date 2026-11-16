@@ -147,7 +147,7 @@ docker run --rm -v <nazwa-uslugi>_media:/m -v $PWD:/b alpine tar -xzf /b/media_<
 
 ## Praca lokalna
 
-Wymagany Node 22 (Payload nie działa jeszcze na Node 26) i Postgres.
+Wymagany Node 26 (LTS; Payload wymaga ^22.23.4 lub >=24.22.1) i Postgres.
 
 ```sh
 cp .env.example .env              # DATABASE_URL, PAYLOAD_SECRET

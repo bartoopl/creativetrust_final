@@ -43,7 +43,7 @@
     "@swc-node/register": "^1.12.1",
     "@swc/core": "^1.16.22",
     "@tailwindcss/postcss": "^4.3.5",
-    "@types/node": "^20.19.43",
+    "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@types/three": "^0.187.0",
@@ -55,7 +55,7 @@
     "typescript": "~6.0.3"
   },
   "engines": {
-    "node": ">=20.9 <25"
+    "node": "^22.23.4 || >=24.22.1"
   },
   "overrides": {
     "dompurify": "^3.4.18"

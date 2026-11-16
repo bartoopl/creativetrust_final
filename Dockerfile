@@ -7,7 +7,7 @@
 #   tools             full source + node_modules, for one-off Payload commands
 #                     (the Sanity import, creating migrations) — see DEPLOY.md
 
-FROM node:22-alpine AS base
+FROM node:26-alpine AS base
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
