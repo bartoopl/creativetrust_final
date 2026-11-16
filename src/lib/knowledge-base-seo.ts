@@ -20,12 +20,22 @@ type Block = {
 
 type Draft = { style: string; listItem?: 'bullet' | 'number'; parts: Inline[] };
 
+/** A contextual paragraph placed before an existing block (matched on its text). */
+type LinkInsert = { beforeText: string; blocks: Draft[] };
+
 type KnowledgeBaseOverride = {
-    headline: string;
+    headline?: string;
     shortDescription?: string;
     seoTitle?: string;
     seoDescription?: string;
-    content: Block[];
+    /** Replaces the CMS body entirely. */
+    content?: Block[];
+    /**
+     * Contextual paragraphs injected into the body (CMS or `content` above), matched
+     * on the text of the block they precede. Used for a single core link per entry
+     * without rewriting the CMS text; a paragraph whose link already exists is skipped.
+     */
+    inserts?: LinkInsert[];
 };
 
 const h2 = (text: string): Draft => ({ style: 'h2', parts: [text] });
@@ -53,6 +63,36 @@ function portableText(drafts: Draft[]): Block[] {
 }
 
 const overrides: Record<string, KnowledgeBaseOverride> = {
+    // Core links (2026-11-16): these entries bring the most impressions without a
+    // single contextual link, so one paragraph points at the service page.
+    'marketing-automation': {
+        inserts: [
+            {
+                beforeText: 'Przykłady zastosowania Marketing Automation',
+                blocks: [
+                    p(
+                        'Automatyzacja porządkuje komunikację, ale jej wynik zależy od danych o zamówieniach i zachowaniu klientów. W sklepie punktem wyjścia bywa ',
+                        { text: 'audyt sklepu internetowego', href: '/uslugi/audyt-e-commerce' },
+                        ', który pokazuje, na którym kroku klienci rezygnują i co naprawić najpierw.',
+                    ),
+                ],
+            },
+        ],
+    },
+    webinar: {
+        inserts: [
+            {
+                beforeText: 'Podsumowanie',
+                blocks: [
+                    p(
+                        'Webinary najczęściej pracują na leady i sprzedaż, a ta domyka się później na stronie lub w sklepie. Gdy kampania ma prowadzić do zamówień, łączymy ją z ',
+                        { text: 'usługi e-commerce', href: '/uslugi/e-commerce' },
+                        ' – od koszyka po pomiar wyniku.',
+                    ),
+                ],
+            },
+        ],
+    },
     'sales-manago': {
         headline: 'SALESmanago – co to jest i jak działa platforma marketing automation',
         shortDescription:
@@ -78,6 +118,11 @@ const overrides: Record<string, KnowledgeBaseOverride> = {
             p('Kampanie e-mailowe i SMS-owe mogą być w pełni zautomatyzowane i personalizowane, co zwiększa zaangażowanie odbiorców.'),
             h3('Integracja z e-commerce'),
             p('SALESmanago wspiera integrację z popularnymi platformami e-commerce, co umożliwia m.in. analizę zachowań zakupowych i rekomendacje produktów w czasie rzeczywistym.'),
+            p(
+                'Automatyzacja działa tym lepiej, im spójniejsze są dane o zamówieniach. W sklepie punktem wyjścia bywa ',
+                { text: 'audyt e-commerce', href: '/uslugi/audyt-e-commerce' },
+                ', który pokazuje, gdzie klienci odpadają i które scenariusze mają sens w pierwszej kolejności.',
+            ),
             h3('Analityka predykcyjna'),
             p('Dzięki sztucznej inteligencji platforma przewiduje zachowania klientów, pomagając marketerom podejmować bardziej świadome decyzje.'),
             h3('Dlaczego warto używać SALESmanago'),
@@ -203,8 +248,51 @@ const overrides: Record<string, KnowledgeBaseOverride> = {
     },
 };
 
+const blockText = (block: Block) => (block.children ?? []).map((child) => child.text ?? '').join('').replace(/\s+/g, ' ').trim();
+
+const hasLink = (content: Block[], href: string) => content.some((block) => (block.markDefs ?? []).some((mark) => mark.href === href));
+
+/** Renames generated keys so an insert never collides with the CMS block keys. */
+function rekey(blocks: Block[], prefix: string): Block[] {
+    return blocks.map((block, index) => {
+        const renamed = new Map((block.markDefs ?? []).map((mark) => [mark._key, `${prefix}-${mark._key}`]));
+        return {
+            ...block,
+            _key: `${prefix}-b${index}`,
+            markDefs: (block.markDefs ?? []).map((mark) => ({ ...mark, _key: renamed.get(mark._key) ?? mark._key })),
+            children: block.children.map((child) => ({
+                ...child,
+                _key: `${prefix}-${child._key}`,
+                marks: child.marks.map((mark) => renamed.get(mark) ?? mark),
+            })),
+        };
+    });
+}
+
+/** Inserts each paragraph before the block whose text it names; unknown text or an existing link is skipped. */
+function applyInserts(content: Block[] | null | undefined, inserts: LinkInsert[], prefix: string): Block[] | null | undefined {
+    if (!Array.isArray(content)) return content;
+    let result = content;
+    inserts.forEach((insert, index) => {
+        const blocks = rekey(portableText(insert.blocks), `${prefix}-i${index}`);
+        const hrefs = blocks.flatMap((block) => (block.markDefs ?? []).map((mark) => mark.href));
+        if (hrefs.some((href) => hasLink(result, href))) return;
+        const before = insert.beforeText.replace(/\s+/g, ' ').trim();
+        const at = result.findIndex((block) => blockText(block) === before);
+        if (at === -1) return;
+        result = [...result.slice(0, at), ...blocks, ...result.slice(at)];
+    });
+    return result;
+}
+
 /** Lays the slug's override over the Sanity document; a missing entry stays missing. */
 export function applyKnowledgeBaseSeo<T extends object>(slug: string, entry: T | null): (T & Partial<KnowledgeBaseOverride>) | null {
     const override = Object.hasOwn(overrides, slug) ? overrides[slug] : undefined;
-    return entry && override ? { ...entry, ...override } : entry;
+    if (!entry || !override) return entry;
+    const { inserts = [], ...fields } = override;
+    // Inserts work on the body that will actually render: an override body when set,
+    // otherwise the CMS body. `content` stays the CMS one when there is nothing to add.
+    const base = fields.content ?? (entry as { content?: Block[] }).content;
+    const content = inserts.length ? applyInserts(base, inserts, `kb-${slug}`) : fields.content;
+    return { ...entry, ...fields, ...(content ? { content } : {}) };
 }
