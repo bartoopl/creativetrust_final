@@ -194,8 +194,16 @@ export default function WebsiteAuditPage() {
                 </div>
             </Section>
 
-            <Section id="zakres" tint title="Co obejmuje audyt strony internetowej">
-                <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+            <Section id="zakres" tint title="Co zawiera audyt strony internetowej?">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Audyt obejmuje cztery obszary: treść i komunikację, konwersję i ścieżkę kontaktu, technikę z Core Web Vitals oraz SEO z widocznością w AI. Każdy sprawdzamy pod to samo pytanie: czy to blokuje zapytanie.
+                    </p>
+                    <p className="ct-body">
+                        Waga obszarów zależy od typu strony. Landing page najczęściej ma problem w treści i formularzu, strona firmowa w strukturze oferty, a serwis z blogiem w linkowaniu wewnętrznym i duplikacji. Cztery obszary zostają te same, zmienia się tylko kolejność napraw.
+                    </p>
+                </div>
+                <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2">
                     <div>
                         <h3 style={{ margin: '0 0 16px', fontSize: 19, fontWeight: 500 }}>Treść i komunikacja</h3>
                         <BulletColumns items={contentPoints} />
@@ -215,15 +223,18 @@ export default function WebsiteAuditPage() {
                 </div>
             </Section>
 
-            <Section title="Ile trwa audyt strony internetowej">
+            <Section title="Ile trwa audyt strony internetowej?">
                 <div className="flex flex-col gap-5" style={proseStyle}>
                     <p className="ct-body">
                         Audyt trwa 5 dni roboczych. Po stronie klienta potrzebujemy dwóch rzeczy: dostępu do analityki i panelu strony oraz jednej rozmowy z osobą, która zna ofertę i proces sprzedaży.
                     </p>
+                    <p className="ct-body">
+                        Termin liczymy od dostępu, nie od podpisania umowy. Po pięciu dniach roboczych klient ma raport, plan przebudowy i wycenę zakresu, a nie listę uwag do przepisania.
+                    </p>
                 </div>
             </Section>
 
-            <Section id="cena" tint title="Ile kosztuje audyt strony internetowej">
+            <Section id="cena" tint title="Ile kosztuje audyt strony internetowej?">
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-5" style={proseStyle}>
                         <p className="ct-body">
