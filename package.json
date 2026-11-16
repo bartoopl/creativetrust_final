@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "check:design": "node scripts/check-design-system.mjs",
     "check:redirects": "node scripts/check-redirects.mjs",
     "typecheck": "tsc --noEmit -p .",
@@ -40,7 +40,6 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.7",
     "@swc-node/register": "^1.12.1",
     "@swc/core": "^1.16.22",
     "@tailwindcss/postcss": "^4.3.5",
@@ -53,7 +52,7 @@
     "eslint-config-next": "^16.4.6",
     "postcss": "^8.5.33",
     "tailwindcss": "^4.3.5",
-    "typescript": "~5.9.3"
+    "typescript": "~6.0.3"
   },
   "engines": {
     "node": ">=20.9 <25"
