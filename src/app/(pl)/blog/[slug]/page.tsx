@@ -11,6 +11,8 @@ import BlogServiceLinks from '@/components/BlogServiceLinks';
 import BlogPostCard from '@/components/BlogPostCard';
 import SchemaScript from '@/components/SchemaScript';
 import { getBlogSeoConfig } from '@/lib/blog-seo';
+import { extractFaq } from '@/lib/faq';
+import type { PortableTextBlock } from '@/lib/markdown/portable-text';
 import { SITE_URL, buildBlogPostingSchema, buildBreadcrumbSchema, buildFaqSchema } from '@/lib/schema';
 import { resolveAuthor } from '@/lib/authors';
 
@@ -110,8 +112,10 @@ export default async function BlogPostPage({
         { name: 'Blog', url: `${SITE_URL}/blog` },
         { name: post.title, url: canonicalUrl },
     ]);
-    // Same items applyBlogPostFixes renders in the body, so the FAQPage matches visible content.
-    const faqSchema = seoConfig?.faq ? buildFaqSchema(seoConfig.faq.items) : null;
+    // Prefer the curated FAQ (blog-seo config); otherwise read the editor's
+    // `## FAQ` section so the JSON-LD matches what the page actually shows.
+    const faqItems = seoConfig?.faq?.items ?? extractFaq(post.content as PortableTextBlock[]);
+    const faqSchema = faqItems.length >= 2 ? buildFaqSchema(faqItems) : null;
 
     const hasRelated = Boolean(post.relatedPosts && post.relatedPosts.length > 0);
 
