@@ -469,5 +469,7 @@ export const getPortfolioSlugs = cached('getPortfolioSlugs', readGetPortfolioSlu
 export const getLatestPortfolioProjects = cached('getLatestPortfolioProjects', readGetLatestPortfolioProjects);
 export const getKnowledgeBase = cached('getKnowledgeBase', readGetKnowledgeBase);
 export const getArticleIndexDocs = cached('getArticleIndexDocs', readGetArticleIndexDocs);
+/** Same query without the hourly data cache: /llms.txt must list a post right after it is published. */
+export const readArticleIndexDocs = readGetArticleIndexDocs;
 export const searchArticles = cached('searchArticles', readSearchArticles);
 export const getSitemapDocs = cached('getSitemapDocs', readGetSitemapDocs);
