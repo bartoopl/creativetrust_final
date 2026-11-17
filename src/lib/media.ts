@@ -71,6 +71,47 @@ export function imageVariantUrl(source: unknown, width?: number, height?: number
     return absoluteMediaUrl(variant?.url ?? asset.url);
 }
 
+export interface ResponsiveImage {
+    /** Largest stored variant up to `maxWidth` — never the original file. */
+    src: string;
+    /** All stored variants, ascending: `thumb.webp 400w, card.webp 800w, …`. */
+    srcSet?: string;
+    width: number;
+    height: number;
+}
+
+/**
+ * Cover image with its intrinsic size and a srcset of the pre-rendered WebP
+ * variants. Uploads ship 400/800/1200 wide siblings; asking the builder for a
+ * width none of them covers (e.g. 1600) used to fall back to the original
+ * multi-megabyte PNG, which is what LCP measured.
+ */
+export function responsiveImage(source: unknown, maxWidth = 1200): ResponsiveImage | null {
+    const asset = assetOf(source);
+    if (!asset?.url) return null;
+    const sizes = asset.sizes ?? {};
+    const variants = WIDTH_VARIANTS.map((name) => sizes[name])
+        .filter((size): size is MediaSize & { url: string; width: number; height: number } =>
+            Boolean(size?.url && size.width && size.height),
+        )
+        .filter((size) => size.width <= maxWidth)
+        .sort((a, b) => a.width - b.width);
+
+    const best = variants[variants.length - 1];
+    const width = best?.width ?? asset.width;
+    const height = best?.height ?? asset.height;
+    // Without intrinsic dimensions the browser would shift the layout: keep the old path.
+    if (!width || !height) return null;
+
+    const unique = variants.filter((size, index) => index === 0 || size.width !== variants[index - 1].width);
+    return {
+        src: absoluteMediaUrl(best?.url ?? asset.url),
+        srcSet: unique.length > 1 ? unique.map((size) => `${absoluteMediaUrl(size.url)} ${size.width}w`).join(', ') : undefined,
+        width,
+        height,
+    };
+}
+
 export interface ImageUrlBuilder {
     width(width: number): ImageUrlBuilder;
     height(height: number): ImageUrlBuilder;
