@@ -5,6 +5,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
+import { ProseWithIllustration } from '@/components/ui/Illustration';
 import { BulletColumns, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { experience } from '@/lib/experience';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
@@ -184,18 +185,26 @@ export default function WebsiteAuditPage() {
             </Section>
 
             <Section id="definicja" title="Czym jest audyt strony internetowej">
-                <div className="flex flex-col gap-5" style={proseStyle}>
+                <ProseWithIllustration id="site-audit" gap={20} alt="Audyt strony warstwa po warstwie: szybkość, treść, SEO i formularz; fioletem oznaczony słaby punkt na drodze do zapytania.">
                     <p className="ct-body">
                         Audyt strony internetowej to uporządkowany przegląd strony firmowej, produktowej lub landing page pod kątem tego, czy spełnia swoje zadanie. Zadaniem strony biznesowej prawie nigdy nie jest „być”, tylko doprowadzić konkretną osobę do konkretnego działania: zapytania, rozmowy, pobrania oferty.
                     </p>
                     <p className="ct-body">
                         Dlatego audyt zaczyna się od celu, a nie od listy błędów. Najpierw ustalamy, do kogo strona mówi i co ma się stać po wejściu. Dopiero potem sprawdzamy, czy treść, układ i technika temu służą. Strona może mieć ładny projekt i jednocześnie nie odpowiadać na pytanie, które klient ma w głowie w pierwszej minucie.
                     </p>
-                </div>
+                </ProseWithIllustration>
             </Section>
 
-            <Section id="zakres" tint title="Co obejmuje audyt strony internetowej">
-                <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+            <Section id="zakres" tint title="Co zawiera audyt strony internetowej?">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Audyt obejmuje cztery obszary: treść i komunikację, konwersję i ścieżkę kontaktu, technikę z Core Web Vitals oraz SEO z widocznością w AI. Każdy sprawdzamy pod to samo pytanie: czy to blokuje zapytanie.
+                    </p>
+                    <p className="ct-body">
+                        Waga obszarów zależy od typu strony. Landing page najczęściej ma problem w treści i formularzu, strona firmowa w strukturze oferty, a serwis z blogiem w linkowaniu wewnętrznym i duplikacji. Cztery obszary zostają te same, zmienia się tylko kolejność napraw.
+                    </p>
+                </div>
+                <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2">
                     <div>
                         <h3 style={{ margin: '0 0 16px', fontSize: 19, fontWeight: 500 }}>Treść i komunikacja</h3>
                         <BulletColumns items={contentPoints} />
@@ -215,15 +224,18 @@ export default function WebsiteAuditPage() {
                 </div>
             </Section>
 
-            <Section title="Ile trwa audyt strony internetowej">
-                <div className="flex flex-col gap-5" style={proseStyle}>
+            <Section title="Ile trwa audyt strony internetowej?">
+                <ProseWithIllustration id="audit-days" gap={20} alt="Kolejne dni audytu jako rosnące kafle; ostatniego dnia powstaje raport zaznaczony na fioletowo.">
                     <p className="ct-body">
                         Audyt trwa 5 dni roboczych. Po stronie klienta potrzebujemy dwóch rzeczy: dostępu do analityki i panelu strony oraz jednej rozmowy z osobą, która zna ofertę i proces sprzedaży.
                     </p>
-                </div>
+                    <p className="ct-body">
+                        Termin liczymy od dostępu, nie od podpisania umowy. Po pięciu dniach roboczych klient ma raport, plan przebudowy i wycenę zakresu, a nie listę uwag do przepisania.
+                    </p>
+                </ProseWithIllustration>
             </Section>
 
-            <Section id="cena" tint title="Ile kosztuje audyt strony internetowej">
+            <Section id="cena" tint title="Ile kosztuje audyt strony internetowej?">
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-5" style={proseStyle}>
                         <p className="ct-body">

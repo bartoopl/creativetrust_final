@@ -31,7 +31,11 @@ Audyt strony internetowej to uporządkowany przegląd strony firmowej, produktow
 
 Dlatego audyt zaczyna się od celu, a nie od listy błędów. Najpierw ustalamy, do kogo strona mówi i co ma się stać po wejściu. Dopiero potem sprawdzamy, czy treść, układ i technika temu służą. Strona może mieć ładny projekt i jednocześnie nie odpowiadać na pytanie, które klient ma w głowie w pierwszej minucie.
 
-## Co obejmuje audyt strony internetowej
+## Co zawiera audyt strony internetowej?
+
+Audyt obejmuje cztery obszary: treść i komunikację, konwersję i ścieżkę kontaktu, technikę z Core Web Vitals oraz SEO z widocznością w AI. Każdy sprawdzamy pod to samo pytanie: czy to blokuje zapytanie.
+
+Waga obszarów zależy od typu strony. Landing page najczęściej ma problem w treści i formularzu, strona firmowa w strukturze oferty, a serwis z blogiem w linkowaniu wewnętrznym i duplikacji. Cztery obszary zostają te same, zmienia się tylko kolejność napraw.
 
 ### Treść i komunikacja
 
@@ -65,11 +69,13 @@ Dlatego audyt zaczyna się od celu, a nie od listy błędów. Najpierw ustalamy,
 - czy nie ma duplikacji i kanibalizacji między podstronami,
 - czy linkowanie wewnętrzne prowadzi od artykułu do zapytania.
 
-## Ile trwa audyt strony internetowej
+## Ile trwa audyt strony internetowej?
 
 Audyt trwa 5 dni roboczych. Po stronie klienta potrzebujemy dwóch rzeczy: dostępu do analityki i panelu strony oraz jednej rozmowy z osobą, która zna ofertę i proces sprzedaży.
 
-## Ile kosztuje audyt strony internetowej
+Termin liczymy od dostępu, nie od podpisania umowy. Po pięciu dniach roboczych klient ma raport, plan przebudowy i wycenę zakresu, a nie listę uwag do przepisania.
+
+## Ile kosztuje audyt strony internetowej?
 
 Audyt kosztuje 1 500 zł netto. Jest usługą płatną, bo to konkretna praca analityczna z konkretnym wynikiem. Kwota jest stała i ustalana przed startem, po rozmowie o celu strony i zakresie.
 

@@ -32,20 +32,30 @@ Audyt e-commerce to analiza sklepu prowadzona z perspektywy osoby, która odpowi
 
 Audyt nie jest listą błędów UX ani przeglądem SEO. Te elementy wchodzą do środka, ale jako środek do wyniku. Decyzja o tym, co robić najpierw, zapada na podstawie wpływu na zysk i kosztu wdrożenia. Gdy zamiast sklepu pytanie dotyczy strony firmowej, właściwym krokiem jest [audyt strony internetowej](https://www.creativetrust.pl/uslugi/audyt-strony-internetowej.md).
 
-## Co obejmuje audyt e-commerce
+## Co zawiera audyt e-commerce?
+
+Audyt obejmuje cztery obszary: sprzedaż i ofertę, marżę, technologię i dane oraz operacje i czas zespołu. Każdy kończy się wnioskiem, który da się wdrożyć, a nie listą uwag do przepisania.
+
+Kolejność analizy wynika z jednego pytania: co dziś najbardziej boli, sprzedaż, marża czy czas zespołu. Odpowiedź decyduje, który obszar dostaje najwięcej miejsca w raporcie. Wszystkie cztery trafiają do jednego raportu i jednej roadmapy.
 
 1. **Sprzedaż i oferta.** Lejek sprzedaży, struktura oferty, kanały pozyskania i ścieżka zakupowa. Szukamy dźwigni, które realnie podnoszą przychód, a nie kolejnych optymalizacji kosmetycznych.
 2. **Marża.** Marżowość na poziomie produktu, kategorii i kanału. Sprawdzamy, czy jest liczona na bieżąco, czy w arkuszu raz w miesiącu, i czy wlicza koszt zwrotów oraz pozyskania klienta.
 3. **Technologia i dane.** Platforma, integracje, ERP i analityka. Dług technologiczny, który spowalnia rozwój sklepu i obniża konwersję. Sprawdzamy też, czy dane z reklam zgadzają się ze stanem magazynu i zamówień.
 4. **Operacje i czas zespołu.** Ręczna praca, raportowanie i procedury wdrażania zmian. Roboczogodziny, które da się odzyskać automatyzacją, oraz miejsca, w których każda zmiana to ryzyko dla sprzedaży.
 
-## Ile trwa audyt e-commerce
+## Ile trwa audyt sklepu?
 
 Audyt trwa 5-7 dni roboczych od momentu, w którym dostajemy dostępy. Po stronie klienta oznacza to dwie godziny wywiadu oraz nadanie dostępu read-only do analityki i zaplecza sklepu na 3 dni.
 
 Termin liczymy od dostępu, nie od podpisania umowy. Jeśli dostępy są gotowe, audyt kończy się w jednym tygodniu roboczym.
 
-## Ile kosztuje audyt e-commerce
+## Czy audyt wymaga dostępu do GA4?
+
+Tak. Bez danych o ruchu i konwersjach audyt byłby opinią, a nie analizą. Dostęp do Google Analytics 4 potrzebujemy w trybie read-only, na 3 dni, razem z Google Search Console, panelem sklepu i panelem reklam.
+
+Nie prosimy o prawo zapisu ani o hasła do systemów finansowych. Po audycie dostępy można odebrać, a dane zostają u klienta. Po stronie zespołu zostaje jedna rzecz: dwie godziny wywiadu o sprzedaży, zamówieniach i raportowaniu.
+
+## Ile kosztuje audyt e-commerce?
 
 Audyt kosztuje 3 000 zł netto. Kwota jest stała i ustalana z góry na rozmowie wstępnej, po ustaleniu zakresu. Klient zna ją przed startem prac i nie ma rozliczania godzin ani dopłat za dodatkowe ustalenia.
 

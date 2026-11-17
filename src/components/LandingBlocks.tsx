@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import SectionHeader from '@/components/ui/SectionHeader';
 import NotchedButton from '@/components/ui/NotchedButton';
+import Illustration, { type IllustrationId } from '@/components/ui/Illustration';
 
 /*
  * Shared presentation blocks for the SEO landing pages under /uslugi
@@ -97,11 +98,22 @@ export function NumberedGrid({ items, cols = 4, numbered = true }: { items: Grid
 }
 
 /** Two-column section body: header on the left, content on the right. */
-export function SplitLayout({ eyebrow, title, children }: { eyebrow?: string; title: React.ReactNode; children: React.ReactNode }) {
+export function SplitLayout({ eyebrow, title, illustration, children }: {
+    eyebrow?: string;
+    title: React.ReactNode;
+    /** Optional isometric illustration under the title (fills the otherwise empty left column). */
+    illustration?: { id: IllustrationId; alt: string };
+    children: React.ReactNode;
+}) {
     return (
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
             <div>
                 <SectionHeader eyebrow={eyebrow} title={title} maxWidth="22ch" />
+                {illustration && (
+                    <div className="mt-10" style={{ maxWidth: 460 }}>
+                        <Illustration id={illustration.id} alt={illustration.alt} />
+                    </div>
+                )}
             </div>
             <div>{children}</div>
         </div>

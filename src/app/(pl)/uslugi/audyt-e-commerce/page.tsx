@@ -5,6 +5,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
+import { ProseWithIllustration } from '@/components/ui/Illustration';
 import { BulletColumns, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { MANAGEMENT_HREF, experience } from '@/lib/experience';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
@@ -213,7 +214,7 @@ export default function EcommerceAuditPage() {
             </Section>
 
             <Section title="Czym jest audyt e-commerce">
-                <div className="flex flex-col gap-5" style={proseStyle}>
+                <ProseWithIllustration id="audit-scan" gap={20} alt="Audyt e-commerce jako inspekcja: katalog sklepu pod lupą, jedna komórka oznaczona na fioletowo jako najważniejsze ustalenie.">
                     <p className="ct-body">
                         Audyt e-commerce to analiza sklepu prowadzona z perspektywy osoby, która odpowiada za wynik, a nie za jeden kanał. Szukamy miejsc, w których sklep traci sprzedaż, marżę i czas zespołu, a potem układamy je w kolejności naprawy.
                     </p>
@@ -221,14 +222,24 @@ export default function EcommerceAuditPage() {
                         Audyt nie jest listą błędów UX ani przeglądem SEO. Te elementy wchodzą do środka, ale jako środek do wyniku. Decyzja o tym, co robić najpierw, zapada na podstawie wpływu na zysk i kosztu wdrożenia. Gdy zamiast sklepu pytanie dotyczy strony firmowej, właściwym krokiem jest{' '}
                         <Link href="/uslugi/audyt-strony-internetowej" style={linkStyle}>audyt strony internetowej</Link>.
                     </p>
+                </ProseWithIllustration>
+            </Section>
+
+            <Section id="zakres" tint title="Co zawiera audyt e-commerce?">
+                <ProseWithIllustration id="audit-report" gap={20} alt="Raport z audytu: stos kartek z roadmapą, na której pierwszy priorytet jest zaznaczony na fioletowo.">
+                    <p className="ct-body">
+                        Audyt obejmuje cztery obszary: sprzedaż i ofertę, marżę, technologię i dane oraz operacje i czas zespołu. Każdy kończy się wnioskiem, który da się wdrożyć, a nie listą uwag do przepisania.
+                    </p>
+                    <p className="ct-body">
+                        Kolejność analizy wynika z jednego pytania: co dziś najbardziej boli, sprzedaż, marża czy czas zespołu. Odpowiedź decyduje, który obszar dostaje najwięcej miejsca w raporcie. Wszystkie cztery trafiają do jednego raportu i jednej roadmapy.
+                    </p>
+                </ProseWithIllustration>
+                <div className="mt-10">
+                    <NumberedGrid cols={4} items={areas} />
                 </div>
             </Section>
 
-            <Section id="zakres" tint title="Co obejmuje audyt e-commerce">
-                <NumberedGrid cols={4} items={areas} />
-            </Section>
-
-            <Section title="Ile trwa audyt e-commerce">
+            <Section title="Ile trwa audyt sklepu?">
                 <div className="flex flex-col gap-5" style={proseStyle}>
                     <p className="ct-body">
                         Audyt trwa 5-7 dni roboczych od momentu, w którym dostajemy dostępy. Po stronie klienta oznacza to dwie godziny wywiadu oraz nadanie dostępu read-only do analityki i zaplecza sklepu na 3 dni.
@@ -239,7 +250,18 @@ export default function EcommerceAuditPage() {
                 </div>
             </Section>
 
-            <Section id="cena" tint title="Ile kosztuje audyt e-commerce">
+            <Section title="Czy audyt wymaga dostępu do GA4?">
+                <div className="flex flex-col gap-5" style={proseStyle}>
+                    <p className="ct-body">
+                        Tak. Bez danych o ruchu i konwersjach audyt byłby opinią, a nie analizą. Dostęp do Google Analytics 4 potrzebujemy w trybie read-only, na 3 dni, razem z Google Search Console, panelem sklepu i panelem reklam.
+                    </p>
+                    <p className="ct-body">
+                        Nie prosimy o prawo zapisu ani o hasła do systemów finansowych. Po audycie dostępy można odebrać, a dane zostają u klienta. Po stronie zespołu zostaje jedna rzecz: dwie godziny wywiadu o sprzedaży, zamówieniach i raportowaniu.
+                    </p>
+                </div>
+            </Section>
+
+            <Section id="cena" tint title="Ile kosztuje audyt e-commerce?">
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-5" style={proseStyle}>
                         <p className="ct-body">

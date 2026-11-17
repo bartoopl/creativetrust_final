@@ -140,7 +140,7 @@ export default function WooCommerceHeadlessMigrationPage() {
             </Section>
 
             <Section tint>
-                <SplitLayout eyebrow="Efekty biznesowe" title="Migracja ma poprawić sprzedaż, nie tylko stack technologiczny">
+                <SplitLayout illustration={{ id: 'migration-move', alt: 'Migracja sklepu: monolit po lewej, nowe warstwy dane, API i front po prawej, dane przenoszone w skrzynkach.' }} eyebrow="Efekty biznesowe" title="Migracja ma poprawić sprzedaż, nie tylko stack technologiczny">
                     <BulletColumns items={outcomes} />
                 </SplitLayout>
             </Section>
@@ -193,7 +193,7 @@ export default function WooCommerceHeadlessMigrationPage() {
             </Section>
 
             <Section tint>
-                <SplitLayout eyebrow="SEO w migracji" title="Plan migracji chroni widoczność tylko wtedy, gdy jest częścią wdrożenia.">
+                <SplitLayout illustration={{ id: 'seo-redirects', alt: 'Przekierowania 301: każdy stary adres wskazuje nowy; fioletem połączona strona, która przynosi ruch.' }} eyebrow="SEO w migracji" title="Plan migracji chroni widoczność tylko wtedy, gdy jest częścią wdrożenia.">
                     <div className="flex flex-col items-start gap-6">
                         <p className="ct-body" style={{ fontSize: 16 }}>Przed zmianą technologii ustalamy adresy do zachowania, mapę przekierowań, canonicale, sitemapę, dane strukturalne i pomiar. Po starcie sprawdzamy indeksację, błędy 404 oraz kluczowe strony i zapytania.</p>
                         <Link href="/blog/migracja-sklepu-bez-utraty-seo" className="ct-ghost" style={{ whiteSpace: 'normal' }}>
