@@ -70,3 +70,13 @@ test('the case-study page renders the cover with intrinsic size and high priorit
     assert.match(page, /height=\{cover\.height\}/);
     assert.match(page, /fetchPriority="high"/, 'the LCP image should not wait behind other requests');
 });
+
+test('the blog post cover uses a stored variant, not a 2000 px request from the PNG', () => {
+    const page = read('src/app/(pl)/blog/[slug]/page.tsx');
+
+    assert.match(page, /responsiveImage\(post\.mainImage\)/);
+    assert.doesNotMatch(page, /urlFor\(post\.mainImage\)\.width\(2000\)/);
+    assert.match(page, /width=\{cover\.width\}/);
+    assert.match(page, /height=\{cover\.height\}/);
+    assert.match(page, /fetchPriority="high"/);
+});
