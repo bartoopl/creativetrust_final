@@ -1,6 +1,7 @@
 import {
     BlockquoteFeature,
     BoldFeature,
+    EXPERIMENTAL_TableFeature,
     FixedToolbarFeature,
     HeadingFeature,
     InlineCodeFeature,
@@ -30,6 +31,9 @@ export const editorFeatures = () => [
     UnorderedListFeature(),
     OrderedListFeature(),
     BlockquoteFeature(),
+    // GFM tables: the converter parses `| a | b |` into Lexical table nodes
+    // (the feature ships its own markdown transformer).
+    EXPERIMENTAL_TableFeature(),
     UploadFeature({ collections: { media: { fields: [] } } }),
     FixedToolbarFeature(),
     InlineToolbarFeature(),
