@@ -5,6 +5,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { getBlogPost } from '@/lib/cms';
 import { urlFor } from '@/lib/cms';
+import { responsiveImage } from '@/lib/media';
 import PortableTextContent from '@/components/PortableTextContent';
 import AudioPlayer from '@/components/AudioPlayer';
 import BlogServiceLinks from '@/components/BlogServiceLinks';
@@ -72,6 +73,9 @@ export default async function BlogPostPage({
     if (!post) {
         notFound();
     }
+
+    // The cover is LCP: a stored WebP variant (≤1200 px), never the 1440 px PNG.
+    const cover = post.mainImage ? responsiveImage(post.mainImage) : null;
 
     // Formatowanie daty publikacji
     const publishDate = new Date(post.publishedAt);
@@ -168,11 +172,21 @@ export default async function BlogPostPage({
                 </div>
             </header>
 
-            {post.mainImage && (
+            {post.mainImage && cover && (
                 <div style={{ padding: '0 var(--pad-x)' }}>
                     <div className="ct-tile mx-auto" style={{ maxWidth: 1280, padding: 12 }}>
                         <div className="ct-v2-media relative" style={{ aspectRatio: '16/9' }}>
-                            <Image src={urlFor(post.mainImage).width(2000).url()} alt={post.title} fill priority sizes="(min-width: 1360px) 1256px, 100vw" className="object-cover" />
+                            <img
+                                src={cover.src}
+                                srcSet={cover.srcSet}
+                                sizes="(min-width: 1360px) 1256px, 100vw"
+                                width={cover.width}
+                                height={cover.height}
+                                alt={post.title}
+                                fetchPriority="high"
+                                decoding="async"
+                                className="object-cover"
+                            />
                         </div>
                     </div>
                 </div>
