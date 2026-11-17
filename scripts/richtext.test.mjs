@@ -1,4 +1,5 @@
 import { test } from 'node:test';
+import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { lexicalToPortableText, plainTextToPortableText, portableTextToLexical } from '../src/lib/richtext/lexical.ts';
 import { portableTextToMarkdown } from '../src/lib/markdown/portable-text.ts';
@@ -90,4 +91,83 @@ test('image URLs pick the smallest stored variant that covers the width', () => 
 
 test('slugify handles Polish letters', () => {
     assert.equal(slugify('Zdjęcie główne – Łódź, sklep #1'), 'zdjecie-glowne-lodz-sklep-1');
+});
+
+// ---------------------------------------------------------------- tables (GFM)
+
+/** Serialized Lexical table as Payload stores it: header row flagged per cell. */
+const lexicalTable = (rows) => ({
+    type: 'table',
+    children: rows.map((cells, rowIndex) => ({
+        type: 'tablerow',
+        children: cells.map((content) => ({
+            type: 'tablecell',
+            headerState: rowIndex === 0 ? 1 : 0,
+            children: [{
+                type: 'paragraph',
+                children: typeof content === 'string' ? [{ type: 'text', text: content, format: 0 }] : content,
+            }],
+        })),
+    })),
+});
+
+test('a 3×15 GFM table keeps its header, columns and every row', () => {
+    const rows = [['Obszar', 'Co sprawdzić', 'Na co uważać']];
+    for (let i = 1; i <= 14; i += 1) rows.push([`Obszar ${i}`, `Punkt ${i}`, `Ryzyko ${i}`]);
+
+    const blocks = lexicalToPortableText({ root: { type: 'root', children: [lexicalTable(rows)] } });
+    assert.equal(blocks.length, 1);
+    const table = blocks[0];
+    assert.equal(table._type, 'table');
+    assert.deepEqual(table.head.map((cell) => cell.spans[0].text), ['Obszar', 'Co sprawdzić', 'Na co uważać']);
+    assert.equal(table.rows.length, 14);
+    assert.deepEqual(table.rows[13].map((cell) => cell.spans[0].text), ['Obszar 14', 'Punkt 14', 'Ryzyko 14']);
+
+    // Back to Lexical for writing through MCP: header row again carries headerState.
+    const lexical = portableTextToLexical(blocks);
+    const back = lexical.root.children[0];
+    assert.equal(back.type, 'table');
+    assert.equal(back.children.length, 15);
+    assert.equal(back.children[0].children[0].headerState, 1);
+    assert.equal(back.children[1].children[0].headerState, 0);
+});
+
+test('bold and a link inside a table cell survive the round trip', () => {
+    const cell = [
+        { type: 'text', text: 'Płatność ', format: 0 },
+        { type: 'text', text: 'online', format: 1 },
+        { type: 'link', fields: { linkType: 'custom', url: '/blog/jak-placic' }, children: [{ type: 'text', text: ' według poradnika', format: 0 }] },
+    ];
+    const blocks = lexicalToPortableText({ root: { type: 'root', children: [lexicalTable([['Obszar', 'Link'], [cell, 'brak']])] } });
+    const table = blocks[0];
+    const spans = table.rows[0][0].spans;
+
+    assert.equal(spans.map((s) => s.text).join(''), 'Płatność online według poradnika');
+    assert.ok(spans.find((s) => s.text === 'online').marks.includes('strong'));
+    const linkKey = spans[spans.length - 1].marks.find((mark) => mark.startsWith('link'));
+    assert.equal(table.rows[0][0].markDefs.find((def) => def._key === linkKey).href, '/blog/jak-placic');
+
+    const lexical = portableTextToLexical(blocks);
+    const link = lexical.root.children[0].children[1].children[0].children[0].children.find((node) => node.type === 'link');
+    assert.equal(link.fields.url, '/blog/jak-placic');
+});
+
+test('the Markdown twin renders a table as GFM, escaping pipes', () => {
+    const blocks = [{
+        _type: 'table',
+        _key: 't1',
+        head: [{ spans: [span('Obszar')] }, { spans: [span('Uwaga')] }],
+        rows: [[{ spans: [span('Ceny | rabaty')] }, { spans: [span('płatność online', ['strong'])] }]],
+    }];
+    assert.equal(
+        portableTextToMarkdown(blocks),
+        '| Obszar | Uwaga |\n| --- | --- |\n| Ceny \\| rabaty | **płatność online** |',
+    );
+});
+
+test('the blog body renders tables through the shared Portable Text component', () => {
+    const source = readFileSync(new URL('../src/components/PortableTextContent.tsx', import.meta.url), 'utf8');
+    assert.match(source, /table: \(\{ value \}: any\)/);
+    assert.match(source, /<table className="ct-table">/);
+    assert.match(source, /<th key=\{index\} scope="col">/);
 });

@@ -10,7 +10,7 @@
  * are "\n" in Portable Text. Pure, import-free: node --test covers it.
  */
 
-import type { PortableTextBlock, PortableTextSpan } from '../markdown/portable-text';
+import type { PortableTextBlock, PortableTextSpan, PortableTextTable, PortableTextTableCell } from '../markdown/portable-text';
 
 // Lexical text format bit flags.
 const FORMAT = { strong: 1, em: 2, 'strike-through': 4, underline: 8, code: 16 } as const;
@@ -140,8 +140,7 @@ function listToLexical(blocks: PortableTextBlock[], level: number): LexicalNode 
     return listNode(listType, items);
 }
 
-/** Splits a run of list blocks at the top level wherever the list type changes. */
-function topLevelLists(blocks: PortableTextBlock[]): PortableTextBlock[][] {
+/** Splits a run of list blocks at the top level wherever the list type changes. */function topLevelLists(blocks: PortableTextBlock[]): PortableTextBlock[][] {
     const runs: PortableTextBlock[][] = [];
     for (const block of blocks) {
         const last = runs[runs.length - 1];
@@ -166,6 +165,29 @@ export function plainTextToPortableText(text: string): PortableTextBlock[] {
         }));
 }
 
+/** Portable Text table → Lexical table; the first row is the header. */
+function tableToLexical(block: PortableTextTable): LexicalNode {
+    const head = block.head?.length ? block.head : (block.rows?.[0] ?? []);
+    const body = block.head?.length ? (block.rows ?? []) : (block.rows ?? []).slice(1);
+    const row = (cells: PortableTextTableCell[], header: boolean) =>
+        element(
+            'tablerow',
+            cells.map((cell) =>
+                element(
+                    'tablecell',
+                    [
+                        element('paragraph', inlineToLexical({ _type: 'block', children: cell.spans, markDefs: cell.markDefs ?? [] }), {
+                            textFormat: 0,
+                            textStyle: '',
+                        }),
+                    ],
+                    { headerState: header ? 1 : 0, colSpan: 1, rowSpan: 1 },
+                ),
+            ),
+        );
+    return element('table', [row(head, true), ...body.map((cells) => row(cells, false))]);
+}
+
 export function portableTextToLexical(value: PortableTextBlock[] | string | null | undefined, options: ToLexicalOptions = {}): LexicalState {
     const blocks = typeof value === 'string' ? plainTextToPortableText(value) : (value ?? []);
     const children: LexicalNode[] = [];
@@ -181,6 +203,8 @@ export function portableTextToLexical(value: PortableTextBlock[] | string | null
         }
         if (block._type === 'block') {
             children.push(blockToLexical(block));
+        } else if (block._type === 'table') {
+            children.push(tableToLexical(block as PortableTextTable));
         } else if (block._type === 'image') {
             const id = options.resolveImage?.(block);
             if (id != null) children.push({ type: 'upload', version: 3, format: '', relationTo: 'media', value: id, fields: {} });
@@ -281,6 +305,43 @@ function textBlock(key: string, nodes: LexicalNode[] | undefined, options: ToPor
     };
 }
 
+/** Lexical table cell → one Portable Text cell (spans + link definitions). */
+function tableCellFromLexical(cell: LexicalNode, options: ToPortableTextOptions): PortableTextTableCell {
+    const state: InlineState = { children: [], markDefs: [] };
+    for (const child of cell.children ?? []) collectInline(child.children ?? [], state, options);
+    const spans = mergeSpans(state.children);
+    // Markdown puts the padding spaces around cell text; they are not content.
+    if (spans.length) {
+        spans[0] = { ...spans[0], text: (spans[0].text ?? '').replace(/^\s+/, '') };
+        const last = spans.length - 1;
+        spans[last] = { ...spans[last], text: (spans[last].text ?? '').replace(/\s+$/, '') };
+    }
+    return {
+        spans: spans.length ? spans : [{ _type: 'span', text: '', marks: [] }],
+        ...(state.markDefs.length ? { markDefs: state.markDefs } : {}),
+    };
+}
+
+/** Lexical table → GFM-shaped block; the row flagged as header becomes `head`. */
+function tableFromLexical(node: LexicalNode, key: string, options: ToPortableTextOptions): PortableTextTable {
+    const rows = (node.children ?? [])
+        .filter((row) => row.type === 'tablerow')
+        .map((row) => {
+            const cells = row.children ?? [];
+            return {
+                cells: cells.filter((cell) => cell.type === 'tablecell').map((cell) => tableCellFromLexical(cell, options)),
+                header: cells.some((cell) => (Number(cell.headerState) & 1) === 1),
+            };
+        });
+    const headIndex = Math.max(0, rows.findIndex((row) => row.header));
+    return {
+        _type: 'table',
+        _key: key,
+        head: rows[headIndex]?.cells ?? [],
+        rows: rows.filter((_, index) => index !== headIndex).map((row) => row.cells),
+    };
+}
+
 export function lexicalToPortableText(state: LexicalState | null | undefined, options: ToPortableTextOptions = {}): PortableTextBlock[] {
     const out: PortableTextBlock[] = [];
     let counter = 0;
@@ -306,6 +367,9 @@ export function lexicalToPortableText(state: LexicalState | null | undefined, op
                 break;
             case 'list':
                 visitList(node, 1);
+                break;
+            case 'table':
+                out.push(tableFromLexical(node, nextKey(), options));
                 break;
             case 'upload': {
                 const media = node.value && typeof node.value === 'object' ? (node.value as MediaDoc) : null;
