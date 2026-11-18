@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import CTASection from '@/components/CTASection';
 import FAQAccordion from '@/components/FAQAccordion';
+import RelatedLinks from '@/components/RelatedLinks';
 import SchemaScript from '@/components/SchemaScript';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
@@ -19,11 +20,13 @@ const AUDIT_PRICE = '3 000 zł netto';
 
 export const metadata: Metadata = {
     title: { absolute: 'Audyt e-commerce: sprzedaż i marża | CreativeTrust' },
-    description: 'Audyt e-commerce w 5-7 dni roboczych: pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry.',
+    // Price and the delivery time up front: at position 10-20 the description decides the click,
+    // and competitors keep their price behind a form.
+    description: 'Audyt e-commerce w 5-7 dni roboczych. Stała cena 3 000 zł netto i raport z roadmapą: gdzie sklep traci sprzedaż, marżę i czas zespołu.',
     alternates: pageAlternates('/uslugi/audyt-e-commerce', 'pl', SITE_URL),
     openGraph: {
         title: 'Audyt e-commerce: sprzedaż i marża | CreativeTrust',
-        description: 'Audyt e-commerce w 5-7 dni roboczych: pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry.',
+        description: 'Audyt e-commerce w 5-7 dni roboczych. Stała cena 3 000 zł netto i raport z roadmapą: gdzie sklep traci sprzedaż, marżę i czas zespołu.',
         url: canonicalUrl,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -32,7 +35,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Audyt e-commerce: sprzedaż i marża | CreativeTrust',
-        description: 'Audyt e-commerce w 5-7 dni roboczych: pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry.',
+        description: 'Audyt e-commerce w 5-7 dni roboczych. Stała cena 3 000 zł netto i raport z roadmapą: gdzie sklep traci sprzedaż, marżę i czas zespołu.',
     },
 };
 
@@ -118,8 +121,36 @@ const steps = [
     },
 ];
 
-const faqs = [
+/** The checklists published 17-18.11.2026: same four areas the audit covers, so the service page and the articles link to each other. */
+const checklists = [
     {
+        href: '/blog/audyt-e-commerce-checklista',
+        title: 'Audyt e-commerce: checklista',
+        description: '15 punktów w czterech obszarach: oferta, marża, technologia i zespół. Zobacz, co sprawdzamy w audycie.',
+    },
+    {
+        href: '/blog/audyt-seo-sklepu-internetowego-checklista',
+        title: 'Audyt SEO sklepu: checklista',
+        description: '14 obszarów od indeksacji po dane strukturalne. Przejdź je sam, zanim zamówisz audyt.',
+    },
+    {
+        href: '/blog/audyt-ux-sklepu-internetowego-checklista',
+        title: 'Audyt UX sklepu: checklista',
+        description: '14 elementów ścieżki zakupowej, od kategorii po potwierdzenie zamówienia.',
+    },
+    {
+        href: '/blog/audyt-strony-internetowej-checklista',
+        title: 'Audyt strony internetowej: checklista',
+        description: 'Cztery obszary i 14 punktów, gdy pytanie dotyczy strony firmowej, a nie sklepu.',
+    },
+    {
+        href: '/blog/audyt-konta-google-ads-checklista',
+        title: 'Audyt konta Google Ads: checklista',
+        description: '30 punktów: konwersje, struktura kampanii, wyszukiwane hasła i budżet.',
+    },
+];
+
+const faqs = [    {
         question: 'Czym ten audyt różni się od audytu UX albo SEO?',
         answer:
             'Patrzymy na sklep z perspektywy zarządzania: sprzedaży, marży i czasu pracy zespołu. UX, SEO i technologia są w nim środkiem do wyniku, a nie osobną listą uwag. Dostajesz priorytety ułożone według wpływu na zysk.',
@@ -188,8 +219,8 @@ export default function EcommerceAuditPage() {
             <SchemaScript schema={faqSchema} />
 
             <PageHero
-                eyebrow="Audyt e-commerce"
-                title={<>Zobacz, gdzie sklep traci sprzedaż, marżę i <span style={{ color: 'var(--accent)' }}>czas zespołu.</span></>}
+                eyebrow="Audyt sklepu internetowego"
+                title={<>Audyt e-commerce: zobacz, gdzie sklep traci sprzedaż, marżę i <span style={{ color: 'var(--accent)' }}>czas zespołu.</span></>}
                 description="Audyt e-commerce to przegląd sklepu z perspektywy zarządzania: sprzedaży, marży, technologii i czasu pracy zespołu. Trwa 5-7 dni roboczych i kończy się raportem z roadmapą, czyli listą napraw w kolejności wpływu na zysk."
                 cta={{ label: 'Pierwsza rozmowa 15 minut', href: '/kontakt' }}
                 ctaSecondary={{ label: 'Co obejmuje audyt', href: '#zakres' }}
@@ -306,6 +337,15 @@ export default function EcommerceAuditPage() {
 
             <Section title="Jak się przygotować do audytu">
                 <BulletColumns items={preparation} />
+            </Section>
+
+            <Section id="checklisty" eyebrow="Zanim zamówisz audyt" title="Przejdź checklistę sam i zobacz, gdzie szukać strat">
+                <p className="ct-body" style={{ maxWidth: 860 }}>
+                    Cztery checklisty pokrywają te same obszary, które analizujemy w audycie: ofertę i sprzedaż, marżę, SEO, UX oraz konto Google Ads. Możesz przejść je samodzielnie — a jeśli po drodze okaże się, że problemów jest więcej niż czasu, to jest właśnie moment na audyt.
+                </p>
+                <div className="mt-8">
+                    <RelatedLinks links={checklists} eyebrow="Checklisty" heading="Wybierz obszar, który najbardziej boli" ariaLabel="Checklisty audytu" />
+                </div>
             </Section>
 
             <Section tint>
