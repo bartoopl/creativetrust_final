@@ -42,7 +42,7 @@ const pages = [
         file: 'src/app/(pl)/uslugi/audyt-e-commerce/page.tsx',
         md: 'content/ai/uslugi/audyt-e-commerce.md',
         title: 'Audyt e-commerce: sprzedaż i marża | CreativeTrust',
-        description: 'Audyt e-commerce w 5-7 dni roboczych: pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry.',
+        description: 'Audyt e-commerce w 5-7 dni roboczych. Stała cena 3 000 zł netto i raport z roadmapą: gdzie sklep traci sprzedaż, marżę i czas zespołu.',
     },
     {
         route: '/uslugi/zarzadzanie-e-commerce',

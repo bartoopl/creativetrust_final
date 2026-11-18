@@ -86,7 +86,13 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
         title: 'Audyt Google Ads: checklista 30 punktów krok po kroku (2026) | CreativeTrust',
         description:
             'Darmowa checklista audytu konta Google Ads: konwersje i tracking, struktura kampanii, wyszukiwane hasła, budżet i landing page. Sprawdź, gdzie ucieka budżet.',
-        links: [],
+        links: [
+            {
+                href: '/uslugi/audyt-google-ads',
+                title: 'Audyt Google Ads',
+                description: 'Sprawdzamy konto i kampanie: konwersje, strukturę, budżet i landing page. Raport z priorytetami w 5-7 dni.',
+            },
+        ],
         heading: 'Audyt Google Ads: checklista, która pokazuje, gdzie ucieka budżet',
         sections: [
             {
@@ -333,7 +339,13 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
         title: 'Google Ads dla B2B: jak pozyskać leady sprzedażowe? Poradnik 2026 | CreativeTrust',
         description:
             'Kampanie Google Ads dla firm B2B krok po kroku: dobór słów kluczowych, formularze, CRM i kwalifikacja leadów. Sprawdź, jak obniżyć koszt pozyskania klienta.',
-        links: [],
+        links: [
+            {
+                href: '/uslugi/audyt-google-ads',
+                title: 'Audyt Google Ads',
+                description: 'Gdzie ucieka budżet: konwersje, struktura kampanii i landing page w jednym raporcie.',
+            },
+        ],
         // WEW-15: link back to the checklist.
         sections: [
             {
