@@ -6,6 +6,7 @@ import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
 import Illustration from '@/components/ui/Illustration';
 import SchemaScript from '@/components/SchemaScript';
+import RelatedLinks from '@/components/RelatedLinks';
 import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
@@ -52,6 +53,20 @@ const process = [
     { num: '02', title: 'UX i design', description: 'Makiety i UI w Figmie. Ścieżka klienta od kategorii po potwierdzenie zamówienia.' },
     { num: '03', title: 'Development', description: 'Budujemy lub migrujemy. Integracje, testy i optymalizacja wydajności.' },
     { num: '04', title: 'Rozwój', description: 'Po starcie optymalizujemy konwersję i rozwijamy sklep na podstawie danych.', featured: true },
+];
+
+/** The article side of this page: checklists and price guides that answer the same questions. */
+const relatedReading = [
+    {
+        href: '/blog/audyt-e-commerce-checklista',
+        title: 'Checklista audytu e-commerce',
+        description: '15 punktów w czterech obszarach: oferta, marża, technologia i zespół.',
+    },
+    {
+        href: '/blog/jak-stworzyc-skuteczny-sklep-internetowy-6-czynnikow-ktore-musisz-wziac-pod-uwage',
+        title: 'Jak stworzyć skuteczny sklep: 6 czynników',
+        description: 'Co zdecyduje o sprzedaży, zanim wybierzesz platformę i wdrożysz pierwszy szablon.',
+    },
 ];
 
 export default function EcommercePage() {
@@ -143,6 +158,10 @@ export default function EcommercePage() {
                         </li>
                     ))}
                 </ol>
+            </Section>
+
+            <Section border={false}>
+                <RelatedLinks links={relatedReading} eyebrow="Zobacz też" heading="Checklisty i kalkulacje, które możesz przejść sam" ariaLabel="Zobacz też" />
             </Section>
 
             <Section tint>

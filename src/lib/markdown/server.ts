@@ -238,8 +238,9 @@ export function markdownResponse(body: string, { canonical, status = 200 }: Mark
         headers: {
             'Content-Type': 'text/markdown; charset=utf-8',
             'Cache-Control': status === 200 ? 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400' : 'no-store',
-            // The HTML page is the one Google should index.
-            'X-Robots-Tag': 'noindex',
+            // The HTML page is the one Google should index. `follow` keeps the links
+            // inside the Markdown twin useful; without it the twin is a dead end.
+            'X-Robots-Tag': 'noindex, follow',
             Link: `<${canonical}>; rel="canonical"`,
             Vary: 'Accept',
         },

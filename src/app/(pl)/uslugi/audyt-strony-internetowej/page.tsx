@@ -9,6 +9,7 @@ import { ProseWithIllustration } from '@/components/ui/Illustration';
 import { BulletColumns, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { experience } from '@/lib/experience';
 import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import RelatedLinks from '@/components/RelatedLinks';
 
 
 const canonicalUrl = `${SITE_URL}/uslugi/audyt-strony-internetowej`;
@@ -18,6 +19,20 @@ const AUDIT_NAME = 'Audyt strony internetowej';
 const AUDIT_PRICE = '1 500 zł netto';
 const AUDIT_HREF = '/uslugi/audyt-strony-internetowej';
 const WEBSITES_HREF = '/uslugi/strony-www';
+
+/** The article side of this page: the checklist and the price guide for the same service. */
+const relatedReading = [
+    {
+        href: '/blog/audyt-strony-internetowej-checklista',
+        title: 'Checklista audytu strony internetowej',
+        description: 'Cztery obszary i 14 punktów: treść, technika, SEO i konwersja. Przejdź je przed zamówieniem audytu.',
+    },
+    {
+        href: '/blog/ile-kosztuje-audyt-strony-internetowej',
+        title: 'Ile kosztuje audyt strony internetowej',
+        description: 'Od czego zależy cena, co wchodzi w zakres i kiedy audyt jest stratą pieniędzy.',
+    },
+];
 
 export const metadata: Metadata = {
     title: { absolute: 'Audyt strony internetowej: co blokuje zapytania' },
@@ -296,6 +311,10 @@ export default function WebsiteAuditPage() {
                 <div className="mt-10">
                     <NumberedGrid cols={3} numbered={false} items={experience.map((item) => ({ title: item.brand, text: item.text }))} />
                 </div>
+            </Section>
+
+            <Section border={false}>
+                <RelatedLinks links={relatedReading} eyebrow="Zobacz też" heading="Checklista i cena — do przejrzenia przed rozmową" ariaLabel="Zobacz też" />
             </Section>
 
             <Section eyebrow="FAQ" title="Pytania o audyt strony internetowej" maxWidth={1100}>

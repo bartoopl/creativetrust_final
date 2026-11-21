@@ -533,7 +533,18 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
         ],
     },
     'jak-stworzyc-skuteczny-sklep-internetowy-6-czynnikow-ktore-musisz-wziac-pod-uwage': {
-        links: [],
+        links: [
+            {
+                href: '/uslugi/e-commerce',
+                title: 'E-commerce',
+                description: 'Sześć czynników z artykułu w jednym wdrożeniu: platforma, płatności, dostawa, dane i analityka.',
+            },
+            {
+                href: '/uslugi/strony-www',
+                title: 'Strony internetowe',
+                description: 'Zaplecze sklepu: strony marek, landing page pod kampanie i treści, które domykają sprzedaż.',
+            },
+        ],
         sections: [
             {
                 beforeHeading: 'Podsumowanie',
@@ -668,6 +679,98 @@ const blogSeoConfig: Record<string, BlogSeoConfig> = {
                         ],
                     },
                 ],
+            },
+        ],
+    },
+    // Thrawn, GSC 16.11.2026: these posts carry the buying questions but no contextual
+    // link to the service page they answer for, so the service pages got impressions and
+    // no clicks. The links render server-side in the "Powiązane usługi" box above the
+    // author; the anchor is the link title.
+    'audyt-e-commerce-checklista': {
+        links: [
+            {
+                href: '/uslugi/audyt-e-commerce',
+                title: 'Audyt e-commerce',
+                description: 'Sprawdzamy ofertę, marżę, technologię i zespół. Stała cena 3 000 zł netto, raport z priorytetami w 5-7 dni.',
+            },
+            {
+                href: '/uslugi/zarzadzanie-e-commerce',
+                title: 'Zarządzanie e-commerce',
+                description: 'Przejmujemy codzienne prowadzenie sklepu: asortyment, ceny, kampanie i zespół, z miesięcznym raportem.',
+            },
+        ],
+    },
+    'ile-kosztuje-audyt-e-commerce': {
+        links: [
+            {
+                href: '/uslugi/audyt-e-commerce',
+                title: 'Audyt e-commerce',
+                description: 'Wiesz już, ile kosztuje audyt i co obejmuje. Zobacz, jak wygląda nasz: zakres, cena i termin.',
+            },
+            {
+                href: '/uslugi/zarzadzanie-e-commerce',
+                title: 'Zarządzanie e-commerce',
+                description: 'Gdy audyt pokaże, że problem jest stały, a nie jednorazowy: prowadzimy sklep za Ciebie.',
+            },
+        ],
+    },
+    'audyt-seo-sklepu-internetowego-checklista': {
+        links: [
+            {
+                href: '/uslugi/audyt-e-commerce',
+                title: 'Audyt e-commerce',
+                description: 'SEO to jeden z czterech obszarów audytu. Całość: oferta, marża, technologia i zespół.',
+            },
+        ],
+    },
+    'audyt-ux-sklepu-internetowego-checklista': {
+        links: [
+            {
+                href: '/uslugi/audyt-e-commerce',
+                title: 'Audyt e-commerce',
+                description: 'UX to jeden z czterech obszarów audytu. Sprawdzamy całą ścieżkę zakupową i podajemy priorytety.',
+            },
+        ],
+    },
+    'audyt-strony-internetowej-checklista': {
+        links: [
+            {
+                href: '/uslugi/audyt-strony-internetowej',
+                title: 'Audyt strony internetowej',
+                description: 'Ten sam zakres, który przechodzisz w checkliście, robimy z danymi: treść, technika, SEO i konwersja.',
+            },
+            {
+                href: '/uslugi/strony-www',
+                title: 'Strony internetowe',
+                description: 'Gdy audyt pokaże, że taniej zbudować od nowa: strony firmowe z CMS-em i szybkim ładowaniem.',
+            },
+        ],
+    },
+    'ile-kosztuje-audyt-strony-internetowej': {
+        links: [
+            {
+                href: '/uslugi/audyt-strony-internetowej',
+                title: 'Audyt strony internetowej',
+                description: 'Stała cena i konkretny zakres. Zobacz, co dostajesz w raporcie i w jakim terminie.',
+            },
+            {
+                href: '/uslugi/strony-www',
+                title: 'Strony internetowe',
+                description: 'Jeśli strona wymaga przebudowy: projekt, wdrożenie i migracja treści z zachowaniem adresów.',
+            },
+        ],
+    },
+    'tworzenie-stron-internetowych-przewodnik-od-a-do-z-dla-kreatywnych-przedsiebiorcow': {
+        links: [
+            {
+                href: '/uslugi/strony-www',
+                title: 'Strony internetowe',
+                description: 'Cały proces z przewodnika prowadzony przez nas: brief, projekt, wdrożenie, SEO i szkolenie z edycji.',
+            },
+            {
+                href: '/uslugi/e-commerce',
+                title: 'E-commerce',
+                description: 'Gdy ze strony firmowej ma wyrosnąć sklep: platforma, integracje i migracja bez utraty pozycji.',
             },
         ],
     },
