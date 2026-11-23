@@ -19,14 +19,14 @@ const AUDIT_NAME = 'Audyt e-commerce';
 const AUDIT_PRICE = '3 000 zł netto';
 
 export const metadata: Metadata = {
-    title: { absolute: 'Audyt e-commerce: sprzedaż i marża | CreativeTrust' },
+    title: { absolute: 'Audyt sklepu internetowego (e-commerce) – raport w 5–7 dni | CreativeTrust' },
     // Price and the delivery time up front: at position 10-20 the description decides the click,
     // and competitors keep their price behind a form.
-    description: 'Audyt e-commerce w 5-7 dni roboczych. Stała cena 3 000 zł netto i raport z roadmapą: gdzie sklep traci sprzedaż, marżę i czas zespołu.',
+    description: 'Audyt sklepu internetowego: sprzedaż, UX, SEO, analityka i infrastruktura. Raport z roadmapą w 5–7 dni roboczych, stała cena 3 000 zł netto. Sprawdź, gdzie tracisz sprzedaż.',
     alternates: pageAlternates('/uslugi/audyt-e-commerce', 'pl', SITE_URL),
     openGraph: {
-        title: 'Audyt e-commerce: sprzedaż i marża | CreativeTrust',
-        description: 'Audyt e-commerce w 5-7 dni roboczych. Stała cena 3 000 zł netto i raport z roadmapą: gdzie sklep traci sprzedaż, marżę i czas zespołu.',
+        title: 'Audyt sklepu internetowego (e-commerce) – raport w 5–7 dni | CreativeTrust',
+        description: 'Audyt sklepu internetowego: sprzedaż, UX, SEO, analityka i infrastruktura. Raport z roadmapą w 5–7 dni roboczych, stała cena 3 000 zł netto. Sprawdź, gdzie tracisz sprzedaż.',
         url: canonicalUrl,
         siteName: 'CreativeTrust',
         locale: 'pl_PL',
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Audyt e-commerce: sprzedaż i marża | CreativeTrust',
-        description: 'Audyt e-commerce w 5-7 dni roboczych. Stała cena 3 000 zł netto i raport z roadmapą: gdzie sklep traci sprzedaż, marżę i czas zespołu.',
+        title: 'Audyt sklepu internetowego (e-commerce) – raport w 5–7 dni | CreativeTrust',
+        description: 'Audyt sklepu internetowego: sprzedaż, UX, SEO, analityka i infrastruktura. Raport z roadmapą w 5–7 dni roboczych, stała cena 3 000 zł netto. Sprawdź, gdzie tracisz sprzedaż.',
     },
 };
 
@@ -220,7 +220,7 @@ export default function EcommerceAuditPage() {
 
             <PageHero
                 eyebrow="Audyt sklepu internetowego"
-                title={<>Audyt e-commerce: zobacz, gdzie sklep traci sprzedaż, marżę i <span style={{ color: 'var(--accent)' }}>czas zespołu.</span></>}
+                title={<>Audyt sklepu internetowego (e-commerce): zobacz, gdzie tracisz sprzedaż, marżę i <span style={{ color: 'var(--accent)' }}>czas zespołu.</span></>}
                 description="Audyt e-commerce to przegląd sklepu z perspektywy zarządzania: sprzedaży, marży, technologii i czasu pracy zespołu. Trwa 5-7 dni roboczych i kończy się raportem z roadmapą, czyli listą napraw w kolejności wpływu na zysk."
                 cta={{ label: 'Pierwsza rozmowa 15 minut', href: '/kontakt' }}
                 ctaSecondary={{ label: 'Co obejmuje audyt', href: '#zakres' }}
@@ -244,10 +244,10 @@ export default function EcommerceAuditPage() {
                 </div>
             </Section>
 
-            <Section title="Czym jest audyt e-commerce">
-                <ProseWithIllustration id="audit-scan" gap={20} alt="Audyt e-commerce jako inspekcja: katalog sklepu pod lupą, jedna komórka oznaczona na fioletowo jako najważniejsze ustalenie.">
+            <Section title="Czym jest audyt sklepu internetowego">
+                <ProseWithIllustration id="audit-scan" gap={20} alt="Audyt sklepu internetowego jako inspekcja: katalog sklepu pod lupą, jedna komórka oznaczona na fioletowo jako najważniejsze ustalenie.">
                     <p className="ct-body">
-                        Audyt e-commerce to analiza sklepu prowadzona z perspektywy osoby, która odpowiada za wynik, a nie za jeden kanał. Szukamy miejsc, w których sklep traci sprzedaż, marżę i czas zespołu, a potem układamy je w kolejności naprawy.
+                        Audyt sklepu internetowego (e-commerce) to analiza sklepu prowadzona z perspektywy osoby, która odpowiada za wynik, a nie za jeden kanał. Szukamy miejsc, w których sklep traci sprzedaż, marżę i czas zespołu, a potem układamy je w kolejności naprawy.
                     </p>
                     <p className="ct-body">
                         Audyt nie jest listą błędów UX ani przeglądem SEO. Te elementy wchodzą do środka, ale jako środek do wyniku. Decyzja o tym, co robić najpierw, zapada na podstawie wpływu na zysk i kosztu wdrożenia. Gdy zamiast sklepu pytanie dotyczy strony firmowej, właściwym krokiem jest{' '}

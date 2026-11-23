@@ -51,6 +51,15 @@ test('the buying-question posts carry the service links they answer for', () => 
     }
 });
 
+test('the e-commerce audit page targets the "audyt sklepu internetowego" keyword', () => {
+    const source = readFileSync(join(SRC, 'app/(pl)/uslugi/audyt-e-commerce/page.tsx'), 'utf8');
+    assert.match(source, /Audyt sklepu internetowego \(e-commerce\) – raport w 5–7 dni \| CreativeTrust/, 'title must contain the target keyword');
+    assert.match(source, /Audyt sklepu internetowego: sprzedaż, UX, SEO, analityka i infrastruktura/, 'meta description must contain the target keyword');
+    assert.match(source, /Audyt sklepu internetowego \(e-commerce\): zobacz, gdzie tracisz sprzedaż, marżę/, 'H1 must contain the target keyword');
+    assert.match(source, /title="Czym jest audyt sklepu internetowego"/, 'the first H2 must contain the target keyword');
+    assert.match(source, /Audyt sklepu internetowego \(e-commerce\) to analiza sklepu/, 'first paragraph must contain the target keyword');
+});
+
 test('the service pages link back to the checklists', () => {
     const pages = {
         'app/(pl)/uslugi/audyt-strony-internetowej/page.tsx': '/blog/audyt-strony-internetowej-checklista',

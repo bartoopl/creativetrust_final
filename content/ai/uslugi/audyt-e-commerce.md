@@ -1,6 +1,6 @@
 ---
-title: "Audyt e-commerce: sprzedaż i marża | CreativeTrust"
-description: "Audyt e-commerce w 5-7 dni roboczych. Stała cena 3 000 zł netto i raport z roadmapą: gdzie sklep traci sprzedaż, marżę i czas zespołu."
+title: "Audyt sklepu internetowego (e-commerce) – raport w 5–7 dni | CreativeTrust"
+description: "Audyt sklepu internetowego: sprzedaż, UX, SEO, analityka i infrastruktura. Raport z roadmapą w 5–7 dni roboczych, stała cena 3 000 zł netto. Sprawdź, gdzie tracisz sprzedaż."
 date: "2026-11-10"
 canonical: "https://www.creativetrust.pl/uslugi/audyt-e-commerce"
 lang: "pl-PL"
