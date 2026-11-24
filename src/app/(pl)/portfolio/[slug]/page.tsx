@@ -9,7 +9,7 @@ import PortableTextContent from '@/components/PortableTextContent';
 import SchemaScript from '@/components/SchemaScript';
 import { GalleryTrigger, ProjectGallery } from '@/components/ProjectGallery';
 import { Project, ImageWithCaption, Technology } from '@/types';
-import { SITE_URL, buildBreadcrumbSchema, buildCreativeWorkSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildCreativeWorkSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 import { portableTextToPlainText, type PortableTextBlock } from '@/lib/markdown/portable-text';
 import { projectCategories, projectSummary, projectTechnologies } from '@/lib/markdown/portfolio';
 import { servicesForCategories } from '@/lib/portfolio-services';
@@ -61,9 +61,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
             siteName: 'CreativeTrust',
             locale: 'pl_PL',
             type: 'article',
-            images: image ? [{ url: image }] : undefined,
+            images: image ? [{ url: image }] : OG_IMAGE,
         },
-        twitter: {
+        twitter: { images: TWITTER_IMAGE,
             card: 'summary_large_image',
             title,
             description,

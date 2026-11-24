@@ -7,7 +7,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { ProseWithIllustration } from '@/components/ui/Illustration';
 import { HeroMedia } from '@/components/LandingBlocks';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/audyt-google-ads`;
 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description: pageDescription,
     // Polish only (no English twin), so no hreflang pair.
     alternates: { canonical: canonicalUrl },
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: pageTitle,
         description: pageDescription,
         url: canonicalUrl,
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         locale: 'pl_PL',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: pageTitle,
         description: pageDescription,

@@ -9,7 +9,7 @@ import Section from '@/components/ui/Section';
 import { ProseWithIllustration } from '@/components/ui/Illustration';
 import { BulletColumns, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { MANAGEMENT_HREF, experience } from '@/lib/experience';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 const canonicalUrl = `${SITE_URL}/uslugi/audyt-e-commerce`;
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     // and competitors keep their price behind a form.
     description: 'Audyt sklepu internetowego: sprzedaż, UX, SEO, analityka i infrastruktura. Raport z roadmapą w 5–7 dni roboczych, stała cena 3 000 zł netto. Sprawdź, gdzie tracisz sprzedaż.',
     alternates: pageAlternates('/uslugi/audyt-e-commerce', 'pl', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Audyt sklepu internetowego (e-commerce) – raport w 5–7 dni | CreativeTrust',
         description: 'Audyt sklepu internetowego: sprzedaż, UX, SEO, analityka i infrastruktura. Raport z roadmapą w 5–7 dni roboczych, stała cena 3 000 zł netto. Sprawdź, gdzie tracisz sprzedaż.',
         url: canonicalUrl,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         locale: 'pl_PL',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'Audyt sklepu internetowego (e-commerce) – raport w 5–7 dni | CreativeTrust',
         description: 'Audyt sklepu internetowego: sprzedaż, UX, SEO, analityka i infrastruktura. Raport z roadmapą w 5–7 dni roboczych, stała cena 3 000 zł netto. Sprawdź, gdzie tracisz sprzedaż.',
