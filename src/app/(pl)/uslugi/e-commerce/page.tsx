@@ -7,14 +7,14 @@ import Section from '@/components/ui/Section';
 import Illustration from '@/components/ui/Illustration';
 import SchemaScript from '@/components/SchemaScript';
 import RelatedLinks from '@/components/RelatedLinks';
-import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema, OG_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: { absolute: 'Sklepy internetowe: projekt i wdrożenie | CreativeTrust' },
     description: 'Budujemy sklepy internetowe: headless, WooCommerce, Shopify, migracje i integracje ERP. Pod sprzedaż, marżę i pracę zespołu.',
     alternates: pageAlternates('/uslugi/e-commerce', 'pl', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Sklepy internetowe: projekt i wdrożenie | CreativeTrust',
         description: 'Budujemy sklepy internetowe: headless, WooCommerce, Shopify, migracje i integracje ERP. Pod sprzedaż, marżę i pracę zespołu.',
         url: `${SITE_URL}/uslugi/e-commerce`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',

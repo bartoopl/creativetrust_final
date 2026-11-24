@@ -5,14 +5,14 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import Illustration from '@/components/ui/Illustration';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema, OG_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: { absolute: 'Social media dla marek: strategia i kampanie | CreativeTrust' },
     description: 'Prowadzimy social media marek pod sprzedaż: strategia, content, kampanie i społeczność planowane z kalendarzem sprzedaży.',
     alternates: pageAlternates('/uslugi/social-media', 'pl', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Social media dla marek: strategia i kampanie | CreativeTrust',
         description: 'Prowadzimy social media marek pod sprzedaż: strategia, content, kampanie i społeczność planowane z kalendarzem sprzedaży.',
         url: `${SITE_URL}/uslugi/social-media`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',

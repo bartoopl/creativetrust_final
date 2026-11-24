@@ -6,7 +6,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, HeroMedia, InlineCTA, NumberedGrid, PriceGrid, SplitLayout } from '@/components/LandingBlocks';
 import { pageAlternates } from '@/lib/i18n';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/tworzenie-stron-www-cennik`;
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: { absolute: 'Ile kosztuje strona internetowa? Cennik | CreativeTrust' },
     description: 'Ile kosztuje strona internetowa? Realne zakresy: landing page od 3 500 zł netto, strona firmowa od 7 500 zł, serwis z CMS. Sprawdź, co wpływa na cenę.',
     alternates: pageAlternates('/uslugi/tworzenie-stron-www-cennik', 'pl', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Ile kosztuje strona internetowa? Cennik | CreativeTrust',
         description: 'Ile kosztuje strona internetowa? Realne zakresy: landing page od 3 500 zł netto, strona firmowa od 7 500 zł, serwis z CMS. Sprawdź, co wpływa na cenę.',
         url: canonicalUrl,
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         locale: 'pl_PL',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'Ile kosztuje strona internetowa? Cennik | CreativeTrust',
         description: 'Ile kosztuje strona internetowa? Realne zakresy: landing page od 3 500 zł netto, strona firmowa od 7 500 zł, serwis z CMS. Sprawdź, co wpływa na cenę.',

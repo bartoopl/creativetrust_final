@@ -8,7 +8,7 @@ import Section from '@/components/ui/Section';
 import Illustration, { ProseWithIllustration } from '@/components/ui/Illustration';
 import { BulletColumns, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { AUDIT_HREF, experience } from '@/lib/experience';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 const canonicalUrl = `${SITE_URL}/uslugi/zarzadzanie-e-commerce`;
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     description:
         'Prowadzimy e-commerce marek z zewnątrz: sprzedaż, marżę, zespół, dostawców i raportowanie. Start od audytu w 5-7 dni roboczych, potem stały abonament.',
     alternates: pageAlternates('/uslugi/zarzadzanie-e-commerce', 'pl', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: pageTitle,
         description: pageDescription,
         url: canonicalUrl,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
         locale: 'pl_PL',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: pageTitle,
         description: pageDescription,
@@ -127,7 +127,7 @@ const faqs = [
             'Pierwsze decyzje o priorytetach zapadają po audycie, czyli po 5-7 dniach roboczych od startu. Dalej pracujemy w miesięcznym rytmie przeglądów. Konkretnego wzrostu nie obiecujemy przed poznaniem danych sklepu.',
     },
     {
-        question: 'Czy pracujecie z naszym software house\'em i obecnymi agencjami?',
+        question: 'Czy pracujecie z naszym software house’em i obecnymi agencjami?',
         answer:
             'Tak. Jeśli klient ma własny dział IT, software house lub agencję, pracujemy z nimi i dzielimy zakres. Naszą rolą jest dopilnowanie, żeby wszystkie strony grały do tego samego planu.',
     },

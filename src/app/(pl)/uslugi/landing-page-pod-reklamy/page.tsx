@@ -6,7 +6,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, HeroMedia, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { pageAlternates } from '@/lib/i18n';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/landing-page-pod-reklamy`;
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description:
         'Landing page pod reklamy i kampanie performance. Strona pod Google Ads, Meta Ads i lead generation. Projekt pod konwersję, nie pod ogólną wizytówkę.',
     alternates: pageAlternates('/uslugi/landing-page-pod-reklamy', 'pl', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Landing page pod reklamy | CreativeTrust',
         description:
             'Projektujemy landing pages pod reklamy płatne, kampanie performance i konwersję.',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         locale: 'pl_PL',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'Landing page pod reklamy | CreativeTrust',
         description:

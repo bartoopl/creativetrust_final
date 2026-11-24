@@ -7,19 +7,19 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import Illustration, { ProseWithIllustration } from '@/components/ui/Illustration';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: { absolute: 'Strony internetowe dla firm, które sprzedają | CreativeTrust' },
     description: 'Strony internetowe dla firm, które mają pracować na sprzedaż: projekt, wdrożenie i SEO. Strona internetowa dla firmy od briefu do startu.',
     alternates: pageAlternates('/uslugi/strony-www', 'pl', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Strony internetowe dla firm, które sprzedają | CreativeTrust',
         description: 'Strony internetowe dla firm, które mają pracować na sprzedaż: projekt, wdrożenie i SEO. Strona internetowa dla firmy od briefu do startu.',
         url: `${SITE_URL}/uslugi/strony-www`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'Strony internetowe dla firm, które sprzedają | CreativeTrust',
         description: 'Strony internetowe dla firm, które mają pracować na sprzedaż: projekt, wdrożenie i SEO. Strona internetowa dla firmy od briefu do startu.',

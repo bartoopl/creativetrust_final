@@ -8,7 +8,7 @@ import Section from '@/components/ui/Section';
 import { ProseWithIllustration } from '@/components/ui/Illustration';
 import { BulletColumns, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { experience } from '@/lib/experience';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 import RelatedLinks from '@/components/RelatedLinks';
 
 
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description:
         'Audyt strony internetowej: treść, konwersja, Core Web Vitals, SEO i widoczność w AI. Raport z priorytetami i planem przebudowy.',
     alternates: { canonical: canonicalUrl },
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Audyt strony internetowej: co blokuje zapytania',
         description:
             'Audyt strony internetowej: treść, konwersja, Core Web Vitals, SEO i widoczność w AI. Raport z priorytetami i planem przebudowy.',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
         locale: 'pl_PL',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'Audyt strony internetowej: co blokuje zapytania',
         description:

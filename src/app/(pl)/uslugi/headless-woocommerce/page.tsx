@@ -7,7 +7,7 @@ import Section from '@/components/ui/Section';
 import Illustration from '@/components/ui/Illustration';
 import { HeroMedia, NumberedGrid } from '@/components/LandingBlocks';
 import { pageAlternates } from '@/lib/i18n';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/uslugi/headless-woocommerce`;
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
         'Headless WooCommerce dla sklepów, które chcą szybszy frontend, lepszy UX i większą kontrolę nad rozwojem. Landing pod long-tail SEO i migracje.',
     alternates: pageAlternates('/uslugi/headless-woocommerce', 'pl', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Headless WooCommerce | CreativeTrust',
         description:
             'Projektujemy headless WooCommerce z Next.js storefrontem, lepszą wydajnością i pełną kontrolą nad UX.',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
         locale: 'pl_PL',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'Headless WooCommerce | CreativeTrust',
         description:

@@ -8,7 +8,7 @@ import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
 import { ProseWithIllustration } from '@/components/ui/Illustration';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 const pageTitle = 'Marketing automation dla e-commerce | SALESmanago';
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: { absolute: pageTitle },
     description: pageDescription,
     alternates: pageAlternates('/uslugi/marketing-automation', 'pl', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: pageTitle,
         description: pageDescription,
         url: `${SITE_URL}/uslugi/marketing-automation`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',
