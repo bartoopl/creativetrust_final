@@ -10,7 +10,7 @@ import NotchedButton from '@/components/ui/NotchedButton';
 import BlogPostCard from '@/components/BlogPostCard';
 import SchemaScript from '@/components/SchemaScript';
 import { resolveAuthor } from '@/lib/authors';
-import { SITE_URL, buildBreadcrumbSchema, buildProfilePageSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildProfilePageSchema, OG_IMAGE } from '@/lib/schema';
 
 // Rendered on request from cached CMS data (src/lib/cms.ts); saving in the
 // admin refreshes it immediately, otherwise it is re-read hourly.
@@ -44,7 +44,7 @@ export async function generateMetadata({
         description,
         // Own canonical: without it the page inherited the homepage's.
         alternates: { canonical: url, types: { 'text/markdown': `${url}.md` } },
-        openGraph: { title: `${name} — autor bloga CreativeTrust`, description, url, type: 'profile', locale: 'pl_PL' },
+        openGraph: { images: OG_IMAGE, title: `${name} — autor bloga CreativeTrust`, description, url, type: 'profile', locale: 'pl_PL' },
     };
 }
 

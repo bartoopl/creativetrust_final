@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { getBlogPosts, getBlogCategories, getFeaturedBlogPosts, urlFor } from '@/lib/cms';
-import { SITE_URL } from '@/lib/schema';
+import { SITE_URL, OG_IMAGE } from '@/lib/schema';
 import PageHero from '@/components/ui/PageHero';
 import BlogPostCard from '@/components/BlogPostCard';
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: 'Blog | Strategia, design, AI i automatyzacja',
     description: 'Artykuły o strategii marki, web designie, e-commerce i AI w marketingu. Konkretna wiedza — bez ogólników.',
     alternates: { canonical: `${SITE_URL}/blog` },
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Blog CreativeTrust | Strategia, design, AI',
         description: 'Artykuły o marketingu, designie, AI i e-commerce.',
         url: `${SITE_URL}/blog`, siteName: 'CreativeTrust', locale: 'pl_PL', type: 'website',

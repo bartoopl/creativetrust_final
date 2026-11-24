@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import { SITE_URL } from '@/lib/schema';
+import { SITE_URL, OG_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
         ...pageAlternates('/portfolio', 'pl', SITE_URL),
         types: { 'text/markdown': `${SITE_URL}/portfolio.md` },
     },
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Portfolio i realizacje | CreativeTrust',
         description: 'Zobacz wybrane realizacje CreativeTrust dla firm i produktów cyfrowych.',
         url: `${SITE_URL}/portfolio`,

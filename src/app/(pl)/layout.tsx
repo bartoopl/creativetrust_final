@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import SiteShell from '@/components/SiteShell';
-import { SITE_URL } from '@/lib/schema';
+import { SITE_URL, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     alternates: {
         canonical: '/',
     },
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce',
         description: 'Audyt sklepu, zarządzanie e-commerce z zewnątrz oraz budowa sklepów i stron internetowych w jednym zespole.',
         url: SITE_URL,
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         locale: 'pl_PL',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'CreativeTrust — Audyt, zarządzanie i budowa e-commerce',
         description: 'Audyt sklepu, zarządzanie e-commerce z zewnątrz oraz budowa sklepów i stron internetowych w jednym zespole.',
