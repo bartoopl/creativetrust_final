@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { SITE_URL } from '@/lib/schema';
+import { SITE_URL, OG_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 import ContactForm from '@/components/ContactForm';
 
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: 'Contact | Book a conversation about your e-commerce',
     description: 'Let’s talk about your e-commerce. A short, no-obligation call: a store audit, outsourced e-commerce management or a specific build.',
     alternates: pageAlternates('/kontakt', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Contact | Book a conversation about your e-commerce | CreativeTrust',
         description: 'Let’s talk about your e-commerce. A short, no-obligation call: a store audit, outsourced e-commerce management or a specific build.',
         url: `${SITE_URL}/en/contact`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',

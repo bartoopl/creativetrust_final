@@ -3,7 +3,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import CTASection from '@/components/CTASection';
 import { NumberedGrid } from '@/components/LandingBlocks';
-import { SITE_URL } from '@/lib/schema';
+import { SITE_URL, OG_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 import { EXPERIENCE_SENTENCE_EN, experienceEn } from '@/lib/experience';
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'About us | A team built on e-commerce audit and management',
     description: 'CreativeTrust audits online stores and runs brands’ e-commerce as an external team. E-commerce experience across many industries, including 5.10.15, Quiosque and the Monnari capital group. In the market since 2010.',
     alternates: pageAlternates('/o-nas', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'About us | A team built on e-commerce audit and management | CreativeTrust',
         description: 'CreativeTrust audits online stores and runs brands’ e-commerce as an external team. In the market since 2010.',
         url: `${SITE_URL}/en/about`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',

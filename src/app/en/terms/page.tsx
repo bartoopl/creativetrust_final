@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { SITE_URL } from '@/lib/schema';
+import { SITE_URL, OG_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: 'Terms and conditions',
     alternates: pageAlternates('/regulamin', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Terms and conditions | CreativeTrust',
         url: `${SITE_URL}/en/terms`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',
     },

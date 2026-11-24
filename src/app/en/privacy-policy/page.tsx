@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { SITE_URL } from '@/lib/schema';
+import { SITE_URL, OG_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: 'Privacy Policy',
     description: 'This privacy policy describes how we process information about you, including personal data and cookies.',
     alternates: pageAlternates('/polityka-prywatnosci', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Privacy Policy | CreativeTrust',
         description: 'This privacy policy describes how we process information about you, including personal data and cookies.',
         url: `${SITE_URL}/en/privacy-policy`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import SiteShell from '@/components/SiteShell';
-import { SITE_URL } from '@/lib/schema';
+import { SITE_URL, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     alternates: {
         canonical: '/en',
     },
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'CreativeTrust — E-commerce audit, management and build',
         description: 'A store audit, outsourced e-commerce management, and the build of online stores and websites — in one team.',
         url: `${SITE_URL}/en`,
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         locale: 'en_GB',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'CreativeTrust — E-commerce audit, management and build',
         description: 'A store audit, outsourced e-commerce management, and the build of online stores and websites — in one team.',
