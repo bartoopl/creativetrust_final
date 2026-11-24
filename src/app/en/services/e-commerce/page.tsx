@@ -5,14 +5,14 @@ import PageHero from '@/components/ui/PageHero';
 import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema, OG_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: { absolute: 'Online stores: design, build, integrations | CreativeTrust' },
     description: 'We design and build online stores: headless, WooCommerce, Shopify, migrations and ERP integrations - for sales, margin and the way your team works.',
     alternates: pageAlternates('/uslugi/e-commerce', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Online stores: design, build, integrations | CreativeTrust',
         description: 'We design and build online stores: headless, WooCommerce, Shopify, migrations and ERP integrations - for sales, margin and the way your team works.',
         url: `${SITE_URL}/en/services/e-commerce`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',

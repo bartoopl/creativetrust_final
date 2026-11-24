@@ -6,7 +6,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, HeroMedia, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { pageAlternates } from '@/lib/i18n';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/en/services/google-ads-landing-page`;
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description:
         'Landing pages for Google Ads, Meta Ads and performance marketing. A page for your ads that lifts conversion and supports SEO. Designed around sales queries.',
     alternates: pageAlternates('/uslugi/landing-page-google-ads', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Google Ads landing page | CreativeTrust',
         description:
             'We build landing pages for paid campaigns, ads and lead generation. Fast, clear and built for conversion.',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         locale: 'en_GB',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'Google Ads landing page | CreativeTrust',
         description:

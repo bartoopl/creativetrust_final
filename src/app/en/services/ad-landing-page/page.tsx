@@ -6,7 +6,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, HeroMedia, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { pageAlternates } from '@/lib/i18n';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/en/services/ad-landing-page`;
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description:
         'Landing pages for ads and performance campaigns. A page for Google Ads, Meta Ads and lead generation. Designed for conversion, not as a generic company brochure.',
     alternates: pageAlternates('/uslugi/landing-page-pod-reklamy', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Landing page for ads | CreativeTrust',
         description:
             'We design landing pages for paid ads, performance campaigns and conversion.',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         locale: 'en_GB',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'Landing page for ads | CreativeTrust',
         description:

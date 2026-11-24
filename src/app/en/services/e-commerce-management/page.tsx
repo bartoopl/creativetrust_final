@@ -6,7 +6,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { AUDIT_HREF_EN, EXPERIENCE_SENTENCE_EN, experienceEn } from '@/lib/experience';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 const canonicalUrl = `${SITE_URL}/en/services/e-commerce-management`;
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description:
         'We run brands\' e-commerce from outside: sales plan, margin, team, suppliers and performance reporting. We start with an audit, then a steady monthly collaboration with one accountable team.',
     alternates: pageAlternates('/uslugi/zarzadzanie-e-commerce', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Outsourced e-commerce management | CreativeTrust',
         description:
             'An e-commerce manager and an implementation team in one retainer. Plan, margin, suppliers and results under one accountability.',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         locale: 'en_GB',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'Outsourced e-commerce management | CreativeTrust',
         description:

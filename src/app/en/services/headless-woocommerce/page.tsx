@@ -6,7 +6,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { HeroMedia, NumberedGrid } from '@/components/LandingBlocks';
 import { pageAlternates } from '@/lib/i18n';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/en/services/headless-woocommerce`;
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description:
         'Headless WooCommerce for stores that want a faster frontend, better UX and more control over growth. A long-tail SEO landing page for migrations.',
     alternates: pageAlternates('/uslugi/headless-woocommerce', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Headless WooCommerce | CreativeTrust',
         description:
             'We build headless WooCommerce with a Next.js storefront, better performance and full control over UX.',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         locale: 'en_GB',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'Headless WooCommerce | CreativeTrust',
         description:

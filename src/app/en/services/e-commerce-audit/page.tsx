@@ -6,7 +6,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, InlineCTA, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { EXPERIENCE_SENTENCE_EN, MANAGEMENT_HREF_EN, experienceEn } from '@/lib/experience';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 const canonicalUrl = `${SITE_URL}/en/services/e-commerce-audit`;
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description:
         'An e-commerce audit for stores that are growing faster than their processes. In 5–7 working days we show where your store loses sales, margin and team time. A fixed fee known upfront, deducted from any ongoing collaboration.',
     alternates: pageAlternates('/uslugi/audyt-e-commerce', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'E-commerce audit | CreativeTrust',
         description:
             'Sales, margin, technology and team workload. A report and roadmap in 5–7 working days, for a fixed fee.',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         locale: 'en_GB',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'E-commerce audit | CreativeTrust',
         description:
