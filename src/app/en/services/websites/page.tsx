@@ -4,14 +4,14 @@ import { InlineCTA } from '@/components/LandingBlocks';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema, OG_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: { absolute: 'Websites for brands and companies | CreativeTrust' },
     description: 'Company sites, product sites, landing pages and portals: fast, easy to edit, built for a specific role in sales. See the scope and pricing.',
     alternates: pageAlternates('/uslugi/strony-www', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Websites for brands and companies | CreativeTrust',
         description: 'Company sites, product sites, landing pages and portals: fast, easy to edit, built for a specific role in sales. See the scope and pricing.',
         url: `${SITE_URL}/en/services/websites`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',

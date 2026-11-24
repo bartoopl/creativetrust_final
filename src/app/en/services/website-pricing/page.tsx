@@ -6,7 +6,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import { BulletColumns, HeroMedia, InlineCTA, NumberedGrid, PriceGrid, SplitLayout } from '@/components/LandingBlocks';
 import { pageAlternates } from '@/lib/i18n';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/en/services/website-pricing`;
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description:
         'How much does a company website cost? See indicative ranges: landing page, company website, CMS-based site, SEO and integrations.',
     alternates: pageAlternates('/uslugi/tworzenie-stron-www-cennik', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Website cost | CreativeTrust',
         description:
             'Indicative website pricing: from a landing page to an extensive company site with a CMS, SEO and integrations.',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         locale: 'en_GB',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'Website cost | CreativeTrust',
         description:

@@ -7,14 +7,14 @@ import PageHero from '@/components/ui/PageHero';
 import SceneWithLegend from '@/components/scene3d/SceneWithLegend';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: 'Marketing Automation for e-commerce and business | SALESmanago, scenarios, CRM',
     description: 'We implement SALESmanago and scenarios that work on your customer base: abandoned-basket recovery, recommendations, reactivation, lead nurturing. Measured in revenue, not in messages sent.',
     alternates: pageAlternates('/uslugi/marketing-automation', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Marketing Automation for e-commerce and business | CreativeTrust',
         description: 'SALESmanago, sales scenarios, segmentation and CRM integrations. Automation measured in revenue.',
         url: `${SITE_URL}/en/services/marketing-automation`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',

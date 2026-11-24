@@ -9,7 +9,7 @@ import SectionHeader from '@/components/ui/SectionHeader';
 import NotchedButton from '@/components/ui/NotchedButton';
 import { BulletColumns, HeroMedia, NumberedGrid, SplitLayout } from '@/components/LandingBlocks';
 import { pageAlternates } from '@/lib/i18n';
-import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildFaqSchema, buildServiceSchema, OG_IMAGE, TWITTER_IMAGE } from '@/lib/schema';
 
 const canonicalUrl = `${SITE_URL}/en/services/woocommerce-to-headless-migration`;
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description:
         'Migrating WooCommerce to a headless architecture: a Next.js storefront, APIs, better performance, SEO and control over store UX.',
     alternates: pageAlternates('/uslugi/migracja-woocommerce-do-headless', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'WooCommerce to headless migration | CreativeTrust',
         description:
             'Find out when it is worth moving a WooCommerce store to headless and how to plan the migration without chaos in sales.',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
         locale: 'en_GB',
         type: 'website',
     },
-    twitter: {
+    twitter: { images: TWITTER_IMAGE,
         card: 'summary_large_image',
         title: 'WooCommerce to headless migration | CreativeTrust',
         description:

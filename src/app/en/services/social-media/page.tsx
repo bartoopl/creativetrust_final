@@ -4,14 +4,14 @@ import { InlineCTA } from '@/components/LandingBlocks';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';
-import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema } from '@/lib/schema';
+import { SITE_URL, buildBreadcrumbSchema, buildServiceSchema, OG_IMAGE } from '@/lib/schema';
 import { pageAlternates } from '@/lib/i18n';
 
 export const metadata: Metadata = {
     title: { absolute: 'Social media for brands: strategy, campaigns | CreativeTrust' },
     description: 'We run brands\' social media for sales: strategy, content, campaigns and community planned with your sales calendar and offer.',
     alternates: pageAlternates('/uslugi/social-media', 'en', SITE_URL),
-    openGraph: {
+    openGraph: { images: OG_IMAGE,
         title: 'Social media for brands: strategy, campaigns | CreativeTrust',
         description: 'We run brands\' social media for sales: strategy, content, campaigns and community planned with your sales calendar and offer.',
         url: `${SITE_URL}/en/services/social-media`, siteName: 'CreativeTrust', locale: 'en_GB', type: 'website',
