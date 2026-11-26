@@ -4,11 +4,11 @@ import TrustpilotReviewCollector from './TrustpilotReviewCollector';
 import { LEGAL_NAME, POSTAL_CITY, STREET_ADDRESS, TAX_ID } from '@/lib/schema';
 import type { Locale } from '@/lib/i18n';
 
-type FooterLink = { href: string; label: string; hrefLang?: string };
+type FooterLink = { href: string; label: string; hrefLang?: string; external?: boolean };
 
 const copy: Record<Locale, {
-    home: string; homeLabel: string; lead: string; servicesTitle: string; companyTitle: string;
-    services: FooterLink[]; company: FooterLink[]; rights: string; taxId: string;
+    home: string; homeLabel: string; lead: string; servicesTitle: string; companyTitle: string; productsTitle: string;
+    services: FooterLink[]; company: FooterLink[]; products: FooterLink[]; rights: string; taxId: string;
     privacy: FooterLink; terms: FooterLink;
 }> = {
     pl: {
@@ -17,6 +17,7 @@ const copy: Record<Locale, {
         lead: 'Audytujemy i prowadzimy e-commerce z zewnątrz. Projektujemy i budujemy sklepy oraz strony internetowe.',
         servicesTitle: 'Usługi',
         companyTitle: 'Firma',
+        productsTitle: 'Nasze produkty',
         services: [
             { href: '/uslugi/audyt-e-commerce', label: 'Audyt e-commerce' },
             { href: '/uslugi/zarzadzanie-e-commerce', label: 'Zarządzanie e-commerce' },
@@ -32,6 +33,10 @@ const copy: Record<Locale, {
             { href: '/baza-wiedzy', label: 'Baza wiedzy' },
             { href: '/kontakt', label: 'Kontakt' },
         ],
+        products: [
+            { href: 'https://lockadeck.io', label: 'Lockadeck', external: true },
+            { href: 'https://flicktally.app', label: 'Flicktally', external: true },
+        ],
         rights: 'Wszelkie prawa zastrzeżone.',
         taxId: 'NIP',
         privacy: { href: '/polityka-prywatnosci', label: 'Polityka prywatności' },
@@ -43,6 +48,7 @@ const copy: Record<Locale, {
         lead: 'We audit and manage e-commerce from the outside. We also design and build online stores and websites.',
         servicesTitle: 'Services',
         companyTitle: 'Company',
+        productsTitle: 'Our products',
         services: [
             { href: '/en/services/e-commerce-audit', label: 'E-commerce audit' },
             { href: '/en/services/e-commerce-management', label: 'E-commerce management' },
@@ -58,6 +64,10 @@ const copy: Record<Locale, {
             { href: '/baza-wiedzy', label: 'Knowledge base (PL)', hrefLang: 'pl' },
             { href: '/en/contact', label: 'Contact' },
         ],
+        products: [
+            { href: 'https://lockadeck.io', label: 'Lockadeck', external: true },
+            { href: 'https://flicktally.app', label: 'Flicktally', external: true },
+        ],
         rights: 'All rights reserved.',
         taxId: 'VAT ID PL',
         privacy: { href: '/en/privacy-policy', label: 'Privacy policy' },
@@ -69,7 +79,11 @@ function FooterColumn({ title, items }: { title: string; items: FooterLink[] }) 
     return (
         <div className="flex flex-col gap-2.5">
             <span className="ct-meta">{title}</span>
-            {items.map((item) => (
+            {items.map((item) => item.external ? (
+                <a key={item.href} href={item.href} target="_blank" rel="noopener" className="ct-nav-link ct-footer-link" style={{ fontWeight: 400 }}>
+                    {item.label}
+                </a>
+            ) : (
                 <Link key={item.href + item.label} href={item.href} hrefLang={item.hrefLang} className="ct-nav-link ct-footer-link" style={{ fontWeight: 400 }}>
                     {item.label}
                 </Link>
@@ -96,6 +110,7 @@ export default function Footer({ locale }: { locale: Locale }) {
                     <div className="flex flex-wrap gap-16">
                         <FooterColumn title={t.servicesTitle} items={t.services} />
                         <FooterColumn title={t.companyTitle} items={t.company} />
+                        <FooterColumn title={t.productsTitle} items={t.products} />
                     </div>
                 </div>
 
