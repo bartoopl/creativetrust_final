@@ -15,6 +15,48 @@ interface PortableTextContentProps {
 
 const headingStyle: React.CSSProperties = { color: 'var(--text)', fontWeight: 500, lineHeight: 1.25 };
 
+interface TableCellValue {
+    spans?: Array<{ text?: string; marks?: string[] }>;
+    markDefs?: Array<{ _key: string; _type: string; href?: string; blank?: boolean }>;
+}
+
+/** Inline marks inside a table cell; links reuse the same canonical href as body links. */
+const CellContent = ({ cell }: { cell: TableCellValue }) => {
+    const defs = new Map((cell.markDefs ?? []).map((def) => [def._key, def]));
+    return (
+        <>
+            {(cell.spans ?? []).map((span, index) => {
+                const marks = span.marks ?? [];
+                let node: React.ReactNode = span.text ?? '';
+                if (marks.includes('code')) {
+                    node = (
+                        <code className="ct-mono" style={{ fontSize: '0.88em', background: 'var(--panel)', borderRadius: 5, padding: '1px 6px' }}>
+                            {node}
+                        </code>
+                    );
+                }
+                if (marks.includes('em')) node = <em>{node}</em>;
+                if (marks.includes('strong')) node = <strong style={{ color: 'var(--text)', fontWeight: 500 }}>{node}</strong>;
+                const linkKey = marks.find((mark) => defs.get(mark)?._type === 'link');
+                if (linkKey) {
+                    const def = defs.get(linkKey)!;
+                    node = (
+                        <Link
+                            href={canonicalHref(def.href ?? '')}
+                            rel={def.blank ? 'noreferrer noopener' : undefined}
+                            target={def.blank ? '_blank' : undefined}
+                            style={{ color: 'var(--accent)', textDecoration: 'underline', textUnderlineOffset: 3, textDecorationThickness: 1 }}
+                        >
+                            {node}
+                        </Link>
+                    );
+                }
+                return <React.Fragment key={index}>{node}</React.Fragment>;
+            })}
+        </>
+    );
+};
+
 const PortableTextContent: React.FC<PortableTextContentProps> = ({ content, compact = false }) => {
     const components = {
         types: {
@@ -52,6 +94,39 @@ const PortableTextContent: React.FC<PortableTextContentProps> = ({ content, comp
                     <code>{value?.code}</code>
                 </pre>
             ),
+            table: ({ value }: any) => {
+                const head: TableCellValue[] = value?.head ?? [];
+                const rows: TableCellValue[][] = value?.rows ?? [];
+                if (!head.length && !rows.length) return null;
+                const columns = head.length || Math.max(...rows.map((row) => row.length));
+                const width = (row: TableCellValue[], index: number) => row[index] ?? { spans: [] };
+                return (
+                    <div className="ct-table-wrap" role="region" tabIndex={0} aria-label="Tabela">
+                        <table className="ct-table">
+                            <thead>
+                                <tr>
+                                    {Array.from({ length: columns }, (_, index) => (
+                                        <th key={index} scope="col">
+                                            <CellContent cell={width(head, index)} />
+                                        </th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {rows.map((row, rowIndex) => (
+                                    <tr key={rowIndex}>
+                                        {Array.from({ length: columns }, (_, index) => (
+                                            <td key={index}>
+                                                <CellContent cell={width(row, index)} />
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                );
+            },
         },
         marks: {
             link: ({ children, value }: any) => {

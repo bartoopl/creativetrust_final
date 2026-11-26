@@ -112,7 +112,7 @@ export const payloadMcp = mcpPlugin({
             instructions: [
                 'CMS of creativetrust.pl (Payload). Content is in Polish unless asked otherwise.',
                 'To write or edit an article, use saveMarkdownContent: it converts Markdown to the rich text format and saves the document.',
-                'Supported Markdown: paragraphs, ## / ### / #### headings (no #), bold, italic, inline code, links, bullet and numbered lists, blockquotes.',
+                'Supported Markdown: paragraphs, ## / ### / #### headings (no #), bold, italic, inline code, links, bullet and numbered lists, blockquotes, GFM tables (| a | b | with a --- divider row).',
                 'Look up ids first with the find tools (authors, blog-categories, service-categories, media).',
                 'By default documents are saved as drafts (publish: false) so an editor can review them in the admin; set publish: true only when asked to publish.',
                 'Nothing can be deleted through this server.',

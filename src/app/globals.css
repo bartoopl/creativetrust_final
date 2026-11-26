@@ -339,6 +339,17 @@ body:has(.ct-v2) .ct-marquee-track span { font-family: var(--font-sans), sans-se
 .ct-v2-card:hover .ct-card-title { color: var(--accent); }
 .ct-project-cover { display: flex; justify-content: center; }
 .ct-project-cover img { width: 100%; height: auto; max-height: min(78vh, 860px); object-fit: contain; }
+/* Markdown tables from the CMS: scroll sideways on phones, keep rows readable. */
+.ct-table-wrap { margin: 32px 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ct-table-wrap:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+.ct-table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.55; text-align: left; }
+.ct-table th, .ct-table td { border: 1px solid var(--line); padding: 10px 12px; vertical-align: top; }
+.ct-table th { background: var(--panel); color: var(--text); font-weight: 500; }
+.ct-table tbody tr:nth-child(even) { background: var(--panel); }
+@media (max-width: 640px) {
+  .ct-table { font-size: 14px; }
+  .ct-table th, .ct-table td { padding: 8px 10px; }
+}
 .ct-gallery-media img { height: auto; }
 .ct-chip {
   display: inline-flex; align-items: center; min-height: 34px; padding: 6px 14px;

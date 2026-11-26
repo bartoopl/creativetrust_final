@@ -79,12 +79,14 @@ function FooterColumn({ title, items }: { title: string; items: FooterLink[] }) 
     return (
         <div className="flex flex-col gap-2.5">
             <span className="ct-meta">{title}</span>
+            {/* The key is the href alone: a key built from href + label leaks into the RSC payload
+                as a phantom route (`/blogBlog`, `/kontaktKontakt`) that Google crawls as a 404. */}
             {items.map((item) => item.external ? (
                 <a key={item.href} href={item.href} target="_blank" rel="noopener" className="ct-nav-link ct-footer-link" style={{ fontWeight: 400 }}>
                     {item.label}
                 </a>
             ) : (
-                <Link key={item.href + item.label} href={item.href} hrefLang={item.hrefLang} className="ct-nav-link ct-footer-link" style={{ fontWeight: 400 }}>
+                <Link key={item.href} href={item.href} hrefLang={item.hrefLang} className="ct-nav-link ct-footer-link" style={{ fontWeight: 400 }}>
                     {item.label}
                 </Link>
             ))}

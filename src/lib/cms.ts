@@ -23,13 +23,24 @@ export { urlFor } from './media';
 
 
 /**
+ * How long a CMS read stays cached. A save in the admin expires it at once
+ * through `revalidateTag` (src/payload/revalidate.ts); this window is only the
+ * backstop for a write that never reaches that hook (the MCP plugin writes
+ * through the Local API). An hour there meant a saved post stayed invisible for
+ * an hour, so it is a minute now: one cheap query per key per minute buys a
+ * page that cannot go stale for longer than that.
+ */
+export const CMS_CACHE_SECONDS = 60;
+
+/**
  * Pages render on request, never at build: the image is built in CI without
  * access to the database. `connection()` marks every page that reads the CMS
- * as dynamic; query results are cached across requests (an hour, or until an
- * editor saves) and deduplicated within one render.
+ * as dynamic; query results are cached across requests (see
+ * CMS_CACHE_SECONDS, or until an editor saves) and deduplicated within one
+ * render.
  */
 function cached<A extends unknown[], R>(key: string, read: (...args: A) => Promise<R>): (...args: A) => Promise<R> {
-    const shared = unstable_cache(read, ['cms', key], { tags: [CMS_CACHE_TAG], revalidate: 3600 });
+    const shared = unstable_cache(read, ['cms', key], { tags: [CMS_CACHE_TAG], revalidate: CMS_CACHE_SECONDS });
     return cache(async (...args: A) => {
         await connection();
         return shared(...args);
@@ -469,5 +480,7 @@ export const getPortfolioSlugs = cached('getPortfolioSlugs', readGetPortfolioSlu
 export const getLatestPortfolioProjects = cached('getLatestPortfolioProjects', readGetLatestPortfolioProjects);
 export const getKnowledgeBase = cached('getKnowledgeBase', readGetKnowledgeBase);
 export const getArticleIndexDocs = cached('getArticleIndexDocs', readGetArticleIndexDocs);
+/** Same query without the hourly data cache: /llms.txt must list a post right after it is published. */
+export const readArticleIndexDocs = readGetArticleIndexDocs;
 export const searchArticles = cached('searchArticles', readSearchArticles);
 export const getSitemapDocs = cached('getSitemapDocs', readGetSitemapDocs);

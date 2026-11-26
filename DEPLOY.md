@@ -7,7 +7,7 @@ Treści są w Postgresie, pliki na wolumenie Dockera, a przed serwerem stoi Clou
 GitHub (push na main) ──► GitHub Actions: testy → obraz Dockera → ghcr.io ──► API Dokploy (compose.deploy)
                                                                                   │
 Cloudflare (CDN, SSL) ──► serwer: Dokploy ── usługa Docker Compose (docker-compose.yml) ──┘
-                                     app (Next + Payload) · db (Postgres 17) · backup (cron)
+                                     app (Next + Payload) · db (Postgres 18) · backup (cron)
 ```
 
 Obraz buduje się w CI **bez dostępu do bazy**. Strony z CMS-a (blog, portfolio,
@@ -144,6 +144,67 @@ Odtworzenie:
 docker exec -i <kontener-db> pg_restore -U creativetrust -d creativetrust --clean < db_<data>.dump
 docker run --rm -v <nazwa-uslugi>_media:/m -v $PWD:/b alpine tar -xzf /b/media_<data>.tar.gz -C /m
 ```
+
+## 7. Aktualizacja Postgresa 17 → 18 (jednorazowo)
+
+Nowa główna wersja Postgresa nie otworzy plików bazy z 17, więc dane przenosi się przez
+zrzut i odtworzenie. Postgres 18 trzyma dane w `/var/lib/postgresql/18/docker` i nie
+startuje z dawnym montowaniem `/var/lib/postgresql/data`, dlatego `docker-compose.yml`
+używa **nowego wolumenu `pgdata18`**. Stary `pgdata` zostaje nietknięty jako droga powrotu.
+
+Przerwa: kilka minut (od wdrożenia do końca odtwarzania strona nie ma treści albo nie działa).
+Najlepiej wieczorem. Polecenia na serwerze przez SSH; nazwy kontenerów i wolumenów mają
+prefiks Dokploy: `docker ps --format '{{.Names}}' | grep creativetrust`.
+
+```sh
+# 0. Nazwy kontenerów (dopasuj do wyniku docker ps)
+APP=$(docker ps --format '{{.Names}}' | grep -E 'creativetrust.*-app-'    | head -1)
+DB=$(docker ps --format '{{.Names}}'  | grep -E 'creativetrust.*-db-'     | head -1)
+BK=$(docker ps --format '{{.Names}}'  | grep -E 'creativetrust.*-backup-' | head -1)
+
+# 1. Stan przed: liczby wierszy do porównania po migracji
+docker exec $DB psql -U creativetrust -d creativetrust -Atc \
+  "select 'posts',count(*) from posts union all select 'portfolio',count(*) from portfolio_projects
+   union all select 'kb',count(*) from knowledge_base union all select 'media',count(*) from media
+   union all select 'users',count(*) from users"
+
+# 2. Zatrzymaj aplikację (od teraz nikt nic nie zapisze) i zrób świeży zrzut
+docker stop $APP
+docker exec $DB pg_dump -U creativetrust -d creativetrust --format=custom --file=/tmp/pg17.dump
+docker cp $DB:/tmp/pg17.dump ./pg17.dump && ls -lh pg17.dump     # kopia na hoście
+```
+
+3. W Dokploy (*General → Compose file*) wklej `docker-compose.yml` z repozytorium (obraz
+   `postgres:18-alpine`, wolumen `pgdata18`) i kliknij *Deploy*. Baza wstanie pusta,
+   a aplikacja przy starcie utworzy w niej puste tabele (migracje).
+
+```sh
+# 4. Odtwórz dane na Postgresie 18 (aplikacja zatrzymana na czas odtwarzania)
+APP=$(docker ps --format '{{.Names}}' | grep -E 'creativetrust.*-app-' | head -1)
+DB=$(docker ps --format '{{.Names}}'  | grep -E 'creativetrust.*-db-'  | head -1)
+docker stop $APP
+docker exec $DB psql -U creativetrust -d creativetrust -Atc 'show server_version'   # 18.x
+docker exec -i $DB pg_restore -U creativetrust -d creativetrust --clean --if-exists --no-owner < pg17.dump
+docker start $APP
+
+# 5. Sprawdzenie: te same liczby co w kroku 1, strona i /admin działają
+docker exec $DB psql -U creativetrust -d creativetrust -Atc \
+  "select 'posts',count(*) from posts union all select 'portfolio',count(*) from portfolio_projects
+   union all select 'kb',count(*) from knowledge_base union all select 'media',count(*) from media
+   union all select 'users',count(*) from users"
+curl -s -o /dev/null -w '%{http_code}\n' https://www.creativetrust.pl/
+docker exec $BK backup     # nocny backup działa już z pg_dump 18
+```
+
+`--clean --if-exists` usuwa puste tabele utworzone przy starcie i wgrywa je ze zrzutu razem
+z historią migracji (sprawdzone lokalnie: dane, 3 migracje i 28 tabel zgodne po odtworzeniu).
+
+**Wycofanie** (gdyby coś poszło nie tak): w Dokploy wklej poprzedni compose
+(`postgres:17-alpine`, `pgdata:/var/lib/postgresql/data`) i *Deploy*. Stary wolumen ma dane
+sprzed kroku 2.
+
+**Sprzątanie** po kilku dniach bez problemów: usuń wpis `pgdata:` z `volumes:` w compose,
+`docker volume rm <prefiks>_pgdata` i `rm pg17.dump`.
 
 ## Praca lokalna
 

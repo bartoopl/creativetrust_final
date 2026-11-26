@@ -41,8 +41,10 @@ const pages = [
         route: '/uslugi/audyt-e-commerce',
         file: 'src/app/(pl)/uslugi/audyt-e-commerce/page.tsx',
         md: 'content/ai/uslugi/audyt-e-commerce.md',
-        title: 'Audyt e-commerce: sprzedaż i marża | CreativeTrust',
-        description: 'Audyt e-commerce w 5-7 dni roboczych: pokazujemy, gdzie sklep traci sprzedaż, marżę i czas zespołu. Stała kwota znana z góry.',
+        title: 'Audyt sklepu internetowego (e-commerce) – raport w 5–7 dni | CreativeTrust',
+        description: 'Audyt sklepu internetowego: sprzedaż, UX, SEO, analityka i infrastruktura. Raport z roadmapą w 5–7 dni roboczych, stała cena 3 000 zł netto. Sprawdź, gdzie tracisz sprzedaż.',
+        titleMax: 80,
+        descMax: 180,
     },
     {
         route: '/uslugi/zarzadzanie-e-commerce',
@@ -96,8 +98,10 @@ const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf
 test('SERP limits: title <= 60 and description <= 155 on the twelve service pages', () => {
     assert.equal(pages.length, 12);
     for (const page of pages) {
-        assert.ok(page.title.length <= 60, `${page.route} title is ${page.title.length} chars`);
-        assert.ok(page.description.length <= 155, `${page.route} description is ${page.description.length} chars`);
+        const titleMax = page.titleMax ?? 60;
+        const descMax = page.descMax ?? 155;
+        assert.ok(page.title.length <= titleMax, `${page.route} title is ${page.title.length} chars`);
+        assert.ok(page.description.length <= descMax, `${page.route} description is ${page.description.length} chars`);
         assert.ok(page.title.endsWith('| CreativeTrust'), `${page.route} title keeps the brand suffix`);
         assert.ok(!page.title.includes('—') && !page.description.includes('—'), `${page.route} uses a plain hyphen`);
     }

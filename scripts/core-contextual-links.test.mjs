@@ -52,10 +52,14 @@ test('each core blog link sits before a real heading with the planned anchor', (
 
 test('the two posts that already linked their target are not doubled', () => {
     // The SSL article's code body already links /uslugi/strony-www; the guide's CMS
-    // body links /uslugi/audyt-strony-internetowej, so its config must stay absent.
+    // body links /uslugi/audyt-strony-internetowej, so its config must not repeat that
+    // href — it may still point at the other service pages the article does not link.
     const ssl = applyBlogPostFixes('ssl-co-to-jest-i-czy-jest-potrzebne-4-powody-dla-ktorych-powinienes-go-wlaczyc', { title: 'SSL' });
     assert.equal(linksIn(ssl.content).filter((link) => link.href === '/uslugi/strony-www').length, 1);
-    assert.equal(getBlogSeoConfig('tworzenie-stron-internetowych-przewodnik-od-a-do-z-dla-kreatywnych-przedsiebiorcow'), undefined);
+    const guide = getBlogSeoConfig('tworzenie-stron-internetowych-przewodnik-od-a-do-z-dla-kreatywnych-przedsiebiorcow');
+    const guideHrefs = (guide?.links ?? []).map((link) => link.href);
+    assert.ok(!guideHrefs.includes('/uslugi/audyt-strony-internetowej'), 'the guide doubles the link its CMS body already carries');
+    assert.ok(guideHrefs.includes('/uslugi/strony-www'), 'the guide should link the website service page');
 });
 
 const kbBlock = (text) => ({

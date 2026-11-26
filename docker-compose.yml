@@ -37,14 +37,16 @@ services:
     mem_limit: 1g
 
   db:
-    image: postgres:17-alpine
+    image: postgres:18-alpine
     restart: unless-stopped
     environment:
       POSTGRES_DB: creativetrust
       POSTGRES_USER: creativetrust
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      # Postgres 18 keeps its data in /var/lib/postgresql/18/docker and refuses the old
+      # /var/lib/postgresql/data mount; a fresh volume, filled by dump/restore (DEPLOY.md §7).
+      - pgdata18:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U creativetrust -d creativetrust"]
       interval: 10s
@@ -55,7 +57,7 @@ services:
   # Nightly database dump (03:00) plus a tarball of the uploads, 14 daily copies
   # kept in the `backups` volume. Copy that volume off the server (DEPLOY.md).
   backup:
-    image: postgres:17-alpine
+    image: postgres:18-alpine
     restart: unless-stopped
     depends_on:
       db:
@@ -87,7 +89,9 @@ services:
     mem_limit: 256m
 
 volumes:
+  # Postgres 17 data, no longer mounted: kept for rollback, remove once 18 is verified.
   pgdata:
+  pgdata18:
   media:
   next-cache:
   backups:

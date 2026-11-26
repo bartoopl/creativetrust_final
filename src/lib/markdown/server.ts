@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { getArticleIndexDocs, getBlogAuthor, getBlogPost, getKnowledgeBaseEntry, getPortfolioProject, urlFor } from '@/lib/cms';
+import { getArticleIndexDocs, getBlogAuthor, getBlogPost, getKnowledgeBaseEntry, getPortfolioProject, readArticleIndexDocs, urlFor } from '@/lib/cms';
 import { authorMarkdown, portfolioIndexMarkdown } from './collections';
 import { SITE_URL } from '@/lib/schema';
 import { resolveAuthor, type SanityAuthor } from '@/lib/authors';
@@ -84,10 +84,13 @@ const ARTICLE_KIND: Record<ArticleListItem['_type'], ArticleKind> = {
  * Every published case study, blog post and knowledge-base entry for llms.txt
  * (a partial list hides most of the evidence from AI agents); [] when the CMS fails.
  */
-export async function getArticleIndex(): Promise<LlmsArticle[]> {
+export async function getArticleIndex(options: { fresh?: boolean } = {}): Promise<LlmsArticle[]> {
+    // The sitemap and page twins may use the hourly cache; /llms.txt asks for a
+    // fresh read so a post published a minute ago is already listed.
+    const read = options.fresh ? readArticleIndexDocs : getArticleIndexDocs;
     const docs = await failSoft<ArticleListItem[]>(
         () =>
-            getArticleIndexDocs().then((result) => [
+            read().then((result) => [
                 ...result.portfolio.map(
                     (project): ArticleListItem => ({
                         _type: 'portfolioProject',
@@ -235,19 +238,20 @@ export function markdownResponse(body: string, { canonical, status = 200 }: Mark
         headers: {
             'Content-Type': 'text/markdown; charset=utf-8',
             'Cache-Control': status === 200 ? 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400' : 'no-store',
-            // The HTML page is the one Google should index.
-            'X-Robots-Tag': 'noindex',
+            // The HTML page is the one Google should index. `follow` keeps the links
+            // inside the Markdown twin useful; without it the twin is a dead end.
+            'X-Robots-Tag': 'noindex, follow',
             Link: `<${canonical}>; rel="canonical"`,
             Vary: 'Accept',
         },
     });
 }
 
-export function plainTextResponse(body: string): Response {
+export function plainTextResponse(body: string, maxAgeSeconds = 3600): Response {
     return new Response(body, {
         headers: {
             'Content-Type': 'text/plain; charset=utf-8',
-            'Cache-Control': 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400',
+            'Cache-Control': `public, max-age=0, s-maxage=${maxAgeSeconds}, stale-while-revalidate=86400`,
         },
     });
 }

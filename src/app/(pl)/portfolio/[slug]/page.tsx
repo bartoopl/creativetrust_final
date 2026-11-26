@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getPortfolioProject, getPortfolioProjects, urlFor } from '@/lib/cms';
+import { responsiveImage } from '@/lib/media';
 import CaseStudyCard from '@/components/CaseStudyCard';
 import PortableTextContent from '@/components/PortableTextContent';
 import SchemaScript from '@/components/SchemaScript';
@@ -114,6 +115,8 @@ export default async function ProjectPage({ params }: { params: Params }) {
 
     const url = `${SITE_URL}/portfolio/${slug}`;
     const mainImage = hasAsset(project.mainImage) ? project.mainImage : null;
+    // The cover is LCP: a stored WebP variant (≤1200 px) instead of the original PNG.
+    const cover = mainImage ? responsiveImage(mainImage) : null;
     const galleryImages: ImageWithCaption[] = (project.galleryImages ?? []).filter(hasAsset);
     // Lightbox order: main image first, then the gallery.
     const lightboxImages: ImageWithCaption[] = [...(mainImage ? [mainImage] : []), ...galleryImages];
@@ -175,11 +178,20 @@ export default async function ProjectPage({ params }: { params: Params }) {
             </section>
 
             <ProjectGallery images={lightboxImages}>
-                {mainImage && (
+                {mainImage && cover && (
                     <div style={{ padding: '0 var(--pad-x)' }}>
                         <GalleryTrigger index={0} label={`Powiększ zdjęcie projektu ${project.title}`} className="ct-tile ct-v2-card mx-auto block max-w-[1280px]" style={{ padding: 12, cursor: 'zoom-in' }}>
                             <div className="ct-v2-media ct-project-cover">
-                                <img src={urlFor(mainImage).width(1600).url()} alt={project.title} />
+                                <img
+                                    src={cover.src}
+                                    srcSet={cover.srcSet}
+                                    sizes="(min-width: 1304px) 1216px, 100vw"
+                                    width={cover.width}
+                                    height={cover.height}
+                                    alt={project.title}
+                                    fetchPriority="high"
+                                    decoding="async"
+                                />
                             </div>
                         </GalleryTrigger>
                     </div>

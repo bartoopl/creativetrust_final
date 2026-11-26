@@ -22,6 +22,19 @@ export interface PortableTextBlock {
     [key: string]: unknown;
 }
 
+/** One table cell: inline spans plus the mark definitions they point at (links). */
+export interface PortableTextTableCell {
+    spans: PortableTextSpan[];
+    markDefs?: NonNullable<PortableTextBlock['markDefs']>;
+}
+
+/** GFM table: a header row and body rows. */
+export interface PortableTextTable extends PortableTextBlock {
+    _type: 'table';
+    head: PortableTextTableCell[];
+    rows: PortableTextTableCell[][];
+}
+
 /** CMS links written against the old non-www host, pointed straight at the canonical one. */
 export function canonicalHref(href: string): string {
     return href.replace(/^https?:\/\/creativetrust\.pl(?=[/?#]|$)/i, 'https://www.creativetrust.pl');
@@ -102,6 +115,24 @@ export function renderInline(block: PortableTextBlock): string {
         out += href ? `[${label.trim()}](${canonicalHref(href).replace(/[()\s]/g, encodeURIComponent)})` : label;
     }
     return out;
+}
+
+/** One table cell as Markdown: inline marks kept, pipes escaped, no line breaks. */
+function renderTableCell(cell: PortableTextTableCell): string {
+    const block: PortableTextBlock = { _type: 'block', children: cell.spans, markDefs: cell.markDefs ?? [] };
+    return renderInline(block).replace(/\r?\n/g, ' ').replace(/\|/g, '\\|').trim();
+}
+
+/** GFM table, so the `.md` twin of a page keeps the same rows and columns. */
+function renderTable(block: PortableTextTable): string {
+    const head = block.head ?? [];
+    const columns = head.length || Math.max(0, ...(block.rows ?? []).map((row) => row.length));
+    if (!columns) return '';
+    const cells = (row: PortableTextTableCell[]) =>
+        Array.from({ length: columns }, (_, index) => renderTableCell(row[index] ?? { spans: [] })).join(' | ');
+    const lines = [`| ${cells(head)} |`, `| ${Array.from({ length: columns }, () => '---').join(' | ')} |`];
+    for (const row of block.rows ?? []) lines.push(`| ${cells(row)} |`);
+    return lines.join('\n');
 }
 
 function renderCode(block: PortableTextBlock): string {
@@ -199,7 +230,9 @@ export function portableTextToMarkdown(
                   ? renderImage(block, options)
                   : block._type === 'code'
                     ? renderCode(block)
-                    : '';
+                    : block._type === 'table'
+                      ? renderTable(block as PortableTextTable)
+                      : '';
         if (rendered) chunks.push(rendered);
     }
     flushList();
